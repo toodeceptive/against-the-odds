@@ -35,34 +35,29 @@ export async function connectToBrowser(options = {}) {
   const pw = await getPlaywright();
   const { chromium } = pw;
 
-  try {
-    // Try to connect to existing Chrome instance
-    if (useExisting) {
-      try {
-        const browser = await chromium.connectOverCDP('http://localhost:9222');
-        console.log('Connected to existing Chrome instance');
-        return browser;
-      } catch (error) {
-        console.log('Could not connect to existing Chrome, launching new instance');
-      }
+  // Try to connect to existing Chrome instance
+  if (useExisting) {
+    try {
+      const browser = await chromium.connectOverCDP('http://localhost:9222');
+      // Connected to existing Chrome instance
+      return browser;
+    } catch (error) {
+      // Could not connect to existing Chrome, launching new instance
     }
-    
-    // Launch new browser instance
-    const browser = await chromium.launch({
-      headless,
-      slowMo,
-      channel: 'chrome',
-      args: [
-        '--disable-blink-features=AutomationControlled',
-        '--remote-debugging-port=9222',
-      ],
-    });
-    
-    return browser;
-  } catch (error) {
-    console.error('Failed to connect to browser:', error);
-    throw error;
   }
+  
+  // Launch new browser instance
+  const browser = await chromium.launch({
+    headless,
+    slowMo,
+    channel: 'chrome',
+    args: [
+      '--disable-blink-features=AutomationControlled',
+      '--remote-debugging-port=9222',
+    ],
+  });
+  
+  return browser;
 }
 
 /**
@@ -80,17 +75,17 @@ export async function ensureShopifyLogin(page, storeDomain) {
     // Check if already logged in (no login form)
     const loginForm = await page.locator('form[action*="login"]').count();
     if (loginForm === 0) {
-      console.log('Already logged in to Shopify admin');
+      // Already logged in to Shopify admin
       return true;
     }
     
     // If login form exists, user needs to log in manually
-    console.log('Login required. Please log in manually in the browser.');
+    // Login required - waiting for manual login
     await page.waitForURL(adminUrl, { timeout: 120000 }); // Wait up to 2 minutes
     
     return true;
   } catch (error) {
-    console.error('Failed to access Shopify admin:', error);
+    // Failed to access Shopify admin
     return false;
   }
 }
@@ -109,8 +104,8 @@ export async function navigateToAppsDevelopment(page) {
     await page.waitForSelector('h1, [data-testid="apps-page"]', { timeout: 10000 });
     
     return true;
-  } catch (error) {
-    console.error('Failed to navigate to Apps > Development:', error);
+  } catch {
+    // Failed to navigate to Apps > Development
     return false;
   }
 }
@@ -163,10 +158,10 @@ export async function extractAccessToken(page) {
       }
     }
     
-    console.log('Access token not found on page. User may need to reveal it manually.');
+    // Access token not found on page
     return null;
   } catch (error) {
-    console.error('Error extracting access token:', error);
+    // Error extracting access token
     return null;
   }
 }
@@ -209,10 +204,10 @@ export async function extractThemeId(page) {
       return match[1];
     }
     
-    console.log('Theme ID not found. User may need to check manually.');
+    // Theme ID not found
     return null;
-  } catch (error) {
-    console.error('Error extracting theme ID:', error);
+  } catch {
+    // Error extracting theme ID
     return null;
   }
 }
@@ -240,7 +235,7 @@ export async function extractText(page, selector) {
     await page.waitForSelector(selector, { timeout: 10000 });
     return await page.locator(selector).first().textContent();
   } catch (error) {
-    console.error(`Error extracting text from ${selector}:`, error);
+    // Error extracting text
     return null;
   }
 }

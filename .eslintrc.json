@@ -22,5 +22,13 @@
     "dist/",
     "build/",
     "*.config.js"
+  ],
+  "overrides": [
+    {
+      "files": ["tests/**/*.js", "**/*.test.js", "**/*.spec.js"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
   ]
 }

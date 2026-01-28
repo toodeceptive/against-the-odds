@@ -20,7 +20,9 @@
     "setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-env.ps1",
     "setup:auto": "powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1",
     "health": "powershell -ExecutionPolicy Bypass -File scripts/health/comprehensive-check.ps1",
-    "sync": "powershell -ExecutionPolicy Bypass -File scripts/sync/sync-all.ps1"
+    "sync": "powershell -ExecutionPolicy Bypass -File scripts/sync/sync-all.ps1",
+    "test:desktop": "powershell -ExecutionPolicy Bypass -File scripts/desktop-automation/test-system.ps1",
+    "test:desktop:quick": "powershell -ExecutionPolicy Bypass -File scripts/desktop-automation/test-system.ps1 -Quick"
   },
   "keywords": [
     "e-commerce",
@@ -38,5 +40,13 @@
     "prettier": "^3.1.0",
     "vitest": "^1.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "screenshot-desktop": "^1.15.0",
+    "tesseract.js": "^5.0.4",
+    "sharp": "^0.33.0"
+  },
+  "optionalDependencies": {
+    "robotjs": "^0.6.0",
+    "node-window-manager": "^2.2.4"
+  }
 }

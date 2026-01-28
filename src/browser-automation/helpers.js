@@ -12,7 +12,7 @@ export async function waitForNetworkIdle(page, timeout = 30000) {
   try {
     await page.waitForLoadState('networkidle', { timeout });
   } catch (error) {
-    console.warn('Network idle timeout:', error.message);
+    // Network idle timeout - non-critical, continue
   }
 }
 
@@ -32,7 +32,7 @@ export async function retryWithBackoff(fn, maxRetries = 3, delay = 1000) {
         throw error;
       }
       const waitTime = delay * Math.pow(2, attempt - 1);
-      console.log(`Attempt ${attempt} failed, retrying in ${waitTime}ms...`);
+      // Retrying after exponential backoff
       await new Promise(resolve => setTimeout(resolve, waitTime));
     }
   }
@@ -96,7 +96,7 @@ export async function extractTableData(page, tableSelector) {
     
     return tableData;
   } catch (error) {
-    console.error('Error extracting table data:', error);
+    // Return empty array on error
     return [];
   }
 }
