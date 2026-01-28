@@ -24,7 +24,7 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 
 # Create extraction script
 $extractScript = @"
-const { chromium } = require('@playwright/test');
+import { chromium } from '@playwright/test';
 import { connectToBrowser, ensureShopifyLogin, extractThemeId } from '../../src/browser-automation/shopify-admin.js';
 
 (async () => {
