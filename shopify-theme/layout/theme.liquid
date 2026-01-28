@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {{ page_title }}
+      {% if current_tags %} - {{ current_tags | join: ", " }}{% endif %}
+      {% if current_page != 1 %} - Page {{ current_page }}{% endif %}
+      {% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}
+    </title>
+    <meta name="description" content="{{ page_description | escape }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {{ 'styles.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        --accent: {{ settings.accent_color | default: "#f0c86a" }};
+        --accent-dark: {{ settings.accent_color_dark | default: "#c9a046" }};
+      }
+    </style>
+    {{ content_for_header }}
+  </head>
+  <body>
+    {{ content_for_layout }}
+  </body>
+</html>

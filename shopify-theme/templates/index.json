@@ -1,0 +1,123 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Against the Odds",
+        "title": "AO brand website and store",
+        "lead": "Building a home for the AO identity, core story, and future store launches. This is the main project hub for the brand experience.",
+        "cta_label": "View logo catalog",
+        "cta_link": "#catalog",
+        "note": "Store opening updates coming soon.",
+        "logo_alt": "Against the Odds circular AO logo"
+      }
+    },
+    "logos": {
+      "type": "logo-explorations",
+      "settings": {
+        "heading": "Logo explorations",
+        "description": "A curated set of AO logo concepts that represent the tone and energy of the brand. These visuals inform the next steps for product, packaging, and digital presence."
+      },
+      "blocks": {
+        "logo-1": {
+          "type": "logo_card",
+          "settings": {
+            "alt_text": "AO logo variation with bold monogram",
+            "caption": "Primary monogram study."
+          }
+        },
+        "logo-2": {
+          "type": "logo_card",
+          "settings": {
+            "alt_text": "AO logo variation with alternate treatment",
+            "caption": "Alternate mark treatment."
+          }
+        },
+        "logo-3": {
+          "type": "logo_card",
+          "settings": {
+            "alt_text": "AO logo exploration with badge layout",
+            "caption": "Badge layout concept."
+          }
+        },
+        "logo-4": {
+          "type": "logo_card",
+          "settings": {
+            "alt_text": "Grid of AO logo design explorations",
+            "caption": "Exploration set, round one."
+          }
+        },
+        "logo-5": {
+          "type": "logo_card",
+          "settings": {
+            "alt_text": "Grid of AO logo variations",
+            "caption": "Exploration set, round two."
+          }
+        },
+        "logo-6": {
+          "type": "logo_card",
+          "settings": {
+            "alt_text": "AO logo concept with textured finish",
+            "caption": "Textured concept layout."
+          }
+        }
+      },
+      "block_order": [
+        "logo-1",
+        "logo-2",
+        "logo-3",
+        "logo-4",
+        "logo-5",
+        "logo-6"
+      ]
+    },
+    "roadmap": {
+      "type": "store-roadmap",
+      "settings": {
+        "heading": "Store roadmap",
+        "description": "The store will open in phases. This site will expand to include product drops, brand collaborations, and story-driven releases."
+      },
+      "blocks": {
+        "card-1": {
+          "type": "roadmap_card",
+          "settings": {
+            "title": "Launch focus",
+            "items": "Signature apparel core line\nLimited run accessories\nCommunity-driven collaborations"
+          }
+        },
+        "card-2": {
+          "type": "roadmap_card",
+          "settings": {
+            "title": "Digital experience",
+            "items": "Story-driven brand pages\nBehind-the-scenes content\nDrop notifications and waitlists"
+          }
+        },
+        "card-3": {
+          "type": "roadmap_card",
+          "settings": {
+            "title": "Next steps",
+            "items": "Finalize the hero mark\nBuild the storefront system\nPublish launch timeline"
+          }
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ]
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "brand": "Against the Odds",
+        "note": "Main project workspace for AO."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "logos",
+    "roadmap",
+    "footer"
+  ]
+}

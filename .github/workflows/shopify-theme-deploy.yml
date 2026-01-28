@@ -1,0 +1,32 @@
+name: Deploy Shopify theme
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN != '' && secrets.SHOPIFY_STORE_DOMAIN != '' && secrets.SHOPIFY_THEME_ID != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli@latest
+
+      - name: Deploy theme
+        env:
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+          SHOPIFY_CLI_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+          SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
+        run: |
+          shopify version
+          shopify theme push --path shopify-theme --store "$SHOPIFY_CLI_STORE" --theme "$SHOPIFY_THEME_ID" --allow-live

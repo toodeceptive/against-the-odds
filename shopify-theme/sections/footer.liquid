@@ -1,0 +1,31 @@
+<footer class="footer">
+  <div class="container footer__layout">
+    <p class="footer__brand">{{ section.settings.brand }}</p>
+    <p class="footer__note">{{ section.settings.note }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Brand",
+      "default": "Against the Odds"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Main project workspace for AO."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

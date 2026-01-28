@@ -1,0 +1,11 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "settings": {
+        "accent_color": "#f0c86a",
+        "accent_color_dark": "#c9a046"
+      }
+    }
+  }
+}

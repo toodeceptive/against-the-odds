@@ -1,0 +1,81 @@
+<section class="section section--alt" id="store">
+  <div class="container">
+    <div class="section__header">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+    </div>
+    <div class="card-grid">
+      {% for block in section.blocks %}
+        <div class="card" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title }}</h3>
+          {% assign items = block.settings.items | newline_to_br | split: "<br />" %}
+          <ul>
+            {% for item in items %}
+              {% assign trimmed = item | strip %}
+              {% if trimmed != blank %}
+                <li>{{ trimmed }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Store roadmap",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Store roadmap"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "The store will open in phases. This site will expand to include product drops, brand collaborations, and story-driven releases."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "roadmap_card",
+      "name": "Roadmap card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Launch focus"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "List items",
+          "default": "Signature apparel core line\nLimited run accessories\nCommunity-driven collaborations"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Store roadmap",
+      "blocks": [
+        {
+          "type": "roadmap_card"
+        },
+        {
+          "type": "roadmap_card"
+        },
+        {
+          "type": "roadmap_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

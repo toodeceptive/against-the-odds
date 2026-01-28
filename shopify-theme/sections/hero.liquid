@@ -1,0 +1,90 @@
+<section class="hero" id="top">
+  <div class="container hero__layout">
+    <div class="hero__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h1>{{ section.settings.title }}</h1>
+      <p class="lead">{{ section.settings.lead }}</p>
+      <div class="hero__actions">
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <a class="button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        {% endif %}
+        {% if section.settings.note != blank %}
+          <p class="note">{{ section.settings.note }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="hero__logo">
+      {% if section.settings.logo != blank %}
+        {{
+          section.settings.logo
+          | image_url: width: 640
+          | image_tag: alt: section.settings.logo_alt, loading: "lazy"
+        }}
+      {% else %}
+        <div class="placeholder">Add hero logo</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Against the Odds"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "AO brand website and store"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead text",
+      "default": "Building a home for the AO identity, core story, and future store launches. This is the main project hub for the brand experience."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary button label",
+      "default": "View logo catalog"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Primary button link",
+      "default": "#catalog"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Store opening updates coming soon."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Hero logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "Logo alt text",
+      "default": "Against the Odds circular AO logo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}
