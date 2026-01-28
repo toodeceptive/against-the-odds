@@ -36,6 +36,19 @@ it automatically via GitHub Actions:
 
 The workflow is gated and will only run when all secrets are present.
 
+## Cloudflare DNS audit
+
+You can run a Cloudflare DNS audit through GitHub Actions or locally.
+
+**GitHub secrets required:**
+- `CF_API_TOKEN` (Cloudflare API token with DNS read access)
+- `CF_ZONE_NAME` (optional; defaults to `aodrop.com`)
+
+Run the **Cloudflare DNS audit** workflow to confirm:
+- A record `@` → `23.227.38.65`
+- CNAME `www` → `shops.myshopify.com`
+- DNS-only (not proxied) status
+
 ## Domain status checklist
 
 - Set the primary domain in Shopify (choose `aodrop.com` or `www.aodrop.com`).
