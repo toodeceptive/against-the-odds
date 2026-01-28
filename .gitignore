@@ -15,7 +15,7 @@ build/
 *.swp
 *.swo
 *~
-.cursor/
+.cursor/debug.log
 
 # OS
 .DS_Store
@@ -55,3 +55,20 @@ env/
 *.bak
 *.backup
 *~
+
+# Test outputs
+test-results/
+playwright-report/
+coverage/
+
+# Screenshots (keep structure, ignore content)
+docs/screenshots/*.png
+docs/screenshots/*.jpg
+
+# Cache
+cache/
+*.cache
+
+# Browser automation temp files
+scripts/**/extract-*-temp.js
+shopify-auth.json

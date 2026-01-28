@@ -8,14 +8,19 @@
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "test:e2e": "playwright test",
+    "test:shopify": "playwright test --config=playwright.shopify.config.js",
     "test:coverage": "vitest run --coverage",
+    "test:all": "npm run test:unit && npm run test:integration",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,ts,jsx,tsx,json,css,md}\"",
     "build": "echo 'Build process not yet configured'",
     "dev": "echo 'Development server not yet configured'",
-    "setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-env.ps1"
+    "setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-env.ps1",
+    "setup:auto": "powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1",
+    "health": "powershell -ExecutionPolicy Bypass -File scripts/health/comprehensive-check.ps1",
+    "sync": "powershell -ExecutionPolicy Bypass -File scripts/sync/sync-all.ps1"
   },
   "keywords": [
     "e-commerce",
