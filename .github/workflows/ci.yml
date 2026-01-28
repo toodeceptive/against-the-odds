@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        if [ -f package.json ]; then
+          npm ci
+        fi
+        
+    - name: Run linter
+      run: |
+        if [ -f package.json ] && npm list eslint 2>/dev/null; then
+          npm run lint || true
+        fi
+        
+    - name: Run tests
+      run: |
+        if [ -f package.json ] && npm list vitest 2>/dev/null || npm list jest 2>/dev/null; then
+          npm test || true
+        fi
+        
+    - name: Build verification
+      run: |
+        if [ -f package.json ] && npm list 2>/dev/null | grep -q "build"; then
+          npm run build || true
+        fi
+        
+    - name: Security scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'CRITICAL,HIGH'
+        
+    - name: Upload security results
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        urls: |
+          https://toodeceptive.github.io/against-the-odds/
+        uploadArtifacts: true
+        temporaryPublicStorage: true

@@ -1,0 +1,37 @@
+{
+  "name": "against-the-odds",
+  "version": "1.0.0",
+  "description": "Official Against The Odds (AO) brand website and store",
+  "private": true,
+  "scripts": {
+    "test": "vitest",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,jsx,tsx,json,css,md}\"",
+    "build": "echo 'Build process not yet configured'",
+    "dev": "echo 'Development server not yet configured'",
+    "setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-env.ps1"
+  },
+  "keywords": [
+    "e-commerce",
+    "shopify",
+    "brand",
+    "merchandise"
+  ],
+  "author": "Against The Odds",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "vitest": "^1.0.0"
+  },
+  "dependencies": {}
+}

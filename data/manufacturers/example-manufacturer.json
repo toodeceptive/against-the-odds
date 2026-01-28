@@ -1,0 +1,34 @@
+{
+  "name": "Example Manufacturing Co.",
+  "contact": {
+    "email": "contact@example.com",
+    "phone": "+1-555-0123",
+    "website": "https://example.com"
+  },
+  "capabilities": {
+    "product_types": ["Hoodies", "T-Shirts", "Hats"],
+    "customization": true,
+    "embroidery": true,
+    "screen_printing": true,
+    "direct_to_garment": false
+  },
+  "pricing": {
+    "moq": 50,
+    "price_per_unit": {
+      "hoodie": 35.00,
+      "t_shirt": 12.00,
+      "hat": 8.00
+    },
+    "sample_cost": 25.00
+  },
+  "lead_times": {
+    "samples": "2-3 weeks",
+    "production": "4-6 weeks"
+  },
+  "location": {
+    "country": "USA",
+    "state": "California"
+  },
+  "certifications": ["WRAP", "GOTS"],
+  "notes": "High quality manufacturer with good communication. Recommended for premium products."
+}

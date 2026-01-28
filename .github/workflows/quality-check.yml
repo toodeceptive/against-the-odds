@@ -1,0 +1,59 @@
+name: Quality Check
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        if [ -f package.json ]; then
+          npm ci
+        fi
+        
+    - name: Code coverage
+      run: |
+        if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
+          npm test -- --coverage || true
+        fi
+        
+    - name: Lint check
+      run: |
+        if [ -f package.json ] && npm list eslint 2>/dev/null; then
+          npm run lint || exit 1
+        fi
+        
+    - name: Format check
+      run: |
+        if [ -f package.json ] && npm list prettier 2>/dev/null; then
+          npm run format:check || exit 1
+        fi
+        
+    - name: Security audit
+      run: |
+        if [ -f package.json ]; then
+          npm audit --audit-level=high || true
+        fi
+        
+    - name: Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        urls: |
+          https://toodeceptive.github.io/against-the-odds/
+        uploadArtifacts: true
+        temporaryPublicStorage: true

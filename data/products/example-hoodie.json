@@ -1,0 +1,54 @@
+{
+  "title": "AO Signature Hoodie",
+  "body_html": "<p>The official Against The Odds signature hoodie. Premium quality, streetwear style.</p>",
+  "vendor": "Against The Odds",
+  "product_type": "Apparel",
+  "tags": "hoodie, streetwear, ao, against-the-odds",
+  "status": "draft",
+  "variants": [
+    {
+      "title": "Small / Black",
+      "price": "79.99",
+      "sku": "AO-HOODIE-S-BLK",
+      "inventory_quantity": 0,
+      "option1": "Small",
+      "option2": "Black"
+    },
+    {
+      "title": "Medium / Black",
+      "price": "79.99",
+      "sku": "AO-HOODIE-M-BLK",
+      "inventory_quantity": 0,
+      "option1": "Medium",
+      "option2": "Black"
+    },
+    {
+      "title": "Large / Black",
+      "price": "79.99",
+      "sku": "AO-HOODIE-L-BLK",
+      "inventory_quantity": 0,
+      "option1": "Large",
+      "option2": "Black"
+    }
+  ],
+  "images": [
+    {
+      "src": "https://example.com/hoodie-front.jpg",
+      "alt": "AO Signature Hoodie - Front"
+    },
+    {
+      "src": "https://example.com/hoodie-back.jpg",
+      "alt": "AO Signature Hoodie - Back"
+    }
+  ],
+  "options": [
+    {
+      "name": "Size",
+      "values": ["Small", "Medium", "Large"]
+    },
+    {
+      "name": "Color",
+      "values": ["Black"]
+    }
+  ]
+}

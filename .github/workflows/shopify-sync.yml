@@ -1,0 +1,52 @@
+name: Shopify Sync
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Daily at 2 AM
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/products/**'
+      - 'src/shopify/**'
+
+jobs:
+  sync-products:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install Shopify CLI
+      run: npm install -g @shopify/cli @shopify/theme
+      
+    - name: Sync products to Shopify
+      env:
+        SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+        SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+      run: |
+        echo "Syncing products to Shopify..."
+        # Add product sync script execution here
+        # node scripts/shopify/sync-products.js
+        
+  backup-store:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Backup store configuration
+      env:
+        SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+        SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+      run: |
+        echo "Backing up store configuration..."
+        # Add backup script execution here

@@ -1,0 +1,30 @@
+# Shopify CLI Configuration
+# This file configures Shopify CLI for the Against The Odds project
+
+# Store configuration
+store: aodrop.com
+store_domain: aodrop.com
+
+# Theme configuration
+theme:
+  development:
+    theme_id: null  # Will be set after theme creation
+    preview_url: null
+
+# App configuration (if building custom app)
+app:
+  name: "AO"
+  client_id: "775fc3aa250b20e6d3122dd39de5b028"  # Shopify App Client ID
+  application_url: "https://example.com"  # TODO: Update with actual app URL
+
+# Development settings
+development:
+  localhost_port: 3458
+  use_localhost: true
+  tunnel_url: null
+
+# API configuration
+api:
+  version: "2026-01"  # Updated to match Shopify app API version
+  admin_api_version: "2026-01"
+  storefront_api_version: "2026-01"

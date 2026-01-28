@@ -1,0 +1,44 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to staging
+      run: |
+        echo "Deploying to staging environment..."
+        # Add staging deployment steps here
+        
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to production
+      run: |
+        echo "Deploying to production environment..."
+        # Add production deployment steps here
+        
+    - name: Deploy Shopify theme
+      if: env.SHOPIFY_ACCESS_TOKEN != ''
+      env:
+        SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+        SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
+      run: |
+        echo "Deploying Shopify theme..."
+        # Add Shopify theme deployment steps here
