@@ -6,6 +6,10 @@ param(
     [string]$Manufacturer = "",
     [string]$SampleId = "",
     [string]$Status = "",
+    [string]$ProductType = "Hoodie",
+    [string]$ExpectedDelivery = "",
+    [string]$TrackingNumber = "",
+    [string]$Notes = "",
     [hashtable]$Evaluation = $null
 )
 
@@ -24,7 +28,19 @@ if (-not (Test-Path $samplesDir)) {
 # Load existing samples
 $samples = @()
 if (Test-Path $samplesFile) {
-    $samples = Get-Content $samplesFile -Raw | ConvertFrom-Json | ForEach-Object { $_ }
+    try {
+        $jsonContent = Get-Content $samplesFile -Raw
+        if (-not [string]::IsNullOrWhiteSpace($jsonContent)) {
+            $samples = $jsonContent | ConvertFrom-Json
+            # Ensure it's an array
+            if ($samples -isnot [Array]) {
+                $samples = @($samples)
+            }
+        }
+    } catch {
+        Write-Host "Warning: Could not load samples file. Starting fresh." -ForegroundColor Yellow
+        $samples = @()
+    }
 }
 
 function Save-Samples {
@@ -139,10 +155,10 @@ switch ($Action) {
         
         $sampleData = @{
             manufacturer = $Manufacturer
-            product_type = if ($PSBoundParameters.ContainsKey('ProductType')) { $ProductType } else { "Hoodie" }
-            expected_delivery = if ($PSBoundParameters.ContainsKey('ExpectedDelivery')) { $ExpectedDelivery } else { $null }
-            tracking_number = if ($PSBoundParameters.ContainsKey('TrackingNumber')) { $TrackingNumber } else { $null }
-            notes = if ($PSBoundParameters.ContainsKey('Notes')) { $Notes } else { "" }
+            product_type = $ProductType
+            expected_delivery = if ([string]::IsNullOrWhiteSpace($ExpectedDelivery)) { $null } else { $ExpectedDelivery }
+            tracking_number = if ([string]::IsNullOrWhiteSpace($TrackingNumber)) { $null } else { $TrackingNumber }
+            notes = $Notes
         }
         
         Add-Sample -SampleData $sampleData

@@ -32,7 +32,7 @@ $headers = @{
     "Content-Type" = "application/json"
 }
 
-$baseUrl = "https://$Store/admin/api/2024-01"
+$baseUrl = "https://$Store/admin/api/2026-01"
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
 
 Write-Host "Fetching store data..." -ForegroundColor Yellow

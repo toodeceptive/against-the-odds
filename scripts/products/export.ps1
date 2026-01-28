@@ -54,17 +54,24 @@ while ($hasNextPage) {
     }
     
     try {
-        $response = Invoke-RestMethod -Uri $url -Headers $headers -Method Get
+        $response = Invoke-WebRequest -Uri $url -Headers $headers -Method Get -UseBasicParsing
         
-        if ($response.products) {
-            $products += $response.products
-            Write-Host "  Fetched $($response.products.Count) products..." -ForegroundColor Cyan
+        # Parse response body
+        $responseBody = $response.Content | ConvertFrom-Json
+        
+        if ($responseBody.products) {
+            $products += $responseBody.products
+            Write-Host "  Fetched $($responseBody.products.Count) products..." -ForegroundColor Cyan
         }
         
-        # Check for next page
-        $linkHeader = $response.PSObject.Properties['Link']?.Value
-        if ($linkHeader -match 'rel="next"') {
-            $pageInfo = ($linkHeader -split 'page_info=')[1] -split '>')[0]
+        # Check for next page in Link header
+        $linkHeader = $response.Headers['Link']
+        if ($linkHeader -and $linkHeader -match 'rel="next"') {
+            if ($linkHeader -match 'page_info=([^>]+)') {
+                $pageInfo = $matches[1]
+            } else {
+                $hasNextPage = $false
+            }
         } else {
             $hasNextPage = $false
         }
@@ -80,7 +87,10 @@ Write-Host ""
 # Export each product to JSON file
 $exported = 0
 foreach ($product in $products) {
-    $filename = "$OutputDir\$($product.id)-$($product.handle).json"
+    # Sanitize filename to avoid invalid characters
+    $safeHandle = if ($product.handle) { $product.handle } else { "product" }
+    $safeHandle = $safeHandle -replace '[<>:"/\\|?*]', '_'
+    $filename = "$OutputDir\$($product.id)-$safeHandle.json"
     
     # Clean product data for export
     $exportData = @{

@@ -46,7 +46,7 @@ function Check-SitePerformance {
         $check.response_time_ms = $stopwatch.ElapsedMilliseconds
         $check.status_code = $response.StatusCode
         
-        Write-Host "  ✓ Site is online (${response_time_ms}ms)" -ForegroundColor Green
+        Write-Host "  ✓ Site is online ($($check.response_time_ms)ms)" -ForegroundColor Green
     } catch {
         $check.status = "offline"
         $check.error = $_.Exception.Message
@@ -92,7 +92,7 @@ function Check-ShopifyAPI {
         $check.response_time_ms = $stopwatch.ElapsedMilliseconds
         $check.shop_name = $response.shop.name
         
-        Write-Host "  ✓ Shopify API is accessible (${response_time_ms}ms)" -ForegroundColor Green
+        Write-Host "  ✓ Shopify API is accessible ($($check.response_time_ms)ms)" -ForegroundColor Green
         Write-Host "    Shop: $($response.shop.name)" -ForegroundColor Cyan
     } catch {
         $check.status = "error"
@@ -142,7 +142,7 @@ function Check-GitHubAPI {
         $check.repo_name = $response.name
         $check.repo_status = $response.private ? "private" : "public"
         
-        Write-Host "  ✓ GitHub API is accessible (${response_time_ms}ms)" -ForegroundColor Green
+        Write-Host "  ✓ GitHub API is accessible ($($check.response_time_ms)ms)" -ForegroundColor Green
         Write-Host "    Repository: $($response.full_name)" -ForegroundColor Cyan
     } catch {
         $check.status = "error"
