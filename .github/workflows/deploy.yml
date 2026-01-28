@@ -35,9 +35,10 @@ jobs:
         # Add production deployment steps here
         
     - name: Deploy Shopify theme
-      if: env.SHOPIFY_ACCESS_TOKEN != ''
+      if: ${{ secrets.SHOPIFY_ACCESS_TOKEN != '' }}
       env:
         SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+        SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
         SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
       run: |
         echo "Deploying Shopify theme..."
