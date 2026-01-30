@@ -48,17 +48,17 @@ try {
             $errors += "PowerShell parse check failed"
         }
         else {
-            Write-Log "✓ PowerShell scripts parse successfully" "Green"
+            Write-Log "[OK] PowerShell scripts parse successfully" "Green"
         }
     }
     else {
         $warnings += "Parse script not found: $parseScript"
-        Write-Log "⚠ Parse script not found" "Yellow"
+        Write-Log "[WARN] Parse script not found" "Yellow"
     }
 }
 catch {
     $errors += "Parse check error: $_"
-    Write-Log "✗ Parse check failed: $_" "Red"
+    Write-Log "[FAIL] Parse check failed: $_" "Red"
 }
 Write-Log ""
 
@@ -70,16 +70,16 @@ try {
     Write-Log "Node.js version: $nodeVersion" "Cyan"
     Write-Log "npm version: $npmVersion" "Cyan"
     if ($LASTEXITCODE -eq 0) {
-        Write-Log "✓ Node.js and npm are available" "Green"
+        Write-Log "[OK] Node.js and npm are available" "Green"
     }
     else {
         $errors += "Node.js or npm not available"
-        Write-Log "✗ Node.js or npm check failed" "Red"
+        Write-Log "[FAIL] Node.js or npm check failed" "Red"
     }
 }
 catch {
     $errors += "Node.js check error: $_"
-    Write-Log "✗ Node.js check failed: $_" "Red"
+    Write-Log "[FAIL] Node.js check failed: $_" "Red"
 }
 Write-Log ""
 
@@ -91,16 +91,16 @@ if (-not $SkipDeps) {
         $npmOutput = npm install 2>&1
         $npmOutput | ForEach-Object { Write-Log $_ }
         if ($LASTEXITCODE -eq 0) {
-            Write-Log "✓ Dependencies installed successfully" "Green"
+            Write-Log "[OK] Dependencies installed successfully" "Green"
         }
         else {
             $warnings += "npm install had issues (may be offline mode)"
-            Write-Log "⚠ npm install completed with warnings" "Yellow"
+            Write-Log "[WARN] npm install completed with warnings" "Yellow"
         }
     }
     catch {
         $warnings += "Dependency installation error: $_"
-        Write-Log "⚠ Dependency installation had issues: $_" "Yellow"
+        Write-Log "[WARN] Dependency installation had issues: $_" "Yellow"
     }
     Write-Log ""
 }
@@ -116,16 +116,16 @@ try {
     $lintOutput = npm run lint 2>&1
     $lintOutput | ForEach-Object { Write-Log $_ }
     if ($LASTEXITCODE -eq 0) {
-        Write-Log "✓ Lint check passed" "Green"
+        Write-Log "[OK] Lint check passed" "Green"
     }
     else {
         $errors += "Lint check failed"
-        Write-Log "✗ Lint check failed" "Red"
+        Write-Log "[FAIL] Lint check failed" "Red"
     }
 }
 catch {
     $warnings += "Lint check error: $_"
-    Write-Log "⚠ Lint check had issues: $_" "Yellow"
+    Write-Log "[WARN] Lint check had issues: $_" "Yellow"
 }
 Write-Log ""
 
@@ -136,16 +136,16 @@ try {
     $formatOutput = npm run format:check 2>&1
     $formatOutput | ForEach-Object { Write-Log $_ }
     if ($LASTEXITCODE -eq 0) {
-        Write-Log "✓ Format check passed" "Green"
+        Write-Log "[OK] Format check passed" "Green"
     }
     else {
         $warnings += "Format check found issues (not critical)"
-        Write-Log "⚠ Format check found issues" "Yellow"
+        Write-Log "[WARN] Format check found issues" "Yellow"
     }
 }
 catch {
     $warnings += "Format check error: $_"
-    Write-Log "⚠ Format check had issues: $_" "Yellow"
+    Write-Log "[WARN] Format check had issues: $_" "Yellow"
 }
 Write-Log ""
 
@@ -157,16 +157,16 @@ if (-not $SkipTests) {
         $testOutput = npm run test:unit 2>&1
         $testOutput | ForEach-Object { Write-Log $_ }
         if ($LASTEXITCODE -eq 0) {
-            Write-Log "✓ Unit tests passed" "Green"
+            Write-Log "[OK] Unit tests passed" "Green"
         }
         else {
             $warnings += "Unit tests had issues (may require credentials)"
-            Write-Log "⚠ Unit tests completed with warnings" "Yellow"
+            Write-Log "[WARN] Unit tests completed with warnings" "Yellow"
         }
     }
     catch {
         $warnings += "Test execution error: $_"
-        Write-Log "⚠ Test execution had issues: $_" "Yellow"
+        Write-Log "[WARN] Test execution had issues: $_" "Yellow"
     }
     Write-Log ""
 }
@@ -183,16 +183,16 @@ try {
         Write-Log "Running comprehensive health check..." "Cyan"
         $healthOutput = & $healthScript 2>&1
         $healthOutput | ForEach-Object { Write-Log $_ }
-        Write-Log "✓ Health check completed" "Green"
+        Write-Log "[OK] Health check completed" "Green"
     }
     else {
         $warnings += "Health check script not found: $healthScript"
-        Write-Log "⚠ Health check script not found" "Yellow"
+        Write-Log "[WARN] Health check script not found" "Yellow"
     }
 }
 catch {
     $warnings += "Health check error: $_"
-    Write-Log "⚠ Health check had issues: $_" "Yellow"
+    Write-Log "[WARN] Health check had issues: $_" "Yellow"
 }
 Write-Log ""
 
@@ -204,16 +204,16 @@ try {
         Write-Log "Running performance check..." "Cyan"
         $perfOutput = & $perfScript 2>&1
         $perfOutput | ForEach-Object { Write-Log $_ }
-        Write-Log "✓ Performance check completed" "Green"
+        Write-Log "[OK] Performance check completed" "Green"
     }
     else {
         $warnings += "Performance check script not found: $perfScript"
-        Write-Log "⚠ Performance check script not found" "Yellow"
+        Write-Log "[WARN] Performance check script not found" "Yellow"
     }
 }
 catch {
     $warnings += "Performance check error: $_"
-    Write-Log "⚠ Performance check had issues: $_" "Yellow"
+    Write-Log "[WARN] Performance check had issues: $_" "Yellow"
 }
 Write-Log ""
 

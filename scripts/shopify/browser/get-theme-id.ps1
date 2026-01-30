@@ -71,7 +71,7 @@ try {
     }
     
     if ($themeId) {
-        Write-Host "✓ Theme ID extracted: $themeId" -ForegroundColor Green
+        Write-Host "[OK] Theme ID extracted: $themeId" -ForegroundColor Green
         
         if ($SaveToEnv -and (Test-Path ".env.local")) {
             $envContent = Get-Content ".env.local"
@@ -92,10 +92,10 @@ try {
             }
             
             $newContent | Out-File -FilePath ".env.local" -Encoding UTF8
-            Write-Host "✓ Saved to .env.local" -ForegroundColor Green
+            Write-Host "[OK] Saved to .env.local" -ForegroundColor Green
         }
     } else {
-        Write-Host "✗ Could not extract theme ID" -ForegroundColor Red
+        Write-Host "[FAIL] Could not extract theme ID" -ForegroundColor Red
     }
 } finally {
     if (Test-Path $scriptPath) {

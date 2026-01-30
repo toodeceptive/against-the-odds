@@ -46,11 +46,11 @@ function Check-SitePerformance {
         $check.response_time_ms = $stopwatch.ElapsedMilliseconds
         $check.status_code = $response.StatusCode
         
-        Write-Host "  ✓ Site is online ($($check.response_time_ms)ms)" -ForegroundColor Green
+        Write-Host "  [OK] Site is online ($($check.response_time_ms)ms)" -ForegroundColor Green
     } catch {
         $check.status = "offline"
         $check.error = $_.Exception.Message
-        Write-Host "  ✗ Site check failed: $_" -ForegroundColor Red
+        Write-Host "  [FAIL] Site check failed: $_" -ForegroundColor Red
     }
     
     $report.checks += $check
@@ -73,7 +73,7 @@ function Check-ShopifyAPI {
     if ([string]::IsNullOrWhiteSpace($store) -or [string]::IsNullOrWhiteSpace($token)) {
         $check.status = "not_configured"
         $check.error = "Shopify credentials not configured"
-        Write-Host "  ⚠ Shopify API not configured" -ForegroundColor Yellow
+        Write-Host "  [WARN] Shopify API not configured" -ForegroundColor Yellow
         $report.checks += $check
         return
     }
@@ -92,12 +92,12 @@ function Check-ShopifyAPI {
         $check.response_time_ms = $stopwatch.ElapsedMilliseconds
         $check.shop_name = $response.shop.name
         
-        Write-Host "  ✓ Shopify API is accessible ($($check.response_time_ms)ms)" -ForegroundColor Green
+        Write-Host "  [OK] Shopify API is accessible ($($check.response_time_ms)ms)" -ForegroundColor Green
         Write-Host "    Shop: $($response.shop.name)" -ForegroundColor Cyan
     } catch {
         $check.status = "error"
         $check.error = $_.Exception.Message
-        Write-Host "  ✗ Shopify API check failed: $_" -ForegroundColor Red
+        Write-Host "  [FAIL] Shopify API check failed: $_" -ForegroundColor Red
     }
     
     $report.checks += $check
@@ -121,7 +121,7 @@ function Check-GitHubAPI {
     if ([string]::IsNullOrWhiteSpace($token)) {
         $check.status = "not_configured"
         $check.error = "GitHub token not configured"
-        Write-Host "  ⚠ GitHub API not configured" -ForegroundColor Yellow
+        Write-Host "  [WARN] GitHub API not configured" -ForegroundColor Yellow
         $report.checks += $check
         return
     }
@@ -140,14 +140,14 @@ function Check-GitHubAPI {
         $check.status = "online"
         $check.response_time_ms = $stopwatch.ElapsedMilliseconds
         $check.repo_name = $response.name
-        $check.repo_status = $response.private ? "private" : "public"
+        $check.repo_status = if ($response.private) { "private" } else { "public" }
         
-        Write-Host "  ✓ GitHub API is accessible ($($check.response_time_ms)ms)" -ForegroundColor Green
+        Write-Host "  [OK] GitHub API is accessible ($($check.response_time_ms)ms)" -ForegroundColor Green
         Write-Host "    Repository: $($response.full_name)" -ForegroundColor Cyan
     } catch {
         $check.status = "error"
         $check.error = $_.Exception.Message
-        Write-Host "  ✗ GitHub API check failed: $_" -ForegroundColor Red
+        Write-Host "  [FAIL] GitHub API check failed: $_" -ForegroundColor Red
     }
     
     $report.checks += $check
@@ -170,5 +170,5 @@ if ($Check -eq "all" -or $Check -eq "shopify") {
 $report | ConvertTo-Json -Depth 10 | Out-File -FilePath $OutputFile -Encoding UTF8
 
 Write-Host ""
-Write-Host "✓ Performance check complete!" -ForegroundColor Green
+Write-Host "[OK] Performance check complete!" -ForegroundColor Green
 Write-Host "Report saved to: $OutputFile" -ForegroundColor Cyan

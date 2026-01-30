@@ -32,7 +32,7 @@ $productsDir = "data\products"
 if (-not (Test-Path $productsDir)) {
     Write-Host "Creating products directory..." -ForegroundColor Yellow
     New-Item -ItemType Directory -Force -Path $productsDir | Out-Null
-    Write-Host "✓ Created $productsDir" -ForegroundColor Green
+    Write-Host "[OK] Created $productsDir" -ForegroundColor Green
     Write-Host "Add product JSON files to this directory to sync them." -ForegroundColor Yellow
     exit 0
 }
@@ -85,7 +85,7 @@ foreach ($file in $productFiles) {
                 }
             }
         } catch {
-            Write-Host "  ⚠ Could not check for existing products: $_" -ForegroundColor Yellow
+            Write-Host "  [WARN] Could not check for existing products: $_" -ForegroundColor Yellow
         }
         
         if ($productFound -and $productId) {
@@ -99,7 +99,7 @@ foreach ($file in $productFiles) {
             $response = Invoke-RestMethod -Uri "$baseUrl/products/$productId.json" `
                 -Headers $headers -Method Put -Body $updateBody
             
-            Write-Host "  ✓ Updated: $($response.product.title)" -ForegroundColor Green
+            Write-Host "  [OK] Updated: $($response.product.title)" -ForegroundColor Green
         } else {
             # Create new product
             Write-Host "  Creating new product..." -ForegroundColor Yellow
@@ -111,7 +111,7 @@ foreach ($file in $productFiles) {
             $response = Invoke-RestMethod -Uri "$baseUrl/products.json" `
                 -Headers $headers -Method Post -Body $createBody
             
-            Write-Host "  ✓ Created: $($response.product.title) (ID: $($response.product.id))" -ForegroundColor Green
+            Write-Host "  [OK] Created: $($response.product.title) (ID: $($response.product.id))" -ForegroundColor Green
         }
     } catch {
         $errorMessage = $_.Exception.Message
@@ -132,4 +132,4 @@ foreach ($file in $productFiles) {
 }
 
 Write-Host ""
-Write-Host "✓ Product sync complete!" -ForegroundColor Green
+Write-Host "[OK] Product sync complete!" -ForegroundColor Green

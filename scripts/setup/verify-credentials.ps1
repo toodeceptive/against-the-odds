@@ -62,7 +62,7 @@ if ([string]::IsNullOrWhiteSpace($githubToken) -or $githubToken -match 'your_.*_
     $results.github.status = "missing"
     $results.github.message = "GITHUB_TOKEN not configured"
     if (-not $Quiet) {
-        Write-Host "  ⚠ GITHUB_TOKEN not configured" -ForegroundColor Yellow
+        Write-Host "  [WARN] GITHUB_TOKEN not configured" -ForegroundColor Yellow
     }
 } else {
     try {
@@ -77,7 +77,7 @@ if ([string]::IsNullOrWhiteSpace($githubToken) -or $githubToken -match 'your_.*_
         $results.github.status = "valid"
         $results.github.message = "Connected to repository: $($response.full_name)"
         if (-not $Quiet) {
-            Write-Host "  ✓ GitHub credentials valid" -ForegroundColor Green
+            Write-Host "  [OK] GitHub credentials valid" -ForegroundColor Green
             Write-Host "    Repository: $($response.full_name)" -ForegroundColor Cyan
         }
     } catch {
@@ -106,7 +106,7 @@ if ([string]::IsNullOrWhiteSpace($shopifyStore) -or
     $results.shopify.status = "missing"
     $results.shopify.message = "Shopify credentials not fully configured"
     if (-not $Quiet) {
-        Write-Host "  ⚠ Shopify credentials not fully configured" -ForegroundColor Yellow
+        Write-Host "  [WARN] Shopify credentials not fully configured" -ForegroundColor Yellow
     }
 } else {
     try {
@@ -121,7 +121,7 @@ if ([string]::IsNullOrWhiteSpace($shopifyStore) -or
         $results.shopify.status = "valid"
         $results.shopify.message = "Connected to store: $($response.shop.name)"
         if (-not $Quiet) {
-            Write-Host "  ✓ Shopify credentials valid" -ForegroundColor Green
+            Write-Host "  [OK] Shopify credentials valid" -ForegroundColor Green
             Write-Host "    Store: $($response.shop.name)" -ForegroundColor Cyan
             Write-Host "    Domain: $($response.shop.domain)" -ForegroundColor Cyan
         }
@@ -149,9 +149,9 @@ if (-not $Quiet) {
                 $results.environment.status -eq "configured"
     
     if ($allValid) {
-        Write-Host "✓ Credential verification complete!" -ForegroundColor Green
+        Write-Host "[OK] Credential verification complete!" -ForegroundColor Green
     } else {
-        Write-Host "⚠ Some credentials need attention" -ForegroundColor Yellow
+        Write-Host "[WARN] Some credentials need attention" -ForegroundColor Yellow
     }
 }
 

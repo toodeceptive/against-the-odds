@@ -1,0 +1,27 @@
+﻿{
+    "timestamp":  "2026-01-29 23:27:43",
+    "checks":  [
+                   {
+                       "error":  "The underlying connection was closed: An unexpected error occurred on a receive.",
+                       "response_time_ms":  null,
+                       "status_code":  null,
+                       "type":  "site",
+                       "url":  "https://aodrop.com",
+                       "status":  "offline"
+                   },
+                   {
+                       "response_time_ms":  null,
+                       "type":  "github_api",
+                       "error":  "GitHub token not configured",
+                       "repository":  "/",
+                       "status":  "not_configured"
+                   },
+                   {
+                       "response_time_ms":  null,
+                       "type":  "shopify_api",
+                       "error":  "Shopify credentials not configured",
+                       "store":  null,
+                       "status":  "not_configured"
+                   }
+               ]
+}

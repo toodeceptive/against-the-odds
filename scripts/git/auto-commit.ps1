@@ -100,11 +100,11 @@ Write-Host ""
 Write-Host "Committing changes..." -ForegroundColor Yellow
 try {
     git commit -m $Message
-    Write-Host "✓ Successfully committed changes" -ForegroundColor Green
+    Write-Host "[OK] Successfully committed changes" -ForegroundColor Green
     Write-Host ""
     Write-Host "Commit details:" -ForegroundColor Cyan
     git log -1 --oneline
 } catch {
-    Write-Host "✗ Failed to commit: $_" -ForegroundColor Red
+    Write-Host "[FAIL] Failed to commit: $_" -ForegroundColor Red
     exit 1
 }

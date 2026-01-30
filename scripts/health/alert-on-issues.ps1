@@ -45,7 +45,7 @@ if ($issues.Count -gt 0) {
     Write-Host "ALERT: Issues detected!" -ForegroundColor Red
     Write-Host ""
     foreach ($issue in $issues) {
-        Write-Host "  ✗ $issue" -ForegroundColor Red
+        Write-Host "  [FAIL] $issue" -ForegroundColor Red
     }
     
     # Save alert log

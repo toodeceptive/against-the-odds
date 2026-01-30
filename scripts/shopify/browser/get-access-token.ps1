@@ -82,7 +82,7 @@ try {
     
     if ($token) {
         Write-Host ""
-        Write-Host "✓ Access token extracted: $($token.Substring(0, 20))..." -ForegroundColor Green
+        Write-Host "[OK] Access token extracted: $($token.Substring(0, 20))..." -ForegroundColor Green
         
         if ($SaveToEnv) {
             # Update .env.local
@@ -105,9 +105,9 @@ try {
                 }
                 
                 $newContent | Out-File -FilePath ".env.local" -Encoding UTF8
-                Write-Host "✓ Saved to .env.local" -ForegroundColor Green
+                Write-Host "[OK] Saved to .env.local" -ForegroundColor Green
             } else {
-                Write-Host "⚠ .env.local not found. Token not saved." -ForegroundColor Yellow
+                Write-Host "[WARN] .env.local not found. Token not saved." -ForegroundColor Yellow
                 Write-Host "Token: $token" -ForegroundColor Cyan
             }
         } else {

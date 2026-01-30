@@ -51,8 +51,8 @@ if ($Live) {
 }
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✓ Theme deployed successfully!" -ForegroundColor Green
+    Write-Host "[OK] Theme deployed successfully!" -ForegroundColor Green
 } else {
-    Write-Host "✗ Theme deployment failed" -ForegroundColor Red
+    Write-Host "[FAIL] Theme deployment failed" -ForegroundColor Red
     exit 1
 }

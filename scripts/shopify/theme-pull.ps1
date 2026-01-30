@@ -30,9 +30,9 @@ Write-Host "Pulling theme '$Theme' from $Store into $ThemePath" -ForegroundColor
 shopify theme pull --store=$Store --theme=$Theme --path=$ThemePath
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "✗ Theme pull failed" -ForegroundColor Red
+    Write-Host "[FAIL] Theme pull failed" -ForegroundColor Red
     exit 1
 }
 
-Write-Host "✓ Theme pull complete" -ForegroundColor Green
+Write-Host "[OK] Theme pull complete" -ForegroundColor Green
 

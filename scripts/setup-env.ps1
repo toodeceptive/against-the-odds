@@ -22,9 +22,9 @@ if (Test-Path $envLocalPath) {
 # Copy example file
 if (Test-Path ".env.example") {
     Copy-Item ".env.example" $envLocalPath
-    Write-Host "✓ Created .env.local from .env.example" -ForegroundColor Green
+    Write-Host "[OK] Created .env.local from .env.example" -ForegroundColor Green
 } else {
-    Write-Host "✗ .env.example not found" -ForegroundColor Red
+    Write-Host "[FAIL] .env.example not found" -ForegroundColor Red
     exit 1
 }
 
@@ -55,12 +55,12 @@ if ($response -eq "y") {
     }
     
     Write-Host ""
-    Write-Host "✓ Environment variables set in Windows (User scope)" -ForegroundColor Green
+    Write-Host "[OK] Environment variables set in Windows (User scope)" -ForegroundColor Green
     Write-Host "Note: You may need to restart your terminal for changes to take effect." -ForegroundColor Yellow
 }
 
 Write-Host ""
-Write-Host "✓ Environment setup complete!" -ForegroundColor Green
+Write-Host "[OK] Environment setup complete!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Cyan
 Write-Host "1. Edit .env.local with your actual values" -ForegroundColor White

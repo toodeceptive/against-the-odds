@@ -34,7 +34,7 @@ if ($envExists) {
         if ($response -eq "y") {
             $backupPath = ".env.local.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss')"
             Copy-Item $envLocalPath $backupPath
-            Write-Host "✓ Backed up to $backupPath" -ForegroundColor Green
+            Write-Host "[OK] Backed up to $backupPath" -ForegroundColor Green
         } else {
             Write-Host "Using existing .env.local" -ForegroundColor Cyan
             $envExists = $false  # Don't overwrite
@@ -46,9 +46,9 @@ if ($envExists) {
 if (-not $envExists) {
     if (Test-Path ".env.example") {
         Copy-Item ".env.example" $envLocalPath
-        Write-Host "✓ Created .env.local from .env.example" -ForegroundColor Green
+        Write-Host "[OK] Created .env.local from .env.example" -ForegroundColor Green
     } else {
-        Write-Host "✗ .env.example not found" -ForegroundColor Red
+        Write-Host "[FAIL] .env.example not found" -ForegroundColor Red
         exit 1
     }
 }
@@ -72,7 +72,7 @@ Write-Host "Applying known credentials..." -ForegroundColor Yellow
 foreach ($key in $knownCredentials.Keys) {
     if ($envVars.ContainsKey($key)) {
         $envVars[$key] = $knownCredentials[$key]
-        Write-Host "  ✓ Set $key" -ForegroundColor Green
+        Write-Host "  [OK] Set $key" -ForegroundColor Green
     }
 }
 
@@ -114,7 +114,7 @@ if ($missingCredentials.Count -gt 0 -and $Interactive) {
                 $bstr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($value)
                 $plainValue = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)
                 $envVars[$cred] = $plainValue
-                Write-Host "  ✓ Set $cred" -ForegroundColor Green
+                Write-Host "  [OK] Set $cred" -ForegroundColor Green
             }
         }
         "2" {
@@ -122,7 +122,7 @@ if ($missingCredentials.Count -gt 0 -and $Interactive) {
             if (Test-Path "scripts\shopify\browser\get-access-token.ps1") {
                 & "scripts\shopify\browser\get-access-token.ps1"
             } else {
-                Write-Host "  ⚠ Browser automation script not found. Please enter manually." -ForegroundColor Yellow
+                Write-Host "  [WARN] Browser automation script not found. Please enter manually." -ForegroundColor Yellow
             }
         }
         "3" {
@@ -148,7 +148,7 @@ foreach ($line in $envContent) {
     }
 }
 $newContent | Out-File -FilePath $envLocalPath -Encoding UTF8 -NoNewline
-Write-Host "✓ Updated .env.local" -ForegroundColor Green
+Write-Host "[OK] Updated .env.local" -ForegroundColor Green
 
 # Optionally store in Windows Credential Manager
 if ($Interactive) {
@@ -163,9 +163,9 @@ if ($Interactive) {
             $envVars['GITHUB_TOKEN'] -notmatch 'your_.*_here') {
             try {
                 cmdkey /generic:git:https://github.com /user:$($knownCredentials.GITHUB_USERNAME) /pass:$($envVars['GITHUB_TOKEN']) 2>&1 | Out-Null
-                Write-Host "  ✓ Stored GitHub credentials" -ForegroundColor Green
+                Write-Host "  [OK] Stored GitHub credentials" -ForegroundColor Green
             } catch {
-                Write-Host "  ⚠ Could not store GitHub credentials: $_" -ForegroundColor Yellow
+                Write-Host "  [WARN] Could not store GitHub credentials: $_" -ForegroundColor Yellow
             }
         }
         
@@ -175,9 +175,9 @@ if ($Interactive) {
             $envVars['SHOPIFY_ACCESS_TOKEN'] -notmatch 'your_.*_here') {
             try {
                 [System.Environment]::SetEnvironmentVariable('SHOPIFY_ACCESS_TOKEN', $envVars['SHOPIFY_ACCESS_TOKEN'], 'User')
-                Write-Host "  ✓ Stored Shopify credentials" -ForegroundColor Green
+                Write-Host "  [OK] Stored Shopify credentials" -ForegroundColor Green
             } catch {
-                Write-Host "  ⚠ Could not store Shopify credentials: $_" -ForegroundColor Yellow
+                Write-Host "  [WARN] Could not store Shopify credentials: $_" -ForegroundColor Yellow
             }
         }
     }
@@ -191,7 +191,7 @@ if (-not $SkipValidation) {
 }
 
 Write-Host ""
-Write-Host "✓ Environment configuration complete!" -ForegroundColor Green
+Write-Host "[OK] Environment configuration complete!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Cyan
 Write-Host "1. Review .env.local to ensure all values are correct" -ForegroundColor White

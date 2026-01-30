@@ -23,18 +23,18 @@ if ($TestPull) {
     try {
         $pullOutput = git pull origin $currentBranch 2>&1
         if ($LASTEXITCODE -eq 0) {
-            Write-Host "  ✓ Pull successful" -ForegroundColor Green
+            Write-Host "  [OK] Pull successful" -ForegroundColor Green
             if ($pullOutput -match 'Already up to date') {
                 Write-Host "    Repository is up to date" -ForegroundColor Cyan
             } else {
                 Write-Host "    Changes pulled successfully" -ForegroundColor Cyan
             }
         } else {
-            Write-Host "  ✗ Pull failed" -ForegroundColor Red
+            Write-Host "  [FAIL] Pull failed" -ForegroundColor Red
             Write-Host "    $pullOutput" -ForegroundColor Red
         }
     } catch {
-        Write-Host "  ✗ Pull error: $_" -ForegroundColor Red
+        Write-Host "  [FAIL] Pull error: $_" -ForegroundColor Red
     }
     Write-Host ""
 }
@@ -46,7 +46,7 @@ if ($TestPush) {
     # Check if there are uncommitted changes
     $status = git status --porcelain
     if ($status) {
-        Write-Host "  ⚠ Uncommitted changes detected" -ForegroundColor Yellow
+        Write-Host "  [WARN] Uncommitted changes detected" -ForegroundColor Yellow
         Write-Host "    Commit changes first or use -TestPush:$false to skip" -ForegroundColor Yellow
     } else {
         # Check if there are commits to push
@@ -56,19 +56,19 @@ if ($TestPush) {
             try {
                 $pushOutput = git push origin $currentBranch 2>&1
                 if ($LASTEXITCODE -eq 0) {
-                    Write-Host "  ✓ Push successful" -ForegroundColor Green
+                    Write-Host "  [OK] Push successful" -ForegroundColor Green
                 } else {
-                    Write-Host "  ✗ Push failed" -ForegroundColor Red
+                    Write-Host "  [FAIL] Push failed" -ForegroundColor Red
                     Write-Host "    $pushOutput" -ForegroundColor Red
                 }
             } catch {
-                Write-Host "  ✗ Push error: $_" -ForegroundColor Red
+                Write-Host "  [FAIL] Push error: $_" -ForegroundColor Red
             }
         } else {
-            Write-Host "  ✓ No commits to push (up to date)" -ForegroundColor Green
+            Write-Host "  [OK] No commits to push (up to date)" -ForegroundColor Green
         }
     }
 }
 
 Write-Host ""
-Write-Host "✓ Push/Pull test complete!" -ForegroundColor Green
+Write-Host "[OK] Push/Pull test complete!" -ForegroundColor Green

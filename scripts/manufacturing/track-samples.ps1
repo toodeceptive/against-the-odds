@@ -64,7 +64,7 @@ function Add-Sample {
     
     $script:samples += $sample
     Save-Samples
-    Write-Host "✓ Added sample: $($sample.id)" -ForegroundColor Green
+    Write-Host "[OK] Added sample: $($sample.id)" -ForegroundColor Green
     return $sample
 }
 
@@ -118,7 +118,7 @@ function Update-Sample {
     }
     
     Save-Samples
-    Write-Host "✓ Updated sample: $Id" -ForegroundColor Green
+    Write-Host "[OK] Updated sample: $Id" -ForegroundColor Green
 }
 
 function Evaluate-Sample {
@@ -141,7 +141,7 @@ function Evaluate-Sample {
     }
     
     Save-Samples
-    Write-Host "✓ Evaluated sample: $Id" -ForegroundColor Green
+    Write-Host "[OK] Evaluated sample: $Id" -ForegroundColor Green
 }
 
 # Execute action

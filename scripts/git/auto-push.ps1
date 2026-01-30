@@ -62,9 +62,9 @@ if ($remoteCommit -and $localCommit -ne $remoteCommit) {
     Write-Host "Attempting to merge remote changes..." -ForegroundColor Yellow
     try {
         git merge "origin/$Branch" --no-edit
-        Write-Host "✓ Successfully merged remote changes" -ForegroundColor Green
+        Write-Host "[OK] Successfully merged remote changes" -ForegroundColor Green
     } catch {
-        Write-Host "✗ Merge conflict detected!" -ForegroundColor Red
+        Write-Host "[FAIL] Merge conflict detected!" -ForegroundColor Red
         Write-Host ""
         Write-Host "Conflicted files:" -ForegroundColor Yellow
         git diff --name-only --diff-filter=U
@@ -101,9 +101,9 @@ try {
     } else {
         git push origin $Branch
     }
-    Write-Host "✓ Successfully pushed to origin/$Branch" -ForegroundColor Green
+    Write-Host "[OK] Successfully pushed to origin/$Branch" -ForegroundColor Green
 } catch {
-    Write-Host "✗ Failed to push: $_" -ForegroundColor Red
+    Write-Host "[FAIL] Failed to push: $_" -ForegroundColor Red
     Write-Host ""
     Write-Host "Possible solutions:" -ForegroundColor Yellow
     Write-Host "1. Check your authentication (see config/github-auth.md)" -ForegroundColor White

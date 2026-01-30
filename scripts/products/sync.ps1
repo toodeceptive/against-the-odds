@@ -27,4 +27,4 @@ if ($Direction -eq "export" -or $Direction -eq "both") {
     Write-Host ""
 }
 
-Write-Host "✓ Sync complete!" -ForegroundColor Green
+Write-Host "[OK] Sync complete!" -ForegroundColor Green

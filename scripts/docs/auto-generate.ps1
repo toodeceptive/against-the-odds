@@ -43,7 +43,7 @@ if ($Type -eq "all" -or $Type -eq "api") {
     }
     
     $apiDocs | ConvertTo-Json -Depth 10 | Out-File -FilePath "docs/api/endpoints.json" -Encoding UTF8
-    Write-Host "  ✓ API documentation generated" -ForegroundColor Green
+    Write-Host "  [OK] API documentation generated" -ForegroundColor Green
 }
 
 if ($Type -eq "all" -or $Type -eq "changelog") {
@@ -67,7 +67,7 @@ All notable changes to this project will be documented in this file.
         }
         
         # Append recent changes (simplified - in production, parse commits properly)
-        Write-Host "  ✓ Changelog updated" -ForegroundColor Green
+        Write-Host "  [OK] Changelog updated" -ForegroundColor Green
     }
 }
 
@@ -77,8 +77,8 @@ if ($Type -eq "all" -or $Type -eq "status") {
     # Generate project status
     & "scripts\reporting\generate-status.ps1"
     
-    Write-Host "  ✓ Status report generated" -ForegroundColor Green
+    Write-Host "  [OK] Status report generated" -ForegroundColor Green
 }
 
 Write-Host ""
-Write-Host "✓ Documentation generation complete!" -ForegroundColor Green
+Write-Host "[OK] Documentation generation complete!" -ForegroundColor Green

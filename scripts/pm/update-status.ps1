@@ -30,9 +30,9 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
     gh issue edit $IssueNumber --add-label $Status
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "✓ Issue #$IssueNumber status updated to: $Status" -ForegroundColor Green
+        Write-Host "[OK] Issue #$IssueNumber status updated to: $Status" -ForegroundColor Green
     } else {
-        Write-Host "✗ Failed to update issue status" -ForegroundColor Red
+        Write-Host "[FAIL] Failed to update issue status" -ForegroundColor Red
         exit 1
     }
 } else {

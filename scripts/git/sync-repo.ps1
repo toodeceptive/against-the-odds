@@ -29,9 +29,9 @@ Write-Host ""
 Write-Host "Fetching from remote..." -ForegroundColor Yellow
 try {
     git -c http.proxy= -c https.proxy= fetch origin $Branch
-    Write-Host "✓ Fetched latest changes" -ForegroundColor Green
+    Write-Host "[OK] Fetched latest changes" -ForegroundColor Green
 } catch {
-    Write-Host "✗ Failed to fetch: $_" -ForegroundColor Red
+    Write-Host "[FAIL] Failed to fetch: $_" -ForegroundColor Red
     exit 1
 }
 
@@ -61,7 +61,7 @@ if (-not $remoteCommit) {
     Write-Host "Remote branch '$Branch' does not exist." -ForegroundColor Yellow
     Write-Host "Creating and pushing local branch..." -ForegroundColor Yellow
     git -c http.proxy= -c https.proxy= push -u origin $Branch
-    Write-Host "✓ Created remote branch" -ForegroundColor Green
+    Write-Host "[OK] Created remote branch" -ForegroundColor Green
     exit 0
 }
 
@@ -71,7 +71,7 @@ Write-Host "Remote commit: $remoteCommit" -ForegroundColor Cyan
 Write-Host ""
 
 if ($localCommit -eq $remoteCommit) {
-    Write-Host "✓ Branches are in sync" -ForegroundColor Green
+    Write-Host "[OK] Branches are in sync" -ForegroundColor Green
     exit 0
 }
 
@@ -80,16 +80,16 @@ $commitsAhead = (git rev-list --count "origin/$Branch..HEAD" 2>$null) -as [int]
 $commitsBehind = (git rev-list --count "HEAD..origin/$Branch" 2>$null) -as [int]
 
 if ($commitsAhead -gt 0 -and $commitsBehind -gt 0) {
-    Write-Host "⚠ Branches have diverged!" -ForegroundColor Yellow
+    Write-Host "[WARN] Branches have diverged!" -ForegroundColor Yellow
     Write-Host "Local is $commitsAhead commit(s) ahead, $commitsBehind commit(s) behind" -ForegroundColor Yellow
     Write-Host ""
     
     Write-Host "Attempting to merge..." -ForegroundColor Yellow
     try {
         git merge "origin/$Branch" --no-edit
-        Write-Host "✓ Successfully merged" -ForegroundColor Green
+        Write-Host "[OK] Successfully merged" -ForegroundColor Green
     } catch {
-        Write-Host "✗ Merge conflict!" -ForegroundColor Red
+        Write-Host "[FAIL] Merge conflict!" -ForegroundColor Red
         Write-Host ""
         Write-Host "Conflicted files:" -ForegroundColor Yellow
         git diff --name-only --diff-filter=U
@@ -106,9 +106,9 @@ if ($commitsAhead -gt 0 -and $commitsBehind -gt 0) {
     Write-Host "Pulling changes..." -ForegroundColor Yellow
     try {
         git pull origin $Branch --no-edit
-        Write-Host "✓ Successfully pulled changes" -ForegroundColor Green
+        Write-Host "[OK] Successfully pulled changes" -ForegroundColor Green
     } catch {
-        Write-Host "✗ Pull failed: $_" -ForegroundColor Red
+        Write-Host "[FAIL] Pull failed: $_" -ForegroundColor Red
         exit 1
     }
 } elseif ($commitsAhead -gt 0) {
@@ -116,15 +116,15 @@ if ($commitsAhead -gt 0 -and $commitsBehind -gt 0) {
     Write-Host "Pushing changes..." -ForegroundColor Yellow
     try {
         git -c http.proxy= -c https.proxy= push origin $Branch
-        Write-Host "✓ Successfully pushed changes" -ForegroundColor Green
+        Write-Host "[OK] Successfully pushed changes" -ForegroundColor Green
     } catch {
-        Write-Host "✗ Push failed: $_" -ForegroundColor Red
+        Write-Host "[FAIL] Push failed: $_" -ForegroundColor Red
         exit 1
     }
 }
 
 Write-Host ""
-Write-Host "✓ Repository synchronized successfully!" -ForegroundColor Green
+Write-Host "[OK] Repository synchronized successfully!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Current status:" -ForegroundColor Cyan
 git status --short

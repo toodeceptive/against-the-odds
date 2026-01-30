@@ -43,10 +43,10 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
         # Verify authentication
         $authStatus = gh auth status 2>&1
         if ($LASTEXITCODE -ne 0) {
-            Write-Host "  ⚠ GitHub CLI not authenticated" -ForegroundColor Yellow
+            Write-Host "  [WARN] GitHub CLI not authenticated" -ForegroundColor Yellow
             Write-Host "    Run: gh auth login" -ForegroundColor Cyan
         } else {
-            Write-Host "  ✓ GitHub CLI authenticated" -ForegroundColor Green
+            Write-Host "  [OK] GitHub CLI authenticated" -ForegroundColor Green
             
             # List secrets
             $secrets = gh secret list 2>&1
@@ -61,17 +61,17 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
                 foreach ($secret in $requiredSecrets) {
                     $found = $secrets | Select-String $secret
                     if ($found) {
-                        Write-Host "  ✓ $secret configured" -ForegroundColor Green
+                        Write-Host "  [OK] $secret configured" -ForegroundColor Green
                     } else {
-                        Write-Host "  ✗ $secret missing" -ForegroundColor Red
+                        Write-Host "  [FAIL] $secret missing" -ForegroundColor Red
                     }
                 }
             } else {
-                Write-Host "  ⚠ Could not list secrets: $secrets" -ForegroundColor Yellow
+                Write-Host "  [WARN] Could not list secrets: $secrets" -ForegroundColor Yellow
             }
         }
     } catch {
-        Write-Host "  ✗ Error: $_" -ForegroundColor Red
+        Write-Host "  [FAIL] Error: $_" -ForegroundColor Red
     }
 } else {
     Write-Host "GitHub CLI (gh) not installed" -ForegroundColor Yellow

@@ -36,9 +36,9 @@ Write-Host "Initializing a new Shopify theme in: $ThemePath" -ForegroundColor Ye
 shopify theme init --path=$ThemePath
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "✗ Theme init failed" -ForegroundColor Red
+    Write-Host "[FAIL] Theme init failed" -ForegroundColor Red
     exit 1
 }
 
-Write-Host "✓ Theme initialized" -ForegroundColor Green
+Write-Host "[OK] Theme initialized" -ForegroundColor Green
 

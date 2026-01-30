@@ -33,7 +33,7 @@ if ($Fix) {
 }
 
 Write-Host ""
-Write-Host "✓ Security scan complete!" -ForegroundColor Green
+Write-Host "[OK] Security scan complete!" -ForegroundColor Green
 
 if ($Fix) {
     Write-Host ""

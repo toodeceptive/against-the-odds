@@ -39,9 +39,9 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
     Invoke-Expression $command
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "✓ Issue created successfully!" -ForegroundColor Green
+        Write-Host "[OK] Issue created successfully!" -ForegroundColor Green
     } else {
-        Write-Host "✗ Failed to create issue" -ForegroundColor Red
+        Write-Host "[FAIL] Failed to create issue" -ForegroundColor Red
         exit 1
     }
 } else {

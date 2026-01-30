@@ -10,7 +10,7 @@ function Write-ErrorWithContext {
         [string]$ScriptName = $MyInvocation.ScriptName
     )
     
-    Write-Host "✗ Error in $ScriptName" -ForegroundColor Red
+    Write-Host "[FAIL] Error in $ScriptName" -ForegroundColor Red
     Write-Host "  $Message" -ForegroundColor Red
     if ($Exception) {
         Write-Host "  Details: $($Exception.Message)" -ForegroundColor Red
@@ -187,17 +187,17 @@ function Write-ProgressStep {
 
 function Write-Success {
     param([string]$Message)
-    Write-Host "✓ $Message" -ForegroundColor Green
+    Write-Host "[OK] $Message" -ForegroundColor Green
 }
 
 function Write-Warning {
     param([string]$Message)
-    Write-Host "⚠ $Message" -ForegroundColor Yellow
+    Write-Host "[WARN] $Message" -ForegroundColor Yellow
 }
 
 function Write-Info {
     param([string]$Message)
-    Write-Host "ℹ $Message" -ForegroundColor Cyan
+    Write-Host "[INFO] $Message" -ForegroundColor Cyan
 }
 
 #endregion

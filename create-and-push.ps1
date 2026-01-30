@@ -19,7 +19,7 @@ Write-Host "Checking if repository exists on GitHub..." -ForegroundColor Yellow
 $checkRepo = git -c http.proxy= -c https.proxy= ls-remote origin 2>&1
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✓ Repository exists on GitHub!" -ForegroundColor Green
+    Write-Host "[OK] Repository exists on GitHub!" -ForegroundColor Green
     Write-Host ""
     Write-Host "Pushing local commits..." -ForegroundColor Yellow
     git -c http.proxy= -c https.proxy= push -u origin main

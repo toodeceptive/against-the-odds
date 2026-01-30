@@ -42,9 +42,9 @@ try {
     Write-Host "  Fetching shop information..." -ForegroundColor Cyan
     $shop = Invoke-RestMethod -Uri "$baseUrl/shop.json" -Headers $headers -Method Get
     $shop | ConvertTo-Json -Depth 10 | Out-File "$OutputDir\shop_$timestamp.json"
-    Write-Host "  ✓ Shop data saved" -ForegroundColor Green
+    Write-Host "  [OK] Shop data saved" -ForegroundColor Green
 } catch {
-    Write-Host "  ✗ Failed to fetch shop data: $_" -ForegroundColor Red
+    Write-Host "  [FAIL] Failed to fetch shop data: $_" -ForegroundColor Red
 }
 
 # Fetch products
@@ -52,9 +52,9 @@ try {
     Write-Host "  Fetching products..." -ForegroundColor Cyan
     $products = Invoke-RestMethod -Uri "$baseUrl/products.json?limit=250" -Headers $headers -Method Get
     $products | ConvertTo-Json -Depth 10 | Out-File "$OutputDir\products_$timestamp.json"
-    Write-Host "  ✓ Fetched $($products.products.Count) product(s)" -ForegroundColor Green
+    Write-Host "  [OK] Fetched $($products.products.Count) product(s)" -ForegroundColor Green
 } catch {
-    Write-Host "  ✗ Failed to fetch products: $_" -ForegroundColor Red
+    Write-Host "  [FAIL] Failed to fetch products: $_" -ForegroundColor Red
 }
 
 # Fetch collections
@@ -62,9 +62,9 @@ try {
     Write-Host "  Fetching collections..." -ForegroundColor Cyan
     $collections = Invoke-RestMethod -Uri "$baseUrl/collections.json?limit=250" -Headers $headers -Method Get
     $collections | ConvertTo-Json -Depth 10 | Out-File "$OutputDir\collections_$timestamp.json"
-    Write-Host "  ✓ Fetched $($collections.collections.Count) collection(s)" -ForegroundColor Green
+    Write-Host "  [OK] Fetched $($collections.collections.Count) collection(s)" -ForegroundColor Green
 } catch {
-    Write-Host "  ✗ Failed to fetch collections: $_" -ForegroundColor Red
+    Write-Host "  [FAIL] Failed to fetch collections: $_" -ForegroundColor Red
 }
 
 # Fetch themes
@@ -72,11 +72,11 @@ try {
     Write-Host "  Fetching themes..." -ForegroundColor Cyan
     $themes = Invoke-RestMethod -Uri "$baseUrl/themes.json" -Headers $headers -Method Get
     $themes | ConvertTo-Json -Depth 10 | Out-File "$OutputDir\themes_$timestamp.json"
-    Write-Host "  ✓ Fetched $($themes.themes.Count) theme(s)" -ForegroundColor Green
+    Write-Host "  [OK] Fetched $($themes.themes.Count) theme(s)" -ForegroundColor Green
 } catch {
-    Write-Host "  ✗ Failed to fetch themes: $_" -ForegroundColor Red
+    Write-Host "  [FAIL] Failed to fetch themes: $_" -ForegroundColor Red
 }
 
 Write-Host ""
-Write-Host "✓ Store data backup complete!" -ForegroundColor Green
+Write-Host "[OK] Store data backup complete!" -ForegroundColor Green
 Write-Host "Backup location: $OutputDir" -ForegroundColor Cyan

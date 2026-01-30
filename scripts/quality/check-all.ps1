@@ -22,10 +22,10 @@ try {
     if ($LASTEXITCODE -ne 0) {
         $allPassed = $false
     } else {
-        Write-Host "✓ Linting passed" -ForegroundColor Green
+        Write-Host "[OK] Linting passed" -ForegroundColor Green
     }
 } catch {
-    Write-Host "⚠ Linting check skipped (no ESLint config)" -ForegroundColor Yellow
+    Write-Host "[WARN] Linting check skipped (no ESLint config)" -ForegroundColor Yellow
 }
 Write-Host ""
 
@@ -34,13 +34,13 @@ Write-Host "Checking code formatting..." -ForegroundColor Yellow
 try {
     npm run format:check
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "⚠ Code formatting issues found" -ForegroundColor Yellow
+        Write-Host "[WARN] Code formatting issues found" -ForegroundColor Yellow
         Write-Host "Run 'npm run format' to fix" -ForegroundColor White
     } else {
-        Write-Host "✓ Formatting check passed" -ForegroundColor Green
+        Write-Host "[OK] Formatting check passed" -ForegroundColor Green
     }
 } catch {
-    Write-Host "⚠ Format check skipped (no Prettier config)" -ForegroundColor Yellow
+    Write-Host "[WARN] Format check skipped (no Prettier config)" -ForegroundColor Yellow
 }
 Write-Host ""
 
@@ -49,10 +49,10 @@ Write-Host "Running security audit..." -ForegroundColor Yellow
 if (Test-Path "package.json") {
     npm audit --audit-level=high
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "⚠ Security vulnerabilities found" -ForegroundColor Yellow
+        Write-Host "[WARN] Security vulnerabilities found" -ForegroundColor Yellow
         Write-Host "Run 'npm audit fix' to attempt automatic fixes" -ForegroundColor White
     } else {
-        Write-Host "✓ Security audit passed" -ForegroundColor Green
+        Write-Host "[OK] Security audit passed" -ForegroundColor Green
     }
 }
 Write-Host ""
@@ -61,16 +61,16 @@ Write-Host ""
 Write-Host "Checking test coverage..." -ForegroundColor Yellow
 try {
     npm run test:coverage
-    Write-Host "✓ Coverage check complete" -ForegroundColor Green
+    Write-Host "[OK] Coverage check complete" -ForegroundColor Green
 } catch {
-    Write-Host "⚠ Coverage check skipped" -ForegroundColor Yellow
+    Write-Host "[WARN] Coverage check skipped" -ForegroundColor Yellow
 }
 Write-Host ""
 
 if ($allPassed) {
-    Write-Host "✓ All quality checks passed!" -ForegroundColor Green
+    Write-Host "[OK] All quality checks passed!" -ForegroundColor Green
     exit 0
 } else {
-    Write-Host "✗ Some quality checks failed" -ForegroundColor Red
+    Write-Host "[FAIL] Some quality checks failed" -ForegroundColor Red
     exit 1
 }

@@ -30,7 +30,7 @@ if ([string]::IsNullOrWhiteSpace($Token)) {
 # Ensure output directory exists
 if (-not (Test-Path $OutputDir)) {
     New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
-    Write-Host "✓ Created output directory: $OutputDir" -ForegroundColor Green
+    Write-Host "[OK] Created output directory: $OutputDir" -ForegroundColor Green
 }
 
 # Setup API headers
@@ -125,8 +125,8 @@ foreach ($product in $products) {
     
     $exportData | ConvertTo-Json -Depth 10 | Out-File -FilePath $filename -Encoding UTF8
     $exported++
-    Write-Host "  ✓ Exported: $($product.title)" -ForegroundColor Green
+    Write-Host "  [OK] Exported: $($product.title)" -ForegroundColor Green
 }
 
 Write-Host ""
-Write-Host "✓ Exported $exported products to $OutputDir" -ForegroundColor Green
+Write-Host "[OK] Exported $exported products to $OutputDir" -ForegroundColor Green

@@ -28,7 +28,7 @@ Write-Host "Attempting to fetch from remote..." -ForegroundColor Yellow
 $fetchResult = git -c http.proxy= -c https.proxy= fetch origin 2>&1
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✓ Successfully fetched from remote!" -ForegroundColor Green
+    Write-Host "[OK] Successfully fetched from remote!" -ForegroundColor Green
     Write-Host ""
     Write-Host "Remote branches:" -ForegroundColor Cyan
     git branch -r
@@ -41,7 +41,7 @@ if ($LASTEXITCODE -eq 0) {
     if ($remoteCommit -and $localCommit -ne $remoteCommit) {
         Write-Host "Remote has different commits. Merging..." -ForegroundColor Yellow
         git merge origin/main --no-edit
-        Write-Host "✓ Merge complete!" -ForegroundColor Green
+        Write-Host "[OK] Merge complete!" -ForegroundColor Green
     }
     
     Write-Host ""
@@ -49,7 +49,7 @@ if ($LASTEXITCODE -eq 0) {
     git -c http.proxy= -c https.proxy= push -u origin main 2>&1
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "✓ Successfully pushed to GitHub!" -ForegroundColor Green
+        Write-Host "[OK] Successfully pushed to GitHub!" -ForegroundColor Green
     } else {
         Write-Host "Push requires authentication." -ForegroundColor Yellow
         Write-Host "Please authenticate when prompted, or use GitHub Desktop." -ForegroundColor Yellow

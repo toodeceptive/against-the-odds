@@ -27,7 +27,7 @@ if ($CheckOnly) {
     Write-Host "Checking for outdated dependencies..." -ForegroundColor Yellow
     npm outdated
     Write-Host ""
-    Write-Host "✓ Dependency check complete!" -ForegroundColor Green
+    Write-Host "[OK] Dependency check complete!" -ForegroundColor Green
     exit 0
 }
 
@@ -42,7 +42,7 @@ if ($Major) {
 }
 
 Write-Host ""
-Write-Host "✓ Dependencies updated!" -ForegroundColor Green
+Write-Host "[OK] Dependencies updated!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "  1. Review package.json changes" -ForegroundColor Cyan

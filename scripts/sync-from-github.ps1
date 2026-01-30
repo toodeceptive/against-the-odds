@@ -24,7 +24,7 @@ Write-Host ""
 # Check if there are uncommitted changes
 $uncommitted = git diff --quiet
 if (-not $uncommitted) {
-    Write-Host "⚠️  Warning: You have uncommitted changes!" -ForegroundColor Yellow
+    Write-Host "[WARN]  Warning: You have uncommitted changes!" -ForegroundColor Yellow
     Write-Host "Options:" -ForegroundColor Cyan
     Write-Host "1. Commit changes first (recommended)" -ForegroundColor White
     Write-Host "2. Stash changes" -ForegroundColor White
@@ -51,7 +51,7 @@ Write-Host "Fetching from GitHub..." -ForegroundColor Yellow
 $fetchResult = git -c http.proxy= -c https.proxy= fetch origin 2>&1
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✓ Successfully fetched from GitHub!" -ForegroundColor Green
+    Write-Host "[OK] Successfully fetched from GitHub!" -ForegroundColor Green
     Write-Host ""
     
     # Check if remote has different commits
@@ -73,9 +73,9 @@ if ($LASTEXITCODE -eq 0) {
             git merge origin/main --no-edit
             
             if ($LASTEXITCODE -eq 0) {
-                Write-Host "✓ Successfully merged remote changes!" -ForegroundColor Green
+                Write-Host "[OK] Successfully merged remote changes!" -ForegroundColor Green
             } else {
-                Write-Host "⚠️  Merge conflicts detected!" -ForegroundColor Red
+                Write-Host "[WARN]  Merge conflicts detected!" -ForegroundColor Red
                 Write-Host "Please resolve conflicts manually:" -ForegroundColor Yellow
                 Write-Host "1. Review conflicts: git status" -ForegroundColor White
                 Write-Host "2. Resolve conflicts in files" -ForegroundColor White
@@ -86,10 +86,10 @@ if ($LASTEXITCODE -eq 0) {
             Write-Host "Merge cancelled." -ForegroundColor Yellow
         }
     } else {
-        Write-Host "✓ Local and remote are in sync!" -ForegroundColor Green
+        Write-Host "[OK] Local and remote are in sync!" -ForegroundColor Green
     }
 } else {
-    Write-Host "⚠️  Fetch failed. Possible reasons:" -ForegroundColor Yellow
+    Write-Host "[WARN]  Fetch failed. Possible reasons:" -ForegroundColor Yellow
     Write-Host "1. Authentication required" -ForegroundColor White
     Write-Host "2. Network issues" -ForegroundColor White
     Write-Host "3. Repository access issues" -ForegroundColor White

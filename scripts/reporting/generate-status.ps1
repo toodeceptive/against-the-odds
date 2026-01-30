@@ -57,8 +57,8 @@ $report = @"
 - ✅ Project management system
 
 ### In Progress
-- ⚠️ Shopify CLI installation and authentication
-- ⚠️ Theme development environment setup
+- [WARN] Shopify CLI installation and authentication
+- [WARN] Theme development environment setup
 
 ### Pending
 - ⬜ Product management system implementation
@@ -104,7 +104,7 @@ Status report generated automatically. Update this file manually for detailed no
 # Write report
 $report | Out-File -FilePath $OutputFile -Encoding UTF8
 
-Write-Host "✓ Status report generated: $OutputFile" -ForegroundColor Green
+Write-Host "[OK] Status report generated: $OutputFile" -ForegroundColor Green
 
 if ($Detailed) {
     # Generate detailed report in docs/status/
@@ -115,5 +115,5 @@ if ($Detailed) {
     
     $detailedFile = "$statusDir\status_$date.md"
     $report | Out-File -FilePath $detailedFile -Encoding UTF8
-    Write-Host "✓ Detailed report saved: $detailedFile" -ForegroundColor Green
+    Write-Host "[OK] Detailed report saved: $detailedFile" -ForegroundColor Green
 }

@@ -64,9 +64,9 @@ if ($E2E -or (-not $Unit -and -not $Integration)) {
 }
 
 if ($allPassed) {
-    Write-Host "✓ All tests passed!" -ForegroundColor Green
+    Write-Host "[OK] All tests passed!" -ForegroundColor Green
     exit 0
 } else {
-    Write-Host "✗ Some tests failed" -ForegroundColor Red
+    Write-Host "[FAIL] Some tests failed" -ForegroundColor Red
     exit 1
 }
