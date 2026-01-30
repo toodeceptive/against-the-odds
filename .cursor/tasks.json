@@ -99,13 +99,24 @@
       }
     },
     {
+      "label": "Start theme preview (new window)",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/start-theme-preview.ps1"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
       "label": "Open pending approval",
       "type": "shell",
       "command": "powershell",
       "args": [
         "-NoProfile",
         "-Command",
-        "Invoke-Item (Join-Path (Get-Location) 'docs/status/pending-approval.md')"
+        "$f = (Join-Path (Get-Location) 'docs/status/pending-approval.md'); if (Get-Command cursor -ErrorAction SilentlyContinue) { cursor -r \"$f\" } elseif (Get-Command code -ErrorAction SilentlyContinue) { code -r \"$f\" } else { Invoke-Item \"$f\" }"
       ],
       "problemMatcher": [],
       "presentation": {

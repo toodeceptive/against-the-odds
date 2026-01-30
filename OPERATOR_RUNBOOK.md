@@ -1,6 +1,6 @@
 # AO Operator Runbook
 
-**Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**) from the **repo root** so paths resolve correctly.
+**Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
 
 ## Daily Checks
 
@@ -29,7 +29,7 @@
 **Edit in Cursor → push to GitHub → store updates.** Store is connected to this repo via the Shopify GitHub App; pushing to the connected branch (usually `main`) triggers theme deployment. No `shopify theme push` needed for that flow.
 
 - **One-time**: Pull live theme into repo: `.\scripts\shopify\theme-pull.ps1` (then commit and push).
-- **Preview before commit**: **Tasks → Run Task → Shopify: Theme Dev (preview before commit)**. When the preview URL appears in the terminal, click it or paste into **View → Simple Browser** to see changes live. No commit needed to preview.
+- **Preview before commit**: Press **Ctrl+Alt+T** (after adding the keybinding once — see `.vscode/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks → Run Task → Shopify: Theme Dev (preview before commit)**. The browser opens the preview URL automatically when the server is ready; you can also click the URL in the terminal or paste into **View → Simple Browser**. No commit needed to preview.
 - **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, then commit, push to `main`.
 - **Deploy log / rollback**: After each deploy or product sync, append to [docs/status/deploy-log.md](docs/status/deploy-log.md). Rollback: theme → Shopify Admin → theme card → Actions → Reset to last commit; products → revert JSON and re-run sync.
 
@@ -93,6 +93,10 @@ After filling `.env.local`:
 - `.\scripts\github\verify-auth.ps1`
 - `npm run test:e2e` (optional)
 - `npm run test:coverage` (optional)
+
+## Legacy/optional scripts at repo root
+
+- `create-and-push.ps1`, `create-repo.ps1`, `sync-repository.ps1`: One-off or legacy repo setup/sync; not part of daily workflow. Use `scripts/` for current automation (e.g. `scripts/shopify/`, `scripts/git/`). See `docs/status/INDEX_REPORTS.md` and `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` for current flows.
 
 ## Shopify app settings (if using embedded app)
 

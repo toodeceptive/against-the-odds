@@ -13,4 +13,10 @@ Append-only log for store-affecting changes. Each entry: **Timestamp** (ISO), **
 
 ---
 
-_(No deployments logged yet. Entries will appear below as theme deploys and product syncs are applied.)_
+## 2026-01-30 — Page bio update (index.html)
+
+- **Branch/commit:** `main` (pending commit)
+- **Summary:** Updated hero bio on index.html: refreshed AO brand copy and added verification line to prove system workflow.
+- **Rollback:** Revert commit that touches index.html and push.
+
+_(Further entries will appear below as theme deploys and product syncs are applied.)_

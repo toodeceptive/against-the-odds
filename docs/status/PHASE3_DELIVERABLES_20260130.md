@@ -8,6 +8,6 @@
 
 ## 3.2 Integrations & API (expert-07)
 
-- **Shopify**: Admin API via scripts/shopify/ (sync-products, test-connection, theme-*); rate limits ~2 req/s documented in plan and OPERATOR_RUNBOOK. Browser vs API: user's browser for one-off; API for bulk (see AGENT_WORKFLOW_CURSOR_SHOPIFY).
+- **Shopify**: Admin API via scripts/shopify/ (sync-products, test-connection, theme-\*); rate limits ~2 req/s documented in plan and OPERATOR_RUNBOOK. Browser vs API: user's browser for one-off; API for bulk (see AGENT_WORKFLOW_CURSOR_SHOPIFY).
 - **GitHub**: GITHUB_TOKEN in Actions; PAT for local where needed. [.cursor/context/github.md](.cursor/context/github.md) and shopify.md list endpoints and doc locations.
 - **Deliverable**: Integration alignment confirmed; no script changes.

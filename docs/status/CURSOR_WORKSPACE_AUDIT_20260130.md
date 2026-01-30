@@ -1,28 +1,28 @@
 # Cursor and Workspace Audit — 2026-01-30
 
 **Scope**: .cursor/rules, .cursor/plans, .cursor/context, .cursor/tasks.json, .cursor/settings.json, .cursor/extensions.json; worktrees; Cursor IDE state (out of repo).  
-**Deliverable**: Findings and .cursor/* updates (Phase 5 Full Project Guru Perfection Plan)
+**Deliverable**: Findings and .cursor/\* updates (Phase 5 Full Project Guru Perfection Plan)
 
 ---
 
 ## 1. .cursor/rules/
 
-| File | Purpose | Status |
-|------|--------|--------|
-| ao-guru.rules.md | Execution principles, safety, quality gates, reporting | Updated: reporting now references docs/status/ and INDEX_REPORTS.md (MASTER_EXECUTION_REPORT.md moved to archive) |
-| env-credentials.mdc | Env and credentials handling | No change |
-| shopify-preview-approval.mdc | Shopify preview/approval flow | No change |
-| use-user-browser.mdc | Use user browser for automation | No change |
+| File                         | Purpose                                                | Status                                                                                                            |
+| ---------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| ao-guru.rules.md             | Execution principles, safety, quality gates, reporting | Updated: reporting now references docs/status/ and INDEX_REPORTS.md (MASTER_EXECUTION_REPORT.md moved to archive) |
+| env-credentials.mdc          | Env and credentials handling                           | No change                                                                                                         |
+| shopify-preview-approval.mdc | Shopify preview/approval flow                          | No change                                                                                                         |
+| use-user-browser.mdc         | Use user browser for automation                        | No change                                                                                                         |
 
 ---
 
 ## 2. .cursor/plans/
 
-| File | Purpose | Status |
-|------|--------|--------|
-| cursor-github-shopify-pipeline.plan.md | Pipeline plan | Retained; reference for workflows |
-| expert_team_security_and_platform_plan_fbf7f611.plan.md | Security/platform plan | Retained |
-| perfect_execution_prompt_aca26457.plan.md | Phase 0 / perfect execution | Retained; entry plan |
+| File                                                    | Purpose                     | Status                            |
+| ------------------------------------------------------- | --------------------------- | --------------------------------- |
+| cursor-github-shopify-pipeline.plan.md                  | Pipeline plan               | Retained; reference for workflows |
+| expert_team_security_and_platform_plan_fbf7f611.plan.md | Security/platform plan      | Retained                          |
+| perfect_execution_prompt_aca26457.plan.md               | Phase 0 / perfect execution | Retained; entry plan              |
 
 **Note**: No redundant plans removed. "Full project perfection" is in .cursor/plans (or repo plan reference); decision tree points to it. Documented here for future pruning if desired.
 
@@ -30,10 +30,10 @@
 
 ## 3. .cursor/context/
 
-| File | Purpose | Status |
-|------|--------|--------|
-| github.md | Repo, auth, workflows, secrets | Current |
-| shopify.md | Store, theme, API, scripts | Current; theme path and branch noted |
+| File       | Purpose                        | Status                               |
+| ---------- | ------------------------------ | ------------------------------------ |
+| github.md  | Repo, auth, workflows, secrets | Current                              |
+| shopify.md | Store, theme, API, scripts     | Current; theme path and branch noted |
 
 No changes required.
 
@@ -63,7 +63,7 @@ No changes required.
 ## 7. Cursor conversations and history (out of repo)
 
 - **In scope (plan)**: Not in repo; no automated edit. Document: "Cursor conversations/history: stored in the IDE; optional manual or export-based review for context."
-- **Action**: This audit documents that scope. All actionable work is on repo and .cursor/* only.
+- **Action**: This audit documents that scope. All actionable work is on repo and .cursor/\* only.
 
 ---
 

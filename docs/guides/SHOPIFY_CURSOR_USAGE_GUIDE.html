@@ -55,7 +55,8 @@ flowchart LR
   </div>
 
   <h2>2. Preview your theme before committing (see work live)</h2>
-  <p><strong>Goal:</strong> See Shopify theme changes in the browser without committing.</p>
+  <p><strong>Goal:</strong> See Shopify theme changes in the browser without committing. Run from repo root.</p>
+  <p><strong>Seamless:</strong> Press <strong>Ctrl+Alt+T</strong> (add keybinding once — see <code>.vscode/KEYBINDING_PENDING_APPROVAL.md</code>) to start theme dev; browser opens the preview URL automatically.</p>
   <div class="mermaid">
 sequenceDiagram
   participant You
@@ -134,13 +135,15 @@ flowchart TD
   <table>
     <thead><tr><th>Goal</th><th>Command or action</th></tr></thead>
     <tbody>
-      <tr><td>Theme preview before commit</td><td>Tasks → Shopify: Theme Dev → open URL in terminal or View → Simple Browser</td></tr>
+      <tr><td><strong>Open pending approval</strong></td><td><strong>Ctrl+Alt+P</strong> (add keybinding once) or Tasks → Open pending approval — opens in same window.</td></tr>
+      <tr><td><strong>Theme preview (dev server)</strong></td><td><strong>Ctrl+Alt+T</strong> (add keybinding once) or Tasks → Shopify: Theme Dev — browser opens URL automatically.</td></tr>
       <tr><td>Product sync preview</td><td><code>.\scripts\shopify\sync-products.ps1 -DryRun</code></td></tr>
       <tr><td>Product sync apply</td><td><code>.\scripts\shopify\sync-products.ps1</code></td></tr>
       <tr><td>Theme dev terminal</td><td><code>.\scripts\shopify\theme-dev.ps1</code></td></tr>
       <tr><td>Theme push apply</td><td><code>.\scripts\shopify\update-theme.ps1</code></td></tr>
+      <tr><td>Pending snapshot</td><td><code>docs/status/pending-approval.md</code></td></tr>
       <tr><td>Deploy log</td><td><code>docs/status/deploy-log.md</code></td></tr>
-      <tr><td>Pipeline verification</td><td><code>npm run verify:pipeline</code></td></tr>
+      <tr><td>Pipeline verification</td><td><code>npm run verify:pipeline</code> or <code>.\scripts\verify-pipeline.ps1</code></td></tr>
     </tbody>
   </table>
 

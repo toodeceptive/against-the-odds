@@ -30,7 +30,7 @@
 
 ## Documentation (agent: where to find product/theme info)
 
-- **Workflow (store updates)**: `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` — products, theme, preview, approval, deploy-log.
+- **Workflow (store updates)**: `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` — products, theme, **preview-before-apply** (pending-approval.md → open-pending-approval.ps1; for theme also start-theme-preview.ps1), approval in chat, deploy-log.
 - **Update from Cursor**: `docs/UPDATE_SHOPIFY_FROM_CURSOR.md`
 - **Setup**: `docs/SHOPIFY_SETUP.md`
 - **Product data**: `data/products/*.json` (source of truth for sync); schema: `data/products/example-hoodie.json`.

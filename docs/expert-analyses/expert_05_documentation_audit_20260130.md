@@ -7,18 +7,18 @@
 
 ## 1. Documentation inventory
 
-| Area | Location | Notes |
-|------|----------|--------|
-| Project overview | README.md, NEXT_STEPS.md, OPERATOR_RUNBOOK.md | Canonical at root; README has quick start, structure, dev tasks |
-| Setup/installation | docs/ENVIRONMENT_SETUP.md, docs/CREDENTIALS_SETUP.md, docs/guides/, docs/SETUP_GITHUB.md, docs/SHOPIFY_SETUP.md | Multiple entry points; INDEX_REPORTS and OPERATOR_RUNBOOK point to current sources |
-| Architecture / workflow | docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md (if present), docs/decisions/, OPERATOR_RUNBOOK | Agent workflow and handoff in docs/ and HANDOFF_PROMPT_NEW_AGENT |
-| Runbooks | OPERATOR_RUNBOOK.md, docs/FINALIZATION_RUNBOOK.md | Daily ops and finalization |
-| Launch | docs/launch/ (00–07) | Store readiness, release, ops, content, analytics, support |
-| Knowledge base | docs/knowledge-base/ (README, shopify-integration, github-workflows, etc.) | Structured; discoverable from docs/ |
-| Status and reports | docs/status/ (INDEX_REPORTS.md, PHASE_0_FINALIZATION, PLAN_AGENT_ENTRY, etc.) | Single place for current status; INDEX_REPORTS is index |
-| Security | docs/security/ (00_security_checklist, AGENT_AND_REPO_SECURITY, CURSOR_DATA_BOUNDARY) | Clear security boundary and checklist |
-| Expert outputs | expert-analyses/ (01–10), docs/status/*.md (phase deliverables) | Historical and current phase reports |
-| Prompts | prompts/ (expert-01–10, finalization-*, PERFECT_EXECUTION, head-guru-orchestrator, etc.) | Agent prompts and orchestration |
+| Area                    | Location                                                                                                        | Notes                                                                              |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Project overview        | README.md, NEXT_STEPS.md, OPERATOR_RUNBOOK.md                                                                   | Canonical at root; README has quick start, structure, dev tasks                    |
+| Setup/installation      | docs/ENVIRONMENT_SETUP.md, docs/CREDENTIALS_SETUP.md, docs/guides/, docs/SETUP_GITHUB.md, docs/SHOPIFY_SETUP.md | Multiple entry points; INDEX_REPORTS and OPERATOR_RUNBOOK point to current sources |
+| Architecture / workflow | docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md (if present), docs/decisions/, OPERATOR_RUNBOOK                           | Agent workflow and handoff in docs/ and HANDOFF_PROMPT_NEW_AGENT                   |
+| Runbooks                | OPERATOR_RUNBOOK.md, docs/FINALIZATION_RUNBOOK.md                                                               | Daily ops and finalization                                                         |
+| Launch                  | docs/launch/ (00–07)                                                                                            | Store readiness, release, ops, content, analytics, support                         |
+| Knowledge base          | docs/knowledge-base/ (README, shopify-integration, github-workflows, etc.)                                      | Structured; discoverable from docs/                                                |
+| Status and reports      | docs/status/ (INDEX_REPORTS.md, PHASE_0_FINALIZATION, PLAN_AGENT_ENTRY, etc.)                                   | Single place for current status; INDEX_REPORTS is index                            |
+| Security                | docs/security/ (00_security_checklist, AGENT_AND_REPO_SECURITY, CURSOR_DATA_BOUNDARY)                           | Clear security boundary and checklist                                              |
+| Expert outputs          | expert-analyses/ (01–10), docs/status/\*.md (phase deliverables)                                                | Historical and current phase reports                                               |
+| Prompts                 | prompts/ (expert-01–10, finalization-\*, PERFECT_EXECUTION, head-guru-orchestrator, etc.)                       | Agent prompts and orchestration                                                    |
 
 ---
 
@@ -34,12 +34,12 @@
 
 ## 3. Gaps and recommendations
 
-| Gap | Recommendation |
-|-----|----------------|
+| Gap                                                                                           | Recommendation                                                                                                                                               |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Multiple setup doc names at root (e.g. INSTALL_INSTRUCTIONS, SETUP_INSTRUCTIONS, QUICK_START) | Consolidated into archive; primary setup = docs/ENVIRONMENT_SETUP.md, docs/guides/quick-start.md, README quick start. INDEX_REPORTS and README link to them. |
-| Legacy reports at root | Move remaining legacy reports to archive/2026-01-30/; update INDEX_REPORTS. |
-| Documentation style guide | Not formalized; acceptable. Optional: add short “Documentation standards” in docs/ or CODING_STANDARDS.md. |
-| API documentation | Scripts and Node usage documented in README and runbook; no separate API doc required for current scope. |
+| Legacy reports at root                                                                        | Move remaining legacy reports to archive/2026-01-30/; update INDEX_REPORTS.                                                                                  |
+| Documentation style guide                                                                     | Not formalized; acceptable. Optional: add short “Documentation standards” in docs/ or CODING_STANDARDS.md.                                                   |
+| API documentation                                                                             | Scripts and Node usage documented in README and runbook; no separate API doc required for current scope.                                                     |
 
 ---
 

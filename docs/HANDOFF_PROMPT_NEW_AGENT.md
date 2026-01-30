@@ -73,8 +73,9 @@ CONTEXT — Read these first (in this order):
 3. OPERATOR_RUNBOOK.md — daily checks, Shopify, credentials, troubleshooting
 4. docs/CREDENTIALS_SETUP.md — .env.local and where to get Shopify/GitHub values
 5. docs/UPDATE_SHOPIFY_FROM_CURSOR.md — how to update the Shopify store from this Cursor app
-6. docs/launch/00_launch_checklist.md — launch checklist (next-phase work)
-7. .cursor/context/shopify.md and .cursor/context/github.md — if present, for store/repo context
+6. docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md — store changes: preview → pending-approval.md → open-pending-approval.ps1 (theme: start-theme-preview.ps1) → approve in chat → apply → docs/status/deploy-log.md; run Cursor tasks from repo root
+7. docs/launch/00_launch_checklist.md — launch checklist (next-phase work)
+8. .cursor/context/shopify.md and .cursor/context/github.md — if present, for store/repo context
 
 **Plan-only runs (Security & Platform / next team):** Read docs/status/PLAN_AGENT_ENTRY.md first if present — single entry for plan chats, Expert Team binding rules, and comprehensive-pass questions. Then read docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md, .cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md, docs/status/CONVERSATION_AUDIT.md (from this worktree or primary if missing).
 **Cross-worktree:** If you are in a worktree (e.g. uqy, snq, mhx) where those three files are missing, read them from **primary**: C:\Users\LegiT\against-the-odds (main). Fold Expert Team requirements into your plan. See docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md if present.

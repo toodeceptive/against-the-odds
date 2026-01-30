@@ -44,8 +44,17 @@ if (-not (Test-Path $ThemePath)) {
 Write-Host "Starting theme dev server (preview URL will appear below)..." -ForegroundColor Yellow
 Write-Host "Store: $Store  |  Path: $ThemePath" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "When the preview URL appears: click it in the terminal, or paste it into Cursor > View > Simple Browser." -ForegroundColor Gray
+Write-Host "Browser will open automatically when the server is ready (default: http://127.0.0.1:9292)." -ForegroundColor Gray
+Write-Host "You can also click the URL in the terminal or paste into Cursor > View > Simple Browser." -ForegroundColor Gray
 Write-Host ""
+
+# Auto-open preview URL in default browser after server has time to start (runs in background)
+$previewUrl = "http://127.0.0.1:9292"
+$openJob = Start-Job -ScriptBlock {
+    param($url)
+    Start-Sleep -Seconds 6
+    try { Start-Process $url } catch { }
+} -ArgumentList $previewUrl
 
 if ($Live) {
     Write-Host "Previewing against LIVE theme context." -ForegroundColor Yellow

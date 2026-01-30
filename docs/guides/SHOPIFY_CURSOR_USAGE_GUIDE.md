@@ -1,6 +1,6 @@
 # Cursor → GitHub → Shopify: Visual Usage Guide
 
-**Against The Odds (AO) store** — Edit in Cursor, preview live, push to GitHub, store updates.
+**Against The Odds (AO) store** — Edit in Cursor, preview live, push to GitHub, store updates. **New system (2026):** All tasks run from **repo root**; every store change uses **preview → snapshot to `docs/status/pending-approval.md` → you approve → apply → append to `docs/status/deploy-log.md`**. Products: JSON path (bulk) or browser path (one-off with uploads). No headless Admin automation; API or your browser only. See [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md) and [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md).
 
 ---
 
@@ -35,7 +35,9 @@ flowchart LR
 
 ## 1. Preview your theme before committing (see work live)
 
-**Goal:** See Shopify theme changes in the browser without committing.
+**Goal:** See Shopify theme changes in the browser without committing. Run the task from **repo root** so script paths resolve.
+
+**Seamless:** Press **Ctrl+Alt+T** (after adding the keybinding once — see `.vscode/KEYBINDING_PENDING_APPROVAL.md`) to start the theme dev server; your browser opens the preview URL automatically when the server is ready.
 
 ```mermaid
 sequenceDiagram
@@ -83,14 +85,17 @@ flowchart TD
   Log --> Done[Product live on store]
 ```
 
-| Step | Action                                                                                 |
-| ---- | -------------------------------------------------------------------------------------- |
-| 1    | Ask in Cursor (e.g. "list this product on my page")                                    |
-| 2    | Agent creates/edits JSON in `data/products/` (see `data/products/example-hoodie.json`) |
-| 3    | **Preview:** Agent runs `.\scripts\shopify\sync-products.ps1 -DryRun` and shows output |
-| 4    | **Approve:** You confirm (e.g. "yes", "apply")                                         |
-| 5    | **Apply:** Agent runs sync without `-DryRun`, then commit and push                     |
-| 6    | **Log:** Agent appends entry to `docs/status/deploy-log.md`                            |
+| Step | Action                                                                                                                                                  |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Ask in Cursor (e.g. "list this product on my page")                                                                                                     |
+| 2    | Agent creates/edits JSON in `data/products/` (see `data/products/example-hoodie.json`)                                                                  |
+| 3    | **Preview:** Agent runs `.\scripts\shopify\sync-products.ps1 -DryRun` and shows output                                                                  |
+| 4    | **Snapshot:** Agent writes summary + dry-run output to `docs/status/pending-approval.md`. You open it via **Tasks → Open pending approval** or in chat. |
+| 5    | **Approve:** You confirm in chat (e.g. "yes", "approve")                                                                                                |
+| 6    | **Apply:** Agent runs sync without `-DryRun`, commit and push; clears pending-approval                                                                  |
+| 7    | **Log:** Agent appends entry to `docs/status/deploy-log.md` (timestamp, summary, rollback)                                                              |
+
+**Product with uploads from your PC:** Agent can use **JSON path** (bulk: add image URLs to product JSON after you upload to Shopify/CDN, then dry-run → approve → sync) or **browser path** (one-off: agent uses your browser via Cursor MCP to add product in Admin and attach your files; you approve before Save). See AGENT_WORKFLOW_CURSOR_SHOPIFY.md.
 
 ---
 
@@ -110,14 +115,15 @@ flowchart TD
   Shopify --> Log[Append to deploy-log.md]
 ```
 
-| Step | Action                                                                            |
-| ---- | --------------------------------------------------------------------------------- |
-| 1    | Ask in Cursor for theme or page changes                                           |
-| 2    | Agent edits files under `src/shopify/themes/aodrop-theme/`                        |
-| 3    | **Preview:** Run **Tasks → Shopify: Theme Dev** and open URL, or review PR diff   |
-| 4    | **Approve:** You confirm                                                          |
-| 5    | **Apply:** Commit and push to `main`; CI updates `shopify-theme`; Shopify deploys |
-| 6    | **Log:** Append to `docs/status/deploy-log.md`                                    |
+| Step | Action                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Ask in Cursor for theme or page changes                                                                                            |
+| 2    | Agent edits files under `src/shopify/themes/aodrop-theme/`                                                                         |
+| 3    | **Preview:** Run **Tasks → Shopify: Theme Dev** (from repo root), open URL or review diff                                          |
+| 4    | **Snapshot:** Agent writes summary + URL/diff to `docs/status/pending-approval.md`; you open via **Tasks → Open pending approval** |
+| 5    | **Approve:** You confirm in chat                                                                                                   |
+| 6    | **Apply:** Commit and push to `main`; CI updates `shopify-theme`; Shopify deploys                                                  |
+| 7    | **Log:** Append to `docs/status/deploy-log.md` (timestamp, summary, rollback)                                                      |
 
 ---
 
@@ -144,15 +150,18 @@ flowchart LR
 
 ## 5. Quick reference
 
-| Goal                              | Command or action                                                                  |
-| --------------------------------- | ---------------------------------------------------------------------------------- |
-| **Theme preview (before commit)** | **Tasks** → **Shopify: Theme Dev** → open URL in terminal or View → Simple Browser |
-| Product sync (preview)            | `.\scripts\shopify\sync-products.ps1 -DryRun`                                      |
-| Product sync (apply)              | `.\scripts\shopify\sync-products.ps1`                                              |
-| Theme dev (terminal)              | `.\scripts\shopify\theme-dev.ps1`                                                  |
-| Theme push (apply)                | `.\scripts\shopify\update-theme.ps1`                                               |
-| Deploy log                        | `docs/status/deploy-log.md`                                                        |
-| Pipeline verification             | `npm run verify:pipeline`                                                          |
+| Goal                              | Command or action                                                                                                                                   |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Theme preview (before commit)** | **Tasks** → **Shopify: Theme Dev** → open URL in terminal or View → Simple Browser                                                                  |
+| Product sync (preview)            | `.\scripts\shopify\sync-products.ps1 -DryRun`                                                                                                       |
+| Product sync (apply)              | `.\scripts\shopify\sync-products.ps1`                                                                                                               |
+| Theme dev (terminal)              | `.\scripts\shopify\theme-dev.ps1`                                                                                                                   |
+| Theme push (apply)                | `.\scripts\shopify\update-theme.ps1`                                                                                                                |
+| **Open pending approval**         | **Ctrl+Alt+P** (add keybinding once — see `.vscode/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks** → **Open pending approval**. Opens in same window. |
+| **Theme preview (dev server)**    | **Ctrl+Alt+T** (add keybinding once) or **Tasks** → **Shopify: Theme Dev**. Browser opens preview URL automatically.                                |
+| Pending snapshot                  | `docs/status/pending-approval.md`                                                                                                                   |
+| Deploy log                        | `docs/status/deploy-log.md`                                                                                                                         |
+| Pipeline verification             | `npm run verify:pipeline` or `.\scripts\verify-pipeline.ps1`                                                                                        |
 
 ---
 

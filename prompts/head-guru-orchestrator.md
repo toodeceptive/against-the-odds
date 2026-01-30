@@ -274,7 +274,7 @@ Each phase must produce **timestamped proof artifacts** saved to `docs/status/`:
 1. **Git history rewrite** (`git filter-repo`, `git rebase -i` with rewrites, `git push --force`)
 2. **Deleting branches** (local or remote)
 3. **Deleting files** (unless clearly obsolete and documented)
-4. **Production Shopify changes** (product updates, theme publishes, etc.)
+4. **Production Shopify changes** (product updates, theme publishes, etc.) — use workflow: preview → pending-approval.md → open-pending-approval.ps1 (theme: start-theme-preview.ps1) → user approves in chat → apply → deploy-log. See `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`.
 5. **GitHub secret rotation** (requires credential updates)
 6. **Force pushes** to `main` or protected branches
 

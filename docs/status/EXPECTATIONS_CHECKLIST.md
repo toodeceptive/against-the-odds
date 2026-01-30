@@ -18,16 +18,16 @@
 
 ## Verification (workflow, runbook, handoff)
 
-| Expectation | Supported by |
-|-------------|--------------|
-| Single agent entry | `docs/status/PLAN_AGENT_ENTRY.md`, `docs/status/PHASE_0_FINALIZATION.md`, `docs/AGENT_PROMPT_DECISION_TREE.md` |
-| Run from repo root | `.cursor/tasks.json` (relative paths), OPERATOR_RUNBOOK, README |
-| Shopify store ops | OPERATOR_RUNBOOK, `docs/launch/03_shopify_store_ops.md`, `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`, `.cursor/context/shopify.md` |
-| Credentials | OPERATOR_RUNBOOK (Credentials), `.env.example`, `docs/CREDENTIALS_SETUP.md`, `.cursor/rules/env-credentials.mdc` |
-| Status and reports | `docs/status/INDEX_REPORTS.md`, archive/2026-01-30, root limited to README, CHANGELOG, NEXT_STEPS, OPERATOR_RUNBOOK |
-| Finalization | `docs/FINALIZATION_RUNBOOK.md`, `docs/launch/00_launch_checklist.md`, `prompts/finalization-*.md` |
-| Quality gates | OPERATOR_RUNBOOK (Daily Checks, Integration Checks), `.github/workflows/ci.yml`, `docs/FINALIZATION_RUNBOOK.md` (DoD) |
-| Handoff to new agent | `docs/HANDOFF_PROMPT_NEW_AGENT.md`, OPERATOR_RUNBOOK, INDEX_REPORTS, PLAN_AGENT_ENTRY |
+| Expectation          | Supported by                                                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Single agent entry   | `docs/status/PLAN_AGENT_ENTRY.md`, `docs/status/PHASE_0_FINALIZATION.md`, `docs/AGENT_PROMPT_DECISION_TREE.md`                 |
+| Run from repo root   | `.cursor/tasks.json` (relative paths), OPERATOR_RUNBOOK, README                                                                |
+| Shopify store ops    | OPERATOR_RUNBOOK, `docs/launch/03_shopify_store_ops.md`, `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`, `.cursor/context/shopify.md` |
+| Credentials          | OPERATOR_RUNBOOK (Credentials), `.env.example`, `docs/CREDENTIALS_SETUP.md`, `.cursor/rules/env-credentials.mdc`               |
+| Status and reports   | `docs/status/INDEX_REPORTS.md`, archive/2026-01-30, root limited to README, CHANGELOG, NEXT_STEPS, OPERATOR_RUNBOOK            |
+| Finalization         | `docs/FINALIZATION_RUNBOOK.md`, `docs/launch/00_launch_checklist.md`, `prompts/finalization-*.md`                              |
+| Quality gates        | OPERATOR_RUNBOOK (Daily Checks, Integration Checks), `.github/workflows/ci.yml`, `docs/FINALIZATION_RUNBOOK.md` (DoD)          |
+| Handoff to new agent | `docs/HANDOFF_PROMPT_NEW_AGENT.md`, OPERATOR_RUNBOOK, INDEX_REPORTS, PLAN_AGENT_ENTRY                                          |
 
 ---
 
