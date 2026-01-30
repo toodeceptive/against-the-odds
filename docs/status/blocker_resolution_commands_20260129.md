@@ -16,6 +16,13 @@ To finish pushing this repo to GitHub from Cursor, two approvals are needed:
 
 Once you’ve replied with approval, the agent can run the force-push (and, if needed, a second push after you’ve unblocked and rotated).
 
+**If push was blocked by GitHub (secret detected):**
+
+1. **Unblock the secret**: Open this URL and click to allow the push:  
+   https://github.com/toodeceptive/against-the-odds/security/secret-scanning/unblock-secret/38xq5YftGtS6MNaAcw3DXsAnnnp  
+2. **Rotate the exposed Shopify App Shared Secret** in Shopify Admin (Apps → Your app → API credentials → regenerate Client secret). Update `.env.local` with the new secret.
+3. Tell the agent “Done” or “Push again”; the agent will run `git push origin main --force` again.
+
 ---
 
 ## Blocker Resolution Checklist

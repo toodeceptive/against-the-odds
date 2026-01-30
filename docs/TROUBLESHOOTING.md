@@ -2,6 +2,20 @@
 
 ## Common Issues and Solutions
 
+### Cursor IDE: "Failed to gather Agent Review context" (Error when executing 'git')
+
+**Symptoms**: Red notification in Cursor: "Failed to gather Agent Review context. Caused by: Error when executing 'git':" or `git: 'credential-manager-core' is not a git command`.
+
+**Cause**: Git is configured to use a credential helper (`credential-manager-core`) that is not installed or not in PATH when Cursor runs git.
+
+**Permanent fix** (run once in a terminal):
+
+```powershell
+git config --global credential.helper manager
+```
+
+On Windows this uses Git Credential Manager (GCM). If you use another helper, set it to one that exists (e.g. `wincred` or `store`). After this, restart Cursor so Agent Review’s git calls use the fixed config.
+
 ### Environment Setup Issues
 
 #### .env.local Not Found
