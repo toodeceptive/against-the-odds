@@ -27,16 +27,16 @@ async function getWindowManager() {
  */
 export async function getAllWindows() {
   const wm = await getWindowManager();
-  
+
   if (wm && wm.default) {
     const manager = new wm.default();
     const windows = manager.getWindows();
-    return windows.map(win => ({
+    return windows.map((win) => ({
       handle: win.id,
       title: win.getTitle(),
       bounds: win.getBounds(),
       process: win.processName,
-      path: win.path
+      path: win.path,
     }));
   } else {
     // PowerShell fallback
@@ -50,7 +50,7 @@ export async function getAllWindows() {
  */
 async function getWindowsPowerShell() {
   const { execSync } = await import('child_process');
-  
+
   const script = `
     Add-Type @"
       using System;
@@ -121,25 +121,22 @@ async function getWindowsPowerShell() {
  * @returns {Promise<Object|null>} Window object or null
  */
 export async function findWindow(searchTerm, options = {}) {
-  const {
-    exactMatch = false,
-    caseSensitive = false
-  } = options;
+  const { exactMatch = false, caseSensitive = false } = options;
 
   const windows = await getAllWindows();
-  
+
   for (const window of windows) {
     const title = caseSensitive ? window.title : window.title.toLowerCase();
     const search = caseSensitive ? searchTerm : searchTerm.toLowerCase();
-    
+
     let matches = false;
     if (exactMatch) {
       matches = title === search;
     } else {
-      matches = title.includes(search) || 
-                (window.process && window.process.toLowerCase().includes(search));
+      matches =
+        title.includes(search) || (window.process && window.process.toLowerCase().includes(search));
     }
-    
+
     if (matches) {
       return window;
     }
@@ -155,12 +152,12 @@ export async function findWindow(searchTerm, options = {}) {
  */
 export async function activateWindow(window) {
   const handle = typeof window === 'object' ? window.handle : window;
-  
+
   const wm = await getWindowManager();
   if (wm && wm.default) {
     try {
       const manager = new wm.default();
-      const win = manager.getWindows().find(w => w.id === handle);
+      const win = manager.getWindows().find((w) => w.id === handle);
       if (win) {
         win.bringToFront();
         win.focus();
@@ -182,7 +179,7 @@ export async function activateWindow(window) {
  */
 async function activateWindowPowerShell(handle) {
   const { execSync } = await import('child_process');
-  
+
   const script = `
     Add-Type @"
       using System;
@@ -207,7 +204,7 @@ async function activateWindowPowerShell(handle) {
 
   try {
     execSync(`powershell -Command "${script}"`, { stdio: 'ignore' });
-    await new Promise(resolve => setTimeout(resolve, 300)); // Wait for activation
+    await new Promise((resolve) => setTimeout(resolve, 300)); // Wait for activation
     return true;
   } catch (error) {
     return false;
@@ -221,12 +218,12 @@ async function activateWindowPowerShell(handle) {
  */
 export async function closeWindow(window) {
   const handle = typeof window === 'object' ? window.handle : window;
-  
+
   const wm = await getWindowManager();
   if (wm && wm.default) {
     try {
       const manager = new wm.default();
-      const win = manager.getWindows().find(w => w.id === handle);
+      const win = manager.getWindows().find((w) => w.id === handle);
       if (win) {
         win.close();
         return true;
@@ -247,7 +244,7 @@ export async function closeWindow(window) {
  */
 async function closeWindowPowerShell(handle) {
   const { execSync } = await import('child_process');
-  
+
   const script = `
     Add-Type @"
       using System;
@@ -281,19 +278,19 @@ async function closeWindowPowerShell(handle) {
  */
 export async function resizeWindow(window, width, height) {
   const handle = typeof window === 'object' ? window.handle : window;
-  
+
   const wm = await getWindowManager();
   if (wm && wm.default) {
     try {
       const manager = new wm.default();
-      const win = manager.getWindows().find(w => w.id === handle);
+      const win = manager.getWindows().find((w) => w.id === handle);
       if (win) {
         const bounds = win.getBounds();
         win.setBounds({
           x: bounds.x,
           y: bounds.y,
           width: width,
-          height: height
+          height: height,
         });
         return true;
       }
@@ -315,19 +312,19 @@ export async function resizeWindow(window, width, height) {
  */
 export async function moveWindow(window, x, y) {
   const handle = typeof window === 'object' ? window.handle : window;
-  
+
   const wm = await getWindowManager();
   if (wm && wm.default) {
     try {
       const manager = new wm.default();
-      const win = manager.getWindows().find(w => w.id === handle);
+      const win = manager.getWindows().find((w) => w.id === handle);
       if (win) {
         const bounds = win.getBounds();
         win.setBounds({
           x: x,
           y: y,
           width: bounds.width,
-          height: bounds.height
+          height: bounds.height,
         });
         return true;
       }
@@ -346,12 +343,12 @@ export async function moveWindow(window, x, y) {
  */
 export async function minimizeWindow(window) {
   const handle = typeof window === 'object' ? window.handle : window;
-  
+
   const wm = await getWindowManager();
   if (wm && wm.default) {
     try {
       const manager = new wm.default();
-      const win = manager.getWindows().find(w => w.id === handle);
+      const win = manager.getWindows().find((w) => w.id === handle);
       if (win) {
         win.minimize();
         return true;
@@ -371,7 +368,7 @@ export async function minimizeWindow(window) {
  */
 async function minimizeWindowPowerShell(handle) {
   const { execSync } = await import('child_process');
-  
+
   const script = `
     Add-Type @"
       using System;
@@ -403,12 +400,12 @@ async function minimizeWindowPowerShell(handle) {
  */
 export async function maximizeWindow(window) {
   const handle = typeof window === 'object' ? window.handle : window;
-  
+
   const wm = await getWindowManager();
   if (wm && wm.default) {
     try {
       const manager = new wm.default();
-      const win = manager.getWindows().find(w => w.id === handle);
+      const win = manager.getWindows().find((w) => w.id === handle);
       if (win) {
         win.maximize();
         return true;
@@ -428,7 +425,7 @@ export async function maximizeWindow(window) {
  */
 async function maximizeWindowPowerShell(handle) {
   const { execSync } = await import('child_process');
-  
+
   const script = `
     Add-Type @"
       using System;

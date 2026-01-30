@@ -53,14 +53,14 @@ if (-not [string]::IsNullOrWhiteSpace($githubToken) -and $githubToken -notmatch 
         $response = Invoke-RestMethod -Uri "https://api.github.com/user" `
             -Headers $headers -Method Get -TimeoutSec 10
         
-        Write-Host "  ✓ GitHub API access successful" -ForegroundColor Green
+        Write-Host "  [OK] GitHub API access successful" -ForegroundColor Green
         Write-Host "    Authenticated as: $($response.login)" -ForegroundColor Cyan
         Write-Host "    User ID: $($response.id)" -ForegroundColor Cyan
     } catch {
-        Write-Host "  ✗ GitHub API access failed: $_" -ForegroundColor Red
+        Write-Host "  [X] GitHub API access failed: $_" -ForegroundColor Red
     }
 } else {
-    Write-Host "  ⚠ GITHUB_TOKEN not configured" -ForegroundColor Yellow
+    Write-Host "  [!] GITHUB_TOKEN not configured" -ForegroundColor Yellow
 }
 
 # Test 2: Repository access
@@ -69,15 +69,15 @@ Write-Host "Testing repository access..." -ForegroundColor Yellow
 try {
     $repoInfo = git ls-remote --heads origin 2>&1
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "  ✓ Repository access successful" -ForegroundColor Green
+        Write-Host "  [OK] Repository access successful" -ForegroundColor Green
         $branches = ($repoInfo | Select-String 'refs/heads/').Count
         Write-Host "    Found $branches branch(es)" -ForegroundColor Cyan
     } else {
-        Write-Host "  ✗ Repository access failed" -ForegroundColor Red
+        Write-Host "  [X] Repository access failed" -ForegroundColor Red
         Write-Host "    Error: $repoInfo" -ForegroundColor Red
     }
 } catch {
-    Write-Host "  ✗ Repository access test failed: $_" -ForegroundColor Red
+    Write-Host "  [X] Repository access test failed: $_" -ForegroundColor Red
 }
 
 # Test 3: Push capability (if requested)
@@ -96,19 +96,19 @@ if ($TestPush) {
         
         $pushResult = git push origin HEAD 2>&1
         if ($LASTEXITCODE -eq 0) {
-            Write-Host "  ✓ Push successful" -ForegroundColor Green
+            Write-Host "  [OK] Push successful" -ForegroundColor Green
             
             # Cleanup
             git reset HEAD~1 --soft 2>&1 | Out-Null
             git restore --staged $testFile 2>&1 | Out-Null
             Remove-Item $testFile -Force
         } else {
-            Write-Host "  ✗ Push failed: $pushResult" -ForegroundColor Red
+            Write-Host "  [X] Push failed: $pushResult" -ForegroundColor Red
             git reset HEAD~1 --soft 2>&1 | Out-Null
             Remove-Item $testFile -Force
         }
     } catch {
-        Write-Host "  ✗ Push test failed: $_" -ForegroundColor Red
+        Write-Host "  [X] Push test failed: $_" -ForegroundColor Red
         if (Test-Path $testFile) {
             Remove-Item $testFile -Force
         }
@@ -122,12 +122,12 @@ if ($TestPull) {
     try {
         $pullResult = git pull origin main 2>&1
         if ($LASTEXITCODE -eq 0) {
-            Write-Host "  ✓ Pull successful" -ForegroundColor Green
+            Write-Host "  [OK] Pull successful" -ForegroundColor Green
         } else {
-            Write-Host "  ⚠ Pull result: $pullResult" -ForegroundColor Yellow
+            Write-Host "  [!] Pull result: $pullResult" -ForegroundColor Yellow
         }
     } catch {
-        Write-Host "  ✗ Pull test failed: $_" -ForegroundColor Red
+        Write-Host "  [X] Pull test failed: $_" -ForegroundColor Red
     }
 }
 
@@ -140,17 +140,17 @@ if ($CheckSecrets) {
         try {
             $secrets = gh secret list 2>&1
             if ($LASTEXITCODE -eq 0) {
-                Write-Host "  ✓ GitHub CLI access successful" -ForegroundColor Green
+                Write-Host "  [OK] GitHub CLI access successful" -ForegroundColor Green
                 Write-Host "  Secrets configured:" -ForegroundColor Cyan
                 $secrets | ForEach-Object { Write-Host "    $_" -ForegroundColor White }
             } else {
-                Write-Host "  ⚠ Could not list secrets: $secrets" -ForegroundColor Yellow
+                Write-Host "  [!] Could not list secrets: $secrets" -ForegroundColor Yellow
             }
         } catch {
-            Write-Host "  ⚠ GitHub CLI error: $_" -ForegroundColor Yellow
+            Write-Host "  [!] GitHub CLI error: $_" -ForegroundColor Yellow
         }
     } else {
-        Write-Host "  ⚠ GitHub CLI (gh) not installed" -ForegroundColor Yellow
+        Write-Host "  [!] GitHub CLI (gh) not installed" -ForegroundColor Yellow
         Write-Host "    Install: winget install GitHub.cli" -ForegroundColor Cyan
         Write-Host "    Or check manually: https://github.com/toodeceptive/against-the-odds/settings/secrets/actions" -ForegroundColor Cyan
     }

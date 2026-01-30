@@ -14,17 +14,17 @@ import { analyzeScreen } from '../screen-analyzer.js';
 export async function openCursor() {
   // Find Cursor window
   const cursorWindow = await findWindow('Cursor');
-  
+
   if (!cursorWindow) {
     // Try to launch Cursor (would need path)
     // For now, assume it's already running or user needs to launch
     throw new Error('Cursor IDE not found. Please launch Cursor first.');
   }
-  
+
   // Activate window
   await activateWindow(cursorWindow);
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   return cursorWindow;
 }
 
@@ -35,18 +35,18 @@ export async function openCursor() {
  */
 export async function openFile(filePath) {
   await openCursor();
-  
+
   // Use Ctrl+P to open file
   await pressKey(['control', 'p']);
-  await new Promise(resolve => setTimeout(resolve, 300));
-  
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
   // Type file path
   await typeText(filePath);
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   // Press Enter to open
   await pressKey('enter');
-  
+
   return true;
 }
 
@@ -57,18 +57,18 @@ export async function openFile(filePath) {
  */
 export async function executeCommand(command) {
   await openCursor();
-  
+
   // Use Ctrl+Shift+P for command palette
   await pressKey(['control', 'shift', 'p']);
-  await new Promise(resolve => setTimeout(resolve, 300));
-  
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
   // Type command
   await typeText(command);
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   // Press Enter
   await pressKey('enter');
-  
+
   return true;
 }
 
@@ -79,7 +79,7 @@ export async function executeCommand(command) {
  */
 export async function navigateTabs(direction) {
   await openCursor();
-  
+
   if (direction === 'next') {
     await pressKey(['control', 'pagedown']);
   } else if (direction === 'previous') {
@@ -112,15 +112,15 @@ export async function saveFile() {
  */
 export async function accessAgent(prompt) {
   await openCursor();
-  
+
   // Open agent panel (Ctrl+L or Cursor-specific shortcut)
   // This would depend on Cursor's actual shortcuts
   await pressKey(['control', 'l']);
-  await new Promise(resolve => setTimeout(resolve, 300));
-  
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
   // Type prompt
   await typeText(prompt);
-  
+
   return true;
 }
 
@@ -130,21 +130,21 @@ export async function accessAgent(prompt) {
  */
 export async function getCurrentFile() {
   await openCursor();
-  
+
   // Analyze screen to get current file name
   const analysis = await analyzeScreen();
-  
+
   // Try to find file name in screen text
   // Cursor typically shows file name in title or tab
   const fileMatch = analysis.text.match(/([^/\\]+\.(js|ts|json|md|ps1|yml|yaml|html|css))$/i);
-  
+
   if (fileMatch) {
     return {
       name: fileMatch[1],
-      path: null // Would need more sophisticated extraction
+      path: null, // Would need more sophisticated extraction
     };
   }
-  
+
   return null;
 }
 
@@ -156,7 +156,7 @@ export async function getCurrentFile() {
 export async function searchInCursor(searchText) {
   await openCursor();
   await Shortcuts.find();
-  await new Promise(resolve => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 200));
   await typeText(searchText);
   return true;
 }
@@ -170,7 +170,7 @@ export async function searchInCursor(searchText) {
 export async function replaceInCursor(findText, replaceText) {
   await openCursor();
   await Shortcuts.replace();
-  await new Promise(resolve => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 200));
   await typeText(findText);
   await pressKey('tab');
   await typeText(replaceText);

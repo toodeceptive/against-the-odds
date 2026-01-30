@@ -3,6 +3,8 @@
  * Common functions for browser automation tasks
  */
 
+import { warn } from '../desktop-automation/logger.js';
+
 /**
  * Wait for network to be idle
  * @param {Page} page - Playwright page instance
@@ -12,7 +14,7 @@ export async function waitForNetworkIdle(page, timeout = 30000) {
   try {
     await page.waitForLoadState('networkidle', { timeout });
   } catch (error) {
-    // Network idle timeout - non-critical, continue
+    warn('Network idle timeout', { timeout, url: page.url(), error: error?.message });
   }
 }
 
@@ -33,7 +35,7 @@ export async function retryWithBackoff(fn, maxRetries = 3, delay = 1000) {
       }
       const waitTime = delay * Math.pow(2, attempt - 1);
       // Retrying after exponential backoff
-      await new Promise(resolve => setTimeout(resolve, waitTime));
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
     }
   }
 }
@@ -72,17 +74,17 @@ export async function safeFill(field, value) {
 export async function extractTableData(page, tableSelector) {
   try {
     await page.waitForSelector(tableSelector, { timeout: 10000 });
-    
+
     const tableData = await page.evaluate((selector) => {
       const table = document.querySelector(selector);
       if (!table) return [];
-      
-      const headers = Array.from(table.querySelectorAll('thead th, tr:first-child th, tr:first-child td')).map(
-        th => th.textContent.trim()
-      );
-      
+
+      const headers = Array.from(
+        table.querySelectorAll('thead th, tr:first-child th, tr:first-child td')
+      ).map((th) => th.textContent.trim());
+
       const rows = Array.from(table.querySelectorAll('tbody tr, tr:not(:first-child)'));
-      return rows.map(row => {
+      return rows.map((row) => {
         const cells = Array.from(row.querySelectorAll('td, th'));
         const rowData = {};
         cells.forEach((cell, index) => {
@@ -93,10 +95,10 @@ export async function extractTableData(page, tableSelector) {
         return rowData;
       });
     }, tableSelector);
-    
+
     return tableData;
   } catch (error) {
-    // Return empty array on error
+    warn('Failed to extract table data', { tableSelector, error: error?.message });
     return [];
   }
 }
@@ -111,7 +113,8 @@ export async function elementExists(page, selector) {
   try {
     const count = await page.locator(selector).count();
     return count > 0;
-  } catch {
+  } catch (error) {
+    warn('Failed to check element existence', { selector, error: error?.message });
     return false;
   }
 }

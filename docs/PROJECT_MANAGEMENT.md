@@ -40,6 +40,7 @@ Create a GitHub Project (recommended name: **AO - Execution Board**) with these 
 - Done
 
 Automation suggestions:
+
 - Move to **In Progress** when a PR is opened.
 - Move to **Done** when the issue is closed.
 
@@ -51,4 +52,3 @@ Scripts:
 - `scripts/pm/update-status.ps1`: updates issue labels (requires `gh`)
 
 If `gh` isn’t installed/authenticated, the scripts print the manual URL and instructions instead.
-

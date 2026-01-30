@@ -27,7 +27,7 @@ The Shopify integration uses a multi-layered approach:
 ### API Key and Secret
 
 - Used for OAuth flows
-- Client ID: `775fc3aa250b20e6d3122dd39de5b028`
+- Client ID: `your_shopify_api_key_here`
 - Secret: Stored securely, never in code
 
 ## Common Operations
@@ -78,7 +78,7 @@ The Shopify integration uses a multi-layered approach:
 ```powershell
 function Invoke-WithRetry {
     param([scriptblock]$ScriptBlock, [int]$MaxRetries = 3)
-    
+
     $attempt = 0
     while ($attempt -lt $MaxRetries) {
         try {
@@ -99,6 +99,7 @@ function Invoke-WithRetry {
 ### Setup
 
 Webhooks can be configured for:
+
 - Order creation/updates
 - Product creation/updates
 - Customer events

@@ -9,18 +9,21 @@ This document describes all capabilities available to desktop automation agents 
 ### 1. Screen Viewing and Analysis
 
 #### Screen Capture
+
 - **Full Screen**: Capture entire screen
 - **Region Capture**: Capture specific screen regions
 - **Window Capture**: Capture specific application windows
 - **Multi-Monitor**: Support for multiple displays
 
 #### OCR Text Extraction
+
 - **Text Reading**: Extract all text from screen
 - **Region Reading**: Extract text from specific regions
 - **Pattern Matching**: Find specific text on screen
 - **Structured Data**: Extract forms, tables, buttons
 
 #### Screen Analysis
+
 - **Element Detection**: Identify UI elements (buttons, inputs, links)
 - **State Analysis**: Analyze current screen state
 - **Change Detection**: Compare screen states over time
@@ -29,6 +32,7 @@ This document describes all capabilities available to desktop automation agents 
 ### 2. Input Control
 
 #### Mouse Control
+
 - **Movement**: Absolute and relative mouse movement
 - **Clicks**: Left, right, middle, double-click
 - **Drag and Drop**: Drag elements between positions
@@ -36,12 +40,14 @@ This document describes all capabilities available to desktop automation agents 
 - **Position Tracking**: Get current mouse position
 
 #### Keyboard Control
+
 - **Text Input**: Type text with configurable delay
 - **Key Presses**: Press individual keys or combinations
 - **Shortcuts**: Execute keyboard shortcuts
 - **Special Keys**: Handle special characters and modifiers
 
 #### Input Simulation
+
 - **Form Filling**: Automatically fill form fields
 - **Button Clicking**: Click buttons by text or position
 - **Menu Navigation**: Navigate menus and dropdowns
@@ -50,12 +56,14 @@ This document describes all capabilities available to desktop automation agents 
 ### 3. Window Management
 
 #### Window Discovery
+
 - **List Windows**: Get all open windows
 - **Find by Title**: Find windows by title pattern
 - **Find by Process**: Find windows by process name
 - **Window Properties**: Get window size, position, state
 
 #### Window Control
+
 - **Activate**: Bring window to front and focus
 - **Resize**: Change window dimensions
 - **Move**: Change window position
@@ -63,6 +71,7 @@ This document describes all capabilities available to desktop automation agents 
 - **Close**: Close windows safely
 
 #### Application Navigation
+
 - **Switch Applications**: Switch between open applications
 - **Manage Multiple Windows**: Handle multiple windows of same app
 - **Window Arrangement**: Organize windows on screen
@@ -70,18 +79,21 @@ This document describes all capabilities available to desktop automation agents 
 ### 4. Issue Detection
 
 #### Automatic Detection
+
 - **Error Messages**: Detect error text on screen
 - **Error Patterns**: Match against known error patterns
 - **UI Issues**: Detect broken or inconsistent UI
 - **Performance Issues**: Detect slow loading or responsiveness
 
 #### Issue Classification
+
 - **By Type**: Error, warning, info, performance
 - **By Severity**: High, medium, low
 - **By Category**: Configuration, network, authentication, API
 - **By Actionability**: Can be fixed automatically or requires manual intervention
 
 #### Issue Tracking
+
 - **State Comparison**: Track issues over time
 - **New Issues**: Detect newly appeared issues
 - **Resolved Issues**: Track when issues are fixed
@@ -90,18 +102,21 @@ This document describes all capabilities available to desktop automation agents 
 ### 5. Debugging and Fixing
 
 #### Root Cause Analysis
+
 - **Error Analysis**: Analyze error messages for root cause
 - **Context Collection**: Gather evidence from screen
 - **Pattern Matching**: Match against known issue patterns
 - **Confidence Calculation**: Determine confidence in analysis
 
 #### Fix Strategy Generation
+
 - **Step Planning**: Create step-by-step fix plan
 - **Automation Assessment**: Determine if fix can be automated
 - **Time Estimation**: Estimate time required
 - **Risk Assessment**: Evaluate risks of fix
 
 #### Automated Fix Application
+
 - **Step Execution**: Execute fix steps automatically
 - **Progress Tracking**: Track fix progress
 - **Error Handling**: Handle errors during fix
@@ -111,6 +126,7 @@ This document describes all capabilities available to desktop automation agents 
 ## Application-Specific Capabilities
 
 ### Cursor IDE Automation
+
 - Open files in editor
 - Navigate editor tabs
 - Use Cursor commands
@@ -118,6 +134,7 @@ This document describes all capabilities available to desktop automation agents 
 - Manage workspace
 
 ### Browser Automation
+
 - Control browser windows
 - Navigate tabs
 - Interact with web pages
@@ -125,6 +142,7 @@ This document describes all capabilities available to desktop automation agents 
 - Extract data from pages
 
 ### System Applications
+
 - Control Windows applications
 - File system navigation
 - System settings access
@@ -134,6 +152,7 @@ This document describes all capabilities available to desktop automation agents 
 ## Safety and Confirmation
 
 ### Confirmation Requirements
+
 - Destructive operations (delete, remove, format)
 - Credential changes
 - System modifications
@@ -141,6 +160,7 @@ This document describes all capabilities available to desktop automation agents 
 - File deletions
 
 ### Safety Features
+
 - Action logging
 - Rollback support
 - Scope limiting
@@ -150,6 +170,7 @@ This document describes all capabilities available to desktop automation agents 
 ## Integration Capabilities
 
 ### Existing Scripts
+
 - Environment setup scripts
 - Credential verification
 - Health monitoring
@@ -157,6 +178,7 @@ This document describes all capabilities available to desktop automation agents 
 - API integration scripts
 
 ### External Systems
+
 - GitHub API integration
 - Shopify API integration
 - Browser automation (Playwright)
@@ -165,32 +187,35 @@ This document describes all capabilities available to desktop automation agents 
 ## Usage Examples
 
 ### Example 1: Detect and Fix Configuration Error
+
 ```javascript
 // Detect issues
 const issues = await detectIssues({ application: 'cursor' });
 
 // Find configuration issue
-const configIssue = issues.find(i => i.type === 'configuration');
+const configIssue = issues.find((i) => i.type === 'configuration');
 
 // Generate and apply fix
 const solution = await generateSolution(configIssue, { autoApply: true });
 ```
 
 ### Example 2: Resolve Authentication Error
+
 ```javascript
 // Detect auth error
-const authIssue = issues.find(i => i.type === 'auth_error');
+const authIssue = issues.find((i) => i.type === 'auth_error');
 
 // Debug issue
 const debug = await debugIssue(authIssue);
 
 // Apply fix with confirmation
 const fix = await applyFix(authIssue, debug.fixStrategy, {
-  requireConfirmation: true
+  requireConfirmation: true,
 });
 ```
 
 ### Example 3: Navigate and Interact with Application
+
 ```javascript
 // Find application window
 const window = await findWindow('Cursor');
@@ -208,6 +233,7 @@ await navigateMenu(['File', 'Open', 'Recent']);
 ## Performance Considerations
 
 ### Optimization
+
 - Batch operations when possible
 - Cache screen captures
 - Reuse window handles
@@ -215,6 +241,7 @@ await navigateMenu(['File', 'Open', 'Recent']);
 - Use efficient selectors
 
 ### Limitations
+
 - OCR accuracy depends on screen quality
 - Some applications may block automation
 - Network operations have latency
@@ -234,12 +261,14 @@ await navigateMenu(['File', 'Open', 'Recent']);
 ## Troubleshooting
 
 ### Common Problems
+
 - **OCR Inaccuracy**: Adjust OCR settings, improve screen quality
 - **Element Not Found**: Use multiple search strategies
 - **Window Not Found**: Check window title variations
 - **Fix Failed**: Review logs, try alternative approach
 
 ### Debugging Tips
+
 - Take screenshots at each step
 - Log all intermediate states
 - Compare before/after states

@@ -9,6 +9,8 @@ This guide provides comprehensive instructions for setting up your development e
 - Windows 10/11
 - PowerShell 5.1 or later
 - Node.js 20.x or later
+- Python 3.x (required for Playwright webServer)
+- Shopify CLI (recommended: global install)
 - Git
 - Chrome browser (for Shopify admin access)
 
@@ -22,6 +24,7 @@ This guide provides comprehensive instructions for setting up your development e
 ```
 
 This script will:
+
 1. Create `.env.local` from template
 2. Apply known credentials automatically
 3. Guide you through missing credentials
@@ -31,6 +34,7 @@ This script will:
 ### Manual Setup
 
 1. **Copy environment template**:
+
    ```powershell
    Copy-Item .env.example .env.local
    ```
@@ -47,32 +51,40 @@ This script will:
 ### GitHub Configuration
 
 **GITHUB_TOKEN**
+
 - Create at: https://github.com/settings/tokens
 - Required scopes: `repo`, `workflow`, `read:org`
 - Store securely in `.env.local`
 
 **GITHUB_USERNAME**
+
 - Value: `toodeceptive` (already known)
 
 **GITHUB_REPO**
+
 - Value: `against-the-odds` (already known)
 
 ### Shopify Configuration
 
 **SHOPIFY_API_KEY**
-- Value: `775fc3aa250b20e6d3122dd39de5b028` (already known)
+
+- Value: `your_api_key` (from Shopify Admin)
 
 **SHOPIFY_API_SECRET**
-- Value: `PLACEHOLDER_SHOPIFY_SECRET` (from dashboard)
+
+- Value: `your_api_secret` (from Shopify Admin)
 
 **SHOPIFY_ACCESS_TOKEN**
+
 - Get from: Shopify Admin > Apps > Development > Custom apps > Your App > API credentials
 - Or use browser automation: `.\scripts\shopify\browser\get-access-token.ps1`
 
 **SHOPIFY_STORE_DOMAIN**
+
 - Value: `aodrop.com` (already known)
 
 **SHOPIFY_THEME_ID**
+
 - Get from: Shopify Admin > Online Store > Themes
 - Or use browser automation: `.\scripts\shopify\browser\get-theme-id.ps1`
 
@@ -179,11 +191,13 @@ cmdkey /generic:git:https://github.com /user:toodeceptive /pass:YOUR_TOKEN
 After environment setup:
 
 1. **Install dependencies**:
+
    ```powershell
    npm install
    ```
 
 2. **Install Shopify CLI**:
+
    ```powershell
    npm install -g @shopify/cli @shopify/theme
    shopify auth login

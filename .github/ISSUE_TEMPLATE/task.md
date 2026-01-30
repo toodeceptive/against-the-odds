@@ -14,9 +14,9 @@ assignees: ''
 
 <!-- Define what "done" looks like for this task -->
 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ]
+- [ ]
+- [ ]
 
 ## Priority
 
@@ -32,6 +32,7 @@ assignees: ''
 ## Dependencies
 
 <!-- Link to related issues or tasks -->
+
 - Related to #
 - Blocks #
 - Blocked by #

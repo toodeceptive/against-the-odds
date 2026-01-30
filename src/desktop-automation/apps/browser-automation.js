@@ -13,20 +13,20 @@ import { pressKey, typeText, Shortcuts } from '../keyboard-control.js';
  */
 export async function findBrowserWindow(browser = 'chrome') {
   const browserNames = {
-    'chrome': ['Chrome', 'Google Chrome'],
-    'firefox': ['Firefox', 'Mozilla Firefox'],
-    'edge': ['Edge', 'Microsoft Edge']
+    chrome: ['Chrome', 'Google Chrome'],
+    firefox: ['Firefox', 'Mozilla Firefox'],
+    edge: ['Edge', 'Microsoft Edge'],
   };
-  
+
   const names = browserNames[browser.toLowerCase()] || browserNames['chrome'];
-  
+
   for (const name of names) {
     const window = await findWindow(name);
     if (window) {
       return window;
     }
   }
-  
+
   return null;
 }
 
@@ -39,7 +39,7 @@ export async function activateBrowser(browser = 'chrome') {
   const window = await findBrowserWindow(browser);
   if (window) {
     await activateWindow(window);
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     return true;
   }
   return false;
@@ -53,7 +53,7 @@ export async function activateBrowser(browser = 'chrome') {
  */
 export async function navigateBrowserTabs(direction, browser = 'chrome') {
   await activateBrowser(browser);
-  
+
   if (direction === 'next') {
     await pressKey(['control', 'pagedown']);
   } else if (direction === 'previous') {
@@ -89,11 +89,11 @@ export async function openBrowserTab(browser = 'chrome') {
  */
 export async function navigateToURL(url, browser = 'chrome') {
   await activateBrowser(browser);
-  
+
   // Focus address bar
   await pressKey(['control', 'l']);
-  await new Promise(resolve => setTimeout(resolve, 200));
-  
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
   // Type URL
   await typeText(url);
   await pressKey('enter');
@@ -116,14 +116,14 @@ export async function refreshBrowser(browser = 'chrome') {
  */
 export async function getBrowserTabs(browser = 'chrome') {
   await activateBrowser(browser);
-  
+
   // Extract tab information from screen text
   // This would need more sophisticated parsing
   const tabs = [];
-  
+
   // Look for tab indicators in screen text
   // Browser-specific implementation would be needed
-  
+
   return tabs;
 }
 
@@ -135,7 +135,7 @@ export async function getBrowserTabs(browser = 'chrome') {
  */
 export async function switchToTab(tabIndex, browser = 'chrome') {
   await activateBrowser(browser);
-  
+
   // Use Ctrl+1, Ctrl+2, etc. for tab switching
   if (tabIndex >= 1 && tabIndex <= 9) {
     await pressKey(['control', tabIndex.toString()]);

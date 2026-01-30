@@ -60,11 +60,13 @@ against-the-odds/
 - Node.js and npm
 - Git
 - PowerShell (Windows)
+- Python 3.x (for Playwright webServer)
 - Shopify Partner account
 
 ### Common Tasks
 
 **Product Management**:
+
 ```powershell
 # Sync products to Shopify
 .\scripts\products\sync.ps1 -Direction import
@@ -74,6 +76,7 @@ against-the-odds/
 ```
 
 **Manufacturing**:
+
 ```powershell
 # Track samples
 .\scripts\manufacturing\track-samples.ps1 -Action list
@@ -83,6 +86,7 @@ against-the-odds/
 ```
 
 **Monitoring**:
+
 ```powershell
 # Performance check
 .\scripts\monitoring\performance-check.ps1
@@ -92,6 +96,7 @@ against-the-odds/
 ```
 
 **Documentation**:
+
 ```powershell
 # Generate documentation
 .\scripts\docs\auto-generate.ps1

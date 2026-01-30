@@ -10,6 +10,7 @@
 **Problem**: Some scripts were using API version `2024-01` instead of `2026-01` (matching Shopify app version).
 
 **Files Fixed**:
+
 - `scripts/shopify/sync-products.ps1` - Updated to `2026-01`
 - `scripts/shopify/fetch-store-data.ps1` - Updated to `2026-01`
 
@@ -20,9 +21,11 @@
 ### 2. Variable Interpolation Bug ✅ FIXED
 
 **Problem**: In `scripts/monitoring/performance-check.ps1`, variable interpolation was incorrect:
+
 - `${response_time_ms}` should be `$($check.response_time_ms)`
 
 **Lines Fixed**:
+
 - Line 49: Site performance check
 - Line 95: Shopify API check
 - Line 145: GitHub API check
@@ -34,6 +37,7 @@
 ### 3. Pagination Logic Bug ✅ FIXED
 
 **Problem**: In `scripts/products/export.ps1`, pagination logic was incorrect:
+
 - Code tried to access `$response.PSObject.Properties['Link']?.Value` which doesn't exist
 - Shopify API returns pagination in HTTP headers, not response body
 
@@ -46,6 +50,7 @@
 ### 4. Missing Parameter Definitions ✅ FIXED
 
 **Problem**: In `scripts/manufacturing/track-samples.ps1`, script referenced undefined parameters:
+
 - `$ProductType`
 - `$ExpectedDelivery`
 - `$TrackingNumber`
@@ -112,16 +117,19 @@
 After these fixes, test the following:
 
 1. **Product Sync**:
+
    ```powershell
    .\scripts\shopify\sync-products.ps1 -DryRun
    ```
 
 2. **Product Export**:
+
    ```powershell
    .\scripts\products\export.ps1
    ```
 
 3. **Sample Tracking**:
+
    ```powershell
    .\scripts\manufacturing\track-samples.ps1 -Action add -Manufacturer "Test" -ProductType "Hoodie"
    ```

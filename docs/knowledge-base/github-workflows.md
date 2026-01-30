@@ -18,6 +18,7 @@ The project uses GitHub Actions for CI/CD automation:
 Runs on: Push to main/develop, Pull requests
 
 Actions:
+
 - Lint code
 - Run tests
 - Build verification
@@ -28,6 +29,7 @@ Actions:
 Runs on: Push to main/develop, Manual trigger
 
 Actions:
+
 - Deploy to staging (develop branch)
 - Deploy to production (main branch)
 - Shopify theme deployment
@@ -37,6 +39,7 @@ Actions:
 Runs on: Daily at 2 AM, Push to main (product/theme changes)
 
 Actions:
+
 - Sync products to Shopify
 - Backup store configuration
 

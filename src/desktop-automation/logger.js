@@ -12,7 +12,7 @@ export const LogLevel = {
   INFO: 1,
   WARN: 2,
   ERROR: 3,
-  NONE: 4
+  NONE: 4,
 };
 
 /**
@@ -89,9 +89,8 @@ export function warn(message, data = {}) {
  */
 export function error(message, error = {}) {
   if (currentLogLevel <= LogLevel.ERROR) {
-    const errorData = error instanceof Error 
-      ? { message: error.message, stack: error.stack }
-      : error;
+    const errorData =
+      error instanceof Error ? { message: error.message, stack: error.stack } : error;
     console.error(formatMessage('ERROR', message, errorData));
   }
 }

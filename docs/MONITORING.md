@@ -11,12 +11,14 @@ This document outlines the monitoring and performance tracking systems for the A
 **Script**: `scripts/monitoring/performance-check.ps1`
 
 Monitors:
+
 - Site availability and response times
 - Shopify API connectivity
 - GitHub API connectivity
 - Response times for all services
 
 **Usage**:
+
 ```powershell
 # Check all services
 .\scripts\monitoring\performance-check.ps1
@@ -32,12 +34,14 @@ Monitors:
 ### 2. Site Performance
 
 **Metrics Tracked**:
+
 - HTTP response codes
 - Response times (milliseconds)
 - Availability status
 - Error messages (if any)
 
 **Targets**:
+
 - Response time: < 2 seconds
 - Uptime: > 99.9%
 - Status code: 200 OK
@@ -45,12 +49,14 @@ Monitors:
 ### 3. Shopify API Monitoring
 
 **Metrics Tracked**:
+
 - API connectivity
 - Response times
 - Shop information retrieval
 - Authentication status
 
 **Targets**:
+
 - Response time: < 1 second
 - Availability: 100%
 - Authentication: Valid
@@ -58,12 +64,14 @@ Monitors:
 ### 4. GitHub API Monitoring
 
 **Metrics Tracked**:
+
 - Repository access
 - API response times
 - Authentication status
 - Repository status
 
 **Targets**:
+
 - Response time: < 500ms
 - Availability: 100%
 - Authentication: Valid
@@ -81,6 +89,7 @@ The `.github/workflows/maintenance.yml` workflow includes automated monitoring:
 ### Local Monitoring
 
 Run performance checks manually:
+
 ```powershell
 .\scripts\monitoring\performance-check.ps1
 ```
@@ -118,6 +127,7 @@ Reports are stored in `docs/status/performance-report.json`:
 **Script**: `.github/workflows/maintenance.yml`
 
 **Tasks**:
+
 1. Dependency updates
 2. Security scanning
 3. Performance monitoring
@@ -128,6 +138,7 @@ Reports are stored in `docs/status/performance-report.json`:
 **Script**: `scripts/maintenance/update-dependencies.ps1`
 
 Updates project dependencies:
+
 ```powershell
 .\scripts\maintenance\update-dependencies.ps1
 ```
@@ -135,6 +146,7 @@ Updates project dependencies:
 **Script**: `scripts/maintenance/security-scan.ps1`
 
 Scans for security vulnerabilities:
+
 ```powershell
 .\scripts\maintenance\security-scan.ps1
 ```
@@ -144,6 +156,7 @@ Scans for security vulnerabilities:
 ### Failure Notifications
 
 When monitoring detects failures:
+
 1. Log error to performance report
 2. Create GitHub issue (if configured)
 3. Send notification (if configured)
@@ -151,6 +164,7 @@ When monitoring detects failures:
 ### Performance Degradation
 
 When performance degrades:
+
 1. Log warning to performance report
 2. Create GitHub issue for investigation
 3. Alert team (if configured)
@@ -169,6 +183,7 @@ When performance degrades:
 ### Environment Variables
 
 Required for monitoring:
+
 - `SHOPIFY_STORE_DOMAIN` - Shopify store domain
 - `SHOPIFY_ACCESS_TOKEN` - Shopify API token
 - `GITHUB_TOKEN` - GitHub API token
@@ -178,6 +193,7 @@ Required for monitoring:
 ### Monitoring Configuration
 
 Configuration files in `config/monitoring/`:
+
 - `performance-thresholds.json` - Performance thresholds
 - `alert-config.json` - Alert configuration
 

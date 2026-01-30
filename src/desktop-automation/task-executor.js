@@ -24,11 +24,7 @@ export class TaskResult {
  * @returns {Promise<TaskResult>} Task result
  */
 export async function executeTask(taskFunction, options = {}) {
-  const {
-    maxRetries = 3,
-    retryDelay = 1000,
-    timeout = 30000
-  } = options;
+  const { maxRetries = 3, retryDelay = 1000, timeout = 30000 } = options;
 
   const result = new TaskResult(taskFunction.name || 'anonymous');
   const startTime = Date.now();
@@ -41,10 +37,9 @@ export async function executeTask(taskFunction, options = {}) {
     );
 
     await Promise.race([taskPromise, timeoutPromise]);
-    
+
     result.success = true;
     result.duration = Date.now() - startTime;
-
   } catch (error) {
     result.error = error.message;
     result.duration = Date.now() - startTime;
@@ -52,7 +47,7 @@ export async function executeTask(taskFunction, options = {}) {
     // Retry if retries remaining
     if (result.retries < maxRetries) {
       result.retries++;
-      await new Promise(resolve => setTimeout(resolve, retryDelay * result.retries));
+      await new Promise((resolve) => setTimeout(resolve, retryDelay * result.retries));
       return await executeTask(taskFunction, { ...options, maxRetries: maxRetries - 1 });
     }
   }
@@ -89,9 +84,7 @@ export async function executeTasksSequential(tasks, options = {}) {
  * @returns {Promise<Array<TaskResult>>} Array of task results
  */
 export async function executeTasksParallel(tasks, options = {}) {
-  const {
-    maxConcurrent = 3
-  } = options;
+  const { maxConcurrent = 3 } = options;
 
   const results = [];
   const executing = [];
@@ -103,7 +96,7 @@ export async function executeTasksParallel(tasks, options = {}) {
     }
 
     // Execute task
-    const taskPromise = executeTask(task, options).then(result => {
+    const taskPromise = executeTask(task, options).then((result) => {
       executing.splice(executing.indexOf(taskPromise), 1);
       return result;
     });

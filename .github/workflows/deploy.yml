@@ -7,10 +7,16 @@ on:
       - develop
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   deploy-staging:
     if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout code
@@ -24,6 +30,9 @@ jobs:
   deploy-production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout code
@@ -34,12 +43,5 @@ jobs:
         echo "Deploying to production environment..."
         # Add production deployment steps here
         
-    - name: Deploy Shopify theme
-      if: ${{ secrets.SHOPIFY_ACCESS_TOKEN != '' }}
-      env:
-        SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
-        SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
-        SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
-      run: |
-        echo "Deploying Shopify theme..."
-        # Add Shopify theme deployment steps here
+    # Note: Shopify theme deployment is handled by the Shopify GitHub App
+    # (configured in Shopify Admin). This workflow focuses on non-Shopify deployments.

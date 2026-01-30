@@ -14,7 +14,7 @@ theme:
 # App configuration (if building custom app)
 app:
   name: "AO"
-  client_id: "775fc3aa250b20e6d3122dd39de5b028"  # Shopify App Client ID
+  client_id: "your_shopify_api_key_here"  # Shopify App Client ID
   application_url: "https://example.com"  # TODO: Update with actual app URL
 
 # Development settings

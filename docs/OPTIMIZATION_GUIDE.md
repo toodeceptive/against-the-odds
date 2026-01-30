@@ -7,6 +7,7 @@
 #### Reduce API Calls
 
 **Before**:
+
 ```powershell
 foreach ($product in $products) {
     $response = Invoke-RestMethod -Uri "$baseUrl/products/$product.id.json"
@@ -14,6 +15,7 @@ foreach ($product in $products) {
 ```
 
 **After**:
+
 ```powershell
 # Batch requests or use pagination
 $response = Invoke-RestMethod -Uri "$baseUrl/products.json?limit=250"
@@ -218,6 +220,7 @@ function Rotate-APIKey {
 ### Monitoring
 
 Track these metrics:
+
 - Script execution times
 - API response times
 - Error rates

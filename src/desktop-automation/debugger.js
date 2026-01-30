@@ -3,11 +3,6 @@
  * Analyzes errors and generates fix strategies
  */
 
-// Imports available for future use
-// import { analyzeScreen, findElementByText } from './screen-analyzer.js';
-// import { extractText } from './ocr-reader.js';
-// import { findErrorType, extractErrorDetails } from './pattern-matcher.js';
-
 /**
  * Debug an issue
  * @param {Object} issue - Issue to debug
@@ -16,7 +11,7 @@
  */
 export async function debugIssue(issue, options = {}) {
   const {
-    captureScreenshot = true
+    captureScreenshot = true,
     // analyzeContext available for future use
   } = options;
 
@@ -26,7 +21,7 @@ export async function debugIssue(issue, options = {}) {
     analysis: null,
     rootCause: null,
     fixStrategy: null,
-    confidence: 0
+    confidence: 0,
   };
 
   // Capture current screen state
@@ -58,7 +53,7 @@ async function analyzeRootCause(issue, analysis) {
     type: 'unknown',
     description: '',
     evidence: [],
-    likely: false
+    likely: false,
   };
 
   // Analyze based on issue type
@@ -137,7 +132,7 @@ async function generateFixStrategy(issue, rootCause) {
     steps: [],
     automated: false,
     requiresConfirmation: true,
-    estimatedTime: 0
+    estimatedTime: 0,
   };
 
   // Generate strategy based on root cause
@@ -149,7 +144,7 @@ async function generateFixStrategy(issue, rootCause) {
         'Locate configuration file or settings',
         'Add or update configuration',
         'Verify configuration is correct',
-        'Restart application if needed'
+        'Restart application if needed',
       ];
       strategy.automated = true;
       strategy.estimatedTime = 300; // 5 minutes
@@ -162,7 +157,7 @@ async function generateFixStrategy(issue, rootCause) {
         'Verify authentication endpoint',
         'Refresh or regenerate tokens',
         'Update credentials in configuration',
-        'Test authentication'
+        'Test authentication',
       ];
       strategy.automated = true;
       strategy.requiresConfirmation = true; // Credentials are sensitive
@@ -176,7 +171,7 @@ async function generateFixStrategy(issue, rootCause) {
         'Verify DNS resolution',
         'Check firewall settings',
         'Test connection to endpoint',
-        'Restart network adapter if needed'
+        'Restart network adapter if needed',
       ];
       strategy.automated = false; // Network issues often need manual intervention
       strategy.estimatedTime = 900; // 15 minutes
@@ -189,7 +184,7 @@ async function generateFixStrategy(issue, rootCause) {
         'Verify API credentials',
         'Check API rate limits',
         'Review API request format',
-        'Retry with exponential backoff'
+        'Retry with exponential backoff',
       ];
       strategy.automated = true;
       strategy.estimatedTime = 300; // 5 minutes
@@ -202,7 +197,7 @@ async function generateFixStrategy(issue, rootCause) {
         'Check application logs',
         'Identify failing component',
         'Apply appropriate fix',
-        'Restart application'
+        'Restart application',
       ];
       strategy.automated = false; // Application errors vary widely
       strategy.estimatedTime = 1800; // 30 minutes
@@ -214,7 +209,7 @@ async function generateFixStrategy(issue, rootCause) {
         'Investigate issue manually',
         'Review error details',
         'Check logs and documentation',
-        'Apply fix based on findings'
+        'Apply fix based on findings',
       ];
       strategy.automated = false;
       strategy.estimatedTime = 3600; // 1 hour
@@ -268,7 +263,7 @@ export async function getDebuggingRecommendations(issue) {
     type: 'investigation',
     priority: 'high',
     action: 'Review error message in detail',
-    description: 'Examine the full error message for specific details'
+    description: 'Examine the full error message for specific details',
   });
 
   // Type-specific recommendations
@@ -278,7 +273,7 @@ export async function getDebuggingRecommendations(issue) {
         type: 'logging',
         priority: 'high',
         action: 'Check application logs',
-        description: 'Review logs for additional context'
+        description: 'Review logs for additional context',
       });
       break;
 
@@ -287,7 +282,7 @@ export async function getDebuggingRecommendations(issue) {
         type: 'configuration',
         priority: 'high',
         action: 'Verify configuration files',
-        description: 'Check .env files and configuration settings'
+        description: 'Check .env files and configuration settings',
       });
       break;
 
@@ -296,7 +291,7 @@ export async function getDebuggingRecommendations(issue) {
         type: 'network',
         priority: 'high',
         action: 'Test network connectivity',
-        description: 'Verify internet connection and DNS resolution'
+        description: 'Verify internet connection and DNS resolution',
       });
       break;
   }

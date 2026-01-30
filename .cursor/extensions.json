@@ -11,6 +11,11 @@
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-rename-tag",
     "christian-kohler.path-intellisense",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "GitHub.vscode-pull-request-github",
+    "mikestead.dotenv",
+    "DavidAnson.vscode-markdownlint",
+    "redhat.vscode-yaml",
+    "ms-python.python"
   ]
 }

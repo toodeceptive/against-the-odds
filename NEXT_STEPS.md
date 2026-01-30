@@ -3,6 +3,7 @@
 ## ✅ What's Been Completed
 
 All infrastructure is now in place:
+
 - ✅ 68 files committed to repository
 - ✅ Complete automation scripts (26 scripts)
 - ✅ Full documentation system (12+ docs)
@@ -27,8 +28,9 @@ notepad .env.local
 ```
 
 **Required Values**:
-- `SHOPIFY_API_KEY`: `775fc3aa250b20e6d3122dd39de5b028` (already known)
-- `SHOPIFY_API_SECRET`: `PLACEHOLDER_SHOPIFY_SECRET` (from Shopify dashboard)
+
+- `SHOPIFY_API_KEY`: your Shopify app client ID
+- `SHOPIFY_API_SECRET`: your Shopify app secret
 - `SHOPIFY_ACCESS_TOKEN`: Get from Shopify Admin > Apps > Development > Custom apps
 - `GITHUB_TOKEN`: Your GitHub Personal Access Token
 
@@ -52,6 +54,7 @@ Once `.env.local` is configured:
 ```
 
 This will verify:
+
 - ✅ Shopify API connectivity
 - ✅ Store information retrieval
 - ✅ Products API access
@@ -74,6 +77,7 @@ shopify theme dev --store=aodrop.com
 ### Product Management
 
 **Create a product locally**:
+
 1. Copy `data/products/example-hoodie.json` to a new file
 2. Edit with your product details
 3. Import to Shopify:
@@ -82,6 +86,7 @@ shopify theme dev --store=aodrop.com
    ```
 
 **Export products from Shopify**:
+
 ```powershell
 .\scripts\products\export.ps1
 ```
@@ -89,6 +94,7 @@ shopify theme dev --store=aodrop.com
 ### Manufacturing Workflow
 
 **Track a sample request**:
+
 ```powershell
 .\scripts\manufacturing\track-samples.ps1 -Action add `
     -Manufacturer "Manufacturer Name" `
@@ -97,11 +103,13 @@ shopify theme dev --store=aodrop.com
 ```
 
 **List all samples**:
+
 ```powershell
 .\scripts\manufacturing\track-samples.ps1 -Action list
 ```
 
 **Evaluate a sample**:
+
 ```powershell
 .\scripts\manufacturing\track-samples.ps1 -Action evaluate `
     -SampleId "sample-guid" `
@@ -118,16 +126,19 @@ shopify theme dev --store=aodrop.com
 ### Monitoring
 
 **Check system performance**:
+
 ```powershell
 .\scripts\monitoring\performance-check.ps1
 ```
 
 **Update dependencies**:
+
 ```powershell
 .\scripts\maintenance\update-dependencies.ps1
 ```
 
 **Security scan**:
+
 ```powershell
 .\scripts\maintenance\security-scan.ps1
 ```
@@ -137,6 +148,7 @@ shopify theme dev --store=aodrop.com
 ### 1. Merch Design Application
 
 Apply your branding to hoodie designs:
+
 - Use the logo catalog in the root directory
 - Create design mockups
 - Save designs to `assets/designs/` (create if needed)
@@ -145,6 +157,7 @@ Apply your branding to hoodie designs:
 ### 2. Manufacturer Research
 
 Start researching manufacturers:
+
 - Use `data/manufacturers/` to track research
 - Create manufacturer profiles (use `example-manufacturer.json` as template)
 - Contact manufacturers for samples
@@ -153,6 +166,7 @@ Start researching manufacturers:
 ### 3. Product Setup
 
 When designs are ready:
+
 1. Create product JSON files in `data/products/`
 2. Use `example-hoodie.json` as template
 3. Import to Shopify when ready
@@ -170,6 +184,7 @@ When designs are ready:
 ### Shopify Connection Issues
 
 If `test-connection.ps1` fails:
+
 1. Verify `.env.local` has correct values
 2. Check Shopify Admin > Apps > Development for API access
 3. Ensure Admin API scopes are enabled:
@@ -181,6 +196,7 @@ If `test-connection.ps1` fails:
 ### GitHub Push Issues
 
 If `git push` fails:
+
 1. Check GitHub authentication: `git config --list | grep credential`
 2. Verify remote URL: `git remote -v`
 3. May need to create Personal Access Token in GitHub Settings
@@ -188,6 +204,7 @@ If `git push` fails:
 ### Script Execution Issues
 
 If scripts fail:
+
 1. Check PowerShell execution policy: `Get-ExecutionPolicy`
 2. If restricted, run: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
 3. Verify Node.js is installed: `node --version`
@@ -213,6 +230,7 @@ Before starting development work:
 ## 🎉 You're Ready!
 
 Everything is set up and ready for development. Start with:
+
 1. Setting up your environment variables
 2. Testing the Shopify connection
 3. Beginning merch design work

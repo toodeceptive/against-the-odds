@@ -3,11 +3,13 @@
 ## Repository Information
 
 ### Description
+
 ```
 Official Against The Odds (AO) brand website and Shopify store. Complete development infrastructure with automated workflows, Shopify integration, and comprehensive project management.
 ```
 
 ### Topics
+
 - `e-commerce`
 - `shopify`
 - `streetwear`
@@ -19,6 +21,7 @@ Official Against The Odds (AO) brand website and Shopify store. Complete develop
 - `powershell`
 
 ### Website
+
 ```
 https://aodrop.com
 ```
@@ -30,6 +33,7 @@ https://aodrop.com
 **Settings Location**: Settings > Branches > Branch protection rules
 
 **Rules to Enable**:
+
 1. ✅ Require a pull request before merging
    - Require approvals: 1
    - Dismiss stale pull request approvals when new commits are pushed
@@ -59,6 +63,7 @@ Similar rules to main, but allow force pushes for development workflow.
 **Settings Location**: Settings > Actions > General > Workflow permissions
 
 **Recommended Settings**:
+
 - ✅ Read and write permissions
 - ✅ Allow GitHub Actions to create and approve pull requests
 
@@ -67,12 +72,14 @@ Similar rules to main, but allow force pushes for development workflow.
 **Settings Location**: Settings > Secrets and variables > Actions
 
 **Required Secrets**:
+
 - `SHOPIFY_STORE_DOMAIN` = `aodrop.com`
 - `SHOPIFY_ACCESS_TOKEN` = (Your Shopify Admin API access token)
 - `SHOPIFY_THEME_ID` = (Your Shopify theme ID)
 
 **Optional Secrets**:
-- `SHOPIFY_API_KEY` = `775fc3aa250b20e6d3122dd39de5b028`
+
+- `SHOPIFY_API_KEY` = (Your Shopify app client ID)
 - `SHOPIFY_API_SECRET` = (Your Shopify API secret)
 - `GITHUB_TOKEN` = (For enhanced GitHub API access)
 - `CLOUDFLARE_API_TOKEN` = (If using Cloudflare)
@@ -84,6 +91,7 @@ Similar rules to main, but allow force pushes for development workflow.
 **Settings Location**: Settings > General > Features
 
 **Recommended**:
+
 - ✅ Issues
 - ✅ Projects
 - ⚠️ Wiki (optional)

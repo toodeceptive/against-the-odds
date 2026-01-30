@@ -21,26 +21,32 @@ These workflows require the following secrets to be configured in GitHub:
 ## Workflow Files
 
 ### `ci.yml`
+
 - Runs on: Push to `main`/`develop`, Pull requests
 - Actions: Linting, testing, security scanning
 
 ### `deploy.yml`
+
 - Runs on: Push to `main`/`develop`, Manual trigger
 - Actions: Deploys to staging/production, Shopify theme deployment
 
 ### `shopify-sync.yml`
+
 - Runs on: Daily at 2 AM, Push to `main` (product/theme changes), Manual trigger
 - Actions: Syncs products to Shopify, backs up store configuration
 
 ### `sync.yml`
+
 - Runs on: Schedule, Manual trigger
 - Actions: Repository synchronization
 
 ### `quality-check.yml`
+
 - Runs on: Pull requests
 - Actions: Code quality checks
 
 ### `maintenance.yml`
+
 - Runs on: Schedule (daily)
 - Actions: Dependency updates, security scanning, performance monitoring
 

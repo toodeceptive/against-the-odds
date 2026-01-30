@@ -16,11 +16,7 @@ import { warn } from './logger.js';
  * @returns {Promise<Object>} Fix result
  */
 export async function applyFix(issue, fixStrategy, options = {}) {
-  const {
-    requireConfirmation = true,
-    verifyAfter = true,
-    rollbackOnFailure = true
-  } = options;
+  const { requireConfirmation = true, verifyAfter = true, rollbackOnFailure = true } = options;
 
   const fixResult = {
     issue: issue,
@@ -30,7 +26,7 @@ export async function applyFix(issue, fixStrategy, options = {}) {
     stepsFailed: [],
     success: false,
     error: null,
-    verification: null
+    verification: null,
   };
 
   // Require confirmation for sensitive operations
@@ -48,7 +44,7 @@ export async function applyFix(issue, fixStrategy, options = {}) {
         fixResult.stepsCompleted.push(step);
       } catch (err) {
         fixResult.stepsFailed.push({ step, error: err.message });
-        
+
         // Stop on critical failure
         if (isCriticalStep(step)) {
           throw err;
@@ -63,7 +59,6 @@ export async function applyFix(issue, fixStrategy, options = {}) {
       fixResult.verification = await verifyFix(issue);
       fixResult.success = fixResult.verification?.fixed || false;
     }
-
   } catch (err) {
     fixResult.success = false;
     fixResult.error = err.message;
@@ -93,11 +88,19 @@ async function executeFixStep(step, issue) {
     await fixConfiguration(issue);
   }
   // Authentication fixes
-  else if (stepLower.includes('authentication') || stepLower.includes('credentials') || stepLower.includes('token')) {
+  else if (
+    stepLower.includes('authentication') ||
+    stepLower.includes('credentials') ||
+    stepLower.includes('token')
+  ) {
     await fixAuthentication(issue);
   }
   // Network fixes
-  else if (stepLower.includes('network') || stepLower.includes('connection') || stepLower.includes('connectivity')) {
+  else if (
+    stepLower.includes('network') ||
+    stepLower.includes('connection') ||
+    stepLower.includes('connectivity')
+  ) {
     await fixNetwork(issue);
   }
   // API fixes
@@ -123,13 +126,12 @@ async function executeFixStep(step, issue) {
 async function fixConfiguration() {
   // This would integrate with existing configuration scripts
   const { execSync } = await import('child_process');
-  
+
   // Try to run configuration fix script if it exists
   try {
-    execSync(
-      'powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1',
-      { stdio: 'ignore' }
-    );
+    execSync('powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1', {
+      stdio: 'ignore',
+    });
   } catch (error) {
     // Fallback: try to find and fix configuration in UI
     await clickOnText('Settings');
@@ -145,8 +147,8 @@ async function fixConfiguration() {
  */
 async function fixAuthentication() {
   // Try to find login/authentication UI elements
-  const loginClicked = await clickOnText('Login') || await clickOnText('Sign In');
-  
+  const loginClicked = (await clickOnText('Login')) || (await clickOnText('Sign In'));
+
   if (loginClicked) {
     // Would need credentials - this should require confirmation
     // For now, just navigate to login
@@ -184,10 +186,9 @@ async function fixAPI() {
   // Check API connectivity
   try {
     const { execSync } = await import('child_process');
-    execSync(
-      'powershell -ExecutionPolicy Bypass -File scripts/shopify/test-connection.ps1',
-      { stdio: 'ignore' }
-    );
+    execSync('powershell -ExecutionPolicy Bypass -File scripts/shopify/test-connection.ps1', {
+      stdio: 'ignore',
+    });
   } catch (err) {
     // API connection failed - would need to investigate further
     warn('API connection test failed', { error: err.message });
@@ -202,9 +203,8 @@ async function fixAPI() {
 async function restartApplication(issue) {
   // Find application window
   const appName = issue?.application || 'Cursor';
-  const appWindow = await findWindow('Cursor') || 
-                   await findWindow('Chrome') ||
-                   await findWindow(appName);
+  const appWindow =
+    (await findWindow('Cursor')) || (await findWindow('Chrome')) || (await findWindow(appName));
 
   if (appWindow) {
     // Close and reopen (would need application-specific logic)
@@ -222,12 +222,13 @@ async function restartApplication(issue) {
 async function attemptGenericFix(step) {
   // Try to find relevant UI elements based on step text
   const keywords = step.split(' ');
-  
+
   for (const keyword of keywords) {
-    if (keyword.length > 3) { // Skip short words
+    if (keyword.length > 3) {
+      // Skip short words
       const clicked = await clickOnText(keyword);
       if (clicked) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
         return;
       }
     }
@@ -241,7 +242,7 @@ async function attemptGenericFix(step) {
  */
 function isCriticalStep(step) {
   const criticalKeywords = ['delete', 'remove', 'uninstall', 'format', 'reset'];
-  return criticalKeywords.some(keyword => step.toLowerCase().includes(keyword));
+  return criticalKeywords.some((keyword) => step.toLowerCase().includes(keyword));
 }
 
 /**
@@ -252,16 +253,16 @@ function isCriticalStep(step) {
 async function verifyFix(originalIssue) {
   // Re-analyze screen to check if issue is resolved
   const analysis = await analyzeScreen({ detectIssues: true });
-  
+
   // Check if original issue is still present
-  const issueStillPresent = analysis.issues.some(i => 
-    i.message === originalIssue.message || i.type === originalIssue.type
+  const issueStillPresent = analysis.issues.some(
+    (i) => i.message === originalIssue.message || i.type === originalIssue.type
   );
 
   return {
     fixed: !issueStillPresent,
     remainingIssues: analysis.issues.length,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 }
 

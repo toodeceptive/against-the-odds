@@ -14,7 +14,7 @@ export const ErrorType = {
   NOT_FOUND: 'not_found',
   TIMEOUT: 'timeout',
   VALIDATION: 'validation',
-  UNKNOWN: 'unknown'
+  UNKNOWN: 'unknown',
 };
 
 /**
@@ -53,13 +53,7 @@ export function classifyError(err) {
  * @returns {Promise<Object>} Recovery result
  */
 export async function handleError(err, context = {}, options = {}) {
-  const {
-    retry = false,
-    maxRetries = 3,
-    retryDelay = 1000,
-    fallback = null,
-    log = true
-  } = options;
+  const { retry = false, maxRetries = 3, retryDelay = 1000, fallback = null, log = true } = options;
 
   const errorType = classifyError(err);
   const errorInfo = {
@@ -67,7 +61,7 @@ export async function handleError(err, context = {}, options = {}) {
     message: err.message,
     stack: err.stack,
     context: context,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 
   if (log) {
@@ -77,7 +71,7 @@ export async function handleError(err, context = {}, options = {}) {
   // Attempt recovery
   if (retry && maxRetries > 0) {
     debug(`Retrying operation (${maxRetries} attempts remaining)`);
-    await new Promise(resolve => setTimeout(resolve, retryDelay));
+    await new Promise((resolve) => setTimeout(resolve, retryDelay));
     return { recovered: true, retry: true, attemptsRemaining: maxRetries - 1 };
   }
 
@@ -94,7 +88,7 @@ export async function handleError(err, context = {}, options = {}) {
 
   return {
     recovered: false,
-    error: errorInfo
+    error: errorInfo,
   };
 }
 
@@ -111,14 +105,14 @@ export function withErrorHandling(fn, options = {}) {
     } catch (err) {
       const context = {
         operation: fn.name || 'anonymous',
-        args: args
+        args: args,
       };
       const result = await handleError(err, context, options);
-      
+
       if (!result.recovered) {
         throw err;
       }
-      
+
       return result.result;
     }
   };

@@ -31,14 +31,14 @@ export class Workflow {
         this.results = await executeTasksSequential(this.steps, options);
       }
 
-      const allSuccess = this.results.every(r => r.success);
+      const allSuccess = this.results.every((r) => r.success);
       this.status = allSuccess ? 'completed' : 'failed';
 
       return {
         workflow: this.name,
         status: this.status,
         results: this.results,
-        success: allSuccess
+        success: allSuccess,
       };
     } catch (error) {
       this.status = 'error';
@@ -46,7 +46,7 @@ export class Workflow {
         workflow: this.name,
         status: 'error',
         error: error.message,
-        results: this.results
+        results: this.results,
       };
     }
   }
@@ -72,7 +72,7 @@ export const Workflows = {
       const { execSync } = await import('child_process');
       execSync('powershell -ExecutionPolicy Bypass -File scripts/health/comprehensive-check.ps1');
       return { success: true };
-    }
+    },
   ]),
 
   /**
@@ -86,7 +86,7 @@ export const Workflows = {
     async () => {
       const { solveAllIssues } = await import('./solution-engine.js');
       return await solveAllIssues({ autoApply: true, requireConfirmation: true });
-    }
+    },
   ]),
 
   /**
@@ -102,8 +102,8 @@ export const Workflows = {
       const { execSync } = await import('child_process');
       execSync('powershell -ExecutionPolicy Bypass -File scripts/setup/verify-credentials.ps1');
       return { success: true };
-    }
-  ])
+    },
+  ]),
 };
 
 /**
@@ -114,7 +114,7 @@ export const Workflows = {
  */
 export async function executeWorkflow(workflowName, options = {}) {
   const workflow = Workflows[workflowName];
-  
+
   if (!workflow) {
     throw new Error(`Workflow not found: ${workflowName}`);
   }

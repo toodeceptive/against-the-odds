@@ -3,7 +3,10 @@
  * Provides functions for keyboard input and shortcuts
  */
 
+import { platform } from 'os';
+
 let robotjs = null;
+const primaryModifier = platform() === 'darwin' ? 'command' : 'control';
 
 /**
  * Initialize robotjs
@@ -30,7 +33,7 @@ async function getRobotJS() {
 export async function typeText(text, options = {}) {
   const {
     delay = 50, // Delay between keystrokes (ms)
-    clearFirst = false // Clear existing text first
+    clearFirst = false, // Clear existing text first
   } = options;
 
   const robot = await getRobotJS();
@@ -39,16 +42,16 @@ export async function typeText(text, options = {}) {
     if (clearFirst) {
       // Select all and delete
       robot.keyTap('a', 'control');
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       robot.keyTap('delete');
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
 
     // Type text with delay
     for (const char of text) {
       robot.typeString(char);
       if (delay > 0) {
-        await new Promise(resolve => setTimeout(resolve, delay));
+        await new Promise((resolve) => setTimeout(resolve, delay));
       }
     }
   } else {
@@ -74,9 +77,7 @@ export async function typeText(text, options = {}) {
  * @returns {Promise<void>}
  */
 export async function pressKey(keys, options = {}) {
-  const {
-    delay = 100
-  } = options;
+  const { delay = 100 } = options;
 
   const robot = await getRobotJS();
 
@@ -85,17 +86,17 @@ export async function pressKey(keys, options = {}) {
       // Key combination (e.g., ['control', 'c'])
       const modifiers = keys.slice(0, -1);
       const mainKey = keys[keys.length - 1];
-      
+
       // Press modifiers
-      modifiers.forEach(mod => {
+      modifiers.forEach((mod) => {
         robot.keyToggle(mod, 'down');
       });
-      
+
       // Press main key
       robot.keyTap(mainKey);
-      
+
       // Release modifiers
-      modifiers.reverse().forEach(mod => {
+      modifiers.reverse().forEach((mod) => {
         robot.keyToggle(mod, 'up');
       });
     } else {
@@ -105,23 +106,25 @@ export async function pressKey(keys, options = {}) {
   } else {
     // PowerShell fallback
     const { execSync } = await import('child_process');
-    
+
     if (Array.isArray(keys)) {
       const modifiers = keys.slice(0, -1);
       const mainKey = keys[keys.length - 1];
-      const modString = modifiers.map(m => {
-        const modMap = { control: '^', alt: '%', shift: '+' };
-        return modMap[m.toLowerCase()] || m;
-      }).join('');
-      
+      const modString = modifiers
+        .map((m) => {
+          const modMap = { control: '^', alt: '%', shift: '+' };
+          return modMap[m.toLowerCase()] || m;
+        })
+        .join('');
+
       const keyMap = {
-        'enter': '~',
-        'escape': '{ESC}',
-        'tab': '{TAB}',
-        'backspace': '{BS}',
-        'delete': '{DEL}'
+        enter: '~',
+        escape: '{ESC}',
+        tab: '{TAB}',
+        backspace: '{BS}',
+        delete: '{DEL}',
       };
-      
+
       const sendKey = keyMap[mainKey.toLowerCase()] || mainKey;
       execSync(
         `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('${modString}${sendKey}')"`,
@@ -129,11 +132,11 @@ export async function pressKey(keys, options = {}) {
       );
     } else {
       const keyMap = {
-        'enter': '~',
-        'escape': '{ESC}',
-        'tab': '{TAB}',
-        'backspace': '{BS}',
-        'delete': '{DEL}'
+        enter: '~',
+        escape: '{ESC}',
+        tab: '{TAB}',
+        backspace: '{BS}',
+        delete: '{DEL}',
       };
       const sendKey = keyMap[keys.toLowerCase()] || keys;
       execSync(
@@ -144,7 +147,7 @@ export async function pressKey(keys, options = {}) {
   }
 
   if (delay > 0) {
-    await new Promise(resolve => setTimeout(resolve, delay));
+    await new Promise((resolve) => setTimeout(resolve, delay));
   }
 }
 
@@ -152,25 +155,25 @@ export async function pressKey(keys, options = {}) {
  * Common keyboard shortcuts
  */
 export const Shortcuts = {
-  copy: async () => await pressKey(['control', 'c']),
-  paste: async () => await pressKey(['control', 'v']),
-  cut: async () => await pressKey(['control', 'x']),
-  selectAll: async () => await pressKey(['control', 'a']),
-  undo: async () => await pressKey(['control', 'z']),
-  redo: async () => await pressKey(['control', 'y']),
-  save: async () => await pressKey(['control', 's']),
-  open: async () => await pressKey(['control', 'o']),
-  new: async () => await pressKey(['control', 'n']),
-  close: async () => await pressKey(['control', 'w']),
-  find: async () => await pressKey(['control', 'f']),
-  replace: async () => await pressKey(['control', 'h']),
+  copy: async () => await pressKey([primaryModifier, 'c']),
+  paste: async () => await pressKey([primaryModifier, 'v']),
+  cut: async () => await pressKey([primaryModifier, 'x']),
+  selectAll: async () => await pressKey([primaryModifier, 'a']),
+  undo: async () => await pressKey([primaryModifier, 'z']),
+  redo: async () => await pressKey([primaryModifier, 'y']),
+  save: async () => await pressKey([primaryModifier, 's']),
+  open: async () => await pressKey([primaryModifier, 'o']),
+  new: async () => await pressKey([primaryModifier, 'n']),
+  close: async () => await pressKey([primaryModifier, 'w']),
+  find: async () => await pressKey([primaryModifier, 'f']),
+  replace: async () => await pressKey([primaryModifier, 'h']),
   refresh: async () => await pressKey(['f5']),
   fullScreen: async () => await pressKey(['f11']),
   altTab: async () => await pressKey(['alt', 'tab']),
   winTab: async () => await pressKey(['command', 'tab']), // Windows key + Tab
   escape: async () => await pressKey(['escape']),
   enter: async () => await pressKey(['enter']),
-  tab: async () => await pressKey(['tab'])
+  tab: async () => await pressKey(['tab']),
 };
 
 /**
@@ -184,7 +187,7 @@ export async function typeTextSafe(text, options = {}) {
   const specialChars = {
     '\n': () => pressKey('enter'),
     '\t': () => pressKey('tab'),
-    '\b': () => pressKey('backspace')
+    '\b': () => pressKey('backspace'),
   };
 
   for (const char of text) {
@@ -193,7 +196,7 @@ export async function typeTextSafe(text, options = {}) {
     } else {
       await typeText(char, { ...options, delay: 0 });
       if (options.delay > 0) {
-        await new Promise(resolve => setTimeout(resolve, options.delay));
+        await new Promise((resolve) => setTimeout(resolve, options.delay));
       }
     }
   }
@@ -207,7 +210,7 @@ export async function typeTextSafe(text, options = {}) {
  */
 export async function toggleKey(key, state) {
   const robot = await getRobotJS();
-  
+
   if (robot) {
     robot.keyToggle(key, state);
   } else {

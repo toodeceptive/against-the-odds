@@ -38,4 +38,3 @@ shopify auth login
 
 - Avoid pushing to **live** theme unless explicitly intended.
 - Keep secrets in `.env.local` only (never commit).
-

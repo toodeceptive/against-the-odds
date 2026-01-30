@@ -14,10 +14,7 @@ import { detectIssues } from './issue-detector.js';
  * @returns {Promise<Object>} Solution object
  */
 export async function generateSolution(issue, options = {}) {
-  const {
-    autoApply = false,
-    requireConfirmation = true
-  } = options;
+  const { autoApply = false, requireConfirmation = true } = options;
 
   // Debug the issue to understand root cause
   const debug = await debugIssue(issue, options);
@@ -31,9 +28,9 @@ export async function generateSolution(issue, options = {}) {
       steps: debug.fixStrategy.steps,
       automated: debug.fixStrategy.automated,
       confidence: debug.confidence,
-      estimatedTime: debug.fixStrategy.estimatedTime
+      estimatedTime: debug.fixStrategy.estimatedTime,
     },
-    apply: null
+    apply: null,
   };
 
   // Apply solution if requested and automated
@@ -54,7 +51,7 @@ export async function generateSolution(issue, options = {}) {
 export async function solveAllIssues(options = {}) {
   const {
     autoApply = false,
-    requireConfirmation = true
+    requireConfirmation = true,
     // maxConcurrent available for future use
   } = options;
 
@@ -72,7 +69,7 @@ export async function solveAllIssues(options = {}) {
     solved: 0,
     failed: 0,
     skipped: 0,
-    solutions: []
+    solutions: [],
   };
 
   // Solve each issue
@@ -80,7 +77,7 @@ export async function solveAllIssues(options = {}) {
     try {
       const solution = await generateSolution(issue, {
         autoApply,
-        requireConfirmation
+        requireConfirmation,
       });
 
       results.solutions.push(solution);
@@ -96,13 +93,12 @@ export async function solveAllIssues(options = {}) {
       }
 
       // Small delay between solutions
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     } catch (error) {
       results.failed++;
       results.solutions.push({
         issue: issue,
-        error: error.message
+        error: error.message,
       });
     }
   }
@@ -127,7 +123,7 @@ export async function getSolutionRecommendations(issue) {
       order: index + 1,
       action: step,
       automated: solution.solution.automated,
-      confidence: solution.solution.confidence
+      confidence: solution.solution.confidence,
     });
   });
 
@@ -138,7 +134,7 @@ export async function getSolutionRecommendations(issue) {
       action: 'Manual investigation recommended',
       automated: false,
       confidence: 0,
-      reason: 'Low confidence in automated solution'
+      reason: 'Low confidence in automated solution',
     });
   }
 

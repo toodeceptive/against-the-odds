@@ -5,12 +5,7 @@
       "label": "Setup Environment",
       "type": "shell",
       "command": "powershell",
-      "args": [
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "scripts/setup/auto-configure-env.ps1"
-      ],
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/setup/auto-configure-env.ps1"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -21,24 +16,14 @@
       "label": "Verify Credentials",
       "type": "shell",
       "command": "powershell",
-      "args": [
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "scripts/setup/verify-credentials.ps1"
-      ],
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/setup/verify-credentials.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Test Shopify Connection",
       "type": "shell",
       "command": "powershell",
-      "args": [
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "scripts/shopify/test-connection.ps1"
-      ],
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/test-connection.ps1"],
       "problemMatcher": []
     },
     {
@@ -87,12 +72,7 @@
       "label": "Health Check",
       "type": "shell",
       "command": "powershell",
-      "args": [
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "scripts/health/comprehensive-check.ps1"
-      ],
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/health/comprehensive-check.ps1"],
       "problemMatcher": []
     }
   ]

@@ -5,9 +5,16 @@ on:
     - cron: '0 0 * * 0' # Weekly on Sunday
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   update-dependencies:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
     
     steps:
     - name: Checkout code
@@ -17,12 +24,13 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
+        cache: 'npm'
         
     - name: Update dependencies
       run: |
         if [ -f package.json ]; then
           npm update
-          npm audit fix || true
+          npm audit --audit-level=high
         fi
         
     - name: Create PR
@@ -36,16 +44,20 @@ jobs:
         
   security-scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      security-events: write
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
+      uses: aquasecurity/trivy-action@v0.45.0
       with:
         scan-type: 'fs'
         scan-ref: '.'
         format: 'table'
-        exit-code: '0'
-        severity: 'CRITICAL,HIGH,MEDIUM'
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'

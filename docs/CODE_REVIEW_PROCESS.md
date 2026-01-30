@@ -14,7 +14,9 @@ This document defines the code review process, standards, and best practices for
 ## Review Workflow
 
 ### 1. Pre-Review Checklist
+
 Before requesting a review, ensure:
+
 - [ ] Code follows coding standards
 - [ ] All tests pass
 - [ ] No linter errors
@@ -22,6 +24,7 @@ Before requesting a review, ensure:
 - [ ] Commit message follows standards
 
 ### 2. Pull Request Process
+
 1. Create feature branch from `main`
 2. Make changes and commit
 3. Push branch to GitHub
@@ -32,6 +35,7 @@ Before requesting a review, ensure:
    - Testing notes
 
 ### 3. Review Criteria
+
 - **Functionality:** Works as intended
 - **Code Quality:** Clean, maintainable
 - **Performance:** No performance issues
@@ -40,6 +44,7 @@ Before requesting a review, ensure:
 - **Documentation:** Well-documented
 
 ### 4. Review Response
+
 - Address all comments
 - Make requested changes
 - Update PR description if needed
@@ -50,6 +55,7 @@ Before requesting a review, ensure:
 ## Review Checklist
 
 ### Code Quality
+
 - [ ] Follows coding standards
 - [ ] No code duplication
 - [ ] Proper error handling
@@ -57,16 +63,19 @@ Before requesting a review, ensure:
 - [ ] Functions are focused and small
 
 ### Testing
+
 - [ ] Tests written and passing
 - [ ] Edge cases covered
 - [ ] No breaking changes
 
 ### Documentation
+
 - [ ] Code is commented
 - [ ] README updated if needed
 - [ ] API docs updated
 
 ### Security
+
 - [ ] No secrets in code
 - [ ] Input validation
 - [ ] XSS/CSRF protection

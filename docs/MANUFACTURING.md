@@ -11,6 +11,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 **Objective**: Apply Against The Odds branding to blank merchandise designs.
 
 **Steps**:
+
 1. Review brand guidelines and logo catalog
 2. Select merchandise items (hoodies, hats, etc.)
 3. Apply logo designs to product mockups
@@ -18,11 +19,13 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 5. Finalize designs for sampling
 
 **Tools**:
+
 - Design software (Adobe Illustrator, Photoshop, or Figma)
 - Brand asset library (`assets/` directory)
 - Product mockup templates
 
 **Deliverables**:
+
 - Finalized design files (AI, PSD, or PNG)
 - Design specifications document
 - Color codes and print specifications
@@ -32,6 +35,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 **Objective**: Identify and evaluate potential manufacturers.
 
 **Research Criteria**:
+
 - Minimum order quantities (MOQ)
 - Pricing per unit
 - Production lead times
@@ -43,17 +47,20 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 - Sustainability practices
 
 **Research Methods**:
+
 1. Online manufacturer directories (Alibaba, ThomasNet, etc.)
 2. Industry trade shows and exhibitions
 3. Referrals from other brands
 4. Direct manufacturer outreach
 
 **Documentation**:
+
 - Manufacturer profiles stored in `data/manufacturers/`
 - Comparison spreadsheet
 - Contact information and communication logs
 
 **Scripts**:
+
 - `scripts/manufacturing/research-manufacturers.ps1` (if automated research needed)
 
 ### Stage 3: Sample Requests
@@ -61,12 +68,14 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 **Objective**: Request samples from selected manufacturers.
 
 **Process**:
+
 1. Contact manufacturers with design specifications
 2. Request sample pricing and timeline
 3. Place sample orders
 4. Track sample requests using `scripts/manufacturing/track-samples.ps1`
 
 **Sample Request Information**:
+
 - Manufacturer name and contact
 - Product type (hoodie, hat, etc.)
 - Design specifications
@@ -75,6 +84,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 - Tracking information (when available)
 
 **Tracking**:
+
 ```powershell
 # Add a new sample request
 .\scripts\manufacturing\track-samples.ps1 -Action add `
@@ -89,11 +99,13 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 **Objective**: Track sample deliveries and update status.
 
 **Process**:
+
 1. Monitor tracking information
 2. Update sample status when delivered
 3. Log delivery dates and condition
 
 **Status Updates**:
+
 ```powershell
 # Update sample status
 .\scripts\manufacturing\track-samples.ps1 -Action update `
@@ -103,6 +115,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 ```
 
 **Sample Statuses**:
+
 - `requested` - Sample order placed
 - `in_transit` - Sample shipped
 - `delivered` - Sample received
@@ -140,12 +153,14 @@ This document outlines the complete manufacturing workflow for Against The Odds 
    - Recommendation (yes/no)
 
 **Evaluation Process**:
+
 1. Physical inspection of samples
 2. Fit testing (if applicable)
 3. Comparison across manufacturers
 4. Documentation of findings
 
 **Documentation**:
+
 ```powershell
 # Evaluate a sample
 .\scripts\manufacturing\track-samples.ps1 -Action evaluate `
@@ -161,6 +176,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 ```
 
 **Evaluation Template**:
+
 - Sample ID
 - Manufacturer
 - Product Type
@@ -178,6 +194,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 **Objective**: Select the best manufacturer based on evaluations.
 
 **Decision Factors**:
+
 - Overall evaluation scores
 - Price competitiveness
 - Production capacity
@@ -187,6 +204,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 - Payment terms
 
 **Selection Process**:
+
 1. Review all sample evaluations
 2. Compare manufacturers side-by-side
 3. Consider business requirements (MOQ, timeline, budget)
@@ -198,6 +216,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 **Objective**: Place production order with selected manufacturer.
 
 **Order Information**:
+
 - Product specifications
 - Quantities per size/color
 - Design files and print specifications
@@ -207,6 +226,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 - Quality standards agreement
 
 **Order Management**:
+
 - Track order status
 - Monitor production progress
 - Quality control checkpoints
@@ -242,6 +262,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 ### Manufacturer Data (`data/manufacturers/`)
 
 Each manufacturer has a JSON file with:
+
 - Company information
 - Contact details
 - Product capabilities
@@ -258,6 +279,7 @@ Each manufacturer has a JSON file with:
 Manages sample tracking throughout the workflow.
 
 **Usage**:
+
 ```powershell
 # List all samples
 .\scripts\manufacturing\track-samples.ps1 -Action list

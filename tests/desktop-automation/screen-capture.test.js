@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { captureScreen, getScreenDimensions, captureAllScreens } from '../../src/desktop-automation/screen-capture.js';
+import {
+  captureScreen,
+  getScreenDimensions,
+  captureAllScreens,
+} from '../../src/desktop-automation/screen-capture.js';
 
 describe('Screen Capture', () => {
   it('should capture full screen', async () => {

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Complete project setup and integration infrastructure
 - GitHub Actions workflows for CI/CD
 - Shopify integration scripts and documentation
@@ -20,10 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Quality gates and code standards
 
 ### Changed
+
 - Updated Shopify CLI configuration with actual API credentials
 - Updated API version to 2026-01 to match Shopify app
 
 ### Security
+
 - Environment variable templates for secure credential management
 - Git hooks for pre-commit validation
 - Security scanning scripts
@@ -31,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-01-28
 
 ### Added
+
 - Initial project structure
 - Basic HTML/CSS landing page
 - Logo catalog

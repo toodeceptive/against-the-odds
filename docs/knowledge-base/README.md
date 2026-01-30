@@ -20,6 +20,7 @@ This directory contains comprehensive knowledge and documentation for the Agains
 ## Contributing
 
 When adding new knowledge:
+
 1. Use clear, descriptive titles
 2. Include examples where applicable
 3. Keep content up-to-date

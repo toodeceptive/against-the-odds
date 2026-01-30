@@ -25,18 +25,21 @@ This document describes the GitHub authentication setup for the Against The Odds
 #### Storing PAT Securely
 
 **Windows Credential Manager (Recommended)**
+
 ```powershell
 # Store PAT in Windows Credential Manager
 cmdkey /generic:git:https://github.com /user:YOUR_GITHUB_USERNAME /pass:YOUR_PAT
 ```
 
 **Environment Variable (Alternative)**
+
 ```powershell
 # Set in user environment variables (not system-wide)
 [System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'YOUR_PAT', 'User')
 ```
 
 **Git Credential Manager (Automatic)**
+
 - First push will prompt for credentials
 - Enter username and PAT (not password)
 - Credentials stored automatically in Windows Credential Manager
@@ -121,6 +124,7 @@ ssh -T git@github.com
 **Issue**: `fatal: Authentication failed`
 
 **Solutions**:
+
 1. Verify PAT is valid and not expired
 2. Check credential manager: `cmdkey /list`
 3. Clear cached credentials: `cmdkey /delete:git:https://github.com`
@@ -131,6 +135,7 @@ ssh -T git@github.com
 **Issue**: `Permission denied (publickey)` or `403 Forbidden`
 
 **Solutions**:
+
 1. Verify token has correct scopes
 2. Check repository access permissions
 3. Verify SSH key is added to GitHub account

@@ -3,6 +3,7 @@
 ## ✅ Setup Complete
 
 ### Local Repository
+
 - **Location**: `C:\Users\LegiT\against-the-odds`
 - **Status**: Fully initialized and ready
 - **Branch**: `main`
@@ -14,6 +15,7 @@
   - `1e947d3` - Add quick start guide
 
 ### Remote Configuration
+
 - **URL**: `https://github.com/toodeceptive/against-the-odds.git`
 - **Protocol**: HTTPS
 - **Visibility**: **PUBLIC** ✅
@@ -21,12 +23,14 @@
 - **Status**: ✅ Properly configured and connected
 
 ### Issues Resolved
+
 1. ✅ Fixed SSH key permissions issue (switched to HTTPS)
 2. ✅ Removed global Git config that was rewriting HTTPS to SSH
 3. ✅ Configured Git Credential Manager for authentication
 4. ✅ Created initial repository structure
 
 ### Files Ready
+
 - `README.md` - Repository description
 - `SETUP_INSTRUCTIONS.md` - Setup guide
 - `REPOSITORY_STATUS.md` - This file
@@ -43,10 +47,12 @@ The repository is **ready to connect** once you create it on GitHub:
    - Click "Create repository"
 
 2. **Push your code**:
+
    ```powershell
    cd C:\Users\LegiT\against-the-odds
    git push -u origin main
    ```
+
    - Windows will prompt for GitHub credentials
    - Use your GitHub username and a Personal Access Token (not password)
    - Or sign in through the browser if prompted

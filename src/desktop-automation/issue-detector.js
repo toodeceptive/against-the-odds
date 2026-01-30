@@ -14,13 +14,13 @@ export async function detectIssues(options = {}) {
   const {
     application = null, // Application context
     severityFilter = null, // Filter by severity
-    issueTypes = null // Filter by issue types
+    issueTypes = null, // Filter by issue types
   } = options;
 
   // Analyze current screen
   const analysis = await analyzeScreen({
     detectElements: true,
-    detectIssues: true
+    detectIssues: true,
   });
 
   let issues = analysis.issues || [];
@@ -31,12 +31,12 @@ export async function detectIssues(options = {}) {
 
   // Filter by severity if specified
   if (severityFilter) {
-    issues = issues.filter(issue => issue.severity === severityFilter);
+    issues = issues.filter((issue) => issue.severity === severityFilter);
   }
 
   // Filter by issue types if specified
   if (issueTypes && Array.isArray(issueTypes)) {
-    issues = issues.filter(issue => issueTypes.includes(issue.type));
+    issues = issues.filter((issue) => issueTypes.includes(issue.type));
   }
 
   return issues;
@@ -83,22 +83,22 @@ async function detectApplicationIssues(analysis, application) {
 
   // Application-specific patterns
   const appPatterns = {
-    'cursor': [
+    cursor: [
       { pattern: /extension.*failed/i, type: 'extension_error', severity: 'medium' },
-      { pattern: /language server.*error/i, type: 'language_server_error', severity: 'high' }
+      { pattern: /language server.*error/i, type: 'language_server_error', severity: 'high' },
     ],
-    'chrome': [
+    chrome: [
       { pattern: /this page.*not available/i, type: 'page_not_found', severity: 'medium' },
-      { pattern: /connection.*refused/i, type: 'connection_error', severity: 'high' }
+      { pattern: /connection.*refused/i, type: 'connection_error', severity: 'high' },
     ],
-    'shopify': [
+    shopify: [
       { pattern: /api.*error/i, type: 'api_error', severity: 'high' },
-      { pattern: /authentication.*failed/i, type: 'auth_error', severity: 'high' }
-    ]
+      { pattern: /authentication.*failed/i, type: 'auth_error', severity: 'high' },
+    ],
   };
 
   const patterns = appPatterns[application.toLowerCase()] || [];
-  
+
   patterns.forEach(({ pattern, type, severity }) => {
     if (pattern.test(analysis.text)) {
       issues.push({
@@ -106,7 +106,7 @@ async function detectApplicationIssues(analysis, application) {
         severity: severity,
         message: `Application-specific issue detected: ${type}`,
         application: application,
-        detectedAt: new Date().toISOString()
+        detectedAt: new Date().toISOString(),
       });
     }
   });
@@ -123,22 +123,17 @@ async function detectPerformanceIssues(analysis) {
   const issues = [];
 
   // Check for loading indicators
-  const loadingPatterns = [
-    /loading\.\.\./i,
-    /please wait/i,
-    /processing/i,
-    /spinner/i
-  ];
+  const loadingPatterns = [/loading\.\.\./i, /please wait/i, /processing/i, /spinner/i];
 
-  const hasLoading = loadingPatterns.some(pattern => pattern.test(analysis.text));
-  
+  const hasLoading = loadingPatterns.some((pattern) => pattern.test(analysis.text));
+
   if (hasLoading) {
     // Check if loading has been present for too long (would need state tracking)
     issues.push({
       type: 'performance',
       severity: 'medium',
       message: 'Loading indicators detected - possible performance issue',
-      detectedAt: new Date().toISOString()
+      detectedAt: new Date().toISOString(),
     });
   }
 
@@ -158,17 +153,17 @@ async function detectConfigurationIssues(analysis) {
     /configuration.*missing/i,
     /settings.*invalid/i,
     /config.*error/i,
-    /environment.*variable/i
+    /environment.*variable/i,
   ];
 
-  configPatterns.forEach(pattern => {
+  configPatterns.forEach((pattern) => {
     if (pattern.test(analysis.text)) {
       issues.push({
         type: 'configuration',
         severity: 'high',
         message: 'Configuration issue detected',
         pattern: pattern.toString(),
-        detectedAt: new Date().toISOString()
+        detectedAt: new Date().toISOString(),
       });
     }
   });
@@ -190,17 +185,17 @@ async function detectConnectivityIssues(analysis) {
     /timeout/i,
     /unable.*connect/i,
     /dns.*error/i,
-    /no internet/i
+    /no internet/i,
   ];
 
-  connectivityPatterns.forEach(pattern => {
+  connectivityPatterns.forEach((pattern) => {
     if (pattern.test(analysis.text)) {
       issues.push({
         type: 'connectivity',
         severity: 'high',
         message: 'Connectivity issue detected',
         pattern: pattern.toString(),
-        detectedAt: new Date().toISOString()
+        detectedAt: new Date().toISOString(),
       });
     }
   });
@@ -214,11 +209,7 @@ async function detectConnectivityIssues(analysis) {
  * @returns {Promise<Function>} Stop function
  */
 export async function monitorIssues(options = {}) {
-  const {
-    interval = 5000,
-    callback = null,
-    onIssue = null
-  } = options;
+  const { interval = 5000, callback = null, onIssue = null } = options;
 
   let monitoring = true;
   let lastIssues = [];
@@ -227,14 +218,14 @@ export async function monitorIssues(options = {}) {
     while (monitoring) {
       try {
         const issues = await detectIssues(options);
-        
+
         // Check for new issues
-        const newIssues = issues.filter(issue =>
-          !lastIssues.some(last => last.message === issue.message)
+        const newIssues = issues.filter(
+          (issue) => !lastIssues.some((last) => last.message === issue.message)
         );
 
         if (newIssues.length > 0 && onIssue) {
-          newIssues.forEach(issue => onIssue(issue));
+          newIssues.forEach((issue) => onIssue(issue));
         }
 
         if (callback) {
@@ -247,7 +238,7 @@ export async function monitorIssues(options = {}) {
         // Could log to error handler if needed
       }
 
-      await new Promise(resolve => setTimeout(resolve, interval));
+      await new Promise((resolve) => setTimeout(resolve, interval));
     }
   };
 
@@ -268,28 +259,28 @@ export function classifyIssue(issue) {
     category: 'unknown',
     priority: 'medium',
     actionable: false,
-    fixable: false
+    fixable: false,
   };
 
   // Categorize by type
   const categories = {
-    'error_message': 'error',
-    'error_pattern': 'error',
-    'performance': 'performance',
-    'ui_inconsistency': 'ui',
-    'configuration': 'configuration',
-    'connectivity': 'network',
-    'api_error': 'api',
-    'auth_error': 'authentication'
+    error_message: 'error',
+    error_pattern: 'error',
+    performance: 'performance',
+    ui_inconsistency: 'ui',
+    configuration: 'configuration',
+    connectivity: 'network',
+    api_error: 'api',
+    auth_error: 'authentication',
   };
 
   classification.category = categories[issue.type] || 'unknown';
 
   // Determine priority based on severity
   const priorityMap = {
-    'high': 'urgent',
-    'medium': 'high',
-    'low': 'medium'
+    high: 'urgent',
+    medium: 'high',
+    low: 'medium',
   };
 
   classification.priority = priorityMap[issue.severity] || 'medium';
@@ -301,18 +292,14 @@ export function classifyIssue(issue) {
     'configuration',
     'connectivity',
     'api_error',
-    'auth_error'
+    'auth_error',
   ].includes(issue.type);
 
   // Determine if automatically fixable
-  classification.fixable = [
-    'configuration',
-    'connectivity',
-    'auth_error'
-  ].includes(issue.type);
+  classification.fixable = ['configuration', 'connectivity', 'auth_error'].includes(issue.type);
 
   return {
     ...issue,
-    classification: classification
+    classification: classification,
   };
 }

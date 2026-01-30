@@ -6,12 +6,9 @@
 // Browser automation library for Shopify admin
 // Uses Playwright for browser automation
 
+import { warn } from '../desktop-automation/logger.js';
+
 let playwright;
-try {
-  playwright = require('@playwright/test');
-} catch {
-  // Playwright not available, will use dynamic import
-}
 
 async function getPlaywright() {
   if (!playwright) {
@@ -26,11 +23,7 @@ async function getPlaywright() {
  * @returns {Promise<Browser>} Playwright browser instance
  */
 export async function connectToBrowser(options = {}) {
-  const { 
-    useExisting = true,
-    headless = false,
-    slowMo = 0 
-  } = options;
+  const { useExisting = true, headless = false, slowMo = 0 } = options;
 
   const pw = await getPlaywright();
   const { chromium } = pw;
@@ -45,18 +38,15 @@ export async function connectToBrowser(options = {}) {
       // Could not connect to existing Chrome, launching new instance
     }
   }
-  
+
   // Launch new browser instance
   const browser = await chromium.launch({
     headless,
     slowMo,
     channel: 'chrome',
-    args: [
-      '--disable-blink-features=AutomationControlled',
-      '--remote-debugging-port=9222',
-    ],
+    args: ['--disable-blink-features=AutomationControlled', '--remote-debugging-port=9222'],
   });
-  
+
   return browser;
 }
 
@@ -68,24 +58,24 @@ export async function connectToBrowser(options = {}) {
  */
 export async function ensureShopifyLogin(page, storeDomain) {
   const adminUrl = `https://${storeDomain}/admin`;
-  
+
   try {
-    await page.goto(adminUrl, { waitUntil: 'networkidle' });
-    
+    await page.goto(adminUrl, { waitUntil: 'domcontentloaded' });
+
     // Check if already logged in (no login form)
     const loginForm = await page.locator('form[action*="login"]').count();
     if (loginForm === 0) {
       // Already logged in to Shopify admin
       return true;
     }
-    
+
     // If login form exists, user needs to log in manually
     // Login required - waiting for manual login
     await page.waitForURL(adminUrl, { timeout: 120000 }); // Wait up to 2 minutes
-    
+
     return true;
   } catch (error) {
-    // Failed to access Shopify admin
+    warn('Failed to access Shopify admin', { storeDomain, error: error?.message });
     return false;
   }
 }
@@ -98,14 +88,14 @@ export async function ensureShopifyLogin(page, storeDomain) {
 export async function navigateToAppsDevelopment(page) {
   try {
     // Navigate to apps page
-    await page.goto('/admin/apps/development', { waitUntil: 'networkidle' });
-    
+    await page.goto('/admin/apps/development', { waitUntil: 'domcontentloaded' });
+
     // Wait for page to load
     await page.waitForSelector('h1, [data-testid="apps-page"]', { timeout: 10000 });
-    
+
     return true;
-  } catch {
-    // Failed to navigate to Apps > Development
+  } catch (error) {
+    warn('Failed to navigate to Apps > Development', { error: error?.message });
     return false;
   }
 }
@@ -121,43 +111,46 @@ export async function extractAccessToken(page) {
     if (!success) {
       return null;
     }
-    
+
     // Look for access token in various possible locations
     // Method 1: Check for token in page content
     const tokenPattern = /shpat_[a-zA-Z0-9]{32,}/;
     const pageContent = await page.content();
     const tokenMatch = pageContent.match(tokenPattern);
-    
+
     if (tokenMatch) {
       return tokenMatch[0];
     }
-    
+
     // Method 2: Look for token in data attributes
-    const tokenElement = await page.locator('[data-access-token], [data-token], input[value*="shpat_"]').first();
-    if (await tokenElement.count() > 0) {
-      const token = await tokenElement.getAttribute('value') || 
-                   await tokenElement.getAttribute('data-access-token') ||
-                   await tokenElement.getAttribute('data-token');
+    const tokenElement = await page
+      .locator('[data-access-token], [data-token], input[value*="shpat_"]')
+      .first();
+    if ((await tokenElement.count()) > 0) {
+      const token =
+        (await tokenElement.getAttribute('value')) ||
+        (await tokenElement.getAttribute('data-access-token')) ||
+        (await tokenElement.getAttribute('data-token'));
       if (token && token.startsWith('shpat_')) {
         return token;
       }
     }
-    
+
     // Method 3: Check API credentials section
     const apiSection = page.locator('text=/API.*[Cc]redential/i, text=/Access.*[Tt]oken/i');
-    if (await apiSection.count() > 0) {
+    if ((await apiSection.count()) > 0) {
       // Try to find token in nearby elements
       const nearbyText = await apiSection.first().evaluate((el) => {
         const parent = el.closest('section, div, form') || el.parentElement;
         return parent?.textContent || '';
       });
-      
+
       const tokenMatch = nearbyText.match(tokenPattern);
       if (tokenMatch) {
         return tokenMatch[0];
       }
     }
-    
+
     // Access token not found on page
     return null;
   } catch (error) {
@@ -175,27 +168,30 @@ export async function extractThemeId(page) {
   try {
     // Navigate to themes page
     await page.goto('/admin/themes', { waitUntil: 'networkidle' });
-    
+
     // Wait for themes to load
     await page.waitForSelector('[data-theme-id], .theme-card, .theme-item', { timeout: 10000 });
-    
+
     // Look for live/main theme
-    const liveTheme = await page.locator('[data-theme-role="main"], .theme[data-role="main"]').first();
-    if (await liveTheme.count() > 0) {
-      const themeId = await liveTheme.getAttribute('data-theme-id') ||
-                     await liveTheme.getAttribute('data-id');
+    const liveTheme = await page
+      .locator('[data-theme-role="main"], .theme[data-role="main"]')
+      .first();
+    if ((await liveTheme.count()) > 0) {
+      const themeId =
+        (await liveTheme.getAttribute('data-theme-id')) ||
+        (await liveTheme.getAttribute('data-id'));
       if (themeId) {
         return themeId;
       }
     }
-    
+
     // Alternative: Extract from URL or page content
     const url = page.url();
     const urlMatch = url.match(/themes\/(\d+)/);
     if (urlMatch) {
       return urlMatch[1];
     }
-    
+
     // Check page content for theme IDs
     const pageContent = await page.content();
     const themeIdPattern = /"id":\s*(\d+).*"role":\s*"main"/;
@@ -203,7 +199,7 @@ export async function extractThemeId(page) {
     if (match) {
       return match[1];
     }
-    
+
     // Theme ID not found
     return null;
   } catch {

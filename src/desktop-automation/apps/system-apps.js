@@ -19,16 +19,16 @@ export async function openFileExplorer(path = null) {
   } else {
     execSync('explorer .', { stdio: 'ignore' });
   }
-  
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   // Find and activate File Explorer window
-  const explorer = await findWindow('File Explorer') || await findWindow('This PC');
+  const explorer = (await findWindow('File Explorer')) || (await findWindow('This PC'));
   if (explorer) {
     await activateWindow(explorer);
     return true;
   }
-  
+
   return false;
 }
 
@@ -38,14 +38,14 @@ export async function openFileExplorer(path = null) {
  */
 export async function openPowerShell() {
   execSync('powershell', { stdio: 'ignore', detached: true });
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  const psWindow = await findWindow('PowerShell') || await findWindow('Windows PowerShell');
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const psWindow = (await findWindow('PowerShell')) || (await findWindow('Windows PowerShell'));
   if (psWindow) {
     await activateWindow(psWindow);
     return true;
   }
-  
+
   return false;
 }
 
@@ -55,14 +55,14 @@ export async function openPowerShell() {
  */
 export async function openCommandPrompt() {
   execSync('cmd', { stdio: 'ignore', detached: true });
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  const cmdWindow = await findWindow('Command Prompt') || await findWindow('cmd');
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const cmdWindow = (await findWindow('Command Prompt')) || (await findWindow('cmd'));
   if (cmdWindow) {
     await activateWindow(cmdWindow);
     return true;
   }
-  
+
   return false;
 }
 
@@ -72,14 +72,14 @@ export async function openCommandPrompt() {
  */
 export async function openSettings() {
   execSync('start ms-settings:', { stdio: 'ignore' });
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   const settings = await findWindow('Settings');
   if (settings) {
     await activateWindow(settings);
     return true;
   }
-  
+
   return false;
 }
 
@@ -89,14 +89,14 @@ export async function openSettings() {
  */
 export async function openControlPanel() {
   execSync('control', { stdio: 'ignore' });
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const controlPanel = await findWindow('Control Panel');
   if (controlPanel) {
     await activateWindow(controlPanel);
     return true;
   }
-  
+
   return false;
 }
 
@@ -106,14 +106,14 @@ export async function openControlPanel() {
  */
 export async function openTaskManager() {
   execSync('taskmgr', { stdio: 'ignore' });
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const taskManager = await findWindow('Task Manager');
   if (taskManager) {
     await activateWindow(taskManager);
     return true;
   }
-  
+
   return false;
 }
 
@@ -124,17 +124,14 @@ export async function openTaskManager() {
  * @returns {Promise<string>} Command output
  */
 export async function runPowerShellCommand(command, options = {}) {
-  const {
-    workingDirectory = null,
-    waitForCompletion = true
-  } = options;
+  const { workingDirectory = null, waitForCompletion = true } = options;
 
   try {
     const cmd = `powershell -Command "${command}"`;
     const execOptions = {
       cwd: workingDirectory,
       encoding: 'utf-8',
-      stdio: waitForCompletion ? 'pipe' : 'ignore'
+      stdio: waitForCompletion ? 'pipe' : 'ignore',
     };
 
     if (waitForCompletion) {
@@ -162,9 +159,9 @@ export async function runInTerminal(command, terminal = 'powershell') {
     await openCommandPrompt();
   }
 
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await new Promise((resolve) => setTimeout(resolve, 500));
   await typeText(command);
   await pressKey('enter');
-  
+
   return true;
 }

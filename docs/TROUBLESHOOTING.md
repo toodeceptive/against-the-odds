@@ -9,6 +9,7 @@
 **Symptoms**: Scripts fail with "environment variable not set"
 
 **Solutions**:
+
 1. Run automated setup: `.\scripts\setup\auto-configure-env.ps1`
 2. Manually create: `Copy-Item .env.example .env.local`
 3. Verify file exists: `Test-Path .env.local`
@@ -18,6 +19,7 @@
 **Symptoms**: API calls return 401/403 errors
 
 **Solutions**:
+
 1. Verify credentials in `.env.local`
 2. Check for typos or extra spaces
 3. Ensure credentials haven't expired
@@ -31,6 +33,7 @@
 **Symptoms**: `git push` fails with authentication error
 
 **Solutions**:
+
 1. Verify GitHub token: `.\scripts\github\verify-auth.ps1`
 2. Check token hasn't expired
 3. Regenerate token if needed
@@ -44,6 +47,7 @@
 **Symptoms**: Cannot push or pull from repository
 
 **Solutions**:
+
 1. Check network connectivity
 2. Verify repository access: `.\scripts\github\test-push-pull.ps1`
 3. Check for uncommitted changes: `git status`
@@ -56,6 +60,7 @@
 **Symptoms**: Shopify API calls return errors
 
 **Solutions**:
+
 1. Test connection: `.\scripts\shopify\test-connection.ps1`
 2. Verify access token is valid
 3. Check API version matches (2026-01)
@@ -67,6 +72,7 @@
 **Symptoms**: Cannot connect to Chrome or extract data
 
 **Solutions**:
+
 1. Ensure Chrome is running
 2. Launch Chrome with debugging: `chrome.exe --remote-debugging-port=9222`
 3. Check if Shopify admin is logged in
@@ -78,6 +84,7 @@
 **Symptoms**: Products not syncing correctly
 
 **Solutions**:
+
 1. Check product JSON format is valid
 2. Verify API permissions (read_products, write_products)
 3. Run with dry-run first: `.\scripts\products\sync.ps1 -DryRun`
@@ -91,6 +98,7 @@
 **Symptoms**: "Script cannot be loaded because running scripts is disabled"
 
 **Solutions**:
+
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
@@ -100,6 +108,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: Browser automation scripts fail
 
 **Solutions**:
+
 1. Install Node.js: https://nodejs.org/
 2. Verify installation: `node --version`
 3. Install dependencies: `npm install`
@@ -109,6 +118,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: "Cannot find module" errors
 
 **Solutions**:
+
 1. Install dependencies: `npm install`
 2. Check package.json includes required packages
 3. Verify node_modules exists
@@ -120,6 +130,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: Local and remote repositories differ
 
 **Solutions**:
+
 1. Check sync status: `.\scripts\sync\verify-all.ps1`
 2. Auto-fix: `.\scripts\sync\auto-fix.ps1`
 3. Manual sync: `git pull origin main`
@@ -130,6 +141,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: Different behavior on different machines
 
 **Solutions**:
+
 1. Verify `.env.local` is configured on all machines
 2. Check `.env.example` is up to date
 3. Ensure all required tools are installed
@@ -142,6 +154,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: Scripts take too long to run
 
 **Solutions**:
+
 1. Check network connectivity
 2. Verify API response times
 3. Reduce batch sizes in API calls
@@ -153,6 +166,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: Browser automation is slow
 
 **Solutions**:
+
 1. Use existing browser instead of launching new
 2. Reduce wait times (if safe)
 3. Optimize selectors
@@ -166,6 +180,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: Test suite reports failures
 
 **Solutions**:
+
 1. Check test output for specific errors
 2. Verify environment is set up correctly
 3. Ensure credentials are configured
@@ -177,6 +192,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Symptoms**: Test coverage below 90%
 
 **Solutions**:
+
 1. Add tests for uncovered code paths
 2. Test error scenarios
 3. Add integration tests

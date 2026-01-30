@@ -44,4 +44,3 @@ Generate with:
 - Prefer **issues** for all work; commits/PRs should reference issue numbers.
 - Keep large decisions in `docs/decisions/` (ADR-style).
 - Keep operational notes in `docs/status/` (append-only snapshots).
-

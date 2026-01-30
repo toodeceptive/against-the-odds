@@ -3,6 +3,7 @@
 ## Current Status
 
 ### ✅ Repository Configuration
+
 - **Local Path**: `C:\Users\LegiT\against-the-odds`
 - **Remote URL**: `https://github.com/toodeceptive/against-the-odds.git`
 - **Visibility**: **PUBLIC** ✅
@@ -10,6 +11,7 @@
 - **Branch**: `main`
 
 ### ✅ Local Commits Ready to Push
+
 ```
 303c04f Update repository status to public and add sync script
 1e947d3 Add quick start guide
@@ -20,6 +22,7 @@ d3ab50d Initial commit - repository setup
 ```
 
 ### ✅ Files Updated
+
 - ✅ README.md - Updated to reflect public status
 - ✅ REPOSITORY_STATUS.md - Updated visibility status
 - ✅ sync-repository.ps1 - Created sync script
@@ -28,21 +31,25 @@ d3ab50d Initial commit - repository setup
 ## 🚀 Push Your Changes
 
 ### Option 1: PowerShell Script (Recommended)
+
 ```powershell
 cd C:\Users\LegiT\against-the-odds
 .\sync-repository.ps1
 ```
 
 ### Option 2: Direct Git Push
+
 ```powershell
 cd C:\Users\LegiT\against-the-odds
 $env:HTTP_PROXY = $null
 $env:HTTPS_PROXY = $null
 git -c http.proxy= -c https.proxy= push -u origin main
 ```
-*Windows will prompt for GitHub credentials*
+
+_Windows will prompt for GitHub credentials_
 
 ### Option 3: GitHub Desktop
+
 1. Open GitHub Desktop
 2. File → Add Local Repository
 3. Select: `C:\Users\LegiT\against-the-odds`
@@ -61,6 +68,7 @@ git -c http.proxy= -c https.proxy= push -u origin main
 ## 🔐 Authentication Note
 
 When you push, Windows Credential Manager will prompt for:
+
 - **Username**: Your GitHub username (`toodeceptive`)
 - **Password**: Use a **Personal Access Token** (not your GitHub password)
 

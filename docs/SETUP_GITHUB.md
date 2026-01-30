@@ -24,10 +24,11 @@ This guide provides step-by-step instructions for setting up complete GitHub int
    - Generate and copy token
 
 2. **Store PAT Securely**:
+
    ```powershell
    # Method 1: Windows Credential Manager
    cmdkey /generic:git:https://github.com /user:toodeceptive /pass:YOUR_PAT
-   
+
    # Method 2: Environment Variable (User scope)
    [System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'YOUR_PAT', 'User')
    ```
@@ -102,6 +103,7 @@ For CI/CD workflows that need authentication:
 ## Step 4: Issue Templates
 
 Issue templates are automatically created in `.github/ISSUE_TEMPLATE/`:
+
 - `task.md` - Task tracking template
 - `bug.md` - Bug report template
 - `feature.md` - Feature request template
@@ -125,6 +127,7 @@ Issue templates are automatically created in `.github/ISSUE_TEMPLATE/`:
 After setting up GitHub Actions workflows:
 
 1. **Test CI Workflow**:
+
    ```powershell
    # Make a test commit
    git checkout -b test/ci-workflow
@@ -146,6 +149,7 @@ After setting up GitHub Actions workflows:
 ## Step 7: Automation Scripts
 
 Automation scripts are located in `scripts/git/`:
+
 - `auto-commit.ps1` - Automated commit with safety checks
 - `auto-push.ps1` - Automated push with conflict detection
 - `sync-repo.ps1` - Complete sync workflow

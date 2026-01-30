@@ -11,7 +11,11 @@ This guide covers the desktop automation system that enables full PC control thr
 Capture screen content in various ways:
 
 ```javascript
-import { captureScreen, captureRegion, captureWindow } from './src/desktop-automation/screen-capture.js';
+import {
+  captureScreen,
+  captureRegion,
+  captureWindow,
+} from './src/desktop-automation/screen-capture.js';
 
 // Capture full screen
 const screenshot = await captureScreen();
@@ -76,7 +80,11 @@ await Shortcuts.save();
 Manage application windows:
 
 ```javascript
-import { findWindow, activateWindow, getAllWindows } from './src/desktop-automation/window-manager.js';
+import {
+  findWindow,
+  activateWindow,
+  getAllWindows,
+} from './src/desktop-automation/window-manager.js';
 
 // Find window
 const window = await findWindow('Cursor');
@@ -112,7 +120,7 @@ const stopMonitoring = await monitorIssues({
   interval: 5000,
   onIssue: (issue) => {
     console.log('New issue detected:', issue);
-  }
+  },
 });
 
 // Stop monitoring later
@@ -140,7 +148,7 @@ import { generateSolution } from './src/desktop-automation/solution-engine.js';
 // Generate solution
 const solution = await generateSolution(issue, {
   autoApply: false,
-  requireConfirmation: true
+  requireConfirmation: true,
 });
 ```
 
@@ -152,7 +160,7 @@ import { applyFix } from './src/desktop-automation/fix-applier.js';
 // Apply fix
 const result = await applyFix(issue, fixStrategy, {
   requireConfirmation: true,
-  verifyAfter: true
+  verifyAfter: true,
 });
 ```
 
@@ -161,7 +169,11 @@ const result = await applyFix(issue, fixStrategy, {
 ### Cursor IDE
 
 ```javascript
-import { openFile, executeCommand, saveFile } from './src/desktop-automation/apps/cursor-automation.js';
+import {
+  openFile,
+  executeCommand,
+  saveFile,
+} from './src/desktop-automation/apps/cursor-automation.js';
 
 // Open file
 await openFile('package.json');
@@ -176,7 +188,10 @@ await saveFile();
 ### Browser
 
 ```javascript
-import { activateBrowser, navigateToURL } from './src/desktop-automation/apps/browser-automation.js';
+import {
+  activateBrowser,
+  navigateToURL,
+} from './src/desktop-automation/apps/browser-automation.js';
 
 // Activate Chrome
 await activateBrowser('chrome');
@@ -215,7 +230,7 @@ if (requiresConfirmation('delete file')) {
 import { requestConfirmation } from './src/desktop-automation/confirmation-system.js';
 
 const confirmed = await requestConfirmation('Delete file', {
-  description: 'This will permanently delete the file'
+  description: 'This will permanently delete the file',
 });
 ```
 
@@ -231,7 +246,7 @@ const orchestrator = createOrchestrator({
   autoDetect: true,
   autoFix: true,
   requireConfirmation: true,
-  monitoring: true
+  monitoring: true,
 });
 
 // Start orchestrator
@@ -269,21 +284,25 @@ await executeWorkflow('detectAndFix');
 ## Troubleshooting
 
 ### Screen Capture Fails
+
 - Check permissions
 - Verify display is accessible
 - Try alternative capture method
 
 ### OCR Inaccurate
+
 - Improve screen quality
 - Adjust OCR settings
 - Use region capture for better accuracy
 
 ### Mouse/Keyboard Not Working
+
 - Check RobotJS installation
 - Verify permissions
 - Use PowerShell fallback
 
 ### Window Not Found
+
 - Check window title variations
 - Try partial matches
 - List all windows first

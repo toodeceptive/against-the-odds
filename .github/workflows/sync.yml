@@ -5,9 +5,15 @@ on:
     - cron: '0 */6 * * *' # Every 6 hours
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout code
@@ -25,16 +31,24 @@ jobs:
         git fetch origin
         git checkout main
         git pull origin main
-        git checkout develop
-        git pull origin develop
+        if git show-ref --verify --quiet refs/remotes/origin/develop; then
+          git checkout develop
+          git pull origin develop
+        else
+          echo "Develop branch does not exist. Skipping develop sync."
+        fi
         
     - name: Check for conflicts
       run: |
         git checkout main
-        git merge develop --no-commit --no-ff || true
-        if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
-          echo "Merge conflicts detected"
-          exit 1
+        if git show-ref --verify --quiet refs/remotes/origin/develop; then
+          git merge develop --no-commit --no-ff || true
+          if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
+            echo "Merge conflicts detected"
+            exit 1
+          fi
+        else
+          echo "Develop branch does not exist. Skipping conflict check."
         fi
         
     - name: Status report

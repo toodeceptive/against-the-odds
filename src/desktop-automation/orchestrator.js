@@ -21,9 +21,9 @@ export class AutomationOrchestrator {
       requireConfirmation: options.requireConfirmation !== false,
       monitoring: options.monitoring || false,
       monitoringInterval: options.monitoringInterval || 10000,
-      ...options
+      ...options,
     };
-    
+
     this.isRunning = false;
     this.monitoringInterval = null;
     this.actionLog = [];
@@ -58,7 +58,7 @@ export class AutomationOrchestrator {
    */
   stop() {
     this.isRunning = false;
-    
+
     if (this.monitoringInterval) {
       clearInterval(this.monitoringInterval);
       this.monitoringInterval = null;
@@ -93,7 +93,7 @@ export class AutomationOrchestrator {
     if (this.options.autoFix) {
       results = await solveAllIssues({
         autoApply: true,
-        requireConfirmation: this.options.requireConfirmation
+        requireConfirmation: this.options.requireConfirmation,
       });
     } else {
       // Just generate solutions without applying
@@ -150,16 +150,16 @@ export class AutomationOrchestrator {
     switch (task) {
       case 'detect_issues':
         return await this.detectAndFix();
-      
+
       case 'analyze_screen':
         return await analyzeScreen(params);
-      
+
       case 'fix_issue': {
         const { issue } = params;
         const solution = await generateSolution(issue, { autoApply: true });
         return solution;
       }
-      
+
       default:
         throw new Error(`Unknown task: ${task}`);
     }
@@ -176,7 +176,7 @@ export class AutomationOrchestrator {
       timestamp: new Date().toISOString(),
       type: type,
       description: description,
-      data: data
+      data: data,
     };
 
     this.actionLog.push(logEntry);

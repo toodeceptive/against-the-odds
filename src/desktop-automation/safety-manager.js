@@ -16,9 +16,9 @@ export const SafetyRules = {
     'reset',
     'clear',
     'wipe',
-    'destroy'
+    'destroy',
   ],
-  
+
   // Actions that are considered destructive
   destructive: [
     'delete',
@@ -32,9 +32,9 @@ export const SafetyRules = {
     'close', // Closing applications
     'restart', // Restarting applications
     'shutdown', // System shutdown
-    'logout' // User logout
+    'logout', // User logout
   ],
-  
+
   // Actions that affect credentials
   credentialRelated: [
     'token',
@@ -43,19 +43,11 @@ export const SafetyRules = {
     'authentication',
     'login',
     'api_key',
-    'secret'
+    'secret',
   ],
-  
+
   // Actions that affect system settings
-  systemSettings: [
-    'registry',
-    'service',
-    'process',
-    'system',
-    'environment',
-    'path',
-    'variable'
-  ]
+  systemSettings: ['registry', 'service', 'process', 'system', 'environment', 'path', 'variable'],
 };
 
 /**
@@ -65,16 +57,13 @@ export const SafetyRules = {
  */
 export function requiresConfirmation(action) {
   const actionLower = action.toLowerCase();
-  
+
   // Check against safety rules
-  return SafetyRules.requireConfirmation.some(keyword =>
-    actionLower.includes(keyword)
-  ) || SafetyRules.destructive.some(keyword =>
-    actionLower.includes(keyword)
-  ) || SafetyRules.credentialRelated.some(keyword =>
-    actionLower.includes(keyword)
-  ) || SafetyRules.systemSettings.some(keyword =>
-    actionLower.includes(keyword)
+  return (
+    SafetyRules.requireConfirmation.some((keyword) => actionLower.includes(keyword)) ||
+    SafetyRules.destructive.some((keyword) => actionLower.includes(keyword)) ||
+    SafetyRules.credentialRelated.some((keyword) => actionLower.includes(keyword)) ||
+    SafetyRules.systemSettings.some((keyword) => actionLower.includes(keyword))
   );
 }
 
@@ -85,9 +74,7 @@ export function requiresConfirmation(action) {
  */
 export function isDestructive(action) {
   const actionLower = action.toLowerCase();
-  return SafetyRules.destructive.some(keyword =>
-    actionLower.includes(keyword)
-  );
+  return SafetyRules.destructive.some((keyword) => actionLower.includes(keyword));
 }
 
 /**
@@ -97,9 +84,7 @@ export function isDestructive(action) {
  */
 export function isCredentialRelated(action) {
   const actionLower = action.toLowerCase();
-  return SafetyRules.credentialRelated.some(keyword =>
-    actionLower.includes(keyword)
-  );
+  return SafetyRules.credentialRelated.some((keyword) => actionLower.includes(keyword));
 }
 
 /**
@@ -114,12 +99,12 @@ export function validateAction(action, context = {}) {
     requiresConfirmation: false,
     riskLevel: 'low',
     warnings: [],
-    errors: []
+    errors: [],
   };
 
   // Check if confirmation required
   validation.requiresConfirmation = requiresConfirmation(action);
-  
+
   // Determine risk level
   if (isDestructive(action)) {
     validation.riskLevel = 'high';
@@ -140,7 +125,7 @@ export function validateAction(action, context = {}) {
 
   // Block extremely dangerous operations
   const blockedActions = ['format c:', 'delete system32', 'rm -rf /'];
-  if (blockedActions.some(blocked => action.toLowerCase().includes(blocked))) {
+  if (blockedActions.some((blocked) => action.toLowerCase().includes(blocked))) {
     validation.allowed = false;
     validation.errors.push('This operation is blocked for safety');
   }
@@ -158,23 +143,23 @@ export function checkFixSafety(fixStrategy) {
     safe: true,
     requiresConfirmation: false,
     risks: [],
-    recommendations: []
+    recommendations: [],
   };
 
   // Check each step
-  fixStrategy.steps.forEach(step => {
+  fixStrategy.steps.forEach((step) => {
     const validation = validateAction(step);
-    
+
     if (!validation.allowed) {
       safety.safe = false;
       safety.risks.push(`Step blocked: ${step}`);
     }
-    
+
     if (validation.requiresConfirmation) {
       safety.requiresConfirmation = true;
       safety.risks.push(`Step requires confirmation: ${step}`);
     }
-    
+
     if (validation.riskLevel === 'high') {
       safety.risks.push(`High-risk step: ${step}`);
       safety.recommendations.push(`Review step carefully: ${step}`);

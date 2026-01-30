@@ -11,6 +11,14 @@ This guide provides step-by-step instructions for setting up complete Shopify in
 - Shopify Partner account (recommended for development)
 - Node.js and npm installed
 
+## Shopify–GitHub App (connected)
+
+Shopify is connected to this repository via the **Shopify GitHub App**. That integration typically:
+
+- **Theme deploys**: Pushes to the connected branch (e.g. `main`) can trigger theme deployment from Shopify’s side. You may not need GitHub Actions to deploy the theme if the app is handling it.
+- **Repo link**: Configured in Shopify Admin (e.g. Settings → Apps and sales channels → GitHub, or your app’s connection settings).
+- **GitHub Actions**: Workflows in this repo that call the Shopify API (e.g. product sync, backups, `deploy.yml` theme step) still use **GitHub Actions secrets** (`SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_THEME_ID`). Keep those set in the repo if you use those workflows.
+
 ## Step 1: Shopify CLI Installation
 
 ### Install Shopify CLI
@@ -124,11 +132,12 @@ $headers = @{
     "X-Shopify-Access-Token" = $token
 }
 
-$response = Invoke-RestMethod -Uri "https://$store/admin/api/2024-01/shop.json" -Headers $headers -Method Get
+$response = Invoke-RestMethod -Uri "https://$store/admin/api/2026-01/shop.json" -Headers $headers -Method Get
 Write-Host "Store Name: $($response.shop.name)" -ForegroundColor Green
 ```
 
 Run the test:
+
 ```powershell
 .\scripts\shopify\test-connection.ps1
 ```
@@ -204,10 +213,10 @@ Products are stored in `data/products/` as JSON files:
 
 ```powershell
 # Import products to Shopify
-.\scripts\shopify\sync-products.ps1
+.\scripts\products\sync.ps1
 
 # Export products from Shopify
-.\scripts\shopify\export-products.ps1
+.\scripts\products\export.ps1
 ```
 
 ## Step 10: Webhooks Setup (Optional)
@@ -215,6 +224,7 @@ Products are stored in `data/products/` as JSON files:
 ### Configure Webhooks
 
 1. **Via Admin API**:
+
    ```powershell
    # Create webhook for order creation
    $webhook = @{
@@ -224,8 +234,8 @@ Products are stored in `data/products/` as JSON files:
            format = "json"
        }
    } | ConvertTo-Json
-   
-   Invoke-RestMethod -Uri "https://$store/admin/api/2024-01/webhooks.json" `
+
+   Invoke-RestMethod -Uri "https://$store/admin/api/2026-01/webhooks.json" `
        -Headers $headers `
        -Method Post `
        -Body $webhook `
@@ -250,6 +260,7 @@ Products are stored in `data/products/` as JSON files:
 **Problem**: `shopify auth login` fails
 
 **Solutions**:
+
 1. Clear cached credentials: `shopify auth logout`
 2. Try browser-based auth: `shopify auth login --browser`
 3. Check Partner account access
@@ -259,6 +270,7 @@ Products are stored in `data/products/` as JSON files:
 **Problem**: API requests return 401/403
 
 **Solutions**:
+
 1. Verify access token is valid
 2. Check API scopes are correct
 3. Regenerate API credentials if needed
@@ -269,6 +281,7 @@ Products are stored in `data/products/` as JSON files:
 **Problem**: Theme changes not syncing
 
 **Solutions**:
+
 1. Check theme ID is correct
 2. Verify store access permissions
 3. Restart development server

@@ -40,14 +40,14 @@ Write-Host ""
 Write-Host "Test 1: Fetching shop information..." -ForegroundColor Cyan
 try {
     $shop = Invoke-RestMethod -Uri "$baseUrl/shop.json" -Headers $headers -Method Get
-    Write-Host "  ✓ Connected successfully!" -ForegroundColor Green
+    Write-Host "  [OK] Connected successfully!" -ForegroundColor Green
     Write-Host "  Shop Name: $($shop.shop.name)" -ForegroundColor Cyan
     Write-Host "  Shop Domain: $($shop.shop.domain)" -ForegroundColor Cyan
     Write-Host "  Shop Email: $($shop.shop.email)" -ForegroundColor Cyan
     Write-Host "  Currency: $($shop.shop.currency)" -ForegroundColor Cyan
 } catch {
-    Write-Host "  ✗ Failed to fetch shop information" -ForegroundColor Red
-    Write-Host "  Error: $_" -ForegroundColor Red
+    Write-Host "  [X] Failed to fetch shop information" -ForegroundColor Red
+    Write-Host ('  Error: ' + $_) -ForegroundColor Red
     exit 1
 }
 
@@ -58,11 +58,11 @@ Write-Host "Test 2: Fetching products..." -ForegroundColor Cyan
 try {
     $products = Invoke-RestMethod -Uri "$baseUrl/products.json?limit=1" -Headers $headers -Method Get
     $productCount = if ($products.products) { $products.products.Count } else { 0 }
-    Write-Host "  ✓ Products API accessible" -ForegroundColor Green
+    Write-Host "  [OK] Products API accessible" -ForegroundColor Green
     Write-Host "  Products found: $productCount" -ForegroundColor Cyan
 } catch {
-    Write-Host "  ✗ Failed to fetch products" -ForegroundColor Red
-    Write-Host "  Error: $_" -ForegroundColor Red
+    Write-Host "  [X] Failed to fetch products" -ForegroundColor Red
+    Write-Host ('  Error: ' + $_) -ForegroundColor Red
 }
 
 Write-Host ""
@@ -72,7 +72,7 @@ Write-Host "Test 3: Fetching themes..." -ForegroundColor Cyan
 try {
     $themes = Invoke-RestMethod -Uri "$baseUrl/themes.json" -Headers $headers -Method Get
     $themeCount = if ($themes.themes) { $themes.themes.Count } else { 0 }
-    Write-Host "  ✓ Themes API accessible" -ForegroundColor Green
+    Write-Host "  [OK] Themes API accessible" -ForegroundColor Green
     Write-Host "  Themes found: $themeCount" -ForegroundColor Cyan
     
     if ($themes.themes) {
@@ -82,9 +82,9 @@ try {
         }
     }
 } catch {
-    Write-Host "  ✗ Failed to fetch themes" -ForegroundColor Red
-    Write-Host "  Error: $_" -ForegroundColor Red
+    Write-Host "  [X] Failed to fetch themes" -ForegroundColor Red
+    Write-Host ('  Error: ' + $_) -ForegroundColor Red
 }
 
 Write-Host ""
-Write-Host "✓ Connection test complete!" -ForegroundColor Green
+Write-Host '[OK] Connection test complete!' -ForegroundColor Green

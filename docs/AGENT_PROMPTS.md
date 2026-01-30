@@ -7,6 +7,7 @@ This guide explains how to use the agent prompt system for new Cursor instances 
 ## Available Prompts
 
 ### Master Agent Prompt
+
 **File**: `prompts/master-agent-prompt.md`
 
 **Purpose**: Main prompt for general-purpose desktop automation agents
@@ -14,6 +15,7 @@ This guide explains how to use the agent prompt system for new Cursor instances 
 **Use When**: Starting a new Cursor agent for comprehensive automation
 
 **Key Features**:
+
 - Full desktop automation capabilities
 - Issue detection and resolution
 - Screen viewing and analysis
@@ -23,6 +25,7 @@ This guide explains how to use the agent prompt system for new Cursor instances 
 ### Specialized Agent Prompts
 
 #### Debugging Agent
+
 **File**: `prompts/debugging-agent.md`
 
 **Use When**: Focused on debugging and fixing issues
@@ -30,6 +33,7 @@ This guide explains how to use the agent prompt system for new Cursor instances 
 **Specialization**: Issue detection, root cause analysis, fix application
 
 #### Setup Agent
+
 **File**: `prompts/setup-agent.md`
 
 **Use When**: Setting up environment and configuring tools
@@ -37,6 +41,7 @@ This guide explains how to use the agent prompt system for new Cursor instances 
 **Specialization**: Environment setup, tool installation, configuration
 
 #### Testing Agent
+
 **File**: `prompts/testing-agent.md`
 
 **Use When**: Running tests and quality verification
@@ -44,6 +49,7 @@ This guide explains how to use the agent prompt system for new Cursor instances 
 **Specialization**: Test execution, quality checks, verification
 
 #### Optimization Agent
+
 **File**: `prompts/optimization-agent.md`
 
 **Use When**: Optimizing performance and code quality
@@ -55,6 +61,7 @@ This guide explains how to use the agent prompt system for new Cursor instances 
 ### Step 1: Choose Agent Type
 
 Decide which agent type fits your needs:
+
 - **Master Agent**: General automation
 - **Debugging Agent**: Fixing issues
 - **Setup Agent**: Configuration
@@ -72,12 +79,14 @@ In new Cursor instance:
 ### Step 3: Provide Context
 
 Also provide context information:
+
 - `prompts/agent-context.md` - Project context
 - `prompts/agent-capabilities.md` - Available capabilities
 
 ### Step 4: Start Automation
 
 Agent can now:
+
 - View and analyze screens
 - Control mouse and keyboard
 - Manage windows
@@ -133,6 +142,7 @@ Agent can now:
 ### Use Existing Scripts
 
 Agents can execute existing PowerShell scripts:
+
 ```javascript
 execSync('powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1');
 ```
@@ -140,6 +150,7 @@ execSync('powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-
 ### Use Browser Automation
 
 Agents can use Playwright for web automation:
+
 ```javascript
 import { connectToBrowser } from './src/browser-automation/shopify-admin.js';
 const browser = await connectToBrowser();
@@ -148,6 +159,7 @@ const browser = await connectToBrowser();
 ### Use API Integrations
 
 Agents can use API scripts:
+
 ```javascript
 execSync('powershell -ExecutionPolicy Bypass -File scripts/shopify/test-connection.ps1');
 ```
@@ -165,6 +177,7 @@ execSync('powershell -ExecutionPolicy Bypass -File scripts/shopify/test-connecti
 ### Emergency Stop
 
 Agents support emergency stop:
+
 - Set emergency stop flag
 - All automation halts immediately
 - Resume when safe
@@ -181,12 +194,14 @@ Agents support emergency stop:
 ## Troubleshooting
 
 ### Agent Not Working
+
 - Verify prompt loaded correctly
 - Check context provided
 - Review capability documentation
 - Check dependencies installed
 
 ### Actions Not Executing
+
 - Check emergency stop status
 - Verify confirmation provided
 - Review safety rules

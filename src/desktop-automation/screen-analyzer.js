@@ -16,24 +16,20 @@ export async function analyzeScreen(options = {}) {
     captureOptions = {},
     ocrOptions = {},
     detectElements = true,
-    detectIssues = true
+    detectIssues = true,
   } = options;
 
   // Capture screen
   const screenshot = await captureScreen(captureOptions);
-  
+
   // Perform OCR
   const ocrResult = await extractText(screenshot, ocrOptions);
-  
+
   // Extract structured data
-  const structured = detectElements 
-    ? await extractStructuredData(screenshot, ocrOptions)
-    : null;
+  const structured = detectElements ? await extractStructuredData(screenshot, ocrOptions) : null;
 
   // Detect issues
-  const issues = detectIssues
-    ? await detectScreenIssues(screenshot, ocrResult, structured)
-    : [];
+  const issues = detectIssues ? await detectScreenIssues(screenshot, ocrResult, structured) : [];
 
   // Get screen metadata
   const sharp = await import('sharp');
@@ -43,13 +39,13 @@ export async function analyzeScreen(options = {}) {
     timestamp: new Date().toISOString(),
     dimensions: {
       width: metadata.width,
-      height: metadata.height
+      height: metadata.height,
     },
     text: ocrResult.text,
     ocrConfidence: ocrResult.confidence,
     elements: structured,
     issues: issues,
-    screenshot: screenshot // Include for further analysis
+    screenshot: screenshot, // Include for further analysis
   };
 }
 
@@ -65,13 +61,13 @@ async function detectScreenIssues(screenshot, ocrResult, structured) {
 
   // Check for error messages
   if (structured && structured.errors.length > 0) {
-    structured.errors.forEach(error => {
+    structured.errors.forEach((error) => {
       issues.push({
         type: 'error_message',
         severity: 'high',
         message: error.text,
         position: error.position,
-        detectedAt: new Date().toISOString()
+        detectedAt: new Date().toISOString(),
       });
     });
   }
@@ -86,10 +82,10 @@ async function detectScreenIssues(screenshot, ocrResult, structured) {
     /access denied/i,
     /permission denied/i,
     /timeout/i,
-    /connection (failed|refused|reset)/i
+    /connection (failed|refused|reset)/i,
   ];
 
-  errorPatterns.forEach(pattern => {
+  errorPatterns.forEach((pattern) => {
     const matches = ocrResult.text.match(pattern);
     if (matches) {
       issues.push({
@@ -97,7 +93,7 @@ async function detectScreenIssues(screenshot, ocrResult, structured) {
         severity: 'high',
         message: matches[0],
         pattern: pattern.toString(),
-        detectedAt: new Date().toISOString()
+        detectedAt: new Date().toISOString(),
       });
     }
   });
@@ -110,7 +106,7 @@ async function detectScreenIssues(screenshot, ocrResult, structured) {
       severity: 'medium',
       message: 'Loading indicators detected - possible performance issue',
       indicators: loadingIndicators,
-      detectedAt: new Date().toISOString()
+      detectedAt: new Date().toISOString(),
     });
   }
 
@@ -122,7 +118,7 @@ async function detectScreenIssues(screenshot, ocrResult, structured) {
       severity: 'low',
       message: 'UI inconsistencies detected',
       details: inconsistencies,
-      detectedAt: new Date().toISOString()
+      detectedAt: new Date().toISOString(),
     });
   }
 
@@ -141,7 +137,7 @@ async function detectLoadingIndicators(screenshot) {
   const loadingText = ['loading', 'please wait', 'processing', '...'];
   const indicators = [];
 
-  loadingText.forEach(text => {
+  loadingText.forEach((text) => {
     const matches = ocrResult.text.toLowerCase().match(new RegExp(text, 'i'));
     if (matches) {
       indicators.push({ type: 'text', text: text });
@@ -186,18 +182,18 @@ export function compareScreenStates(state1, state2) {
     textChanged: state1.text !== state2.text,
     elementsChanged: JSON.stringify(state1.elements) !== JSON.stringify(state2.elements),
     issuesChanged: state1.issues.length !== state2.issues.length,
-    newIssues: state2.issues.filter(issue => 
-      !state1.issues.some(i => i.message === issue.message)
+    newIssues: state2.issues.filter(
+      (issue) => !state1.issues.some((i) => i.message === issue.message)
     ),
-    resolvedIssues: state1.issues.filter(issue =>
-      !state2.issues.some(i => i.message === issue.message)
-    )
+    resolvedIssues: state1.issues.filter(
+      (issue) => !state2.issues.some((i) => i.message === issue.message)
+    ),
   };
 
   return {
     changed: differences.textChanged || differences.elementsChanged || differences.issuesChanged,
     differences: differences,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 }
 
@@ -217,7 +213,7 @@ export async function findElementByText(searchText, options = {}) {
       text: matches[0].text,
       position: matches[0].position,
       bbox: matches[0].bbox,
-      confidence: matches[0].confidence
+      confidence: matches[0].confidence,
     };
   }
 
@@ -236,12 +232,13 @@ export async function getScreenStateSummary(options = {}) {
     timestamp: analysis.timestamp,
     hasText: analysis.text.length > 0,
     textLength: analysis.text.length,
-    elementCount: analysis.elements ? 
-      (analysis.elements.buttons.length + 
-       analysis.elements.inputs.length + 
-       analysis.elements.labels.length) : 0,
+    elementCount: analysis.elements
+      ? analysis.elements.buttons.length +
+        analysis.elements.inputs.length +
+        analysis.elements.labels.length
+      : 0,
     issueCount: analysis.issues.length,
-    criticalIssues: analysis.issues.filter(i => i.severity === 'high').length,
-    ocrConfidence: analysis.ocrConfidence
+    criticalIssues: analysis.issues.filter((i) => i.severity === 'high').length,
+    ocrConfidence: analysis.ocrConfidence,
   };
 }

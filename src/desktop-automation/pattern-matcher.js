@@ -12,36 +12,36 @@ export const ErrorPatterns = {
   notFound: /not found|404|file not found|page not found/i,
   accessDenied: /access denied|permission denied|unauthorized|403/i,
   timeout: /timeout|timed out|request timeout/i,
-  
+
   // Network errors
   connectionFailed: /connection.*failed|unable.*connect|cannot.*connect/i,
   networkError: /network.*error|network.*unavailable/i,
   dnsError: /dns.*error|dns.*failed/i,
-  
+
   // Application errors
   applicationError: /application.*error|app.*crash|application.*failed/i,
   extensionError: /extension.*error|extension.*failed/i,
   pluginError: /plugin.*error|plugin.*failed/i,
-  
+
   // Configuration errors
   configError: /configuration.*error|config.*invalid|settings.*error/i,
   envError: /environment.*variable|env.*not set|missing.*variable/i,
-  
+
   // Authentication errors
   authError: /authentication.*failed|login.*failed|invalid.*credentials/i,
   tokenError: /token.*expired|token.*invalid|access.*token/i,
-  
+
   // API errors
   apiError: /api.*error|api.*failed|request.*failed/i,
   rateLimit: /rate.*limit|too.*many.*requests|429/i,
-  
+
   // Performance issues
   slowLoading: /loading|please wait|processing/i,
   memoryError: /out.*of.*memory|memory.*error/i,
-  
+
   // UI issues
   elementNotFound: /element.*not found|button.*not found/i,
-  renderError: /render.*error|display.*error/i
+  renderError: /render.*error|display.*error/i,
 };
 
 /**
@@ -62,7 +62,7 @@ export function matchPatterns(text, patterns) {
         pattern: patternNames[index] || pattern.toString(),
         match: match[0],
         index: match.index,
-        fullMatch: match
+        fullMatch: match,
       });
     }
   });
@@ -87,7 +87,7 @@ export function findErrorType(text, errorType) {
     return {
       type: errorType,
       match: match[0],
-      index: match.index
+      index: match.index,
     };
   }
 
@@ -109,7 +109,7 @@ export function extractErrorDetails(match, text) {
     error: match.match,
     context: context,
     position: match.index,
-    severity: determineSeverity(match.pattern)
+    severity: determineSeverity(match.pattern),
   };
 }
 
@@ -119,26 +119,19 @@ export function extractErrorDetails(match, text) {
  * @returns {string} Severity level
  */
 function determineSeverity(patternName) {
-  const highSeverity = [
-    'fatal',
-    'crash',
-    'accessDenied',
-    'authError',
-    'tokenError',
-    'memoryError'
-  ];
+  const highSeverity = ['fatal', 'crash', 'accessDenied', 'authError', 'tokenError', 'memoryError'];
 
   const mediumSeverity = [
     'generalError',
     'connectionFailed',
     'apiError',
     'configError',
-    'applicationError'
+    'applicationError',
   ];
 
-  if (highSeverity.some(s => patternName.includes(s))) {
+  if (highSeverity.some((s) => patternName.includes(s))) {
     return 'high';
-  } else if (mediumSeverity.some(s => patternName.includes(s))) {
+  } else if (mediumSeverity.some((s) => patternName.includes(s))) {
     return 'medium';
   } else {
     return 'low';
@@ -154,7 +147,7 @@ export const UIElementPatterns = {
   link: /(link|href|url|navigate|go to)/i,
   menu: /(menu|dropdown|select|choose)/i,
   dialog: /(dialog|modal|popup|alert|confirm)/i,
-  tab: /(tab|page|section)/i
+  tab: /(tab|page|section)/i,
 };
 
 /**
@@ -165,15 +158,15 @@ export const UIElementPatterns = {
 export function findUIElements(text) {
   const elements = [];
 
-  Object.keys(UIElementPatterns).forEach(type => {
+  Object.keys(UIElementPatterns).forEach((type) => {
     const pattern = UIElementPatterns[type];
     const matches = text.matchAll(new RegExp(pattern, 'gi'));
-    
+
     for (const match of matches) {
       elements.push({
         type: type,
         text: match[0],
-        index: match.index
+        index: match.index,
       });
     }
   });

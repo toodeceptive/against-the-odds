@@ -14,24 +14,24 @@ import { typeText, pressKey } from '../keyboard-control.js';
  */
 export async function navigateToView(view) {
   await openCursor();
-  
+
   // Use Ctrl+Shift+E for explorer, etc.
   const viewShortcuts = {
-    'explorer': ['control', 'shift', 'e'],
-    'search': ['control', 'shift', 'f'],
+    explorer: ['control', 'shift', 'e'],
+    search: ['control', 'shift', 'f'],
     'source control': ['control', 'shift', 'g'],
-    'extensions': ['control', 'shift', 'x'],
-    'terminal': ['control', '`'],
-    'problems': ['control', 'shift', 'm']
+    extensions: ['control', 'shift', 'x'],
+    terminal: ['control', '`'],
+    problems: ['control', 'shift', 'm'],
   };
-  
+
   const shortcut = viewShortcuts[view.toLowerCase()];
   if (shortcut) {
     await pressKey(shortcut);
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
     return true;
   }
-  
+
   // Fallback: try clicking on view name
   return await clickOnText(view);
 }
@@ -43,19 +43,19 @@ export async function navigateToView(view) {
  */
 export async function openWorkspaceFolder(folderPath) {
   await openCursor();
-  
+
   // Use File > Open Folder
   await pressKey(['alt', 'f']);
-  await new Promise(resolve => setTimeout(resolve, 200));
-  
+  await new Promise((resolve) => setTimeout(resolve, 200));
+
   // Navigate to Open Folder
-  await clickOnText('Open Folder') || await pressKey('o');
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
+  (await clickOnText('Open Folder')) || (await pressKey('o'));
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   // Type folder path
   await typeText(folderPath);
   await pressKey('enter');
-  
+
   return true;
 }
 
@@ -67,7 +67,7 @@ export async function openWorkspaceFolder(folderPath) {
 export async function navigateFileExplorer(filePath) {
   // Open explorer view
   await navigateToView('explorer');
-  
+
   // Click on file path parts
   const parts = filePath.split(/[/\\]/);
   for (const part of parts) {
@@ -78,10 +78,10 @@ export async function navigateFileExplorer(filePath) {
         await typeText(part);
         await pressKey('enter');
       }
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 200));
     }
   }
-  
+
   return true;
 }
 
@@ -93,22 +93,22 @@ export async function navigateFileExplorer(filePath) {
  */
 export async function useCursorAI(action, prompt) {
   await openCursor();
-  
+
   // Cursor AI shortcuts (may vary by version)
   // Ctrl+L for chat, Ctrl+K for inline edit, etc.
   const aiShortcuts = {
-    'chat': ['control', 'l'],
-    'compose': ['control', 'i'],
-    'edit': ['control', 'k']
+    chat: ['control', 'l'],
+    compose: ['control', 'i'],
+    edit: ['control', 'k'],
   };
-  
+
   const shortcut = aiShortcuts[action.toLowerCase()];
   if (shortcut) {
     await pressKey(shortcut);
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
     await typeText(prompt);
     return true;
   }
-  
+
   return false;
 }

@@ -23,6 +23,7 @@ Results Storage / API Integration
 ### Prerequisites
 
 1. **Node.js and Playwright installed**:
+
    ```powershell
    npm install
    npx playwright install chromium
@@ -45,10 +46,12 @@ Browser automation uses `playwright.shopify.config.js` for Shopify-specific sett
 ```
 
 **Requirements**:
+
 - Chrome open with Shopify admin logged in
 - Or script will launch new browser and wait for login
 
 **Output**:
+
 - Token saved to `.env.local` automatically
 - Or displayed for manual entry
 
@@ -59,10 +62,12 @@ Browser automation uses `playwright.shopify.config.js` for Shopify-specific sett
 ```
 
 **Requirements**:
+
 - Shopify admin access
 - Themes page accessible
 
 **Output**:
+
 - Theme ID saved to `.env.local`
 
 ### Verify Store Setup
@@ -179,6 +184,7 @@ npx playwright test --config=playwright.shopify.config.js
 **Issue**: Script can't connect to existing Chrome instance
 
 **Solutions**:
+
 1. Ensure Chrome is running
 2. Launch Chrome with remote debugging: `chrome.exe --remote-debugging-port=9222`
 3. Use `useExisting: false` to launch new browser
@@ -188,6 +194,7 @@ npx playwright test --config=playwright.shopify.config.js
 **Issue**: Automation hits login page
 
 **Solutions**:
+
 1. Log in manually in browser first
 2. Use storage state to save login session
 3. Wait for manual login (script will pause)
@@ -197,6 +204,7 @@ npx playwright test --config=playwright.shopify.config.js
 **Issue**: Selectors don't match elements
 
 **Solutions**:
+
 1. Check Shopify admin structure hasn't changed
 2. Use more flexible selectors
 3. Add wait conditions
@@ -212,7 +220,7 @@ await page.context().storageState({ path: 'shopify-auth.json' });
 
 // Next time, use saved state
 const context = await browser.newContext({
-  storageState: 'shopify-auth.json'
+  storageState: 'shopify-auth.json',
 });
 ```
 

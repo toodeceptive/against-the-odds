@@ -14,18 +14,18 @@ import { typeText, pressKey, Shortcuts } from './keyboard-control.js';
  */
 export async function clickOnText(text, options = {}) {
   const { findElementByText } = await import('./screen-analyzer.js');
-  
+
   const element = await findElementByText(text, options);
-  
+
   if (element) {
     await clickMouse('left', {
       x: element.position.x,
       y: element.position.y,
-      ...options
+      ...options,
     });
     return true;
   }
-  
+
   return false;
 }
 
@@ -37,14 +37,11 @@ export async function clickOnText(text, options = {}) {
  * @returns {Promise<boolean>} True if filled successfully
  */
 export async function fillFormField(fieldLabel, value, options = {}) {
-  const {
-    clearFirst = true,
-    submitAfter = false
-  } = options;
+  const { clearFirst = true, submitAfter = false } = options;
 
   // Find and click on the field label or field itself
   const clicked = await clickOnText(fieldLabel);
-  
+
   if (!clicked) {
     // Try clicking on input field directly
     // This would need more sophisticated detection
@@ -52,13 +49,13 @@ export async function fillFormField(fieldLabel, value, options = {}) {
   }
 
   // Wait a moment for field to be focused
-  await new Promise(resolve => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 200));
 
   // Clear existing content if needed
   if (clearFirst) {
     await Shortcuts.selectAll();
     await pressKey('delete');
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
   }
 
   // Type the value
@@ -66,7 +63,7 @@ export async function fillFormField(fieldLabel, value, options = {}) {
 
   // Submit if requested
   if (submitAfter) {
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
     await pressKey('enter');
   }
 
@@ -90,23 +87,21 @@ export async function clickButton(buttonText, options = {}) {
  * @returns {Promise<boolean>} True if navigation successful
  */
 export async function navigateMenu(menuPath, options = {}) {
-  const {
-    delay = 200
-  } = options;
+  const { delay = 200 } = options;
 
   for (const menuItem of menuPath) {
     // Click on menu item
     const clicked = await clickOnText(menuItem);
-    
+
     if (!clicked) {
       // Try keyboard navigation as fallback
       // Type first letter and press enter
       await typeText(menuItem[0]);
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       await pressKey('enter');
     }
-    
-    await new Promise(resolve => setTimeout(resolve, delay));
+
+    await new Promise((resolve) => setTimeout(resolve, delay));
   }
 
   return true;
@@ -137,7 +132,7 @@ export async function dragElement(startX, startY, endX, endY, options = {}) {
 export async function selectText(startX, startY, endX, endY) {
   // Click at start position
   await clickMouse('left', { x: startX, y: startY });
-  await new Promise(resolve => setTimeout(resolve, 100));
+  await new Promise((resolve) => setTimeout(resolve, 100));
 
   // Drag to end position
   const { dragAndDrop } = await import('./mouse-control.js');
@@ -173,13 +168,9 @@ export async function doubleClick(x, y, options = {}) {
  * @returns {Promise<boolean>} True if element appeared and clicked
  */
 export async function waitAndClick(text, options = {}) {
-  const {
-    timeout = 10000,
-    interval = 500,
-    maxAttempts = null
-  } = options;
+  const { timeout = 10000, interval = 500, maxAttempts = null } = options;
 
-  const attempts = maxAttempts || (timeout / interval);
+  const attempts = maxAttempts || timeout / interval;
   const startTime = Date.now();
 
   for (let i = 0; i < attempts; i++) {
@@ -192,7 +183,7 @@ export async function waitAndClick(text, options = {}) {
       return true;
     }
 
-    await new Promise(resolve => setTimeout(resolve, interval));
+    await new Promise((resolve) => setTimeout(resolve, interval));
   }
 
   return false;

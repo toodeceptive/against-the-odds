@@ -15,7 +15,11 @@ if ([string]::IsNullOrWhiteSpace($StoreDomain)) {
 Write-Host "=== Shopify App Installation Check ===" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "App: AO" -ForegroundColor Yellow
-Write-Host "Client ID: 775fc3aa250b20e6d3122dd39de5b028" -ForegroundColor Cyan
+if ([string]::IsNullOrWhiteSpace($env:SHOPIFY_API_KEY)) {
+    Write-Host "Client ID: (set SHOPIFY_API_KEY in .env.local)" -ForegroundColor Cyan
+} else {
+    Write-Host "Client ID: $($env:SHOPIFY_API_KEY)" -ForegroundColor Cyan
+}
 Write-Host ""
 Write-Host "Check installation status:" -ForegroundColor Yellow
 Write-Host "1. Go to: https://$StoreDomain/admin/apps" -ForegroundColor White

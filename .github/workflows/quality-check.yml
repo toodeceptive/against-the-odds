@@ -6,9 +6,13 @@ on:
   push:
     branches: [ main, develop ]
 
+permissions:
+  contents: read
+
 jobs:
   quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     
     steps:
     - name: Checkout code
@@ -29,7 +33,7 @@ jobs:
     - name: Code coverage
       run: |
         if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
-          npm test -- --coverage || true
+          npm run test:coverage
         fi
         
     - name: Lint check
@@ -47,7 +51,7 @@ jobs:
     - name: Security audit
       run: |
         if [ -f package.json ]; then
-          npm audit --audit-level=high || true
+          npm audit --audit-level=high
         fi
         
     - name: Lighthouse CI

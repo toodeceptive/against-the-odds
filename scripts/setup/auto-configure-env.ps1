@@ -13,10 +13,8 @@ Set-Location $repoPath
 Write-Host "=== Automated Environment Configuration ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Known credentials (from plan)
+# Known non-secret defaults
 $knownCredentials = @{
-    SHOPIFY_API_KEY = "775fc3aa250b20e6d3122dd39de5b028"
-    SHOPIFY_API_SECRET = "PLACEHOLDER_SHOPIFY_SECRET"
     SHOPIFY_STORE_DOMAIN = "aodrop.com"
     SHOPIFY_STORE_URL = "https://aodrop.com"
     GITHUB_USERNAME = "toodeceptive"

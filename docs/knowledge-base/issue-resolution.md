@@ -7,6 +7,7 @@
 **Detection**: Error messages about missing configuration, invalid settings
 
 **Resolution**:
+
 1. Identify missing configuration
 2. Locate configuration file
 3. Add/update configuration
@@ -20,6 +21,7 @@
 **Detection**: Login failures, token errors, 401/403 responses
 
 **Resolution**:
+
 1. Check credentials validity
 2. Refresh tokens if possible
 3. Update credentials
@@ -33,6 +35,7 @@
 **Detection**: Connection errors, timeouts, DNS errors
 
 **Resolution**:
+
 1. Check network connectivity
 2. Verify DNS resolution
 3. Test endpoint accessibility
@@ -46,6 +49,7 @@
 **Detection**: API errors, rate limits, failed requests
 
 **Resolution**:
+
 1. Check API endpoint
 2. Verify credentials
 3. Check rate limits
@@ -59,6 +63,7 @@
 **Detection**: Application crashes, error dialogs
 
 **Resolution**:
+
 1. Review error message
 2. Check application logs
 3. Identify failing component

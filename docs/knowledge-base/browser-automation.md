@@ -61,19 +61,23 @@ const data = await extractTableData(page, 'table.products');
 ### Retry with Backoff
 
 ```javascript
-const result = await retryWithBackoff(async () => {
+const result = await retryWithBackoff(
+  async () => {
     return await page.click('button');
-}, 3, 1000);
+  },
+  3,
+  1000
+);
 ```
 
 ### Screenshot on Error
 
 ```javascript
 try {
-    await page.click('button');
+  await page.click('button');
 } catch (error) {
-    await takeScreenshot(page, 'error.png');
-    throw error;
+  await takeScreenshot(page, 'error.png');
+  throw error;
 }
 ```
 
@@ -93,7 +97,7 @@ try {
 ```javascript
 const loggedIn = await ensureShopifyLogin(page, storeDomain);
 if (!loggedIn) {
-    // Handle login failure
+  // Handle login failure
 }
 ```
 

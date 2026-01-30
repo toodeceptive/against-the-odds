@@ -42,32 +42,32 @@ export function compareStates(state1, state2) {
       textChanged: state1.text !== state2.text,
       textDiff: calculateTextDiff(state1.text, state2.text),
       elementsChanged: JSON.stringify(state1.elements) !== JSON.stringify(state2.elements),
-      issuesChanged: state1.issues.length !== state2.issues.length
+      issuesChanged: state1.issues.length !== state2.issues.length,
     },
     issues: {
-      newIssues: state2.issues.filter(issue2 =>
-        !state1.issues.some(issue1 => issue1.message === issue2.message)
+      newIssues: state2.issues.filter(
+        (issue2) => !state1.issues.some((issue1) => issue1.message === issue2.message)
       ),
-      resolvedIssues: state1.issues.filter(issue1 =>
-        !state2.issues.some(issue2 => issue2.message === issue1.message)
+      resolvedIssues: state1.issues.filter(
+        (issue1) => !state2.issues.some((issue2) => issue2.message === issue1.message)
       ),
-      persistentIssues: state1.issues.filter(issue1 =>
-        state2.issues.some(issue2 => issue2.message === issue1.message)
-      )
+      persistentIssues: state1.issues.filter((issue1) =>
+        state2.issues.some((issue2) => issue2.message === issue1.message)
+      ),
     },
     summary: {
       hasChanges: false,
       hasNewIssues: false,
-      hasResolvedIssues: false
-    }
+      hasResolvedIssues: false,
+    },
   };
 
   // Calculate summary
-  comparison.summary.hasChanges = 
-    comparison.changes.textChanged || 
+  comparison.summary.hasChanges =
+    comparison.changes.textChanged ||
     comparison.changes.elementsChanged ||
     comparison.changes.issuesChanged;
-  
+
   comparison.summary.hasNewIssues = comparison.issues.newIssues.length > 0;
   comparison.summary.hasResolvedIssues = comparison.issues.resolvedIssues.length > 0;
 
@@ -83,14 +83,14 @@ export function compareStates(state1, state2) {
 function calculateTextDiff(text1, text2) {
   const lines1 = text1.split('\n');
   const lines2 = text2.split('\n');
-  
-  const added = lines2.filter(line => !lines1.includes(line));
-  const removed = lines1.filter(line => !lines2.includes(line));
-  
+
+  const added = lines2.filter((line) => !lines1.includes(line));
+  const removed = lines1.filter((line) => !lines2.includes(line));
+
   return {
     added: added,
     removed: removed,
-    changed: added.length > 0 || removed.length > 0
+    changed: added.length > 0 || removed.length > 0,
   };
 }
 
@@ -110,12 +110,12 @@ export class StateTracker {
   async captureState() {
     const state = await ScreenState.capture();
     this.states.push(state);
-    
+
     // Keep only last N states
     if (this.states.length > this.maxStates) {
       this.states.shift();
     }
-    
+
     return state;
   }
 
@@ -130,7 +130,7 @@ export class StateTracker {
 
     const current = this.states[this.states.length - 1];
     const previous = this.states[this.states.length - 2];
-    
+
     return compareStates(previous, current);
   }
 
@@ -160,13 +160,13 @@ export function detectStateChangeIssues(comparison) {
 
   // New issues appeared
   if (comparison.summary.hasNewIssues) {
-    comparison.issues.newIssues.forEach(issue => {
+    comparison.issues.newIssues.forEach((issue) => {
       issues.push({
         type: 'state_change',
         severity: 'high',
         message: `New issue detected: ${issue.message}`,
         issue: issue,
-        detectedAt: comparison.timestamp
+        detectedAt: comparison.timestamp,
       });
     });
   }
@@ -174,10 +174,8 @@ export function detectStateChangeIssues(comparison) {
   // Text changed unexpectedly (could indicate error)
   if (comparison.changes.textChanged) {
     const errorKeywords = ['error', 'failed', 'exception'];
-    const hasErrorKeywords = errorKeywords.some(keyword =>
-      comparison.changes.textDiff.added.some(line =>
-        line.toLowerCase().includes(keyword)
-      )
+    const hasErrorKeywords = errorKeywords.some((keyword) =>
+      comparison.changes.textDiff.added.some((line) => line.toLowerCase().includes(keyword))
     );
 
     if (hasErrorKeywords) {
@@ -186,7 +184,7 @@ export function detectStateChangeIssues(comparison) {
         severity: 'medium',
         message: 'Error text appeared in state change',
         textDiff: comparison.changes.textDiff,
-        detectedAt: comparison.timestamp
+        detectedAt: comparison.timestamp,
       });
     }
   }

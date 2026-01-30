@@ -6,9 +6,16 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
     
     steps:
     - name: Checkout code
@@ -29,23 +36,23 @@ jobs:
     - name: Run linter
       run: |
         if [ -f package.json ] && npm list eslint 2>/dev/null; then
-          npm run lint || true
+          npm run lint
         fi
         
     - name: Run tests
       run: |
-        if [ -f package.json ] && npm list vitest 2>/dev/null || npm list jest 2>/dev/null; then
-          npm test || true
+        if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
+          npm run test:all
         fi
         
     - name: Build verification
       run: |
-        if [ -f package.json ] && npm list 2>/dev/null | grep -q "build"; then
-          npm run build || true
+        if [ -f package.json ]; then
+          npm run --if-present build
         fi
         
     - name: Security scan
-      uses: aquasecurity/trivy-action@master
+      uses: aquasecurity/trivy-action@v0.45.0
       with:
         scan-type: 'fs'
         scan-ref: '.'
@@ -61,6 +68,9 @@ jobs:
 
   quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout code

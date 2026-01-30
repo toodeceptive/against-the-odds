@@ -72,3 +72,6 @@ cache/
 # Browser automation temp files
 scripts/**/extract-*-temp.js
 shopify-auth.json
+
+# OCR / Tesseract data (local only)
+*.traineddata
