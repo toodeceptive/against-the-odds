@@ -30,7 +30,8 @@ Use this document **after** you restart Cursor and open this project. It gives y
 | **Workspace / tree** | **Primary repo only**: `C:\Users\LegiT\against-the-odds` | Do not open the `snq` worktree or multiple roots for this handoff. |
 | **Branch** | **`main`** | All finalization work is merged here. |
 | **Mode** | **Agent** (not Plan-only, not Ask-only) | Agent must be able to run commands and edit files. |
-| **Permissions** | **“Run everything”** or equivalent | So it can run git, npm, PowerShell, and network (e.g. push, Shopify CLI). |
+| **Permissions** | **“Run everything”** + **edit all files (including ignored)** | Full: git, npm, PowerShell, network; may edit .env.local and any ignored file to complete end-to-end setup. |
+| **Browser / local access** | **Allowed as needed** | May use Google Chrome (or system browser) to log into Shopify, GitHub, Cursor, or local flows when necessary; guru-level precision. |
 | **Live Server** | Optional | If you use Live Server (e.g. port 5500) for front-end, start it yourself or let the agent start it per runbook; not required for finalization. |
 | **Where work runs** | **Locally** in this repo | GitHub/Shopify/Cloudflare are used via APIs and CLI from this machine; no “takeover” of your PC beyond running approved repo scripts and Cursor. |
 
@@ -38,12 +39,12 @@ Use this document **after** you restart Cursor and open this project. It gives y
 
 ## Security and Safety (Built Into the Prompt)
 
-The prompt instructs the new agent to:
+The user has granted the agent permission to **edit all files (including ignored)** and to **use Google Chrome / local PC access** to log into Shopify, GitHub, Cursor, or local flows as needed. The prompt still enforces:
 
-- **Never commit or log secrets**: `.env.local` is gitignored; credentials stay out of repo and logs.
-- **No account takeover**: It does not ask for your passwords or 2FA; it uses existing `.env.local` and approved scripts (e.g. `shopify auth login` in terminal, scripts that read `.env.local`).
+- **Never commit secrets** (but may edit .env.local): The agent may edit `.env.local` and other ignored files to fill credentials; it must never commit them or log tokens/passwords.
+- **Destructive git only with approval**: Force-push or history rewrite only after user approval (already given for this handoff).
 - **Destructive git only with approval**: Force-push or history rewrite only after you’ve approved (you already approved in prior context).
-- **Use only repo assets**: Scripts in `scripts/`, docs in `docs/`, config in repo. No arbitrary downloads or execution of untrusted code.
+- **Guru-level accuracy**: Use state-of-the-art methods, task management, and precision; may use browser automation or local access when necessary to complete setup.
 - **Fetch project info from repo and Cursor**: It reads from `.cursor/`, `docs/`, `docs/status/`, and the repo—not from “all chat history” (which the new agent cannot see). The prompt summarizes state so the new agent has full context.
 
 ---
@@ -53,7 +54,13 @@ The prompt instructs the new agent to:
 **Copy everything inside the block below** and paste it as the **first message** to the new agent.
 
 ```
-You are taking over the Against The Odds (AO) project to finalize all current work and then move to the next steps. The user has approved full permissions ("run everything") and has approved destructive git (force-push) and credential rotation where needed. Work only in the primary repo: C:\Users\LegiT\against-the-odds, branch main.
+You are taking over the Against The Odds (AO) project to finalize all current work and then move to the next steps. Operate with guru-level expertise: accuracy, precision, task management, state-of-the-art scripts and methods, and deep knowledge of coding, programming, and tooling.
+
+PERMISSIONS (user-approved):
+- Edit ALL files, including ignored files (e.g. .env.local), to complete end-to-end setup in any and all ways necessary.
+- Access the user's PC locally and use Google Chrome (or the system browser) to log into websites as needed—Shopify, GitHub, Cursor, local files, or other services—when required to obtain credentials, unblock flows, or complete setup. Do so with guru expert accuracy and precision.
+- Run everything: terminal, git, npm, PowerShell, network, browser automation; use repo scripts, browser login, or local file access as appropriate to achieve the goals below.
+- Work only in the primary repo: C:\Users\LegiT\against-the-odds, branch main. Destructive git (force-push, history rewrite) is approved for this handoff.
 
 CONTEXT — Read these first (in this order):
 1. docs/status/system_finalization_report_20260129.md — inventory, blockers, what's done
@@ -67,27 +74,28 @@ CONTEXT — Read these first (in this order):
 CURRENT STATE:
 - Consolidation is done: all work is on main (finalization/consolidate merged). All 55 PowerShell scripts parse; debug sweep runs; lint passes; proof in docs/status/.
 - Push to GitHub was blocked by secret detection. User was to: (1) Unblock via GitHub link in blocker_resolution_commands_20260129.md, (2) Rotate Shopify app secret in Shopify Admin and update .env.local, (3) Tell you "Push again" or "Done."
-- .env.local exists in repo root with placeholders; user should paste real Shopify/GitHub credentials there. Never commit .env.local or log secrets.
+- .env.local exists in repo root with placeholders. You may edit .env.local (and any ignored file) to fill in real credentials—e.g. after guiding the user through browser login, using repo scripts that extract tokens, or other secure means. Never commit .env.local or any file containing secrets; never log or echo tokens, passwords, or API secrets.
 
-YOUR TASKS (in order):
-1. Finalize push: If the user has already unblocked and rotated, run: git push origin main --force. If push still fails (secret), output the unblock URL and rotate instructions from blocker_resolution_commands_20260129.md and wait for user to complete then say "Push again."
+YOUR TASKS (in order; execute with guru precision and task management):
+1. Finalize push: If the user has already unblocked and rotated, run: git push origin main --force. If push still fails (secret), use the unblock URL and rotate instructions in blocker_resolution_commands_20260129.md—including using Chrome/browser to open Shopify Admin or GitHub if needed to rotate or unblock—then retry push when done. You may edit .env.local with new credentials if you obtain them via approved flows.
 2. Verification: Run .\scripts\debug\parse-all-ps1.ps1; run .\scripts\run-everything-debug.ps1 (use -SkipDeps -SkipTests if npm fails); ensure lint passes. Save any new proof log under docs/status/ if needed.
 3. Mark finalization complete: Update docs/status/system_finalization_report_20260129.md status to "Finalization complete" and add one line that push succeeded (or document that push is pending user unblock+rotate).
-4. Next steps: Using docs/launch/00_launch_checklist.md and NEXT_STEPS.md, outline or start the immediate next steps: ensure .env.local has real values (guide user if not), run .\scripts\shopify\test-connection.ps1, then theme dev or merch ordering prep per docs/launch/07_drop01_product_image_plan_extended.md and assets/drop01/READY_TO_SEND_CHECKLIST.md. Do not skip verification; do not expose secrets in any file or log.
+4. Next steps: Using docs/launch/00_launch_checklist.md and NEXT_STEPS.md, complete or advance the immediate next steps: ensure .env.local has real values (edit it or use browser/login flows as needed), run .\scripts\shopify\test-connection.ps1, then theme dev or merch ordering prep per docs/launch/07_drop01_product_image_plan_extended.md and assets/drop01/READY_TO_SEND_CHECKLIST.md. Use any combination of repo scripts, Chrome login, and local file edits required to achieve end-to-end setup with guru-level accuracy.
 
 SECURITY RULES (mandatory):
-- Never commit .env.local or any file containing secrets. Never echo or log tokens, passwords, or API secrets.
-- Destructive git (force-push, history rewrite) only after user approval; user has already approved force-push for this handoff.
-- Use only scripts and docs in this repo. Credentials only from .env.local. Do not install or run untrusted code from the internet.
-- For Shopify/GitHub/Cloudflare: use .env.local and approved repo scripts (e.g. scripts/shopify/test-connection.ps1, shopify theme dev). Do not ask the user to paste secrets into chat; direct them to .env.local and docs/CREDENTIALS_SETUP.md.
+- You may EDIT .env.local and other ignored files to store credentials; you must NEVER COMMIT them or add them to tracked files. Never echo or log tokens, passwords, or API secrets.
+- Destructive git (force-push, history rewrite) is approved for this handoff; do not perform other destructive repo operations without explicit user approval.
+- Prefer repo scripts and docs; when you use browser or local access, do so only to complete the approved setup (e.g. Shopify/GitHub login, unblock, credential extraction). Do not install or run untrusted code from the internet.
+- When obtaining credentials via browser or scripts, write them only to .env.local (or other user-approved local config); never to chat logs or committed files.
 
-Confirm you've read the context files, then execute the four tasks in order. Report when push succeeds (or what the user must do), when verification is done, and what the next steps are.
+Confirm you've read the context files, then execute the four tasks in order with guru expertise. Report when push succeeds (or what was done), when verification is done, and what the next steps are.
 ```
 
 ---
 
 ## Guru / Expert Notes for Prompt Design
 
+- **Full permissions**: The user has granted edit-all-files (including ignored), Chrome/browser login for Shopify/GitHub/Cursor/local, and local PC access as needed—with guru-level accuracy, precision, task management, and state-of-the-art scripts and methods. The prompt encodes this so the agent can complete end-to-end setup in any/all ways necessary while still never committing secrets.
 - **Single workspace**: One agent, one repo root, one branch (`main`) avoids split context and wrong-tree edits.
 - **Ordered context**: The prompt lists specific files in order so the agent loads state before acting.
 - **State in the prompt**: Current state is summarized so the new agent does not depend on “all chat history” (which it cannot see).
