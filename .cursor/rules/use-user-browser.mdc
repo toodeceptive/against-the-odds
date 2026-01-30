@@ -1,0 +1,13 @@
+---
+description: Use the user's open browser (Chrome) when fetching info or completing setup; do not use a separate or headless browser.
+alwaysApply: true
+---
+
+# Use User's Browser
+
+When browser access is needed to fetch information or complete end-to-end setup, use the **user's own browser**—the Chrome windows they already have open (e.g. Shopify, GitHub, Cloudflare, already logged in).
+
+- **Do**: Use the user's open windows via browser MCP (navigate, snapshot, click, type in those tabs) to get credentials, unblock flows, or finish setup before proceeding.
+- **Do not**: Use a separate browser, headless browser, or new incognito session.
+
+Apply this whenever you need to: fetch credentials, complete login flows, unblock setup, or finish end-to-end configuration that requires a logged-in session.
