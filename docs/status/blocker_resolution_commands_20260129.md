@@ -5,6 +5,19 @@
 
 ---
 
+## Approval request (to complete push from Cursor)
+
+To finish pushing this repo to GitHub from Cursor, two approvals are needed:
+
+1. **Force-push**: Our local `main` will **replace** GitHub’s `main`. The 7 commits currently on GitHub (initial setup, logo PNGs) will be **removed** from the remote. Reply **"Approved"** or **"Yes"** to allow:  
+   `git push origin main --force`
+
+2. **If GitHub blocks the push** (secret detected in history): You will (a) open the email or repo Security tab and use **Unblock** for the detected secret, and (b) **rotate** the exposed Shopify app secret in Shopify Admin and update `.env.local`. Reply **"Approved"** or **"Yes"** to confirm you’ll do that so we can push again.
+
+Once you’ve replied with approval, the agent can run the force-push (and, if needed, a second push after you’ve unblocked and rotated).
+
+---
+
 ## Blocker Resolution Checklist
 
 - [ ] **2a.** History cleaned (or GitHub unblock used) + credentials rotated

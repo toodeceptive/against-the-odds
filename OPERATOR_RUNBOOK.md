@@ -22,6 +22,10 @@
 - `.\scripts\sync\sync-all.ps1`
 - `.\scripts\reporting\generate-status.ps1`
 
+## Update Shopify from Cursor
+
+See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)** for how to update your store from this Cursor app: theme dev, test connection, sync products, and deploy via GitHub.
+
 ## Shopify Theme Development
 
 - **Shopify–GitHub App**: Store is connected to this repo via the Shopify GitHub App.
