@@ -33,7 +33,7 @@
 
 ## Gaps vs expectations (if any)
 
-- **Shopify connection test**: Requires user to set `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_ACCESS_TOKEN` in `.env.local`; documented in `docs/status/proceed_20260130.md` and OPERATOR_RUNBOOK.
+- **Shopify connection test**: Requires user to set `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_ACCESS_TOKEN` in `.env.local`; documented in OPERATOR_RUNBOOK. (Proceed summary archived in `archive/2026-01-30/status-legacy/`.)
 - **Store readiness report**: `docs/launch/01_store_readiness.md` is a template; run Tech Release Manager prompt to populate with current results.
 
 ---

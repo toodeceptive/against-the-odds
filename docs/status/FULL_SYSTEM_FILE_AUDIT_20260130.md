@@ -120,11 +120,11 @@
 
 ### Quality gates (Run 3)
 
-| Check          | Result                                                                 |
-| -------------- | ---------------------------------------------------------------------- |
-| **ESLint**     | Passed                                                                 |
+| Check          | Result                                                                                       |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| **ESLint**     | Passed                                                                                       |
 | **Prettier**   | 1 file had style issues (`FULL_SYSTEM_FILE_AUDIT_20260130.md`) → fixed with `npm run format` |
-| **Unit tests** | Passed (vitest, 2 tests)                                                |
+| **Unit tests** | Passed (vitest, 2 tests)                                                                     |
 
 ### Findings (Run 3)
 

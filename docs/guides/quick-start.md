@@ -83,3 +83,7 @@
 - Review [Project Management Guide](../PROJECT_MANAGEMENT.md)
 - Set up [Shopify Integration](../SHOPIFY_SETUP.md)
 - Read [Manufacturing Workflow](../MANUFACTURING.md)
+
+---
+
+_Last updated: 2026-01-30_

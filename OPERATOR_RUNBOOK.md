@@ -94,9 +94,13 @@ After filling `.env.local`:
 - `npm run test:e2e` (optional)
 - `npm run test:coverage` (optional)
 
-## Legacy/optional scripts at repo root
+## Legacy/optional scripts (archived)
 
-- `create-and-push.ps1`, `create-repo.ps1`, `sync-repository.ps1`: One-off or legacy repo setup/sync; not part of daily workflow. Use `scripts/` for current automation (e.g. `scripts/shopify/`, `scripts/git/`). See `docs/status/INDEX_REPORTS.md` and `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` for current flows.
+- **Root scripts** (one-off repo setup/sync) moved to `scripts/archive/root-scripts-legacy/`: create-and-push.ps1, create-repo.ps1, sync-repository.ps1. Use `scripts/shopify/`, `scripts/git/`, etc. for current flows. See `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` and `docs/status/INDEX_REPORTS.md`.
+
+## replacements.txt (repo root)
+
+- **Purpose**: Regex for git-filter-repo (Shopify secret replacement when sanitizing history). Do not remove if you use history sanitization; see `docs/status/blocker_resolution_commands_20260129.md` or archive for context.
 
 ## Shopify app settings (if using embedded app)
 

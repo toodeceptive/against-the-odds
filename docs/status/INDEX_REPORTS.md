@@ -35,40 +35,40 @@ See `archive/2026-01-30/ARCHIVE_NOTE.md`.
 
 Use these for current phase, finalization, audits, and handoff.
 
-| File                                                                   | Purpose                                                                                               |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `PHASE_0_FINALIZATION.md`                                              | Phase 0 checklist and sign-off ("Phase 0 finalized; proceeding allowed.")                             |
-| `PLAN_AGENT_ENTRY.md`                                                  | Agent entry plan — read first, then execute Phase 0                                                   |
-| `GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md`                            | Multi-agent guru audit (workflows, prompts, redundancies, P1/P2)                                      |
-| `PIPELINE_FINALIZED.md`                                                | Pipeline finalized sign-off (seven-expert sequence; entry for future agents)                          |
-| `system_finalization_report_20260129.md`                               | System finalization inventory and blockers                                                            |
-| `deploy-log.md`                                                        | Deploy and rollback log (append-only)                                                                 |
-| `pending-approval.md`                                                  | Pending Shopify/store changes (preview before apply)                                                  |
-| `proceed_20260130.md`                                                  | Proceed execution summary and next step (Shopify creds)                                               |
-| `blocker_resolution_commands_20260129.md`                              | Blocker resolution commands                                                                           |
-| `verification_20260129.md`, `verification_proofs_20260129.md`          | Verification evidence                                                                                 |
-| `IMPLEMENTATION_COMPLETE_20260129.md`                                  | Implementation complete marker                                                                        |
-| `WORKFLOW_OPS_AUDIT_REPORT.md`                                         | Workflow ops audit                                                                                    |
-| `ao_guru_*_20260129.md`                                                | AO guru baseline/audit/synthesis                                                                      |
-| `expert_05_documentation_audit_20260130.md` (in docs/expert-analyses/) | Phase 4 documentation audit (expert-05)                                                               |
-| `CURSOR_WORKSPACE_AUDIT_20260130.md`                                   | Phase 5 Cursor and workspace audit (.cursor/\*, tasks, plans, scope)                                  |
-| `EXPECTATIONS_CHECKLIST.md`                                            | Phase 6 needs/expectations and workflow/runbook/handoff verification                                  |
-| `MASTER_SYNTHESIS_REPORT_20260130.md`                                  | Phase 7 Head Guru synthesis (Phases 1–6)                                                              |
-| `PROJECT_PERFECTED_20260130.md`                                        | Project perfected sign-off (Full Project Guru Perfection Plan)                                        |
-| **Plan: Full project update & perfection**                             | `.cursor/plans/full_project_update_perfection_guru.plan.md` — audit, new system, cleanup, update all. |
-| `PROJECT_AUDIT_20260130.md`, `AUDIT_*_20260130.md` (A1–A6)             | Phase A audit (code, docs, Cursor, workflows, scripts, prompts)                                       |
-| `UPDATE_CHECKLIST_20260130.md`, `CLEANUP_LOG_20260130.md`              | Phase B update checklist; Phase C cleanup log                                                         |
-| `PROJECT_UPDATE_PERFECTION_20260130.md`                                | Project update & perfection sign-off (Full plan executed)                                             |
-| `FULL_SYSTEM_FILE_AUDIT_20260130.md`                                   | Full system and file audit (post-commit: issues, outdated refs, codebase)                             |
-| `docs/KEYBINDING_PENDING_APPROVAL.md`                                  | User keybinding instructions (Ctrl+Alt+P, Ctrl+Alt+T)                                                 |
-| Other dated/theme reports                                              | Audits, coverage, security, optimization, etc.                                                        |
+| File                                                                   | Purpose                                                                                                                          |
+| ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `PHASE_0_FINALIZATION.md`                                              | Phase 0 checklist and sign-off ("Phase 0 finalized; proceeding allowed.")                                                        |
+| `PLAN_AGENT_ENTRY.md`                                                  | Agent entry plan — read first, then execute Phase 0                                                                              |
+| `GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md`                            | Multi-agent guru audit (workflows, prompts, redundancies, P1/P2)                                                                 |
+| `PIPELINE_FINALIZED.md`                                                | Pipeline finalized sign-off (seven-expert sequence; entry for future agents)                                                     |
+| `system_finalization_report_20260129.md`                               | System finalization inventory and blockers                                                                                       |
+| `deploy-log.md`                                                        | Deploy and rollback log (append-only)                                                                                            |
+| `pending-approval.md`                                                  | Pending Shopify/store changes (preview before apply)                                                                             |
+| `blocker_resolution_commands_20260129.md`                              | Blocker resolution commands                                                                                                      |
+| `WORKFLOW_OPS_AUDIT_REPORT.md`                                         | Workflow ops audit                                                                                                               |
+| `expert_05_documentation_audit_20260130.md` (in docs/expert-analyses/) | Phase 4 documentation audit (expert-05)                                                                                          |
+| **Plan: Expired/legacy cleanup**                                       | `docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md` — consolidate/archive expired plans, guides, expert-analyses, root scripts |
+| `CURSOR_WORKSPACE_AUDIT_20260130.md`                                   | Phase 5 Cursor and workspace audit (.cursor/\*, tasks, plans, scope)                                                             |
+| `EXPECTATIONS_CHECKLIST.md`                                            | Phase 6 needs/expectations and workflow/runbook/handoff verification                                                             |
+| `MASTER_SYNTHESIS_REPORT_20260130.md`                                  | Phase 7 Head Guru synthesis (Phases 1–6)                                                                                         |
+| `PROJECT_PERFECTED_20260130.md`                                        | Project perfected sign-off (Full Project Guru Perfection Plan)                                                                   |
+| **Plan: Full project update & perfection**                             | `.cursor/plans/full_project_update_perfection_guru.plan.md` — audit, new system, cleanup, update all.                            |
+| `PROJECT_AUDIT_20260130.md`, `AUDIT_*_20260130.md` (A1–A6)             | Phase A audit (code, docs, Cursor, workflows, scripts, prompts)                                                                  |
+| `UPDATE_CHECKLIST_20260130.md`, `CLEANUP_LOG_20260130.md`              | Phase B update checklist; Phase C cleanup log                                                                                    |
+| `PROJECT_UPDATE_PERFECTION_20260130.md`                                | Project update & perfection sign-off (Full plan executed)                                                                        |
+| `FULL_SYSTEM_FILE_AUDIT_20260130.md`                                   | Full system and file audit (post-commit: issues, outdated refs, codebase)                                                        |
+| `docs/KEYBINDING_PENDING_APPROVAL.md`                                  | User keybinding instructions (Ctrl+Alt+P, Ctrl+Alt+T)                                                                            |
+| Other dated/theme reports                                              | Audits, coverage, security, optimization, etc.                                                                                   |
 
 ---
 
-## expert-analyses/ (past expert runs)
+## expert-analyses/ and legacy content
 
-- **Root** `expert-analyses/`: Legacy numbered runs (01–10) + README; keep for reference.
-- **docs/expert-analyses/**: Current Phase 4/5 outputs — `expert_05_documentation_audit_20260130.md`, `expert_10_dev_experience_audit_20260130.md`. Example outputs of expert prompts; not duplicated here.
+- **docs/expert-analyses/**: Current Phase 4/5 outputs only — `expert_05_documentation_audit_20260130.md`, `expert_10_dev_experience_audit_20260130.md`. Example outputs of expert prompts.
+- **Legacy expert runs (01–10)**: Moved to `archive/2026-01-30/expert-analyses-legacy/` (root expert-analyses/ removed).
+- **Superseded status files**: ao*guru*_*20260129, verification*_, IMPLEMENTATION*COMPLETE_20260129, proceed*\* moved to `archive/2026-01-30/status-legacy/`.
+- **Root scripts (legacy)**: create-and-push.ps1, create-repo.ps1, sync-repository.ps1 moved to `scripts/archive/root-scripts-legacy/`.
+- **Plans index**: `.cursor/plans/README.md` — current vs reference plans.
 
 ---
 
