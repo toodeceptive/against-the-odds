@@ -37,7 +37,7 @@ flowchart LR
 
 **Goal:** See Shopify theme changes in the browser without committing. Run the task from **repo root** so script paths resolve.
 
-**Seamless:** Press **Ctrl+Alt+T** (after adding the keybinding once — see `.vscode/KEYBINDING_PENDING_APPROVAL.md`) to start the theme dev server; your browser opens the preview URL automatically when the server is ready.
+**Seamless:** Press **Ctrl+Alt+T** (after adding the keybinding once — see `docs/KEYBINDING_PENDING_APPROVAL.md`) to start the theme dev server; your browser opens the preview URL automatically when the server is ready.
 
 ```mermaid
 sequenceDiagram
@@ -150,18 +150,18 @@ flowchart LR
 
 ## 5. Quick reference
 
-| Goal                              | Command or action                                                                                                                                   |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Theme preview (before commit)** | **Tasks** → **Shopify: Theme Dev** → open URL in terminal or View → Simple Browser                                                                  |
-| Product sync (preview)            | `.\scripts\shopify\sync-products.ps1 -DryRun`                                                                                                       |
-| Product sync (apply)              | `.\scripts\shopify\sync-products.ps1`                                                                                                               |
-| Theme dev (terminal)              | `.\scripts\shopify\theme-dev.ps1`                                                                                                                   |
-| Theme push (apply)                | `.\scripts\shopify\update-theme.ps1`                                                                                                                |
-| **Open pending approval**         | **Ctrl+Alt+P** (add keybinding once — see `.vscode/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks** → **Open pending approval**. Opens in same window. |
-| **Theme preview (dev server)**    | **Ctrl+Alt+T** (add keybinding once) or **Tasks** → **Shopify: Theme Dev**. Browser opens preview URL automatically.                                |
-| Pending snapshot                  | `docs/status/pending-approval.md`                                                                                                                   |
-| Deploy log                        | `docs/status/deploy-log.md`                                                                                                                         |
-| Pipeline verification             | `npm run verify:pipeline` or `.\scripts\verify-pipeline.ps1`                                                                                        |
+| Goal                              | Command or action                                                                                                                                |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Theme preview (before commit)** | **Tasks** → **Shopify: Theme Dev** → open URL in terminal or View → Simple Browser                                                               |
+| Product sync (preview)            | `.\scripts\shopify\sync-products.ps1 -DryRun`                                                                                                    |
+| Product sync (apply)              | `.\scripts\shopify\sync-products.ps1`                                                                                                            |
+| Theme dev (terminal)              | `.\scripts\shopify\theme-dev.ps1`                                                                                                                |
+| Theme push (apply)                | `.\scripts\shopify\update-theme.ps1`                                                                                                             |
+| **Open pending approval**         | **Ctrl+Alt+P** (add keybinding once — see `docs/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks** → **Open pending approval**. Opens in same window. |
+| **Theme preview (dev server)**    | **Ctrl+Alt+T** (add keybinding once) or **Tasks** → **Shopify: Theme Dev**. Browser opens preview URL automatically.                             |
+| Pending snapshot                  | `docs/status/pending-approval.md`                                                                                                                |
+| Deploy log                        | `docs/status/deploy-log.md`                                                                                                                      |
+| Pipeline verification             | `npm run verify:pipeline` or `.\scripts\verify-pipeline.ps1`                                                                                     |
 
 ---
 

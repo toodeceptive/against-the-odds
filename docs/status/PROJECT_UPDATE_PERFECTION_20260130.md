@@ -7,12 +7,12 @@
 
 ## Summary
 
-| Phase | Deliverable |
-| ----- | ----------- |
-| **A** | Project audit (A1–A6) → `PROJECT_AUDIT_20260130.md`, `AUDIT_*_20260130.md` |
-| **B** | Updates (B1–B8) → `UPDATE_CHECKLIST_20260130.md`; rules, tasks, context, docs, keybinding doc, prompts, workflows README |
+| Phase | Deliverable                                                                                                                |
+| ----- | -------------------------------------------------------------------------------------------------------------------------- |
+| **A** | Project audit (A1–A6) → `PROJECT_AUDIT_20260130.md`, `AUDIT_*_20260130.md`                                                 |
+| **B** | Updates (B1–B8) → `UPDATE_CHECKLIST_20260130.md`; rules, tasks, context, docs, keybinding doc, prompts, workflows README   |
 | **C** | Cleanup (C1–C7) → `CLEANUP_LOG_20260130.md`; root scripts documented; expert-analyses clarified; no unique content deleted |
-| **D** | Verify + sign-off → lint/format/tests pass; this report |
+| **D** | Verify + sign-off → lint/format/tests pass; this report                                                                    |
 
 ---
 

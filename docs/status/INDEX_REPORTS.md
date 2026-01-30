@@ -21,7 +21,7 @@ These live at repo root or were moved to `archive/2026-01-30/` (see below). For 
 
 ### Moved to archive/2026-01-30
 
-**P1 batch**: COMPLETION\*REPORT, FIXES*COMPLETE, FIXED_STATUS, IMPLEMENTATION\**, PHASE\*1\*\_, FINAL_VERIFICATION, PROJECT_STATUS\*, REPOSITORY_STATUS, REVIEW_SUMMARY, SUB_ISSUES.
+**P1 batch**: COMPLETION\*REPORT, FIXES\*COMPLETE, FIXED_STATUS, IMPLEMENTATION\*\*, PHASE\*1\*\_, FINAL_VERIFICATION, PROJECT_STATUS\*, REPOSITORY_STATUS, REVIEW_SUMMARY, SUB_ISSUES.
 
 **Phase 4 batch (2026-01-30)**: AUDIT\*REPORT, BUG_FIXES, CODE_REVIEW_SYNC, DESKTOP_AUTOMATION_IMPLEMENTATION, FINAL_IMPLEMENTATION\*\*, INSTALL_INSTRUCTIONS, MASTER_EXECUTION_REPORT, QUICK_START, SETUP_INSTRUCTIONS, SETUP_VERIFICATION, SYSTEM_READY, ULTIMATE_MASTER_AGENT_EXECUTION_REPORT.
 
@@ -57,8 +57,9 @@ Use these for current phase, finalization, audits, and handoff.
 | `PROJECT_PERFECTED_20260130.md`                                        | Project perfected sign-off (Full Project Guru Perfection Plan)                                        |
 | **Plan: Full project update & perfection**                             | `.cursor/plans/full_project_update_perfection_guru.plan.md` — audit, new system, cleanup, update all. |
 | `PROJECT_AUDIT_20260130.md`, `AUDIT_*_20260130.md` (A1–A6)             | Phase A audit (code, docs, Cursor, workflows, scripts, prompts)                                       |
-| `UPDATE_CHECKLIST_20260130.md`, `CLEANUP_LOG_20260130.md`               | Phase B update checklist; Phase C cleanup log                                                         |
+| `UPDATE_CHECKLIST_20260130.md`, `CLEANUP_LOG_20260130.md`              | Phase B update checklist; Phase C cleanup log                                                         |
 | `PROJECT_UPDATE_PERFECTION_20260130.md`                                | Project update & perfection sign-off (Full plan executed)                                             |
+| `FULL_SYSTEM_FILE_AUDIT_20260130.md`                                   | Full system and file audit (post-commit: issues, outdated refs, codebase)                             |
 | `docs/KEYBINDING_PENDING_APPROVAL.md`                                  | User keybinding instructions (Ctrl+Alt+P, Ctrl+Alt+T)                                                 |
 | Other dated/theme reports                                              | Audits, coverage, security, optimization, etc.                                                        |
 
@@ -73,13 +74,13 @@ Use these for current phase, finalization, audits, and handoff.
 
 ## Quick reference
 
-| Need                       | Where                                                   |
-| -------------------------- | ------------------------------------------------------- |
-| Current phase and sign-off | `docs/status/PHASE_0_FINALIZATION.md`                   |
-| Agent entry and plan       | `docs/status/PLAN_AGENT_ENTRY.md`                       |
-| Latest guru audit          | `docs/status/GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md` |
-| Project perfected sign-off | `docs/status/PROJECT_PERFECTED_20260130.md`             |
-| Project update & perfection sign-off | `docs/status/PROJECT_UPDATE_PERFECTION_20260130.md` |
-| Deploy/rollback log        | `docs/status/deploy-log.md`                             |
-| Next steps                 | `NEXT_STEPS.md`, `OPERATOR_RUNBOOK.md`                  |
-| This index                 | `docs/status/INDEX_REPORTS.md`                          |
+| Need                                 | Where                                                   |
+| ------------------------------------ | ------------------------------------------------------- |
+| Current phase and sign-off           | `docs/status/PHASE_0_FINALIZATION.md`                   |
+| Agent entry and plan                 | `docs/status/PLAN_AGENT_ENTRY.md`                       |
+| Latest guru audit                    | `docs/status/GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md` |
+| Project perfected sign-off           | `docs/status/PROJECT_PERFECTED_20260130.md`             |
+| Project update & perfection sign-off | `docs/status/PROJECT_UPDATE_PERFECTION_20260130.md`     |
+| Deploy/rollback log                  | `docs/status/deploy-log.md`                             |
+| Next steps                           | `NEXT_STEPS.md`, `OPERATOR_RUNBOOK.md`                  |
+| This index                           | `docs/status/INDEX_REPORTS.md`                          |
