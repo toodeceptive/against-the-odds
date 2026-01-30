@@ -3,6 +3,8 @@
 **Generated**: 2026-01-29  
 **Purpose**: Step-by-step commands to resolve GitHub push protection and Windows-invalid filenames. Execute only after explicit approval.
 
+**Resolution (2026-01-29)**: Push was **resolved** via history rewrite: `git-filter-repo` was run in the primary repo to remove the Shopify App Shared Secret from all commits; credentials were rotated; `main` was force-pushed to `origin`. The unblock URL below is kept for reference if future pushes trigger secret detection.
+
 ---
 
 ## Approval request (to complete push from Cursor)
@@ -27,9 +29,9 @@ Once you’ve replied with approval, the agent can run the force-push (and, if n
 
 ## Blocker Resolution Checklist
 
-- [ ] **2a.** History cleaned (or GitHub unblock used) + credentials rotated
-- [ ] **2b.** Remote renames done (by you) + local fetch/merge done
-- [ ] **Push** succeeds (no push protection errors)
+- [x] **2a.** History cleaned (git-filter-repo) + credentials rotated
+- [ ] **2b.** Remote renames done (by you) + local fetch/merge done (if needed)
+- [x] **Push** succeeds (main force-pushed 2026-01-29)
 
 ---
 
