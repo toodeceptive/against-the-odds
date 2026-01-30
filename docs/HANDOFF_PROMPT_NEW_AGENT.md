@@ -32,6 +32,7 @@ Use this document **after** you restart Cursor and open this project. It gives y
 | **Mode** | **Agent** (not Plan-only, not Ask-only) | Agent must be able to run commands and edit files. |
 | **Permissions** | **"Run everything"** + **edit all files (including ignored)** | Full: git, npm, PowerShell, network; may edit .env.local and any ignored file to complete end-to-end setup. |
 | **Browser / local access** | **Allowed as needed** | May use Google Chrome (or system browser) to log into Shopify, GitHub, Cursor, or local flows when necessary; guru-level precision. |
+| **Use the user's browser** | **Required when needed** | The agent must navigate **the user's own browser**—the Chrome windows the user already has open (e.g. Shopify, GitHub, Cloudflare tabs, already logged in)—when needed to fetch information and finalize end-to-end system setup **before** proceeding. Do not use a separate or headless browser; use the user's open windows. |
 | **Live Server** | Optional | If you use Live Server (e.g. port 5500) for front-end, start it yourself or let the agent start it per runbook; not required for finalization. |
 | **Where work runs** | **Locally on your PC and in this repo** | Repo, terminal, browser (Chrome), local files—whatever is needed to finalize and run next steps with guru expertise. |
 
@@ -59,6 +60,7 @@ You are taking over the Against The Odds (AO) project to finalize all current wo
 PERMISSIONS (user-approved):
 - Edit all files, including ignored (e.g. .env.local), to finish end-to-end setup in any way needed.
 - Use the PC locally and Google Chrome (or system browser) to log into Shopify, GitHub, Cursor, local files, or other services when needed to get credentials, unblock flows, or complete setup, with guru-level accuracy and precision.
+- Navigate the user's browser: When browser access is needed, use the user's own browser—the Chrome windows they already have open (e.g. Shopify, GitHub, Cloudflare tabs, already logged in). Navigate those open windows to fetch information and finalize end-to-end system setup before proceeding. Do not use a separate or headless browser; use the user's open windows.
 - Run everything: terminal, git, npm, PowerShell, network, browser automation; use repo scripts, browser login, or local file access as appropriate.
 - Guru expertise: Operate with guru-level expertise—accuracy, precision, task management, state-of-the-art scripts and methods, and strong knowledge of coding, programming, and tooling.
 - Work only in the primary repo: C:\Users\LegiT\against-the-odds, branch main. Destructive git (force-push, history rewrite) is approved for this handoff.
@@ -75,6 +77,7 @@ CONTEXT — Read these first (in this order):
 
 CURRENT STATE:
 - Consolidation is done: all work is on main. Push to GitHub has SUCCEEDED: history was rewritten with git-filter-repo (Shopify secret removed from history); main was force-pushed to origin. Credentials were rotated; .env.local holds the new secret (never commit).
+- **User's browser**: The user has Chrome open with tabs already logged in (e.g. Shopify, GitHub, Cloudflare). When you need to fetch credentials, unblock flows, or complete setup, navigate **this same browser** (the user's open windows)—not a separate session—to finalize end-to-end setup before proceeding.
 - All 55 PowerShell scripts parse; debug sweep runs; lint passes; proof in docs/status/.
 - .env.local exists in repo root. You may edit .env.local (and any ignored file) to fill in real credentials—e.g. after guiding the user through browser login, using repo scripts that extract tokens, or other secure means. Never commit .env.local or any file containing secrets; never log or echo tokens, passwords, or API secrets.
 
@@ -96,6 +99,7 @@ Confirm you've read the context files, then execute the tasks in order with guru
 ## Guru / Expert Notes for Prompt Design
 
 - **Full permissions**: Edit-all-files (including ignored), Chrome/browser login for Shopify/GitHub/Cursor/local, local PC access, with guru-level accuracy, precision, task management, and state-of-the-art scripts and methods. The new agent has permission to edit all files, use Chrome and local PC access for logins and setup, work with guru-level accuracy, and never commit secrets; browser/local access only for approved setup.
+- **User's browser**: The agent must navigate the user's own browser (the Chrome windows they already have open—Shopify, GitHub, Cloudflare, etc., already logged in) when needed to fetch information and finalize end-to-end setup before proceeding; do not use a separate or headless browser.
 - **Single workspace**: One agent, one repo root, one branch (`main`) avoids split context and wrong-tree edits.
 - **Ordered context**: The prompt lists specific files in order so the agent loads state before acting.
 - **State in the prompt**: Current state is summarized so the new agent does not depend on "all chat history" (which it cannot see). Push has succeeded; tasks are now verification and next steps.
@@ -110,8 +114,9 @@ Confirm you've read the context files, then execute the tasks in order with guru
 
 1. Send the message to the new agent.
 2. The agent will read the listed docs, run verification, update status if needed, then outline next steps.
-3. Push has already succeeded; no unblock/rotate needed unless you push new branches that trigger secret detection.
-4. Use **docs/UPDATE_SHOPIFY_FROM_CURSOR.md** anytime you want to update your Shopify store from Cursor (theme dev, test connection, sync).
+3. **User's browser**: Keep Chrome open with your Shopify, GitHub, and Cloudflare tabs (already logged in). The agent is instructed to navigate **your** browser—those same open windows—when it needs to fetch credentials, unblock flows, or complete setup; it will not use a separate browser session.
+4. Push has already succeeded; no unblock/rotate needed unless you push new branches that trigger secret detection.
+5. Use **docs/UPDATE_SHOPIFY_FROM_CURSOR.md** anytime you want to update your Shopify store from Cursor (theme dev, test connection, sync).
 
 ---
 
