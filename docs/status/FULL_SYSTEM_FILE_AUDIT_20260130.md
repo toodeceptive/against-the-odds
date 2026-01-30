@@ -99,17 +99,38 @@
 
 ### Quality gates (Run 2)
 
-| Check          | Result                                                                 |
-| -------------- | ---------------------------------------------------------------------- |
-| **ESLint**     | Passed                                                                 |
+| Check          | Result                                                                                       |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| **ESLint**     | Passed                                                                                       |
 | **Prettier**   | 1 file had style issues (`FULL_SYSTEM_FILE_AUDIT_20260130.md`) → fixed with `npm run format` |
-| **Unit tests** | Passed (vitest, 2 tests)                                               |
+| **Unit tests** | Passed (vitest, 2 tests)                                                                     |
 
 ### Findings (Run 2)
 
 - **Keybinding refs**: All point to `docs/KEYBINDING_PENDING_APPROVAL.md`; no `.vscode/` in active docs. Plan and PROJECT_AUDIT correctly mention “.vscode or docs/” as options.
 - **Codebase**: No TODO/FIXME in src/ or tests/. scripts/products/sync.ps1 still has hardcoded repo path (known; optional follow-up).
 - **Unupdated/irrelevant**: No new obsolete files; CHANGELOG still has no entry for Full Project Update & Perfection or audits (optional).
+- **No new issues** requiring code or doc changes this run.
+
+---
+
+## 10. Run 3 (post-push — re-audit)
+
+**Run**: Third full system and file audit (after `git push origin main`).
+
+### Quality gates (Run 3)
+
+| Check          | Result                                                                 |
+| -------------- | ---------------------------------------------------------------------- |
+| **ESLint**     | Passed                                                                 |
+| **Prettier**   | 1 file had style issues (`FULL_SYSTEM_FILE_AUDIT_20260130.md`) → fixed with `npm run format` |
+| **Unit tests** | Passed (vitest, 2 tests)                                                |
+
+### Findings (Run 3)
+
+- **Keybinding refs**: Unchanged; all point to `docs/KEYBINDING_PENDING_APPROVAL.md`. Plan/PROJECT_AUDIT mention “.vscode or docs/” as options.
+- **Codebase**: No TODO/FIXME in src/ or tests/. Scripts: most use `$PSScriptRoot` for repo root; **scripts/products/sync.ps1** still hardcodes repo path; **scripts/shopify/browser/get-token-client-credentials.ps1** has fallback hardcoded path. Known; optional follow-up.
+- **Unupdated/irrelevant**: No new obsolete files.
 - **No new issues** requiring code or doc changes this run.
 
 ---
