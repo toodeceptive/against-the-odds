@@ -1,0 +1,20 @@
+---
+description: Preview before live Shopify changes; get explicit approval before apply.
+alwaysApply: true
+---
+
+# Shopify: Preview before apply
+
+For any change that affects the **live Shopify store** (theme push, product sync, publishing):
+
+1. **Preview first**: Show the user one of:
+   - Product sync: output of `.\scripts\shopify\sync-products.ps1 -DryRun`
+   - Theme: `shopify theme dev` preview URL, or a PR diff summary
+2. **Snapshot**: Before asking for approval, write the preview to [docs/status/pending-approval.md](docs/status/pending-approval.md) (summary + dry-run output or theme URL/diff + "To approve: say 'approve' in Cursor chat"). Tell the user to run **Tasks → Open pending approval** or open the file, then reply "approve" in chat.
+3. **Get explicit approval**: Wait for the user to confirm in chat (e.g. "approve", "yes", "looks good") before:
+   - Running sync without `-DryRun`
+   - Pushing to `main` or merging a PR that updates theme/products
+   - Running `shopify theme push` or any script that writes to the live store
+4. **After apply**: Every store-affecting change (theme push, product sync, one-off browser change) must have a deploy-log entry. Append to [docs/status/deploy-log.md](docs/status/deploy-log.md): timestamp, action, branch/commit, summary, rollback steps (e.g. revert commit, restore JSON and sync, or "Revert in Shopify Admin: …"). Clear [docs/status/pending-approval.md](docs/status/pending-approval.md) (write "No pending changes" placeholder). Do not include secrets in the log.
+
+Never perform permanent store or branch updates without preview and user approval. See [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md).

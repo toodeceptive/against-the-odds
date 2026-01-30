@@ -63,6 +63,7 @@ spec-pack/
 ```
 
 **Future Files** (to be generated):
+
 - `drop01_print_spec_sheet.pdf` - Master spec sheet (combined)
 - `beanie_spec.pdf` - Beanie spec (PDF version)
 - `cap_spec.pdf` - Cap spec (PDF version)

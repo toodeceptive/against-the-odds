@@ -1,5 +1,8 @@
 # Sync products from local data to Shopify
 # Reads product data from data/products/ and syncs to Shopify store
+# See docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md for preview/approval flow.
+# API: https://shopify.dev/docs/api/admin-rest/latest/resources/product
+# Rate limits: 2 req/s (standard); on 429 use Retry-After and backoff.
 
 param(
     [switch]$DryRun = $false,
@@ -8,7 +11,15 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+
+# Repo root: script is scripts/shopify/sync-products.ps1 -> repo = parent of parent of PSScriptRoot
+$repoPath = if ($PSScriptRoot) {
+    $parent = Join-Path $PSScriptRoot ".."
+    $grandParent = Join-Path $parent ".."
+    (Resolve-Path $grandParent).Path
+} else {
+    Split-Path -Parent (Get-Location).Path
+}
 Set-Location $repoPath
 
 Write-Host "=== Shopify Product Sync ===" -ForegroundColor Cyan
@@ -27,8 +38,8 @@ if ([string]::IsNullOrWhiteSpace($Token)) {
     exit 1
 }
 
-# Check for product data directory
-$productsDir = "data\products"
+# Cross-platform products path
+$productsDir = Join-Path (Join-Path $repoPath "data") "products"
 if (-not (Test-Path $productsDir)) {
     Write-Host "Creating products directory..." -ForegroundColor Yellow
     New-Item -ItemType Directory -Force -Path $productsDir | Out-Null
@@ -37,9 +48,9 @@ if (-not (Test-Path $productsDir)) {
     exit 0
 }
 
-# Get product files
-$productFiles = Get-ChildItem -Path $productsDir -Filter "*.json"
-if ($productFiles.Count -eq 0) {
+# Get product files (exclude .gitkeep etc.)
+$productFiles = Get-ChildItem -Path $productsDir -Filter "*.json" -File | Where-Object { $_.Name -notmatch '^\.' }
+if (-not $productFiles -or $productFiles.Count -eq 0) {
     Write-Host "No product files found in $productsDir" -ForegroundColor Yellow
     exit 0
 }
@@ -47,36 +58,63 @@ if ($productFiles.Count -eq 0) {
 Write-Host "Found $($productFiles.Count) product file(s)" -ForegroundColor Cyan
 Write-Host ""
 
-# Setup API headers
 $headers = @{
     "X-Shopify-Access-Token" = $Token
-    "Content-Type" = "application/json"
+    "Content-Type"           = "application/json"
+}
+$baseUrl = "https://$Store/admin/api/2024-10"
+
+# Invoke REST with 429 retry (Retry-After or 1s backoff, max 3 retries)
+function Invoke-ShopifyRestMethod {
+    param([string]$Uri, [hashtable]$Headers, [string]$Method = "Get", [string]$Body = $null)
+    $maxRetries = 3
+    $attempt = 0
+    while ($true) {
+        try {
+            $params = @{ Uri = $Uri; Headers = $Headers; Method = $Method }
+            if ($Body) { $params.Body = $Body }
+            return Invoke-RestMethod @params
+        } catch {
+            $attempt++
+            if ($attempt -ge $maxRetries) { throw }
+            $statusCode = $null
+            if ($_.Exception -and $_.Exception.Response -and $_.Exception.Response.StatusCode) {
+                $statusCode = $_.Exception.Response.StatusCode.Value__
+            }
+            if ($statusCode -eq 429) {
+                $retryAfter = 1
+                $resp = $_.Exception.Response
+                if ($resp -and $resp.Headers -and $resp.Headers["Retry-After"]) {
+                    $retryAfter = [int][double]::Parse($resp.Headers["Retry-After"][0])
+                }
+                $retryAfter = [Math]::Max(1, [Math]::Min($retryAfter, 10))
+                Write-Host "  [429] Rate limited; waiting ${retryAfter}s before retry ($attempt/$maxRetries)" -ForegroundColor Yellow
+                Start-Sleep -Seconds $retryAfter
+            } else {
+                throw
+            }
+        }
+    }
 }
 
-$baseUrl = "https://$Store/admin/api/2026-01"
-
-# Process each product file
 foreach ($file in $productFiles) {
     Write-Host "Processing: $($file.Name)" -ForegroundColor Yellow
-    
+
     try {
         $productData = Get-Content $file.FullName -Raw | ConvertFrom-Json
-        
+
         if ($DryRun) {
             Write-Host "  [DRY RUN] Would create/update product: $($productData.title)" -ForegroundColor Cyan
             continue
         }
-        
-        # Check if product exists (by title - fetch and filter)
-        # Note: Shopify API doesn't support direct title filter, so we search by fetching and filtering
+
         $productFound = $false
         $productId = $null
-        
+
         try {
-            # Try to find by title (fetch first page and search)
             $searchUrl = "$baseUrl/products.json?limit=250"
-            $allProducts = Invoke-RestMethod -Uri $searchUrl -Headers $headers -Method Get
-            
+            $allProducts = Invoke-ShopifyRestMethod -Uri $searchUrl -Headers $headers -Method Get
+
             if ($allProducts.products) {
                 $matchingProduct = $allProducts.products | Where-Object { $_.title -eq $productData.title }
                 if ($matchingProduct) {
@@ -87,30 +125,16 @@ foreach ($file in $productFiles) {
         } catch {
             Write-Host "  [WARN] Could not check for existing products: $_" -ForegroundColor Yellow
         }
-        
+
         if ($productFound -and $productId) {
-            # Update existing product
             Write-Host "  Updating existing product (ID: $productId)..." -ForegroundColor Yellow
-            
-            $updateBody = @{
-                product = $productData
-            } | ConvertTo-Json -Depth 10
-            
-            $response = Invoke-RestMethod -Uri "$baseUrl/products/$productId.json" `
-                -Headers $headers -Method Put -Body $updateBody
-            
+            $updateBody = @{ product = $productData } | ConvertTo-Json -Depth 10
+            $response = Invoke-ShopifyRestMethod -Uri "$baseUrl/products/$productId.json" -Headers $headers -Method Put -Body $updateBody
             Write-Host "  [OK] Updated: $($response.product.title)" -ForegroundColor Green
         } else {
-            # Create new product
             Write-Host "  Creating new product..." -ForegroundColor Yellow
-            
-            $createBody = @{
-                product = $productData
-            } | ConvertTo-Json -Depth 10
-            
-            $response = Invoke-RestMethod -Uri "$baseUrl/products.json" `
-                -Headers $headers -Method Post -Body $createBody
-            
+            $createBody = @{ product = $productData } | ConvertTo-Json -Depth 10
+            $response = Invoke-ShopifyRestMethod -Uri "$baseUrl/products.json" -Headers $headers -Method Post -Body $createBody
             Write-Host "  [OK] Created: $($response.product.title) (ID: $($response.product.id))" -ForegroundColor Green
         }
     } catch {
@@ -119,13 +143,11 @@ foreach ($file in $productFiles) {
             try {
                 $errorDetails = $_.ErrorDetails.Message | ConvertFrom-Json
                 if ($errorDetails.errors) {
-                    $errorMessage = ($errorDetails.errors | ForEach-Object { 
+                    $errorMessage = ($errorDetails.errors | ForEach-Object {
                         if ($_.message) { $_.message } else { $_ }
                     }) -join "; "
                 }
-            } catch {
-                # Keep original error message if parsing fails
-            }
+            } catch { }
         }
         Write-Host "  ✗ Error processing $($file.Name): $errorMessage" -ForegroundColor Red
     }

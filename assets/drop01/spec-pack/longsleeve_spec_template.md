@@ -146,9 +146,9 @@
 - [ ] QR code scannability tested and confirmed (if QR included)
 - [ ] Spray overlay effect achievable with chosen print method (if QR included)
 - [ ] Proof approval step before production
-- [ ] Estimated turnaround time: _____ days
-- [ ] Cost per sample: $_____
-- [ ] Minimum order quantity (for future production): _____
+- [ ] Estimated turnaround time: **\_** days
+- [ ] Cost per sample: $**\_**
+- [ ] Minimum order quantity (for future production): **\_**
 
 ---
 
@@ -162,6 +162,7 @@
 ---
 
 **Next Steps**:
+
 1. Review artwork files
 2. Confirm specifications with manufacturer
 3. Test QR code scannability (if QR included) - print test at scale

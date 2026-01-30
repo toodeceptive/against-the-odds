@@ -353,45 +353,57 @@ Create `docs/status/system_finalization_report_YYYYMMDD.md` with:
 # System Finalization Report — YYYY-MM-DD
 
 ## Executive Summary
+
 - [Brief summary of what was accomplished]
 
 ## Inventory
 
 ### Local Repositories
+
 - [List all clones/worktrees with their states]
 
 ### Branches
+
 - [List all branches, their status, merge decisions]
 
 ### Stashes
+
 - [List stashes, their status]
 
 ## Blockers Resolved
 
 ### GitHub Push Protection
+
 - [What was found, how it was fixed, proof]
 
 ### Windows-Incompatible Filenames
+
 - [What was found, how it was fixed, proof]
 
 ### npm Connectivity
+
 - [What was found, how it was fixed, proof]
 
 ## Verification Proof
 
 ### Script Parsing
+
 - [Status, log file reference]
 
 ### Debug Sweep
+
 - [Status, log file reference]
 
 ### Lint/Test/Format
+
 - [Status, log file references]
 
 ### Health/Performance
+
 - [Status, JSON report references]
 
 ### Integrations
+
 - [GitHub status, Shopify status, log references]
 
 ## Remaining Blockers

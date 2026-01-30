@@ -132,9 +132,9 @@
 - [ ] Side decoration included? (Yes/No)
 - [ ] QR code included on side? (Yes/No - if side decoration included)
 - [ ] Proof approval step before production
-- [ ] Estimated turnaround time: _____ days
-- [ ] Cost per sample: $_____
-- [ ] Minimum order quantity (for future production): _____
+- [ ] Estimated turnaround time: **\_** days
+- [ ] Cost per sample: $**\_**
+- [ ] Minimum order quantity (for future production): **\_**
 
 ---
 
@@ -149,6 +149,7 @@
 ---
 
 **Next Steps**:
+
 1. Review artwork files
 2. Confirm specifications with manufacturer
 3. Approve proof before production

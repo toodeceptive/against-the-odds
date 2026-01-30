@@ -1,3 +1,7 @@
+/**
+ * Unattended headless automation of Shopify Admin is not recommended per Shopify API terms.
+ * Use for manual or user-in-browser flows only (e.g. connect to existing Chrome, user watches).
+ */
 import { test, expect } from '@playwright/test';
 import {
   connectToBrowser,

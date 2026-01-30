@@ -73,7 +73,7 @@
 
 - **Error Correction**: **H** (high)
 - **Minimum Physical Size**: Start at **1.25–1.5 in** (3.2–3.8 cm) square
-- **Quiet Zone**: Keep a clean margin around the QR (at least **4 modules**) — do *not* spray/texture the quiet zone
+- **Quiet Zone**: Keep a clean margin around the QR (at least **4 modules**) — do _not_ spray/texture the quiet zone
 - **Contrast**: QR "dark modules" should remain clearly darker than the hoodie fabric; avoid low-contrast grays
 - **Testing**:
   - Test scan on at least 2 phones (iPhone/Android) at 12–24 inches distance
@@ -150,9 +150,9 @@
 - [ ] QR code scannability tested and confirmed
 - [ ] Spray overlay effect achievable with chosen print method
 - [ ] Proof approval step before production
-- [ ] Estimated turnaround time: _____ days
-- [ ] Cost per sample: $_____
-- [ ] Minimum order quantity (for future production): _____
+- [ ] Estimated turnaround time: **\_** days
+- [ ] Cost per sample: $**\_**
+- [ ] Minimum order quantity (for future production): **\_**
 
 ---
 
@@ -166,6 +166,7 @@
 ---
 
 **Next Steps**:
+
 1. Review artwork files
 2. Confirm specifications with manufacturer
 3. Test QR code scannability (print test at scale)

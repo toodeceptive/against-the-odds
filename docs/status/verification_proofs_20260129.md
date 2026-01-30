@@ -20,11 +20,13 @@ Verification proofs collected for system finalization. Some tasks are blocked by
 **Status**: COMPLETE
 
 **Results**:
+
 - Total scripts checked: 55
 - Parsed successfully: 25
 - Parse errors: 30 scripts with 85 total errors
 
 **Key Findings**:
+
 - Most common errors: Missing string terminators, missing closing braces, incomplete try-catch blocks
 - Scripts with errors need fixing before production use
 - Parse check script itself works correctly
@@ -36,10 +38,12 @@ Verification proofs collected for system finalization. Some tasks are blocked by
 ### 2. Node.js and npm Version Check ✅
 
 **Output Files**:
+
 - `docs/status/node_version_20260129.log`
 - `docs/status/npm_version_20260129.log`
 
 **Results**:
+
 - Node.js version: v24.12.0 ✅
 - npm version: 11.6.2 ✅ (with warning about unknown "devdir" config)
 
@@ -53,6 +57,7 @@ Verification proofs collected for system finalization. Some tasks are blocked by
 **Status**: CREATED but has parse errors
 
 **Functionality**:
+
 - Comprehensive end-to-end system check
 - Runs parse checks, lint, tests, health checks, performance checks
 - Saves all outputs to `docs/status/` with timestamps
@@ -74,6 +79,7 @@ Verification proofs collected for system finalization. Some tasks are blocked by
 **Attempted**: Not attempted (known blocker from finalization report)
 
 **Action Required**:
+
 - Fix npm connectivity (check `npm_config_offline` setting)
 - Verify network access to npm registry
 - Install dependencies: `npm install`
@@ -110,6 +116,7 @@ Verification proofs collected for system finalization. Some tasks are blocked by
 **Reason**: Requires dependencies installed
 
 **Commands**:
+
 - `npm run test:unit`
 - `npm run test:integration`
 - `npm run test:all`
@@ -141,6 +148,7 @@ Verification proofs collected for system finalization. Some tasks are blocked by
 **Note**: Script has parse errors (documented in parse check log)
 
 **Action Required**:
+
 1. Fix parse errors in performance check script
 2. Run performance check and save JSON output
 
@@ -151,11 +159,13 @@ Verification proofs collected for system finalization. Some tasks are blocked by
 **Status**: PENDING (Credential-Gated)
 
 **GitHub Tests**:
+
 - `scripts/github/verify-auth.ps1`
 - `scripts/github/test-push-pull.ps1`
 - `scripts/github/verify-secrets.ps1`
 
 **Shopify Tests**:
+
 - `scripts/shopify/test-connection.ps1` (requires `.env.local`)
 
 **Expected Output**: `docs/status/integration_tests_20260129.log`

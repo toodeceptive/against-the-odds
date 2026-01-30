@@ -90,9 +90,9 @@ See `mockups/beanie_front_mockup.png` for visual reference.
 - [ ] Logo size confirmed
 - [ ] Color specifications confirmed
 - [ ] Proof approval step before production
-- [ ] Estimated turnaround time: _____ days
-- [ ] Cost per sample: $_____
-- [ ] Minimum order quantity (for future production): _____
+- [ ] Estimated turnaround time: **\_** days
+- [ ] Cost per sample: $**\_**
+- [ ] Minimum order quantity (for future production): **\_**
 
 ---
 
@@ -106,6 +106,7 @@ See `mockups/beanie_front_mockup.png` for visual reference.
 ---
 
 **Next Steps**:
+
 1. Review artwork files
 2. Confirm specifications with manufacturer
 3. Approve proof before production

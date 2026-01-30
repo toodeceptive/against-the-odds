@@ -1,0 +1,33 @@
+# Sync theme from main to shopify-theme branch (theme at root for Shopify GitHub App)
+# On push to main when src/shopify/themes/aodrop-theme changes, subtree-split and push shopify-theme.
+# Connect shopify-theme branch in Shopify Admin (Online Store > Themes > Connect from GitHub).
+
+name: Sync Theme Branch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/shopify/themes/aodrop-theme/**'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-theme-branch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Subtree split and push shopify-theme
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git subtree split --prefix=src/shopify/themes/aodrop-theme -b shopify-theme
+          git push origin shopify-theme --force

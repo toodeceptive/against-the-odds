@@ -29,4 +29,4 @@ description: Consistent agent behavior for audits, fixes, and reporting.
 
 ## Reporting
 
-- Maintain `MASTER_EXECUTION_REPORT.md` with findings, decisions, fixes, and verification.
+- Maintain current execution/audit reports in `docs/status/` (see `docs/status/INDEX_REPORTS.md`).

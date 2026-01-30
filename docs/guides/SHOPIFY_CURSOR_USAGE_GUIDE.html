@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor → GitHub → Shopify — Usage Guide | Against The Odds</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root { --bg: #1a1a1a; --fg: #e0e0e0; --accent: #4a9eff; --card: #252525; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; background: var(--bg); color: var(--fg); line-height: 1.6; }
+    h1 { font-size: 1.75rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
+    h2 { font-size: 1.25rem; margin-top: 2rem; color: var(--accent); }
+    h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    p { margin: 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { border: 1px solid #444; padding: 0.5rem 0.75rem; text-align: left; }
+    th { background: var(--card); color: var(--accent); }
+    .mermaid { background: var(--card); padding: 1rem; border-radius: 8px; margin: 1rem 0; text-align: center; }
+    .step-list { list-style: none; padding: 0; }
+    .step-list li { margin: 0.75rem 0; padding-left: 1.5rem; position: relative; }
+    .step-list li::before { content: attr(data-step); position: absolute; left: 0; font-weight: 700; color: var(--accent); }
+    .meta { font-size: 0.9rem; color: #888; margin-top: 2rem; }
+    @media print { body { background: #fff; color: #111; } .mermaid { background: #f5f5f5; } th { background: #eee; color: #111; } }
+  </style>
+</head>
+<body>
+  <h1>Cursor → GitHub → Shopify: Visual Usage Guide</h1>
+  <p><strong>Against The Odds (AO) store</strong> — Edit in Cursor, preview live, push to GitHub, store updates.</p>
+
+  <h2>1. At a glance</h2>
+  <div class="mermaid">
+flowchart LR
+  subgraph edit [Edit in Cursor]
+    A[Theme files]
+    B[Product JSON]
+  end
+  subgraph preview [Preview before commit]
+    C[Tasks: Shopify Theme Dev]
+    D[Open URL in browser]
+  end
+  subgraph apply [Apply]
+    E[You approve]
+    F[Commit and push]
+  end
+  subgraph live [Live store]
+    G[Shopify]
+  end
+  A --> C
+  B --> C
+  C --> D
+  D --> E
+  E --> F
+  F --> G
+  </div>
+
+  <h2>2. Preview your theme before committing (see work live)</h2>
+  <p><strong>Goal:</strong> See Shopify theme changes in the browser without committing.</p>
+  <div class="mermaid">
+sequenceDiagram
+  participant You
+  participant Cursor
+  participant Terminal
+  participant Browser
+  You->>Cursor: Ctrl+Shift+P then Run Task
+  You->>Cursor: Choose Shopify Theme Dev
+  Cursor->>Terminal: Runs theme dev server
+  Terminal->>You: Shows preview URL
+  You->>Browser: Click URL or View then Simple Browser
+  You->>Cursor: Edit theme files
+  Note over Cursor,Browser: Preview hot-reloads
+  You->>Cursor: When satisfied commit and push
+  </div>
+  <table>
+    <thead><tr><th>Step</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>In Cursor: <strong>Ctrl+Shift+P</strong> (Mac: <strong>Cmd+Shift+P</strong>) → type <strong>Run Task</strong></td></tr>
+      <tr><td>2</td><td>Select <strong>Shopify: Theme Dev (preview before commit)</strong></td></tr>
+      <tr><td>3</td><td>Wait for the preview URL in the terminal (e.g. https://... or http://127.0.0.1:9292)</td></tr>
+      <tr><td>4</td><td><strong>Click the URL</strong> in the terminal, or <strong>View → Simple Browser</strong> and paste the URL</td></tr>
+      <tr><td>5</td><td>Edit theme files; the preview updates live. No commit needed to preview.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>One-time:</strong> If the theme folder is empty, run <code>.\scripts\shopify\theme-pull.ps1</code> first.</p>
+
+  <h2>3. Product listing flow (add or change a product)</h2>
+  <div class="mermaid">
+flowchart TD
+  R[You add or change product] --> J[Agent create or edit JSON in data/products]
+  J --> P[Preview sync-products.ps1 DryRun]
+  P --> S[Show you dry-run output]
+  S --> A{You approve?}
+  A -->|Yes| Run[Apply sync-products.ps1]
+  A -->|No| Stop[Stop]
+  Run --> Push[Commit and push]
+  Push --> Log[Append to deploy-log.md]
+  Log --> Done[Product live on store]
+  </div>
+  <table>
+    <thead><tr><th>Step</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Ask in Cursor (e.g. list this product on my page)</td></tr>
+      <tr><td>2</td><td>Agent creates or edits JSON in <code>data/products/</code></td></tr>
+      <tr><td>3</td><td><strong>Preview:</strong> Agent runs <code>.\scripts\shopify\sync-products.ps1 -DryRun</code></td></tr>
+      <tr><td>4</td><td><strong>Approve:</strong> You confirm (e.g. yes or apply)</td></tr>
+      <tr><td>5</td><td><strong>Apply:</strong> Agent runs sync without DryRun then commit and push</td></tr>
+      <tr><td>6</td><td><strong>Log:</strong> Agent appends entry to <code>docs/status/deploy-log.md</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Theme or page flow</h2>
+  <div class="mermaid">
+flowchart TD
+  R[You theme or page change] --> E[Agent edit src/shopify/themes/aodrop-theme]
+  E --> P[Preview Theme Dev task or PR diff]
+  P --> A{You approve?}
+  A -->|Yes| Push[Commit and push to main]
+  A -->|No| Stop[Stop]
+  Push --> CI[CI updates shopify-theme branch]
+  CI --> Shopify[Shopify deploys from branch]
+  Shopify --> Log[Append to deploy-log.md]
+  </div>
+
+  <h2>5. Rollback</h2>
+  <table>
+    <thead><tr><th>What</th><th>How</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Theme</strong></td><td>Shopify Admin → Online Store → Themes → theme card → <strong>Actions</strong> → <strong>Reset to last commit</strong>. Or revert commit on shopify-theme and push.</td></tr>
+      <tr><td><strong>Products</strong></td><td>Revert data/products JSON in repo and run <code>.\scripts\shopify\sync-products.ps1</code>; or fix in Shopify Admin.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6. Quick reference</h2>
+  <table>
+    <thead><tr><th>Goal</th><th>Command or action</th></tr></thead>
+    <tbody>
+      <tr><td>Theme preview before commit</td><td>Tasks → Shopify: Theme Dev → open URL in terminal or View → Simple Browser</td></tr>
+      <tr><td>Product sync preview</td><td><code>.\scripts\shopify\sync-products.ps1 -DryRun</code></td></tr>
+      <tr><td>Product sync apply</td><td><code>.\scripts\shopify\sync-products.ps1</code></td></tr>
+      <tr><td>Theme dev terminal</td><td><code>.\scripts\shopify\theme-dev.ps1</code></td></tr>
+      <tr><td>Theme push apply</td><td><code>.\scripts\shopify\update-theme.ps1</code></td></tr>
+      <tr><td>Deploy log</td><td><code>docs/status/deploy-log.md</code></td></tr>
+      <tr><td>Pipeline verification</td><td><code>npm run verify:pipeline</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>7. Full pipeline (end-to-end)</h2>
+  <div class="mermaid">
+flowchart TB
+  subgraph cursor [Cursor]
+    Agent[Agent or You]
+    Edit[Edit theme and product JSON]
+    Preview[Preview dry-run or Theme Dev URL]
+  end
+  subgraph approval [Your approval]
+    OK[You confirm]
+  end
+  subgraph github [GitHub]
+    Main[main branch]
+    ThemeBranch[shopify-theme branch]
+    CI[CI sync theme branch and product sync]
+  end
+  subgraph shopify [Shopify]
+    Store[Live store]
+  end
+  subgraph audit [Audit]
+    DeployLog[deploy-log.md]
+  end
+  Agent --> Edit
+  Edit --> Preview
+  Preview --> OK
+  OK --> Agent
+  Agent --> Main
+  Main --> CI
+  CI --> ThemeBranch
+  CI --> Store
+  ThemeBranch --> Store
+  CI --> DeployLog
+  </div>
+
+  <p class="meta">Against The Odds — Cursor–GitHub–Shopify pipeline. Open this file in a browser and use <strong>Print → Save as PDF</strong> to download. Source: docs/guides/SHOPIFY_CURSOR_USAGE_GUIDE.md</p>
+
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+  </script>
+</body>
+</html>

@@ -9,6 +9,18 @@ $ErrorActionPreference = "Stop"
 $repoPath = "C:\Users\LegiT\against-the-odds"
 Set-Location $repoPath
 
+# Load .env.local into process env when present (same pattern as run-runbook.ps1)
+if (Test-Path ".env.local") {
+    Get-Content ".env.local" | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith("#") -and $line -match "^([^=]+)=(.*)$") {
+            $key = $matches[1].Trim()
+            $val = $matches[2].Trim()
+            [Environment]::SetEnvironmentVariable($key, $val, "Process")
+        }
+    }
+}
+
 Write-Host "=== Shopify Connection Test ===" -ForegroundColor Cyan
 Write-Host ""
 

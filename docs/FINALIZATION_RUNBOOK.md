@@ -1,6 +1,6 @@
 # Against The Odds — Finalization Runbook (Project + Business Plan)
 
-**Purpose**: Provide a single, step-by-step playbook to finalize the Against The Odds project *and* produce an investor/customer-ready business plan.
+**Purpose**: Provide a single, step-by-step playbook to finalize the Against The Odds project _and_ produce an investor/customer-ready business plan.
 
 This runbook assumes you will use the new **Finalization Team** prompts in `prompts/` and keep outputs in `docs/business-plan/` and `docs/launch/`.
 
@@ -9,6 +9,7 @@ This runbook assumes you will use the new **Finalization Team** prompts in `prom
 ## Definition of Done (DoD)
 
 ### Business plan package (required)
+
 - **Exec summary**: 1–2 pages
 - **Narrative plan**: problem → customer → positioning → product → ops → GTM → risks
 - **Financial model**: unit economics + 12-month forecast + inventory assumptions
@@ -17,6 +18,7 @@ This runbook assumes you will use the new **Finalization Team** prompts in `prom
 - **Legal pack (draft)**: ToS, Privacy Policy, Refund/Returns, Shipping policy + risk register
 
 ### Tech / launch readiness (required)
+
 - **Credentials setup complete**: `.env.local` configured (never committed)
 - **Integrations verified**:
   - Shopify connection test passes: `scripts/shopify/test-connection.ps1`
@@ -30,6 +32,7 @@ This runbook assumes you will use the new **Finalization Team** prompts in `prom
   - `scripts/quality/check-all.ps1`
 
 ### Store ops / security / measurement (required)
+
 - **Shopify store ops documented**: theme workflow, product readiness, rollback plan
 - **Release + environments documented**: branches, CI, Shopify themes, rollback
 - **Analytics plan exists**: KPIs + UTM/creator tracking + review cadence
@@ -77,6 +80,7 @@ Use separate Cursor instances (or separate chat contexts) with these prompts:
 - **Customer Support / Community Lead**: `prompts/finalization-customer-support-community.md`
 
 Always provide these context files to every agent:
+
 - `prompts/agent-context.md`
 - `prompts/agent-capabilities.md`
 - `README.md`
@@ -89,33 +93,41 @@ Always provide these context files to every agent:
 ## Execution Phases
 
 ### Phase A — Stabilize the repo (Tech Release Manager)
+
 Goal: everything reproducible and “green” locally.
 
 Deliverables:
+
 - `docs/launch/01_store_readiness.md` (status + gaps + commands used)
 - A short punch-list of remaining technical blockers (if any)
 
 ### Phase B — Build the business plan backbone (Business Plan Lead + Finance)
+
 Goal: produce a coherent, consistent narrative + numbers.
 
 Deliverables:
+
 - `docs/business-plan/00_exec_summary.md`
 - `docs/business-plan/01_business_plan.md`
 - `docs/business-plan/02_financial_model.md`
 
 ### Phase C — GTM + Ops + Legal (parallel specialists)
+
 Goal: make the plan executable and defensible.
 
 Deliverables:
+
 - `docs/business-plan/03_gtm_plan.md`
 - `docs/business-plan/04_ops_plan.md`
 - `docs/business-plan/05_legal_pack.md`
 - `docs/launch/00_launch_checklist.md`
 
 ### Phase D — Orchestrator synthesis
+
 Goal: ensure consistency across docs, assumptions, and timelines.
 
 Deliverables:
+
 - One “final pass” update to all plan docs to remove contradictions
 - A single-page “Top Risks & Mitigations” section inside `05_legal_pack.md`
 
@@ -124,6 +136,7 @@ Deliverables:
 ## Acceptance Checks (quick)
 
 Before calling it “finalized”, confirm:
+
 - Business plan docs exist in the locations above and agree on:
   - target customer
   - pricing and margin assumptions
@@ -131,4 +144,3 @@ Before calling it “finalized”, confirm:
   - channel mix and KPI definitions
 - Technical checks pass as listed in DoD
 - No secrets are committed (especially `.env.local`)
-

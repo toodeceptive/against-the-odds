@@ -25,16 +25,16 @@ Use this document **after** you restart Cursor and open this project. It gives y
 
 ## Tree, Mode, and Environment
 
-| Setting | Value | Notes |
-|--------|--------|--------|
-| **Workspace / tree** | **Primary repo only**: `C:\Users\LegiT\against-the-odds` | Do not open the `snq` worktree or multiple roots for this handoff. |
-| **Branch** | **`main`** | All finalization work is merged here. |
-| **Mode** | **Agent** (not Plan-only, not Ask-only) | Agent must be able to run commands and edit files. |
-| **Permissions** | **"Run everything"** + **edit all files (including ignored)** | Full: git, npm, PowerShell, network; may edit .env.local and any ignored file to complete end-to-end setup. |
-| **Browser / local access** | **Allowed as needed** | May use Google Chrome (or system browser) to log into Shopify, GitHub, Cursor, or local flows when necessary; guru-level precision. |
-| **Use the user's browser** | **Required when needed** | The agent must navigate **the user's own browser**—the Chrome windows the user already has open (e.g. Shopify, GitHub, Cloudflare tabs, already logged in)—when needed to fetch information and finalize end-to-end system setup **before** proceeding. Do not use a separate or headless browser; use the user's open windows. |
-| **Live Server** | Optional | If you use Live Server (e.g. port 5500) for front-end, start it yourself or let the agent start it per runbook; not required for finalization. |
-| **Where work runs** | **Locally on your PC and in this repo** | Repo, terminal, browser (Chrome), local files—whatever is needed to finalize and run next steps with guru expertise. |
+| Setting                    | Value                                                         | Notes                                                                                                                                                                                                                                                                                                                           |
+| -------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Workspace / tree**       | **Primary repo only**: `C:\Users\LegiT\against-the-odds`      | Do not open the `snq` worktree or multiple roots for this handoff.                                                                                                                                                                                                                                                              |
+| **Branch**                 | **`main`**                                                    | All finalization work is merged here.                                                                                                                                                                                                                                                                                           |
+| **Mode**                   | **Agent** (not Plan-only, not Ask-only)                       | Agent must be able to run commands and edit files.                                                                                                                                                                                                                                                                              |
+| **Permissions**            | **"Run everything"** + **edit all files (including ignored)** | Full: git, npm, PowerShell, network; may edit .env.local and any ignored file to complete end-to-end setup.                                                                                                                                                                                                                     |
+| **Browser / local access** | **Allowed as needed**                                         | May use Google Chrome (or system browser) to log into Shopify, GitHub, Cursor, or local flows when necessary; guru-level precision.                                                                                                                                                                                             |
+| **Use the user's browser** | **Required when needed**                                      | The agent must navigate **the user's own browser**—the Chrome windows the user already has open (e.g. Shopify, GitHub, Cloudflare tabs, already logged in)—when needed to fetch information and finalize end-to-end system setup **before** proceeding. Do not use a separate or headless browser; use the user's open windows. |
+| **Live Server**            | Optional                                                      | If you use Live Server (e.g. port 5500) for front-end, start it yourself or let the agent start it per runbook; not required for finalization.                                                                                                                                                                                  |
+| **Where work runs**        | **Locally on your PC and in this repo**                       | Repo, terminal, browser (Chrome), local files—whatever is needed to finalize and run next steps with guru expertise.                                                                                                                                                                                                            |
 
 ---
 
@@ -47,6 +47,7 @@ The user has granted the agent permission to **edit all files (including ignored
 - **Destructive git only with approval**: Force-push or history rewrite only after user approval (already given for this handoff).
 - **Guru-level accuracy**: Use state-of-the-art methods, task management, and precision; may use browser automation or local access when necessary to complete setup.
 - **Fetch project info from repo and Cursor**: It reads from `.cursor/`, `docs/`, `docs/status/`, and the repo—not from "all chat history" (which the new agent cannot see). The prompt summarizes state so the new agent has full context.
+- **Files and uploads for store changes**: The user grants the agent permission to read files/paths and use uploads shared in chat when the user is requesting a store change (e.g. "add a product with these images" or providing description/data from their PC). Use them only for the requested change; follow the workflow in docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md (preview → approve → apply → log).
 
 ---
 
@@ -74,6 +75,9 @@ CONTEXT — Read these first (in this order):
 5. docs/UPDATE_SHOPIFY_FROM_CURSOR.md — how to update the Shopify store from this Cursor app
 6. docs/launch/00_launch_checklist.md — launch checklist (next-phase work)
 7. .cursor/context/shopify.md and .cursor/context/github.md — if present, for store/repo context
+
+**Plan-only runs (Security & Platform / next team):** Read docs/status/PLAN_AGENT_ENTRY.md first if present — single entry for plan chats, Expert Team binding rules, and comprehensive-pass questions. Then read docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md, .cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md, docs/status/CONVERSATION_AUDIT.md (from this worktree or primary if missing).
+**Cross-worktree:** If you are in a worktree (e.g. uqy, snq, mhx) where those three files are missing, read them from **primary**: C:\Users\LegiT\against-the-odds (main). Fold Expert Team requirements into your plan. See docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md if present.
 
 CURRENT STATE:
 - Consolidation is done: all work is on main. Push to GitHub has SUCCEEDED: history was rewritten with git-filter-repo (Shopify secret removed from history); main was force-pushed to origin. Credentials were rotated; .env.local holds the new secret (never commit).
@@ -122,11 +126,11 @@ Confirm you've read the context files, then execute the tasks in order with guru
 
 ## Quick Reference
 
-| Need | Where |
-|------|--------|
-| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above |
-| When to restart | When this file is saved; push has succeeded |
-| Tree / mode | Primary repo only, main, Agent mode, "Run everything" |
-| Push unblock + rotate | docs/status/blocker_resolution_commands_20260129.md (push resolved via history rewrite) |
-| Credentials | .env.local + docs/CREDENTIALS_SETUP.md |
-| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md |
+| Need                       | Where                                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------------- |
+| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above                       |
+| When to restart            | When this file is saved; push has succeeded                                             |
+| Tree / mode                | Primary repo only, main, Agent mode, "Run everything"                                   |
+| Push unblock + rotate      | docs/status/blocker_resolution_commands_20260129.md (push resolved via history rewrite) |
+| Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                                                  |
+| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                                      |

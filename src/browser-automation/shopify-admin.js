@@ -1,10 +1,10 @@
 /**
  * Shopify Admin Browser Automation Library
- * Provides reusable functions for interacting with Shopify admin interface
+ * Provides reusable functions for interacting with Shopify admin interface.
+ *
+ * Note: Unattended headless automation of Shopify Admin is not recommended per Shopify API terms.
+ * Use for manual or user-in-browser flows only (e.g. connect to existing Chrome, user watches).
  */
-
-// Browser automation library for Shopify admin
-// Uses Playwright for browser automation
 
 import { warn } from '../desktop-automation/logger.js';
 

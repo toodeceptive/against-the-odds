@@ -1,3 +1,7 @@
+# PLACEHOLDER: No real deployment steps yet.
+# Implement per OPERATOR_RUNBOOK.md and docs/launch/00_launch_checklist.md when ready.
+# Shopify theme deployment: use sync-theme-branch.yml + Shopify "Connect from GitHub".
+
 name: Deploy
 
 on:

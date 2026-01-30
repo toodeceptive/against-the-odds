@@ -5,8 +5,9 @@
 - **Store Domain**: aodrop.com
 - **Store URL**: https://aodrop.com
 - **App Name**: AO
-- **Client ID**: your_shopify_api_key_here
+- **Client ID**: your_shopify_api_key_here (set in .env.local as SHOPIFY_API_KEY)
 - **API Version**: 2026-01
+- **Theme ID**: Set in .env.local as SHOPIFY_THEME_ID; get via `shopify theme list` or Shopify Admin → Online Store → Themes → theme URL. Theme source in repo: `src/shopify/themes/aodrop-theme/`. Connected branch for GitHub: `shopify-theme` (subtree from main).
 
 ## API Endpoints
 
@@ -27,7 +28,11 @@
 - API testing: `scripts/shopify/test-connection.ps1`
 - Browser automation: `scripts/shopify/browser/`
 
-## Documentation
+## Documentation (agent: where to find product/theme info)
 
-- Setup: `docs/SHOPIFY_SETUP.md`
-- Manufacturing: `docs/MANUFACTURING.md`
+- **Workflow (store updates)**: `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` — products, theme, preview, approval, deploy-log.
+- **Update from Cursor**: `docs/UPDATE_SHOPIFY_FROM_CURSOR.md`
+- **Setup**: `docs/SHOPIFY_SETUP.md`
+- **Product data**: `data/products/*.json` (source of truth for sync); schema: `data/products/example-hoodie.json`.
+- **Theme source**: `src/shopify/themes/aodrop-theme/` (layout, sections, templates, assets).
+- **Manufacturing**: `docs/MANUFACTURING.md`

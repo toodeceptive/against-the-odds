@@ -1,3 +1,9 @@
+# Shopify Sync: products from data/products/ to store
+# Runs on push to main (product/theme paths), schedule, or manual.
+# Secrets: SHOPIFY_STORE_DOMAIN, SHOPIFY_ACCESS_TOKEN (Settings > Actions > Secrets).
+# Note: IDE may show "Context access might be invalid" for these secret names—known false positive
+# (GitHub Actions extension doesn't list custom repo secrets). Workflow runs correctly when secrets are set.
+
 name: Shopify Sync
 
 on:
@@ -20,50 +26,40 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
 
-    - name: Validate Shopify secrets
-      run: |
-        if [ -z "${{ secrets.SHOPIFY_STORE_DOMAIN }}" ] || [ -z "${{ secrets.SHOPIFY_ACCESS_TOKEN }}" ]; then
-          echo "Missing Shopify secrets. Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN."
-          exit 1
-        fi
-        
-    - name: Install Shopify CLI
-      run: npm install -g @shopify/cli @shopify/theme
-      
-    - name: Sync products to Shopify
-      env:
-        SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
-        SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
-      run: |
-        echo "Syncing products to Shopify..."
-        # Add product sync script execution here
-        # node scripts/shopify/sync-products.js
-        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate Shopify secrets
+        run: |
+          if [ -z "${{ secrets.SHOPIFY_STORE_DOMAIN }}" ] || [ -z "${{ secrets.SHOPIFY_ACCESS_TOKEN }}" ]; then
+            echo "Missing Shopify secrets. Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN in repo Settings > Secrets."
+            exit 1
+          fi
+
+      - name: Sync products to Shopify
+        env:
+          SHOPIFY_STORE_DOMAIN: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+        shell: pwsh
+        run: |
+          ./scripts/shopify/sync-products.ps1
+
   backup-store:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: read
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Backup store configuration
-      env:
-        SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
-        SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
-      run: |
-        echo "Backing up store configuration..."
-        # Add backup script execution here
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # PLACEHOLDER: Implement real backup (e.g. theme/product export to artifact) per OPERATOR_RUNBOOK.md / docs/launch/00_launch_checklist.md
+      - name: Backup store configuration (placeholder)
+        env:
+          SHOPIFY_STORE_DOMAIN: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+        run: |
+          echo "Backup step: add script to export products/themes to artifact or branch when needed."

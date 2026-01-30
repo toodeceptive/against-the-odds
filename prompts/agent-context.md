@@ -42,9 +42,11 @@ C:\Users\LegiT\against-the-odds\
 ├── scripts/              # Automation scripts
 ├── src/                  # Source code
 │   ├── browser-automation/  # Browser automation
-│   └── desktop-automation/   # Desktop automation (NEW)
+│   ├── desktop-automation/   # Desktop automation
+│   └── shopify/              # Shopify theme (Connect from GitHub)
+│       └── themes/aodrop-theme/  # Theme at root for shopify-theme branch
 ├── tests/                # Test files
-└── prompts/              # Agent prompts (NEW)
+└── prompts/              # Agent prompts
 ```
 
 ## Important Files and Locations

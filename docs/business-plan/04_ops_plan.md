@@ -66,9 +66,11 @@
 ### QC gates (quality control)
 
 **Gate 0 — Manufacturer qualification (before samples)**
+
 - Verify capability, references, and ability to meet required QC standards.
 
 **Gate 1 — Sample evaluation (must-pass)**
+
 - Use `track-samples.ps1` “evaluate” to record:
   - Quality score, price score, delivery score, and a clear recommended/not‑recommended decision.
 - Pass criteria (example):
@@ -78,6 +80,7 @@
   - Stitching/construction consistent and clean
 
 **Gate 2 — Pre-production confirmation**
+
 - Manufacturer confirms:
   - Approved artwork files + placement
   - Material/fabric lot and trims
@@ -85,12 +88,14 @@
   - Packaging, labeling, carton packout
 
 **Gate 3 — In-process check (during production)**
+
 - Manufacturer provides photo/video evidence or inspection report at ~20–30% completion for:
   - Print/embroidery alignment
   - Stitching quality
   - Label placement and correctness
 
 **Gate 4 — Final inspection (pre-ship)**
+
 - Confirm:
   - Quantity by SKU
   - Defect rate vs agreed threshold
@@ -98,6 +103,7 @@
   - Random measurement checks on a defined sample size
 
 **Gate 5 — Receiving QC (upon arrival)**
+
 - Reconcile PO vs received (counts and variants).
 - Spot-check:
   - Damage in transit
@@ -113,6 +119,7 @@
 ### Fulfillment options (choose per phase)
 
 **Option A — Self-fulfillment (launch / low volume)**
+
 - Best when: low SKU count, manageable daily order volume, desire for tight brand control.
 - Process:
   - Pick/pack from small storage.
@@ -123,6 +130,7 @@
   - Standard pack-out (tissue, sticker, insert) to reduce variability.
 
 **Option B — 3PL (scale / higher volume)**
+
 - Best when: growing order volume, need faster shipping zones, need operational leverage.
 - Requirements to enable:
   - Clean SKU catalog and barcode/label conventions.
@@ -130,6 +138,7 @@
   - Agreed SLAs (same-day/next-day ship, cutoffs, return handling).
 
 **Option C — Print-on-demand (POD) for selected items**
+
 - Best when: testing new designs without inventory risk.
 - Tradeoffs:
   - Higher COGS, less control over quality/packaging, brand experience constraints.
@@ -222,26 +231,25 @@
 ### Key operational risks
 
 - **Supplier delays / missed ship dates**
-  - *Mitigations*: dual-source (at least 2 qualified manufacturers), maintain a buffer timeline, stage production (pilot then full), keep launch dates flexible.
+  - _Mitigations_: dual-source (at least 2 qualified manufacturers), maintain a buffer timeline, stage production (pilot then full), keep launch dates flexible.
 
 - **Quality drift from sample to production**
-  - *Mitigations*: Gate 2 pre-production lock, Gate 3 in-process evidence, Gate 4 final inspection; specify tolerances and defect definitions in PO.
+  - _Mitigations_: Gate 2 pre-production lock, Gate 3 in-process evidence, Gate 4 final inspection; specify tolerances and defect definitions in PO.
 
 - **Inventory stockouts or oversells**
-  - *Mitigations*: conservative initial buy, receiving QC before publishing inventory, reorder points based on sell-through, keep “quarantine/in-transit” off-sale.
+  - _Mitigations_: conservative initial buy, receiving QC before publishing inventory, reorder points based on sell-through, keep “quarantine/in-transit” off-sale.
 
 - **Fulfillment errors (wrong item/size)**
-  - *Mitigations*: SKU conventions, bin locations, pick/pack checklist, scan/verify step before shipment, periodic accuracy audits.
+  - _Mitigations_: SKU conventions, bin locations, pick/pack checklist, scan/verify step before shipment, periodic accuracy audits.
 
 - **High return rate / unclear sizing**
-  - *Mitigations*: publish detailed size charts and fit notes, collect feedback, adjust patterns/specs and/or product copy, tighten QC on measurements.
+  - _Mitigations_: publish detailed size charts and fit notes, collect feedback, adjust patterns/specs and/or product copy, tighten QC on measurements.
 
 - **Carrier disruptions / delivery exceptions**
-  - *Mitigations*: offer multiple carriers, proactive tracking monitoring, clear customer comms cadence, fast replacement policy for confirmed lost packages (as financially feasible).
+  - _Mitigations_: offer multiple carriers, proactive tracking monitoring, clear customer comms cadence, fast replacement policy for confirmed lost packages (as financially feasible).
 
 - **Cashflow pressure from MOQs and prepayments**
-  - *Mitigations*: negotiate payment terms, start with smaller SKU set, phased production, use preorder/waitlist (if aligned to brand) while protecting customer trust.
+  - _Mitigations_: negotiate payment terms, start with smaller SKU set, phased production, use preorder/waitlist (if aligned to brand) while protecting customer trust.
 
 - **Tooling/script drift (paths, API versions, process mismatch)**
-  - *Mitigations*: keep scripts documented and parameterized, run regular “ops checks” (weekly cadence), avoid hardcoding local paths in long-lived automation, pin/track API versions and update intentionally.
-
+  - _Mitigations_: keep scripts documented and parameterized, run regular “ops checks” (weekly cadence), avoid hardcoding local paths in long-lived automation, pin/track API versions and update intentionally.

@@ -137,12 +137,14 @@ npm test
 # Unit tests only
 npm run test:unit
 
-# E2E tests
+# E2E tests (run `npx playwright install` once if needed)
 npm run test:e2e
 
 # With coverage
 npm run test:coverage
 ```
+
+Desktop automation tests (`tests/desktop-automation/`) run on Windows only and are gated accordingly. Shopify admin E2E tests require `SHOPIFY_STORE_DOMAIN` and Playwright browsers; see `docs/SHOPIFY_SETUP.md`.
 
 ## 📦 Scripts
 

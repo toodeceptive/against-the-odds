@@ -27,7 +27,7 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 # Create extraction script
 $extractScript = @"
 import { chromium } from '@playwright/test';
-import { connectToBrowser, ensureShopifyLogin, extractAccessToken } from '../../src/browser-automation/shopify-admin.js';
+import { connectToBrowser, ensureShopifyLogin, extractAccessToken } from '../../../src/browser-automation/shopify-admin.js';
 
 (async () => {
   try {
@@ -61,7 +61,7 @@ import { connectToBrowser, ensureShopifyLogin, extractAccessToken } from '../../
 })();
 "@
 
-$scriptPath = "scripts\shopify\browser\extract-token-temp.js"
+$scriptPath = "scripts\shopify\browser\extract-token-temp.mjs"
 $extractScript | Out-File -FilePath $scriptPath -Encoding UTF8
 
 try {

@@ -74,6 +74,43 @@
       "command": "powershell",
       "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/health/comprehensive-check.ps1"],
       "problemMatcher": []
+    },
+    {
+      "label": "Shopify: Theme Dev (preview before commit)",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-dev.ps1"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Shopify: Theme Dev (Live theme context)",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-dev.ps1", "-Live"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Open pending approval",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Invoke-Item (Join-Path (Get-Location) 'docs/status/pending-approval.md')"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent"
+      }
     }
   ]
 }

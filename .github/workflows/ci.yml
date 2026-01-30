@@ -66,6 +66,26 @@ jobs:
       with:
         sarif_file: 'trivy-results.sarif'
 
+  secret-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Check for accidental secrets
+        run: |
+          set -e
+          for f in $(git ls-files '*.ps1' '*.js' '*.ts' '*.json' '*.yml' '*.yaml' 2>/dev/null); do
+            [ "$f" = ".env.example" ] && continue
+            if grep -qE '(shpat_|ghp_|shpss_)[a-zA-Z0-9]{20,}' "$f" 2>/dev/null; then
+              echo "::error file=$f::Possible secret detected. Use .env.local or GitHub Secrets only."
+              exit 1
+            fi
+          done
+          echo "No accidental secrets found in tracked files."
+
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15

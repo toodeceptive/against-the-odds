@@ -20,35 +20,45 @@ These workflows require the following secrets to be configured in GitHub:
 
 ## Workflow Files
 
+### CI vs quality-check (both run on push/PR to main and develop)
+
+- **`ci.yml`**: **Fast gate** — lint, test, build, Trivy (security scan), secret-scan, Lighthouse. Runs on every push/PR to `main` and `develop`.
+- **`quality-check.yml`**: **Deeper check** — code coverage, lint, format check, npm audit, Lighthouse. Same triggers. Overlap with CI: both run lint and Lighthouse; use both if you want a quick gate (CI) plus coverage/format (quality-check), or consider merging into one workflow later.
+
 ### `ci.yml`
 
 - Runs on: Push to `main`/`develop`, Pull requests
-- Actions: Linting, testing, security scanning
+- Actions: Linting, testing, build, Trivy security scan, secret-scan, Lighthouse
+
+### `quality-check.yml`
+
+- Runs on: Push to `main`/`develop`, Pull requests
+- Actions: Code coverage, lint, format check, npm audit, Lighthouse
 
 ### `deploy.yml`
 
 - Runs on: Push to `main`/`develop`, Manual trigger
-- Actions: Deploys to staging/production, Shopify theme deployment
+- Actions: **Placeholder** — deploy-staging / deploy-production (echo only). Implement real deployment or remove. Shopify theme deployment is via Shopify GitHub App / `sync-theme-branch.yml`.
 
 ### `shopify-sync.yml`
 
-- Runs on: Daily at 2 AM, Push to `main` (product/theme changes), Manual trigger
-- Actions: Syncs products to Shopify, backs up store configuration
+- Runs on: Daily at 2 AM, Push to `main` (data/products, src/shopify), Manual trigger
+- Actions: Syncs products to Shopify; backup-store job is **placeholder** (implement or remove)
+
+### `sync-theme-branch.yml`
+
+- Runs on: Push to `main` when `src/shopify/themes/aodrop-theme/**` changes
+- Actions: Subtree-split theme to `shopify-theme` branch and push (for Shopify “Connect from GitHub”)
 
 ### `sync.yml`
 
-- Runs on: Schedule, Manual trigger
-- Actions: Repository synchronization
-
-### `quality-check.yml`
-
-- Runs on: Pull requests
-- Actions: Code quality checks
+- Runs on: Schedule (every 6 h), Manual trigger
+- Actions: Repository sync (fetch, checkout main/develop, conflict check)
 
 ### `maintenance.yml`
 
-- Runs on: Schedule (daily)
-- Actions: Dependency updates, security scanning, performance monitoring
+- Runs on: Schedule (weekly Sunday), Manual trigger
+- Actions: Dependency update PR, Trivy security scan (weekly; CI runs Trivy on every push)
 
 ## Setup Instructions
 

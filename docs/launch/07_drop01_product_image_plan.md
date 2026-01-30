@@ -49,7 +49,7 @@ Produce the **final print-ready artwork + mockups** for Drop 01 so you can order
 
 - **Error correction**: **H** (high)
 - **Minimum physical size**: start at **1.25–1.5 in** (3.2–3.8 cm) square
-- **Quiet zone**: keep a clean margin around the QR (at least **4 modules**) — do *not* spray/texture the quiet zone
+- **Quiet zone**: keep a clean margin around the QR (at least **4 modules**) — do _not_ spray/texture the quiet zone
 - **Contrast**: QR “dark modules” should remain clearly darker than the hoodie fabric; avoid low-contrast grays
 - **Testing**:
   - Test scan on at least 2 phones (iPhone/Android) at 12–24 inches distance

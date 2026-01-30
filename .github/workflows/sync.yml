@@ -55,5 +55,5 @@ jobs:
       run: |
         echo "## Repository Sync Status" >> $GITHUB_STEP_SUMMARY
         echo "- Main branch: $(git rev-parse --short HEAD)" >> $GITHUB_STEP_SUMMARY
-        echo "- Develop branch: $(git rev-parse --short origin/develop)" >> $GITHUB_STEP_SUMMARY
+        echo "- Develop branch: $(git show-ref --verify --quiet refs/remotes/origin/develop && git rev-parse --short origin/develop || echo 'N/A')" >> $GITHUB_STEP_SUMMARY
         echo "- Last sync: $(date)" >> $GITHUB_STEP_SUMMARY

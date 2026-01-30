@@ -21,7 +21,7 @@ Once you’ve replied with approval, the agent can run the force-push (and, if n
 **If push was blocked by GitHub (secret detected):**
 
 1. **Unblock the secret**: Open this URL and click to allow the push:  
-   https://github.com/toodeceptive/against-the-odds/security/secret-scanning/unblock-secret/38xq5YftGtS6MNaAcw3DXsAnnnp  
+   https://github.com/toodeceptive/against-the-odds/security/secret-scanning/unblock-secret/38xq5YftGtS6MNaAcw3DXsAnnnp
 2. **Rotate the exposed Shopify App Shared Secret** in Shopify Admin (Apps → Your app → API credentials → regenerate Client secret). Update `.env.local` with the new secret.
 3. Tell the agent “Done” or “Push again”; the agent will run `git push origin main --force` again.
 
@@ -44,16 +44,20 @@ Once you’ve replied with approval, the agent can run the force-push (and, if n
 **Prerequisites:** Install [git-filter-repo](https://github.com/newren/git-filter-repo) (e.g. `pip install git-filter-repo` or use Windows package manager). Create a fresh clone or backup before rewriting.
 
 1. **Create a replace-text file** (no secret inside). Example `replacements.txt`:
+
    ```
    shpss_==>PLACEHOLDER_SHOPIFY_SECRET
    ```
+
    (Use the exact placeholder you want in history.)
 
 2. **Run filter-repo** from repo root (rewrites history; destructive):
+
    ```powershell
    cd C:\Users\LegiT\against-the-odds
    git filter-repo --replace-text replacements.txt --path .env.example --path scripts/setup/auto-configure-env.ps1 --path-glob '*.md' --force
    ```
+
    Or use `--invert-paths` if you prefer to only touch specific paths; adjust paths to match every file that ever contained the secret (see report: `.env.example`, `NEXT_STEPS.md`, `COMPLETION_REPORT.md`, `docs/ENVIRONMENT_SETUP.md`, `scripts/setup/auto-configure-env.ps1`). Check git-filter-repo docs for `--replace-text` and path options.
 
 3. **Rotate credentials** in Shopify (Admin → Apps → Your app → API credentials): regenerate Client secret / Shared secret. Update `.env.local` with new values (never commit).
