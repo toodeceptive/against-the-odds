@@ -12,22 +12,22 @@
 
 ### 1.1 Plan versions (this conversation and prior)
 
-| Plan / version | Location / reference | Scope | Status |
-| -------------- | ------------------- | ------ | ------ |
-| **Security check** | (no file in .cursor/plans) | Token echo fix, CI secret-scan exclusions, security docs, portable paths | Implemented |
-| **Top repos V1–V5** | docs/status/PLAN_AUDIT_20260131.md | Dawn/official docs → cross-comparative → non-inhibition → system perfection → guru expert; execution 8.9/8.11 | Implemented (items 1–10 in PLAN_AUDIT) |
-| **FINAL_REPO_ORGANIZATION_AND_AUDIT** | .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md | Single canonical plan: Phase 0 + Tracks A–G + Synthesis | **Current** (only plan) |
-| **perfect_execution_prompt** (consolidated) | prompts/PERFECT_EXECUTION_PROMPT.md | Phase 0 gate; mandatory cleanup/finalization | Implemented in FINAL plan |
-| **cursor-github-shopify-pipeline** | .cursor/plans/cursor-github-shopify-pipeline.plan.md | Cursor → GitHub → Shopify; theme branch; preview/approval | Reference (implemented) |
-| **full_project_update_perfection_guru** | .cursor/plans/full_project_update_perfection_guru.plan.md | Audit → update → cleanup; Phase 0 gate; multi-guru phases | Reference (consolidated) |
-| **expert_team_security_and_platform** | .cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md | Security & platform; browser-first; no headless | Reference (implemented) |
-| **PLAN_EXPIRED_LEGACY_CLEANUP** | docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md | Consolidate expert-analyses, root scripts, plans index, replacements.txt, guides, status | Reference |
-| **PLAN_AUDIT_20260131** | docs/status/PLAN_AUDIT_20260131.md | Plan versions table; cross-comparative analysis; perfected prompt; execution list | Reference |
-| **Cursor + GitHub audit and finalization** | This file + .cursor/plans/README | Cursor vs GitHub audit; browser–agent clarification; plan finalization; guru expert layout/guides | Reference (implemented) |
+| Plan / version                              | Location / reference                                                  | Scope                                                                                                         | Status                                 |
+| ------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| **Security check**                          | (no file in .cursor/plans)                                            | Token echo fix, CI secret-scan exclusions, security docs, portable paths                                      | Implemented                            |
+| **Top repos V1–V5**                         | docs/status/PLAN_AUDIT_20260131.md                                    | Dawn/official docs → cross-comparative → non-inhibition → system perfection → guru expert; execution 8.9/8.11 | Implemented (items 1–10 in PLAN_AUDIT) |
+| **FINAL_REPO_ORGANIZATION_AND_AUDIT**       | .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md               | Single canonical plan: Phase 0 + Tracks A–G + Synthesis                                                       | **Current** (only plan)                |
+| **perfect_execution_prompt** (consolidated) | prompts/PERFECT_EXECUTION_PROMPT.md                                   | Phase 0 gate; mandatory cleanup/finalization                                                                  | Implemented in FINAL plan              |
+| **cursor-github-shopify-pipeline**          | .cursor/plans/cursor-github-shopify-pipeline.plan.md                  | Cursor → GitHub → Shopify; theme branch; preview/approval                                                     | Reference (implemented)                |
+| **full_project_update_perfection_guru**     | .cursor/plans/full_project_update_perfection_guru.plan.md             | Audit → update → cleanup; Phase 0 gate; multi-guru phases                                                     | Reference (consolidated)               |
+| **expert_team_security_and_platform**       | .cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md | Security & platform; browser-first; no headless                                                               | Reference (implemented)                |
+| **PLAN_EXPIRED_LEGACY_CLEANUP**             | docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md                   | Consolidate expert-analyses, root scripts, plans index, replacements.txt, guides, status                      | Reference                              |
+| **PLAN_AUDIT_20260131**                     | docs/status/PLAN_AUDIT_20260131.md                                    | Plan versions table; cross-comparative analysis; perfected prompt; execution list                             | Reference                              |
+| **Cursor + GitHub audit and finalization**  | This file + .cursor/plans/README                                      | Cursor vs GitHub audit; browser–agent clarification; plan finalization; guru expert layout/guides             | Reference (implemented)                |
 
 ### 1.2 Cross-comparative analysis
 
-- **Progress:** Security and top-repos execution (AGENTS.md, agent-permissions.mdc, OPERATOR_RUNBOOK, README, docs/README, launch 07_ note, shopify context, sync.ps1 portability, guides dates, CHANGELOG, plans README) completed. This audit adds: browser–agent clarification in AGENTS.md; single audit doc (this file); plans README updated; CHANGELOG and INDEX_REPORTS updated.
+- **Progress:** Security and top-repos execution (AGENTS.md, agent-permissions.mdc, OPERATOR*RUNBOOK, README, docs/README, launch 07* note, shopify context, sync.ps1 portability, guides dates, CHANGELOG, plans README) completed. This audit adds: browser–agent clarification in AGENTS.md; single audit doc (this file); plans README updated; CHANGELOG and INDEX_REPORTS updated.
 - **Redundancy:** “Further multi-agent research… best practices… guru expert… guides for user and agents…” is addressed in PLAN_AUDIT and executed items. No re-research of covered topics; execution only.
 - **Single source of truth:** Workflow = AGENT_WORKFLOW_CURSOR_SHOPIFY.md; runbook = OPERATOR_RUNBOOK.md; docs index = docs/README.md; agent entry = PLAN_AGENT_ENTRY.md; plans index = .cursor/plans/README.md.
 
@@ -37,23 +37,23 @@
 
 ### 2.1 Cursor (settings, repo, connections, extensions, files)
 
-| Area | Location | Finding |
-| ---- | -------- | ------- |
-| **Settings** | .cursor/settings.json | Format-on-save; PS/JS/TS/JSON/MD formatters; excludes .git, node_modules, .env.local, dist, build; extensions.recommendations (9: PowerShell, Prettier, ESLint, Playwright, Vitest, GitHub PR, dotenv, markdownlint, yaml, Python). |
-| **Extensions** | .cursor/extensions.json | 17 recommendations (includes Copilot, copilot-chat, TypeScript-next, Tailwind, path-intellisense, GitLens, auto-rename-tag). settings.json is a subset; both valid (workspace vs repo recommendations). |
-| **Rules** | .cursor/rules/*.mdc, ao-guru.rules.md | agent-permissions, env-credentials, shopify-preview-approval, use-user-browser, ao-guru. All align with preview-before-apply, no secrets, user’s browser. |
-| **Plans** | .cursor/plans/ | 4 .plan.md + README. README lists current vs reference; this audit added as Reference (implemented). |
-| **Context** | .cursor/context/github.md, shopify.md | GitHub: repo URL, PAT, verify-auth, workflows, secrets. Shopify: store, theme path, sync-products/sync.ps1, browser/, workflow doc. |
-| **Tasks** | .cursor/tasks.json | Open pending approval, Theme Dev, Start theme preview, Verify Credentials, Sync Products, etc.; repo-relative paths. |
+| Area           | Location                               | Finding                                                                                                                                                                                                                             |
+| -------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Settings**   | .cursor/settings.json                  | Format-on-save; PS/JS/TS/JSON/MD formatters; excludes .git, node_modules, .env.local, dist, build; extensions.recommendations (9: PowerShell, Prettier, ESLint, Playwright, Vitest, GitHub PR, dotenv, markdownlint, yaml, Python). |
+| **Extensions** | .cursor/extensions.json                | 17 recommendations (includes Copilot, copilot-chat, TypeScript-next, Tailwind, path-intellisense, GitLens, auto-rename-tag). settings.json is a subset; both valid (workspace vs repo recommendations).                             |
+| **Rules**      | .cursor/rules/\*.mdc, ao-guru.rules.md | agent-permissions, env-credentials, shopify-preview-approval, use-user-browser, ao-guru. All align with preview-before-apply, no secrets, user’s browser.                                                                           |
+| **Plans**      | .cursor/plans/                         | 4 .plan.md + README. README lists current vs reference; this audit added as Reference (implemented).                                                                                                                                |
+| **Context**    | .cursor/context/github.md, shopify.md  | GitHub: repo URL, PAT, verify-auth, workflows, secrets. Shopify: store, theme path, sync-products/sync.ps1, browser/, workflow doc.                                                                                                 |
+| **Tasks**      | .cursor/tasks.json                     | Open pending approval, Theme Dev, Start theme preview, Verify Credentials, Sync Products, etc.; repo-relative paths.                                                                                                                |
 
 ### 2.2 GitHub (settings, repo, connections, app, codebase, files)
 
-| Area | Location | Finding |
-| ---- | -------- | ------- |
-| **Repo settings** | .github/settings.optimization.md | Description, topics, branch protection (PR, CI + quality-check), Actions permissions, secrets (SHOPIFY_*, GITHUB_TOKEN). |
-| **Workflows** | .github/workflows/ | ci.yml, quality-check.yml, deploy.yml, shopify-sync.yml, sync-theme-branch.yml, sync.yml, maintenance.yml; README documents triggers and secrets. |
-| **Templates** | .github/ISSUE_TEMPLATE/, PULL_REQUEST_TEMPLATE.md | bug, feature, task; PR template present. |
-| **Connections** | PAT in .env.local or Credential Manager | scripts/github/verify-auth.ps1. Theme: shopify-theme branch via sync-theme-branch.yml; Shopify GitHub App for store. |
+| Area              | Location                                          | Finding                                                                                                                                           |
+| ----------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Repo settings** | .github/settings.optimization.md                  | Description, topics, branch protection (PR, CI + quality-check), Actions permissions, secrets (SHOPIFY\_\*, GITHUB_TOKEN).                        |
+| **Workflows**     | .github/workflows/                                | ci.yml, quality-check.yml, deploy.yml, shopify-sync.yml, sync-theme-branch.yml, sync.yml, maintenance.yml; README documents triggers and secrets. |
+| **Templates**     | .github/ISSUE_TEMPLATE/, PULL_REQUEST_TEMPLATE.md | bug, feature, task; PR template present.                                                                                                          |
+| **Connections**   | PAT in .env.local or Credential Manager           | scripts/github/verify-auth.ps1. Theme: shopify-theme branch via sync-theme-branch.yml; Shopify GitHub App for store.                              |
 
 ### 2.3 Alignment
 

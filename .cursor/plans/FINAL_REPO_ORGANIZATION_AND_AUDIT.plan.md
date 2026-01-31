@@ -25,18 +25,18 @@ Organize and improve: **branches, workflows, worktrees, agents, consoles, enviro
 
 These items **must** be addressed during execution; do not skip.
 
-| # | Issue | Where | Resolution |
-|---|--------|--------|------------|
-| 1 | **develop** branch does not exist but ci.yml, quality-check.yml, deploy.yml reference it | Track A + B | Create develop and document strategy, or remove develop from all workflow triggers and document main-only |
-| 2 | **worktrees.json** does not list ewa, mhx, snq or their paths (four worktrees exist: main repo + ewa, mhx, snq) | Phase 0 + Track A | Document in BRANCH_INVENTORY or WORKTREE_INVENTORY.md; align worktrees.json or doc-only |
-| 3 | **deploy.yml** is placeholder (echo only) | Track B | Implement real deploy or remove; document in workflow README |
-| 4 | **shopify-sync.yml** backup-store job is placeholder | Track B | Implement or remove; document |
-| 5 | **No LICENSE file**; package.json has UNLICENSED | Track A | Add LICENSE file or document "UNLICENSED; no LICENSE file" in runbook |
-| 6 | **GitHub Environments** not used; deploy is branch-based | Track B | Document in workflow README: "No GitHub Environments; deploy is branch-based (develop=staging, main=production)" |
-| 7 | **.github/settings.optimization.md** not in plan | Track B or D | Keep current (branch protection, topics, description) |
-| 8 | **Root .png files** (7+ logo/design files) — move to assets or archive | Phase 0 + Track F | List in Phase 0; Track F move and log in ARCHIVE_LOG |
-| 9 | **Remote URL** (toodeceptive/against-the-odds) — verify intentional | Phase 0 + Track A | Document in inventory; verify with user if needed |
-| 10 | **Stale local branches** (ao-guru-exec, finalization/consolidate-20260129, wip/finalization-team-20260129) — merge or delete | Track A | Include in branch strategy; decide and document |
+| #   | Issue                                                                                                                        | Where             | Resolution                                                                                                       |
+| --- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 1   | **develop** branch does not exist but ci.yml, quality-check.yml, deploy.yml reference it                                     | Track A + B       | Create develop and document strategy, or remove develop from all workflow triggers and document main-only        |
+| 2   | **worktrees.json** does not list ewa, mhx, snq or their paths (four worktrees exist: main repo + ewa, mhx, snq)              | Phase 0 + Track A | Document in BRANCH_INVENTORY or WORKTREE_INVENTORY.md; align worktrees.json or doc-only                          |
+| 3   | **deploy.yml** is placeholder (echo only)                                                                                    | Track B           | Implement real deploy or remove; document in workflow README                                                     |
+| 4   | **shopify-sync.yml** backup-store job is placeholder                                                                         | Track B           | Implement or remove; document                                                                                    |
+| 5   | **No LICENSE file**; package.json has UNLICENSED                                                                             | Track A           | Add LICENSE file or document "UNLICENSED; no LICENSE file" in runbook                                            |
+| 6   | **GitHub Environments** not used; deploy is branch-based                                                                     | Track B           | Document in workflow README: "No GitHub Environments; deploy is branch-based (develop=staging, main=production)" |
+| 7   | **.github/settings.optimization.md** not in plan                                                                             | Track B or D      | Keep current (branch protection, topics, description)                                                            |
+| 8   | **Root .png files** (7+ logo/design files) — move to assets or archive                                                       | Phase 0 + Track F | List in Phase 0; Track F move and log in ARCHIVE_LOG                                                             |
+| 9   | **Remote URL** (toodeceptive/against-the-odds) — verify intentional                                                          | Phase 0 + Track A | Document in inventory; verify with user if needed                                                                |
+| 10  | **Stale local branches** (ao-guru-exec, finalization/consolidate-20260129, wip/finalization-team-20260129) — merge or delete | Track A           | Include in branch strategy; decide and document                                                                  |
 
 **Branch snapshot (audit)**: main (local + origin); develop (absent); ao-guru-exec, cursor/main-project-setup-2bd1, finalization/consolidate-20260129, handoff-doc-permissions-20260129, wip/finalization-team-20260129 (local); shopify-theme (workflow-created by sync-theme-branch.yml). **Worktree snapshot**: Primary `C:\Users\LegiT\against-the-odds` (main); ewa, mhx, snq under `.cursor/worktrees/against-the-odds/` (see IF_HANDOFF primary path).
 
@@ -137,7 +137,7 @@ flowchart LR
 
 **Owner**: Expert 5 + head guru ([prompts/expert-05-documentation.md](prompts/expert-05-documentation.md), [prompts/head-guru-orchestrator.md](prompts/head-guru-orchestrator.md)).
 
-- **Prompts**: Index all [prompts/](prompts) (experts 01–10, finalization-*, head-guru, MASTER_10_EXPERT_SYSTEM, AO_GURU, PERFECT_EXECUTION, master/ULTIMATE_*, setup, testing, debugging, optimization, agent-capabilities, agent-context). Label current vs reference/deprecated; [docs/AGENT_PROMPT_DECISION_TREE.md](docs/AGENT_PROMPT_DECISION_TREE.md) and [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md) point to correct prompts.
+- **Prompts**: Index all [prompts/](prompts) (experts 01–10, finalization-_, head-guru, MASTER*10_EXPERT_SYSTEM, AO_GURU, PERFECT_EXECUTION, master/ULTIMATE*_, setup, testing, debugging, optimization, agent-capabilities, agent-context). Label current vs reference/deprecated; [docs/AGENT_PROMPT_DECISION_TREE.md](docs/AGENT_PROMPT_DECISION_TREE.md) and [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md) point to correct prompts.
 - **Cursor rules**: List [.cursor/rules/](.cursor/rules) (agent-permissions.mdc, ao-guru.rules.md, env-credentials.mdc, shopify-preview-approval.mdc, use-user-browser.mdc); verify no conflict with [AGENTS.md](AGENTS.md).
 - **Cursor context and workspace**: .cursor/context (github.md, shopify.md), tasks.json, settings.json, extensions.json — keep current and documented.
 - **Plans**: [.cursor/plans/README.md](.cursor/plans/README.md) is the single index; this plan is the only plan. Add last-updated and version note. Plan execution outputs go to docs/status with date (e.g. CODEBASE_AUDIT_YYYYMMDD.md).
@@ -187,7 +187,7 @@ flowchart LR
 **Owner**: Expert 8 + Expert 1 ([prompts/expert-08-frontend-ux.md](prompts/expert-08-frontend-ux.md), [prompts/expert-01-security-secrets.md](prompts/expert-01-security-secrets.md)).
 
 - **Root .png files** (issue #8): List in Phase 0; move each to [assets/](assets) (e.g. assets/brand/) or archive with ARCHIVE_LOG entry; remove from root.
-- **Screenshots**: Define location (e.g. docs/screenshots) and naming; .gitignore has docs/screenshots/*.png|jpg; ensure docs/screenshots exists and is documented.
+- **Screenshots**: Define location (e.g. docs/screenshots) and naming; .gitignore has docs/screenshots/\*.png|jpg; ensure docs/screenshots exists and is documented.
 - **Assets**: [assets/drop01/](assets/drop01) (artwork, exports, mockups, spec-pack) — label, READMEs current; asset index if needed.
 - **Security**: [docs/security/](docs/security), [scripts/maintenance/security-scan.ps1](scripts/maintenance/security-scan.ps1) — checklist and scans current; verify no secrets in repo, .env.local gitignored, credentials doc current.
 - **Extensions**: .cursor/extensions.json, .cursor/settings.json — list recommended extensions and purpose; document in docs or .cursor README.
@@ -202,7 +202,7 @@ flowchart LR
 
 - **Codebase layout**: [src/](src) — modules (shopify, browser-automation, desktop-automation); entry points and dependencies; language mix (JS).
 - **Libraries and parsers**: package.json, parsers, bins; document; versions and licenses consistent.
-- **Strings and i18n**: Hardcoded strings, env var naming (e.g. SHOPIFY_*); document in codebase audit.
+- **Strings and i18n**: Hardcoded strings, env var naming (e.g. SHOPIFY\_\*); document in codebase audit.
 - **Lint and format**: Run lint/format; fix or document exceptions; single-source configs.
 - **Tests**: [tests/](tests) — structure (e2e, integration, unit, shopify-admin, desktop-automation); align with coverage and CI; document in TEST_COVERAGE or docs.
 - **Schemas and data contracts**: List and document.
@@ -237,20 +237,20 @@ flowchart LR
 
 ## Key files to create or update
 
-| Item | Action |
-|------|--------|
-| Phase 0 inventory | docs/status (branches, worktrees, folders, .tmp/build/bin, env, handoff, root files, LICENSE state) |
-| docs/status/BRANCH_INVENTORY.md (or WORKTREE_INVENTORY.md) | List branches and worktrees; develop/worktrees resolution |
-| docs/status/CONSOLIDATION_LOG.md | Create; dated entries Phase 0 + each track + resolved issues |
-| archive/ARCHIVE_LOG.md (parent) | Version/date per archive batch; keep archive/2026-01-30/ARCHIVE_NOTE.md |
-| docs/status/INDEX_REPORTS.md | Version/update table and current vs legacy |
-| .cursor/plans/README.md | Single plan index; this plan only; last-updated |
-| .github/workflows/README.md | Workflow list, triggers, placeholders, environments, settings.optimization |
-| scripts/README.md | Scripts by domain and when to run; npm script map |
-| config index | config/README.md or docs |
-| docs/status/CODEBASE_AUDIT_*.md | From Track G |
-| README.md, docs/README.md, OPERATOR_RUNBOOK.md | Consolidate and update |
-| PLAN_AGENT_ENTRY, HANDOFF_PROMPT_NEW_AGENT, PLAN_HANDOFF, IF_HANDOFF | Update with indices and log locations; primary path |
+| Item                                                                 | Action                                                                                              |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Phase 0 inventory                                                    | docs/status (branches, worktrees, folders, .tmp/build/bin, env, handoff, root files, LICENSE state) |
+| docs/status/BRANCH_INVENTORY.md (or WORKTREE_INVENTORY.md)           | List branches and worktrees; develop/worktrees resolution                                           |
+| docs/status/CONSOLIDATION_LOG.md                                     | Create; dated entries Phase 0 + each track + resolved issues                                        |
+| archive/ARCHIVE_LOG.md (parent)                                      | Version/date per archive batch; keep archive/2026-01-30/ARCHIVE_NOTE.md                             |
+| docs/status/INDEX_REPORTS.md                                         | Version/update table and current vs legacy                                                          |
+| .cursor/plans/README.md                                              | Single plan index; this plan only; last-updated                                                     |
+| .github/workflows/README.md                                          | Workflow list, triggers, placeholders, environments, settings.optimization                          |
+| scripts/README.md                                                    | Scripts by domain and when to run; npm script map                                                   |
+| config index                                                         | config/README.md or docs                                                                            |
+| docs/status/CODEBASE*AUDIT*\*.md                                     | From Track G                                                                                        |
+| README.md, docs/README.md, OPERATOR_RUNBOOK.md                       | Consolidate and update                                                                              |
+| PLAN_AGENT_ENTRY, HANDOFF_PROMPT_NEW_AGENT, PLAN_HANDOFF, IF_HANDOFF | Update with indices and log locations; primary path                                                 |
 
 ---
 

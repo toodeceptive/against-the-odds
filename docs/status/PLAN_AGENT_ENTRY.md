@@ -17,10 +17,10 @@ You are entering the **Against The Odds (AO)** project. Before doing any other w
 
 The project mandates **Phase 0** (full cleanup and finalization) before any other execution phase. The authoritative source for this is:
 
-| Document                                                      | Role                                                                             |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **`prompts/PERFECT_EXECUTION_PROMPT.md`**                     | Defines Phase 0 scope, checklist, gate, and sign-off. **Read it and follow it.** |
-| **`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`**  | Single canonical plan (Phase 0 + Tracks A–G + Synthesis); see .cursor/plans/README.md. |
+| Document                                                      | Role                                                                                   |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **`prompts/PERFECT_EXECUTION_PROMPT.md`**                     | Defines Phase 0 scope, checklist, gate, and sign-off. **Read it and follow it.**       |
+| **`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`** | Single canonical plan (Phase 0 + Tracks A–G + Synthesis); see .cursor/plans/README.md. |
 
 ### Execution steps (in order)
 
@@ -61,9 +61,9 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 | Agent permission and browser use   | [AGENTS.md](../../AGENTS.md) (repo root)                  |
 | Phase 0 definition and checklist   | `prompts/PERFECT_EXECUTION_PROMPT.md`                     |
 | Phase 0 tracker and sign-off file  | `docs/status/PHASE_0_FINALIZATION.md`                     |
-| Canonical plan (Phase 0 + tracks)  | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`  |
-| Consolidation log (all tracks)     | `docs/status/CONSOLIDATION_LOG.md`                         |
-| Index of reports                   | `docs/status/INDEX_REPORTS.md`                             |
+| Canonical plan (Phase 0 + tracks)  | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` |
+| Consolidation log (all tracks)     | `docs/status/CONSOLIDATION_LOG.md`                        |
+| Index of reports                   | `docs/status/INDEX_REPORTS.md`                            |
 | New-agent handoff and prompt       | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                        |
 | After Phase 0: which prompt to run | `docs/AGENT_PROMPT_DECISION_TREE.md`                      |
 

@@ -6,11 +6,11 @@
 
 ## Layout
 
-| Directory | Purpose |
-|-----------|---------|
-| **data/products/** | Product JSON (e.g. example-hoodie.json). Source for repo → store sync. |
-| **data/manufacturers/** | Manufacturer profiles (e.g. example-manufacturer.json). |
-| **data/samples/** | Sample tracking data (e.g. .gitkeep; add sample records as needed). |
+| Directory               | Purpose                                                                |
+| ----------------------- | ---------------------------------------------------------------------- |
+| **data/products/**      | Product JSON (e.g. example-hoodie.json). Source for repo → store sync. |
+| **data/manufacturers/** | Manufacturer profiles (e.g. example-manufacturer.json).                |
+| **data/samples/**       | Sample tracking data (e.g. .gitkeep; add sample records as needed).    |
 
 ---
 

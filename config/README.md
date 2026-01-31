@@ -6,37 +6,37 @@
 
 ## Repository config (root)
 
-| File | Purpose |
-|------|---------|
-| `.editorconfig` | Editor defaults (indent, line endings) |
-| `.eslintrc.json` | ESLint rules; used by `npm run lint` and CI |
-| `.prettierrc.json` | Prettier formatting; used by `npm run format` and quality-check |
-| `vitest.config.js` | Vitest (unit/integration tests) |
-| `playwright.config.js` | Playwright E2E default config |
-| `playwright.shopify.config.js` | Playwright config for Shopify admin E2E |
+| File                           | Purpose                                                         |
+| ------------------------------ | --------------------------------------------------------------- |
+| `.editorconfig`                | Editor defaults (indent, line endings)                          |
+| `.eslintrc.json`               | ESLint rules; used by `npm run lint` and CI                     |
+| `.prettierrc.json`             | Prettier formatting; used by `npm run format` and quality-check |
+| `vitest.config.js`             | Vitest (unit/integration tests)                                 |
+| `playwright.config.js`         | Playwright E2E default config                                   |
+| `playwright.shopify.config.js` | Playwright config for Shopify admin E2E                         |
 
 ---
 
 ## config/ directory
 
-| Path | Purpose |
-|------|---------|
-| **config/git-hooks/pre-commit** | Git hook entry; invokes `scripts/git/pre-commit.ps1` (see [docs/HOOKS.md](../docs/HOOKS.md)) |
-| **config/shopify/.shopify-cli.yml** | Shopify CLI: store (aodrop.com), theme dev port, API version |
-| **config/github-auth.md** | GitHub auth and credential setup notes |
+| Path                                | Purpose                                                                                      |
+| ----------------------------------- | -------------------------------------------------------------------------------------------- |
+| **config/git-hooks/pre-commit**     | Git hook entry; invokes `scripts/git/pre-commit.ps1` (see [docs/HOOKS.md](../docs/HOOKS.md)) |
+| **config/shopify/.shopify-cli.yml** | Shopify CLI: store (aodrop.com), theme dev port, API version                                 |
+| **config/github-auth.md**           | GitHub auth and credential setup notes                                                       |
 
 ---
 
 ## Cursor and IDE
 
-| Path | Purpose |
-|------|---------|
-| `.cursor/rules/*.mdc` | Agent rules (permissions, env, preview-approval, browser) |
-| `.cursor/context/github.md`, `shopify.md` | Context for agents |
-| `.cursor/settings.json` | Cursor format-on-save, excludes, extensions subset |
-| `.cursor/extensions.json` | Recommended extensions |
-| `.cursor/tasks.json` | IDE tasks (e.g. open pending approval, theme dev) |
-| `.cursor/plans/README.md` | Plan index; single plan: FINAL_REPO_ORGANIZATION_AND_AUDIT |
+| Path                                      | Purpose                                                    |
+| ----------------------------------------- | ---------------------------------------------------------- |
+| `.cursor/rules/*.mdc`                     | Agent rules (permissions, env, preview-approval, browser)  |
+| `.cursor/context/github.md`, `shopify.md` | Context for agents                                         |
+| `.cursor/settings.json`                   | Cursor format-on-save, excludes, extensions subset         |
+| `.cursor/extensions.json`                 | Recommended extensions                                     |
+| `.cursor/tasks.json`                      | IDE tasks (e.g. open pending approval, theme dev)          |
+| `.cursor/plans/README.md`                 | Plan index; single plan: FINAL_REPO_ORGANIZATION_AND_AUDIT |
 
 ---
 

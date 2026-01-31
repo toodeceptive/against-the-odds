@@ -94,11 +94,11 @@
 
 ### 4.2 Plans
 
-| Plan                                                      | Purpose                                                           | Status                                                |
-| --------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------- |
+| Plan                                                       | Purpose                                                           | Status                                                                      |
+| ---------------------------------------------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `perfect_execution_prompt_aca26457.plan.md` (consolidated) | Phase 0 mandatory; PERFECT_EXECUTION_PROMPT                       | See .cursor/plans/README.md; single plan: FINAL_REPO_ORGANIZATION_AND_AUDIT |
-| `cursor-github-shopify-pipeline.plan.md`                  | Cursor→GitHub→Shopify; theme branch; preview/approval; deploy log | Implemented; AGENT_WORKFLOW_CURSOR_SHOPIFY.md + rules |
-| `expert_team_security_and_platform_plan_fbf7f611.plan.md` | Security/platform (e.g. browser-first, no headless Shopify Admin) | Referenced in AGENT_WORKFLOW                          |
+| `cursor-github-shopify-pipeline.plan.md`                   | Cursor→GitHub→Shopify; theme branch; preview/approval; deploy log | Implemented; AGENT_WORKFLOW_CURSOR_SHOPIFY.md + rules                       |
+| `expert_team_security_and_platform_plan_fbf7f611.plan.md`  | Security/platform (e.g. browser-first, no headless Shopify Admin) | Referenced in AGENT_WORKFLOW                                                |
 
 ### 4.3 Tasks (tasks.json)
 
