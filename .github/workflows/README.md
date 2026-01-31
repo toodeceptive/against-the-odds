@@ -20,9 +20,9 @@ These workflows require the following secrets to be configured in GitHub:
 
 ## Workflow Files
 
-### CI vs quality-check (both run on push/PR to main and develop)
+### CI vs quality-check (both run on push/PR to main only)
 
-- **`ci.yml`**: **Fast gate** — lint, test, build, Trivy (security scan), secret-scan, Lighthouse. Runs on every push/PR to `main` and `develop`.
+- **`ci.yml`**: **Fast gate** — lint, test, build, Trivy (security scan), secret-scan, Lighthouse. Runs on every push/PR to `main`.
 - **`quality-check.yml`**: **Deeper check** — code coverage, lint, format check, npm audit, Lighthouse. Same triggers. Overlap with CI: both run lint and Lighthouse; use both if you want a quick gate (CI) plus coverage/format (quality-check), or consider merging into one workflow later.
 
 ### `ci.yml`
@@ -53,7 +53,7 @@ These workflows require the following secrets to be configured in GitHub:
 ### `sync.yml`
 
 - Runs on: Schedule (every 6 h), Manual trigger
-- Actions: Repository sync (fetch, checkout main/develop, conflict check)
+- Actions: Repository sync (fetch, checkout main; no develop branch)
 
 ### `maintenance.yml`
 

@@ -20,7 +20,7 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 | Document                                                      | Role                                                                             |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | **`prompts/PERFECT_EXECUTION_PROMPT.md`**                     | Defines Phase 0 scope, checklist, gate, and sign-off. **Read it and follow it.** |
-| **`.cursor/plans/perfect_execution_prompt_aca26457.plan.md`** | Source plan that defines requirements for the prompt.                            |
+| **`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`**  | Single canonical plan (Phase 0 + Tracks A–G + Synthesis); see .cursor/plans/README.md. |
 
 ### Execution steps (in order)
 
@@ -45,9 +45,12 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 
 ## 3. Related Context (Optional but Recommended)
 
+- **Agent permission and when agents use your browser**: [AGENTS.md](../../AGENTS.md) (repo root) — full permission; safety rules; when to use Cursor browser MCP.
 - **Handoff for new agent** (context, permissions, exact prompt): `docs/HANDOFF_PROMPT_NEW_AGENT.md`
 - **System finalization report** (inventory, blockers): `docs/status/system_finalization_report_20260129.md`
 - **Operator runbook** (daily checks, Shopify, credentials): `OPERATOR_RUNBOOK.md`
+- **Consolidation log** (Phase 0 + all tracks, resolved issues): `docs/status/CONSOLIDATION_LOG.md`
+- **Index of reports and status files**: `docs/status/INDEX_REPORTS.md`
 
 ---
 
@@ -55,9 +58,12 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 
 | Need                               | Where                                                     |
 | ---------------------------------- | --------------------------------------------------------- |
+| Agent permission and browser use   | [AGENTS.md](../../AGENTS.md) (repo root)                  |
 | Phase 0 definition and checklist   | `prompts/PERFECT_EXECUTION_PROMPT.md`                     |
 | Phase 0 tracker and sign-off file  | `docs/status/PHASE_0_FINALIZATION.md`                     |
-| Source plan (requirements)         | `.cursor/plans/perfect_execution_prompt_aca26457.plan.md` |
+| Canonical plan (Phase 0 + tracks)  | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`  |
+| Consolidation log (all tracks)     | `docs/status/CONSOLIDATION_LOG.md`                         |
+| Index of reports                   | `docs/status/INDEX_REPORTS.md`                             |
 | New-agent handoff and prompt       | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                        |
 | After Phase 0: which prompt to run | `docs/AGENT_PROMPT_DECISION_TREE.md`                      |
 

@@ -2,6 +2,8 @@
 
 Official Against The Odds brand website and Shopify store. Complete development infrastructure with automated workflows, Shopify integration, and comprehensive project management.
 
+**Agent permission:** Agents have permission to perform all actions in this repo; see [AGENTS.md](AGENTS.md) or `.cursor/rules`. Safety rules (preview-before-apply for store changes, no secrets in commits) still apply.
+
 ## 🚀 Quick Start
 
 ```powershell
@@ -46,11 +48,12 @@ shopify auth login
 against-the-odds/
 ├── .github/workflows/     # CI/CD automation
 ├── config/               # Configuration files
-├── data/                 # Product and manufacturer data
-├── docs/                 # Documentation
-├── scripts/              # Automation scripts
-├── src/shopify/          # Shopify themes and apps
-└── tests/                # Test suites
+├── data/products/        # Product JSON (source for sync)
+├── docs/                 # Documentation (index: docs/README.md)
+├── scripts/shopify/      # Theme dev, sync-products, test-connection
+├── scripts/products/     # sync (wrapper), export
+├── src/shopify/themes/   # Theme source (aodrop-theme)
+└── tests/                # Unit, integration, e2e
 ```
 
 ## 🛠️ Development
@@ -68,10 +71,12 @@ against-the-odds/
 **Product Management**:
 
 ```powershell
-# Sync products to Shopify
-.\scripts\products\sync.ps1 -Direction import
+# Product sync (repo → store): preview then apply
+.\scripts\shopify\sync-products.ps1 -DryRun   # preview
+.\scripts\shopify\sync-products.ps1           # apply (after approval)
 
-# Export products from Shopify
+# Bidirectional: import from store or export to repo
+.\scripts\products\sync.ps1 -Direction import
 .\scripts\products\export.ps1
 ```
 
@@ -104,12 +109,14 @@ against-the-odds/
 
 ## 📚 Documentation
 
-- [Setup Guide](docs/SETUP_GITHUB.md) - GitHub and development setup
-- [Shopify Integration](docs/SHOPIFY_SETUP.md) - Complete Shopify setup guide
-- [Project Management](docs/PROJECT_MANAGEMENT.md) - Task and issue management
-- [Manufacturing Workflow](docs/MANUFACTURING.md) - Sample tracking and production
-- [Monitoring](docs/MONITORING.md) - Performance and health monitoring
-- [Quick Start Guide](docs/guides/quick-start.md) - Getting started quickly
+- [Docs index](docs/README.md) — single entry for all docs
+- [Consolidation log](docs/status/CONSOLIDATION_LOG.md) — Phase 0 + tracks + resolved issues
+- [Index of reports](docs/status/INDEX_REPORTS.md) — status files and quick reference
+- [Store workflow (preview → approve → apply)](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md) — theme and product changes
+- [Setup Guide](docs/SETUP_GITHUB.md) — GitHub and development setup
+- [Shopify Integration](docs/SHOPIFY_SETUP.md) — Complete Shopify setup guide
+- [Quick Start Guide](docs/guides/quick-start.md) — Getting started quickly
+- [Shopify + Cursor guide](docs/guides/SHOPIFY_CURSOR_USAGE_GUIDE.md) — User guide for prompts and preview
 
 ## 🔐 Environment Variables
 

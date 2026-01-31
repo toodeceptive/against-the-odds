@@ -69,7 +69,19 @@ function Get-EnvVar {
 }
 
 function Set-RepoLocation {
-    param([string]$RepoPath = "C:\Users\LegiT\against-the-odds")
+    param([string]$RepoPath = $null)
+    
+    if ([string]::IsNullOrWhiteSpace($RepoPath)) {
+        # Derive repo root from this script's location (scripts/shared -> repo root)
+        $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+        if ($scriptDir) {
+            $parent = Join-Path $scriptDir ".."
+            $grandParent = Join-Path $parent ".."
+            $RepoPath = (Resolve-Path $grandParent).Path
+        } else {
+            $RepoPath = (Get-Location).Path
+        }
+    }
     
     if (Test-Path $RepoPath) {
         Set-Location $RepoPath

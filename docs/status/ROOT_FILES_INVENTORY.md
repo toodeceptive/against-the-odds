@@ -1,0 +1,78 @@
+# Root Files Inventory
+
+**Purpose**: Explicit list of every root-level file and directory; used by Phase 0 and Track F. **Last updated: 2026-01-31.**
+
+---
+
+## Root-level files (current)
+
+### System / IDE
+| File | Purpose |
+|------|----------|
+| `.editorconfig` | Editor defaults |
+| `.eslintrc.json` | ESLint config |
+| `.prettierrc.json` | Prettier config |
+| `.gitignore` | Git ignore patterns (includes .env.local, node_modules, docs/screenshots/*.png\|jpg) |
+
+### Cursor workspace
+| File / dir | Purpose |
+|------------|---------|
+| `.cursor/` | Rules, context, plans, tasks, settings, extensions, worktrees |
+
+### Config and env (templates only at root)
+| File | Purpose |
+|------|----------|
+| `.env.example` | Env template (no secrets) |
+| `.env.shopify.example` | Shopify env template (excluded from CI secret-scan) |
+| `.env.local` | **Local secrets only; gitignored; never commit** |
+
+### Scripts and config at root
+| File | Purpose |
+|------|----------|
+| `package.json` | npm scripts, dependencies |
+| `vitest.config.js` | Vitest |
+| `playwright.config.js` | Playwright default |
+| `playwright.shopify.config.js` | Playwright Shopify E2E |
+| `replacements.txt` | Regex for git-filter-repo (secret replacement in history); see OPERATOR_RUNBOOK |
+
+### Docs and project
+| File | Purpose |
+|------|----------|
+| `README.md` | Project overview; links to OPERATOR_RUNBOOK, docs, AGENTS.md |
+| `CHANGELOG.md` | Version history |
+| `NEXT_STEPS.md` | Immediate next steps |
+| `OPERATOR_RUNBOOK.md` | Daily checks, Shopify, credentials |
+| `AGENTS.md` | Agent permission and browser use |
+| `index.html` | Root HTML (e.g. static site entry) |
+| `styles.css` | Root CSS |
+
+### GitHub
+| Dir | Purpose |
+|----|----------|
+| `.github/` | Workflows, ISSUE_TEMPLATE, PULL_REQUEST_TEMPLATE, settings.optimization.md |
+
+### Directories (root)
+| Dir | Purpose |
+|-----|---------|
+| `archive/` | Archived batches (e.g. 2026-01-30); ARCHIVE_LOG at archive/ARCHIVE_LOG.md |
+| `assets/` | drop01 (artwork, exports, mockups, spec-pack); **brand/** (root .png moved here 2026-01-31) |
+| `config/` | git-hooks, shopify/.shopify-cli.yml, github-auth.md |
+| `data/` | products, manufacturers, samples (source for sync) |
+| `docs/` | Documentation; index docs/README.md |
+| `prompts/` | Expert and finalization prompts |
+| `scripts/` | PowerShell scripts; index scripts/README.md |
+| `src/` | shopify/themes, browser-automation, desktop-automation |
+| `tests/` | Unit, integration, e2e, shopify-admin, desktop-automation |
+
+---
+
+## Resolved (Track F)
+
+- **Root .png files (issue #8)**: Seven PNGs (logo/design) were at root. **Moved to `assets/brand/`** 2026-01-31; see [assets/brand/README.md](../../assets/brand/README.md) and CONSOLIDATION_LOG Track F. Root is clear of loose image files.
+
+---
+
+## To be addressed (if any)
+
+- **LICENSE**: No LICENSE file; package.json has `"license": "UNLICENSED"`. Documented in OPERATOR_RUNBOOK and plan; add LICENSE file or keep UNLICENSED per project decision.
+- **replacements.txt**: Kept at root; documented in OPERATOR_RUNBOOK; optional relocate to config/ in future.

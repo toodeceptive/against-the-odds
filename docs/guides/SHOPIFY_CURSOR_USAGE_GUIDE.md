@@ -202,4 +202,4 @@ flowchart TB
 
 ---
 
-_Reference: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [.cursor/plans/cursor-github-shopify-pipeline.plan.md](../../.cursor/plans/cursor-github-shopify-pipeline.plan.md). Last updated: 2026-01-30._
+_Reference: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [.cursor/plans/README.md](../../.cursor/plans/README.md). Last updated: 2026-01-31._

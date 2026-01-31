@@ -1,0 +1,10 @@
+---
+description: User grants agents full permission to act; system is fully functional; no operations inhibited. Safety rules (preview-before-apply, no secrets in commits) still apply.
+alwaysApply: true
+---
+
+# Agent permission
+
+The user grants agents **full permission** to perform all actions in this repository and worktree. The system is fully functional; no operations are inhibited. Agents may run scripts, edit files, commit, push, and execute workflows as needed to complete tasks.
+
+**Existing rules still apply:** Preview-before-apply for store-affecting changes ([shopify-preview-approval.mdc](shopify-preview-approval.mdc)); no secrets in commits ([env-credentials.mdc](env-credentials.mdc)). See [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md) and [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../../docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md) for workflows.

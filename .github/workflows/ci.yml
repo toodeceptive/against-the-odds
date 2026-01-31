@@ -1,10 +1,13 @@
 name: CI
+# Branch: main only; no develop branch in repo.
+# If dev workflow needed, feature branches open PR against main (branch protection required).
+# Develop references removed per final plan resolution.
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 permissions:
   contents: read

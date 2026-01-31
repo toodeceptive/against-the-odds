@@ -77,7 +77,7 @@ CONTEXT — Read these first (in this order):
 7. docs/launch/00_launch_checklist.md — launch checklist (next-phase work)
 8. .cursor/context/shopify.md and .cursor/context/github.md — if present, for store/repo context
 
-**Plan-only runs (Security & Platform / next team):** Read docs/status/PLAN_AGENT_ENTRY.md first if present — single entry for plan chats, Expert Team binding rules, and comprehensive-pass questions. Then read docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md, .cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md, docs/status/CONVERSATION_AUDIT.md (from this worktree or primary if missing).
+**Plan-only runs (Security & Platform / next team):** Read docs/status/PLAN_AGENT_ENTRY.md first if present — single entry for plan chats and comprehensive-pass questions. Then read docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md, .cursor/plans/README.md (pipeline and security are reference-implemented in docs and rules), docs/status/CONVERSATION_AUDIT.md (from this worktree or primary if missing).
 **Cross-worktree:** If you are in a worktree (e.g. uqy, snq, mhx) where those three files are missing, read them from **primary**: C:\Users\LegiT\against-the-odds (main). Fold Expert Team requirements into your plan. See docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md if present.
 
 CURRENT STATE:

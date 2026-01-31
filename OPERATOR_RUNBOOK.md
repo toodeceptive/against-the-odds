@@ -1,5 +1,7 @@
 # AO Operator Runbook
 
+**Agent permission:** You have permission to perform all actions in this repo; see [AGENTS.md](AGENTS.md) or `.cursor/rules`. Existing safety rules (preview-before-apply for store changes, no secrets in commits) still apply.
+
 **Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
 
 ## Daily Checks
@@ -53,6 +55,7 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 - Store in `.env.local` (never commit)
 - If missing, copy from `.env.example` and fill values
+- **replacements.txt** at repo root: regex for git-filter-repo (Shopify secret replacement in history); do not remove if using history sanitization.
 
 ## Troubleshooting
 

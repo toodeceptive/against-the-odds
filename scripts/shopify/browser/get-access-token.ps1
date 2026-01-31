@@ -108,10 +108,10 @@ try {
                 Write-Host "[OK] Saved to .env.local" -ForegroundColor Green
             } else {
                 Write-Host "[WARN] .env.local not found. Token not saved." -ForegroundColor Yellow
-                Write-Host "Token: $token" -ForegroundColor Cyan
+                Write-Host "Token obtained but not saved. Run with -SaveToEnv and ensure .env.local exists, or paste the token from Shopify Admin into .env.local." -ForegroundColor Cyan
             }
         } else {
-            Write-Host "Token: $token" -ForegroundColor Cyan
+            Write-Host "Token obtained (not saved). Run with -SaveToEnv to write to .env.local, or paste from Shopify Admin > Apps > Development > API credentials." -ForegroundColor Cyan
         }
     } else {
         Write-Host ""

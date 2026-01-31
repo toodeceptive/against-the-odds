@@ -1,5 +1,13 @@
 # Against The Odds — Security Checklist
 
+## Last verified (2026-01-31)
+
+- **CI**: Secret-scan (shpat*, ghp*, shpss*) and Trivy (CRITICAL,HIGH → SARIF) run in [.github/workflows/ci.yml](../../.github/workflows/ci.yml). Example env files `.env.example` and `.env.shopify.example` excluded from secret-scan.
+- **Token echo**: Full token no longer echoed in [scripts/shopify/browser/get-access-token.ps1](../../scripts/shopify/browser/get-access-token.ps1); only truncated or instructions shown.
+- **npm audit**: 6 moderate (esbuild via vitest, eslint); 0 high, 0 critical. CI uses `--audit-level=high` so PRs are not blocked by moderate; deferred fixes documented in [docs/status/SECURITY_AUDIT_20260130.md](../status/SECURITY_AUDIT_20260130.md).
+
+---
+
 ## Secrets hygiene
 
 - [ ] Confirm `.env.local` is gitignored and **never** committed (validate `.gitignore` includes it).

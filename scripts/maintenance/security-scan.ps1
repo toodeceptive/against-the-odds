@@ -5,7 +5,14 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+# Repo root: script is scripts/maintenance/security-scan.ps1 -> repo = parent of parent of PSScriptRoot
+$repoPath = if ($PSScriptRoot) {
+    $parent = Join-Path $PSScriptRoot ".."
+    $grandParent = Join-Path $parent ".."
+    (Resolve-Path $grandParent).Path
+} else {
+    (Get-Location).Path
+}
 Set-Location $repoPath
 
 Write-Host "=== Security Scan ===" -ForegroundColor Cyan
