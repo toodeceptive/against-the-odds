@@ -58,7 +58,7 @@ Use these for current phase, finalization, audits, and handoff.
 | `EXPECTATIONS_CHECKLIST.md`                                            | Phase 6 needs/expectations and workflow/runbook/handoff verification                                                             |
 | `MASTER_SYNTHESIS_REPORT_20260130.md`                                  | Phase 7 Head Guru synthesis (Phases 1–6)                                                                                         |
 | `PROJECT_PERFECTED_20260130.md`                                        | Project perfected sign-off (Full Project Guru Perfection Plan)                                                                   |
-| **Plan: Full repo organization & audit**                                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — Phase 0 + Tracks A–G + Synthesis; see .cursor/plans/README.md.      |
+| **Plan: Full project update & perfection**                             | `.cursor/plans/full_project_update_perfection_guru.plan.md` — audit, new system, cleanup, update all.                            |
 | `PROJECT_AUDIT_20260130.md`, `AUDIT_*_20260130.md` (A1–A6)             | Phase A audit (code, docs, Cursor, workflows, scripts, prompts)                                                                  |
 | `UPDATE_CHECKLIST_20260130.md`, `CLEANUP_LOG_20260130.md`              | Phase B update checklist; Phase C cleanup log                                                                                    |
 | `PROJECT_UPDATE_PERFECTION_20260130.md`                                | Project update & perfection sign-off (Full plan executed)                                                                        |

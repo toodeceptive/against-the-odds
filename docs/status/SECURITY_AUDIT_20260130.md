@@ -12,7 +12,7 @@
 - **CI secret-scan**: [.github/workflows/ci.yml](.github/workflows/ci.yml) runs secret-scan (shpat*, ghp*, shpss\_) on tracked files; .env.example and .env.shopify.example excluded.
 - **Secrets in repo**: Grep for token/secret/api_key patterns found only doc and config references (env var names, setup instructions); no hardcoded credentials in tracked code.
 - **GitHub Actions**: Workflows use `contents: read` or least privilege; Shopify secrets only in shopify-sync and deploy (env vars, not CLI args).
-- **Shopify ToS**: No headless admin automation; API + user's browser only (see [.cursor/rules/use-user-browser.mdc](../../.cursor/rules/use-user-browser.mdc) and [docs/security/00_security_checklist.md](../security/00_security_checklist.md)).
+- **Shopify ToS**: No headless admin automation; API + user's browser only (see [.cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md](.cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md)).
 
 ---
 

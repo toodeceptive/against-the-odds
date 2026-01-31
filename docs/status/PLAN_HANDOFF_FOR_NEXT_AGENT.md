@@ -1,6 +1,6 @@
 # Handoff for next plan (new agent chat)
 
-**Date:** 2026-01-30  
+**Date:** 2026-01-30
 **Purpose:** Give the next plan agent (new Cursor chat using the "plan" feature) everything needed to create a **new** plan without redundancy, from fresh perspectives, considering all work done so far and future optimizations.
 
 **Plan runs:** For any plan chat (Security & Platform, Fresh Team, or next team), read [PLAN_AGENT_ENTRY.md](PLAN_AGENT_ENTRY.md) first if present — single entry, Expert Team binding rules, and comprehensive-pass questions.
@@ -9,7 +9,7 @@
 
 ## 1. What was done (do not redo)
 
-- **Security & platform (reference-implemented):** Pipeline and browser-first/no-headless are implemented in docs and rules. See `.cursor/plans/README.md`, [.cursor/rules/use-user-browser.mdc](../../.cursor/rules/use-user-browser.mdc), [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md). Originally from Expert Team Security and Platform Plan (consolidated 2026-01-31). Implemented:
+- **Expert Team Security and Platform Plan** (`.cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md`) — created and fully implemented:
   - **Shopify:** No unattended headless automation of Shopify Admin (ToS). Theme via Cursor → GitHub → Shopify GitHub App; products via dry-run → approve in chat → sync (Admin API) or user's browser (Cursor browser MCP) with approval before save.
   - **Local-only:** Only `.env.local` at repo root is required on PC; nothing else from the repo must be stored elsewhere.
   - **Cursor data boundary:** Secrets only in `.env.local`; never in chat or logs; non-secret repo content may be sent to Cursor for AI. Documented in `docs/security/CURSOR_DATA_BOUNDARY.md`.
@@ -23,13 +23,13 @@
 
 | Topic                         | Location                                                                                                                         |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Canonical plan and index      | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`, `.cursor/plans/README.md`                                             |
+| Expert Team plan (full)       | `.cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md`                                                          |
 | Conversation and build record | `docs/status/CONVERSATION_AUDIT.md`                                                                                              |
-| Security and compliance       | `docs/status/SECURITY_COMPLIANCE_REPORT.md`, `.cursor/rules/use-user-browser.mdc`, `docs/security/00_security_checklist.md`     |
+| Security and compliance       | `docs/status/SECURITY_COMPLIANCE_REPORT.md`                                                                                      |
 | Cursor data boundary          | `docs/security/CURSOR_DATA_BOUNDARY.md`                                                                                          |
 | Pending approval flow         | `docs/status/pending-approval.md`, `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`, `.cursor/rules/shopify-preview-approval.mdc`         |
 | Local PC / env                | `docs/status/LOCAL_PC_SPECS.md`, `docs/CREDENTIALS_SETUP.md`                                                                     |
-| Consolidation log             | `docs/status/CONSOLIDATION_LOG.md`                                                                                                |
+| Other plans (reference)       | `.cursor/plans/` (cursor-github-shopify-pipeline, perfect_execution_prompt, etc.)                                                |
 | Root-level status docs        | Many (AUDIT_REPORT, BUG_FIXES, COMPLETION_REPORT, etc.) — legacy; canonical status lives in `docs/status/` and `.cursor/plans/`. |
 
 ---

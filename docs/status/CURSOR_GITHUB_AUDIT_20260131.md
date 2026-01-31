@@ -4,8 +4,6 @@
 
 **Is it ready?** Yes—when all Section 6 (final checklist) and Section 7 (guru expert perfection criteria) items are met and Section 8 (100-question guru audit) has been reviewed. All criteria are currently met; plan is finalized.
 
-**Note (2026-01-31):** Plans were consolidated; single canonical plan is `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`. Table in 1.1 is a snapshot as of audit; pipeline and security are reference-implemented in docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md and .cursor/rules.
-
 **Purpose:** In-depth audit of this conversation, all plan versions, Cursor vs GitHub (settings, repo, connections, apps, codebase, extensions, md files, folders), browser–agent system, and pipeline; cross-comparative analysis; perfected prompt; execution and plan finalization.
 
 ---
@@ -145,129 +143,129 @@ The plan is **perfect** when all of the following hold. Use this checklist for f
 
 Answers verified by reading the repo. Use this section to confirm the plan is perfect and finalized in all aspects.
 
-**1. Plan coherence and history (Q1–Q10)**  
-Q1: Is there a single plan history? **Yes.** PLAN_AUDIT_20260131 + this file.  
-Q2: Are all plan versions listed with status? **Yes.** Section 1.1 table.  
-Q3: Is execution order explicit? **Yes.** Section 5 and PLAN_AUDIT Section 3.  
-Q4: Is “perfect plan” defined? **Yes.** Section 7.  
-Q5: Is redundancy avoided? **Yes.** Cross-comparative analysis Section 1.2.  
-Q6: Is entry point unique? **Yes.** PLAN_AGENT_ENTRY → Phase 0 → decision tree.  
-Q7: Do PLAN_AUDIT and this file cross-reference? **Yes.** Section 4 Execution; PLAN_AUDIT Section 4.  
-Q8: Are current vs reference plans clear? **Yes.** .cursor/plans/README.md.  
-Q9: Is CHANGELOG updated for plan passes? **Yes.** 2026-01-31 entries.  
+**1. Plan coherence and history (Q1–Q10)**
+Q1: Is there a single plan history? **Yes.** PLAN_AUDIT_20260131 + this file.
+Q2: Are all plan versions listed with status? **Yes.** Section 1.1 table.
+Q3: Is execution order explicit? **Yes.** Section 5 and PLAN_AUDIT Section 3.
+Q4: Is “perfect plan” defined? **Yes.** Section 7.
+Q5: Is redundancy avoided? **Yes.** Cross-comparative analysis Section 1.2.
+Q6: Is entry point unique? **Yes.** PLAN_AGENT_ENTRY → Phase 0 → decision tree.
+Q7: Do PLAN_AUDIT and this file cross-reference? **Yes.** Section 4 Execution; PLAN_AUDIT Section 4.
+Q8: Are current vs reference plans clear? **Yes.** .cursor/plans/README.md.
+Q9: Is CHANGELOG updated for plan passes? **Yes.** 2026-01-31 entries.
 Q10: Is INDEX_REPORTS updated? **Yes.** CURSOR_GITHUB_AUDIT, PLAN_AUDIT in table and quick reference.
 
-**2. Cursor settings, rules, tasks, context (Q11–Q20)**  
-Q11: Do rules align with preview-before-apply and no secrets? **Yes.** agent-permissions, shopify-preview-approval, env-credentials.  
-Q12: Is use-user-browser rule present? **Yes.** .cursor/rules/use-user-browser.mdc.  
-Q13: Are tasks run from repo root? **Yes.** tasks.json uses Get-Location; runbook states “from repo root.”  
-Q14: Do context files match workflows? **Yes.** github.md, shopify.md vs .github/workflows/README.  
-Q15: Are Open pending approval and Start theme preview tasks defined? **Yes.** tasks.json.  
-Q16: Is settings.json excluding secrets and build artifacts? **Yes.** .env.local, dist, build excluded.  
-Q17: Are extensions documented? **Yes.** settings.json + extensions.json; audit Section 2.1.  
-Q18: Is plans README current? **Yes.** Lists Cursor + GitHub audit as Reference.  
-Q19: Are there conflicting Cursor rules? **No.** All five rules align.  
+**2. Cursor settings, rules, tasks, context (Q11–Q20)**
+Q11: Do rules align with preview-before-apply and no secrets? **Yes.** agent-permissions, shopify-preview-approval, env-credentials.
+Q12: Is use-user-browser rule present? **Yes.** .cursor/rules/use-user-browser.mdc.
+Q13: Are tasks run from repo root? **Yes.** tasks.json uses Get-Location; runbook states “from repo root.”
+Q14: Do context files match workflows? **Yes.** github.md, shopify.md vs .github/workflows/README.
+Q15: Are Open pending approval and Start theme preview tasks defined? **Yes.** tasks.json.
+Q16: Is settings.json excluding secrets and build artifacts? **Yes.** .env.local, dist, build excluded.
+Q17: Are extensions documented? **Yes.** settings.json + extensions.json; audit Section 2.1.
+Q18: Is plans README current? **Yes.** Lists Cursor + GitHub audit as Reference.
+Q19: Are there conflicting Cursor rules? **No.** All five rules align.
 Q20: Is agent-permissions.mdc present? **Yes.** .cursor/rules/agent-permissions.mdc.
 
-**3. GitHub workflows, settings, secrets (Q21–Q30)**  
-Q21: Are required secrets documented? **Yes.** .github/workflows/README.md, settings.optimization.md.  
-Q22: Do workflows match context? **Yes.** ci, quality-check, deploy, shopify-sync, sync-theme-branch, sync, maintenance.  
-Q23: Is branch protection documented? **Yes.** settings.optimization.md.  
-Q24: Is CI blocking only on high/critical? **Yes.** quality-check uses audit-level=high; security checklist.  
-Q25: Are ISSUE_TEMPLATE and PR template present? **Yes.** .github/ISSUE_TEMPLATE/, PULL_REQUEST_TEMPLATE.md.  
-Q26: Is there a single source for “required secrets”? **Yes.** .github/workflows/README.md.  
-Q27: Do workflows reference correct paths? **Yes.** Repo-relative.  
-Q28: Is deploy.yml placeholder documented? **Yes.** workflows/README.  
-Q29: Is shopify-sync trigger clear? **Yes.** Daily, push to main (data/products, src/shopify), manual.  
+**3. GitHub workflows, settings, secrets (Q21–Q30)**
+Q21: Are required secrets documented? **Yes.** .github/workflows/README.md, settings.optimization.md.
+Q22: Do workflows match context? **Yes.** ci, quality-check, deploy, shopify-sync, sync-theme-branch, sync, maintenance.
+Q23: Is branch protection documented? **Yes.** settings.optimization.md.
+Q24: Is CI blocking only on high/critical? **Yes.** quality-check uses audit-level=high; security checklist.
+Q25: Are ISSUE_TEMPLATE and PR template present? **Yes.** .github/ISSUE_TEMPLATE/, PULL_REQUEST_TEMPLATE.md.
+Q26: Is there a single source for “required secrets”? **Yes.** .github/workflows/README.md.
+Q27: Do workflows reference correct paths? **Yes.** Repo-relative.
+Q28: Is deploy.yml placeholder documented? **Yes.** workflows/README.
+Q29: Is shopify-sync trigger clear? **Yes.** Daily, push to main (data/products, src/shopify), manual.
 Q30: Is sync-theme-branch trigger clear? **Yes.** Push to main when theme path changes.
 
-**4. Browser–agent system (Q31–Q40)**  
-Q31: Does AGENTS.md state when agents use the browser? **Yes.** “When agents use your browser” section.  
-Q32: Are BROWSER_CREDENTIAL_FLOW and AGENT_WORKFLOW (browser path) linked? **Yes.** AGENTS.md.  
-Q33: Is approval before destructive/store-affecting saves stated? **Yes.** AGENTS.md, workflow doc.  
-Q34: Is “user watches” explicit? **Yes.** AGENTS.md, use-user-browser.mdc.  
-Q35: Is no headless stated? **Yes.** Expert team plan, AGENT_WORKFLOW, SECURITY_COMPLIANCE_REPORT.  
-Q36: Is credential setup (navigate, you log in, agent writes .env.local) documented? **Yes.** BROWSER_CREDENTIAL_FLOW.  
-Q37: Is one-off product-with-uploads (browser path) documented? **Yes.** AGENT_WORKFLOW “Browser path.”  
-Q38: Does the runbook mention “user’s browser (no headless)”? **Yes.** OPERATOR_RUNBOOK agent context.  
-Q39: Are browser scripts listed? **Yes.** scripts/shopify/browser/; audit Section 4.1.  
+**4. Browser–agent system (Q31–Q40)**
+Q31: Does AGENTS.md state when agents use the browser? **Yes.** “When agents use your browser” section.
+Q32: Are BROWSER_CREDENTIAL_FLOW and AGENT_WORKFLOW (browser path) linked? **Yes.** AGENTS.md.
+Q33: Is approval before destructive/store-affecting saves stated? **Yes.** AGENTS.md, workflow doc.
+Q34: Is “user watches” explicit? **Yes.** AGENTS.md, use-user-browser.mdc.
+Q35: Is no headless stated? **Yes.** Expert team plan, AGENT_WORKFLOW, SECURITY_COMPLIANCE_REPORT.
+Q36: Is credential setup (navigate, you log in, agent writes .env.local) documented? **Yes.** BROWSER_CREDENTIAL_FLOW.
+Q37: Is one-off product-with-uploads (browser path) documented? **Yes.** AGENT_WORKFLOW “Browser path.”
+Q38: Does the runbook mention “user’s browser (no headless)”? **Yes.** OPERATOR_RUNBOOK agent context.
+Q39: Are browser scripts listed? **Yes.** scripts/shopify/browser/; audit Section 4.1.
 Q40: Is Cursor browser MCP named? **Yes.** AGENTS.md, use-user-browser.mdc.
 
-**5. Docs and guides (user vs agent) (Q41–Q50)**  
-Q41: Is docs/README the single docs index? **Yes.** Canonical; links to workflow, setup, security, agent/handoff.  
-Q42: Does docs/README list AGENTS.md? **Yes.** Agent and handoff table, first row.  
-Q43: Is workflow canonical single? **Yes.** AGENT_WORKFLOW_CURSOR_SHOPIFY.md.  
-Q44: Is “user: what to run/say” covered? **Yes.** SHOPIFY_CURSOR_USAGE_GUIDE, quick-start, README.  
-Q45: Is “agent: what to run and in what order” covered? **Yes.** AGENT_WORKFLOW, OPERATOR_RUNBOOK, AGENTS.md.  
-Q46: Is KEYBINDING_PENDING_APPROVAL referenced? **Yes.** Runbook, SHOPIFY_CURSOR_USAGE_GUIDE; INDEX_REPORTS.  
-Q47: Are setup and credentials docs listed? **Yes.** docs/README (SETUP_GITHUB, SHOPIFY_SETUP, CREDENTIALS_SETUP, BROWSER_CREDENTIAL_FLOW).  
-Q48: Is OPERATOR_RUNBOOK in docs index? **Yes.** Operations and runbooks.  
-Q49: Are security docs listed? **Yes.** docs/README security and compliance.  
+**5. Docs and guides (user vs agent) (Q41–Q50)**
+Q41: Is docs/README the single docs index? **Yes.** Canonical; links to workflow, setup, security, agent/handoff.
+Q42: Does docs/README list AGENTS.md? **Yes.** Agent and handoff table, first row.
+Q43: Is workflow canonical single? **Yes.** AGENT_WORKFLOW_CURSOR_SHOPIFY.md.
+Q44: Is “user: what to run/say” covered? **Yes.** SHOPIFY_CURSOR_USAGE_GUIDE, quick-start, README.
+Q45: Is “agent: what to run and in what order” covered? **Yes.** AGENT_WORKFLOW, OPERATOR_RUNBOOK, AGENTS.md.
+Q46: Is KEYBINDING_PENDING_APPROVAL referenced? **Yes.** Runbook, SHOPIFY_CURSOR_USAGE_GUIDE; INDEX_REPORTS.
+Q47: Are setup and credentials docs listed? **Yes.** docs/README (SETUP_GITHUB, SHOPIFY_SETUP, CREDENTIALS_SETUP, BROWSER_CREDENTIAL_FLOW).
+Q48: Is OPERATOR_RUNBOOK in docs index? **Yes.** Operations and runbooks.
+Q49: Are security docs listed? **Yes.** docs/README security and compliance.
 Q50: Is HANDOFF_PROMPT_NEW_AGENT in agent/handoff? **Yes.** docs/README.
 
-**6. Scripts and pipeline (Q51–Q60)**  
-Q51: Is sync-products.ps1 canonical for product sync? **Yes.** Audit, runbook, context, workflow.  
-Q52: Is -DryRun documented for preview? **Yes.** AGENT_WORKFLOW, AGENTS.md safety rules.  
-Q53: Is scripts/products/sync.ps1 the wrapper? **Yes.** Delegates to sync-products.ps1; shopify context.  
-Q54: Do open-pending-approval.ps1 and start-theme-preview.ps1 exist? **Yes.** scripts/ (verified).  
-Q55: Is theme-dev.ps1 documented? **Yes.** Runbook, workflow, tasks.  
-Q56: Are script paths repo-relative? **Yes.** All “.\scripts\...” from repo root.  
-Q57: Is pipeline (Cursor → GitHub → Shopify) documented? **Yes.** cursor-github-shopify-pipeline plan, AGENT_WORKFLOW.  
-Q58: Are workflow files listed? **Yes.** .github/workflows/README.  
-Q59: Is deploy-log required after every store change? **Yes.** shopify-preview-approval rule, AGENT_WORKFLOW.  
+**6. Scripts and pipeline (Q51–Q60)**
+Q51: Is sync-products.ps1 canonical for product sync? **Yes.** Audit, runbook, context, workflow.
+Q52: Is -DryRun documented for preview? **Yes.** AGENT_WORKFLOW, AGENTS.md safety rules.
+Q53: Is scripts/products/sync.ps1 the wrapper? **Yes.** Delegates to sync-products.ps1; shopify context.
+Q54: Do open-pending-approval.ps1 and start-theme-preview.ps1 exist? **Yes.** scripts/ (verified).
+Q55: Is theme-dev.ps1 documented? **Yes.** Runbook, workflow, tasks.
+Q56: Are script paths repo-relative? **Yes.** All “.\scripts\...” from repo root.
+Q57: Is pipeline (Cursor → GitHub → Shopify) documented? **Yes.** cursor-github-shopify-pipeline plan, AGENT_WORKFLOW.
+Q58: Are workflow files listed? **Yes.** .github/workflows/README.
+Q59: Is deploy-log required after every store change? **Yes.** shopify-preview-approval rule, AGENT_WORKFLOW.
 Q60: Is pending-approval.md the snapshot target? **Yes.** Rule, workflow, tasks.
 
-**7. Security and credentials (Q61–Q70)**  
-Q61: Is .env.local the single local secret store? **Yes.** env-credentials, BROWSER_CREDENTIAL_FLOW, security checklist.  
-Q62: Is “never commit .env.local” stated everywhere needed? **Yes.** AGENTS.md, rules, docs.  
-Q63: Is replacements.txt documented? **Yes.** OPERATOR_RUNBOOK, audit.  
-Q64: Is token echo fixed in get-access-token.ps1? **Yes.** Security checklist “Last verified.”  
-Q65: Are CI secret-scan exclusions documented? **Yes.** .env.shopify.example; security checklist.  
-Q66: Is npm audit level (high) documented? **Yes.** Security checklist, SECURITY_AUDIT.  
-Q67: Are rotation procedures documented? **Yes.** 00_security_checklist.  
-Q68: Is AGENT_AND_REPO_SECURITY linked? **Yes.** docs/README security.  
-Q69: Is CURSOR_DATA_BOUNDARY linked? **Yes.** docs/README.  
+**7. Security and credentials (Q61–Q70)**
+Q61: Is .env.local the single local secret store? **Yes.** env-credentials, BROWSER_CREDENTIAL_FLOW, security checklist.
+Q62: Is “never commit .env.local” stated everywhere needed? **Yes.** AGENTS.md, rules, docs.
+Q63: Is replacements.txt documented? **Yes.** OPERATOR_RUNBOOK, audit.
+Q64: Is token echo fixed in get-access-token.ps1? **Yes.** Security checklist “Last verified.”
+Q65: Are CI secret-scan exclusions documented? **Yes.** .env.shopify.example; security checklist.
+Q66: Is npm audit level (high) documented? **Yes.** Security checklist, SECURITY_AUDIT.
+Q67: Are rotation procedures documented? **Yes.** 00_security_checklist.
+Q68: Is AGENT_AND_REPO_SECURITY linked? **Yes.** docs/README security.
+Q69: Is CURSOR_DATA_BOUNDARY linked? **Yes.** docs/README.
 Q70: Do rules forbid logging secrets? **Yes.** env-credentials.mdc.
 
-**8. Single source of truth and consistency (Q71–Q80)**  
-Q71: One canonical workflow doc? **Yes.** AGENT_WORKFLOW_CURSOR_SHOPIFY.md.  
-Q72: One runbook? **Yes.** OPERATOR_RUNBOOK.md.  
-Q73: One docs index? **Yes.** docs/README.md.  
-Q74: One agent entry? **Yes.** PLAN_AGENT_ENTRY.md.  
-Q75: One plans index? **Yes.** .cursor/plans/README.md.  
-Q76: One agent permission + browser doc? **Yes.** AGENTS.md.  
-Q77: Do README and runbook point to AGENTS.md? **Yes.** Both.  
-Q78: Do workflow and runbook point to same scripts? **Yes.** sync-products, open-pending-approval, start-theme-preview, theme-dev.  
-Q79: Are Cursor rules and docs aligned? **Yes.** No conflicting instructions.  
+**8. Single source of truth and consistency (Q71–Q80)**
+Q71: One canonical workflow doc? **Yes.** AGENT_WORKFLOW_CURSOR_SHOPIFY.md.
+Q72: One runbook? **Yes.** OPERATOR_RUNBOOK.md.
+Q73: One docs index? **Yes.** docs/README.md.
+Q74: One agent entry? **Yes.** PLAN_AGENT_ENTRY.md.
+Q75: One plans index? **Yes.** .cursor/plans/README.md.
+Q76: One agent permission + browser doc? **Yes.** AGENTS.md.
+Q77: Do README and runbook point to AGENTS.md? **Yes.** Both.
+Q78: Do workflow and runbook point to same scripts? **Yes.** sync-products, open-pending-approval, start-theme-preview, theme-dev.
+Q79: Are Cursor rules and docs aligned? **Yes.** No conflicting instructions.
 Q80: Is “preview before apply” single definition? **Yes.** shopify-preview-approval.mdc; workflow and AGENTS.md reference it.
 
-**9. Discoverability and entry points (Q81–Q90)**  
-Q81: Can an agent find “where to start”? **Yes.** PLAN_AGENT_ENTRY “Read this first.”  
-Q82: Can an agent find “agent permission”? **Yes.** AGENTS.md; README, runbook, docs/README.  
-Q83: Can an agent find “when to use browser”? **Yes.** AGENTS.md section; BROWSER_CREDENTIAL_FLOW, workflow browser path.  
-Q84: Can a user find “what to run for theme preview”? **Yes.** README, SHOPIFY_CURSOR_USAGE_GUIDE, runbook.  
-Q85: Can a user find “what to say to approve”? **Yes.** Workflow “approve” in chat; pending-approval text.  
-Q86: Is INDEX_REPORTS findable? **Yes.** docs/README Agent and handoff; status/ listed in subfolders.  
-Q87: Is PLAN_AGENT_ENTRY linked from decision tree? **Yes.** “Before any other work” + Phase 0.  
-Q88: Is PLAN_AGENT_ENTRY linked from docs/README? **Yes.** status/PLAN_AGENT_ENTRY.md.  
-Q89: Does PLAN_AGENT_ENTRY link to AGENTS.md? **Yes.** (Added in this pass: Related Context / Quick Reference.)  
+**9. Discoverability and entry points (Q81–Q90)**
+Q81: Can an agent find “where to start”? **Yes.** PLAN_AGENT_ENTRY “Read this first.”
+Q82: Can an agent find “agent permission”? **Yes.** AGENTS.md; README, runbook, docs/README.
+Q83: Can an agent find “when to use browser”? **Yes.** AGENTS.md section; BROWSER_CREDENTIAL_FLOW, workflow browser path.
+Q84: Can a user find “what to run for theme preview”? **Yes.** README, SHOPIFY_CURSOR_USAGE_GUIDE, runbook.
+Q85: Can a user find “what to say to approve”? **Yes.** Workflow “approve” in chat; pending-approval text.
+Q86: Is INDEX_REPORTS findable? **Yes.** docs/README Agent and handoff; status/ listed in subfolders.
+Q87: Is PLAN_AGENT_ENTRY linked from decision tree? **Yes.** “Before any other work” + Phase 0.
+Q88: Is PLAN_AGENT_ENTRY linked from docs/README? **Yes.** status/PLAN_AGENT_ENTRY.md.
+Q89: Does PLAN_AGENT_ENTRY link to AGENTS.md? **Yes.** (Added in this pass: Related Context / Quick Reference.)
 Q90: Is CURSOR_GITHUB_AUDIT in INDEX_REPORTS quick reference? **Yes.**
 
-**10. Execution, redundancy, gaps, finalization (Q91–Q100)**  
-Q91: Are all Section 5 “perfected prompt” items done? **Yes.** All five checked.  
-Q92: Are all Section 6 checklist items checked? **Yes.**  
-Q93: Are all Section 7 perfection criteria satisfiable? **Yes.** All seven hold.  
-Q94: Is there duplicate plan history? **No.** PLAN_AUDIT + this file; no third duplicate.  
-Q95: Is there conflicting “canonical script” (e.g. two sync scripts)? **No.** sync-products canonical; sync.ps1 wrapper.  
-Q96: Are legacy/archive locations documented? **Yes.** INDEX_REPORTS, PLAN_EXPIRED_LEGACY_CLEANUP.  
-Q97: Is Phase 0 gate unambiguous? **Yes.** PLAN_AGENT_ENTRY, PERFECT_EXECUTION_PROMPT, PHASE_0_FINALIZATION.  
-Q98: Is “finalized” defined? **Yes.** Section 6 + 7 + 8; “Is it ready?” at top.  
-Q99: Can a future agent re-verify “perfect” without re-auditing from scratch? **Yes.** Section 7 checklist + Section 8 Q&A.  
+**10. Execution, redundancy, gaps, finalization (Q91–Q100)**
+Q91: Are all Section 5 “perfected prompt” items done? **Yes.** All five checked.
+Q92: Are all Section 6 checklist items checked? **Yes.**
+Q93: Are all Section 7 perfection criteria satisfiable? **Yes.** All seven hold.
+Q94: Is there duplicate plan history? **No.** PLAN_AUDIT + this file; no third duplicate.
+Q95: Is there conflicting “canonical script” (e.g. two sync scripts)? **No.** sync-products canonical; sync.ps1 wrapper.
+Q96: Are legacy/archive locations documented? **Yes.** INDEX_REPORTS, PLAN_EXPIRED_LEGACY_CLEANUP.
+Q97: Is Phase 0 gate unambiguous? **Yes.** PLAN_AGENT_ENTRY, PERFECT_EXECUTION_PROMPT, PHASE_0_FINALIZATION.
+Q98: Is “finalized” defined? **Yes.** Section 6 + 7 + 8; “Is it ready?” at top.
+Q99: Can a future agent re-verify “perfect” without re-auditing from scratch? **Yes.** Section 7 checklist + Section 8 Q&A.
 Q100: Is the plan ready for production use (no further edits required for “perfect plan”)? **Yes.** All 100 answers verified; one fix applied (PLAN_AGENT_ENTRY → AGENTS.md).
 
 ---
 
-**Plan file / reference:** This document; .cursor/plans/README.md (Cursor + GitHub audit and finalization).  
+**Plan file / reference:** This document; .cursor/plans/README.md (Cursor + GitHub audit and finalization).
 **Entry:** docs/status/PLAN_AGENT_ENTRY.md → Phase 0 → decision tree → audits or specialist work.
 
 <!-- markdownlint-enable MD060 -->
