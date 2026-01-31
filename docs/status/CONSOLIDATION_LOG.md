@@ -34,6 +34,33 @@
 
 ---
 
+## 2026-01-31 — Track C (agents, prompts, rules, plans, hooks)
+
+**Summary**: Plan index single; rules and AGENTS.md aligned; hooks documented.
+
+**Deliverables**:
+- **.cursor/plans/README.md** — Single plan (FINAL_REPO_ORGANIZATION_AND_AUDIT); reference links to workflow and security.
+- **.cursor/rules** — agent-permissions.mdc, env-credentials.mdc, shopify-preview-approval.mdc, use-user-browser.mdc; no conflict with AGENTS.md.
+- **docs/HOOKS.md** — Pre-commit hook (config/git-hooks/pre-commit → scripts/git/pre-commit.ps1); repo-root detection in script.
+
+**Resolutions**: PLAN_AGENT_ENTRY points to canonical plan; hooks doc resolves config/README link.
+
+---
+
+## 2026-01-31 — Track D (docs, statuses, archives, READMEs)
+
+**Summary**: INDEX_REPORTS version/update table; archive log; READMEs and templates current.
+
+**Deliverables**:
+- **docs/status/INDEX_REPORTS.md** — Master index; version/update table (VERSION_UPDATE_TABLE.md); scripts/config/data sections; quick reference.
+- **archive/ARCHIVE_LOG.md** — Parent-level log; 2026-01-30 batch; root .png relocation note (Track F).
+- **docs/README.md**, **OPERATOR_RUNBOOK.md**, **README.md** — Current; links to CONSOLIDATION_LOG, INDEX_REPORTS, AGENTS.md, scripts/README.
+- **.github/ISSUE_TEMPLATE**, **PULL_REQUEST_TEMPLATE.md** — Current; settings.optimization.md kept per plan.
+
+**Resolutions**: Version/update table in INDEX_REPORTS and VERSION_UPDATE_TABLE.md; handoff files point to logs/indices.
+
+---
+
 ## 2026-01-31 — Track E (scripts, config, data, monitoring)
 
 **Summary**: Scripts and config indexed; data and monitoring documented.
@@ -103,4 +130,4 @@
 
 ---
 
-**All tracks and Synthesis complete.** 2026-01-31.
+**All tracks (A–G) and Synthesis complete.** 2026-01-31. Track C and Track D entries added on review; plan refs and branch/worktree inventories updated.

@@ -22,7 +22,7 @@
 | ------------------------------------------------------- | --------------------------- | --------------------------------- |
 | cursor-github-shopify-pipeline.plan.md                  | Pipeline plan               | Retained; reference for workflows |
 | expert_team_security_and_platform_plan_fbf7f611.plan.md | Security/platform plan      | Retained                          |
-| perfect_execution_prompt_aca26457.plan.md               | Phase 0 / perfect execution | Retained; entry plan              |
+| perfect_execution_prompt_aca26457.plan.md (consolidated) | Phase 0 / perfect execution | See .cursor/plans/README.md; single plan: FINAL_REPO_ORGANIZATION_AND_AUDIT |
 
 **Note**: No redundant plans removed. "Full project perfection" is in .cursor/plans (or repo plan reference); decision tree points to it. Documented here for future pruning if desired.
 

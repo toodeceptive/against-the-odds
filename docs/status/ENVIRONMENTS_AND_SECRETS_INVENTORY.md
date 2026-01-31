@@ -10,7 +10,7 @@
 
 - **.env.example** (template only)
 - **.env.shopify.example** (template only) — excluded from GitHub secret-scan via CI
-- **.env.local** (single local secret store; **gitignored** per [.gitignore](.gitignore) lines 26–28)\*\*\* — never commit\*\*\*
+- **.env.local** (single local secret store; **gitignored** per [.gitignore](.gitignore) lines 26–28) — **never commit**
 - **.cursor/settings.json**: Formats on save, excludes .env.local, dist, build, node_modules, etc.
 
 **Verification**: Confirm .env.local exists at repo root; secrets in docs/CREDENTIALS_SETUP.md.

@@ -16,9 +16,10 @@
 | -------------- | ------------------- | ------ | ------ |
 | **Security check** | (no file in .cursor/plans) | Token echo fix, CI secret-scan exclusions, security docs, portable paths | Implemented |
 | **Top repos V1–V5** | docs/status/PLAN_AUDIT_20260131.md | Dawn/official docs → cross-comparative → non-inhibition → system perfection → guru expert; execution 8.9/8.11 | Implemented (items 1–10 in PLAN_AUDIT) |
-| **perfect_execution_prompt** | .cursor/plans/perfect_execution_prompt_aca26457.plan.md | Phase 0 gate; mandatory cleanup/finalization | Current |
-| **cursor-github-shopify-pipeline** | .cursor/plans/cursor-github-shopify-pipeline.plan.md | Cursor → GitHub → Shopify; theme branch; preview/approval | Current |
-| **full_project_update_perfection_guru** | .cursor/plans/full_project_update_perfection_guru.plan.md | Audit → update → cleanup; Phase 0 gate; multi-guru phases | Current |
+| **FINAL_REPO_ORGANIZATION_AND_AUDIT** | .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md | Single canonical plan: Phase 0 + Tracks A–G + Synthesis | **Current** (only plan) |
+| **perfect_execution_prompt** (consolidated) | prompts/PERFECT_EXECUTION_PROMPT.md | Phase 0 gate; mandatory cleanup/finalization | Implemented in FINAL plan |
+| **cursor-github-shopify-pipeline** | .cursor/plans/cursor-github-shopify-pipeline.plan.md | Cursor → GitHub → Shopify; theme branch; preview/approval | Reference (implemented) |
+| **full_project_update_perfection_guru** | .cursor/plans/full_project_update_perfection_guru.plan.md | Audit → update → cleanup; Phase 0 gate; multi-guru phases | Reference (consolidated) |
 | **expert_team_security_and_platform** | .cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md | Security & platform; browser-first; no headless | Reference (implemented) |
 | **PLAN_EXPIRED_LEGACY_CLEANUP** | docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md | Consolidate expert-analyses, root scripts, plans index, replacements.txt, guides, status | Reference |
 | **PLAN_AUDIT_20260131** | docs/status/PLAN_AUDIT_20260131.md | Plan versions table; cross-comparative analysis; perfected prompt; execution list | Reference |
