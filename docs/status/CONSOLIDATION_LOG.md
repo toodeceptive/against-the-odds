@@ -236,3 +236,9 @@
 ## 2026-02 — Full system audit, perfection, commit and push (user-approved)
 
 **Action**: User approved comprehensive audit and perfection of pipeline, branches, worktrees, workflows, and commit/push. **Discovery**: main @ 80c3186; 13 modified, 6 untracked; local branches main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129; remotes origin/main, shopify-theme, dependabot/…; 5 worktrees (primary + ewa, mhx, snq, uub; ewa/snq/uub detached HEAD). **Pipeline**: verify-pipeline -SkipRunbook OK; format fixed (SETUP_STATUS.md); lint and test:unit pass. **Docs**: docs/status/SHOPIFY_ADMIN_CHECKLIST.md (what to verify when logging into Shopify Admin — agent cannot log in); docs/status/FULL_SYSTEM_AUDIT_20260201.md (branches, worktrees, workflows, optional cleanup); WORKTREE_INVENTORY.md updated (uub added). **Obsolete**: No workflows or code deleted; archive/ and scripts/archive/ kept; optional branch/worktree cleanup documented for operator. **Commit**: All changes staged and committed to main; push to origin/main. See FULL_SYSTEM_AUDIT_20260201.md for branch/worktree optional cleanup.
+
+---
+
+## 2026-02 — Guru finalization commit pushed (user-approved)
+
+**Action**: User approved commit and push of all guru work. **Commit** 0f64466: Theme auth flows (theme-auth-then-pull.ps1, theme-auth-via-browser.ps1, finish-setup.ps1), theme-pull/theme-dev/update-theme token env and SHOPIFY_FLAG_FORCE, SSL troubleshooting (docs/TROUBLESHOOTING.md), status docs (SETUP_STATUS, GURU_COMPLETION_SUMMARY, MANUAL_VERIFICATION_CHECKLIST, SHOPIFY_ADMIN_CHECKLIST, FULL_SYSTEM_AUDIT_20260201), browser scripts, theme customization flow and scripts README. **Push**: origin/main 80c3186..0f64466. Main is up to date with origin; all guru-deliverable work is committed and pushed.
