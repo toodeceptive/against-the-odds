@@ -51,6 +51,8 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 - `.\scripts\maintenance\update-dependencies.ps1`
 - `.\scripts\maintenance\security-scan.ps1`
 
+**Desktop automation (optional)**: `robotjs` and `node-window-manager` are optionalDependencies; they may require native build (node-gyp) on install. If `npm install` fails for these, you can skip optional deps or install build tools (e.g. Visual Studio Build Tools on Windows). See `src/desktop-automation/` and `tests/desktop-automation/`.
+
 ## Credentials
 
 - Store in `.env.local` (never commit)

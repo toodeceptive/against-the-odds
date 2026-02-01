@@ -5,12 +5,12 @@
 
 ---
 
-## Current state (2026-01-30)
+## Current state (2026-01-31)
 
 - **Unit tests**: Pass (tests/unit/example.test.js).
 - **Integration tests**: Skip when credentials missing (expected).
-- **Desktop automation tests**: Pass (Windows; gated).
-- **Coverage (v8)**: ~16% statements/lines, ~24% functions, ~35% branches. Thresholds in vitest.config.js set to current baseline so `npm run test:coverage` passes; target remains 90%.
+- **Desktop automation tests**: Pass (Windows; screen-capture, window-management, mouse-keyboard, issue-detection).
+- **Coverage (v8)**: ~20% statements/lines, ~31% functions, ~44% branches (All files). Thresholds in vitest.config.js set to baseline so `npm run test:coverage` passes; target remains 90%.
 
 ---
 
