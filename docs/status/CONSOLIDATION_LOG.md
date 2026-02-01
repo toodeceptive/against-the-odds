@@ -182,3 +182,9 @@
 
 - **Scope**: Workflow & pipeline visual guide (docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md); Ctrl+Alt+T approved; keybindings added to user Cursor keybindings.json; theme dev task presentation (reveal, focus, showReuseMessage); KEYBINDING_PENDING_APPROVAL, OPERATOR_RUNBOOK, README, docs/README updated; Prettier on docs/README.md.
 - **Commit/push**: Single commit for guide + keybinding finalization; CHANGELOG and this log entry. No store-affecting changes. All work complete.
+
+---
+
+## 2026-01-31 — Test, fix, review, audit, finalize (Prettier on workflow guide)
+
+**Action**: Full test suite (lint, format, unit, integration, verify-pipeline) run; Prettier fix applied to docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md. All checks pass. Pending user approval to commit and push.
