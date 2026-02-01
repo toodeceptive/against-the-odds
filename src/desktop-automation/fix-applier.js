@@ -132,7 +132,7 @@ async function fixConfiguration() {
     execSync('powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1', {
       stdio: 'ignore',
     });
-  } catch (error) {
+  } catch (_error) {
     // Fallback: try to find and fix configuration in UI
     await clickOnText('Settings');
     await clickOnText('Configuration');

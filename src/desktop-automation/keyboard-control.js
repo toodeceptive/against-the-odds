@@ -16,7 +16,7 @@ async function getRobotJS() {
   if (!robotjs) {
     try {
       robotjs = await import('robotjs');
-    } catch (error) {
+    } catch (_error) {
       // RobotJS not available, using PowerShell fallback
       return null;
     }

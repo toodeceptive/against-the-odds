@@ -20,7 +20,7 @@ function loadEnv() {
     });
 
     return envVars;
-  } catch (error) {
+  } catch (_error) {
     return {};
   }
 }

@@ -13,7 +13,7 @@ async function getRobotJS() {
   if (!robotjs) {
     try {
       robotjs = await import('robotjs');
-    } catch (error) {
+    } catch (_error) {
       // RobotJS not available, using PowerShell fallback
       return null;
     }
@@ -45,7 +45,7 @@ export async function getMousePosition() {
       if (match) {
         return { x: parseInt(match[1]), y: parseInt(match[2]) };
       }
-    } catch (error) {
+    } catch (_error) {
       // Fallback to default position if PowerShell fails
     }
     return { x: 0, y: 0 };
@@ -93,7 +93,7 @@ export async function moveMouse(x, y, options = {}) {
         `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x}, ${y})"`,
         { stdio: 'ignore' }
       );
-    } catch (error) {
+    } catch (_error) {
       // Silently fail if PowerShell command doesn't work
     }
   }

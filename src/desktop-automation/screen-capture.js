@@ -55,7 +55,7 @@ export async function captureRegion(region, options = {}) {
     }
 
     return cropped;
-  } catch (error) {
+  } catch (_error) {
     // Fallback: return full screen if cropping fails
     return fullScreen;
   }
@@ -106,7 +106,7 @@ export async function captureAllScreens() {
     try {
       const img = await screenshot({ screen: i, filename: null });
       screenshots.push({ screen: i, image: img });
-    } catch (error) {
+    } catch (_error) {
       // No more screens
       break;
     }

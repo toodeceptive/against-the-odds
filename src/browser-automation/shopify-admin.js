@@ -34,7 +34,7 @@ export async function connectToBrowser(options = {}) {
       const browser = await chromium.connectOverCDP('http://localhost:9222');
       // Connected to existing Chrome instance
       return browser;
-    } catch (error) {
+    } catch (_error) {
       // Could not connect to existing Chrome, launching new instance
     }
   }
@@ -74,8 +74,8 @@ export async function ensureShopifyLogin(page, storeDomain) {
     await page.waitForURL(adminUrl, { timeout: 120000 }); // Wait up to 2 minutes
 
     return true;
-  } catch (error) {
-    warn('Failed to access Shopify admin', { storeDomain, error: error?.message });
+  } catch (_error) {
+    warn('Failed to access Shopify admin', { storeDomain, error: _error?.message });
     return false;
   }
 }
@@ -94,8 +94,8 @@ export async function navigateToAppsDevelopment(page) {
     await page.waitForSelector('h1, [data-testid="apps-page"]', { timeout: 10000 });
 
     return true;
-  } catch (error) {
-    warn('Failed to navigate to Apps > Development', { error: error?.message });
+  } catch (_error) {
+    warn('Failed to navigate to Apps > Development', { error: _error?.message });
     return false;
   }
 }
@@ -153,7 +153,7 @@ export async function extractAccessToken(page) {
 
     // Access token not found on page
     return null;
-  } catch (error) {
+  } catch (_error) {
     // Error extracting access token
     return null;
   }
@@ -230,7 +230,7 @@ export async function extractText(page, selector) {
   try {
     await page.waitForSelector(selector, { timeout: 10000 });
     return await page.locator(selector).first().textContent();
-  } catch (error) {
+  } catch (_error) {
     // Error extracting text
     return null;
   }

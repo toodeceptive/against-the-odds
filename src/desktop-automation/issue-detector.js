@@ -233,7 +233,7 @@ export async function monitorIssues(options = {}) {
         }
 
         lastIssues = issues;
-      } catch (err) {
+      } catch (_err) {
         // Error handling - monitoring continues
         // Could log to error handler if needed
       }

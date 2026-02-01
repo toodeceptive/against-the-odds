@@ -13,7 +13,7 @@ async function getWindowManager() {
   if (!windowManager) {
     try {
       windowManager = await import('node-window-manager');
-    } catch (error) {
+    } catch (_error) {
       // node-window-manager not available, using PowerShell fallback
       return null;
     }
@@ -108,7 +108,7 @@ async function getWindowsPowerShell() {
     const result = execSync(`powershell -Command "${script}"`, { encoding: 'utf-8' });
     const windows = JSON.parse(result);
     return Array.isArray(windows) ? windows : [];
-  } catch (error) {
+  } catch (_error) {
     // Return empty array on error
     return [];
   }
@@ -206,7 +206,7 @@ async function activateWindowPowerShell(handle) {
     execSync(`powershell -Command "${script}"`, { stdio: 'ignore' });
     await new Promise((resolve) => setTimeout(resolve, 300)); // Wait for activation
     return true;
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 }
@@ -228,7 +228,7 @@ export async function closeWindow(window) {
         win.close();
         return true;
       }
-    } catch (error) {
+    } catch (_error) {
       // Fallback to PowerShell method
     }
   }
@@ -264,7 +264,7 @@ async function closeWindowPowerShell(handle) {
   try {
     execSync(`powershell -Command "${script}"`, { stdio: 'ignore' });
     return true;
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 }
@@ -328,7 +328,7 @@ export async function moveWindow(window, x, y) {
         });
         return true;
       }
-    } catch (error) {
+    } catch (_error) {
       // Move failed, return false
     }
   }
@@ -388,7 +388,7 @@ async function minimizeWindowPowerShell(handle) {
   try {
     execSync(`powershell -Command "${script}"`, { stdio: 'ignore' });
     return true;
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 }
@@ -410,7 +410,7 @@ export async function maximizeWindow(window) {
         win.maximize();
         return true;
       }
-    } catch (error) {
+    } catch (_error) {
       // Fallback to PowerShell method
     }
   }
@@ -445,7 +445,7 @@ async function maximizeWindowPowerShell(handle) {
   try {
     execSync(`powershell -Command "${script}"`, { stdio: 'ignore' });
     return true;
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 }
