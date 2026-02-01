@@ -173,3 +173,12 @@
 
 - **Commit**: ef05f72 — docs: finalization audit — fix broken plan refs, agent entry, asset paths. FINALIZATION_AUDIT_20260131.md; broken plan refs (cursor-github-shopify, expert_team) → .cursor/plans/README.md and rules/docs/security; PLAN_AGENT_ENTRY Phase 0 skip when signed off; NEXT_STEPS/assets/brand, MANUFACTURING logo path; NEXT_BEST_STEPS Tier 4 items 11–12 done; docs/README PROJECT_MANAGEMENT; OPERATOR_RUNBOOK run-runbook.ps1; INDEX_REPORTS, VERSION_UPDATE_TABLE, CHANGELOG.
 - **Push**: main ef05f72 → origin/main. No store-affecting changes.
+
+---
+
+## 2026-01-31 — Workflow visual guide and keybinding finalization (user-approved)
+
+**Action**: User approved full review, commit, push, and finalization of all work.
+
+- **Scope**: Workflow & pipeline visual guide (docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md); Ctrl+Alt+T approved; keybindings added to user Cursor keybindings.json; theme dev task presentation (reveal, focus, showReuseMessage); KEYBINDING_PENDING_APPROVAL, OPERATOR_RUNBOOK, README, docs/README updated; Prettier on docs/README.md.
+- **Commit/push**: Single commit for guide + keybinding finalization; CHANGELOG and this log entry. No store-affecting changes. All work complete.

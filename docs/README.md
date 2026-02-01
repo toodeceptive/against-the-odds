@@ -4,11 +4,12 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 
 ## Workflow and store (canonical)
 
-| Doc                                                                          | Purpose                                                                     |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [AGENT_WORKFLOW_CURSOR_SHOPIFY.md](AGENT_WORKFLOW_CURSOR_SHOPIFY.md)         | **Canonical** — Preview-before-apply workflow for theme and product changes |
-| [UPDATE_SHOPIFY_FROM_CURSOR.md](UPDATE_SHOPIFY_FROM_CURSOR.md)               | Alternate entry: how to update Shopify from Cursor                          |
-| [guides/SHOPIFY_CURSOR_USAGE_GUIDE.md](guides/SHOPIFY_CURSOR_USAGE_GUIDE.md) | User guide: what to run / what to say when giving prompts                   |
+| Doc                                                                                  | Purpose                                                                     |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| [AGENT_WORKFLOW_CURSOR_SHOPIFY.md](AGENT_WORKFLOW_CURSOR_SHOPIFY.md)                 | **Canonical** — Preview-before-apply workflow for theme and product changes |
+| [UPDATE_SHOPIFY_FROM_CURSOR.md](UPDATE_SHOPIFY_FROM_CURSOR.md)                       | Alternate entry: how to update Shopify from Cursor                          |
+| [guides/SHOPIFY_CURSOR_USAGE_GUIDE.md](guides/SHOPIFY_CURSOR_USAGE_GUIDE.md)         | User guide: what to run / what to say when giving prompts                   |
+| [guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md](guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md) | Visual workflow/pipeline: when you prompt an agent (store vs other work)    |
 
 ## Setup and credentials
 

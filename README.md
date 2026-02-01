@@ -113,6 +113,7 @@ against-the-odds/
 - [Consolidation log](docs/status/CONSOLIDATION_LOG.md) — Phase 0 + tracks + resolved issues
 - [Index of reports](docs/status/INDEX_REPORTS.md) — status files and quick reference
 - [Store workflow (preview → approve → apply)](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md) — theme and product changes
+- [Workflow & pipeline visual guide](docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md) — when you prompt an agent (store vs other work)
 - [Setup Guide](docs/SETUP_GITHUB.md) — GitHub and development setup
 - [Shopify Integration](docs/SHOPIFY_SETUP.md) — Complete Shopify setup guide
 - [Quick Start Guide](docs/guides/quick-start.md) — Getting started quickly
