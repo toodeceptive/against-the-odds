@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-01-31** — LICENSE file (UNLICENSED) at repo root; ROOT_FILES_INVENTORY and CONSOLIDATION_LOG updated; format pass on 2 files. Plan issue #5 closed.
 - **2026-01-31** — Next steps execution: NEXT_BEST_STEPS_20260131.md (guru analysis, Tier 1–4); NEXT_STEPS.md and INDEX_REPORTS/VERSION_UPDATE_TABLE updated; redundant Tier 1 item 3 removed; Tier 1 runbook (lint, format, test pass; runbook: GitHub OK, Shopify credential-gated); BRANCH_INVENTORY branch-hygiene note; Prettier format pass.
 - **2026-01-31** — Post-push review: CONSOLIDATION_LOG Track C/D entries; CURSOR_GITHUB_AUDIT plan table updated to FINAL_REPO_ORGANIZATION_AND_AUDIT; BRANCH_INVENTORY and WORKTREE_INVENTORY current state; ENVIRONMENTS doc encoding fix; historical audit refs (consolidated plan) noted.
 - **2026-01-31** — Tracks E, F, G and Synthesis: scripts/README.md (scripts by domain, npm map), config/README.md, data/README.md; root .png moved to assets/brand; docs/screenshots/README.md and ROOT_FILES_INVENTORY.md; CODEBASE_AUDIT_20260131.md; CONSOLIDATION_LOG completed (Phase 0 + A, B, E, F, G + Synthesis); VERSION_UPDATE_TABLE.md, archive/ARCHIVE_LOG.md; INDEX_REPORTS and PLAN_AGENT_ENTRY updated; workflows README main-only; handoff and README point to CONSOLIDATION_LOG and INDEX_REPORTS.

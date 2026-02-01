@@ -79,7 +79,9 @@
 
 ---
 
-## To be addressed (if any)
+## Resolved / current
 
-- **LICENSE**: No LICENSE file; package.json has `"license": "UNLICENSED"`. Documented in OPERATOR_RUNBOOK and plan; add LICENSE file or keep UNLICENSED per project decision.
+- **LICENSE**: Root LICENSE file added (UNLICENSED; aligns with package.json). Documented in OPERATOR_RUNBOOK and ROOT_FILES_INVENTORY.
+
+## To be addressed (if any)
 - **replacements.txt**: Kept at root; documented in OPERATOR_RUNBOOK; optional relocate to config/ in future.

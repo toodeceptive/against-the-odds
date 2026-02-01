@@ -144,3 +144,5 @@
 ## 2026-01-31 — User approval (finalization)
 
 **Sign-off**: User approves all commits and finalizations after in-depth review and auditing by the agent team. No further changes required for this phase.
+
+**Proceed (2026-01-31)**: Tier 4 item 11 — LICENSE file added at repo root (UNLICENSED). Lint, format, unit tests pass. Next: Tier 3 (launch checklist when ready), Tier 4 items 9–10–12 (coverage, deploy/backup-store, desktop automation docs) as needed.

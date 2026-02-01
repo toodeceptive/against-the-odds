@@ -11,8 +11,8 @@
 **Contents**:
 
 - **expert-analyses-legacy/** — Legacy expert run outputs (01–10).
-- **status-legacy/** — Superseded status files (ao*guru*_, verification\__, IMPLEMENTATION_COMPLETE_20260129, etc.).
-- **Root reports** — AUDIT*\*REPORT, BUG_FIXES, CODE_REVIEW_SYNC, DESKTOP_AUTOMATION_IMPLEMENTATION, FINAL_IMPLEMENTATION*_, INSTALL\__, MASTER*EXECUTION_REPORT, QUICK_START, SETUP*\*, SYSTEM_READY, ULTIMATE_MASTER_AGENT_EXECUTION_REPORT, SUB_ISSUES, SYSTEM_READY.
+- **status-legacy/** — Superseded status files (ao*guru*\_, verification\_\_, IMPLEMENTATION_COMPLETE_20260129, etc.).
+- **Root reports** — AUDIT*\*REPORT, BUG_FIXES, CODE_REVIEW_SYNC, DESKTOP_AUTOMATION_IMPLEMENTATION, FINAL_IMPLEMENTATION*\_, INSTALL\_\_, MASTER*EXECUTION_REPORT, QUICK_START, SETUP*\*, SYSTEM_READY, ULTIMATE_MASTER_AGENT_EXECUTION_REPORT, SUB_ISSUES, SYSTEM_READY.
 
 **Note**: See archive/2026-01-30/ARCHIVE_NOTE.md for batch details. INDEX_REPORTS.md references this batch under "Moved to archive/2026-01-30".
 

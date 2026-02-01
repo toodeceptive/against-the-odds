@@ -8,13 +8,13 @@
 
 ## Branches (local and remote)
 
-| Branch                               | Location                                                       | Notes                                                                     |
-| ------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **main**                             | local (current), remote origin                                 | Default branch; workflow triggers are main-only (develop removed).        |
-| **develop**                          | Not present (local or remote)                                  | Removed from ci.yml, quality-check.yml, deploy.yml; main-only documented. |
-| **cursor/main-project-setup-2bd1**   | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical. |
+| Branch                               | Location                                                       | Notes                                                                                                                           |
+| ------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **main**                             | local (current), remote origin                                 | Default branch; workflow triggers are main-only (develop removed).                                                              |
+| **develop**                          | Not present (local or remote)                                  | Removed from ci.yml, quality-check.yml, deploy.yml; main-only documented.                                                       |
+| **cursor/main-project-setup-2bd1**   | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
 | **handoff-doc-permissions-20260129** | local only (+ worktree mhx)                                    | Optional: handoff/permissions work reflected in main (AGENTS.md, handoff docs). Merge or delete when worktree no longer needed. |
-| **shopify-theme**                    | Remote only (created by sync-theme-branch.yml on push to main) | Workflow-created branch for Shopify GitHub App connection                 |
+| **shopify-theme**                    | Remote only (created by sync-theme-branch.yml on push to main) | Workflow-created branch for Shopify GitHub App connection                                                                       |
 
 **Resolved (Track A)**: develop removed from all workflow triggers. Stale local branches (ao-guru-exec, finalization/consolidate-20260129, wip/finalization-team-20260129) deleted. Main-only strategy documented in CONSOLIDATION_LOG and workflow README. **Branch hygiene (2026-01-31)**: handoff-doc-permissions and cursor/main-project-setup-2bd1 documented as optional cleanup; no action required unless merging or deleting.
 
