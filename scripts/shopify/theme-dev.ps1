@@ -1,5 +1,7 @@
+
 # Start Shopify theme dev server for live preview (hot-reload) before committing.
 # Run from Cursor: Tasks > Run Task > "Shopify: Theme Dev". When the preview URL appears, click it or paste into View > Simple Browser.
+# Uses "npx shopify theme dev" so the theme CLI is used (not a different global "shopify" e.g. Hydrogen).
 # Repo root from script location.
 
 param(
@@ -36,6 +38,7 @@ if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
 Write-Host "=== Shopify Theme Dev (preview before commit) ===" -ForegroundColor Cyan
 Write-Host ""
 
+# Ensure theme CLI is available (install globally if missing; we still invoke via npx for consistency)
 . "$PSScriptRoot\Ensure-ShopifyCli.ps1"
 
 if ([string]::IsNullOrWhiteSpace($Store)) {
@@ -49,24 +52,40 @@ if (-not (Test-Path $ThemePath)) {
     exit 1
 }
 
+# Theme dev requires a full theme (layout/, config/). If only assets/snippets exist, user must theme-pull first.
+$layoutFile = Join-Path (Join-Path $ThemePath "layout") "theme.liquid"
+if (-not (Test-Path $layoutFile)) {
+    Write-Host "Error: Theme folder is not a full Shopify theme (missing layout/theme.liquid)." -ForegroundColor Red
+    Write-Host "Run theme-pull first: .\scripts\shopify\theme-pull.ps1" -ForegroundColor Yellow
+    Write-Host "That pulls the live theme from Shopify into this folder; then theme dev will work." -ForegroundColor Gray
+    exit 1
+}
+
+# Use permanent store domain (myshopify.com) for theme CLI — matches theme-pull.
+$storeForCli = $Store
+if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
+    $storeForCli = "aodrop.com.myshopify.com"
+}
+
+$themeToken = $env:SHOPIFY_CLI_THEME_TOKEN
+if ([string]::IsNullOrWhiteSpace($themeToken)) { $themeToken = $env:SHOPIFY_ACCESS_TOKEN }
+
 Write-Host "Starting theme dev server (preview URL will appear below)..." -ForegroundColor Yellow
-Write-Host "Store: $Store  |  Path: $ThemePath" -ForegroundColor Cyan
+Write-Host "Store: $storeForCli  |  Path: $ThemePath" -ForegroundColor Cyan
+if ($themeToken) { Write-Host "Using token (non-interactive)." -ForegroundColor Gray }
 Write-Host ""
-Write-Host "Browser will open automatically when the server is ready (default: http://127.0.0.1:9292)." -ForegroundColor Gray
-Write-Host "You can also click the URL in the terminal or paste into Cursor > View > Simple Browser." -ForegroundColor Gray
+Write-Host "Using: npx shopify theme dev (theme CLI). Browser will open when ready (http://127.0.0.1:9292)." -ForegroundColor Gray
 Write-Host ""
 
-# Auto-open preview URL in default browser after server has time to start (runs in background)
-$previewUrl = "http://127.0.0.1:9292"
-$openJob = Start-Job -ScriptBlock {
-    param($url)
-    Start-Sleep -Seconds 6
-    try { Start-Process $url } catch { }
-} -ArgumentList $previewUrl
-
-$args = $ShopifyCmd[1..($ShopifyCmd.Length - 1)] + "theme", "dev", "--store=$Store", "--path=$ThemePath"
+# Use npx explicitly so we always use @shopify/cli theme dev (avoids wrong global "shopify" e.g. Hydrogen).
+# Pass --path and path as separate args so Windows paths (e.g. C:\...) are not mangled.
+$devArgs = @("shopify", "theme", "dev", "--store=$storeForCli", "--path", $ThemePath, "--host", "127.0.0.1", "--port", "9292", "--open")
+if ($themeToken) {
+    $devArgs += "--password"
+    $devArgs += $themeToken
+}
 if ($Live) {
     Write-Host "Previewing against LIVE theme context." -ForegroundColor Yellow
-    $args += "--theme=live"
+    $devArgs += "--theme=live"
 }
-& $ShopifyCmd[0] $args
+& npx $devArgs

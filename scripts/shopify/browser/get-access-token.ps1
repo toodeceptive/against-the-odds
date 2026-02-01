@@ -7,7 +7,11 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) {
+    (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path
+} else {
+    (Get-Location).Path
+}
 Set-Location $repoPath
 
 Write-Host "=== Shopify Access Token Extraction ===" -ForegroundColor Cyan
@@ -85,27 +89,30 @@ try {
         Write-Host "[OK] Access token extracted: $($token.Substring(0, 20))..." -ForegroundColor Green
         
         if ($SaveToEnv) {
-            # Update .env.local
+            # Update .env.local (SHOPIFY_ACCESS_TOKEN for API scripts; SHOPIFY_CLI_THEME_TOKEN for theme pull/dev)
             if (Test-Path ".env.local") {
                 $envContent = Get-Content ".env.local"
-                $updated = $false
+                $updatedAccess = $false
+                $updatedCli = $false
                 $newContent = @()
                 
                 foreach ($line in $envContent) {
                     if ($line -match '^SHOPIFY_ACCESS_TOKEN=(.*)$') {
                         $newContent += "SHOPIFY_ACCESS_TOKEN=$token"
-                        $updated = $true
+                        $updatedAccess = $true
+                    } elseif ($line -match '^SHOPIFY_CLI_THEME_TOKEN=(.*)$') {
+                        $newContent += "SHOPIFY_CLI_THEME_TOKEN=$token"
+                        $updatedCli = $true
                     } else {
                         $newContent += $line
                     }
                 }
                 
-                if (-not $updated) {
-                    $newContent += "SHOPIFY_ACCESS_TOKEN=$token"
-                }
+                if (-not $updatedAccess) { $newContent += "SHOPIFY_ACCESS_TOKEN=$token" }
+                if (-not $updatedCli) { $newContent += "SHOPIFY_CLI_THEME_TOKEN=$token" }
                 
                 $newContent | Out-File -FilePath ".env.local" -Encoding UTF8
-                Write-Host "[OK] Saved to .env.local" -ForegroundColor Green
+                Write-Host "[OK] Saved SHOPIFY_ACCESS_TOKEN and SHOPIFY_CLI_THEME_TOKEN to .env.local" -ForegroundColor Green
             } else {
                 Write-Host "[WARN] .env.local not found. Token not saved." -ForegroundColor Yellow
                 Write-Host "Token obtained but not saved. Run with -SaveToEnv and ensure .env.local exists, or paste the token from Shopify Admin into .env.local." -ForegroundColor Cyan

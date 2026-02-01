@@ -69,6 +69,26 @@ On Windows this uses Git Credential Manager (GCM). If you use another helper, se
 
 ### Shopify Issues
 
+#### Theme pull: SSL/TLS handshake failure (Windows)
+
+**Symptoms**: `theme-pull.ps1` or `npx shopify theme pull` fails with:
+
+- `Network error connecting to your store aodrop.com.myshopify.com`
+- `request to https://.../admin/api/unstable/graphql.json failed, reason: write EPROTO ... ssl3_read_bytes:ssl/tls alert handshake failure`
+- `SSL alert number 40`
+
+**Cause**: Known Windows + Node.js + Shopify CLI issue: TLS negotiation with Shopify’s API can fail (proxy, antivirus, or Node/OpenSSL version).
+
+**Try (in order)**:
+
+1. **Node version**: Use Node.js 18 or 20 LTS. Check: `node -v`. Install from https://nodejs.org/ or use nvm-windows.
+2. **Retry**: Run `.\scripts\shopify\theme-pull.ps1` again; transient network/SSL issues often clear.
+3. **Network**: Temporarily disable VPN or try another network (e.g. mobile hotspot) and run theme-pull again.
+4. **Proxy/antivirus**: If you use a corporate proxy or SSL-inspecting antivirus, try from a network that doesn’t intercept HTTPS, or add an exception for `*.myshopify.com`.
+5. **WSL2**: From WSL2 (Ubuntu), run the same repo and `.\scripts\shopify\theme-pull.ps1` (or `npx shopify theme pull`) there; Linux often avoids this SSL behavior.
+
+Auth is separate: if you later see “not authorized”, use `.\scripts\shopify\theme-auth-then-pull.ps1` or `.\scripts\shopify\theme-auth-via-browser.ps1`.
+
 #### API Connection Failed
 
 **Symptoms**: Shopify API calls return errors

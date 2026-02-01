@@ -86,7 +86,7 @@ When you open the **theme dev URL** (step 3), you get a **live preview** of the 
 
 To **preview the look locally without Shopify**, open:
 
-**`docs/guides/theme-preview-mock.html`** in your browser. It shows a static mock of the AO brand (dark theme, placeholder logo/slogan text, accent underlines) so you can see the style before running theme dev.
+**`docs/guides/theme-preview-mock.html`** in your browser. It is a **static style mock only** (local HTML), **not** a Shopify theme. Use it to see the AO look (dark theme, slogan, accent underlines). For the **actual Shopify theme preview**, run `.\scripts\shopify\theme-dev.ps1` (or Tasks → Shopify: Theme Dev) and open the URL it prints.
 
 ---
 

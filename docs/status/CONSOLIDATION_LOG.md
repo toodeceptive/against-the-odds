@@ -212,3 +212,27 @@
 ## 2026-02 — Guru expert finalization (theme + CI + docs)
 
 **Action**: Multi-phase guru audit and finalization (user-approved). **Theme**: AO brand CSS (drip/magenta/teal, grunge utility), theme-preview-mock, store-update docs (UPDATE_SHOPIFY_FROM_CURSOR, THEME_CUSTOMIZATION_FLOW, aodrop-theme README). **CI**: quality-check (test:unit required, test:coverage + npm audit optional/continue-on-error); ci (test:unit only, trivy + upload-sarif continue-on-error); shopify-sync (sync-products.ps1 exits 0 when secrets missing); sync-theme-branch (checkout token, subtree push continue-on-error). **Docs**: deploy-log, CHANGELOG, workflows README updated. **Verification**: format:check, lint, test:unit, verify-pipeline (66 scripts parse, 7 workflows present, dry-run OK) — all pass. No obsolete files deleted; placeholders documented. **Committed and pushed** (theme 8d36600, CI 58711f8); this log entry and deploy-log/CHANGELOG in finalization commit.
+
+---
+
+## 2026-02 — Setup and manual verification (user-approved)
+
+**Action**: User approved setup and manual verification. **Automated checks run**: verify-pipeline.ps1 -SkipRunbook (67 scripts parse, 7 workflows, lint, product sync dry-run OK); format:check (2 files fixed with npm run format); test:unit (pass). **Docs added**: Manual verification checklist in docs/UPDATE_SHOPIFY_FROM_CURSOR.md (auth + pull → theme-dev → Admin confirm → optional theme-update-store); docs/status/MANUAL_VERIFICATION_CHECKLIST.md (table + automated checks). **Theme paths**: Confirmed all Shopify scripts default to src/shopify/themes/aodrop-theme. **Manual steps** (require Shopify CLI auth): theme-auth-then-pull.ps1 → theme-dev.ps1 → confirm in Admin; see MANUAL_VERIFICATION_CHECKLIST.md.
+
+---
+
+## 2026-02 — Guru review, audit, finish-setup (user-approved)
+
+**Action**: User approved review, audit, and automated finish of setup. **Review/audit**: Theme setup flow (theme-pull, auth-then-pull, auth-via-browser, theme-dev, theme-update-store), merge-brand, docs (UPDATE_SHOPIFY_FROM_CURSOR, THEME_CUSTOMIZATION_FLOW, MANUAL_VERIFICATION_CHECKLIST) reviewed; aodrop-theme folder has assets/snippets but no layout/ until theme-pull succeeds. **Fixes**: theme-pull.ps1 failure message improved (SSL/retry hint + auth script names); format fixed (MANUAL_VERIFICATION_CHECKLIST.md, scripts/README.md). **New script**: finish-setup.ps1 — runs verify-pipeline -SkipRunbook, theme-pull, theme-update-store -SkipPush (merge brand + copy images), writes docs/status/SETUP_STATUS.md; exits 0 when verify passes (pull failure due to SSL/network is non-fatal). **Run**: finish-setup.ps1 executed — pipeline OK, theme pull FAIL (SSL handshake), merge brand + copy images OK, SETUP_STATUS.md written. **Result**: Setup automation complete; theme pull blocked by network/SSL until retry or auth path. Next: retry theme-pull or theme-auth-then-pull/theme-auth-via-browser, then theme-dev, Admin confirm, optional theme-update-store (push).
+
+---
+
+## 2026-02 — Guru takeover completion (user-approved)
+
+**Action**: User approved full guru takeover to complete all work using expert techniques and processes. **Verification**: verify-pipeline -SkipRunbook (69 scripts, 7 workflows, lint, product sync dry-run OK); format fixed (SETUP_STATUS.md, scripts/README.md); lint and test:unit pass. **finish-setup.ps1** re-run: pipeline OK, theme pull FAIL (SSL), merge brand + copy images OK, SETUP_STATUS.md refreshed. **Deliverable**: docs/status/GURU_COMPLETION_SUMMARY.md — single handoff document with: (1) what was completed (verification, auth/theme scripts, docs), (2) current blocker (SSL/TLS on theme pull), (3) handoff checklist (pull → theme-dev → Admin → optional theme-update-store). All work that can be done without live Shopify network is complete; user follows checklist once SSL/network allows.
+
+---
+
+## 2026-02 — Full system audit, perfection, commit and push (user-approved)
+
+**Action**: User approved comprehensive audit and perfection of pipeline, branches, worktrees, workflows, and commit/push. **Discovery**: main @ 80c3186; 13 modified, 6 untracked; local branches main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129; remotes origin/main, shopify-theme, dependabot/…; 5 worktrees (primary + ewa, mhx, snq, uub; ewa/snq/uub detached HEAD). **Pipeline**: verify-pipeline -SkipRunbook OK; format fixed (SETUP_STATUS.md); lint and test:unit pass. **Docs**: docs/status/SHOPIFY_ADMIN_CHECKLIST.md (what to verify when logging into Shopify Admin — agent cannot log in); docs/status/FULL_SYSTEM_AUDIT_20260201.md (branches, worktrees, workflows, optional cleanup); WORKTREE_INVENTORY.md updated (uub added). **Obsolete**: No workflows or code deleted; archive/ and scripts/archive/ kept; optional branch/worktree cleanup documented for operator. **Commit**: All changes staged and committed to main; push to origin/main. See FULL_SYSTEM_AUDIT_20260201.md for branch/worktree optional cleanup.

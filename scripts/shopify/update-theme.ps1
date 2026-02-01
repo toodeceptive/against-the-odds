@@ -1,4 +1,5 @@
 # Deploy theme updates to Shopify
+# Uses "npx shopify theme push" so the theme CLI is used (not a different global "shopify" e.g. Hydrogen).
 # Syncs local theme files to Shopify store. Repo root from script location.
 
 param(
@@ -45,9 +46,24 @@ if (-not (Test-Path $ThemePath)) {
     exit 1
 }
 
-Write-Host "Deploying theme..." -ForegroundColor Yellow
+# Use permanent store domain (myshopify.com) for theme CLI — matches theme-pull.
+$storeForCli = $Store
+if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
+    $storeForCli = "aodrop.com.myshopify.com"
+}
 
-$pushArgs = $ShopifyCmd[1..($ShopifyCmd.Length - 1)] + "theme", "push", "--store=$Store", "--path=$ThemePath"
+$themeToken = $env:SHOPIFY_CLI_THEME_TOKEN
+if ([string]::IsNullOrWhiteSpace($themeToken)) { $themeToken = $env:SHOPIFY_ACCESS_TOKEN }
+
+Write-Host "Deploying theme (npx shopify theme push)..." -ForegroundColor Yellow
+if ($themeToken) { Write-Host "Using token (non-interactive)." -ForegroundColor Gray }
+
+# Use npx explicitly so we always use @shopify/cli theme push. Pass --path and path as separate args.
+$pushArgs = @("shopify", "theme", "push", "--store=$storeForCli", "--path", $ThemePath)
+if ($themeToken) {
+    $pushArgs += "--password"
+    $pushArgs += $themeToken
+}
 if ($Live) {
     Write-Host "Warning: Deploying to LIVE theme!" -ForegroundColor Red
     $confirm = Read-Host "Are you sure? (yes/no)"
@@ -64,7 +80,7 @@ if ($Live) {
         $pushArgs += "--theme=$ThemeId"
     }
 }
-& $ShopifyCmd[0] $pushArgs
+& npx $pushArgs
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "[OK] Theme deployed successfully!" -ForegroundColor Green

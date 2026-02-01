@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AO theme preview (mock) — Against the Odds</title>
+    <title>AO style mock (not a Shopify theme) — Against the Odds</title>
     <style>
       :root {
         --ao-bg: #0d0d0d;
@@ -191,6 +191,20 @@
         outline: 2px solid var(--ao-accent-cyan);
         outline-offset: 2px;
       }
+
+      .mock-notice {
+        font-size: 0.8rem;
+        color: var(--ao-text-muted);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 0.5rem var(--ao-spacing);
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .mock-notice code {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 0.15rem 0.35rem;
+        border-radius: 3px;
+      }
     </style>
   </head>
   <body>
@@ -198,11 +212,16 @@
       <div class="page-width">
         <div class="logo-placeholder" aria-label="Against the Odds">Against the Odds</div>
       </div>
+      <div class="mock-notice" role="status">
+        This is a <strong>static style mock</strong> (local HTML). It is <strong>not</strong> a
+        Shopify theme. For the live Shopify theme preview, run
+        <code>.\scripts\shopify\theme-dev.ps1</code> or use Tasks → Shopify: Theme Dev.
+      </div>
     </header>
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="page-width">
-          <span class="badge">Theme preview mock</span>
+          <span class="badge">Style mock only — not Shopify</span>
           <h1 id="hero-title" class="title accent-underline">Against the Odds</h1>
           <p class="subtitle">
             If y'all drop it · We all got it · If y'all rock it ·
@@ -218,7 +237,11 @@
     <footer>
       <div class="page-width">
         <p>We all profit</p>
-        <p><a href="#">Theme dev</a> → open theme-dev.ps1 URL for live store preview</p>
+        <p>
+          <strong>Live Shopify theme preview:</strong> Run
+          <code>.\scripts\shopify\theme-dev.ps1</code> from repo root (or Tasks → Shopify: Theme
+          Dev), then open the URL it prints. Requires <code>theme-pull.ps1</code> once first.
+        </p>
       </div>
     </footer>
   </body>

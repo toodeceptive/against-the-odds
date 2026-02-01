@@ -44,20 +44,23 @@ if (-not (Test-Path $envPath)) {
 }
 
 $content = Get-Content $envPath
-$updated = $false
+$updatedAccess = $false
+$updatedCli = $false
 $newContent = @()
 foreach ($line in $content) {
     if ($line -match '^SHOPIFY_ACCESS_TOKEN=(.*)$') {
         $newContent += "SHOPIFY_ACCESS_TOKEN=$Token"
-        $updated = $true
+        $updatedAccess = $true
+    } elseif ($line -match '^SHOPIFY_CLI_THEME_TOKEN=(.*)$') {
+        $newContent += "SHOPIFY_CLI_THEME_TOKEN=$Token"
+        $updatedCli = $true
     } else {
         $newContent += $line
     }
 }
-if (-not $updated) {
-    $newContent += "SHOPIFY_ACCESS_TOKEN=$Token"
-}
+if (-not $updatedAccess) { $newContent += "SHOPIFY_ACCESS_TOKEN=$Token" }
+if (-not $updatedCli) { $newContent += "SHOPIFY_CLI_THEME_TOKEN=$Token" }
 $newContent | Out-File -FilePath $envPath -Encoding UTF8
 
-Write-Host "[OK] SHOPIFY_ACCESS_TOKEN saved to .env.local (never commit this file)." -ForegroundColor Green
-Write-Host "Verify with: .\scripts\run-runbook.ps1" -ForegroundColor Cyan
+Write-Host "[OK] SHOPIFY_ACCESS_TOKEN and SHOPIFY_CLI_THEME_TOKEN saved to .env.local (never commit this file)." -ForegroundColor Green
+Write-Host "Theme pull/dev will use token. Verify with: .\scripts\run-runbook.ps1" -ForegroundColor Cyan
