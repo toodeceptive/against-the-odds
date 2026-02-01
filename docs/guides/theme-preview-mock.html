@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AO theme preview (mock) — Against the Odds</title>
+    <style>
+      :root {
+        --ao-bg: #0d0d0d;
+        --ao-bg-surface: #1a1a1a;
+        --ao-bg-elevated: #141414;
+        --ao-text: #f5f0e8;
+        --ao-text-muted: #b8b0a0;
+        --ao-accent-cyan: #00d4ff;
+        --ao-accent-yellow: #facc15;
+        --ao-accent-pink: #ec4899;
+        --ao-font-display: 'Bebas Neue', 'Oswald', sans-serif;
+        --ao-font-body: 'Inter', 'DM Sans', sans-serif;
+        --ao-radius: 6px;
+        --ao-shadow-glow: 0 0 20px rgba(0, 212, 255, 0.2);
+        --ao-page-width: 1200px;
+        --ao-spacing: 1.5rem;
+        --ao-spacing-lg: 3rem;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--ao-bg);
+        color: var(--ao-text);
+        font-family: var(--ao-font-body);
+        font-size: 1rem;
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page-width {
+        max-width: var(--ao-page-width);
+        margin: 0 auto;
+        padding-left: var(--ao-spacing);
+        padding-right: var(--ao-spacing);
+      }
+
+      /* Header */
+      header {
+        background: var(--ao-bg-surface);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1rem 0;
+      }
+
+      .logo-placeholder {
+        font-family: var(--ao-font-display);
+        font-size: 1.5rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      /* Main */
+      main {
+        flex: 1;
+        padding: var(--ao-spacing-lg) 0;
+      }
+
+      .hero {
+        text-align: center;
+        padding: var(--ao-spacing-lg) var(--ao-spacing);
+      }
+
+      .hero .badge {
+        display: inline-block;
+        background: rgba(0, 212, 255, 0.15);
+        color: var(--ao-accent-cyan);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .hero .title {
+        font-family: var(--ao-font-display);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0 0 0.5rem;
+        line-height: 1.1;
+      }
+
+      .accent-underline {
+        display: inline-block;
+        position: relative;
+      }
+
+      .accent-underline::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -4px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--ao-accent-cyan),
+          var(--ao-accent-yellow)
+        );
+        border-radius: 2px;
+      }
+
+      .hero .subtitle {
+        color: var(--ao-text-muted);
+        font-size: 1.125rem;
+        margin: 0.5rem 0;
+      }
+
+      .hero .cta {
+        margin-top: 1.5rem;
+      }
+
+      .btn-primary {
+        display: inline-block;
+        background: var(--ao-accent-cyan);
+        color: var(--ao-bg);
+        border: 2px solid #000;
+        font-family: var(--ao-font-display);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--ao-radius);
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        transition: box-shadow 0.2s ease;
+      }
+
+      .btn-primary:hover {
+        box-shadow: var(--ao-shadow-glow);
+      }
+
+      .btn-primary:focus-visible {
+        outline: 2px solid var(--ao-accent-cyan);
+        outline-offset: 2px;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--ao-bg-elevated);
+        color: var(--ao-text-muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 2rem var(--ao-spacing);
+        text-align: center;
+      }
+
+      footer p {
+        margin: 0.5rem 0;
+      }
+
+      footer a {
+        color: var(--ao-accent-cyan);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      footer a:focus-visible {
+        outline: 2px solid var(--ao-accent-cyan);
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="page-width">
+        <div class="logo-placeholder" aria-label="Against the Odds">Against the Odds</div>
+      </div>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="page-width">
+          <span class="badge">Theme preview mock</span>
+          <h1 id="hero-title" class="title accent-underline">Against the Odds</h1>
+          <p class="subtitle">
+            If y'all drop it · We all got it · If y'all rock it · We all profit
+          </p>
+          <p class="subtitle">THE ODDS WERE NEVER EVEN</p>
+          <p class="cta">
+            <a href="#" class="btn-primary">Join the drop</a>
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="page-width">
+        <p>We all profit</p>
+        <p>
+          <a href="#">Theme dev</a> → open theme-dev.ps1 URL for live store preview
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
