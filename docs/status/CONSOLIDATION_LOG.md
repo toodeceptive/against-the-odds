@@ -272,3 +272,9 @@
 ## 2026-02 — Finalize and close agent branches/workflows; handoff for new agent (user-approved)
 
 **Action**: User asked to finalize and close all current agent branches and workflows and prepare for a new agent to properly plan and finish all work. **Branches/workflows:** Main is canonical (7d2bced); feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129 documented as optional cleanup for new agent. Workflows (main-only) finalized and documented. **Handoff:** Created docs/status/HANDOFF_FOR_NEW_AGENT_202602.md — single entry point for new agent: current state, closed branches/workflows, what's complete, what's blocked (theme pull/SSL), what to plan and do (theme pull when SSL allows, Admin check, optional push and branch/worktree cleanup). Updated INDEX_REPORTS.md (HANDOFF_FOR_NEW_AGENT_202602 at top of Current canonical). Updated PLAN_HANDOFF_FOR_NEXT_AGENT.md to point new agent to HANDOFF_FOR_NEW_AGENT_202602.md. **Result:** Current agent work is closed; new agent reads HANDOFF_FOR_NEW_AGENT_202602.md first, then plans and finishes remaining work.
+
+---
+
+## 2026-02 — Handoff replaced: situation only; full dominion for new agent (user-approved)
+
+**Action**: User stated the system is broken and will allow the new agent full unrestricted approval and dominion over the entire project to fix everything. User asked not to express limitations or instructions, only to explain the situation. **Change:** HANDOFF_FOR_NEW_AGENT_202602.md was replaced with a situation-only document: repo and branch state, what was attempted and what happens (theme pull fails with SSL; theme folder has brand assets but no full structure; pipeline and finish-setup runs), what exists in the repo (scripts, credentials, docs, workflows, store), and the user’s position (system broken; new agent has full dominion to fix everything). No limitations or instructions in the handoff.
