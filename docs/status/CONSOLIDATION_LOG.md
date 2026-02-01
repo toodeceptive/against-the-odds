@@ -206,3 +206,9 @@
 ## 2026-01-31 — NEXT_BEST_STEPS: Tier 1 + Tier 2 (user-approved)
 
 **Action**: Execute NEXT_BEST_STEPS Tier 1 (daily checks) and Tier 2 (branch hygiene). Tier 1: lint, format:check, test:unit — all pass. Tier 2: BRANCH_INVENTORY refreshed — added dependabot/npm_and_yarn remote note; clarified handoff-doc-permissions and cursor/main-project-setup-2bd1 as optional operator cleanup; last updated note. Tier 3 (launch checklist, store readiness) and Tier 4 (coverage, deploy placeholders) remain for operator when ready. **Committed and pushed** (user-approved).
+
+---
+
+## 2026-02 — Guru expert finalization (theme + CI + docs)
+
+**Action**: Multi-phase guru audit and finalization (user-approved). **Theme**: AO brand CSS (drip/magenta/teal, grunge utility), theme-preview-mock, store-update docs (UPDATE_SHOPIFY_FROM_CURSOR, THEME_CUSTOMIZATION_FLOW, aodrop-theme README). **CI**: quality-check (test:unit required, test:coverage + npm audit optional/continue-on-error); ci (test:unit only, trivy + upload-sarif continue-on-error); shopify-sync (sync-products.ps1 exits 0 when secrets missing); sync-theme-branch (checkout token, subtree push continue-on-error). **Docs**: deploy-log, CHANGELOG, workflows README updated. **Verification**: format:check, lint, test:unit, verify-pipeline (66 scripts parse, 7 workflows present, dry-run OK) — all pass. No obsolete files deleted; placeholders documented. **Committed and pushed** (theme 8d36600, CI 58711f8); this log entry and deploy-log/CHANGELOG in finalization commit.

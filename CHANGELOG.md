@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02** — Guru finalization: Theme brand (ao-brand.css drip/magenta/teal, theme-preview-mock, store-update docs); CI resilience (quality-check: test:unit required, coverage/audit optional; ci: test:unit only, trivy/sarif continue-on-error; shopify-sync: skip when secrets missing; sync-theme-branch: token + continue-on-error). Deploy-log and pipeline verification updated. No store-affecting deploy.
 - **2026-01-31** — Dependabot fix: vitest 1→4, @vitest/coverage-v8 1→4, eslint 8→9; ESLint flat config (eslint.config.mjs), removed .eslintrc.json; npm audit 0 vulnerabilities. Not store-affecting.
 - **2026-01-31** — Workflow visual guide and keybinding finalization: docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md (user-focused pipeline when prompting an agent); Ctrl+Alt+T approved; keybindings added to user Cursor keybindings.json (Ctrl+Alt+P, Ctrl+Alt+T); .cursor/tasks.json theme dev task reveal/focus/showReuseMessage; KEYBINDING_PENDING_APPROVAL and OPERATOR_RUNBOOK updated; README and docs/README links. No store-affecting changes.
 - **2026-01-31** — Finalization audit: FINALIZATION_AUDIT_20260131.md; fixed broken plan refs (cursor-github-shopify, expert_team → .cursor/plans/README.md and rules); PLAN_AGENT_ENTRY Phase 0 skip when signed off; NEXT_STEPS/assets/brand, MANUFACTURING logo path; NEXT_BEST_STEPS Tier 4 items 11–12 done; docs/README PROJECT_MANAGEMENT; OPERATOR_RUNBOOK run-runbook.ps1; INDEX_REPORTS and VERSION_UPDATE_TABLE.
