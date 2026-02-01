@@ -48,7 +48,7 @@ if (Test-Path $snippetSrc) {
 }
 
 # Patch layout/theme.liquid if it exists
-$layoutFile = Join-Path $ThemePath "layout\theme.liquid"
+$layoutFile = Join-Path (Join-Path $ThemePath "layout") "theme.liquid"
 if (-not (Test-Path $layoutFile)) {
     Write-Host "[SKIP] No layout/theme.liquid; add stylesheet and body class manually (see LAYOUT_STEPS.md)" -ForegroundColor Yellow
     exit 0

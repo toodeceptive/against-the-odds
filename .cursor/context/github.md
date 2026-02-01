@@ -14,12 +14,14 @@
 
 ## Workflows
 
-- CI: `.github/workflows/ci.yml`
+- **Branch strategy**: main-only (no develop branch).
+- CI: `.github/workflows/ci.yml` (push/PR to main)
 - Deploy: `.github/workflows/deploy.yml`
 - Shopify Sync: `.github/workflows/shopify-sync.yml`
+- Sync theme branch: `.github/workflows/sync-theme-branch.yml` (main → shopify-theme)
 - Quality: `.github/workflows/quality-check.yml`
 - Maintenance: `.github/workflows/maintenance.yml`
-- Sync: `.github/workflows/sync.yml`
+- Sync: `.github/workflows/sync.yml` (repo sync; main-only status)
 
 ## Secrets Required
 

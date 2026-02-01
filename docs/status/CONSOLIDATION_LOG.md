@@ -242,3 +242,21 @@
 ## 2026-02 — Guru finalization commit pushed (user-approved)
 
 **Action**: User approved commit and push of all guru work. **Commit** 0f64466: Theme auth flows (theme-auth-then-pull.ps1, theme-auth-via-browser.ps1, finish-setup.ps1), theme-pull/theme-dev/update-theme token env and SHOPIFY_FLAG_FORCE, SSL troubleshooting (docs/TROUBLESHOOTING.md), status docs (SETUP_STATUS, GURU_COMPLETION_SUMMARY, MANUAL_VERIFICATION_CHECKLIST, SHOPIFY_ADMIN_CHECKLIST, FULL_SYSTEM_AUDIT_20260201), browser scripts, theme customization flow and scripts README. **Push**: origin/main 80c3186..0f64466. Main is up to date with origin; all guru-deliverable work is committed and pushed.
+
+---
+
+## 2026-02 — Takeover: theme-pull REST fallback (user-approved)
+
+**Action**: User reported all runs failed manually; approved takeover to fix. **Root cause**: theme-pull fails with SSL/TLS handshake (Node CLI and, on this machine, .NET REST both fail — environment/network). **Fixes**: (1) **theme-pull-rest.ps1** — new script: pull theme via Shopify REST Admin API (PowerShell/Invoke-WebRequest); TLS 1.2 forced; paginated assets list; used when token set. (2) **theme-pull.ps1** — when token set, try REST first, then CLI fallback; env SHOPIFY_USE_REST_PULL=1 forces REST only. (3) **TROUBLESHOOTING.md** — REST fallback as first step; renumbered steps. (4) **scripts/README.md** — theme-pull-rest.ps1 and SHOPIFY_USE_REST_PULL documented. **Verification**: verify-pipeline (70 scripts), format, lint, test:unit pass. Theme pull still fails on this machine (SSL environment); REST path available for when network allows.
+
+---
+
+## 2026-02 — Branch/workflow/path integrity (user-approved)
+
+**Action**: User asked to check GitHub branches and ensure full system integrity. **Branches**: BRANCH_INVENTORY.md updated — added **feature/ao-brand-shopify-automation** (local + remote); all branches (main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129, shopify-theme, dependabot/…) documented. **Workflows**: sync.yml status report changed to main-only (removed develop branch line; "Branch strategy: main-only (no develop)"). **Paths**: theme-init.ps1 — repo path now resolved from PSScriptRoot (no hardcoded C:\ path); ThemePath default via Join-Path. finish-setup.ps1 and merge-brand-into-theme.ps1 — layout path uses Join-Path for cross-platform (layout/theme.liquid). **Verification**: verify-pipeline (70 scripts, 7 workflows) pass.
+
+---
+
+## 2026-02 — Full system audit: remotes, Cursor, GitHub, pipeline, docs (user-approved)
+
+**Action**: User approved full audit and fix of remotes, repo, terminal, Cursor, GitHub, pipeline, folders, files, worktrees, workflows, agents, .md files, paths. **Git**: origin only (https://github.com/toodeceptive/against-the-odds.git); branches main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129 (local only), shopify-theme (remote only), dependabot/…; 5 worktrees (primary + ewa, mhx, snq, uub). **Cursor**: .cursor/worktrees.json — added inventoryDoc pointer to docs/status/WORKTREE_INVENTORY.md. .cursor/context/github.md — branch strategy main-only; added sync-theme-branch.yml. .cursor/context/shopify.md — theme-pull REST fallback and SHOPIFY_USE_REST_PULL noted. **Docs**: docs/status/INDEX_REPORTS.md — new "Current canonical (2026-02)" section at top (CONSOLIDATION_LOG, BRANCH_INVENTORY, WORKTREE_INVENTORY, GURU_COMPLETION_SUMMARY, SETUP_STATUS, MANUAL_VERIFICATION_CHECKLIST, INDEX_REPORTS, OPERATOR_RUNBOOK, AGENTS.md). No legacy files deleted; consolidation by index and labels only. **Workflows**: Already main-only; sync.yml status updated previously. **Verification**: Pipeline and codebase checks (verify-pipeline, format, lint, test) to run after staging.

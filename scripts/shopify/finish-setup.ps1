@@ -73,7 +73,8 @@ if (-not $SkipMerge) {
 # 4. Write SETUP_STATUS.md
 Write-Host "[4/4] Writing docs/status/SETUP_STATUS.md..." -ForegroundColor Yellow
 
-$layoutExists = Test-Path (Join-Path (Join-Path (Join-Path (Join-Path $repoPath "src") "shopify") "themes") "aodrop-theme\layout\theme.liquid")
+$themeRoot = Join-Path (Join-Path (Join-Path (Join-Path $repoPath "src") "shopify") "themes") "aodrop-theme"
+$layoutExists = Test-Path (Join-Path (Join-Path $themeRoot "layout") "theme.liquid")
 
 $nextSteps = @()
 if (-not $pullOk) {

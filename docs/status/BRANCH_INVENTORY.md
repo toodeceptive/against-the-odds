@@ -2,20 +2,21 @@
 
 **Purpose**: Single source of truth so nothing is overlooked during reorganization.
 
-**Last updated**: 2026-01-31 (NEXT_BEST_STEPS Tier 2 refresh)
+**Last updated**: 2026-02 (branch inventory: added feature/ao-brand-shopify-automation; main-only)
 
 ---
 
 ## Branches (local and remote)
 
-| Branch                               | Location                                                       | Notes                                                                                                                           |
-| ------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| **main**                             | local (current), remote origin                                 | Default branch; workflow triggers are main-only (develop removed).                                                              |
-| **develop**                          | Not present (local or remote)                                  | Removed from ci.yml, quality-check.yml, deploy.yml; main-only documented.                                                       |
-| **cursor/main-project-setup-2bd1**   | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
-| **handoff-doc-permissions-20260129** | local only (+ worktree mhx)                                    | Optional: handoff/permissions work reflected in main (AGENTS.md, handoff docs). Merge or delete when worktree no longer needed. |
-| **shopify-theme**                    | Remote only (created by sync-theme-branch.yml on push to main) | Workflow-created branch for Shopify GitHub App connection                                                                       |
-| **dependabot/npm_and_yarn/…**        | Remote only (transient)                                        | Dependabot PR branches; safe to ignore for inventory; merge/close via PR.                                                       |
+| Branch                                  | Location                                                       | Notes                                                                                                                           |
+| --------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **main**                                | local (current), remote origin                                 | Default branch; workflow triggers are main-only (develop removed).                                                              |
+| **develop**                             | Not present (local or remote)                                  | Removed from ci.yml, quality-check.yml, deploy.yml; main-only documented.                                                       |
+| **feature/ao-brand-shopify-automation** | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
+| **cursor/main-project-setup-2bd1**      | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
+| **handoff-doc-permissions-20260129**    | local only (+ worktree mhx)                                    | Optional: handoff/permissions work reflected in main (AGENTS.md, handoff docs). Merge or delete when worktree no longer needed. |
+| **shopify-theme**                       | Remote only (created by sync-theme-branch.yml on push to main) | Workflow-created branch for Shopify GitHub App connection                                                                       |
+| **dependabot/npm_and_yarn/…**           | Remote only (transient)                                        | Dependabot PR branches; safe to ignore for inventory; merge/close via PR.                                                       |
 
 **Resolved (Track A)**: develop removed from all workflow triggers. Stale local branches (ao-guru-exec, finalization/consolidate-20260129, wip/finalization-team-20260129) deleted. Main-only strategy documented in CONSOLIDATION_LOG and workflow README. **Branch hygiene (2026-01-31)**: handoff-doc-permissions and cursor/main-project-setup-2bd1 documented as optional; operator may merge useful work to main and delete, or keep as reference (see NEXT_BEST_STEPS_20260131 Tier 2).
 

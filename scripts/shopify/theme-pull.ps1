@@ -56,6 +56,24 @@ if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN
 if ([string]::IsNullOrWhiteSpace($themeToken)) { $themeToken = $env:SHOPIFY_ACCESS_TOKEN }
 
+# When token is set: try REST first (PowerShell/.NET TLS) to avoid Node SSL handshake failures on Windows.
+if ($themeToken -and ($env:SHOPIFY_USE_REST_PULL -eq "1" -or $env:SHOPIFY_USE_REST_PULL -eq "true")) {
+    Write-Host "Pulling theme '$Theme' from $storeForCli into $ThemePath (REST API, token set)" -ForegroundColor Yellow
+    & "$PSScriptRoot\theme-pull-rest.ps1" -Store $Store -ThemePath $ThemePath -Theme $Theme
+    exit $LASTEXITCODE
+}
+
+if ($themeToken) {
+    Write-Host "Pulling theme '$Theme' from $storeForCli into $ThemePath" -ForegroundColor Yellow
+    Write-Host "Trying REST API first (avoids Node SSL issues)..." -ForegroundColor Gray
+    & "$PSScriptRoot\theme-pull-rest.ps1" -Store $Store -ThemePath $ThemePath -Theme $Theme
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "[OK] Theme pull complete (REST)" -ForegroundColor Green
+        exit 0
+    }
+    Write-Host "REST pull failed; falling back to Shopify CLI." -ForegroundColor Yellow
+}
+
 Write-Host "Pulling theme '$Theme' from $storeForCli into $ThemePath" -ForegroundColor Yellow
 Write-Host "Using: npx shopify theme pull (theme CLI)" -ForegroundColor Gray
 if ($themeToken) {
@@ -69,8 +87,6 @@ Write-Host ""
 [Environment]::SetEnvironmentVariable("SHOPIFY_FLAG_FORCE", "1", "Process")
 
 # Use npx explicitly so we always use @shopify/cli theme pull (avoids wrong global "shopify" e.g. Hydrogen).
-# Pass --path and path as separate args so Windows paths (e.g. C:\...) are not mangled.
-# Run without capturing so output streams in real time (avoids "frozen" appearance).
 $pullArgs = @("shopify", "theme", "pull", "--store=$storeForCli", "--theme=$Theme", "--path", $ThemePath)
 if ($themeToken) {
     $pullArgs += "--password"
@@ -81,7 +97,8 @@ if ($themeToken) {
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[FAIL] Theme pull failed" -ForegroundColor Red
     Write-Host "If you see 'not authorized': run .\scripts\shopify\theme-auth-then-pull.ps1 or .\scripts\shopify\theme-auth-via-browser.ps1" -ForegroundColor Yellow
-    Write-Host "If you see an SSL/network error: see docs/TROUBLESHOOTING.md (Theme pull: SSL/TLS handshake failure)." -ForegroundColor Gray
+    Write-Host "If you see an SSL/network error: set SHOPIFY_USE_REST_PULL=1 and run this script again to use REST (PowerShell) instead of Node CLI." -ForegroundColor Gray
+    Write-Host "See docs/TROUBLESHOOTING.md (Theme pull: SSL/TLS handshake failure)." -ForegroundColor Gray
     exit 1
 }
 

@@ -8,13 +8,13 @@
 
 ## Actual worktrees (from git worktree list)
 
-| Path                                                    | Branch/HEAD                      | Commit   | Purpose                                          |
-| ------------------------------------------------------- | -------------------------------- | -------- | ------------------------------------------------ |
-| `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)   | Primary repo, main branch                        |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ewa` | detached HEAD                    | 505df09  | Cursor navigation worktree (may be temporary)   |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30  | Active worktree on feature branch (user visible) |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/snq` | detached HEAD                    | 1c5ed2e  | Cursor navigation worktree (may be temporary)   |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/uub`  | detached HEAD                    | 16a8024  | Cursor navigation worktree (may be temporary)   |
+| Path                                                    | Branch/HEAD                      | Commit  | Purpose                                          |
+| ------------------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------ |
+| `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)  | Primary repo, main branch                        |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ewa` | detached HEAD                    | 505df09 | Cursor navigation worktree (may be temporary)    |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user visible) |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/snq` | detached HEAD                    | 1c5ed2e | Cursor navigation worktree (may be temporary)    |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/uub` | detached HEAD                    | 16a8024 | Cursor navigation worktree (may be temporary)    |
 
 **Note**: worktrees ewa, snq, uub are detached HEAD and may be temporary; mhx is on a live feature branch. Optional cleanup: `git worktree remove <path>` for detached worktrees no longer in use (from main repo).
 

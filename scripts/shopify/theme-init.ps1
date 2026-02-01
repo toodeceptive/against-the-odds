@@ -2,11 +2,20 @@
 
 param(
     [string]$Store = $env:SHOPIFY_STORE_DOMAIN,
-    [string]$ThemePath = "src\shopify\themes\aodrop-theme"
+    [string]$ThemePath = $null
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+
+$repoPath = if ($PSScriptRoot) {
+    $parent = Join-Path $PSScriptRoot ".."
+    (Resolve-Path (Join-Path $parent "..")).Path
+} else {
+    (Get-Location).Path
+}
+if (-not $ThemePath) {
+    $ThemePath = Join-Path (Join-Path (Join-Path (Join-Path $repoPath "src") "shopify") "themes") "aodrop-theme"
+}
 Set-Location $repoPath
 
 Write-Host "=== Shopify Theme Init ===" -ForegroundColor Cyan

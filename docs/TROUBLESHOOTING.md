@@ -81,11 +81,12 @@ On Windows this uses Git Credential Manager (GCM). If you use another helper, se
 
 **Try (in order)**:
 
-1. **Node version**: Use Node.js 18 or 20 LTS. Check: `node -v`. Install from https://nodejs.org/ or use nvm-windows.
-2. **Retry**: Run `.\scripts\shopify\theme-pull.ps1` again; transient network/SSL issues often clear.
-3. **Network**: Temporarily disable VPN or try another network (e.g. mobile hotspot) and run theme-pull again.
-4. **Proxy/antivirus**: If you use a corporate proxy or SSL-inspecting antivirus, try from a network that doesn’t intercept HTTPS, or add an exception for `*.myshopify.com`.
-5. **WSL2**: From WSL2 (Ubuntu), run the same repo and `.\scripts\shopify\theme-pull.ps1` (or `npx shopify theme pull`) there; Linux often avoids this SSL behavior.
+1. **REST fallback**: `theme-pull.ps1` tries REST (PowerShell/.NET) first when a token is set. Force REST only: `$env:SHOPIFY_USE_REST_PULL=1; .\scripts\shopify\theme-pull.ps1`, or run `.\scripts\shopify\theme-pull-rest.ps1`. If both fail with SSL, the issue is network/environment.
+2. **Node version** (CLI): Use Node.js 18 or 20 LTS. Check: `node -v`. Install from https://nodejs.org/ or use nvm-windows.
+3. **Retry**: Run `.\scripts\shopify\theme-pull.ps1` again; transient network/SSL issues sometimes clear.
+4. **Network**: Temporarily disable VPN or try another network (e.g. mobile hotspot) and run theme-pull again.
+5. **Proxy/antivirus**: If you use a corporate proxy or SSL-inspecting antivirus, try from a network that doesn’t intercept HTTPS, or add an exception for `*.myshopify.com`.
+6. **WSL2**: From WSL2 (Ubuntu), run the same repo and `.\scripts\shopify\theme-pull.ps1` (or `npx shopify theme pull`) there; Linux often avoids this SSL behavior.
 
 Auth is separate: if you later see “not authorized”, use `.\scripts\shopify\theme-auth-then-pull.ps1` or `.\scripts\shopify\theme-auth-via-browser.ps1`.
 
