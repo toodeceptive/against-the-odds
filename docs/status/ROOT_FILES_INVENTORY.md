@@ -8,12 +8,12 @@
 
 ### System / IDE
 
-| File               | Purpose                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------- |
-| `.editorconfig`    | Editor defaults                                                                       |
-| `.eslintrc.json`   | ESLint config                                                                         |
-| `.prettierrc.json` | Prettier config                                                                       |
-| `.gitignore`       | Git ignore patterns (includes .env.local, node_modules, docs/screenshots/\*.png\|jpg) |
+| File                | Purpose                                                                               |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `.editorconfig`     | Editor defaults                                                                       |
+| `eslint.config.mjs` | ESLint 9 flat config                                                                  |
+| `.prettierrc.json`  | Prettier config                                                                       |
+| `.gitignore`        | Git ignore patterns (includes .env.local, node_modules, docs/screenshots/\*.png\|jpg) |
 
 ### Cursor workspace
 

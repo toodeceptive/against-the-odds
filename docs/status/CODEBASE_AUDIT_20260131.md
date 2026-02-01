@@ -48,7 +48,7 @@
 
 | Tool            | Config                                                                                                         | When                                                          |
 | --------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| **ESLint**      | .eslintrc.json                                                                                                 | npm run lint, lint:fix; CI (ci.yml, quality-check.yml)        |
+| **ESLint**      | eslint.config.mjs (flat config)                                                                                | npm run lint, lint:fix; CI (ci.yml, quality-check.yml)        |
 | **Prettier**    | .prettierrc.json                                                                                               | npm run format, format:check; quality-check runs format:check |
 | **Centralized** | Single config at root; no conflicting per-dir overrides. Documented in config/README.md and scripts/README.md. |
 

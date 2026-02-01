@@ -170,7 +170,7 @@ flowchart LR
 
 - **Scripts**: [scripts/](scripts) — group by domain; **scripts/README.md** with list, purpose, when to run (link from OPERATOR_RUNBOOK).
 - **package.json scripts**: Document in scripts/README; align with scripts/ and CI.
-- **Config files**: config/, .editorconfig, .eslintrc.json, .prettierrc.json, vitest.config.js, playwright.config.js, playwright.shopify.config.js, config/shopify/.shopify-cli.yml — list and label; config index (e.g. config/README.md or docs).
+- **Config files**: config/, .editorconfig, eslint.config.mjs (ESLint 9 flat), .prettierrc.json, vitest.config.js, playwright.config.js, playwright.shopify.config.js, config/shopify/.shopify-cli.yml — list and label; config index (e.g. config/README.md or docs).
 - **Environments**: .env.example, .env.shopify.example placeholders; document in [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md); .env.local single local secret store, never committed.
 - **Monitoring and quality**: scripts/health, scripts/monitoring, scripts/quality — document when (local vs CI); align with workflows.
 - **.tmp and temp**: Remove or relocate per Phase 0 list; document in runbook or scripts README.

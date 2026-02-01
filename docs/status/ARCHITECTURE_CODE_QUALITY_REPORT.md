@@ -16,7 +16,7 @@
 
 ### 1.2 Config and quality gates
 
-- **ESLint**: .eslintrc.json — env node/browser/es2021, extends eslint:recommended, prefer-const/no-var, test overrides (no-console off). **Status**: 0 errors, 0 warnings (verified).
+- **ESLint**: eslint.config.mjs (flat config) — globals node/browser, extends eslint:recommended, prefer-const/no-var, test overrides (no-console off). **Status**: 0 errors, 0 warnings (verified).
 - **Prettier**: .prettierrc.json — semi, trailingComma es5, singleQuote, printWidth 100, tabWidth 2. **Status**: Applied to 206 files; format:check passes.
 - **EditorConfig**: .editorconfig — utf-8, LF, indent 2 (js/ts/json/css/md), 4 (ps1). Aligns with Prettier.
 

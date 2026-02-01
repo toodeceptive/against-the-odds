@@ -114,7 +114,7 @@
 
 ## Config and Environment
 
-- **Lint/format**: ESLint (`.eslintrc.json`), Prettier (`.prettierrc.json`). Centralized; CI runs `lint` and `format:check`.
+- **Lint/format**: ESLint 9 (`eslint.config.mjs` flat config), Prettier (`.prettierrc.json`). Centralized; CI runs `lint` and `format:check`.
 - **Env**: `.env.example`, `.env.shopify.example` (templates); `.env.local` (local secrets, gitignored). See [docs/CREDENTIALS_SETUP.md](../docs/CREDENTIALS_SETUP.md).
 - **.tmp / temp**: No repo-level .tmp directory. CI uses `cache: 'npm'`. Scripts that use temp files (e.g. browser token extraction) clean up after use.
 

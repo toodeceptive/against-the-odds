@@ -188,3 +188,9 @@
 ## 2026-01-31 — Test, fix, review, audit, finalize (Prettier on workflow guide)
 
 **Action**: Full test suite (lint, format, unit, integration, verify-pipeline) run; Prettier fix applied to docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md. All checks pass. Pending user approval to commit and push.
+
+---
+
+## 2026-01-31 — Dependabot fix (vitest 4, ESLint 9, npm audit 0)
+
+**Action**: Fix moderate Dependabot vulnerabilities (esbuild via vitest/vite, ESLint circular-ref). Upgraded vitest 1→4, @vitest/coverage-v8 1→4, eslint 8→9; migrated to ESLint 9 flat config (eslint.config.mjs), removed .eslintrc.json; added globals, @eslint/js, @eslint/eslintrc. npm audit: 0 vulnerabilities. Full audit: lint, format, unit/integration tests, verify-pipeline, doc cleanup (all .eslintrc refs → eslint.config.mjs), Prettier on 3 files, pending-approval cleared. **Committed and pushed** (agent-approved).

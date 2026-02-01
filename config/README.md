@@ -9,7 +9,7 @@
 | File                           | Purpose                                                         |
 | ------------------------------ | --------------------------------------------------------------- |
 | `.editorconfig`                | Editor defaults (indent, line endings)                          |
-| `.eslintrc.json`               | ESLint rules; used by `npm run lint` and CI                     |
+| `eslint.config.mjs`            | ESLint 9 flat config; used by `npm run lint` and CI             |
 | `.prettierrc.json`             | Prettier formatting; used by `npm run format` and quality-check |
 | `vitest.config.js`             | Vitest (unit/integration tests)                                 |
 | `playwright.config.js`         | Playwright E2E default config                                   |
