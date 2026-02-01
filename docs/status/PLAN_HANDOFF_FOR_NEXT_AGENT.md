@@ -1,7 +1,9 @@
 # Handoff for next plan (new agent chat)
 
-**Date:** 2026-01-30
+**Date:** 2026-01-30 (updated 2026-02)
 **Purpose:** Give the next plan agent (new Cursor chat using the "plan" feature) everything needed to create a **new** plan without redundancy, from fresh perspectives, considering all work done so far and future optimizations.
+
+**New agent entry (2026-02):** Current agent branches and workflows are **finalized and closed**. For the **new agent** that will plan and finish remaining work, read **[HANDOFF_FOR_NEW_AGENT_202602.md](HANDOFF_FOR_NEW_AGENT_202602.md)** first — it is the single entry point for current state, what's complete, what's blocked, and what to plan and do.
 
 **Plan runs:** For any plan chat (Security & Platform, Fresh Team, or next team), read [PLAN_AGENT_ENTRY.md](PLAN_AGENT_ENTRY.md) first if present — single entry, Expert Team binding rules, and comprehensive-pass questions.
 

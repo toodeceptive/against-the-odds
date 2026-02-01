@@ -10,6 +10,7 @@ Use these first for pipeline, branches, worktrees, and handoff.
 
 | File                                 | Purpose                                                                        |
 | ------------------------------------ | ------------------------------------------------------------------------------ |
+| **HANDOFF_FOR_NEW_AGENT_202602.md**  | **Entry point for new agent** — current state, closed branches/workflows, plan and finish remaining work |
 | **CONSOLIDATION_LOG.md**             | Append-only log of all tracks; single source of what was done and when         |
 | **BRANCH_INVENTORY.md**              | Branch and remote list; main-only strategy                                     |
 | **WORKTREE_INVENTORY.md**            | Cursor/git worktree paths (see also `.cursor/worktrees.json` → `inventoryDoc`) |

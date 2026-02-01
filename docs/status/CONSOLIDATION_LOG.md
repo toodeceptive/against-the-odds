@@ -266,3 +266,9 @@
 ## 2026-02 — All work finishable from this environment complete (user-approved)
 
 **Action**: User approved bypass of inhibiting limitations and to finish all work. **Limitation**: Theme pull and theme-dev require TLS to Shopify; SSL handshake fails in this environment (REST and CLI both). **Completed**: finish-setup.ps1 -SkipPull run — pipeline verify OK, theme pull skipped, merge brand + copy images OK (7 brand images, ao-brand.css, ao-hero-brand.liquid); docs/status/SETUP_STATUS.md refreshed with last run and next steps. **Result**: All automatable work from this environment is complete. Theme pull and theme-dev remain blocked until SSL/network allows (retry from another network or follow docs/TROUBLESHOOTING.md). User: retry theme-pull when network allows, then theme-dev, Admin check, optional theme-update-store.
+
+---
+
+## 2026-02 — Finalize and close agent branches/workflows; handoff for new agent (user-approved)
+
+**Action**: User asked to finalize and close all current agent branches and workflows and prepare for a new agent to properly plan and finish all work. **Branches/workflows:** Main is canonical (7d2bced); feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129 documented as optional cleanup for new agent. Workflows (main-only) finalized and documented. **Handoff:** Created docs/status/HANDOFF_FOR_NEW_AGENT_202602.md — single entry point for new agent: current state, closed branches/workflows, what's complete, what's blocked (theme pull/SSL), what to plan and do (theme pull when SSL allows, Admin check, optional push and branch/worktree cleanup). Updated INDEX_REPORTS.md (HANDOFF_FOR_NEW_AGENT_202602 at top of Current canonical). Updated PLAN_HANDOFF_FOR_NEXT_AGENT.md to point new agent to HANDOFF_FOR_NEW_AGENT_202602.md. **Result:** Current agent work is closed; new agent reads HANDOFF_FOR_NEW_AGENT_202602.md first, then plans and finishes remaining work.

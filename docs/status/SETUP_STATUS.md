@@ -4,12 +4,12 @@
 
 ## Automated steps
 
-| Step              | Result   |
-| ----------------- | -------- |
-| Pipeline verify   | OK |
-| Theme pull        | skipped |
-| Merge brand (no push) | OK |
-| Full theme (layout/theme.liquid) | no |
+| Step                             | Result  |
+| -------------------------------- | ------- |
+| Pipeline verify                  | OK      |
+| Theme pull                       | skipped |
+| Merge brand (no push)            | OK      |
+| Full theme (layout/theme.liquid) | no      |
 
 ## Next steps
 
