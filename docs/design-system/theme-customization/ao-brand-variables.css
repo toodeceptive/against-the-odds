@@ -1,0 +1,85 @@
+/**
+ * AO (Against the Odds) brand — CSS custom properties for Shopify theme
+ * Derived from logo set: full logo, We All Profit, The Odds Were Never Even, AO acronym, full slogan.
+ * Copy into your theme's base CSS or load as an asset and include in theme.liquid.
+ *
+ * Usage in Liquid: reference in layout/theme.liquid or in a section's <style> block.
+ * Dawn/OS2.0: add to assets/ or merge into base.css; map settings in config/settings_schema.json.
+ */
+
+:root {
+  /* Base — dark urban background */
+  --ao-bg: #0c0d0f;
+  --ao-surface: #14181e;
+  --ao-surface-light: #1c222a;
+  --ao-text: #f5f5f0;
+  --ao-text-muted: #a0a8b4;
+  --ao-border: rgba(255, 255, 255, 0.08);
+
+  /* Accents — from logo splatters and motto */
+  --ao-cyan: #22d3ee;
+  --ao-blue: #3b82f6;
+  --ao-yellow: #facc15;
+  --ao-pink: #ec4899;
+  --ao-purple: #a855f7;
+  --ao-teal: #14b8a6;
+  --ao-accent: #f0c86a;
+  --ao-accent-dark: #c9a046;
+
+  /* Typography */
+  --ao-font-display: 'Bebas Neue', 'Oswald', 'Archivo Black', Impact, sans-serif;
+  --ao-font-body: 'DM Sans', 'Inter', 'Segoe UI', system-ui, sans-serif;
+
+  /* Optional: map to Shopify theme settings (if using settings_schema) */
+  --color-background: var(--ao-bg);
+  --color-foreground: var(--ao-text);
+  --color-accent: var(--ao-cyan);
+  --color-button-background: var(--ao-yellow);
+  --color-button-text: #0c0d0f;
+}
+
+/* Utility classes for AO brand (optional) */
+.ao-heading {
+  font-family: var(--ao-font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ao-accent-underline--cyan {
+  border-bottom: 3px solid var(--ao-cyan);
+}
+
+.ao-accent-underline--yellow {
+  border-bottom: 3px solid var(--ao-yellow);
+}
+
+.ao-btn-primary {
+  background: var(--ao-yellow);
+  color: #0c0d0f;
+  font-weight: 700;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ao-btn-primary:hover {
+  background: var(--ao-accent-dark);
+}
+
+.ao-btn-outline {
+  background: transparent;
+  color: var(--ao-text);
+  border: 2px solid var(--ao-cyan);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ao-btn-outline:hover {
+  background: var(--ao-cyan);
+  color: var(--ao-bg);
+}
