@@ -12,13 +12,14 @@ Use these brand images in your Shopify theme sections. Upload each to **Theme as
 | **AO + The Odds Were Never Even** (logo + motto)    | `logo-ao-with-motto.png`                | Hero lockup, about, brand story section               |
 | **The Odds Were Never Even** (motto only)           | `motto-the-odds-were-never-even.png`    | Section divider, footer tagline, product storytelling |
 
-## Source files (for reference)
+## Source files and automation
 
-If the images were saved in the primary workspace, copy them from:
+Brand images in **assets/brand/** (repo root) are copied into the theme’s **assets** folder when you run:
 
-- `assets/` (project root) — paths like `c__Users_LegiT_..._Against_the_Odds__Full_Logo_....png`
+- `.\scripts\shopify\copy-brand-images-to-theme.ps1` — copies all PNGs with sanitized filenames (spaces → hyphens).
+- Or use the full flow: `.\scripts\shopify\theme-update-store.ps1` — merge brand + copy images + push.
 
-Rename to the suggested filenames above when uploading to the theme so Liquid can reference them consistently, e.g.:
+After copy, filenames in the theme will match the source names (sanitized). Rename in Theme Editor to the suggested filenames above if you want Liquid to reference them consistently, e.g.:
 
 ```liquid
 <img src="{{ 'logo-against-the-odds-blue-pink.png' | asset_url }}" alt="Against the Odds" width="200" height="auto" loading="lazy">

@@ -87,13 +87,14 @@ Ensure all logo/slogan images have **transparent backgrounds** where provided so
 
 ## 7. Implementation checklist
 
-- [ ] Pull live theme: `.\scripts\shopify\theme-pull.ps1`
-- [ ] Copy `ao-brand-customization` assets and styles into theme (see `APPLY_INSTRUCTIONS.md` in package)
-- [ ] Upload brand images to theme `assets/` (or Shopify Files) and reference in sections
-- [ ] Set theme color/font settings to AO palette and typography (or use `ao-brand.css` variables)
-- [ ] Set header logo to full logo asset; add motto/slogan to hero and footer as per manifest
-- [ ] Run theme dev: `.\scripts\shopify\theme-dev.ps1` and verify contrast and layout
-- [ ] Commit and push to connected branch for deploy
+- [ ] Pull live theme once (if needed): `.\scripts\shopify\theme-pull.ps1`
+- [ ] Update store theme (merge brand + copy images + push): `.\scripts\shopify\theme-update-store.ps1`
+  - Merges `ao-brand-customization` into theme and patches `layout/theme.liquid` when present.
+  - Copies all PNGs from `assets/brand/` into theme assets; then pushes to Shopify.
+- [ ] Set theme color/font settings to AO palette (or rely on `ao-brand.css` and `ao-brand-theme` class).
+- [ ] In Theme Editor: set header logo; add hero/footer motto/slogan as per ASSETS_MANIFEST.
+- [ ] Run theme dev: `.\scripts\shopify\theme-dev.ps1` and verify contrast and layout.
+- [ ] Commit and push repo changes after deploy.
 
 ---
 
