@@ -15,6 +15,8 @@ This document describes the **automated flow** for pulling the live theme, apply
 | **Quality check (format, lint, tests)**        | `npm run quality`                                                   |
 | **Before commit**                              | Pre-commit runs Prettier automatically; optional: `npm run quality` |
 
+**Store not showing brand?** Run `theme-pull.ps1` once, then `theme-update-store.ps1` to merge brand, copy images from `assets/brand/`, and push to Shopify.
+
 ---
 
 ## Flow diagram

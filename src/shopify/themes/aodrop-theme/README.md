@@ -36,6 +36,8 @@ shopify auth login
 
 Or push only: `.\scripts\shopify\update-theme.ps1`
 
+**If the store theme hasn’t updated:** Run step 3 (`theme-pull.ps1`) once in an interactive terminal, then run step 5 (`theme-update-store.ps1`) so the live theme gets the AO brand and images.
+
 ## Brand customization (pre-applied)
 
 This folder includes AO brand assets:

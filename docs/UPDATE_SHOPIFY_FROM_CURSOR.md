@@ -28,6 +28,14 @@ In **Shopify Admin**: Confirm the store is connected to this repo (Settings → 
 3. Commit and push to the connected branch (e.g. `main`)
 4. Shopify deploys from that branch
 
+### Store theme not updating?
+
+If the live store (aodrop.com) doesn’t show your brand changes:
+
+1. **One-time**: Pull the live theme into the repo: run `.\scripts\shopify\theme-pull.ps1` in an interactive terminal (requires `shopify auth login` once).
+2. **Apply and push**: Run `.\scripts\shopify\theme-update-store.ps1` — this merges AO brand CSS/snippet into the theme, copies PNGs from `assets/brand/` into the theme assets, and pushes the theme to Shopify. Use `-Live` only when you intend to update the **live** theme.
+3. **Preview first**: Open `docs/guides/theme-preview-mock.html` in a browser for a static mock, or run `.\scripts\shopify\theme-dev.ps1` for a live preview before pushing.
+
 **Summary**: Edit in Cursor → push to GitHub → store updates. The Admin API token in `.env.local` is **not** required for this flow (only for product sync, backups, or CLI push).
 
 ---

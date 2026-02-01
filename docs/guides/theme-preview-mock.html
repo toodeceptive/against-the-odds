@@ -12,12 +12,16 @@
         --ao-text: #f5f0e8;
         --ao-text-muted: #b8b0a0;
         --ao-accent-cyan: #00d4ff;
+        --ao-accent-teal: #06b6d4;
         --ao-accent-yellow: #facc15;
         --ao-accent-pink: #ec4899;
+        --ao-accent-magenta: #d946ef;
+        --ao-accent-violet: #a855f7;
         --ao-font-display: 'Bebas Neue', 'Oswald', sans-serif;
         --ao-font-body: 'Inter', 'DM Sans', sans-serif;
         --ao-radius: 6px;
         --ao-shadow-glow: 0 0 20px rgba(0, 212, 255, 0.2);
+        --ao-shadow-glow-magenta: 0 0 20px rgba(217, 70, 239, 0.25);
         --ao-page-width: 1200px;
         --ao-spacing: 1.5rem;
         --ao-spacing-lg: 3rem;
@@ -104,10 +108,26 @@
         position: absolute;
         left: 0;
         right: 0;
-        bottom: -4px;
-        height: 4px;
+        bottom: -6px;
+        height: 5px;
         background: linear-gradient(90deg, var(--ao-accent-cyan), var(--ao-accent-yellow));
         border-radius: 2px;
+      }
+
+      .drip-underline {
+        position: relative;
+        display: inline-block;
+      }
+      .drip-underline::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 6px;
+        background: linear-gradient(90deg, var(--ao-accent-violet), var(--ao-accent-magenta));
+        border-radius: 2px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       }
 
       .hero .subtitle {
@@ -185,9 +205,10 @@
           <span class="badge">Theme preview mock</span>
           <h1 id="hero-title" class="title accent-underline">Against the Odds</h1>
           <p class="subtitle">
-            If y'all drop it · We all got it · If y'all rock it · We all profit
+            If y'all drop it · We all got it · If y'all rock it ·
+            <span class="drip-underline">We all profit</span>
           </p>
-          <p class="subtitle">THE ODDS WERE NEVER EVEN</p>
+          <p class="subtitle drip-underline">THE ODDS WERE NEVER EVEN</p>
           <p class="cta">
             <a href="#" class="btn-primary">Join the drop</a>
           </p>

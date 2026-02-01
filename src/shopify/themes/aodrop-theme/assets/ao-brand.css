@@ -16,12 +16,15 @@
   --ao-text-muted: #b8b0a0;
   --ao-text-inverse: #0d0d0d;
 
-  /* Accents (from brand images) */
+  /* Accents (from brand images — graffiti/splatter) */
   --ao-accent-cyan: #00d4ff;
+  --ao-accent-teal: #06b6d4;
   --ao-accent-blue: #2563eb;
   --ao-accent-pink: #ec4899;
+  --ao-accent-magenta: #d946ef;
   --ao-accent-violet: #a855f7;
   --ao-accent-yellow: #facc15;
+  --ao-accent-lime: #a3e635;
   --ao-accent-red: #dc2626;
   --ao-outline: #000000;
   --ao-white: #ffffff;
@@ -47,6 +50,7 @@
   --ao-radius-lg: 12px;
   --ao-border: 2px solid var(--ao-outline);
   --ao-shadow-glow: 0 0 20px rgba(0, 212, 255, 0.2);
+  --ao-shadow-glow-magenta: 0 0 20px rgba(217, 70, 239, 0.25);
   --ao-shadow-drip: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
@@ -182,7 +186,7 @@ body.ao-brand-theme,
   margin: 0 auto;
 }
 
-/* Section with accent underline (slogan style) */
+/* Section with accent underline (slogan / drip style from brand images) */
 .ao-brand-accent-underline {
   position: relative;
   display: inline-block;
@@ -193,10 +197,41 @@ body.ao-brand-theme,
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -4px;
-  height: 4px;
+  bottom: -6px;
+  height: 5px;
   background: linear-gradient(90deg, var(--ao-accent-cyan), var(--ao-accent-yellow));
   border-radius: 2px;
+}
+
+/* Drip underline (WE ALL PROFIT style — purple/magenta bar) */
+.ao-brand-drip-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.ao-brand-drip-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 6px;
+  background: linear-gradient(90deg, var(--ao-accent-violet), var(--ao-accent-magenta));
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Grunge texture overlay utility (optional section backgrounds) */
+.ao-brand-textured {
+  position: relative;
+}
+
+.ao-brand-textured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
 }
 
 /* Cards / product tiles on dark */
