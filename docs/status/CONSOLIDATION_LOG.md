@@ -200,3 +200,9 @@
 ## 2026-01-31 — Proceed: verification pass and finalization
 
 **Action**: Proceed with rest of work per user approval. Verification: INDEX_REPORTS.md is documentation index (not YAML); ci.yml, quality-check.yml, deploy.yml are main-only; ENVIRONMENTS_AND_SECRETS_INVENTORY and workflow README state main-only; no 2027 typo in logs; NEXT_BEST_STEPS Tier 1 current. Full checks: lint, format, unit tests pass. CONSOLIDATION_LOG entry added. **Committed and pushed** (user-approved).
+
+---
+
+## 2026-01-31 — NEXT_BEST_STEPS: Tier 1 + Tier 2 (user-approved)
+
+**Action**: Execute NEXT_BEST_STEPS Tier 1 (daily checks) and Tier 2 (branch hygiene). Tier 1: lint, format:check, test:unit — all pass. Tier 2: BRANCH_INVENTORY refreshed — added dependabot/npm_and_yarn remote note; clarified handoff-doc-permissions and cursor/main-project-setup-2bd1 as optional operator cleanup; last updated note. Tier 3 (launch checklist, store readiness) and Tier 4 (coverage, deploy placeholders) remain for operator when ready. **Committed and pushed** (user-approved).
