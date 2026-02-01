@@ -6,9 +6,9 @@
 
 ## Daily Checks
 
-- `npm run lint`
-- `npm run format:check`
-- `npm run test:unit`
+- **One command:** `npm run quality` (format, format:check, lint, test:unit)
+- Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
+- **Prettier runs automatically on every commit** (pre-commit hook); see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)
 
