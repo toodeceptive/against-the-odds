@@ -35,9 +35,13 @@ if (-not $SkipParse) {
 # 2. Workflow files exist
 Write-Host "[2/5] Checking workflow files..." -ForegroundColor Yellow
 $workflows = @(
+    ".github/workflows/ci.yml",
+    ".github/workflows/quality-check.yml",
+    ".github/workflows/deploy.yml",
     ".github/workflows/shopify-sync.yml",
     ".github/workflows/sync-theme-branch.yml",
-    ".github/workflows/ci.yml"
+    ".github/workflows/sync.yml",
+    ".github/workflows/maintenance.yml"
 )
 foreach ($w in $workflows) {
     $fullPath = Join-Path $repoPath $w

@@ -84,4 +84,5 @@
 - **LICENSE**: Root LICENSE file added (UNLICENSED; aligns with package.json). Documented in OPERATOR_RUNBOOK and ROOT_FILES_INVENTORY.
 
 ## To be addressed (if any)
+
 - **replacements.txt**: Kept at root; documented in OPERATOR_RUNBOOK; optional relocate to config/ in future.

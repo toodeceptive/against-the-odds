@@ -22,5 +22,6 @@
 | assets/brand/README.md                | 2026-01-31   | Root .png relocation                                                |
 | docs/screenshots/README.md            | 2026-01-31   | Screenshots policy                                                  |
 | NEXT_BEST_STEPS_20260131.md           | 2026-01-31   | Guru expert next steps (prioritized)                                |
+| GURU_EXPERT_ANALYSIS_20260131.md      | 2026-01-31   | Cross-comparative + limit-test; fixes; approval request             |
 
 _Last updated: 2026-01-31._

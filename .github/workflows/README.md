@@ -27,18 +27,18 @@ These workflows require the following secrets to be configured in GitHub:
 
 ### `ci.yml`
 
-- Runs on: Push to `main`/`develop`, Pull requests
+- Runs on: Push to `main`, Pull requests targeting `main`
 - Actions: Linting, testing, build, Trivy security scan, secret-scan, Lighthouse
 
 ### `quality-check.yml`
 
-- Runs on: Push to `main`/`develop`, Pull requests
+- Runs on: Push to `main`, Pull requests targeting `main`
 - Actions: Code coverage, lint, format check, npm audit, Lighthouse
 
 ### `deploy.yml`
 
-- Runs on: Push to `main`/`develop`, Manual trigger
-- Actions: **Placeholder** — deploy-staging / deploy-production (echo only). Implement real deployment or remove. Shopify theme deployment is via Shopify GitHub App / `sync-theme-branch.yml`.
+- Runs on: Push to `main`, Manual trigger (workflow_dispatch)
+- Actions: **Placeholder** — deploy-staging (disabled; no develop branch) / deploy-production (echo only). Shopify theme deployment is via Shopify GitHub App / `sync-theme-branch.yml`.
 
 ### `shopify-sync.yml`
 
@@ -73,3 +73,8 @@ These workflows require the following secrets to be configured in GitHub:
 - Secrets are encrypted and only accessible to workflows
 - Never commit secrets to the repository
 - Use `.env.local` for local development (gitignored)
+
+## To implement (optional)
+
+- **deploy.yml**: To add real deployment: add steps (e.g. `shopify theme push`, or call to your hosting API) in the `deploy-production` job; use secrets for credentials. To remove: delete the workflow file or replace jobs with a single no-op step.
+- **shopify-sync.yml backup-store job**: To implement: add a step that runs a script (e.g. product/theme export to a GitHub Actions artifact or a branch). To remove: delete the `backup-store` job from the workflow.

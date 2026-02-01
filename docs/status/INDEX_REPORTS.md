@@ -91,20 +91,21 @@ Use these for current phase, finalization, audits, and handoff.
 
 ## Quick reference
 
-| Need                                      | Where                                                   |
-| ----------------------------------------- | ------------------------------------------------------- |
-| Current phase and sign-off                | `docs/status/PHASE_0_FINALIZATION.md`                   |
-| Agent entry and plan                      | `docs/status/PLAN_AGENT_ENTRY.md`                       |
-| Cursor + GitHub full audit / plan history | `docs/status/CURSOR_GITHUB_AUDIT_20260131.md`           |
-| Plan versions and perfected prompt        | `docs/status/PLAN_AUDIT_20260131.md`                    |
-| Latest guru audit                         | `docs/status/GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md` |
-| Project perfected sign-off                | `docs/status/PROJECT_PERFECTED_20260130.md`             |
-| Project update & perfection sign-off      | `docs/status/PROJECT_UPDATE_PERFECTION_20260130.md`     |
-| Deploy/rollback log                       | `docs/status/deploy-log.md`                             |
-| Next steps                                | `NEXT_STEPS.md`, `OPERATOR_RUNBOOK.md`                  |
-| This index                                | `docs/status/INDEX_REPORTS.md`                          |
-| Version/update table                      | `docs/status/VERSION_UPDATE_TABLE.md`                   |
-| Consolidation log (all tracks)            | `docs/status/CONSOLIDATION_LOG.md`                      |
-| Next best steps (guru analysis)           | `docs/status/NEXT_BEST_STEPS_20260131.md`               |
-| Codebase audit (Track G)                  | `docs/status/CODEBASE_AUDIT_20260131.md`                |
-| Root files inventory                      | `docs/status/ROOT_FILES_INVENTORY.md`                   |
+| Need                                              | Where                                                   |
+| ------------------------------------------------- | ------------------------------------------------------- |
+| Current phase and sign-off                        | `docs/status/PHASE_0_FINALIZATION.md`                   |
+| Agent entry and plan                              | `docs/status/PLAN_AGENT_ENTRY.md`                       |
+| Cursor + GitHub full audit / plan history         | `docs/status/CURSOR_GITHUB_AUDIT_20260131.md`           |
+| Plan versions and perfected prompt                | `docs/status/PLAN_AUDIT_20260131.md`                    |
+| Latest guru audit                                 | `docs/status/GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md` |
+| Project perfected sign-off                        | `docs/status/PROJECT_PERFECTED_20260130.md`             |
+| Project update & perfection sign-off              | `docs/status/PROJECT_UPDATE_PERFECTION_20260130.md`     |
+| Deploy/rollback log                               | `docs/status/deploy-log.md`                             |
+| Next steps                                        | `NEXT_STEPS.md`, `OPERATOR_RUNBOOK.md`                  |
+| This index                                        | `docs/status/INDEX_REPORTS.md`                          |
+| Version/update table                              | `docs/status/VERSION_UPDATE_TABLE.md`                   |
+| Consolidation log (all tracks)                    | `docs/status/CONSOLIDATION_LOG.md`                      |
+| Next best steps (guru analysis)                   | `docs/status/NEXT_BEST_STEPS_20260131.md`               |
+| Guru expert analysis (cross-compare + limit-test) | `docs/status/GURU_EXPERT_ANALYSIS_20260131.md`          |
+| Codebase audit (Track G)                          | `docs/status/CODEBASE_AUDIT_20260131.md`                |
+| Root files inventory                              | `docs/status/ROOT_FILES_INVENTORY.md`                   |

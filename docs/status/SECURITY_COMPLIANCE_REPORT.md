@@ -33,7 +33,7 @@
 ## 4. GitHub and CI
 
 - **Actions:** Prefer `GITHUB_TOKEN` for workflows; PAT only where needed (e.g. local scripts). Workflows use `permissions: contents: read` (or minimal); SHOPIFY\_\* secrets only in workflows that need them (e.g. shopify-sync.yml). Aligned with [docs/security/00_security_checklist.md](../security/00_security_checklist.md).
-- **Branch strategy:** CI triggers on `main` and `develop`; deploy and theme flow via Shopify GitHub App. Documented in runbook and workflow docs.
+- **Branch strategy:** CI triggers on `main` only (main-only strategy; no develop branch). Deploy and theme flow via Shopify GitHub App. Documented in runbook and workflow docs.
 
 ---
 
