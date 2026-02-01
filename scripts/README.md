@@ -35,11 +35,11 @@
 | Script                                           | Purpose                                                | When to run                                                                           |
 | ------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------- |
 | **sync-products.ps1**                            | Bulk product sync repo → store (Admin API)             | Use `-DryRun` first; then apply after approval. Used by CI/shopify-sync workflow.     |
-| **theme-dev.ps1**                                | Start `shopify theme dev`                              | Local theme preview                                                                   |
+| **theme-dev.ps1**                                | Start `shopify theme dev`                              | Local theme preview (CLI auto-install, loads .env.local)                              |
 | **test-connection.ps1**                          | Test Shopify API connectivity                          | After credentials change                                                              |
 | **browser/get-access-token.ps1**                 | Obtain token via user's browser; optional `-SaveToEnv` | One-off token setup                                                                   |
 | **browser/save-token-to-env.ps1**                | Write token to .env.local                              | After get-access-token                                                                |
-| theme-pull.ps1, theme-init.ps1, update-theme.ps1 | Theme operations                                       | Per [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md) |
+| theme-pull.ps1, theme-init.ps1, update-theme.ps1 | Theme operations (Ensure-ShopifyCli.ps1 + .env.local)  | Per [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md) |
 
 ### Products (scripts/products/)
 

@@ -21,14 +21,22 @@ if (-not $ThemePath) {
 }
 Set-Location $repoPath
 
+if (Test-Path ".env.local") {
+    Get-Content ".env.local" | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith("#") -and $line -match "^([^=]+)=(.*)$") {
+            $key = $matches[1].Trim()
+            $val = $matches[2].Trim()
+            [Environment]::SetEnvironmentVariable($key, $val, "Process")
+        }
+    }
+}
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+
 Write-Host "=== Shopify Theme Dev (preview before commit) ===" -ForegroundColor Cyan
 Write-Host ""
 
-if (-not (Get-Command shopify -ErrorAction SilentlyContinue)) {
-    Write-Host "Error: Shopify CLI not found." -ForegroundColor Red
-    Write-Host "Install with: npm install -g @shopify/cli @shopify/theme" -ForegroundColor Yellow
-    exit 1
-}
+. "$PSScriptRoot\Ensure-ShopifyCli.ps1"
 
 if ([string]::IsNullOrWhiteSpace($Store)) {
     Write-Host "Error: SHOPIFY_STORE_DOMAIN not set (e.g. aodrop.com). Set in .env.local or pass -Store." -ForegroundColor Red
@@ -56,9 +64,9 @@ $openJob = Start-Job -ScriptBlock {
     try { Start-Process $url } catch { }
 } -ArgumentList $previewUrl
 
+$args = $ShopifyCmd[1..($ShopifyCmd.Length - 1)] + "theme", "dev", "--store=$Store", "--path=$ThemePath"
 if ($Live) {
     Write-Host "Previewing against LIVE theme context." -ForegroundColor Yellow
-    shopify theme dev --store=$Store --theme=live --path=$ThemePath
-} else {
-    shopify theme dev --store=$Store --path=$ThemePath
+    $args += "--theme=live"
 }
+& $ShopifyCmd[0] $args

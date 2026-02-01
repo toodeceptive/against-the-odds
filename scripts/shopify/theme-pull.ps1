@@ -20,14 +20,22 @@ if (-not $ThemePath) {
 }
 Set-Location $repoPath
 
+if (Test-Path ".env.local") {
+    Get-Content ".env.local" | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith("#") -and $line -match "^([^=]+)=(.*)$") {
+            $key = $matches[1].Trim()
+            $val = $matches[2].Trim()
+            [Environment]::SetEnvironmentVariable($key, $val, "Process")
+        }
+    }
+}
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+
 Write-Host "=== Shopify Theme Pull ===" -ForegroundColor Cyan
 Write-Host ""
 
-if (-not (Get-Command shopify -ErrorAction SilentlyContinue)) {
-    Write-Host "Error: Shopify CLI not found." -ForegroundColor Red
-    Write-Host "Install with: npm install -g @shopify/cli @shopify/theme" -ForegroundColor Yellow
-    exit 1
-}
+. "$PSScriptRoot\Ensure-ShopifyCli.ps1"
 
 if ([string]::IsNullOrWhiteSpace($Store)) {
     Write-Host "Error: SHOPIFY_STORE_DOMAIN not set (expected aodrop.com)." -ForegroundColor Red
@@ -37,7 +45,8 @@ if ([string]::IsNullOrWhiteSpace($Store)) {
 New-Item -ItemType Directory -Force -Path $ThemePath | Out-Null
 
 Write-Host "Pulling theme '$Theme' from $Store into $ThemePath" -ForegroundColor Yellow
-shopify theme pull --store=$Store --theme=$Theme --path=$ThemePath
+$args = $ShopifyCmd[1..($ShopifyCmd.Length - 1)] + "theme", "pull", "--store=$Store", "--theme=$Theme", "--path=$ThemePath"
+& $ShopifyCmd[0] $args
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[FAIL] Theme pull failed" -ForegroundColor Red

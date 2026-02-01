@@ -14,17 +14,17 @@ Edit your store in Cursor, push to GitHub, and have changes go live—the best w
 
 If `src/shopify/themes/aodrop-theme` is empty or you haven't pulled your live theme yet:
 
-1. Install Shopify CLI: `npm install -g @shopify/cli @shopify/theme`
-2. Log in: `shopify auth login` (select your store, e.g. aodrop.com)
-3. Pull the live theme into the repo: `.\scripts\shopify\theme-pull.ps1`
-4. Commit and push so the theme lives on the branch Shopify is watching (usually `main`)
+1. **Store:** Create `.env.local` in repo root with `SHOPIFY_STORE_DOMAIN=aodrop.com` (optional but recommended; scripts load it automatically).
+2. **Auth:** Run `shopify auth login` once (select your store, e.g. aodrop.com).
+3. **Pull:** Run `.\scripts\shopify\theme-pull.ps1` from repo root. The script **installs Shopify CLI automatically** if missing and reads the store from `.env.local`.
+4. Commit and push so the theme lives on the branch Shopify is watching (usually `main`).
 
 In **Shopify Admin**: Confirm the store is connected to this repo (Settings → Apps and sales channels → GitHub). Set the branch (e.g. `main`) and, if the app asks, the theme directory (e.g. `src/shopify/themes/aodrop-theme` or repo root—depends on how the Shopify GitHub integration is configured).
 
 ### Daily workflow
 
 1. Edit theme files in Cursor (e.g. under `src/shopify/themes/aodrop-theme`)
-2. **Preview before commit**: Run **Tasks → Run Task → Shopify: Theme Dev (preview before commit)**. When the preview URL appears in the terminal, click it or paste it into **View → Simple Browser** to see your changes live. Edit and refresh; no commit needed to preview.
+2. **Preview before commit**: Run **Tasks → Shopify: Theme Dev** or press **Ctrl+Alt+T**. Scripts load `.env.local` and install Shopify CLI if needed; the preview URL opens in your browser (or click it in the terminal / **View → Simple Browser**). Edit and refresh; no commit needed to preview.
 3. Commit and push to the connected branch (e.g. `main`)
 4. Shopify deploys from that branch
 
@@ -36,9 +36,9 @@ In **Shopify Admin**: Confirm the store is connected to this repo (Settings → 
 
 **When**: You want to push the theme directly from Cursor (e.g. before GitHub is connected, or to a dev theme).
 
-- **Prerequisites**: `.env.local` with `SHOPIFY_STORE_DOMAIN`; Shopify CLI: `npm install -g @shopify/cli @shopify/theme` then `shopify auth login`
-- **Push theme to store**: `.\scripts\shopify\update-theme.ps1` (or `shopify theme push` with the path to your theme)
-- **Live preview**: `shopify theme dev --store=aodrop.com --theme=live`
+- **Prerequisites**: `.env.local` with `SHOPIFY_STORE_DOMAIN` (optional; scripts load it). Run `shopify auth login` once. Shopify CLI is **installed automatically** by `theme-pull` / `theme-dev` / `update-theme` if missing.
+- **Push theme to store**: `.\scripts\shopify\update-theme.ps1` from repo root
+- **Live preview**: **Tasks → Shopify: Theme Dev** or `.\scripts\shopify\theme-dev.ps1`
 
 ---
 

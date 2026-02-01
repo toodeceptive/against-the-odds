@@ -21,14 +21,23 @@ if (-not $ThemePath) {
 }
 Set-Location $repoPath
 
+if (Test-Path ".env.local") {
+    Get-Content ".env.local" | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith("#") -and $line -match "^([^=]+)=(.*)$") {
+            $key = $matches[1].Trim()
+            $val = $matches[2].Trim()
+            [Environment]::SetEnvironmentVariable($key, $val, "Process")
+        }
+    }
+}
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+if ([string]::IsNullOrWhiteSpace($ThemeId)) { $ThemeId = $env:SHOPIFY_THEME_ID }
+
 Write-Host "=== Shopify Theme Update ===" -ForegroundColor Cyan
 Write-Host ""
 
-if (-not (Get-Command shopify -ErrorAction SilentlyContinue)) {
-    Write-Host "Error: Shopify CLI not found" -ForegroundColor Red
-    Write-Host "Install with: npm install -g @shopify/cli @shopify/theme" -ForegroundColor Yellow
-    exit 1
-}
+. "$PSScriptRoot\Ensure-ShopifyCli.ps1"
 
 if (-not (Test-Path $ThemePath)) {
     Write-Host "Error: Theme directory not found: $ThemePath" -ForegroundColor Red
@@ -38,6 +47,7 @@ if (-not (Test-Path $ThemePath)) {
 
 Write-Host "Deploying theme..." -ForegroundColor Yellow
 
+$pushArgs = $ShopifyCmd[1..($ShopifyCmd.Length - 1)] + "theme", "push", "--store=$Store", "--path=$ThemePath"
 if ($Live) {
     Write-Host "Warning: Deploying to LIVE theme!" -ForegroundColor Red
     $confirm = Read-Host "Are you sure? (yes/no)"
@@ -45,16 +55,16 @@ if ($Live) {
         Write-Host "Deployment cancelled." -ForegroundColor Yellow
         exit 0
     }
-    shopify theme push --store=$Store --theme=live --path=$ThemePath
+    $pushArgs += "--theme=live"
 } else {
     if ([string]::IsNullOrWhiteSpace($ThemeId)) {
         Write-Host "Deploying to development theme..." -ForegroundColor Yellow
-        shopify theme push --store=$Store --path=$ThemePath
     } else {
         Write-Host "Deploying to theme ID: $ThemeId" -ForegroundColor Yellow
-        shopify theme push --store=$Store --theme=$ThemeId --path=$ThemePath
+        $pushArgs += "--theme=$ThemeId"
     }
 }
+& $ShopifyCmd[0] $pushArgs
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "[OK] Theme deployed successfully!" -ForegroundColor Green

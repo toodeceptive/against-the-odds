@@ -89,7 +89,7 @@ sequenceDiagram
 | 4    | Waits for your reply in chat                                                                                                                            | Reply **"approve"** (or "yes" / "looks good") |
 | 5    | Applies (runs sync or pushes to main), then appends [docs/status/deploy-log.md](../status/deploy-log.md)                                                | —                                             |
 
-**Theme preview shortcut (approved):** Press **Ctrl+Alt+T** to start the theme dev server; your browser opens the preview URL automatically. Keybindings are in your Cursor settings; on another machine, add once per [docs/KEYBINDING_PENDING_APPROVAL.md](../KEYBINDING_PENDING_APPROVAL.md). Run from repo root.
+**Theme preview shortcut (approved):** Press **Ctrl+Alt+T** to start the theme dev server; your browser opens the preview URL automatically. Scripts load `.env.local` and install Shopify CLI if missing. Keybindings: [docs/KEYBINDING_PENDING_APPROVAL.md](../KEYBINDING_PENDING_APPROVAL.md). Run from repo root.
 
 ---
 

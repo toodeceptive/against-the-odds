@@ -4,6 +4,60 @@
 
 ---
 
+## System readiness (what runs automatically)
+
+| Check                | What happens                                                                                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Shopify CLI**      | If missing, `theme-pull` / `theme-dev` / `update-theme` **install it automatically** (`npm install -g @shopify/cli @shopify/theme`). No manual install needed.                       |
+| **Store / theme ID** | Scripts **load `.env.local`** from repo root when present. Set `SHOPIFY_STORE_DOMAIN` (e.g. `aodrop.com`) and optionally `SHOPIFY_THEME_ID` there so you don’t pass them every time. |
+| **One-time auth**    | Run `shopify auth login` once (select store). Required for theme pull and local preview.                                                                                             |
+| **Theme folder**     | If `src/shopify/themes/aodrop-theme` is empty, run `.\scripts\shopify\theme-pull.ps1` once from repo root (CLI installs if needed; store from `.env.local`).                         |
+
+---
+
+## Preview system vs Update feature
+
+```mermaid
+flowchart TB
+  subgraph preview_system [Preview system — see changes before commit]
+    P1[Tasks → Shopify: Theme Dev]
+    P2[Or Ctrl+Alt+T]
+    P3[theme-dev.ps1: loads .env.local, ensures CLI]
+    P4[Dev server starts]
+    P5[Browser opens http://127.0.0.1:9292]
+    P6[Or: View → Simple Browser, paste URL]
+    P7[Edit theme files → hot reload]
+    P1 --> P3
+    P2 --> P3
+    P3 --> P4
+    P4 --> P5
+    P4 --> P6
+    P5 --> P7
+    P6 --> P7
+  end
+
+  subgraph update_feature [Update feature — go live]
+    U1[Option A: GitHub flow]
+    U2[Commit and push to main]
+    U2 --> U3[CI updates shopify-theme]
+    U3 --> U4[Shopify deploys from branch]
+    U1 --> U2
+
+    U5[Option B: CLI push]
+    U6[.\scripts\shopify\update-theme.ps1]
+    U6 --> U7[Loads .env.local, ensures CLI]
+    U7 --> U8[Push to dev or live theme]
+    U5 --> U6
+  end
+
+  preview_system -.->|When satisfied| update_feature
+```
+
+- **Preview:** Run from repo root. No commit required; browser (or Simple Browser) shows live theme. CLI and store are resolved automatically.
+- **Update:** After approval, either **commit and push** (GitHub → store) or run **`update-theme.ps1`** for direct CLI push.
+
+---
+
 ## At a glance
 
 ```mermaid
@@ -64,7 +118,7 @@ sequenceDiagram
 | 4    | **Click the URL** in the terminal, or **View → Simple Browser** and paste the URL        |
 | 5    | Edit theme files; the preview updates live. No commit needed to preview.                 |
 
-**One-time:** If the theme folder is empty, run `.\scripts\shopify\theme-pull.ps1` first (requires Shopify CLI and `shopify auth login`).
+**One-time:** If the theme folder is empty, run `.\scripts\shopify\theme-pull.ps1` from repo root. The script installs Shopify CLI if missing and reads `SHOPIFY_STORE_DOMAIN` from `.env.local`; you only need to run `shopify auth login` once.
 
 ---
 
@@ -150,18 +204,20 @@ flowchart LR
 
 ## 5. Quick reference
 
-| Goal                              | Command or action                                                                                                                                |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Theme preview (before commit)** | **Tasks** → **Shopify: Theme Dev** → open URL in terminal or View → Simple Browser                                                               |
-| Product sync (preview)            | `.\scripts\shopify\sync-products.ps1 -DryRun`                                                                                                    |
-| Product sync (apply)              | `.\scripts\shopify\sync-products.ps1`                                                                                                            |
-| Theme dev (terminal)              | `.\scripts\shopify\theme-dev.ps1`                                                                                                                |
-| Theme push (apply)                | `.\scripts\shopify\update-theme.ps1`                                                                                                             |
-| **Open pending approval**         | **Ctrl+Alt+P** (add keybinding once — see `docs/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks** → **Open pending approval**. Opens in same window. |
-| **Theme preview (dev server)**    | **Ctrl+Alt+T** (add keybinding once) or **Tasks** → **Shopify: Theme Dev**. Browser opens preview URL automatically.                             |
-| Pending snapshot                  | `docs/status/pending-approval.md`                                                                                                                |
-| Deploy log                        | `docs/status/deploy-log.md`                                                                                                                      |
-| Pipeline verification             | `npm run verify:pipeline` or `.\scripts\verify-pipeline.ps1`                                                                                     |
+| Goal                              | Command or action                                                                                                                                       |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Theme preview (before commit)** | **Tasks** → **Shopify: Theme Dev** or **Ctrl+Alt+T**. CLI auto-installs if missing; `.env.local` loaded. Open URL in terminal or View → Simple Browser. |
+| **Theme update (go live)**        | **GitHub:** Commit and push to `main`. **CLI:** `.\scripts\shopify\update-theme.ps1` (loads `.env.local`, ensures CLI).                                 |
+| Pull theme into repo              | `.\scripts\shopify\theme-pull.ps1` (CLI auto-install, `.env.local` for store)                                                                           |
+| Product sync (preview)            | `.\scripts\shopify\sync-products.ps1 -DryRun`                                                                                                           |
+| Product sync (apply)              | `.\scripts\shopify\sync-products.ps1`                                                                                                                   |
+| Theme dev (terminal)              | `.\scripts\shopify\theme-dev.ps1`                                                                                                                       |
+| Theme push (apply)                | `.\scripts\shopify\update-theme.ps1`                                                                                                                    |
+| **Open pending approval**         | **Ctrl+Alt+P** (add keybinding once — see `docs/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks** → **Open pending approval**. Opens in same window.        |
+| **Theme preview (dev server)**    | **Ctrl+Alt+T** (add keybinding once) or **Tasks** → **Shopify: Theme Dev**. Browser opens preview URL automatically.                                    |
+| Pending snapshot                  | `docs/status/pending-approval.md`                                                                                                                       |
+| Deploy log                        | `docs/status/deploy-log.md`                                                                                                                             |
+| Pipeline verification             | `npm run verify:pipeline` or `.\scripts\verify-pipeline.ps1`                                                                                            |
 
 ---
 
@@ -202,4 +258,4 @@ flowchart TB
 
 ---
 
-_Reference: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [.cursor/plans/README.md](../../.cursor/plans/README.md). Last updated: 2026-01-31._
+_Reference: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](../UPDATE_SHOPIFY_FROM_CURSOR.md), [.cursor/plans/README.md](../../.cursor/plans/README.md). Last updated: 2026-02-01._

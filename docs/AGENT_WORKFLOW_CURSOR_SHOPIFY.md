@@ -70,8 +70,8 @@ When you ask to add or change a product using **images, files, or descriptions f
 
 To see your Shopify theme changes **live before committing**:
 
-1. **Start the theme dev server**: In Cursor, press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) → type **Run Task** → choose **Shopify: Theme Dev (preview before commit)**. Or run in terminal: `.\scripts\shopify\theme-dev.ps1`
-2. **Open the preview URL**: When the server starts, a preview URL appears in the terminal (e.g. `https://...trycloudflare.com` or `http://127.0.0.1:9292`). Either:
+1. **Start the theme dev server**: In Cursor, press **Ctrl+Alt+T** or **Run Task** → **Shopify: Theme Dev (preview before commit)**. Or run in terminal: `.\scripts\shopify\theme-dev.ps1`. Scripts load `.env.local` and install Shopify CLI if missing.
+2. **Open the preview URL**: When the server starts, a preview URL appears in the terminal (e.g. `https://...trycloudflare.com` or `http://127.0.0.1:9292`). The browser may open it automatically. Otherwise:
    - **Click the URL** in the terminal (most terminals make it clickable), or
    - **Cursor Simple Browser**: **View → Simple Browser**, then paste the URL.
 3. Edit theme files under `src/shopify/themes/aodrop-theme/`; the preview hot-reloads. When satisfied, commit and push (after approval per the rule above).
@@ -90,7 +90,7 @@ No "Go Live" or commit needed to preview—the dev server shows your local chang
 | Theme dev (terminal)                 | `.\scripts\shopify\theme-dev.ps1`                                                                                                                                                                        |
 | Theme push (apply)                   | `.\scripts\shopify\update-theme.ps1`                                                                                                                                                                     |
 | **Open pending approval**            | Tasks → **Open pending approval** or **Ctrl+Alt+P** (opens docs/status/pending-approval.md). Agent runs `.\scripts\open-pending-approval.ps1` after writing the file so the preview opens automatically. |
-| **Start theme preview (new window)** | `.\scripts\start-theme-preview.ps1` — agent runs this for theme changes so the live preview opens in the browser.                                                                                        |
+| **Start theme preview (new window)** | `.\scripts\start-theme-preview.ps1` — agent runs this for theme changes so the live preview opens in the browser. Theme scripts load `.env.local` and auto-install Shopify CLI if missing.               |
 | Pending snapshot                     | [docs/status/pending-approval.md](status/pending-approval.md)                                                                                                                                            |
 | Deploy log                           | [docs/status/deploy-log.md](status/deploy-log.md)                                                                                                                                                        |
 | Pipeline verification                | `npm run verify:pipeline` or `.\scripts\verify-pipeline.ps1`                                                                                                                                             |
