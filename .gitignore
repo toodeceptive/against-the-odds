@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
+# package-lock.json is committed so CI can run npm ci (reproducible installs)
 
 # Build outputs
 dist/

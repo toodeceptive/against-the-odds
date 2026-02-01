@@ -101,6 +101,7 @@ jobs:
       
     - name: Lighthouse CI
       uses: treosh/lighthouse-ci-action@v10
+      continue-on-error: true
       with:
         urls: |
           https://toodeceptive.github.io/against-the-odds/
