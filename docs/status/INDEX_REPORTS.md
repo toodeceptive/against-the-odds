@@ -70,7 +70,8 @@ Use these for current phase, finalization, audits, and handoff.
 | Other dated/theme reports                                              | Audits, coverage, security, optimization, etc.                                                                                   |
 | `BRAND_THEME_CUSTOMIZATION_20260201.md`                                | AO brand theme spec (palette, typography, assets, accessibility); use with `src/shopify/themes/ao-brand-customization/`.         |
 | `FINALIZATION_THEME_FLOW_20260201.md`                                  | Theme flow finalization: merge script, pull-and-preview, visualized mock; guru review and layout optimization.                   |
-| `GURU_PRETTIER_AUTOMATION_20260201.md`                                 | Prettier auto on pre-commit; npm run quality; flow/visualization guide updated for easy use.                                   |
+| `GURU_PRETTIER_AUTOMATION_20260201.md`                                 | Prettier auto on pre-commit; npm run quality; flow/visualization guide updated for easy use.                                     |
+| `FINALIZATION_COMPLETE_20260201.md`                                    | Finalizations, perfections, optimizations complete; testing done; quality gates passed.                                          |
 
 ---
 
