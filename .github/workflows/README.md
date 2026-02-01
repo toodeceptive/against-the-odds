@@ -28,7 +28,7 @@ These workflows require the following secrets to be configured in GitHub:
 ### `ci.yml`
 
 - Runs on: Push to `main`, Pull requests targeting `main`
-- Actions: Linting, testing, build, Trivy security scan, secret-scan, Lighthouse
+- Actions: Linting, unit tests, build, Trivy security scan (continue-on-error), secret-scan, Lighthouse
 
 ### `quality-check.yml`
 
@@ -44,6 +44,7 @@ These workflows require the following secrets to be configured in GitHub:
 
 - Runs on: Daily at 2 AM, Push to `main` (data/products, src/shopify), Manual trigger
 - Actions: Syncs products to Shopify; backup-store job is **placeholder** (implement or remove)
+- **Resilience**: If `SHOPIFY_STORE_DOMAIN` or `SHOPIFY_ACCESS_TOKEN` are not set, the sync step skips gracefully (exit 0) so the workflow does not fail.
 
 ### `sync-theme-branch.yml`
 

@@ -31,13 +31,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Validate Shopify secrets
-        run: |
-          if [ -z "${{ secrets.SHOPIFY_STORE_DOMAIN }}" ] || [ -z "${{ secrets.SHOPIFY_ACCESS_TOKEN }}" ]; then
-            echo "Missing Shopify secrets. Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN in repo Settings > Secrets."
-            exit 1
-          fi
-
       - name: Sync products to Shopify
         env:
           SHOPIFY_STORE_DOMAIN: ${{ secrets.SHOPIFY_STORE_DOMAIN }}

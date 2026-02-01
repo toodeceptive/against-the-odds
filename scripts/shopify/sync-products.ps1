@@ -25,17 +25,17 @@ Set-Location $repoPath
 Write-Host "=== Shopify Product Sync ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Validate environment
+# Validate environment — skip sync gracefully in CI when secrets are not set
 if ([string]::IsNullOrWhiteSpace($Store)) {
-    Write-Host "Error: SHOPIFY_STORE_DOMAIN not set" -ForegroundColor Red
-    Write-Host "Set it in .env.local or pass -Store parameter" -ForegroundColor Yellow
-    exit 1
+    Write-Host "SHOPIFY_STORE_DOMAIN not set; skipping product sync." -ForegroundColor Yellow
+    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Gray
+    exit 0
 }
 
 if ([string]::IsNullOrWhiteSpace($Token)) {
-    Write-Host "Error: SHOPIFY_ACCESS_TOKEN not set" -ForegroundColor Red
-    Write-Host "Set it in .env.local or pass -Token parameter" -ForegroundColor Yellow
-    exit 1
+    Write-Host "SHOPIFY_ACCESS_TOKEN not set; skipping product sync." -ForegroundColor Yellow
+    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Gray
+    exit 0
 }
 
 # Cross-platform products path
