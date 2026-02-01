@@ -63,6 +63,7 @@ Use this as the **source-of-truth checklist** for Drop 1. Mark each item with: *
 - **Favicon set**: 32/48/180/512 png + `favicon.ico`
 - **Brand basics**: color palette, typefaces, spacing rules (1 page is enough)
 - **Packaging look** (even if minimal): mailer/box, sticker, thank-you insert
+- **Shopify theme customization**: Palette, typography, and component styles are defined in **docs/status/BRAND_THEME_CUSTOMIZATION_20260201.md**. Apply the package in **src/shopify/themes/ao-brand-customization/** (see APPLY_INSTRUCTIONS.md and ASSETS_MANIFEST.md) after pulling the live theme.
 
 ### Product page photo/video (must-have)
 

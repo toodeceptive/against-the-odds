@@ -68,6 +68,7 @@ Use these for current phase, finalization, audits, and handoff.
 | `ROOT_FILES_INVENTORY.md`                                              | Root files list; .png moved to assets/brand (Track F)                                                                            |
 | `VERSION_UPDATE_TABLE.md`                                              | File \| Last updated \| Summary for key status files                                                                             |
 | Other dated/theme reports                                              | Audits, coverage, security, optimization, etc.                                                                                   |
+| `BRAND_THEME_CUSTOMIZATION_20260201.md`                                | AO brand theme spec (palette, typography, assets, accessibility); use with `src/shopify/themes/ao-brand-customization/`.         |
 
 ---
 

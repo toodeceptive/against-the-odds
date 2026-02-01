@@ -1,0 +1,251 @@
+/**
+ * Against the Odds — Brand theme customization
+ * Street-art / graffiti-inspired palette and components.
+ * Include in theme layout (e.g. layout/theme.liquid): {{ 'ao-brand.css' | asset_url | stylesheet_tag }}
+ */
+
+:root {
+  /* Backgrounds */
+  --ao-bg: #0d0d0d;
+  --ao-bg-surface: #1a1a1a;
+  --ao-bg-elevated: #141414;
+  --ao-bg-textured: #141414;
+
+  /* Text */
+  --ao-text: #f5f0e8;
+  --ao-text-muted: #b8b0a0;
+  --ao-text-inverse: #0d0d0d;
+
+  /* Accents (from brand images) */
+  --ao-accent-cyan: #00d4ff;
+  --ao-accent-blue: #2563eb;
+  --ao-accent-pink: #ec4899;
+  --ao-accent-violet: #a855f7;
+  --ao-accent-yellow: #facc15;
+  --ao-accent-red: #dc2626;
+  --ao-outline: #000000;
+  --ao-white: #ffffff;
+
+  /* Semantic (map to your theme settings if needed) */
+  --ao-primary: var(--ao-accent-cyan);
+  --ao-secondary: var(--ao-accent-yellow);
+  --ao-cta: var(--ao-accent-cyan);
+  --ao-cta-hover: var(--ao-accent-blue);
+  --ao-link: var(--ao-accent-cyan);
+  --ao-link-hover: var(--ao-accent-violet);
+  --ao-emphasis: var(--ao-accent-yellow);
+  --ao-urgency: var(--ao-accent-red);
+
+  /* Typography */
+  --ao-font-display: 'Bebas Neue', 'Oswald', sans-serif;
+  --ao-font-heading: 'Bebas Neue', 'Oswald', sans-serif;
+  --ao-font-body: 'Inter', 'DM Sans', 'Space Grotesk', sans-serif;
+  --ao-font-accent: 'Permanent Marker', 'Rock Salt', cursive;
+
+  /* Spacing / borders */
+  --ao-radius: 6px;
+  --ao-radius-lg: 12px;
+  --ao-border: 2px solid var(--ao-outline);
+  --ao-shadow-glow: 0 0 20px rgba(0, 212, 255, 0.2);
+  --ao-shadow-drip: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Optional: dark base overrides for body when using Dawn or similar */
+body.ao-brand-theme,
+.theme-ao-brand body {
+  background-color: var(--ao-bg);
+  color: var(--ao-text);
+  font-family: var(--ao-font-body);
+}
+
+.ao-brand-theme .page-width,
+.theme-ao-brand .page-width {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Headings — bold, display feel */
+.ao-brand-theme h1,
+.ao-brand-theme h2,
+.ao-brand-theme .title,
+.theme-ao-brand h1,
+.theme-ao-brand h2,
+.theme-ao-brand .title {
+  font-family: var(--ao-font-display);
+  color: var(--ao-text);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.ao-brand-theme h1,
+.theme-ao-brand h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Links */
+.ao-brand-theme a:not(.button):not(.btn),
+.theme-ao-brand a:not(.button):not(.btn) {
+  color: var(--ao-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.ao-brand-theme a:not(.button):not(.btn):hover,
+.theme-ao-brand a:not(.button):not(.btn):hover {
+  color: var(--ao-link-hover);
+  border-bottom-color: var(--ao-accent-violet);
+}
+
+/* Primary button — accent, bold */
+.ao-brand-theme .button--primary,
+.ao-brand-theme .btn--primary,
+.theme-ao-brand .button--primary,
+.theme-ao-brand .btn--primary {
+  background-color: var(--ao-cta);
+  color: var(--ao-text-inverse);
+  border: var(--ao-border);
+  font-family: var(--ao-font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--ao-radius);
+  padding: 0.75rem 1.5rem;
+  box-shadow: var(--ao-shadow-drip);
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.ao-brand-theme .button--primary:hover,
+.ao-brand-theme .btn--primary:hover,
+.theme-ao-brand .button--primary:hover,
+.theme-ao-brand .btn--primary:hover {
+  background-color: var(--ao-cta-hover);
+  box-shadow: var(--ao-shadow-glow);
+}
+
+/* Secondary / outline button */
+.ao-brand-theme .button--secondary,
+.ao-brand-theme .btn--secondary,
+.theme-ao-brand .button--secondary,
+.theme-ao-brand .btn--secondary {
+  background-color: transparent;
+  color: var(--ao-text);
+  border: 2px solid var(--ao-text);
+  font-family: var(--ao-font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--ao-radius);
+  padding: 0.75rem 1.5rem;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.ao-brand-theme .button--secondary:hover,
+.theme-ao-brand .button--secondary:hover {
+  background-color: var(--ao-text);
+  color: var(--ao-bg);
+}
+
+/* Hero section — dark bg, optional texture */
+.ao-brand-hero {
+  background-color: var(--ao-bg);
+  color: var(--ao-text);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.ao-brand-hero .ao-brand-hero__title {
+  font-family: var(--ao-font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.ao-brand-hero .ao-brand-hero__subtitle {
+  color: var(--ao-text-muted);
+  font-size: 1.125rem;
+}
+
+.ao-brand-hero .ao-brand-hero__logo img,
+.ao-brand-hero .ao-brand-hero__slogan img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Section with accent underline (slogan style) */
+.ao-brand-accent-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.ao-brand-accent-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ao-accent-cyan), var(--ao-accent-yellow));
+  border-radius: 2px;
+}
+
+/* Cards / product tiles on dark */
+.ao-brand-card {
+  background-color: var(--ao-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--ao-radius-lg);
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.ao-brand-card:hover {
+  border-color: var(--ao-accent-cyan);
+  box-shadow: var(--ao-shadow-glow);
+}
+
+.ao-brand-card .ao-brand-card__title {
+  font-family: var(--ao-font-heading);
+  color: var(--ao-text);
+}
+
+.ao-brand-card .ao-brand-card__price {
+  color: var(--ao-accent-yellow);
+  font-weight: 700;
+}
+
+/* Footer */
+.ao-brand-theme footer,
+.theme-ao-brand footer {
+  background-color: var(--ao-bg-elevated);
+  color: var(--ao-text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ao-brand-theme footer a,
+.theme-ao-brand footer a {
+  color: var(--ao-text-muted);
+}
+
+.ao-brand-theme footer a:hover,
+.theme-ao-brand footer a:hover {
+  color: var(--ao-accent-cyan);
+}
+
+/* Focus visible (accessibility) */
+.ao-brand-theme *:focus-visible,
+.theme-ao-brand *:focus-visible {
+  outline: 2px solid var(--ao-accent-cyan);
+  outline-offset: 2px;
+}

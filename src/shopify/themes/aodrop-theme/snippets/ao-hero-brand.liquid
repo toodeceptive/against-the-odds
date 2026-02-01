@@ -1,0 +1,24 @@
+{% comment %}
+  AO Brand Hero — optional snippet for hero with logo/slogan.
+  Usage: {% render 'ao-hero-brand', logo: 'logo-against-the-odds-blue-pink.png', slogan: 'slogan-full.png', motto: 'motto-the-odds-were-never-even.png' %}
+  Upload images to theme assets and pass filenames, or use section settings.
+{% endcomment %}
+<section class="ao-brand-hero" style="background-color: var(--ao-bg, #0d0d0d); color: var(--ao-text, #f5f0e8); padding: 3rem 1.5rem; text-align: center;">
+  <div class="page-width">
+    {% if logo != blank %}
+      <div class="ao-brand-hero__logo" style="margin-bottom: 1rem;">
+        <img src="{{ logo | asset_url }}" alt="Against the Odds" width="280" height="auto" loading="eager">
+      </div>
+    {% endif %}
+    {% if slogan != blank %}
+      <div class="ao-brand-hero__slogan" style="margin-bottom: 1rem;">
+        <img src="{{ slogan | asset_url }}" alt="If y'all drop it, We all got it. If y'all rock it, We all profit." width="400" height="auto" loading="lazy">
+      </div>
+    {% endif %}
+    {% if motto != blank %}
+      <div class="ao-brand-hero__motto">
+        <img src="{{ motto | asset_url }}" alt="The Odds Were Never Even" width="320" height="auto" loading="lazy">
+      </div>
+    {% endif %}
+  </div>
+</section>
