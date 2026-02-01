@@ -1,10 +1,13 @@
 #!/bin/sh
 # Pre-commit hook (cross-platform wrapper)
-# Calls PowerShell script on Windows
+# Calls PowerShell script on Windows. Always run from repo root so paths and CWD are correct.
 
-if [ -f "scripts/git/pre-commit.ps1" ]; then
-    powershell.exe -ExecutionPolicy Bypass -File "scripts/git/pre-commit.ps1"
-    exit $?
+root=$(git rev-parse --show-toplevel 2>/dev/null)
+if [ -n "$root" ]; then
+  cd "$root" || true
 fi
-
+if [ -f "scripts/git/pre-commit.ps1" ]; then
+  powershell.exe -ExecutionPolicy Bypass -File "scripts/git/pre-commit.ps1"
+  exit $?
+fi
 exit 0
