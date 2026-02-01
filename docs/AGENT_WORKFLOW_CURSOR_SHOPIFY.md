@@ -1,6 +1,6 @@
 # Agent workflow: Cursor → GitHub → Shopify
 
-Step-by-step for fulfilling store change requests (products, theme) with preview and approval. Reference: [.cursor/plans/cursor-github-shopify-pipeline.plan.md](../.cursor/plans/cursor-github-shopify-pipeline.plan.md).
+Step-by-step for fulfilling store change requests (products, theme) with preview and approval. Reference: [.cursor/plans/README.md](../.cursor/plans/README.md) (canonical plan index); pipeline implemented here and in rules.
 
 ---
 
@@ -62,7 +62,7 @@ When you ask to add or change a product using **images, files, or descriptions f
 - **Snapshot before approval**: Before asking for approval, write the preview (dry-run output or theme URL + diff) to [docs/status/pending-approval.md](status/pending-approval.md). **Then run `.\scripts\open-pending-approval.ps1`** so the file opens in Cursor automatically—the user sees the preview before approving. For theme/page changes, also run `.\scripts\start-theme-preview.ps1` so the live preview opens in their browser. After apply, clear the file (write "No pending changes" placeholder).
 - **Deploy log**: Every store-affecting change (theme push, product sync, one-off browser change) must have an entry in [docs/status/deploy-log.md](status/deploy-log.md) with timestamp, action, branch/commit, summary, and **rollback steps** (e.g. revert commit, restore JSON and sync, or "Revert in Shopify Admin: …"). No secrets in the log.
 - **Credentials**: Secrets only in `.env.local` (local) or GitHub Actions secrets; never commit or log. See [.cursor/rules/env-credentials.mdc](../.cursor/rules/env-credentials.mdc).
-- **Browser-first, no headless**: For live store changes use official Admin API (product sync with approval) or the user's browser (Cursor browser MCP) with you watching; do not use unattended headless automation of Shopify Admin (ToS). See plan [.cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md](../.cursor/plans/expert_team_security_and_platform_plan_fbf7f611.plan.md).
+- **Browser-first, no headless**: For live store changes use official Admin API (product sync with approval) or the user's browser (Cursor browser MCP) with you watching; do not use unattended headless automation of Shopify Admin (ToS). See [.cursor/rules/use-user-browser.mdc](../.cursor/rules/use-user-browser.mdc), [.cursor/rules/shopify-preview-approval.mdc](../.cursor/rules/shopify-preview-approval.mdc), and [docs/security/00_security_checklist.md](security/00_security_checklist.md).
 
 ---
 

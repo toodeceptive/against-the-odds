@@ -68,3 +68,4 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 | [CODE_REVIEW_PROCESS.md](CODE_REVIEW_PROCESS.md) | Code review process               |
 | [MANUFACTURING.md](MANUFACTURING.md)             | Manufacturing workflow            |
 | [MONITORING.md](MONITORING.md)                   | Performance and health monitoring |
+| [PROJECT_MANAGEMENT.md](PROJECT_MANAGEMENT.md)   | Branching and task workflow       |

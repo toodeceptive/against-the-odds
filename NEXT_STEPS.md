@@ -146,9 +146,9 @@ shopify theme dev --store=aodrop.com
 
 Apply your branding to hoodie designs:
 
-- Use the logo catalog in the root directory
+- Use the logo catalog in **assets/brand/** (see [assets/brand/README.md](assets/brand/README.md))
 - Create design mockups
-- Save designs to `assets/designs/` (create if needed)
+- Save designs to `assets/designs/` (create if needed) or reference `assets/brand/` for logos
 - Reference designs when creating product data
 
 ### 2. Manufacturer Research

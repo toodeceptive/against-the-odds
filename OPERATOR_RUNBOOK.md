@@ -15,6 +15,7 @@
 - `npm run test:integration`
 - `.\scripts\shopify\test-connection.ps1`
 - `.\scripts\github\verify-auth.ps1`
+- Or run both Shopify and GitHub checks: `.\scripts\run-runbook.ps1`
 
 ## Health & Quality
 

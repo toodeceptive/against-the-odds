@@ -107,5 +107,6 @@ Use these for current phase, finalization, audits, and handoff.
 | Consolidation log (all tracks)                    | `docs/status/CONSOLIDATION_LOG.md`                      |
 | Next best steps (guru analysis)                   | `docs/status/NEXT_BEST_STEPS_20260131.md`               |
 | Guru expert analysis (cross-compare + limit-test) | `docs/status/GURU_EXPERT_ANALYSIS_20260131.md`          |
+| Finalization audit (unfinished work, broken refs) | `docs/status/FINALIZATION_AUDIT_20260131.md`            |
 | Codebase audit (Track G)                          | `docs/status/CODEBASE_AUDIT_20260131.md`                |
 | Root files inventory                              | `docs/status/ROOT_FILES_INVENTORY.md`                   |

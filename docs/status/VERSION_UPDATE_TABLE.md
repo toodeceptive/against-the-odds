@@ -23,5 +23,6 @@
 | docs/screenshots/README.md            | 2026-01-31   | Screenshots policy                                                  |
 | NEXT_BEST_STEPS_20260131.md           | 2026-01-31   | Guru expert next steps (prioritized)                                |
 | GURU_EXPERT_ANALYSIS_20260131.md      | 2026-01-31   | Cross-comparative + limit-test; fixes; approval request             |
+| FINALIZATION_AUDIT_20260131.md        | 2026-01-31   | Unfinished work; broken plan refs; agent entry; asset paths; fixes  |
 
 _Last updated: 2026-01-31._

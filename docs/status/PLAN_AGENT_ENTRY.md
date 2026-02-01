@@ -9,7 +9,8 @@
 You are entering the **Against The Odds (AO)** project. Before doing any other work:
 
 1. **Read this file** (`docs/status/PLAN_AGENT_ENTRY.md`).
-2. **Execute the plan** described in the next section.
+2. **If Phase 0 is already signed off** (see [docs/status/PHASE_0_FINALIZATION.md](PHASE_0_FINALIZATION.md) and [docs/status/CONSOLIDATION_LOG.md](CONSOLIDATION_LOG.md)), skip re-execution and go to [docs/status/NEXT_BEST_STEPS_20260131.md](NEXT_BEST_STEPS_20260131.md) and [docs/AGENT_PROMPT_DECISION_TREE.md](../AGENT_PROMPT_DECISION_TREE.md) for ongoing work.
+3. **Otherwise**, execute the plan described in the next section.
 
 ---
 

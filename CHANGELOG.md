@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-01-31** — Finalization audit: FINALIZATION_AUDIT_20260131.md; fixed broken plan refs (cursor-github-shopify, expert_team → .cursor/plans/README.md and rules); PLAN_AGENT_ENTRY Phase 0 skip when signed off; NEXT_STEPS/assets/brand, MANUFACTURING logo path; NEXT_BEST_STEPS Tier 4 items 11–12 done; docs/README PROJECT_MANAGEMENT; OPERATOR_RUNBOOK run-runbook.ps1; INDEX_REPORTS and VERSION_UPDATE_TABLE.
 - **2026-01-31** — Guru expert analysis: cross-comparative + limit-test (lint, format, unit/integration tests, npm audit, runbook, verify-pipeline); fixes: Prettier ROOT_FILES_INVENTORY, SECURITY_COMPLIANCE_REPORT main-only wording, workflows README main-only + optional implement notes, verify-pipeline.ps1 all 7 workflows; GURU_EXPERT_ANALYSIS_20260131.md; INDEX_REPORTS and VERSION_UPDATE_TABLE updated. Pipeline fully operational; approval requested for commit.
 - **2026-01-31** — Proceed: COVERAGE_REMEDIATION_PLAN snapshot (20% stmts, 31% funcs, 44% branches); OPERATOR_RUNBOOK desktop automation optional deps note (robotjs, node-window-manager, native build).
 - **2026-01-31** — LICENSE file (UNLICENSED) at repo root; ROOT_FILES_INVENTORY and CONSOLIDATION_LOG updated; format pass on 2 files. Plan issue #5 closed.

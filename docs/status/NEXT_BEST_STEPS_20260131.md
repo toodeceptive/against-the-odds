@@ -53,12 +53,12 @@
 
 ### Tier 4 — Optional technical follow-up (no urgency)
 
-| #   | Action                                     | Why                                                                                                                   | Where                                                                                                               |
-| --- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| 9   | **Coverage remediation**                   | Raise test coverage toward 90%; thresholds in vitest.config.js are at baseline.                                       | [docs/status/COVERAGE_REMEDIATION_PLAN.md](COVERAGE_REMEDIATION_PLAN.md); CODEBASE_AUDIT_20260131 § Recommendations |
-| 10  | **deploy.yml / shopify-sync backup-store** | Implement real deploy or backup-store job, or remove placeholders; already documented as placeholder.                 | .github/workflows/README.md; ci.yml, shopify-sync.yml                                                               |
-| 11  | **LICENSE file**                           | Add a LICENSE file or explicitly document "UNLICENSED" in runbook (already in package.json and ROOT_FILES_INVENTORY). | OPERATOR_RUNBOOK or root LICENSE                                                                                    |
-| 12  | **Desktop automation deps**                | If contributors use robotjs/node-window-manager, document native build in README or OPERATOR_RUNBOOK.                 | CODEBASE_AUDIT_20260131 § Recommendations                                                                           |
+| #   | Action                                     | Why                                                                                                   | Where                                                                                                               |
+| --- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| 9   | **Coverage remediation**                   | Raise test coverage toward 90%; thresholds in vitest.config.js are at baseline.                       | [docs/status/COVERAGE_REMEDIATION_PLAN.md](COVERAGE_REMEDIATION_PLAN.md); CODEBASE_AUDIT_20260131 § Recommendations |
+| 10  | **deploy.yml / shopify-sync backup-store** | Implement real deploy or backup-store job, or remove placeholders; already documented as placeholder. | .github/workflows/README.md; ci.yml, shopify-sync.yml                                                               |
+| 11  | **LICENSE file**                           | ✅ Done — LICENSE (UNLICENSED) at repo root; documented in OPERATOR_RUNBOOK and ROOT_FILES_INVENTORY. | —                                                                                                                   |
+| 12  | **Desktop automation deps**                | ✅ Done — OPERATOR_RUNBOOK documents optional robotjs/node-window-manager and native build.           | OPERATOR_RUNBOOK § Dependency Maintenance                                                                           |
 
 **Rationale**: Improves quality and clarity over time; not blocking.
 

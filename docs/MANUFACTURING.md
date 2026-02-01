@@ -12,7 +12,7 @@ This document outlines the complete manufacturing workflow for Against The Odds 
 
 **Steps**:
 
-1. Review brand guidelines and logo catalog
+1. Review brand guidelines and logo catalog (logos: [assets/brand/](../assets/brand/README.md))
 2. Select merchandise items (hoodies, hats, etc.)
 3. Apply logo designs to product mockups
 4. Create design variations for review
