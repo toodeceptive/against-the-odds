@@ -9,6 +9,8 @@
 - **Before any other work**: Read `docs/status/PLAN_AGENT_ENTRY.md` and complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md`.
 - **Sign-off required**: `docs/status/PHASE_0_FINALIZATION.md` must contain **Phase 0 finalized; proceeding allowed.**
 
+**Exception — Fix everything / takeover**: If the user has granted **full dominion** to fix the entire project and the system is broken, read **`docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`** and **`docs/status/PROMPT_FOR_NEW_AGENT.md`** first. Then execute the canonical plan (`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`) and addendum (`.cursor/plans/FULL_SYSTEM_AUDIT_AND_FIX_ADDENDUM.md`). Phase 0 may be satisfied by existing inventory/sign-off; proceed through tracks and addendum fixes.
+
 ---
 
 ## After Phase 0: Which Prompt When?
@@ -57,6 +59,7 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 | Need                      | Document                                |
 | ------------------------- | --------------------------------------- |
 | Phase 0 and entry         | `docs/status/PLAN_AGENT_ENTRY.md`       |
+| Fix everything / takeover | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`, `docs/status/PROMPT_FOR_NEW_AGENT.md` |
 | Phase 0 definition        | `prompts/PERFECT_EXECUTION_PROMPT.md`   |
 | This decision tree        | `docs/AGENT_PROMPT_DECISION_TREE.md`    |
 | Shopify / Cursor workflow | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` |

@@ -17,7 +17,8 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 | -------------------------------------------------------- | ----------------------------- |
 | [SETUP_GITHUB.md](SETUP_GITHUB.md)                       | GitHub and development setup  |
 | [SHOPIFY_SETUP.md](SHOPIFY_SETUP.md)                     | Complete Shopify setup guide  |
-| [CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md)             | Credentials and .env.local    |
+| [CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md)             | Credentials and .env.local (canonical) |
+| [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md)              | Full environment and tooling (see CREDENTIALS_SETUP for secrets) |
 | [BROWSER_CREDENTIAL_FLOW.md](BROWSER_CREDENTIAL_FLOW.md) | Browser-based credential flow |
 | [guides/quick-start.md](guides/quick-start.md)           | Quick start                   |
 
@@ -42,7 +43,10 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 | -------------------------------------------------------------- | ------------------------------------------------------------- |
 | [../AGENTS.md](../AGENTS.md)                                   | Agent permission and when agents use your browser (repo root) |
 | [AGENT_PROMPT_DECISION_TREE.md](AGENT_PROMPT_DECISION_TREE.md) | Agent prompt decision tree                                    |
+| [AGENT_SYSTEM.md](AGENT_SYSTEM.md)                             | Agent system and capabilities                                |
+| [AGENT_PROMPTS.md](AGENT_PROMPTS.md)                           | Agent prompts index                                           |
 | [HANDOFF_PROMPT_NEW_AGENT.md](HANDOFF_PROMPT_NEW_AGENT.md)     | Handoff prompt for new agent                                  |
+| [status/HANDOFF_FOR_NEW_AGENT_202602.md](status/HANDOFF_FOR_NEW_AGENT_202602.md) | Situation for new agent (fix everything / takeover) |
 | [status/PLAN_AGENT_ENTRY.md](status/PLAN_AGENT_ENTRY.md)       | Agent entry plan                                              |
 | [status/INDEX_REPORTS.md](status/INDEX_REPORTS.md)             | Index of reports and status files                             |
 
@@ -64,6 +68,7 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 
 | Doc                                              | Purpose                           |
 | ------------------------------------------------ | --------------------------------- |
+| [HOOKS.md](HOOKS.md)                             | Git hooks (pre-commit; Windows-oriented) |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md)         | Troubleshooting                   |
 | [CODING_STANDARDS.md](CODING_STANDARDS.md)       | Coding standards                  |
 | [CODE_REVIEW_PROCESS.md](CODE_REVIEW_PROCESS.md) | Code review process               |

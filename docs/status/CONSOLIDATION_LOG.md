@@ -278,3 +278,23 @@
 ## 2026-02 — Handoff replaced: situation only; full dominion for new agent (user-approved)
 
 **Action**: User stated the system is broken and will allow the new agent full unrestricted approval and dominion over the entire project to fix everything. User asked not to express limitations or instructions, only to explain the situation. **Change:** HANDOFF_FOR_NEW_AGENT_202602.md was replaced with a situation-only document: repo and branch state, what was attempted and what happens (theme pull fails with SSL; theme folder has brand assets but no full structure; pipeline and finish-setup runs), what exists in the repo (scripts, credentials, docs, workflows, store), and the user’s position (system broken; new agent has full dominion to fix everything). No limitations or instructions in the handoff.
+
+---
+
+## 2026-02 — Guru expert execution: plan unification and addendum quick wins (user-approved)
+
+**Action**: User approved in-depth review/analysis/auditing and to proceed. Guru expert team executed addendum fixes and plan unification.
+
+**Plan**: FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md — added addendum reference (FULL_SYSTEM_AUDIT_AND_FIX_ADDENDUM.md, GURU_1000_QA_AUDIT_AND_INSIGHTS.md) and actionable frontmatter todos (Phase 0, Tracks A–G, Synthesis, addendum) so Cursor Build can run. Single canonical plan with addendum executed together.
+
+**Scripts**: Removed hardcoded repo path in scripts/shopify/browser/get-token-client-credentials.ps1 (fallback now Get-Location). Removed hardcoded path in scripts/run-everything-debug.ps1 (repo derived from PSScriptRoot).
+
+**index.html**: All image src and og/twitter URLs updated to assets/brand/ (BEB15EE5 and six other PNGs).
+
+**Docs**: docs/README.md — added ENVIRONMENT_SETUP, HOOKS, AGENT_SYSTEM, AGENT_PROMPTS, status/HANDOFF_FOR_NEW_AGENT_202602. docs/ENVIRONMENT_SETUP.md — canonical note for CREDENTIALS_SETUP. docs/HOOKS.md — platform note: pre-commit is Windows-oriented (powershell.exe); WSL/CI use pwsh or manual script.
+
+**Agent entry**: docs/AGENT_PROMPT_DECISION_TREE.md — added Fix everything / takeover branch (HANDOFF_FOR_NEW_AGENT_202602, PROMPT_FOR_NEW_AGENT); exception when user grants full dominion. .cursor/plans/README.md — added entry line for takeover.
+
+**Cursor**: .cursor/tasks.json — added Verify Pipeline, Run Runbook, Shopify: Theme Pull, Theme Auth Then Pull, Finish Setup, Run Shopify E2E Tests, Run Desktop Automation Tests. .cursor/context/node-and-automation.md — new context: when to use Playwright vs desktop-automation, npm scripts, locations, Cursor tasks. AGENTS.md — new section: Playwright and desktop-automation; pointer to node-and-automation.md and docs/AGENT_SYSTEM.md.
+
+**Result**: One plan with todos for Build; addendum quick wins applied; agent entry and handoff clarified; Playwright and desktop-automation surfaced for agents.

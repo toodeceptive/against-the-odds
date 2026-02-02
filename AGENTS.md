@@ -9,6 +9,10 @@ The user grants agents **full permission** to perform all actions in this reposi
 - **Preview before apply:** Store-affecting changes (theme push, product sync) require preview (e.g. `sync-products.ps1 -DryRun` or theme dev URL), snapshot to `docs/status/pending-approval.md`, and explicit user approval in chat before apply. See `.cursor/rules/shopify-preview-approval.mdc`.
 - **No secrets in commits:** Credentials live only in `.env.local` or GitHub Secrets; never commit or log secrets. See `.cursor/rules/env-credentials.mdc`.
 
+## Playwright and desktop automation
+
+Agents may use **Playwright** for scripted E2E and browser automation, and **desktop-automation** (and remote-PC flows) for operations that cannot be performed via GitHub or Shopify API. See `.cursor/context/node-and-automation.md` and [docs/AGENT_SYSTEM.md](docs/AGENT_SYSTEM.md). Use **your browser** (Cursor browser MCP) for interactive credential or one-off UI flows; use Playwright for automated, repeatable E2E runs when appropriate.
+
 ## When agents use your browser
 
 With your permission, agents use **your browser** (Cursor browser MCP, your Chrome) when an action is impossible, limited, or unsafe via API—for example:

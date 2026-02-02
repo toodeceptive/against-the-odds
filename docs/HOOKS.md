@@ -24,6 +24,8 @@ Repo root is resolved from the script location for worktree portability.
 
 **Setup**: Ensure the hook is installed (e.g. copy or link `config/git-hooks/pre-commit` to `.git/hooks/pre-commit` so Git invokes it on commit).
 
+**Platform**: The pre-commit hook invokes `powershell.exe` and is **Windows-oriented**. On non-Windows (e.g. WSL, CI), use `pwsh` if available or run `scripts/git/pre-commit.ps1` manually; document any CI override in your workflow.
+
 **Manual quality check (no commit)**: Run `npm run quality` to format, check format, lint, and run unit tests in one command.
 
 ---

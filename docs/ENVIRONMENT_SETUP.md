@@ -1,5 +1,7 @@
 # Complete Environment Setup Guide
 
+**Note**: For credentials and `.env.local` setup, the canonical doc is [CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md). This guide covers broader environment and tooling; use both as needed.
+
 ## Overview
 
 This guide provides comprehensive instructions for setting up your development environment for the Against The Odds project, including all required credentials, tools, and configurations.

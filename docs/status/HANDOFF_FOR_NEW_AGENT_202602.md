@@ -1,5 +1,7 @@
 # Situation for new agent (2026-02)
 
+**Prompt for new agent:** See **`docs/status/PROMPT_FOR_NEW_AGENT.md`** for a copy-paste prompt to start the next agent.
+
 The user has given the new agent **full unrestricted approval and dominion over the entire project** to fix everything. This document explains the situation only. No limitations or instructions are imposed.
 
 ---

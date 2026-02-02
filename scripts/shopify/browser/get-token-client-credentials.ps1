@@ -2,7 +2,7 @@
 # Requires SHOPIFY_API_KEY and SHOPIFY_API_SECRET (and optionally SHOPIFY_STORE_DOMAIN) in .env.local.
 
 $ErrorActionPreference = "Stop"
-$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path } else { "C:\Users\LegiT\against-the-odds" }
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 $envPath = Join-Path $repoPath ".env.local"

@@ -1,7 +1,29 @@
 ---
 name: Final repo organization and audit
 overview: Single canonical plan to sort, label, organize, clean, and update the entire repository—branches, workflows, worktrees, agents, docs, scripts, configs, assets, code, and tooling—with Phase 0 inventory, seven expert tracks, synthesis, and all known gaps and resolutions baked in. No other plans remain; this is the only plan.
-todos: []
+todos:
+  - id: phase0
+    content: Phase 0 — Audit and inventory (branches, worktrees, files, env, handoff); sign-off in PHASE_0_FINALIZATION
+  - id: track-a
+    content: Track A — Repo structure, branches, worktrees, LICENSE, stale branches
+  - id: track-b
+    content: Track B — Workflows, deploy.yml, shopify-sync, README
+  - id: track-c
+    content: Track C — Agents, prompts, rules, plans, hooks
+  - id: track-d
+    content: Track D — Docs, statuses, archives, INDEX_REPORTS, READMEs
+  - id: track-e
+    content: Track E — Scripts, configs, monitoring, data
+  - id: track-f
+    content: Track F — Assets, root .png, screenshots, security
+  - id: track-g
+    content: Track G — Codebase audit, lint, tests
+  - id: synthesis
+    content: Synthesis — CONSOLIDATION_LOG, handoff update, resolved-issues summary
+  - id: addendum
+    content: Addendum — Hardcoded paths, index.html images, docs/README, HOOKS, decision tree, tasks, node-and-automation context
+  - id: guru-pass-2
+    content: Guru pass 2 — Unidentified/unexamined/ignored (replacements.txt, .cursor/settings, pre-commit, archive, prompts stale refs, launch, spec-pack); update plan from audit
 isProject: false
 ---
 
@@ -12,6 +34,34 @@ isProject: false
 **Gate**: Phase 0 must be signed off before tracks. Sign-off line: **"Phase 0 finalized; proceeding allowed."** (See [prompts/PERFECT_EXECUTION_PROMPT.md](prompts/PERFECT_EXECUTION_PROMPT.md) and [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md).)
 
 **Reference (already implemented)**: Pipeline and preview-before-apply: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). Security and platform: browser-first, no headless Shopify admin; [.cursor/rules/use-user-browser.mdc](.cursor/rules/use-user-browser.mdc), [.cursor/rules/shopify-preview-approval.mdc](.cursor/rules/shopify-preview-approval.mdc), [docs/security/00_security_checklist.md](docs/security/00_security_checklist.md).
+
+**Addendum and guru (consolidated below)**: All guru expert updates from [FULL_SYSTEM_AUDIT_AND_FIX_ADDENDUM.md](FULL_SYSTEM_AUDIT_AND_FIX_ADDENDUM.md) (issues 13–30, U1–U14, Node/Playwright surfacing) and [GURU_1000_QA_AUDIT_AND_INSIGHTS.md](GURU_1000_QA_AUDIT_AND_INSIGHTS.md) (20 dimensions, plan insights) are consolidated in this plan. Those files remain as reference; execute from this document.
+
+**Entry — fix everything / full dominion**: If the user says "fix everything" or grants full dominion, read [docs/status/HANDOFF_FOR_NEW_AGENT_202602.md](docs/status/HANDOFF_FOR_NEW_AGENT_202602.md) and [docs/status/PROMPT_FOR_NEW_AGENT.md](docs/status/PROMPT_FOR_NEW_AGENT.md) first; Phase 0 gate may be satisfied by existing inventory; then execute this plan and addendum items.
+
+---
+
+## Repository file inventory (guru-corrected)
+
+**Total on disk** (excluding .git and node_modules): **~476 files.** **Tracked** (excluding gitignored generated): **~431 files.**
+
+| Area | Count | Notes |
+|------|--------|------|
+| Root | 22 | index.html, styles.css, package.json, eslint, vitest, playwright configs, README, OPERATOR_RUNBOOK, AGENTS, LICENSE, replacements.txt, etc. |
+| .cursor/ | 16 | context (3: github, shopify, node-and-automation), plans (4), rules (5), tasks.json, settings.json, worktrees.json, extensions.json |
+| .github/ | 13 | ISSUE_TEMPLATE (3), PULL_REQUEST_TEMPLATE, settings.optimization, workflows (8) |
+| archive/ | 47 | 2026-01-30: expert-analyses-legacy (11), status-legacy (8), + reports; ARCHIVE_LOG |
+| assets/ | 19 | brand (8), drop01 (11: artwork, exports, mockups, spec-pack 5) |
+| config/ | 4 | git-hooks/pre-commit, github-auth.md, shopify/.shopify-cli.yml, README |
+| data/ | 6 | products, manufacturers, samples (.gitkeep + JSON + README) |
+| docs/ | **141** | Root-level MD, business-plan, decisions, expert-analyses, guides (6), knowledge-base (8), launch (10), security (3), **status (77)**, screenshots/README |
+| docs/status/ | **77** | All status/report MD + performance-report.json |
+| prompts/ | 37 | experts 01–10, finalization-*, head-guru, MASTER_10, PERFECT_EXECUTION, ULTIMATE_*, setup/debug/test/optimization, agent-context, agent-capabilities |
+| scripts/ | 71 | 70 PS1 + README |
+| src/ | 45 | browser-automation (2), desktop-automation (27 + apps 5), shopify/themes (16) |
+| tests/ | 10 | unit, integration, e2e, shopify-admin, desktop-automation |
+
+**Gitignored / generated (not in tracked count):** coverage/ (41), playwright-report/, test-results/, .vscode/ (2 if present); node_modules excluded from tree.
 
 ---
 
@@ -39,6 +89,30 @@ These items **must** be addressed during execution; do not skip.
 | 10  | **Stale local branches** (ao-guru-exec, finalization/consolidate-20260129, wip/finalization-team-20260129) — merge or delete | Track A           | Include in branch strategy; decide and document                                                                  |
 
 **Branch snapshot (audit)**: main (local + origin); develop (absent); ao-guru-exec, cursor/main-project-setup-2bd1, finalization/consolidate-20260129, handoff-doc-permissions-20260129, wip/finalization-team-20260129 (local); shopify-theme (workflow-created by sync-theme-branch.yml). **Worktree snapshot**: Primary `C:\Users\LegiT\against-the-odds` (main); ewa, mhx, snq under `.cursor/worktrees/against-the-odds/` (see IF_HANDOFF primary path).
+
+---
+
+## Additional issues from guru/addendum (execute with tracks)
+
+Beyond the 10 must-resolve items above, address these during execution:
+
+| ID | Issue | Where | Resolution |
+|----|--------|--------|------------|
+| 13–14 | Hardcoded repo path; index.html image paths | get-token-client-credentials.ps1; run-everything-debug.ps1; index.html | PSScriptRoot/Get-Location fallback; assets/brand/ for all PNGs (done). |
+| 15–17 | docs/README entries; HOOKS Windows note; ENVIRONMENT_SETUP vs CREDENTIALS_SETUP | docs/README.md, HOOKS.md, ENVIRONMENT_SETUP.md | Add ENVIRONMENT_SETUP, HOOKS, AGENT_SYSTEM, AGENT_PROMPTS; canonical note for CREDENTIALS_SETUP (done). |
+| 18–19 | sync.yml develop logic; maintenance.yml Trivy exit-code | .github/workflows | Optional: remove develop steps; document or continue-on-error for Trivy. |
+| 20–22 | package-lock committed; performance-report.json gitignore; extensions.json vs settings | .gitignore, .cursor/ | Verify package-lock not ignored; add docs/status/performance-report.json to .gitignore if generated; doc only for extensions. |
+| 23–26 | Playwright/Vitest; data/samples path; assets/drop01 spec-pack; archive | Various | Document; spec-pack (5 files); archive per INDEX_REPORTS. |
+| 27–28 | Decision tree "fix everything"; plans README takeover line | AGENT_PROMPT_DECISION_TREE, .cursor/plans/README | Add HANDOFF_FOR_NEW_AGENT_202602 + PROMPT_FOR_NEW_AGENT (done). |
+| U1–U2 | Single "fix everything" entry; Phase 0 vs full dominion | Entry, decision tree | Add fix-everything branch; "full dominion" → Phase 0 optional (done). |
+| U3 | head-guru-orchestrator.md stale branches/blockers | prompts/head-guru-orchestrator.md | Update from BRANCH_INVENTORY and HANDOFF_FOR_NEW_AGENT_202602; blockers = theme pull SSL. |
+| U4 | theme-pull-rest API 2024-01 vs 2026-01 | scripts/shopify/theme-pull-rest.ps1 | Align to 2026-01 or document. |
+| U5–U6 | Cursor tasks; Playwright/desktop in context and AGENTS | .cursor/tasks.json, .cursor/context/node-and-automation.md, AGENTS.md | Add verify-pipeline, run-runbook, theme-pull, theme-auth-then-pull, finish-setup, test:shopify, test:desktop; node-and-automation context; AGENTS section (done). |
+| U7–U8 | docs/README; HANDOFF duality | docs/README, docs/ vs docs/status/ | Add entries; decision tree points to status/ handoff (done). |
+| U9–U10 | CI verify-pipeline/E2E; architecture one-pager | .github/workflows; docs/ | Optional: document or add job; optional one-pager. |
+| U11–U14 | index.html paths; hardcoded paths; pre-commit Windows; performance-report .gitignore | index.html, scripts, HOOKS.md, .gitignore | Fix paths; fix script paths; document HOOKS; add performance-report.json if generated (done where applicable). |
+
+**New (script path sweep)**: 50+ scripts still use hardcoded `$repoPath = "C:\Users\LegiT\against-the-odds"`. Per-script: derive repo from PSScriptRoot (depth: scripts/*.ps1 → "..", scripts/X/*.ps1 → "..\..", scripts/X/Y/*.ps1 → "..\..\.."); fallback Get-Location. **package.json**: Remove `--ext` from lint/lint:fix (ESLint 9 flat config). **config/shopify/.shopify-cli.yml**: Resolve TODO (application_url). **theme-bootstrap-minimal.ps1**: Implement per plan; document in SETUP_STATUS, TROUBLESHOOTING.
 
 ---
 
@@ -137,9 +211,9 @@ flowchart LR
 
 **Owner**: Expert 5 + head guru ([prompts/expert-05-documentation.md](prompts/expert-05-documentation.md), [prompts/head-guru-orchestrator.md](prompts/head-guru-orchestrator.md)).
 
-- **Prompts**: Index all [prompts/](prompts) (experts 01–10, finalization-_, head-guru, MASTER*10_EXPERT_SYSTEM, AO_GURU, PERFECT_EXECUTION, master/ULTIMATE*_, setup, testing, debugging, optimization, agent-capabilities, agent-context). Label current vs reference/deprecated; [docs/AGENT_PROMPT_DECISION_TREE.md](docs/AGENT_PROMPT_DECISION_TREE.md) and [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md) point to correct prompts.
+- **Prompts**: Index all [prompts/](prompts) (experts 01–10, finalization-*, head-guru, MASTER10_EXPERT_SYSTEM, AO_GURU, PERFECT_EXECUTION, master/ULTIMATE*, setup, testing, debugging, optimization, agent-capabilities, agent-context). Label current vs reference/deprecated; [docs/AGENT_PROMPT_DECISION_TREE.md](docs/AGENT_PROMPT_DECISION_TREE.md) and [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md) point to correct prompts.
 - **Cursor rules**: List [.cursor/rules/](.cursor/rules) (agent-permissions.mdc, ao-guru.rules.md, env-credentials.mdc, shopify-preview-approval.mdc, use-user-browser.mdc); verify no conflict with [AGENTS.md](AGENTS.md).
-- **Cursor context and workspace**: .cursor/context (github.md, shopify.md), tasks.json, settings.json, extensions.json — keep current and documented.
+- **Cursor context and workspace**: .cursor/context (github.md, shopify.md, **node-and-automation.md** — Playwright/desktop for agents), tasks.json, settings.json, extensions.json — keep current and documented.
 - **Plans**: [.cursor/plans/README.md](.cursor/plans/README.md) is the single index; this plan is the only plan. Add last-updated and version note. Plan execution outputs go to docs/status with date (e.g. CODEBASE_AUDIT_YYYYMMDD.md).
 - **Hooks**: [config/git-hooks/pre-commit](config/git-hooks/pre-commit) and [scripts/git/pre-commit.ps1](scripts/git/pre-commit.ps1) — document what runs where; single source of truth.
 - **Filters**: Document .cursor or repo-level ignore patterns in OPERATOR_RUNBOOK or docs.
@@ -187,7 +261,7 @@ flowchart LR
 **Owner**: Expert 8 + Expert 1 ([prompts/expert-08-frontend-ux.md](prompts/expert-08-frontend-ux.md), [prompts/expert-01-security-secrets.md](prompts/expert-01-security-secrets.md)).
 
 - **Root .png files** (issue #8): List in Phase 0; move each to [assets/](assets) (e.g. assets/brand/) or archive with ARCHIVE_LOG entry; remove from root.
-- **Screenshots**: Define location (e.g. docs/screenshots) and naming; .gitignore has docs/screenshots/\*.png|jpg; ensure docs/screenshots exists and is documented.
+- **Screenshots**: Define location (e.g. docs/screenshots) and naming; .gitignore has docs/screenshots/.png|jpg; ensure docs/screenshots exists and is documented.
 - **Assets**: [assets/drop01/](assets/drop01) (artwork, exports, mockups, spec-pack) — label, READMEs current; asset index if needed.
 - **Security**: [docs/security/](docs/security), [scripts/maintenance/security-scan.ps1](scripts/maintenance/security-scan.ps1) — checklist and scans current; verify no secrets in repo, .env.local gitignored, credentials doc current.
 - **Extensions**: .cursor/extensions.json, .cursor/settings.json — list recommended extensions and purpose; document in docs or .cursor README.
@@ -202,7 +276,7 @@ flowchart LR
 
 - **Codebase layout**: [src/](src) — modules (shopify, browser-automation, desktop-automation); entry points and dependencies; language mix (JS).
 - **Libraries and parsers**: package.json, parsers, bins; document; versions and licenses consistent.
-- **Strings and i18n**: Hardcoded strings, env var naming (e.g. SHOPIFY\_\*); document in codebase audit.
+- **Strings and i18n**: Hardcoded strings, env var naming (e.g. SHOPIFY); document in codebase audit.
 - **Lint and format**: Run lint/format; fix or document exceptions; single-source configs.
 - **Tests**: [tests/](tests) — structure (e2e, integration, unit, shopify-admin, desktop-automation); align with coverage and CI; document in TEST_COVERAGE or docs.
 - **Schemas and data contracts**: List and document.
@@ -232,6 +306,22 @@ flowchart LR
 1. **Phase 0** — run first; sign-off before tracks.
 2. **Tracks A–G** — can run in parallel after Phase 0; each produces deliverable and consolidation-log entry.
 3. **Synthesis** — after all tracks: CONSOLIDATION_LOG, ARCHIVE_LOG, INDEX_REPORTS and README updates, handoff update, resolved-issues summary.
+4. **Addendum / guru items** — hardcoded script paths (sweep), index.html, docs/README, HOOKS, decision tree, tasks, node-and-automation, theme-pull-rest API, head-guru update, package lint, config TODO, performance-report .gitignore (execute alongside or after tracks).
+5. **Guru pass 2** — audit unidentified/unexamined/ignored: replacements.txt, .cursor/settings.json, .cursor/worktrees.json, config/git-hooks/pre-commit raw content; archive/2026-01-30; prompts (stale refs); docs/launch; assets/drop01/spec-pack; gitignore/exclude tables; append "Guru pass 2" subsection to CONSOLIDATION_LOG or addendum.
+
+---
+
+## Guru plan insights (from 1,000-QA audit)
+
+1. **Entry**: Fix-everything branch and full-dominion → Phase 0 optional (in this plan and decision tree).
+2. **Prompts**: Update head-guru from BRANCH_INVENTORY and HANDOFF; node-and-automation context and AGENTS.md for Playwright/desktop (done).
+3. **Tasks**: verify-pipeline, finish-setup, theme-pull, theme-auth-then-pull, run-runbook, test:shopify, test:desktop (done).
+4. **Docs**: ENVIRONMENT_SETUP, HOOKS, AGENT_SYSTEM, AGENT_PROMPTS in docs/README; HANDOFF redirect (done).
+5. **Theme**: theme-bootstrap-minimal.ps1; align theme-pull-rest API to 2026-01 or document.
+6. **Scripts/paths**: Fix hardcoded paths in all scripts (sweep); index.html to assets/brand/ (done).
+7. **CI (optional)**: Document or add optional job for verify-pipeline / E2E.
+8. **HOOKS**: Pre-commit Windows-oriented (powershell.exe) — document in HOOKS.md (done).
+9. **.gitignore**: performance-report.json if generated.
 
 ---
 
@@ -248,9 +338,11 @@ flowchart LR
 | .github/workflows/README.md                                          | Workflow list, triggers, placeholders, environments, settings.optimization                          |
 | scripts/README.md                                                    | Scripts by domain and when to run; npm script map                                                   |
 | config index                                                         | config/README.md or docs                                                                            |
-| docs/status/CODEBASE*AUDIT*\*.md                                     | From Track G                                                                                        |
+| docs/status/CODEBASE*AUDIT*.md                                       | From Track G                                                                                        |
 | README.md, docs/README.md, OPERATOR_RUNBOOK.md                       | Consolidate and update                                                                              |
 | PLAN_AGENT_ENTRY, HANDOFF_PROMPT_NEW_AGENT, PLAN_HANDOFF, IF_HANDOFF | Update with indices and log locations; primary path                                                 |
+| docs/status/HANDOFF_FOR_NEW_AGENT_202602.md, PROMPT_FOR_NEW_AGENT.md | Entry for fix-everything / takeover; keep current                                                     |
+| .cursor/context/node-and-automation.md                               | Playwright and desktop-automation context for agents; keep current                                   |
 
 ---
 
@@ -291,8 +383,9 @@ flowchart LR
 - Phase 0: BRANCH_INVENTORY (and WORKTREE_INVENTORY if separate) exists; lists every branch and worktree; notes develop absence, worktrees.json gap, remote URL, root files (.png, replacements.txt), LICENSE state.
 - Track A: develop resolved; worktrees documented; stale branches decided and executed; LICENSE or UNLICENSED documented; replacements.txt verified.
 - Track B: deploy.yml and shopify-sync backup-store decided and implemented or removed; README states no GitHub Environments, branch-based deploy; settings.optimization.md current.
-- Track D: INDEX_REPORTS has version/update table; templates and settings.optimization.md reviewed.
-- Track F: Root .png moved and ARCHIVE_LOG updated; screenshots location documented.
+- Track D: INDEX_REPORTS has version/update table (docs 141, status 77, ~476 total); templates and settings.optimization.md reviewed.
+- Track F: Root .png moved and ARCHIVE_LOG updated; screenshots location documented; assets/drop01/spec-pack (5) noted.
 - Synthesis: CONSOLIDATION_LOG has Phase 0 + all tracks + resolved-issues summary; handoff files updated and point to logs/indices.
+- **Guru/addendum**: All script repo paths derived from PSScriptRoot (no hardcoded path); theme-pull-rest API aligned or documented; head-guru updated; package lint without --ext; config/shopify TODO resolved; performance-report.json in .gitignore if generated; .cursor/context includes node-and-automation; AGENTS.md and decision tree include fix-everything and Playwright/desktop; Guru pass 2 (unidentified/unexamined/ignored) completed and logged.
 
-No branch, worktree, workflow, environment, directory, or critical file left undocumented or unresolved; every one of the 10 issues has a documented resolution.
+No branch, worktree, workflow, environment, directory, or critical file left undocumented or unresolved; every one of the 10 main issues and guru/addendum issues has a documented resolution.

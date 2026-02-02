@@ -8,7 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Continue"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"

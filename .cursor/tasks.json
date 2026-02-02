@@ -123,6 +123,55 @@
       "presentation": {
         "reveal": "silent"
       }
+    },
+    {
+      "label": "Verify Pipeline",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/verify-pipeline.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Runbook",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/run-runbook.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Shopify: Theme Pull",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-pull.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Shopify: Theme Auth Then Pull",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-auth-then-pull.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Finish Setup",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/finish-setup.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Shopify E2E Tests",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:shopify"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Desktop Automation Tests",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:desktop"],
+      "problemMatcher": []
     }
   ]
 }
