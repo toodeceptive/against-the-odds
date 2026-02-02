@@ -59,6 +59,6 @@
 
 - **Domain experts**: prompts/expert-01-security-secrets.md … prompts/expert-10-developer-experience.md
 - **Finalization leads**: prompts/finalization-chief-of-staff.md, finalization-workflow-pipeline.md, finalization-release-branch-manager.md, finalization-tech-release-manager.md, finalization-security-compliance.md, finalization-shopify-store-ops.md, finalization-ops-manufacturing-lead.md, finalization-legal-risk-lead.md, finalization-gtm-growth-lead.md, finalization-business-plan-lead.md, finalization-finance-modeler.md, finalization-content-creative.md, finalization-customer-support-community.md, finalization-analytics-instrumentation.md
-- **Orchestration**: prompts/head-guru-orchestrator.md, prompts/PERFECT_EXECUTION_PROMPT.md, prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md, prompts/MASTER_10_EXPERT_SYSTEM.md
+- **Orchestration**: prompts/head-guru-orchestrator.md, prompts/PERFECT_EXECUTION_PROMPT.md, prompts/MASTER_10_EXPERT_SYSTEM.md, prompts/MASTER_10_EXPERT_SYSTEM.md
 
 See the plan file for full prompt paths and tables.

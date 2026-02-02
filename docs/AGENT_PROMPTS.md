@@ -18,7 +18,7 @@ This guide explains how to use the agent prompt system for new Cursor instances.
 
 ### Audits and finalization
 
-- **`prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md`** — Full system audit
+- **`prompts/MASTER_10_EXPERT_SYSTEM.md`** — Full system audit (10-expert sequential run)
 - **`prompts/finalization-*.md`** — Role-specific finalization (Shopify store ops, release manager, etc.)
 
 ## How to Use
@@ -33,7 +33,7 @@ This guide explains how to use the agent prompt system for new Cursor instances.
 
 Use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to pick:
 
-- Full system audit → `ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md`
+- Full system audit → `MASTER_10_EXPERT_SYSTEM.md`
 - 10-expert run → `MASTER_10_EXPERT_SYSTEM.md`
 - Finalization → `head-guru-orchestrator.md`
 - Single domain → `expert-N-*.md`

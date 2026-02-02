@@ -20,13 +20,13 @@
 
 ## 2. Tests (tests/)
 
-| Directory                     | Purpose                                                            | CI                        |
-| ----------------------------- | ------------------------------------------------------------------ | ------------------------- |
-| **tests/unit/**               | Vitest (example.test.js; 2 tests)                                  | ci.yml, quality-check.yml |
-| **tests/integration/**        | github-api.test.js, shopify-api.test.js (credential-gated)         | CI when env present       |
-| **tests/e2e/**                | example.spec.js, shopify-admin.spec.js (Playwright)                | Optional                  |
-| **tests/shopify-admin/**      | extract-credentials.spec.js                                        | Shopify E2E config        |
-| **tests/desktop-automation/** | issue-detection, mouse-keyboard, screen-capture, window-management | npm run test:desktop      |
+| Directory                     | Purpose                                                            | CI                   |
+| ----------------------------- | ------------------------------------------------------------------ | -------------------- |
+| **tests/unit/**               | Vitest (example.test.js; 2 tests)                                  | ci.yml               |
+| **tests/integration/**        | github-api.test.js, shopify-api.test.js (credential-gated)         | CI when env present  |
+| **tests/e2e/**                | example.spec.js, shopify-admin.spec.js (Playwright)                | Optional             |
+| **tests/shopify-admin/**      | extract-credentials.spec.js                                        | Shopify E2E config   |
+| **tests/desktop-automation/** | issue-detection, mouse-keyboard, screen-capture, window-management | npm run test:desktop |
 
 **Coverage**: Vitest v8; thresholds in vitest.config.js (lines/functions/branches/statements); baseline per COVERAGE_REMEDIATION_PLAN.md. Coverage report: npm run test:coverage.
 
@@ -48,7 +48,7 @@
 
 | Tool            | Config                                                                                                         | When                                                          |
 | --------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| **ESLint**      | eslint.config.mjs (flat config)                                                                                | npm run lint, lint:fix; CI (ci.yml, quality-check.yml)        |
+| **ESLint**      | eslint.config.mjs (flat config)                                                                                | npm run lint, lint:fix; CI (ci.yml)                           |
 | **Prettier**    | .prettierrc.json                                                                                               | npm run format, format:check; quality-check runs format:check |
 | **Centralized** | Single config at root; no conflicting per-dir overrides. Documented in config/README.md and scripts/README.md. |
 

@@ -80,10 +80,10 @@ No breaking changes; no new dependencies; no secrets touched.
 
 All guru expert analysis tasks are complete. Fixes and optimizations are applied; post-cleanup checks pass. The following changes are **ready to commit** upon your approval:
 
-1. **.github/workflows/README.md** — main-only triggers; optional implement notes for deploy.yml and shopify-sync backup-store.
+1. **.github/workflows/README.md** — main-only triggers; optional implement notes for shopify-sync backup-store. (deploy.yml and quality-check.yml removed; CI consolidated into ci.yml.)
 2. **docs/status/ROOT_FILES_INVENTORY.md** — Prettier format.
 3. **docs/status/SECURITY_COMPLIANCE_REPORT.md** — Branch strategy: main only (no develop).
-4. **scripts/verify-pipeline.ps1** — Verify all 7 workflow files (ci, quality-check, deploy, shopify-sync, sync-theme-branch, sync, maintenance).
+4. **scripts/verify-pipeline.ps1** — Verify workflow files (ci, shopify-sync, sync-theme-branch, sync, maintenance).
 5. **docs/status/GURU_EXPERT_ANALYSIS_20260131.md** — This report.
 
 **Approved and completed (2026-01-31)**: User approved; commit 913afcd created and pushed to origin main. Cleanup: no temp files; worktrees and workflows unchanged and documented. Log: CONSOLIDATION_LOG entry added. System finalized and ready for use.

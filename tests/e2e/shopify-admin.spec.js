@@ -31,8 +31,6 @@ test.describe('Shopify Admin E2E Tests', () => {
   });
 
   testIf(hasStoreDomain)('should navigate to products page', async () => {
-    test.setTimeout(120000);
-
     const browser = await connectToBrowser({ useExisting: true, headless: false });
     const context = await browser.newContext();
     const page = await context.newPage();

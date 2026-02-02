@@ -124,9 +124,9 @@
 
 | #   | Issue                                      | Resolution                                                                                                        |
 | --- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| 1   | develop in workflow triggers               | Removed from ci.yml, quality-check.yml, deploy.yml; main-only documented.                                         |
+| 1   | develop in workflow triggers               | Removed from ci.yml; quality-check.yml and deploy.yml deleted (consolidated into ci.yml); main-only documented.   |
 | 2   | worktrees.json vs ewa/mhx/snq              | WORKTREE_INVENTORY.md documents actual worktrees; doc-only.                                                       |
-| 3   | deploy.yml placeholder                     | Documented in workflow README; deploy-staging disabled (if: false).                                               |
+| 3   | deploy.yml placeholder                     | Removed; CI consolidated into ci.yml; workflow README documents current set.                                      |
 | 4   | shopify-sync backup-store placeholder      | Documented in workflow README; implement or remove later.                                                         |
 | 5   | No LICENSE file                            | UNLICENSED in package.json; documented in runbook and ROOT_FILES_INVENTORY.                                       |
 | 6   | GitHub Environments not used               | Workflow README and ENVIRONMENTS_AND_SECRETS_INVENTORY state main-only; no Environments.                          |
@@ -406,6 +406,12 @@
 
 - **Workflows**: `deploy.yml`, `quality-check.yml` (CI consolidated into `ci.yml`).
 - **docs/status/**: ~45 historical/duplicate files (AUDIT*\*\_20260130, CLEANUP_LOG_20260130, FULL_SYSTEM*\_, GURU\__ historical, PHASE2/3*DELIVERABLES, PLAN*_, PROJECT\_\_, PROMPT*FOR_NEW_AGENT, SECURITY*\*, WORKFLOW_OPS_AUDIT, CONVERSATION_AUDIT, COVERAGE_REMEDIATION_PLAN, and other dated/duplicate reports).
-- **prompts/**: ULTIMATE_MASTER_AGENT_PROMPT, AO_GURU_MULTI_SPECIALIST_MASTER_AGENT_PROMPT, master-agent-prompt, setup-agent, testing-agent, debugging-agent, optimization-agent, agent-capabilities, agent-context (canonical: head-guru-orchestrator, MASTER_10_EXPERT_SYSTEM, PERFECT_EXECUTION_PROMPT, expert-01–10, finalization-\*, ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT).
+- **prompts/**: ULTIMATE_MASTER_AGENT_PROMPT, AO_GURU_MULTI_SPECIALIST_MASTER_AGENT_PROMPT, master-agent-prompt, setup-agent, testing-agent, debugging-agent, optimization-agent, agent-capabilities, agent-context, ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT (canonical: head-guru-orchestrator, MASTER_10_EXPERT_SYSTEM, PERFECT_EXECUTION_PROMPT, expert-01–10, finalization-\*).
 
 **Reference updates**: verify-pipeline.ps1, .github/workflows/README.md, scripts/README.md, OPERATOR_RUNBOOK.md, HANDOFF_FOR_NEW_AGENT_202602.md, AGENT_SYSTEM.md, AGENT_PROMPTS.md, AGENT_PROMPT_DECISION_TREE.md, FINALIZATION_RUNBOOK.md, finalization-chief-of-staff.md, DESKTOP_AUTOMATION.md, agent-best-practices.md, .cursor/context/github.md, .github/settings.optimization.md. INDEX_REPORTS.md trimmed to remaining files only.
+
+---
+
+## 2026-02 — Plan implementation (prompt + doc refs, E2E timeout)
+
+**Summary**: ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT deleted; all references updated to MASTER_10_EXPERT_SYSTEM. Docs updated to reflect removed quality-check.yml and deploy.yml (CI consolidated). E2E shopify-admin.spec.js: duplicate test.setTimeout removed (describe-level 120000 retained). CONSOLIDATION_LOG resolved-issues and workflow/doc refs aligned with current workflow set.

@@ -50,12 +50,12 @@
 
 ### 2.2 GitHub (settings, repo, connections, app, codebase, files)
 
-| Area              | Location                                          | Finding                                                                                                                                           |
-| ----------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Repo settings** | .github/settings.optimization.md                  | Description, topics, branch protection (PR, CI + quality-check), Actions permissions, secrets (SHOPIFY\_\*, GITHUB_TOKEN).                        |
-| **Workflows**     | .github/workflows/                                | ci.yml, quality-check.yml, deploy.yml, shopify-sync.yml, sync-theme-branch.yml, sync.yml, maintenance.yml; README documents triggers and secrets. |
-| **Templates**     | .github/ISSUE_TEMPLATE/, PULL_REQUEST_TEMPLATE.md | bug, feature, task; PR template present.                                                                                                          |
-| **Connections**   | PAT in .env.local or Credential Manager           | scripts/github/verify-auth.ps1. Theme: shopify-theme branch via sync-theme-branch.yml; Shopify GitHub App for store.                              |
+| Area              | Location                                          | Finding                                                                                                                                                                                                |
+| ----------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Repo settings** | .github/settings.optimization.md                  | Description, topics, branch protection (PR, CI + quality-check), Actions permissions, secrets (SHOPIFY\_\*, GITHUB_TOKEN).                                                                             |
+| **Workflows**     | .github/workflows/                                | ci.yml (consolidated), shopify-sync.yml, sync-theme-branch.yml, sync.yml, maintenance.yml; README documents triggers and secrets. quality-check.yml and deploy.yml removed (consolidated into ci.yml). |
+| **Templates**     | .github/ISSUE_TEMPLATE/, PULL_REQUEST_TEMPLATE.md | bug, feature, task; PR template present.                                                                                                                                                               |
+| **Connections**   | PAT in .env.local or Credential Manager           | scripts/github/verify-auth.ps1. Theme: shopify-theme branch via sync-theme-branch.yml; Shopify GitHub App for store.                                                                                   |
 
 ### 2.3 Alignment
 

@@ -52,7 +52,9 @@
 
 ## 3. GitHub Workflows Audit
 
-### 3.1 Inventory (8 workflows)
+### 3.1 Inventory (workflows)
+
+**Note (2026-02)**: quality-check.yml and deploy.yml were removed; CI consolidated into ci.yml. Current workflows: ci.yml, shopify-sync.yml, sync-theme-branch.yml, sync.yml, maintenance.yml.
 
 | Workflow                | Triggers                                                   | Jobs                                                               | Notes                                    |
 | ----------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------- |

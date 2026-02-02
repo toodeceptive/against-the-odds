@@ -17,7 +17,7 @@
 
 | Goal                                                                                       | Use this prompt                               | Location                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------------------------------------ | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Full system audit** (code, config, workflows, integrations, security, performance, etc.) | Ultimate Comprehensive Audit                  | `prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md`                                                                                                                                                                                                |
+| **Full system audit** (code, config, workflows, integrations, security, performance, etc.) | Master 10-Expert System                       | `prompts/MASTER_10_EXPERT_SYSTEM.md`                                                                                                                                                                                                            |
 | **10-expert sequential run** (Security → Performance → Code Quality → … → DevEx)           | Master 10-Expert System                       | `prompts/MASTER_10_EXPERT_SYSTEM.md`                                                                                                                                                                                                            |
 | **Finalization orchestration** (reconcile worktrees, branches, Shopify, verification)      | Head Guru Orchestrator                        | `prompts/head-guru-orchestrator.md`                                                                                                                                                                                                             |
 | **Single-domain deep dive** (e.g. security only, testing only)                             | Expert N                                      | `prompts/expert-01-security-secrets.md` … `prompts/expert-10-developer-experience.md`                                                                                                                                                           |
@@ -48,7 +48,7 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 
 ## Canonical “Master” Prompts (Avoid Duplication)
 
-- **Audits**: `ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md` — systematic audit of any component.
+- **Audits**: `MASTER_10_EXPERT_SYSTEM.md` — systematic audit of any component (10-expert sequential run).
 - **Orchestration (multi-agent)**: `head-guru-orchestrator.md` or `MASTER_10_EXPERT_SYSTEM.md` — head-guru for finalization/reconciliation; MASTER_10 for sequential expert audits.
 
 ---

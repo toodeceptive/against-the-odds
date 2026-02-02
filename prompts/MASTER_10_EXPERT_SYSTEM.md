@@ -195,12 +195,9 @@ The 10-expert system is successful when:
 
 ---
 
-## Integration with Ultimate Comprehensive Audit Prompt
+## Full system audit
 
-The Ultimate Comprehensive Audit Prompt (`prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md`) provides the general framework. The 10-expert system provides specialized, domain-specific deep dives.
-
-**Use Ultimate Prompt for**: General component audits, quick reviews, initial assessments  
-**Use Expert Prompts for**: Deep domain-specific analysis, specialized optimization, comprehensive domain perfection
+Use this MASTER_10_EXPERT_SYSTEM for full-system or single-component audits: run the 10 experts in sequence (or the relevant expert for one component). For deep domain-specific analysis and comprehensive domain perfection, run the matching expert prompt.
 
 ---
 
