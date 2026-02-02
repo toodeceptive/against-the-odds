@@ -25,13 +25,13 @@
 
 | Topic                         | Location                                                                                                                         |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Canonical plan                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (only plan file; open in Cursor and use Build)                          |
+| Canonical plan                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (only plan file; open in Cursor and use Build)                         |
 | Conversation and build record | `docs/status/CONVERSATION_AUDIT.md`                                                                                              |
 | Security and compliance       | `docs/status/SECURITY_COMPLIANCE_REPORT.md`                                                                                      |
 | Cursor data boundary          | `docs/security/CURSOR_DATA_BOUNDARY.md`                                                                                          |
 | Pending approval flow         | `docs/status/pending-approval.md`, `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`, `.cursor/rules/shopify-preview-approval.mdc`         |
 | Local PC / env                | `docs/status/LOCAL_PC_SPECS.md`, `docs/CREDENTIALS_SETUP.md`                                                                     |
-| Other plans (reference)       | `.cursor/plans/` — single plan only: FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (open in Cursor and use Build)                   |
+| Other plans (reference)       | `.cursor/plans/` — single plan only: FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (open in Cursor and use Build)                    |
 | Root-level status docs        | Many (AUDIT_REPORT, BUG_FIXES, COMPLETION_REPORT, etc.) — legacy; canonical status lives in `docs/status/` and `.cursor/plans/`. |
 
 ---

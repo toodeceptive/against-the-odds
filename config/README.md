@@ -29,14 +29,14 @@
 
 ## Cursor and IDE
 
-| Path                                      | Purpose                                                    |
-| ----------------------------------------- | ---------------------------------------------------------- |
-| `.cursor/rules/*.mdc`                     | Agent rules (permissions, env, preview-approval, browser)  |
-| `.cursor/context/github.md`, `shopify.md` | Context for agents                                         |
-| `.cursor/settings.json`                   | Cursor format-on-save, excludes, extensions subset         |
-| `.cursor/extensions.json`                 | Recommended extensions                                     |
-| `.cursor/tasks.json`                      | IDE tasks (e.g. open pending approval, theme dev)          |
-| `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` | Single plan file; open in Cursor and use Build |
+| Path                                                      | Purpose                                                   |
+| --------------------------------------------------------- | --------------------------------------------------------- |
+| `.cursor/rules/*.mdc`                                     | Agent rules (permissions, env, preview-approval, browser) |
+| `.cursor/context/github.md`, `shopify.md`                 | Context for agents                                        |
+| `.cursor/settings.json`                                   | Cursor format-on-save, excludes, extensions subset        |
+| `.cursor/extensions.json`                                 | Recommended extensions                                    |
+| `.cursor/tasks.json`                                      | IDE tasks (e.g. open pending approval, theme dev)         |
+| `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` | Single plan file; open in Cursor and use Build            |
 
 ---
 

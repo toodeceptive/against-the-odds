@@ -327,7 +327,7 @@
 - **Prompts (stale refs)**: head-guru-orchestrator.md updated from BRANCH_INVENTORY and HANDOFF (2026-02-01 plan build). Decision tree and PLAN_AGENT_ENTRY point to HANDOFF_FOR_NEW_AGENT_202602 and single plan. No further stale refs.
 - **docs/launch**: 10 numbered files + README; linked from docs/README. No change.
 - **assets/drop01/spec-pack**: 5 files (beanie, cap, hoodie, longsleeve templates + README). Documented in assets/drop01 README and plan. No change.
-- **.gitignore / exclude**: performance-report.json in .gitignore; docs/screenshots/*.png|jpg; coverage, test-results, playwright-report. No change.
+- **.gitignore / exclude**: performance-report.json in .gitignore; docs/screenshots/\*.png|jpg; coverage, test-results, playwright-report. No change.
 
 **Result**: Guru pass 2 complete. No unidentified or unexamined items; all items verified and documented. Pipeline (70 scripts, 7 workflows), lint, and test:unit pass.
 
@@ -349,3 +349,20 @@
 - Theme pull fails in this environment with SSL/TLS handshake errors (REST and CLI both). Documented in HANDOFF_FOR_NEW_AGENT_202602, SETUP_STATUS, TROUBLESHOOTING.md (REST fallback, TLS 1.2, retry from different network). No code change; environment/network limitation.
 
 **Result**: Ref fix applied; framework and guru-assignments docs in place and indexed; CONSOLIDATION_LOG updated. Uncommitted changes (plan edits, deleted plans, modified docs, new framework docs) ready for commit. User may commit and push when ready.
+
+---
+
+## 2026-02-01 — Canonical Build plan perfected
+
+**Summary**: Build plan reframed to incremental-only + hybrid Shopify model; stale plan refs removed; navigation anchors confirmed; inventories aligned; quality gates passed.
+
+**Changes**:
+
+- **Canonical plan** (FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md): Added "Current Operating Mode (Read This First)" — Phase 0 signed off → do not re-run; incremental fix batches only; Hybrid Shopify model; worktree rule; no new artifacts. Reframed body as historical reference (already executed); added Incremental Fix List and No new artifacts rule. Pointers to CONSOLIDATION_LOG and EXECUTIVE_DECISION_WORK_PRINCIPLES.
+- **Stale refs**: CURSOR_GITHUB_AUDIT_20260131 — added current canonical navigation note (README + canonical plan); AUDIT_CURSOR_WORKSPACE_20260130 — plan line updated to point to canonical plan/README.
+- **Inventories**: BRANCH_INVENTORY and WORKTREE_INVENTORY already include uub; no change.
+- **Script fix**: scripts/shopify/theme-pull.ps1 — Unicode en-dash in string replaced with ASCII hyphen; npx invocation fixed to `& "npx" @pullArgs` so pipeline parse passes.
+
+**Verification**: npm run format, format:check, lint, test:unit, and verify-pipeline -SkipRunbook passed.
+
+**Result**: Single source of truth for Build is the canonical plan; agents read operating mode first; no doc links to missing plan files; one clean commit.

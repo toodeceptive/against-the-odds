@@ -28,8 +28,9 @@
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ewa` | detached HEAD                    | 505df09        | Same commit as main; may be used for cursor navigation or parallel work |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30        | Different commit; active worktree (current branch)                      |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/snq` | detached HEAD                    | 1c5ed2e        | Different commit; may be used for cursor navigation or parallel work    |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/uub` | detached HEAD                    | 16a8024        | Different commit; may be used for cursor navigation or parallel work    |
 
-**Note**: [.cursor/worktrees.json](.cursor/worktrees.json) does not list ewa, mhx, snq. Recommendation: extend worktrees.json or maintain this inventory doc as single source of truth.
+**Note**: [.cursor/worktrees.json](.cursor/worktrees.json) does not list ewa, mhx, snq, uub. Recommendation: extend worktrees.json or maintain this inventory doc as single source of truth.
 
 **Usage**: All commands run from **repo root**; do not commit from worktrees without coordinating with main branch.
 

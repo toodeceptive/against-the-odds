@@ -13,13 +13,13 @@
 
 ## npm scripts (package.json)
 
-| Script | Purpose |
-|--------|---------|
-| `npm run test:e2e` | Playwright default config — general E2E |
-| `npm run test:shopify` | Playwright Shopify config — store/admin E2E |
-| `npm run test:desktop` | Desktop automation system test (PowerShell) |
-| `npm run test:desktop:quick` | Desktop automation quick run |
-| `npm run verify:pipeline` | Verify pipeline (scripts + workflows) |
+| Script                       | Purpose                                     |
+| ---------------------------- | ------------------------------------------- |
+| `npm run test:e2e`           | Playwright default config — general E2E     |
+| `npm run test:shopify`       | Playwright Shopify config — store/admin E2E |
+| `npm run test:desktop`       | Desktop automation system test (PowerShell) |
+| `npm run test:desktop:quick` | Desktop automation quick run                |
+| `npm run verify:pipeline`    | Verify pipeline (scripts + workflows)       |
 
 ---
 

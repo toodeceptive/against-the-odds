@@ -52,7 +52,7 @@ $storeHost = $Store
 if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
     $storeHost = "aodrop.com.myshopify.com"
 }
-$baseUrl = "https://$storeHost/admin/api/2024-01"
+$baseUrl = "https://$storeHost/admin/api/2026-01"
 $headers = @{
     "X-Shopify-Access-Token" = $token
     "Content-Type"           = "application/json"

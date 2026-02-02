@@ -25,9 +25,9 @@
 | **Classic agent** (setup, debug, test, optimize)                                           | Setup / Debugging / Testing / Optimization agent | `prompts/setup-agent.md`, `debugging-agent.md`, `testing-agent.md`, `optimization-agent.md`                                                                                                                                                                          |
 | **Finalize entire workflow and pipeline** (one coordinated pass)                           | Finalization Workflow Pipeline                   | `prompts/finalization-workflow-pipeline.md` — run experts in order: Security → CI/CD → Documentation → Integrations → Finalization Shopify Store Ops → Head Guru Orchestrator → DevEx; produce "Pipeline finalized" sign-off in `docs/status/`.                      |
 | **Full project perfection** (Phases 1–7: foundation → docs → Cursor → business → sign-off) | Full Project Guru Perfection Plan                | `.cursor/plans/` (plan file) or run Phases 1–7 in order per plan; produce `docs/status/PROJECT_PERFECTED_YYYYMMDD.md`. Entry: `docs/status/PLAN_AGENT_ENTRY.md` → Phase 0 first. See `docs/status/INDEX_REPORTS.md` and `docs/status/PROJECT_PERFECTED_20260130.md`. |
-| **Full project update & perfection** (audit + new system + cleanup + update everything)    | Full Project Update & Perfection (multi-guru)    | `.cursor/plans/full_project_update_perfection_guru.plan.md` — audit (A1–A6), update (B1–B8), cleanup (C1–C7), sign-off (D). See INDEX_REPORTS.                                                                                                                       |
-| **Execute plan with full guru team** (per-phase owners and reviewers)                       | Canonical plan + guru assignments                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build; see plan section "Guru expert team" and `docs/status/GURU_TEAM_ASSIGNMENTS.md` for roster, assignment matrix, and perfection dimensions.                                                                                                                       |
-| **Audit and perfection framework** (best ways to audit and perfect entire repo)             | Reference doc                                    | `docs/status/AUDIT_AND_PERFECTION_FRAMEWORK.md` — scripts, inventories, expert-driven audit, decision flow, fix types, guru ownership; links to GURU_TEAM_ASSIGNMENTS and canonical plan.                                                                                                                       |
+| **Full project update & perfection** (audit + new system + cleanup + update everything)    | Full Project Update & Perfection (multi-guru)    | **Consolidated** into the single canonical plan: `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (open in Cursor and use Build). See `docs/status/INDEX_REPORTS.md`.                                                                                       |
+| **Execute plan with full guru team** (per-phase owners and reviewers)                      | Canonical plan + guru assignments                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build; see plan section "Guru expert team" and `docs/status/GURU_TEAM_ASSIGNMENTS.md` for roster, assignment matrix, and perfection dimensions.                                   |
+| **Audit and perfection framework** (best ways to audit and perfect entire repo)            | Reference doc                                    | `docs/status/AUDIT_AND_PERFECTION_FRAMEWORK.md` — scripts, inventories, expert-driven audit, decision flow, fix types, guru ownership; links to GURU_TEAM_ASSIGNMENTS and canonical plan.                                                                            |
 
 ---
 
@@ -58,11 +58,11 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 
 ## Quick Reference
 
-| Need                      | Document                                |
-| ------------------------- | --------------------------------------- |
-| Phase 0 and entry         | `docs/status/PLAN_AGENT_ENTRY.md`       |
+| Need                      | Document                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| Phase 0 and entry         | `docs/status/PLAN_AGENT_ENTRY.md`                                                    |
 | Fix everything / takeover | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`, `docs/status/PROMPT_FOR_NEW_AGENT.md` |
-| Phase 0 definition        | `prompts/PERFECT_EXECUTION_PROMPT.md`   |
-| This decision tree        | `docs/AGENT_PROMPT_DECISION_TREE.md`    |
-| Shopify / Cursor workflow | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` |
-| New-agent handoff         | `docs/HANDOFF_PROMPT_NEW_AGENT.md`      |
+| Phase 0 definition        | `prompts/PERFECT_EXECUTION_PROMPT.md`                                                |
+| This decision tree        | `docs/AGENT_PROMPT_DECISION_TREE.md`                                                 |
+| Shopify / Cursor workflow | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`                                              |
+| New-agent handoff         | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                                                   |

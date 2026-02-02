@@ -79,7 +79,7 @@ Write-Host "Using: npx shopify theme pull (theme CLI)" -ForegroundColor Gray
 if ($themeToken) {
     Write-Host "Using token from SHOPIFY_CLI_THEME_TOKEN / SHOPIFY_ACCESS_TOKEN (non-interactive)." -ForegroundColor Gray
 } else {
-    Write-Host "If you see a verification code: press a key to open the browser, confirm the code, then return here and wait 30–60s." -ForegroundColor Gray
+    Write-Host "If you see a verification code: press a key to open the browser, confirm the code, then return here and wait 30-60s." -ForegroundColor Gray
 }
 Write-Host ""
 
@@ -92,7 +92,7 @@ if ($themeToken) {
     $pullArgs += "--password"
     $pullArgs += $themeToken
 }
-& npx $pullArgs
+& "npx" @pullArgs
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[FAIL] Theme pull failed" -ForegroundColor Red

@@ -9,8 +9,9 @@
 You are entering the **Against The Odds (AO)** project. Before doing any other work:
 
 1. **Read this file** (`docs/status/PLAN_AGENT_ENTRY.md`).
-2. **If Phase 0 is already signed off** (see [docs/status/PHASE_0_FINALIZATION.md](PHASE_0_FINALIZATION.md) and [docs/status/CONSOLIDATION_LOG.md](CONSOLIDATION_LOG.md)), skip re-execution and go to [docs/status/NEXT_BEST_STEPS_20260131.md](NEXT_BEST_STEPS_20260131.md) and [docs/AGENT_PROMPT_DECISION_TREE.md](../AGENT_PROMPT_DECISION_TREE.md) for ongoing work.
-3. **Otherwise**, execute the plan described in the next section.
+2. **Read** `docs/status/EXECUTIVE_DECISION_WORK_PRINCIPLES.md` (binding: no redundant runs; incremental-only execution when Phase 0 is signed off).
+3. **If Phase 0 is already signed off** (see [docs/status/PHASE_0_FINALIZATION.md](PHASE_0_FINALIZATION.md) and [docs/status/CONSOLIDATION_LOG.md](CONSOLIDATION_LOG.md)), skip re-execution and go to [docs/status/NEXT_BEST_STEPS_20260131.md](NEXT_BEST_STEPS_20260131.md) and [docs/AGENT_PROMPT_DECISION_TREE.md](../AGENT_PROMPT_DECISION_TREE.md) for ongoing work.
+4. **Otherwise**, execute the plan described in the next section.
 
 ---
 
@@ -18,9 +19,9 @@ You are entering the **Against The Odds (AO)** project. Before doing any other w
 
 The project mandates **Phase 0** (full cleanup and finalization) before any other execution phase. The authoritative source for this is:
 
-| Document                                                      | Role                                                                                   |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **`prompts/PERFECT_EXECUTION_PROMPT.md`**                     | Defines Phase 0 scope, checklist, gate, and sign-off. **Read it and follow it.**       |
+| Document                                                      | Role                                                                                                                                                                                                                            |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`prompts/PERFECT_EXECUTION_PROMPT.md`**                     | Defines Phase 0 scope, checklist, gate, and sign-off. **Read it and follow it.**                                                                                                                                                |
 | **`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`** | Single canonical plan (Phase 0 + Tracks A–G + Synthesis). Open in Cursor and use Build. The plan can be run with the full guru expert team; see the plan section "Guru expert team" and `docs/status/GURU_TEAM_ASSIGNMENTS.md`. |
 
 ### Execution steps (in order)
@@ -65,7 +66,7 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 | Canonical plan (Phase 0 + tracks)  | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` |
 | Consolidation log (all tracks)     | `docs/status/CONSOLIDATION_LOG.md`                        |
 | Index of reports                   | `docs/status/INDEX_REPORTS.md`                            |
-| Guru team (roster, assignments)    | `docs/status/GURU_TEAM_ASSIGNMENTS.md`                   |
+| Guru team (roster, assignments)    | `docs/status/GURU_TEAM_ASSIGNMENTS.md`                    |
 | New-agent handoff and prompt       | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                        |
 | After Phase 0: which prompt to run | `docs/AGENT_PROMPT_DECISION_TREE.md`                      |
 
