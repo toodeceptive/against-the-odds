@@ -11,7 +11,7 @@
 
 ## 1. What was done (do not redo)
 
-- **Expert Team Security and Platform Plan** (consolidated; rules and workflow implemented) — see `.cursor/plans/README.md` and `.cursor/rules/`; created and fully implemented:
+- **Expert Team Security and Platform Plan** (consolidated; rules and workflow implemented) — see `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` and `.cursor/rules/`; created and fully implemented:
   - **Shopify:** No unattended headless automation of Shopify Admin (ToS). Theme via Cursor → GitHub → Shopify GitHub App; products via dry-run → approve in chat → sync (Admin API) or user's browser (Cursor browser MCP) with approval before save.
   - **Local-only:** Only `.env.local` at repo root is required on PC; nothing else from the repo must be stored elsewhere.
   - **Cursor data boundary:** Secrets only in `.env.local`; never in chat or logs; non-secret repo content may be sent to Cursor for AI. Documented in `docs/security/CURSOR_DATA_BOUNDARY.md`.
@@ -25,13 +25,13 @@
 
 | Topic                         | Location                                                                                                                         |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Canonical plan index          | `.cursor/plans/README.md` (single plan: FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md)                                               |
+| Canonical plan                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (only plan file; open in Cursor and use Build)                          |
 | Conversation and build record | `docs/status/CONVERSATION_AUDIT.md`                                                                                              |
 | Security and compliance       | `docs/status/SECURITY_COMPLIANCE_REPORT.md`                                                                                      |
 | Cursor data boundary          | `docs/security/CURSOR_DATA_BOUNDARY.md`                                                                                          |
 | Pending approval flow         | `docs/status/pending-approval.md`, `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`, `.cursor/rules/shopify-preview-approval.mdc`         |
 | Local PC / env                | `docs/status/LOCAL_PC_SPECS.md`, `docs/CREDENTIALS_SETUP.md`                                                                     |
-| Other plans (reference)       | `.cursor/plans/` — all plans consolidated into FINAL_REPO_ORGANIZATION_AND_AUDIT; see README.md                                  |
+| Other plans (reference)       | `.cursor/plans/` — single plan only: FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (open in Cursor and use Build)                   |
 | Root-level status docs        | Many (AUDIT_REPORT, BUG_FIXES, COMPLETION_REPORT, etc.) — legacy; canonical status lives in `docs/status/` and `.cursor/plans/`. |
 
 ---

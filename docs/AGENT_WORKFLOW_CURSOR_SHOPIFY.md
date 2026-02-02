@@ -1,6 +1,6 @@
 # Agent workflow: Cursor → GitHub → Shopify
 
-Step-by-step for fulfilling store change requests (products, theme) with preview and approval. Reference: [.cursor/plans/README.md](../.cursor/plans/README.md) (canonical plan index); pipeline implemented here and in rules.
+Step-by-step for fulfilling store change requests (products, theme) with preview and approval. Reference: [.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md](../.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md) (single plan; open in Cursor and use Build); pipeline implemented here and in rules.
 
 ---
 

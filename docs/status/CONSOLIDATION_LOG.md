@@ -298,3 +298,54 @@
 **Cursor**: .cursor/tasks.json — added Verify Pipeline, Run Runbook, Shopify: Theme Pull, Theme Auth Then Pull, Finish Setup, Run Shopify E2E Tests, Run Desktop Automation Tests. .cursor/context/node-and-automation.md — new context: when to use Playwright vs desktop-automation, npm scripts, locations, Cursor tasks. AGENTS.md — new section: Playwright and desktop-automation; pointer to node-and-automation.md and docs/AGENT_SYSTEM.md.
 
 **Result**: One plan with todos for Build; addendum quick wins applied; agent entry and handoff clarified; Playwright and desktop-automation surfaced for agents.
+
+---
+
+## 2026-02-01 — Plan build executed (single plan file)
+
+**Action**: User requested to build the plan. Phase 0 already signed off (PHASE_0_FINALIZATION.md: "Phase 0 finalized; proceeding allowed."). Tracks A–G and Synthesis were previously completed per log entries above.
+
+**Plans**: .cursor/plans/ now contains only FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (README, ADDENDUM, GURU_1000_QA, MASTER plan removed). All repo references updated to point to this single plan file; open in Cursor and use Build.
+
+**Prompts**: prompts/head-guru-orchestrator.md — updated Current Known State from BRANCH_INVENTORY and HANDOFF: branches (main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129; main-only workflows); worktrees (primary + ewa, mhx, snq); blockers (theme pull SSL; layout/theme.liquid).
+
+**Verification**: BRANCH_INVENTORY.md, WORKTREE_INVENTORY.md, LICENSE (present at root), .github/workflows/README.md (deploy/shopify-sync placeholders documented), CONSOLIDATION_LOG and handoff chain current. Plan build complete; all 11 todos verified or executed.
+
+---
+
+## Guru pass 2 (unidentified/unexamined/ignored) — 2026-02-01
+
+**Action**: Execute plan "Guru pass 2" audit per FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md.
+
+**Audit**:
+
+- **replacements.txt**: At repo root; single line (regex for git-filter-repo Shopify secret replacement). Documented in OPERATOR_RUNBOOK (§replacements.txt), ROOT_FILES_INVENTORY, plan. No change.
+- **.cursor/settings.json**: Present; Cursor IDE settings. Not listed in worktrees.json; extensions and workspace config documented in config/README and plan. No change.
+- **.cursor/worktrees.json**: Contains `setup-worktree`, `inventoryDoc` → docs/status/WORKTREE_INVENTORY.md. ewa, mhx, snq paths not in JSON; WORKTREE_INVENTORY.md is single source of truth per plan. No change.
+- **config/git-hooks/pre-commit**: Shell wrapper; cd to repo root, invokes `powershell.exe -File scripts/git/pre-commit.ps1`. Documented in docs/HOOKS.md (Windows-oriented). No change.
+- **archive/2026-01-30**: Present; ARCHIVE_LOG and INDEX_REPORTS reference it. No change.
+- **Prompts (stale refs)**: head-guru-orchestrator.md updated from BRANCH_INVENTORY and HANDOFF (2026-02-01 plan build). Decision tree and PLAN_AGENT_ENTRY point to HANDOFF_FOR_NEW_AGENT_202602 and single plan. No further stale refs.
+- **docs/launch**: 10 numbered files + README; linked from docs/README. No change.
+- **assets/drop01/spec-pack**: 5 files (beanie, cap, hoodie, longsleeve templates + README). Documented in assets/drop01 README and plan. No change.
+- **.gitignore / exclude**: performance-report.json in .gitignore; docs/screenshots/*.png|jpg; coverage, test-results, playwright-report. No change.
+
+**Result**: Guru pass 2 complete. No unidentified or unexamined items; all items verified and documented. Pipeline (70 scripts, 7 workflows), lint, and test:unit pass.
+
+---
+
+## 2026-02-01 — Full system audit and perfection (user-approved)
+
+**Action**: User approved full dominion to audit, review, analyze, update, clean, optimize, consolidate, organize, and perfect the entire system/pipeline/repo (local, git, all branches). Execution per AUDIT_AND_PERFECTION_FRAMEWORK and canonical plan.
+
+**Verification**:
+
+- **Git**: main ahead 1 (unpushed); local branches main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129; remotes origin/main, shopify-theme, feature/ao-brand-shopify-automation, dependabot/…; .cursor/plans/ contains only FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (README, ADDENDUM, GURU_1000_QA, MASTER plan removed per plan build).
+- **Pipeline**: `npm run lint` and `npm run test:unit` pass. verify-pipeline (70 scripts, 7 workflows) previously verified.
+- **Broken refs**: PLAN_HANDOFF_FOR_NEXT_AGENT.md — "see README.md" under .cursor/plans/ updated to "single plan only: FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (open in Cursor and use Build)" (README was removed in plan build).
+- **New docs**: docs/status/AUDIT_AND_PERFECTION_FRAMEWORK.md and docs/status/GURU_TEAM_ASSIGNMENTS.md added to INDEX_REPORTS and AGENT_PROMPT_DECISION_TREE; framework is the reference for best ways to audit and perfect with guru team.
+
+**Shopify theme pull (known blocker)**:
+
+- Theme pull fails in this environment with SSL/TLS handshake errors (REST and CLI both). Documented in HANDOFF_FOR_NEW_AGENT_202602, SETUP_STATUS, TROUBLESHOOTING.md (REST fallback, TLS 1.2, retry from different network). No code change; environment/network limitation.
+
+**Result**: Ref fix applied; framework and guru-assignments docs in place and indexed; CONSOLIDATION_LOG updated. Uncommitted changes (plan edits, deleted plans, modified docs, new framework docs) ready for commit. User may commit and push when ready.

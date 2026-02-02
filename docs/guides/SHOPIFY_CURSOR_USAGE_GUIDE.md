@@ -258,4 +258,4 @@ flowchart TB
 
 ---
 
-_Reference: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](../UPDATE_SHOPIFY_FROM_CURSOR.md), [.cursor/plans/README.md](../../.cursor/plans/README.md). Last updated: 2026-02-01._
+_Reference: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](../UPDATE_SHOPIFY_FROM_CURSOR.md), [.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md](../../.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md). Last updated: 2026-02-01._

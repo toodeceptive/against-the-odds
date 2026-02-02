@@ -21,12 +21,12 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 | Document                                                      | Role                                                                                   |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | **`prompts/PERFECT_EXECUTION_PROMPT.md`**                     | Defines Phase 0 scope, checklist, gate, and sign-off. **Read it and follow it.**       |
-| **`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`** | Single canonical plan (Phase 0 + Tracks A–G + Synthesis); see .cursor/plans/README.md. |
+| **`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`** | Single canonical plan (Phase 0 + Tracks A–G + Synthesis). Open in Cursor and use Build. The plan can be run with the full guru expert team; see the plan section "Guru expert team" and `docs/status/GURU_TEAM_ASSIGNMENTS.md`. |
 
 ### Execution steps (in order)
 
 1. **Read** `prompts/PERFECT_EXECUTION_PROMPT.md` in full.
-2. **Satisfy Phase 0**  
+2. **Satisfy Phase 0**
    Work through the Phase 0 completion checklist in that prompt. Scope includes:
    - All branches (local + remote); merge state and cleanup.
    - All local directories and files; structure, naming, consolidation.
@@ -34,12 +34,12 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
    - All WIP and unfinished work completed, removed, or documented and tracked.
    - All tasks/processes/issues reviewed and optimized.
    - Website/server data and Shopify/Cloudflare profile/info reviewed and documented (or deferred with reason + next steps if access is blocked).
-3. **Record sign-off**  
+3. **Record sign-off**
    Only after the checklist is fully satisfied:
    - Update `docs/status/PHASE_0_FINALIZATION.md`.
    - Add the **exact** line: **Phase 0 finalized; proceeding allowed.**
    - Include timestamp and a brief summary of what was finalized.
-4. **Gate**  
+4. **Gate**
    Do **not** proceed to planning execution, expert cycles, feature work, or other phases until Phase 0 sign-off is recorded.
 
 ---
@@ -65,6 +65,7 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 | Canonical plan (Phase 0 + tracks)  | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` |
 | Consolidation log (all tracks)     | `docs/status/CONSOLIDATION_LOG.md`                        |
 | Index of reports                   | `docs/status/INDEX_REPORTS.md`                            |
+| Guru team (roster, assignments)    | `docs/status/GURU_TEAM_ASSIGNMENTS.md`                   |
 | New-agent handoff and prompt       | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                        |
 | After Phase 0: which prompt to run | `docs/AGENT_PROMPT_DECISION_TREE.md`                      |
 

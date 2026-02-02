@@ -36,7 +36,7 @@
 | `.cursor/settings.json`                   | Cursor format-on-save, excludes, extensions subset         |
 | `.cursor/extensions.json`                 | Recommended extensions                                     |
 | `.cursor/tasks.json`                      | IDE tasks (e.g. open pending approval, theme dev)          |
-| `.cursor/plans/README.md`                 | Plan index; single plan: FINAL_REPO_ORGANIZATION_AND_AUDIT |
+| `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` | Single plan file; open in Cursor and use Build |
 
 ---
 

@@ -9,7 +9,7 @@
 - **Before any other work**: Read `docs/status/PLAN_AGENT_ENTRY.md` and complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md`.
 - **Sign-off required**: `docs/status/PHASE_0_FINALIZATION.md` must contain **Phase 0 finalized; proceeding allowed.**
 
-**Exception — Fix everything / takeover**: If the user has granted **full dominion** to fix the entire project and the system is broken, read **`docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`** and **`docs/status/PROMPT_FOR_NEW_AGENT.md`** first. Then execute the canonical plan (`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`) and addendum (`.cursor/plans/FULL_SYSTEM_AUDIT_AND_FIX_ADDENDUM.md`). Phase 0 may be satisfied by existing inventory/sign-off; proceed through tracks and addendum fixes.
+**Exception — Fix everything / takeover**: If the user has granted **full dominion** to fix the entire project and the system is broken, read **`docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`** and **`docs/status/PROMPT_FOR_NEW_AGENT.md`** first. Then execute the canonical plan (`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`). All audit content is consolidated in that plan. Phase 0 may be satisfied by existing inventory/sign-off; proceed through tracks and addendum fixes.
 
 ---
 
@@ -26,6 +26,8 @@
 | **Finalize entire workflow and pipeline** (one coordinated pass)                           | Finalization Workflow Pipeline                   | `prompts/finalization-workflow-pipeline.md` — run experts in order: Security → CI/CD → Documentation → Integrations → Finalization Shopify Store Ops → Head Guru Orchestrator → DevEx; produce "Pipeline finalized" sign-off in `docs/status/`.                      |
 | **Full project perfection** (Phases 1–7: foundation → docs → Cursor → business → sign-off) | Full Project Guru Perfection Plan                | `.cursor/plans/` (plan file) or run Phases 1–7 in order per plan; produce `docs/status/PROJECT_PERFECTED_YYYYMMDD.md`. Entry: `docs/status/PLAN_AGENT_ENTRY.md` → Phase 0 first. See `docs/status/INDEX_REPORTS.md` and `docs/status/PROJECT_PERFECTED_20260130.md`. |
 | **Full project update & perfection** (audit + new system + cleanup + update everything)    | Full Project Update & Perfection (multi-guru)    | `.cursor/plans/full_project_update_perfection_guru.plan.md` — audit (A1–A6), update (B1–B8), cleanup (C1–C7), sign-off (D). See INDEX_REPORTS.                                                                                                                       |
+| **Execute plan with full guru team** (per-phase owners and reviewers)                       | Canonical plan + guru assignments                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build; see plan section "Guru expert team" and `docs/status/GURU_TEAM_ASSIGNMENTS.md` for roster, assignment matrix, and perfection dimensions.                                                                                                                       |
+| **Audit and perfection framework** (best ways to audit and perfect entire repo)             | Reference doc                                    | `docs/status/AUDIT_AND_PERFECTION_FRAMEWORK.md` — scripts, inventories, expert-driven audit, decision flow, fix types, guru ownership; links to GURU_TEAM_ASSIGNMENTS and canonical plan.                                                                                                                       |
 
 ---
 

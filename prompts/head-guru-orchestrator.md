@@ -32,13 +32,10 @@ You have **FULL AUTHORITY** to coordinate, delegate, verify, and finalize, but *
 
 ### Current Known State
 
-- **Branches**: `main`, `ao-guru-exec`, `wip/finalization-team-20260129` (local); `origin/main`, `origin/cursor/main-project-setup-2bd1` (remote)
-- **Worktrees**: Primary repo + `snq` worktree (detached HEAD)
-- **Stashes**: 1 stash on `wip/finalization-team-20260129`
+- **Branches**: `main` (default), `feature/ao-brand-shopify-automation`, `cursor/main-project-setup-2bd1`, `handoff-doc-permissions-20260129` (local); `origin/main`, `origin/shopify-theme` (workflow-created). Develop branch does not exist; workflows are main-only. See docs/status/BRANCH_INVENTORY.md.
+- **Worktrees**: Primary repo (main) + ewa, mhx, snq (and optionally uub) under `.cursor/worktrees/against-the-odds/`. See docs/status/WORKTREE_INVENTORY.md; .cursor/worktrees.json does not list ewa/mhx/snq.
 - **Blockers**:
-  - GitHub push protection (secrets in history)
-  - Windows-incompatible filenames in remote history
-  - npm connectivity issues (offline mode / network)
+  - Theme pull fails (SSL/TLS) so `src/shopify/themes/aodrop-theme` may lack `layout/theme.liquid`; theme-dev and finish-setup depend on pull or theme-bootstrap-minimal. See docs/status/HANDOFF_FOR_NEW_AGENT_202602.md.
 
 ---
 

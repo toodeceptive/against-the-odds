@@ -3,7 +3,7 @@
 **When this applies:** You are in a worktree (e.g. uqy, snq, mhx) and were asked to read one or more of:
 
 - `docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md`
-- `.cursor/plans/README.md` or `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`
+- `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`
 - `docs/status/CONVERSATION_AUDIT.md`
 
 but they are **not present** in this worktree.
@@ -13,7 +13,7 @@ but they are **not present** in this worktree.
 - **Path:** `C:\Users\LegiT\against-the-odds` (main branch)
 - **Files:**
   - `docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md`
-  - `.cursor/plans/README.md` (canonical plan index; FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md is the single plan)
+  - `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (only plan file; open in Cursor and use Build)
   - `docs/status/CONVERSATION_AUDIT.md`
 
 **Then:** Fold any extra requirements from those documents into your plan. In particular:
