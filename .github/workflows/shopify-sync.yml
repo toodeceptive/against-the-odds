@@ -41,18 +41,43 @@ jobs:
 
   backup-store:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
+    if: github.event_name != 'push'
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # PLACEHOLDER: Implement real backup (e.g. theme/product export to artifact) per OPERATOR_RUNBOOK.md / docs/launch/00_launch_checklist.md
-      - name: Backup store configuration (placeholder)
+      - name: Backup live theme to branch (REST)
         env:
           SHOPIFY_STORE_DOMAIN: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
           SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+          SHOPIFY_ADMIN_API_VERSION: 2026-01
+        shell: pwsh
         run: |
-          echo "Backup step: add script to export products/themes to artifact or branch when needed."
+          ./scripts/shopify/theme-pull-rest.ps1 -Store $env:SHOPIFY_STORE_DOMAIN -ThemePath "src/shopify/themes/aodrop-theme" -Theme "live"
+          
+          if (-not (Test-Path "src/shopify/themes/aodrop-theme")) {
+            throw "Theme path missing after pull."
+          }
+          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Publish the pulled theme snapshot to a dedicated branch (force-updated)
+          git checkout -B shopify-theme-backup
+          git add "src/shopify/themes/aodrop-theme"
+          
+          $status = git status --porcelain
+          if ([string]::IsNullOrWhiteSpace($status)) {
+            Write-Host "No changes to commit; backup branch unchanged."
+            exit 0
+          }
+          
+          $stamp = (Get-Date).ToString("yyyy-MM-dd")
+          git commit -m "chore: backup Shopify theme ($stamp)"
+          git push origin shopify-theme-backup --force

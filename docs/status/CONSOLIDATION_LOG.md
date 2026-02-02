@@ -366,3 +366,19 @@
 **Verification**: npm run format, format:check, lint, test:unit, and verify-pipeline -SkipRunbook passed.
 
 **Result**: Single source of truth for Build is the canonical plan; agents read operating mode first; no doc links to missing plan files; one clean commit.
+
+---
+
+## 2026-02-02 — Theme backup branch fallback + Shopify API version alignment
+
+**Summary**: Implemented a GitHub Actions-based fallback for the local TLS-blocked Shopify theme pull, aligned Admin API version usage across scripts, and fixed Windows Prettier EOL portability.
+
+**Changes**:
+
+- **Theme backup without local Shopify connectivity**: `.github/workflows/shopify-sync.yml` `backup-store` job now pulls the **live theme** via `scripts/shopify/theme-pull-rest.ps1` and force-pushes snapshots to `shopify-theme-backup` (runs only on schedule/manual, not on push).
+- **Admin API version consistency**: `SHOPIFY_ADMIN_API_VERSION` now controls REST version (default `2026-01`) in `theme-pull-rest.ps1`, `sync-products.ps1`, and `fetch-store-data.ps1` (previously mixed/hardcoded).
+- **Portability fixes**: `fetch-store-data.ps1` no longer hardcodes the primary repo path; `.env.local` loading and relative output dir handling added. `.prettierrc.json` sets `endOfLine: auto` so `format:check` is stable on Windows.
+
+**Verification**: `npm run lint`, `npm run test:unit`, `npm run format:check`, and `scripts/verify-pipeline.ps1 -SkipRunbook` passed.
+
+**Result**: The repo can obtain a reproducible, versioned theme snapshot in GitHub (`shopify-theme-backup`) even when local theme pull is blocked by environment TLS/SSL.

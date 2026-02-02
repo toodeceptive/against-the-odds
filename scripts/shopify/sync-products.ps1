@@ -58,11 +58,18 @@ if (-not $productFiles -or $productFiles.Count -eq 0) {
 Write-Host "Found $($productFiles.Count) product file(s)" -ForegroundColor Cyan
 Write-Host ""
 
+$storeHost = $Store
+if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
+    $storeHost = "aodrop.com.myshopify.com"
+}
+$apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
+if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
+
 $headers = @{
     "X-Shopify-Access-Token" = $Token
     "Content-Type"           = "application/json"
 }
-$baseUrl = "https://$Store/admin/api/2024-10"
+$baseUrl = "https://$storeHost/admin/api/$apiVersion"
 
 # Invoke REST with 429 retry (Retry-After or 1s backoff, max 3 retries)
 function Invoke-ShopifyRestMethod {

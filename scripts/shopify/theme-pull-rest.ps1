@@ -52,7 +52,9 @@ $storeHost = $Store
 if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
     $storeHost = "aodrop.com.myshopify.com"
 }
-$baseUrl = "https://$storeHost/admin/api/2026-01"
+$apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
+if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
+$baseUrl = "https://$storeHost/admin/api/$apiVersion"
 $headers = @{
     "X-Shopify-Access-Token" = $token
     "Content-Type"           = "application/json"
