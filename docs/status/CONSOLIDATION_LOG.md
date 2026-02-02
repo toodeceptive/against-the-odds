@@ -382,3 +382,16 @@
 **Verification**: `npm run lint`, `npm run test:unit`, `npm run format:check`, and `scripts/verify-pipeline.ps1 -SkipRunbook` passed.
 
 **Result**: The repo can obtain a reproducible, versioned theme snapshot in GitHub (`shopify-theme-backup`) even when local theme pull is blocked by environment TLS/SSL.
+
+---
+
+## 2026-02-02 — Handoff docs clarified for new agent instances
+
+**Summary**: Improved the “new agent” prompt and handoff situation doc to reflect the real operating model: new agents should pull from `origin/main` first, then follow the canonical plan + executive principles.
+
+**Changes**:
+
+- `docs/status/PROMPT_FOR_NEW_AGENT.md`: expanded into a copy-paste block with explicit first steps (sync, read handoff, read executive principles, read operating mode, skim consolidation log).
+- `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`: clarified that the next agent instance can push/pull and should sync from `origin/main`, and highlighted the canonical plan + binding rules as the source of truth.
+
+**Verification**: `npm run format:check` passed.

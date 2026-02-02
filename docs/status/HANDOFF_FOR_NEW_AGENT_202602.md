@@ -1,15 +1,17 @@
 # Situation for new agent (2026-02)
 
-**Prompt for new agent:** See **`docs/status/PROMPT_FOR_NEW_AGENT.md`** for a copy-paste prompt to start the next agent.
+**Prompt for new agent:** See **`docs/status/PROMPT_FOR_NEW_AGENT.md`** for the copy-paste prompt to start the next agent in a new instance.
 
 The user has given the new agent **full unrestricted approval and dominion over the entire project** to fix everything. This document explains the situation only. No limitations or instructions are imposed.
+
+**New agent access:** The new agent runs in a new instance and **has access to branch `main`** (can push/pull). The previous agent was **local-only** (no push). The new agent should **pull from origin first** (`git pull origin main`) to get the latest commit(s), including "Canonical Build plan perfected (2026-02-01)" and related docs, then follow the prompt in PROMPT_FOR_NEW_AGENT.md.
 
 ---
 
 ## Repo and branch state
 
 - **Primary repo:** `C:\Users\LegiT\against-the-odds` on branch **main**.
-- **Last commit on main:** `f3141ee` — "Finalize and close agent branches/workflows; handoff for new agent". Local main is in sync with **origin/main** (https://github.com/toodeceptive/against-the-odds.git).
+- **Last commit on main (at handoff):** Either `f3141ee` ("Finalize and close agent branches/workflows; handoff for new agent") if origin was not updated, or a later commit such as `c720000` ("Canonical Build plan perfected (2026-02-01)") after the previous agent’s local commit. **Pull `origin/main`** to ensure you have the latest.
 - **Other local branches:** `feature/ao-brand-shopify-automation`, `cursor/main-project-setup-2bd1`, `handoff-doc-permissions-20260129` (latter exists only locally and has an associated worktree at mhx).
 - **Remote-only branches:** `origin/shopify-theme` (created by sync-theme-branch workflow), `origin/dependabot/npm_and_yarn/...`.
 - **Worktrees:** Primary at the path above (main). Cursor worktrees at `.../ewa`, `.../mhx`, `.../snq`, `.../uub` (ewa, snq, uub are detached HEAD; mhx is on handoff-doc-permissions-20260129).
@@ -29,7 +31,7 @@ The user has given the new agent **full unrestricted approval and dominion over 
 
 - **Scripts:** Under `scripts/shopify/`: theme-pull.ps1 (tries REST first when token set, then Node CLI), theme-pull-rest.ps1 (PowerShell REST API pull), theme-dev.ps1, theme-auth-then-pull.ps1, theme-auth-via-browser.ps1, finish-setup.ps1, theme-update-store.ps1, merge-brand-into-theme.ps1, copy-brand-images-to-theme.ps1, update-theme.ps1, and others. Theme path defaults: `src/shopify/themes/aodrop-theme`. Repo root is resolved from script location (PSScriptRoot).
 - **Credentials:** `.env.local` at repo root (gitignored) is used for SHOPIFY_STORE_DOMAIN, SHOPIFY_CLI_THEME_TOKEN or SHOPIFY_ACCESS_TOKEN. Scripts load it when present.
-- **Docs:** Many status and handoff docs in `docs/status/`, including CONSOLIDATION_LOG.md (chronological log of what was done), BRANCH_INVENTORY.md, WORKTREE_INVENTORY.md, GURU_COMPLETION_SUMMARY.md, SETUP_STATUS.md, MANUAL_VERIFICATION_CHECKLIST.md, INDEX_REPORTS.md, SHOPIFY_ADMIN_CHECKLIST.md. Root-level: OPERATOR_RUNBOOK.md, AGENTS.md, docs/UPDATE_SHOPIFY_FROM_CURSOR.md, docs/TROUBLESHOOTING.md.
+- **Docs:** Many status and handoff docs in `docs/status/`, including CONSOLIDATION_LOG.md (chronological log of what was done — read latest entries for full follow-up context), BRANCH_INVENTORY.md, WORKTREE_INVENTORY.md, EXECUTIVE_DECISION_WORK_PRINCIPLES.md (binding rules), GURU_COMPLETION_SUMMARY.md, SETUP_STATUS.md, MANUAL_VERIFICATION_CHECKLIST.md, INDEX_REPORTS.md, SHOPIFY_ADMIN_CHECKLIST.md. **Canonical Build plan:** `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (read "Current Operating Mode" first). Root-level: OPERATOR_RUNBOOK.md, AGENTS.md, docs/UPDATE_SHOPIFY_FROM_CURSOR.md, docs/TROUBLESHOOTING.md.
 - **GitHub workflows:** `.github/workflows/` — ci.yml, quality-check.yml, deploy.yml, shopify-sync.yml, sync-theme-branch.yml, sync.yml, maintenance.yml. They trigger on **main**; no develop branch in use.
 - **Store:** Shopify store domain `aodrop.com` (myshopify: aodrop.com.myshopify.com). Theme source in repo: `src/shopify/themes/aodrop-theme`. Shopify GitHub App can connect to repo/branch for theme deployment.
 
