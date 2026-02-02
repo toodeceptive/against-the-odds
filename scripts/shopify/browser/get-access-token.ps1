@@ -28,10 +28,12 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# Create extraction script
+# Create extraction script (temp file outside repo to avoid token exposure in repo path)
+$scriptPath = Join-Path $env:TEMP ("extract-token-" + [guid]::NewGuid().ToString("N") + ".mjs")
 $extractScript = @"
-import { chromium } from '@playwright/test';
-import { connectToBrowser, ensureShopifyLogin, extractAccessToken } from '../../../src/browser-automation/shopify-admin.js';
+import { join } from 'path';
+const repoRoot = process.env.ATO_REPO_ROOT || process.cwd();
+const { connectToBrowser, ensureShopifyLogin, extractAccessToken } = await import(join(repoRoot, 'src', 'browser-automation', 'shopify-admin.js'));
 
 (async () => {
   try {
@@ -64,8 +66,6 @@ import { connectToBrowser, ensureShopifyLogin, extractAccessToken } from '../../
   }
 })();
 "@
-
-$scriptPath = "scripts\shopify\browser\extract-token-temp.mjs"
 $extractScript | Out-File -FilePath $scriptPath -Encoding UTF8
 
 try {
@@ -73,7 +73,9 @@ try {
     Write-Host "Please ensure Chrome is open with Shopify admin logged in." -ForegroundColor Cyan
     Write-Host ""
     
+    $env:ATO_REPO_ROOT = $repoPath
     $output = node $scriptPath 2>&1
+    $env:ATO_REPO_ROOT = $null
     $token = $null
     
     foreach ($line in $output) {
@@ -81,7 +83,9 @@ try {
             $token = $matches[1].Trim()
             break
         }
-        Write-Host $line
+        if ($line -notmatch '^SUCCESS:') {
+            Write-Host $line
+        }
     }
     
     if ($token) {

@@ -2,96 +2,47 @@
 
 ## Overview
 
-This guide explains how to use the agent prompt system for new Cursor instances to enable full desktop automation capabilities.
+This guide explains how to use the agent prompt system for new Cursor instances. Use `docs/AGENT_PROMPT_DECISION_TREE.md` to choose the right prompt for your goal.
 
-## Available Prompts
+## Available Prompts (canonical)
 
-### Master Agent Prompt
+### Orchestration and entry
 
-**File**: `prompts/master-agent-prompt.md`
+- **`prompts/head-guru-orchestrator.md`** — Finalization and reconciliation; multi-agent coordination
+- **`prompts/MASTER_10_EXPERT_SYSTEM.md`** — Sequential 10-expert run (Security → … → DevEx)
+- **`prompts/PERFECT_EXECUTION_PROMPT.md`** — Phase 0 gate; read first before other work
 
-**Purpose**: Main prompt for general-purpose desktop automation agents
+### Single-domain experts
 
-**Use When**: Starting a new Cursor agent for comprehensive automation
+- **`prompts/expert-01-security-secrets.md`** through **`prompts/expert-10-developer-experience.md`** — Deep dive on one domain (security, performance, code quality, testing, docs, CI/CD, integrations, frontend, data, DevEx)
 
-**Key Features**:
+### Audits and finalization
 
-- Full desktop automation capabilities
-- Issue detection and resolution
-- Screen viewing and analysis
-- Mouse/keyboard control
-- Window management
-
-### Specialized Agent Prompts
-
-#### Debugging Agent
-
-**File**: `prompts/debugging-agent.md`
-
-**Use When**: Focused on debugging and fixing issues
-
-**Specialization**: Issue detection, root cause analysis, fix application
-
-#### Setup Agent
-
-**File**: `prompts/setup-agent.md`
-
-**Use When**: Setting up environment and configuring tools
-
-**Specialization**: Environment setup, tool installation, configuration
-
-#### Testing Agent
-
-**File**: `prompts/testing-agent.md`
-
-**Use When**: Running tests and quality verification
-
-**Specialization**: Test execution, quality checks, verification
-
-#### Optimization Agent
-
-**File**: `prompts/optimization-agent.md`
-
-**Use When**: Optimizing performance and code quality
-
-**Specialization**: Performance optimization, code improvement
+- **`prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md`** — Full system audit
+- **`prompts/finalization-*.md`** — Role-specific finalization (Shopify store ops, release manager, etc.)
 
 ## How to Use
 
-### Step 1: Choose Agent Type
+### Step 1: Phase 0 first
 
-Decide which agent type fits your needs:
+1. Read `docs/status/PLAN_AGENT_ENTRY.md`
+2. Complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md`
+3. Confirm sign-off in `docs/status/PHASE_0_FINALIZATION.md`
 
-- **Master Agent**: General automation
-- **Debugging Agent**: Fixing issues
-- **Setup Agent**: Configuration
-- **Testing Agent**: Quality assurance
-- **Optimization Agent**: Performance improvement
+### Step 2: Choose prompt
 
-### Step 2: Load Prompt
+Use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to pick:
 
-In new Cursor instance:
+- Full system audit → `ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md`
+- 10-expert run → `MASTER_10_EXPERT_SYSTEM.md`
+- Finalization → `head-guru-orchestrator.md`
+- Single domain → `expert-N-*.md`
 
-1. Open the appropriate prompt file
-2. Copy the prompt content
-3. Provide to the agent as system prompt or context
+### Step 3: Load and run
 
-### Step 3: Provide Context
-
-Also provide context information:
-
-- `prompts/agent-context.md` - Project context
-- `prompts/agent-capabilities.md` - Available capabilities
-
-### Step 4: Start Automation
-
-Agent can now:
-
-- View and analyze screens
-- Control mouse and keyboard
-- Manage windows
-- Detect and fix issues
-- Automate workflows
+1. Open the chosen prompt file
+2. Provide as system prompt or context
+3. Run per prompt instructions
 
 ## Prompt Structure
 
@@ -115,27 +66,18 @@ Agent can now:
 
 ## Example Usage
 
-### Starting Master Agent
+### Starting orchestration (Head Guru)
 
-1. Open new Cursor instance
-2. Load `prompts/master-agent-prompt.md`
-3. Provide `prompts/agent-context.md` as context
-4. Agent can now:
-   - Detect issues automatically
-   - Debug problems
-   - Apply fixes
-   - Report results
+1. Complete Phase 0 per `docs/status/PLAN_AGENT_ENTRY.md` and `prompts/PERFECT_EXECUTION_PROMPT.md`
+2. Load `prompts/head-guru-orchestrator.md` or `prompts/MASTER_10_EXPERT_SYSTEM.md`
+3. Provide `README.md`, `NEXT_STEPS.md`, and `docs/status/INDEX_REPORTS.md` as context
+4. Agent can run experts in sequence and produce sign-offs in `docs/status/`
 
-### Starting Debugging Agent
+### Single-domain expert
 
-1. Open new Cursor instance
-2. Load `prompts/debugging-agent.md`
-3. Provide issue description
-4. Agent will:
-   - Analyze the issue
-   - Identify root cause
-   - Generate fix strategy
-   - Apply fix (with confirmation)
+1. Load one of `prompts/expert-01-security-secrets.md` through `prompts/expert-10-developer-experience.md`
+2. Provide repo context (README, OPERATOR_RUNBOOK)
+3. Agent will audit that domain and update docs/config per prompt
 
 ## Integration with Project
 
@@ -209,7 +151,7 @@ Agents support emergency stop:
 
 ## References
 
-- [Master Agent Prompt](../prompts/master-agent-prompt.md)
-- [Agent Context](../prompts/agent-context.md)
-- [Agent Capabilities](../prompts/agent-capabilities.md)
+- [Agent Prompt Decision Tree](AGENT_PROMPT_DECISION_TREE.md)
+- [Head Guru Orchestrator](../prompts/head-guru-orchestrator.md)
+- [MASTER_10_EXPERT_SYSTEM](../prompts/MASTER_10_EXPERT_SYSTEM.md)
 - [Desktop Automation Guide](DESKTOP_AUTOMATION.md)

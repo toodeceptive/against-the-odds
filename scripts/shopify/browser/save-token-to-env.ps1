@@ -10,7 +10,11 @@ $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) {
     (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path
 } else {
-    "C:\Users\LegiT\against-the-odds"
+    (Get-Location).Path
+}
+if (-not (Test-Path (Join-Path $repoPath ".git"))) {
+    Write-Host "Error: Repository root not found (no .git). Run from repo root or ensure script path is correct." -ForegroundColor Red
+    exit 1
 }
 Set-Location $repoPath
 

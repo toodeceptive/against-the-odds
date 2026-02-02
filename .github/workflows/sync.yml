@@ -26,30 +26,11 @@ jobs:
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         
-    - name: Sync branches
+    - name: Sync main
       run: |
         git fetch origin
         git checkout main
         git pull origin main
-        if git show-ref --verify --quiet refs/remotes/origin/develop; then
-          git checkout develop
-          git pull origin develop
-        else
-          echo "Develop branch does not exist. Skipping develop sync."
-        fi
-        
-    - name: Check for conflicts
-      run: |
-        git checkout main
-        if git show-ref --verify --quiet refs/remotes/origin/develop; then
-          git merge develop --no-commit --no-ff || true
-          if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
-            echo "Merge conflicts detected"
-            exit 1
-          fi
-        else
-          echo "Develop branch does not exist. Skipping conflict check."
-        fi
         
     - name: Status report
       run: |

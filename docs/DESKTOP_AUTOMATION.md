@@ -311,4 +311,4 @@ await executeWorkflow('detectAndFix');
 
 - [Agent System](AGENT_SYSTEM.md)
 - [Agent Prompts](AGENT_PROMPTS.md)
-- [Master Agent Prompt](../prompts/master-agent-prompt.md)
+- [Head Guru Orchestrator](../prompts/head-guru-orchestrator.md)

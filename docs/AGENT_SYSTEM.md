@@ -20,43 +20,31 @@ Verification → Reporting
 
 ## Agent Types
 
-### Master Agent
+### Orchestration (multi-agent)
 
-- **Prompt**: `prompts/master-agent-prompt.md`
-- **Capabilities**: Full desktop automation, issue detection, debugging, fixing
-- **Use Case**: General purpose automation and problem solving
+- **Prompt**: `prompts/head-guru-orchestrator.md` or `prompts/MASTER_10_EXPERT_SYSTEM.md`
+- **Capabilities**: Finalization, reconciliation, sequential expert audits
+- **Use Case**: Full project audit and perfection; see `docs/AGENT_PROMPT_DECISION_TREE.md`
 
-### Debugging Agent
+### Phase 0 / entry
 
-- **Prompt**: `prompts/debugging-agent.md`
-- **Focus**: Issue detection and resolution
-- **Use Case**: Debugging specific problems
+- **Prompt**: `prompts/PERFECT_EXECUTION_PROMPT.md`
+- **Focus**: Phase 0 gate and execution quality
+- **Use Case**: Entry before any other work; sign-off in `docs/status/PHASE_0_FINALIZATION.md`
 
-### Setup Agent
+### Single-domain experts
 
-- **Prompt**: `prompts/setup-agent.md`
-- **Focus**: Environment setup and configuration
-- **Use Case**: Initial setup and configuration
-
-### Testing Agent
-
-- **Prompt**: `prompts/testing-agent.md`
-- **Focus**: Testing and quality assurance
-- **Use Case**: Test execution and verification
-
-### Optimization Agent
-
-- **Prompt**: `prompts/optimization-agent.md`
-- **Focus**: Performance and code optimization
-- **Use Case**: System and code optimization
+- **Prompts**: `prompts/expert-01-security-secrets.md` through `prompts/expert-10-developer-experience.md`
+- **Focus**: Security, performance, code quality, testing, docs, CI/CD, integrations, frontend, data, DevEx
+- **Use Case**: Deep dive on one domain; see decision tree
 
 ## Usage
 
 ### Starting an Agent
 
 1. **Open new Cursor instance**
-2. **Load agent prompt** from `prompts/master-agent-prompt.md`
-3. **Provide context** from `prompts/agent-context.md`
+2. **Read** `docs/status/PLAN_AGENT_ENTRY.md` and complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md`
+3. **Choose prompt** from `docs/AGENT_PROMPT_DECISION_TREE.md` (orchestrator, MASTER_10, expert-N, finalization-\*)
 4. **Begin automation**
 
 ### Basic Workflow
@@ -196,4 +184,5 @@ Agents can use Playwright for web automation:
 
 - [Desktop Automation Guide](DESKTOP_AUTOMATION.md)
 - [Agent Prompts Guide](AGENT_PROMPTS.md)
-- [Master Agent Prompt](../prompts/master-agent-prompt.md)
+- [Agent Prompt Decision Tree](AGENT_PROMPT_DECISION_TREE.md)
+- [Head Guru Orchestrator](../prompts/head-guru-orchestrator.md)

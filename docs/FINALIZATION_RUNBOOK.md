@@ -81,9 +81,8 @@ Use separate Cursor instances (or separate chat contexts) with these prompts:
 
 Always provide these context files to every agent:
 
-- `prompts/agent-context.md`
-- `prompts/agent-capabilities.md`
 - `README.md`
+- `docs/status/INDEX_REPORTS.md`
 - `NEXT_STEPS.md`
 - `docs/MANUFACTURING.md`
 - `docs/PROJECT_MANAGEMENT.md`

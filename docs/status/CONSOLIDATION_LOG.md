@@ -395,3 +395,17 @@
 - `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`: clarified that the next agent instance can push/pull and should sync from `origin/main`, and highlighted the canonical plan + binding rules as the source of truth.
 
 **Verification**: `npm run format:check` passed.
+
+---
+
+## 2026-02-01 — Aggressive cleanup (workflows, docs/status, prompts)
+
+**Summary**: Deleted redundant workflows and obsolete/duplicate status reports and prompts; consolidated CI; updated all references.
+
+**Deletions**:
+
+- **Workflows**: `deploy.yml`, `quality-check.yml` (CI consolidated into `ci.yml`).
+- **docs/status/**: ~45 historical/duplicate files (AUDIT*\*\_20260130, CLEANUP_LOG_20260130, FULL_SYSTEM*\_, GURU\__ historical, PHASE2/3*DELIVERABLES, PLAN*_, PROJECT\_\_, PROMPT*FOR_NEW_AGENT, SECURITY*\*, WORKFLOW_OPS_AUDIT, CONVERSATION_AUDIT, COVERAGE_REMEDIATION_PLAN, and other dated/duplicate reports).
+- **prompts/**: ULTIMATE_MASTER_AGENT_PROMPT, AO_GURU_MULTI_SPECIALIST_MASTER_AGENT_PROMPT, master-agent-prompt, setup-agent, testing-agent, debugging-agent, optimization-agent, agent-capabilities, agent-context (canonical: head-guru-orchestrator, MASTER_10_EXPERT_SYSTEM, PERFECT_EXECUTION_PROMPT, expert-01–10, finalization-\*, ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT).
+
+**Reference updates**: verify-pipeline.ps1, .github/workflows/README.md, scripts/README.md, OPERATOR_RUNBOOK.md, HANDOFF_FOR_NEW_AGENT_202602.md, AGENT_SYSTEM.md, AGENT_PROMPTS.md, AGENT_PROMPT_DECISION_TREE.md, FINALIZATION_RUNBOOK.md, finalization-chief-of-staff.md, DESKTOP_AUTOMATION.md, agent-best-practices.md, .cursor/context/github.md, .github/settings.optimization.md. INDEX_REPORTS.md trimmed to remaining files only.

@@ -20,7 +20,7 @@ You do not need perfect information. You must **document assumptions**, keep out
 - `NEXT_STEPS.md`
 - `docs/MANUFACTURING.md`
 - `docs/PROJECT_MANAGEMENT.md`
-- `prompts/agent-context.md`
+- `docs/status/INDEX_REPORTS.md`
 
 ## Team you coordinate (recommended)
 

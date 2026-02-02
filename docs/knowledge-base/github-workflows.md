@@ -4,35 +4,23 @@
 
 The project uses GitHub Actions for CI/CD automation:
 
-1. **CI**: Continuous Integration on every push
-2. **Deploy**: Automated deployment
-3. **Sync**: Repository synchronization
-4. **Shopify Sync**: Product and theme sync
-5. **Quality**: Code quality checks
-6. **Maintenance**: Automated maintenance tasks
+1. **CI**: Consolidated quality gate (lint, format, test, Trivy, secret-scan, npm audit, Lighthouse) on push/PR to main
+2. **Sync**: Repository synchronization (main-only)
+3. **Shopify Sync**: Product and theme sync
+4. **Sync theme branch**: Subtree-split theme to shopify-theme branch for Shopify GitHub App
+5. **Maintenance**: Dependency update PRs, weekly Trivy
 
 ## Workflow Files
 
 ### ci.yml
 
-Runs on: Push to main/develop, Pull requests
+Runs on: Push to main, Pull requests targeting main
 
 Actions:
 
-- Lint code
-- Run tests
-- Build verification
-- Security scanning
-
-### deploy.yml
-
-Runs on: Push to main/develop, Manual trigger
-
-Actions:
-
-- Deploy to staging (develop branch)
-- Deploy to production (main branch)
-- Shopify theme deployment
+- Lint, format check, unit tests, build
+- Trivy security scan, secret-scan, npm audit (continue-on-error where appropriate)
+- Optional coverage, Lighthouse (continue-on-error)
 
 ### shopify-sync.yml
 

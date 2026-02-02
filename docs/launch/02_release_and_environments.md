@@ -13,7 +13,7 @@ This repo is intended to use a simple two-branch model with short-lived topic br
 
 Operational notes:
 
-- **CI and quality gates** run on PRs to both `main` and `develop` (`.github/workflows/ci.yml`, `.github/workflows/quality-check.yml`).
+- **CI** runs on push/PR to `main` (`.github/workflows/ci.yml`; consolidated lint, format, test, Trivy, secret-scan, npm audit, Lighthouse). This repo uses main-only; no develop branch.
 - **Automation vs reality**: Some workflows are intentionally placeholder/scaffold (“Add deployment steps here”). Treat them as guardrails/checklists unless you’ve wired the actual deployment commands.
 
 ## Detached HEAD recovery
@@ -76,13 +76,10 @@ Think of “environments” as a combination of:
   - Node tooling for tests/linters.
   - Shopify theme preview via Shopify CLI (`shopify theme dev`) using scripts like `scripts/shopify/theme-dev.ps1`.
 - **Staging (integration)**:
-  - **Source**: `develop`
-  - **Deploy trigger**: push to `develop` (`.github/workflows/deploy.yml`)
-  - **Expectation**: used for pre-release validation (tests, content QA, theme preview links).
-  - **Reality check**: the deploy workflow currently prints placeholder output; treat this as a process definition unless you’ve connected actual hosting steps.
+  - **Source**: topic branches; PR to `main`. No deploy.yml; use PR/CI for validation.
 - **Production**:
   - **Source**: `main`
-  - **Deploy trigger**: push to `main` (`.github/workflows/deploy.yml`)
+  - **Deploy trigger**: Theme via sync-theme-branch.yml; product sync via shopify-sync.yml (no deploy.yml).
   - **Shopify theme**:
     - “Development theme” pushes: `scripts/shopify/update-theme.ps1` (default) or Shopify CLI push without `--theme=live`.
     - “Live theme” pushes: `scripts/shopify/update-theme.ps1 -Live` (explicit confirmation prompt).

@@ -102,9 +102,9 @@
 
 ### Quality (scripts/quality/)
 
-| Script        | Purpose        | When to run                                                        |
-| ------------- | -------------- | ------------------------------------------------------------------ |
-| check-all.ps1 | Quality checks | Local or CI (quality-check.yml runs lint, format, coverage, audit) |
+| Script        | Purpose        | When to run                                             |
+| ------------- | -------------- | ------------------------------------------------------- |
+| check-all.ps1 | Quality checks | Local or CI (ci.yml runs lint, format, coverage, audit) |
 
 ### Other (root-level scripts/)
 
@@ -131,8 +131,7 @@
 
 ## Alignment with CI/CD
 
-- **ci.yml**: Lint, test, build, Trivy, secret-scan, Lighthouse (main only).
-- **quality-check.yml**: Coverage, lint, format check, npm audit, Lighthouse (main only).
+- **ci.yml**: Lint, format check, test, build, Trivy, secret-scan, npm audit, optional coverage, Lighthouse (main only; consolidated).
 - **shopify-sync.yml**: Calls product sync (data/products, src/shopify); backup-store job is placeholder.
 - **sync-theme-branch.yml**: Subtree-split theme to `shopify-theme` branch on push to main when theme files change.
 - **sync.yml**: Repository sync (fetch, main); no develop branch.

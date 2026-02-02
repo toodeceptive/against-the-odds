@@ -43,7 +43,7 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 ## Shopify Theme Development
 
 - **Shopify–GitHub App**: Store is connected to this repo. Theme deploys happen when you push to the connected branch (typically `main`). Configuration: Shopify Admin → Settings → Apps and sales channels → GitHub.
-- **GitHub Actions**: Theme deployment is handled by the Shopify GitHub App; `deploy.yml` and `shopify-sync.yml` are for other automation (product sync/backup use Admin API secrets if configured).
+- **GitHub Actions**: Theme deployment is handled by the Shopify GitHub App; `shopify-sync.yml` is for product sync (Admin API secrets if configured).
 - `shopify auth login` — needed for theme pull and local dev
 - `shopify theme dev --store=aodrop.com --theme=live` — local preview
 

@@ -18,6 +18,8 @@ jobs:
   sync-theme-branch:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code

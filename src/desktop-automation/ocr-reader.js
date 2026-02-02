@@ -1,6 +1,11 @@
 /**
  * OCR Reader Library
- * Provides OCR capabilities for reading text from screen captures
+ * Provides OCR capabilities for reading text from screen captures.
+ *
+ * Lifecycle: Call cleanup() when done (e.g. in test afterAll/afterEach or when
+ * shutting down a long-running process) to terminate the Tesseract worker and
+ * avoid leaking resources. Tests that use extractText or related functions
+ * should call cleanup() in teardown.
  */
 
 import { createWorker } from 'tesseract.js';

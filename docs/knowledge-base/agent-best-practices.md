@@ -159,6 +159,6 @@ try {
 
 ## References
 
-- [Master Agent Prompt](../../prompts/master-agent-prompt.md)
+- [Head Guru Orchestrator](../../prompts/head-guru-orchestrator.md)
 - [Desktop Automation Guide](../DESKTOP_AUTOMATION.md)
 - [Agent System](../AGENT_SYSTEM.md)

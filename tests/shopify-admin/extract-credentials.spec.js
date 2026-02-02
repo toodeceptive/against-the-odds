@@ -7,13 +7,12 @@ import {
 } from '../../src/browser-automation/shopify-admin.js';
 
 test.describe('Shopify Admin Credential Extraction', () => {
+  test.setTimeout(120000); // 2 minutes for manual login if needed
   const storeDomain = process.env.SHOPIFY_STORE_DOMAIN;
   const hasStoreDomain = Boolean(storeDomain);
   const testIf = (condition) => (condition ? test : test.skip);
 
   testIf(hasStoreDomain)('should extract access token from admin', async () => {
-    test.setTimeout(120000); // 2 minutes for manual login if needed
-
     const browser = await connectToBrowser({ useExisting: true, headless: false });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -36,8 +35,6 @@ test.describe('Shopify Admin Credential Extraction', () => {
   });
 
   testIf(hasStoreDomain)('should extract theme ID from admin', async () => {
-    test.setTimeout(120000);
-
     const browser = await connectToBrowser({ useExisting: true, headless: false });
     const context = await browser.newContext();
     const page = await context.newPage();

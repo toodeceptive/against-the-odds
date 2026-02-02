@@ -17,7 +17,7 @@ Shopify is connected to this repository via the **Shopify GitHub App**. That int
 
 - **Theme deploys**: Pushes to the connected branch (e.g. `main`) can trigger theme deployment from Shopify’s side. You may not need GitHub Actions to deploy the theme if the app is handling it.
 - **Repo link**: Configured in Shopify Admin (e.g. Settings → Apps and sales channels → GitHub, or your app’s connection settings).
-- **GitHub Actions**: Workflows in this repo that call the Shopify API (e.g. product sync, backups, `deploy.yml` theme step) still use **GitHub Actions secrets** (`SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_THEME_ID`). Keep those set in the repo if you use those workflows.
+- **GitHub Actions**: Workflows that call the Shopify API (e.g. `shopify-sync.yml` for product sync) use **GitHub Actions secrets** (`SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_THEME_ID`). Keep those set in the repo if you use those workflows.
 
 ## Step 1: Shopify CLI Installation
 

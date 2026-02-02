@@ -36,6 +36,12 @@ jobs:
           npm ci
         fi
         
+    - name: Format check
+      run: |
+        if [ -f package.json ] && npm list prettier 2>/dev/null; then
+          npm run format:check || exit 1
+        fi
+        
     - name: Run linter
       run: |
         if [ -f package.json ] && npm list eslint 2>/dev/null; then
@@ -46,6 +52,13 @@ jobs:
       run: |
         if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
           npm run test:unit
+        fi
+        
+    - name: Security audit
+      continue-on-error: true
+      run: |
+        if [ -f package.json ]; then
+          npm audit --audit-level=high
         fi
         
     - name: Build verification

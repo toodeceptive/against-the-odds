@@ -41,9 +41,7 @@ https://aodrop.com
 
 2. ✅ Require status checks to pass before merging
    - Require branches to be up to date before merging
-   - Status checks to require:
-     - `CI` (from `.github/workflows/ci.yml`)
-     - `quality-check` (from `.github/workflows/quality-check.yml`)
+   - Status checks to require: **CI** (workflow name from `.github/workflows/ci.yml`). If you previously required `quality-check` or `deploy`, remove those; only `ci.yml` runs now (consolidated).
 
 3. ✅ Require conversation resolution before merging
 
