@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [20, 18]
+        node-version: [20]
     concurrency: ci-${{ github.ref }}
     timeout-minutes: 20
     permissions:
@@ -93,7 +93,7 @@ jobs:
         
     - name: Security scan
       continue-on-error: true
-      uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
+      uses: aquasecurity/trivy-action@b6643a2
       with:
         scan-type: 'fs'
         scan-ref: '.'
