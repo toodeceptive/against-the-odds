@@ -13,21 +13,45 @@ permissions:
   contents: read
 
 jobs:
+  # The test job runs on a matrix of Node.js versions and caches dependencies to speed up
+  # subsequent builds. Concurrency ensures that only one CI run per branch executes at a time.
   test:
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20, 18]
+    concurrency: ci-${{ github.ref }}
     timeout-minutes: 20
     permissions:
       contents: read
       security-events: write
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
+    # Cache npm dependencies based on the lock file
+    - name: Cache npm
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ matrix.node-version }}-
+
+    # Cache Playwright browsers (if used) to avoid re‑downloading
+    - name: Cache Playwright
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
     - name: Install dependencies
@@ -97,7 +121,8 @@ jobs:
           set -e
           for f in $(git ls-files '*.ps1' '*.js' '*.ts' '*.json' '*.yml' '*.yaml' 2>/dev/null); do
             [ "$f" = ".env.example" ] && continue
-            if grep -qE '(shpat_|ghp_|shpss_)[a-zA-Z0-9]{20,}' "$f" 2>/dev/null; then
+            # Check for common secret patterns: Shopify (shpat_, shpss_), GitHub tokens (ghp_) and generic api keys
+            if grep -qE '(shpat_|ghp_|shpss_|api_key|token_)[A-Za-z0-9]{20,}' "$f" 2>/dev/null; then
               echo "::error file=$f::Possible secret detected. Use .env.local or GitHub Secrets only."
               exit 1
             fi
