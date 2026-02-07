@@ -8,14 +8,14 @@
 
 ## Organization labels (worktrees · pipeline · project · GitHub · branches · repos)
 
-| Scope            | Label / description                                                                 |
-| ---------------- | ----------------------------------------------------------------------------------- |
-| **Worktrees**    | **Primary**: `C:/Users/LegiT/against-the-odds` (main). **Active**: mhx (handoff-doc-permissions-20260129). |
-| **Pipeline**     | **CI**: ci.yml (main only); **verify**: `.\scripts\verify-pipeline.ps1`; **runbook**: `.\scripts\run-runbook.ps1`. 74 PowerShell scripts, 6 workflows. |
-| **Project**      | **Repo**: against-the-odds. **Root**: OPERATOR_RUNBOOK, AGENTS.md, .cursor/plans, docs/status. **Canonical**: main. |
-| **GitHub repo**  | **origin**: https://github.com/toodeceptive/against-the-odds.git (fetch/push). **Default branch**: main. |
-| **Branches**     | **main** (default, local+remote). **Optional/local**: chore/script-paths-utilities-gitignore, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129, mlf-main. **Remote-only**: shopify-theme (workflow), cursor-agent-setup, guru-finalization-20260206, dependabot/*. |
-| **Repos**        | **Primary repo** = main worktree. **Worktree mhx** = secondary checkout on handoff branch. |
+| Scope           | Label / description                                                                                                                                                                                                                                                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Worktrees**   | **Primary**: `C:/Users/LegiT/against-the-odds` (main). **Active**: mhx (handoff-doc-permissions-20260129).                                                                                                                                                                                                               |
+| **Pipeline**    | **CI**: ci.yml (main only); **verify**: `.\scripts\verify-pipeline.ps1`; **runbook**: `.\scripts\run-runbook.ps1`. 74 PowerShell scripts, 6 workflows.                                                                                                                                                                   |
+| **Project**     | **Repo**: against-the-odds. **Root**: OPERATOR_RUNBOOK, AGENTS.md, .cursor/plans, docs/status. **Canonical**: main.                                                                                                                                                                                                      |
+| **GitHub repo** | **origin**: https://github.com/toodeceptive/against-the-odds.git (fetch/push). **Default branch**: main.                                                                                                                                                                                                                 |
+| **Branches**    | **main** (default, local+remote). **Optional/local**: chore/script-paths-utilities-gitignore, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129, mlf-main. **Remote-only**: shopify-theme (workflow), cursor-agent-setup, guru-finalization-20260206, dependabot/\*. |
+| **Repos**       | **Primary repo** = main worktree. **Worktree mhx** = secondary checkout on handoff branch.                                                                                                                                                                                                                               |
 
 ---
 

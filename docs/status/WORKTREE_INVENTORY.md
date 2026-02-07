@@ -8,8 +8,8 @@
 
 ## Actual worktrees (from git worktree list)
 
-| Label    | Path                                                    | Branch/HEAD                      | Commit  | Purpose                                  |
-| -------- | ------------------------------------------------------- | -------------------------------- | ------- | ---------------------------------------- |
+| Label       | Path                                                    | Branch/HEAD                      | Commit  | Purpose                                  |
+| ----------- | ------------------------------------------------------- | -------------------------------- | ------- | ---------------------------------------- |
 | **Primary** | `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)  | Primary repo; main branch; canonical     |
 | **Active**  | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user) |
 
