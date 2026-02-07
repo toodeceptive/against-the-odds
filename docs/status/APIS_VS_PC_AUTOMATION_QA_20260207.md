@@ -23,11 +23,11 @@
 
 ## Credentials × mode matrix
 
-| Task | Secrets present | Browser only (on user PC, logged in) | Neither |
-|------|-----------------|--------------------------------------|---------|
-| Theme apply | Prefer CLI/API | Use PC + browser (Admin → Themes) | Ask user to log in or add token |
-| Product sync | Prefer API/sync script | Use PC + browser (Admin → Products) | Ask or skip |
-| CI deploy | Required (secrets) | N/A (no PC in CI) | Skip/defer |
+| Task         | Secrets present        | Browser only (on user PC, logged in) | Neither                         |
+| ------------ | ---------------------- | ------------------------------------ | ------------------------------- |
+| Theme apply  | Prefer CLI/API         | Use PC + browser (Admin → Themes)    | Ask user to log in or add token |
+| Product sync | Prefer API/sync script | Use PC + browser (Admin → Products)  | Ask or skip                     |
+| CI deploy    | Required (secrets)     | N/A (no PC in CI)                    | Skip/defer                      |
 
 ---
 
