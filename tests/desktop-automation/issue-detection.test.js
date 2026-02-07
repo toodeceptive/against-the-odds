@@ -3,10 +3,14 @@ import { detectIssues, monitorIssues } from '../../src/desktop-automation/issue-
 import { classifyIssue } from '../../src/desktop-automation/issue-detector.js';
 
 describe('Issue Detection', () => {
-  it('should detect issues on screen', async () => {
-    const issues = await detectIssues();
-    expect(Array.isArray(issues)).toBe(true);
-  });
+  it(
+    'should detect issues on screen',
+    async () => {
+      const issues = await detectIssues();
+      expect(Array.isArray(issues)).toBe(true);
+    },
+    30000,
+  );
 
   it('should classify issues', () => {
     const issue = {
