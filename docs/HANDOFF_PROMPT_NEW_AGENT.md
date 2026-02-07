@@ -68,8 +68,8 @@ PERMISSIONS (user-approved):
 - Initial setup: Ignore all security measures for initial setup; just prompt the user to continue.
 
 CONTEXT — Read these first (in this order):
-1. docs/status/system_finalization_report_20260129.md — inventory, blockers, what's done
-2. docs/status/blocker_resolution_commands_20260129.md — push unblock URL, rotate steps, exact commands (push already succeeded via history rewrite)
+1. docs/status/HANDOFF_FOR_NEW_AGENT_202602.md — current state, blockers, what's done
+2. docs/status/CONSOLIDATION_LOG.md — chronological log (push/unblock context if needed)
 3. OPERATOR_RUNBOOK.md — daily checks, Shopify, credentials, troubleshooting
 4. docs/CREDENTIALS_SETUP.md — .env.local and where to get Shopify/GitHub values
 5. docs/UPDATE_SHOPIFY_FROM_CURSOR.md — how to update the Shopify store from this Cursor app
@@ -88,7 +88,7 @@ CURRENT STATE:
 
 YOUR TASKS (in order; execute with guru precision and task management):
 1. Verification: Run .\scripts\debug\parse-all-ps1.ps1; run .\scripts\run-everything-debug.ps1 (use -SkipDeps -SkipTests if npm fails); ensure lint passes. Save any new proof log under docs/status/ if needed.
-2. Mark finalization complete (if not already): Ensure docs/status/system_finalization_report_20260129.md status is "Finalization complete" and notes that push succeeded.
+2. Mark finalization complete (if not already): Ensure docs/status/PHASE_0_FINALIZATION.md and CONSOLIDATION_LOG reflect finalization; push has succeeded.
 3. Next steps: Using docs/launch/00_launch_checklist.md and NEXT_STEPS.md, complete or advance the immediate next steps: ensure .env.local has real values (edit it or use browser/login flows as needed), run .\scripts\shopify\test-connection.ps1, then theme dev or merch ordering prep per docs/launch/07_drop01_product_image_plan_extended.md and assets/drop01/READY_TO_SEND_CHECKLIST.md. Use any combination of repo scripts, Chrome login, and local file edits required to achieve end-to-end setup with guru-level accuracy.
 
 SECURITY RULES (mandatory):
@@ -111,7 +111,7 @@ Confirm you've read the context files, then execute the tasks in order with guru
 - **Tasks are sequential**: Verify → mark complete → next steps. Push is done.
 - **Security in the prompt**: Explicit "never commit secrets," "only repo scripts," "credentials only from .env.local" keeps behavior safe even with "run everything."
 - **No secrets in the prompt**: The prompt does not contain your tokens or passwords; it points to `.env.local` and docs.
-- **Unblock URL in repo**: The exact GitHub unblock link lives in `docs/status/blocker_resolution_commands_20260129.md`; kept for reference (push was resolved via history rewrite).
+- **Unblock URL / push context**: See CONSOLIDATION_LOG for push and unblock history (legacy blocker_resolution file was consolidated).
 
 ---
 
@@ -127,11 +127,11 @@ Confirm you've read the context files, then execute the tasks in order with guru
 
 ## Quick Reference
 
-| Need                       | Where                                                                                   |
-| -------------------------- | --------------------------------------------------------------------------------------- |
-| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above                       |
-| When to restart            | When this file is saved; push has succeeded                                             |
-| Tree / mode                | Primary repo only, main, Agent mode, "Run everything"                                   |
-| Push unblock + rotate      | docs/status/blocker_resolution_commands_20260129.md (push resolved via history rewrite) |
-| Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                                                  |
-| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                                      |
+| Need                       | Where                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------- |
+| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above               |
+| When to restart            | When this file is saved; push has succeeded                                     |
+| Tree / mode                | Primary repo only, main, Agent mode, "Run everything"                           |
+| Push unblock + rotate      | CONSOLIDATION_LOG (push resolved via history rewrite; legacy file consolidated) |
+| Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                                          |
+| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                              |

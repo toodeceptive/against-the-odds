@@ -2,7 +2,7 @@
 
 **Purpose**: Single source of truth so nothing is overlooked during reorganization.
 
-**Last updated**: 2026-02-06 (guru finalization merged to main; mlf-main + CI note added)
+**Last updated**: 2026-02-07 (full-system scan; IF_HANDOFF created; workflows doc includes codeql)
 
 ---
 

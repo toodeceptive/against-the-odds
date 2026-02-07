@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — Full no-skip system scan: missing files, broken refs, cleanup
+
+**Summary**: User-approved custom multi-agent full-system scan/test/audit with rule: skip nothing; fix failures; create missing; update or delete obsolete; fix inhibiting/counter-intuitive; cleanup worktrees/temp/files to finalize. **Created (missing referenced files)**: docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md (primary path, worktree rule); docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md (redirect to HANDOFF, PLAN_AGENT_ENTRY, plan); docs/status/CONVERSATION_AUDIT.md (redirect to CONSOLIDATION_LOG, EXECUTIVE_DECISION_WORK_PRINCIPLES); docs/status/FULL_SYSTEM_FILE_AUDIT_20260130.md (stub pointer to ROOT_FILES_INVENTORY, CODEBASE_AUDIT, INDEX_REPORTS). **Updated**: HANDOFF_FOR_NEW_AGENT_202602 — workflows list includes codeql.yml; BRANCH_INVENTORY and WORKTREE_INVENTORY last-updated 2026-02-07; INDEX_REPORTS — handoff-chain files and FULL_SYSTEM_FILE_AUDIT stub; WORKTREE_INVENTORY — "Finalization cleanup" section (worktree remove, temp files, branches); OPERATOR_RUNBOOK — "Cleanup and finalization" section + fixed replacements.txt ref; HANDOFF_PROMPT_NEW_AGENT — CONTEXT list and refs point to HANDOFF_FOR_NEW_AGENT_202602 and CONSOLIDATION_LOG (removed broken refs to system_finalization_report, blocker_resolution_commands). **Pipeline**: verify-pipeline step 5 (runbook) still fails by design (credential-gated). Lint, format:check, test:unit pass. Report: docs/status/FULL_SYSTEM_SCAN_NO_SKIP_20260207.md.
+
+---
+
 ## 2026-02-07 — Custom full system test run (guru-informed)
 
 **Summary**: User-approved custom run of FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT based on comprehensive guru expert agent team review of work, files, code, git repo, local repo, pipeline, system tests, auditing, and research on improving every element (Cursor, agentic, git, repo, local, AO project/pipeline). **Executed**: Repo + local (pull main); code (lint, format:check, test:unit, test:integration — all pass or skip as designed); pipeline (verify-pipeline: 70/70 scripts, **6 workflows** including codeql.yml); files/scripts/cursor/project e2e verified. **Improvement**: `scripts/verify-pipeline.ps1` now includes `codeql.yml` in workflow checks. Report: docs/status/FULL_SYSTEM_TEST_REPORT_CUSTOM_GURU_20260207.md. Deferrals unchanged (runbook Shopify 401, integration skip, theme pull/E2E per HANDOFF).

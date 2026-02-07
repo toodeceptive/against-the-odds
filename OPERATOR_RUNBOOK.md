@@ -100,13 +100,21 @@ After filling `.env.local`:
 - `npm run test:e2e` (optional)
 - `npm run test:coverage` (optional)
 
+## Cleanup and finalization
+
+To finalize after systemwide changes (e.g. all work merged to main):
+
+- **Worktrees**: See [docs/status/WORKTREE_INVENTORY.md](docs/status/WORKTREE_INVENTORY.md) — "Finalization cleanup" for optional `git worktree remove` of ewa, snq, uub, opo, qqa if no longer needed.
+- **Temp files**: `.gitignore` excludes `*.tmp`, `*.temp`, `.cache/`, `*.bak`; delete any such files in repo root if present.
+- **Branches**: Optional delete of merged local branches (e.g. `git branch -d guru-finalization-20260206`) after confirming merge to main; see [docs/status/BRANCH_INVENTORY.md](docs/status/BRANCH_INVENTORY.md).
+
 ## Legacy/optional scripts (archived)
 
 - **Root scripts** (one-off repo setup/sync) moved to `scripts/archive/root-scripts-legacy/`: create-and-push.ps1, create-repo.ps1, sync-repository.ps1. Use `scripts/shopify/`, `scripts/git/`, etc. for current flows. See `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` and `docs/status/INDEX_REPORTS.md`.
 
 ## replacements.txt (repo root)
 
-- **Purpose**: Regex for git-filter-repo (Shopify secret replacement when sanitizing history). Do not remove if you use history sanitization; see `docs/status/blocker_resolution_commands_20260129.md` or archive for context.
+- **Purpose**: Regex for git-filter-repo (Shopify secret replacement when sanitizing history). Do not remove if you use history sanitization; see CONSOLIDATION_LOG or archive for context.
 
 ## Shopify app settings (if using embedded app)
 

@@ -2,7 +2,7 @@
 
 **Purpose**: Single source of truth for actual worktrees not listed in .cursor/worktrees.json.
 
-**Last updated**: 2026-02-06 (added opo, qqa; aligned with BRANCH_INVENTORY)
+**Last updated**: 2026-02-07 (aligned with BRANCH_INVENTORY; cleanup optional per doc)
 
 ---
 
@@ -19,6 +19,17 @@
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/qqa` | detached HEAD                    | 3011143  | Guru finalization / full system test; work merged to main      |
 
 **Note**: worktrees ewa, snq, uub are detached HEAD and may be temporary; mhx is on a live feature branch. Optional cleanup: `git worktree remove <path>` for detached worktrees no longer in use (from main repo).
+
+---
+
+## Finalization cleanup (optional)
+
+To reflect systemwide changes and leave only the primary worktree and any actively used worktrees:
+
+1. **From primary repo** (`C:\Users\LegiT\against-the-odds`): run `git worktree list` to see all worktrees.
+2. **Remove unused worktrees**: `git worktree remove "C:/Users/LegiT/.cursor/worktrees/against-the-odds/ewa"` (repeat for snq, uub, opo, qqa if no longer needed). Do not remove mhx if you still use handoff-doc-permissions branch.
+3. **Temp files**: `.gitignore` already excludes `*.tmp`, `*.temp`, `.cache/`, `*.bak`; no repo-level temp files should be committed. Delete any local `*.tmp` or `*.log` in repo root if present.
+4. **Branches**: Optional `git branch -d <branch>` for merged local branches (e.g. guru-finalization-20260206, cursor-agent-setup) after confirming merged to main.
 
 ---
 
