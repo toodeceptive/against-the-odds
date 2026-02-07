@@ -83,7 +83,7 @@ Workspace settings live in `.cursor/settings.json` (Cursor) and are mirrored in 
 
 ## 6. Personal (user) Cursor settings — checklist
 
-These are set in **Cursor Settings** (UI), not in the repo. Configure for best agent and Composer behavior:
+These are set in **Cursor Settings** (UI), not in the repo. Configure for best agent and Composer behavior. **Actionable tick list**: [CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md](CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md) (Iterate on Lints, Auto-apply to files outside context, and all §6 items).
 
 | Setting area              | Recommendation                                                                                                                                                                                                                                                                                                              |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

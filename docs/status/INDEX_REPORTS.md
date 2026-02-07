@@ -37,7 +37,8 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **GURU_20_TEAMS_60_SPECIALTIES.md**                            | 20 guru expert teams × 60 specialties; multi-perspective audit checklist for perfection loop                             |
 | **GURU_FULL_TEAM_SETUP_VERIFY_ORGANIZE_20260207.md**           | Full-team assignment: setup, verify (incl. desktop automation), clean, organize/label worktrees·pipeline·GitHub·branches |
 | **GURU_EXPERT_EXECUTION_TASKLIST_20260207.md**                 | Guru expert team step-by-step task list: find/fix all issues, optimize, finalize; commits/pulls/pushes                   |
-| **GURU_EXTENSIONS_CONFIG_AUDIT_20260207.md**                  | Guru extensions & config audit: manual configure/optimize; local, repo, extensions, GitHub; PP + desktop automation     |
+| **GURU_EXTENSIONS_CONFIG_AUDIT_20260207.md**                   | Guru extensions & config audit: manual configure/optimize; local, repo, extensions, GitHub; PP + desktop automation      |
+| **CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md**                | Cursor Settings UI checklist (Iterate on Lints, Auto-apply, §6); verify-auth/verify-secrets results; PP cycles           |
 
 ---
 

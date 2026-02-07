@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — Cursor UI checklist, verify-auth/verify-secrets, multifaceted PP cycles (user-approved)
+
+**Summary**: User approved guru expert team to use GitHub/browser verification (verify-auth, verify-secrets), enable Cursor UI improvements (Iterate on Lints, Auto-apply to files outside context, and all enhancements per CURSOR_AND_AGENT_OPTIMIZATION §6), and run multiple multifaceted aligned PP cycles across project, Cursor, GitHub. **Done**: (1) Ran `scripts/github/verify-auth.ps1` — repo access OK, 19 branches; GITHUB_TOKEN not set (credential-gated). (2) Ran `scripts/github/verify-secrets.ps1` — gh CLI not installed; required/optional secrets listed; manual URL provided. (3) Added [CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md](CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md) — tickable Cursor Settings checklist (§6 items), verify-auth/verify-secrets results, PP cycle reference. (4) CURSOR_AND_AGENT_OPTIMIZATION §6 — cross-reference to checklist. (5) Multifaceted PP cycles: quality pass, verify-pipeline 74/74 + 6 workflows, desktop automation 13/13 pass. INDEX_REPORTS updated. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-07 — Guru extensions/config audit: manual configure & optimize (user-approved)
 
 **Summary**: User approved manually configuring/optimizing all extensions using guru expert PP cycles and desktop automation; guru team to identify issues locally, in repo, in extensions, on GitHub account/repo; using browser or any approved methods. **Audit**: [GURU_EXTENSIONS_CONFIG_AUDIT_20260207.md](GURU_EXTENSIONS_CONFIG_AUDIT_20260207.md) — team assignment (Extensions, Project settings, VS Code parity, Local verification, Repo, GitHub/remote, Browser/automation). **Findings**: Extensions 18 recommendations; .cursor and .vscode extensions.json match; .cursor/settings.json and .vscode/settings.json aligned (Cursor-only keys in .cursor only). No config changes required; already optimal per CURSOR_AND_AGENT_OPTIMIZATION. **Verification**: npm run quality pass; verify-pipeline -SkipRunbook 74/74 parse, 6 workflows, lint OK; desktop automation 13/13 pass. INDEX_REPORTS updated with GURU_EXTENSIONS_CONFIG_AUDIT_20260207. No store-affecting changes; no deploy-log entry.
