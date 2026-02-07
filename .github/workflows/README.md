@@ -60,6 +60,11 @@ These workflows require the following secrets to be configured in GitHub:
 - Never commit secrets to the repository
 - Use `.env.local` for local development (gitignored)
 
+## CI troubleshooting
+
+- **Format check fails**: Run `npm run format` at repo root, then commit and push. CI runs `format:check`, `lint`, `test:unit` on push/PR to main.
+- **Dependabot PR fails**: Major bumps (e.g. eslint 10, @types/node 25) may need config or dependency alignment; update and push to the PR branch or merge main into it and re-run.
+
 ## To implement (optional)
 
 - **shopify-sync.yml backup-store job**: To implement: add a step that runs a script (e.g. product/theme export to a GitHub Actions artifact or a branch). To remove: delete the `backup-store` job from the workflow.
