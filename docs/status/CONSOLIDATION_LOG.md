@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — Autonomous guru setup, pipeline runbook fix, real-world test
+
+**Summary**: User approved guru expert team to autonomously complete secrets setup and full system/pipeline execution. **Credential attempt**: auto-configure-env applied known credentials (SHOPIFY_STORE_DOMAIN, SHOPIFY_STORE_URL, etc.); client-credentials skipped (SHOPIFY_API_KEY not in .env.local). **Fixes**: test-connection.ps1 now re-reads Store/Token from env after loading .env.local so standalone and runbook runs use loaded values; run-runbook.ps1 defaults SHOPIFY_STORE_DOMAIN to aodrop.com when unset so runbook reports token/API state instead of "store not set". **Pipeline**: npm run quality (pass), verify-pipeline (74/74 parse, workflows, lint; runbook runs and reports SHOPIFY_ACCESS_TOKEN not set, GitHub OK), npm audit 0 vulnerabilities. **Docs**: GURU_PP_OPERATOR_GUIDE.md — added "Sample real-world command" and expected outcomes for verify-pipeline.ps1.
+
+---
+
 ## 2026-02-07 — User approval: E2E, PC control, and guru methods for setup
 
 **Summary**: User approved agents to perform all setup tasks using **e2e, PC control, browser automation, screen-reader flows, and other guru-approved methods** as needed and necessary by the guru expert team. Recorded in AGENTS.md so future agents do not require a separate permission prompt when these methods are the right tool for a setup task.
