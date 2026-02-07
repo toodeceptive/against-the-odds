@@ -1,16 +1,15 @@
-import { describe, it, expect } from 'vitest';
-import { detectIssues, monitorIssues } from '../../src/desktop-automation/issue-detector.js';
-import { classifyIssue } from '../../src/desktop-automation/issue-detector.js';
+import { describe, expect, it } from 'vitest';
+import {
+  classifyIssue,
+  detectIssues,
+  monitorIssues,
+} from '../../src/desktop-automation/issue-detector.js';
 
 describe('Issue Detection', () => {
-  it(
-    'should detect issues on screen',
-    async () => {
-      const issues = await detectIssues();
-      expect(Array.isArray(issues)).toBe(true);
-    },
-    30000,
-  );
+  it('should detect issues on screen', async () => {
+    const issues = await detectIssues();
+    expect(Array.isArray(issues)).toBe(true);
+  }, 30000);
 
   it('should classify issues', () => {
     const issue = {
