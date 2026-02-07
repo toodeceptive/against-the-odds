@@ -27,6 +27,7 @@
 | **Full project update & perfection** (audit + new system + cleanup + update everything)                     | Full Project Update & Perfection (multi-guru) | **Consolidated** into the single canonical plan: `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (open in Cursor and use Build). See `docs/status/INDEX_REPORTS.md`.                                                                                    |
 | **Execute plan with full guru team** (per-phase owners and reviewers)                                       | Canonical plan + guru assignments             | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build; see plan section "Guru expert team" and `docs/status/GURU_TEAM_ASSIGNMENTS.md` for roster, assignment matrix, and perfection dimensions.                                |
 | **Full system-wide test and improvement** (new agent team; code, repo, pipeline, Cursor system, AO project) | Full System Test and Improvement              | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md` — test all aspects (code, files, functions, tools, extensions, repo, local, pipeline, scripts, GitHub Actions, Cursor agent system); fixes, cleanup, optimizations, performance. Use /review, /pr, Verifier. |
+| **Full-system overhaul and unified agent execution** (any request → plan → PC + APIs → preview/approve/apply; Phase 0 audit; conditional APIs vs PC; 100-step PP) | Master Full-System Overhaul Unified Guru PP   | `prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md` — full-system overhaul, audit, unified vision; decision tree and credentials matrix; reference master prompt for fix-if-fail and commit. |
 | **Audit and perfection framework** (best ways to audit and perfect entire repo)                             | Reference doc                                 | `docs/status/AUDIT_AND_PERFECTION_FRAMEWORK.md` — scripts, inventories, expert-driven audit, decision flow, fix types, guru ownership; links to GURU_TEAM_ASSIGNMENTS and canonical plan.                                                                         |
 
 ---
@@ -61,6 +62,7 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 | Phase 0 and entry                  | `docs/status/PLAN_AGENT_ENTRY.md`                    |
 | Fix everything / takeover          | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`        |
 | Full system test + improvement run | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md` |
+| Full-system overhaul + unified vision | `prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md` |
 | Phase 0 definition                 | `prompts/PERFECT_EXECUTION_PROMPT.md`                |
 | This decision tree                 | `docs/AGENT_PROMPT_DECISION_TREE.md`                 |
 | Shopify / Cursor workflow          | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`              |

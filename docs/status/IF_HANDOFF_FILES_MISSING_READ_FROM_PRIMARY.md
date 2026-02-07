@@ -1,6 +1,6 @@
 # If handoff files are missing (read from primary)
 
-**Purpose**: When working in a **worktree** (ewa, mhx, snq, uub, opo, qqa) where handoff/plan docs are missing or stale, read them from the **primary repo** so you have the single source of truth.
+**Purpose**: When working in a **worktree** (see [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) for current list) where handoff/plan docs are missing or stale, read them from the **primary repo** so you have the single source of truth.
 
 ---
 

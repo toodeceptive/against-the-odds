@@ -42,7 +42,7 @@ From handoff docs and CONSOLIDATION_LOG:
 ## 3) Worktree/workspace rule
 
 - **Primary worktree**: `C:\Users\LegiT\against-the-odds` (main).
-- Additional worktrees may exist under `C:\Users\LegiT\.cursor\worktrees\against-the-odds\*` (ewa/mhx/snq/uub).
+- Additional worktrees may exist under `C:\Users\LegiT\.cursor\worktrees\against-the-odds\*`; see [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) for current list.
 
 **Rule**: When in a worktree, read handoff/plan docs from the **primary worktree** per `docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md`. Prefer running fixes from the primary worktree so inventories/logs stay consistent.
 

@@ -70,6 +70,12 @@
 - **Usage:** Theme preview capture, product demo fallback, “see my screen” flows. See docs/AUTOMATION_IMPLEMENTATION_GUIDE.md.
 - **Tests:** tests/desktop-automation/\*.test.js; npm run test:desktop (optional; may require native build on Windows).
 
+### 2.7 PC automation vs APIs/secrets (conditional — refined 2026-02-07)
+
+- **Theme apply and many store tasks** do **not** require APIs/secrets when the agent runs **on the user's PC** and the user has a **browser session** (e.g. Chrome logged into Shopify Admin). The agent can navigate PC and browser to perform theme apply, product edits, settings, etc.; the session is the credential; no repo secrets needed.
+- **APIs/secrets are required** when: **CI or headless** (no user desktop); **bulk/scripted** operations where UI is slow or fragile; or user prefers API for reliability.
+- **Rule:** Prefer APIs when available and when context is CI/headless; use **PC + browser** when agent is on user's PC and no secrets (or user prefers not to store tokens). See [MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md](../../prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md) for decision tree and credentials matrix.
+
 ---
 
 ## 3. Fixes applied (this session)
