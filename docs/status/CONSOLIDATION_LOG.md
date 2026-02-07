@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-06 — Guru pass (inventory accuracy)
+
+**Summary**: BRANCH_INVENTORY and CONSOLIDATION_LOG updated to reflect that `cursor-agent-setup` was merged to main (03c4243); opo worktree and branch noted as optional to delete. Lint, format check, and unit tests verified; no code changes.
+
+---
+
 ## 2026-02-06 — Perfection run (format + README)
 
 **Summary**: Prettier format pass applied repo-wide; README gained a "Cursor and agent" section (rules, skills, /review, /pr, links to AGENTS.md and CURSOR_AND_AGENT_OPTIMIZATION). Lint and unit tests verified; changes committed and pushed on `main`.
@@ -14,7 +20,7 @@
 
 ## 2026-02-06 — Cursor agent setup and .cursorignore (branch: cursor-agent-setup)
 
-**Summary**: Full Cursor/agent optimization finalized and committed: PP baseline rule, four skills, Verifier subagent, /review and /pr commands, worktrees env copy, extensions single source, audit docs, and .cursorignore at repo root. Branch `cursor-agent-setup` pushed; merge into `main` from worktree that has main checked out when ready.
+**Summary**: Full Cursor/agent optimization finalized and committed: PP baseline rule, four skills, Verifier subagent, /review and /pr commands, worktrees env copy, extensions single source, audit docs, and .cursorignore at repo root. Branch `cursor-agent-setup` pushed; **merged to main** (commit 03c4243). Optional: delete branch and opo worktree when no longer needed.
 
 **Commits**: (1) chore: add .cursorignore for Cursor indexing and agent context. (2) chore: Cursor agent setup — PP baseline, skills, subagents, commands, worktrees, docs.
 
