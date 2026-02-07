@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — 100-step multiphase PP cycles plan; full-scale system verification (user-pre-approved)
+
+**Summary**: User approved setup, run, execute, and perform any/all tasks to improve, enhance, optimize, finalize, and finish all work via massive full-scale multi-agent multi-cycle aligned comprehensive PP cycles across all trees, worktrees, branches, Git, GitHub, repos, and local files; desktop automation, E2E, actual full system testing; fix any failures/errors/setups by means necessary (guru expert multi-agent analysis). **Done**: (1) Full system verification run: **quality** pass, **verify-pipeline** -SkipRunbook pass (74/74 scripts, 6 workflows, lint OK), **integration** tests skipped (credential-gated by design), **desktop automation** 13/13 pass. No failures to fix. (2) Created [GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md](GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md) — 100-step multiphase series (10 phases × 10 steps): Phase 1 Repo/Git/worktrees, 2 Quality gates, 3 Pipeline & CI, 4 Cursor/extensions/settings, 5 GitHub/auth/secrets, 6 Shopify/theme/store, 7 Tests (unit/integration/desktop/E2E), 8 Docs/status/consolidation, 9 Cleanup/optimize/fix, 10 Finalize/commit/push. Each step has verification and "fix if fail" guidance; failure handling and guru review pre-approved. INDEX_REPORTS updated. Commit and push to follow (guru review).
+
+---
+
 ## 2026-02-07 — Cursor UI checklist, verify-auth/verify-secrets, multifaceted PP cycles (user-approved)
 
 **Summary**: User approved guru expert team to use GitHub/browser verification (verify-auth, verify-secrets), enable Cursor UI improvements (Iterate on Lints, Auto-apply to files outside context, and all enhancements per CURSOR_AND_AGENT_OPTIMIZATION §6), and run multiple multifaceted aligned PP cycles across project, Cursor, GitHub. **Done**: (1) Ran `scripts/github/verify-auth.ps1` — repo access OK, 19 branches; GITHUB_TOKEN not set (credential-gated). (2) Ran `scripts/github/verify-secrets.ps1` — gh CLI not installed; required/optional secrets listed; manual URL provided. (3) Added [CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md](CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md) — tickable Cursor Settings checklist (§6 items), verify-auth/verify-secrets results, PP cycle reference. (4) CURSOR_AND_AGENT_OPTIMIZATION §6 — cross-reference to checklist. (5) Multifaceted PP cycles: quality pass, verify-pipeline 74/74 + 6 workflows, desktop automation 13/13 pass. INDEX_REPORTS updated. No store-affecting changes; no deploy-log entry.
