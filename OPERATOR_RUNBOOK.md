@@ -113,4 +113,5 @@ After filling `.env.local`:
 - `APP_URL` — your app’s root URL
 - `PREFERENCES_URL` — preferences/settings URL
 - `REDIRECT_URLS` — allowed OAuth redirect URLs (comma-separated in scripts if needed)
-  See `docs/SHOPIFY_SETUP.md` for details.
+
+See `docs/SHOPIFY_SETUP.md` for details.
