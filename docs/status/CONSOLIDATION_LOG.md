@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-02-06 — Perfection run (format + README)
+
+**Summary**: Prettier format pass applied repo-wide; README gained a "Cursor and agent" section (rules, skills, /review, /pr, links to AGENTS.md and CURSOR_AND_AGENT_OPTIMIZATION). Lint and unit tests verified; changes committed and pushed on `main`.
+
+**Commit**: chore: Prettier format pass; README Cursor/agent section for users.
+
+---
+
 ## 2026-02-06 — Cursor agent setup and .cursorignore (branch: cursor-agent-setup)
 
 **Summary**: Full Cursor/agent optimization finalized and committed: PP baseline rule, four skills, Verifier subagent, /review and /pr commands, worktrees env copy, extensions single source, audit docs, and .cursorignore at repo root. Branch `cursor-agent-setup` pushed; merge into `main` from worktree that has main checked out when ready.

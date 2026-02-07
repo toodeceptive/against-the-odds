@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02-06** — Perfection run: Prettier format pass repo-wide; README "Cursor and agent" section (rules, skills, /review, /pr, AGENTS.md, CURSOR_AND_AGENT_OPTIMIZATION). Lint and unit tests verified; pushed on main.
 - **2026-02-06** — Cursor agent setup (branch `cursor-agent-setup`): .cursorignore at repo root; PP baseline rule (pp-basis.mdc); skills (prodigy-protocol, prodigy-phantasm, universal-godmode, agentic-performance); Verifier subagent; /review and /pr commands; worktrees env copy; extensions via extensions.json only; audit docs (AGENTIC_SETUP_AUDIT, CURSOR_AND_AGENT_OPTIMIZATION, CURSORIGNORE_TEMPLATE). CONSOLIDATION_LOG, BRANCH_INVENTORY, ROOT_FILES_INVENTORY updated. Merge cursor-agent-setup to main when ready.
 - **2026-02** — Guru finalization: Theme brand (ao-brand.css drip/magenta/teal, theme-preview-mock, store-update docs); CI resilience (quality-check: test:unit required, coverage/audit optional; ci: test:unit only, trivy/sarif continue-on-error; shopify-sync: skip when secrets missing; sync-theme-branch: token + continue-on-error). Deploy-log and pipeline verification updated. No store-affecting deploy.
 - **2026-01-31** — Dependabot fix: vitest 1→4, @vitest/coverage-v8 1→4, eslint 8→9; ESLint flat config (eslint.config.mjs), removed .eslintrc.json; npm audit 0 vulnerabilities. Not store-affecting.
