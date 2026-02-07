@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-06 — Guru finish: HANDOFF deferrals, format, verify-pipeline
+
+**Summary**: User-approved guru completion with explicit deferrals. **HANDOFF** updated with "Deferred (by design)" subsection: verify-pipeline runbook step (Shopify 401, GITHUB_TOKEN) credential-gated; integration tests skipped when credentials missing; theme pull / E2E environment/SSL blocker — no change. Markdownlint fix branch merged to main (97f2d00). Prettier format pass on SKILL.md, AGENTIC_SETUP_AUDIT.md, INDEX_REPORTS.md. **verify-pipeline**: steps 1–4 pass (script parse, workflows, product sync dry-run, lint); step 5 (runbook) fails as expected (credential-gated). Lint, format:check, test:unit pass.
+
+---
+
 ## 2026-02-06 — Markdownlint fixes (commit message / IDE)
 
 **Summary**: Resolved markdownlint issues that blocked commit message generation and IDE: **MD060** (table column style) and **MD024** (duplicate heading). Added `.markdownlint.json` with `MD060: false`; added `<!-- markdownlint-disable MD060 -->` in `.cursor/skills/agentic-performance/SKILL.md`, `docs/status/AGENTIC_SETUP_AUDIT.md`, and `docs/status/INDEX_REPORTS.md`. **CHANGELOG.md**: duplicate "### Added" under [1.0.0] renamed to "### Added in 1.0.0". **AGENTIC_SETUP_AUDIT.md**: glob patterns in checklist wrapped in backticks (MD037); table spacing normalized where edited. **SKILL.md**: table pipe spacing adjusted. All markdownlint diagnostics cleared in qqa worktree; same fixes apply when opo/other worktrees use these files from main.

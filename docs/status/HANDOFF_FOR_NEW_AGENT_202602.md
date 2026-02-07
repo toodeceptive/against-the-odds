@@ -25,6 +25,12 @@ The user has given the new agent **full unrestricted approval and dominion over 
 - **Pipeline:** `verify-pipeline.ps1` runs PowerShell scripts and 5 GitHub workflows (ci, shopify-sync, sync-theme-branch, sync, maintenance); lint and product-sync dry-run pass. `npm run format`, `npm run lint`, `npm run test:unit` have been run and pass in this environment.
 - **finish-setup.ps1** has been run with theme pull skipped (because pull fails); it verified pipeline, merged brand assets into the theme folder, and wrote `docs/status/SETUP_STATUS.md`.
 
+### Deferred (by design; no change unless credentials/env fixed)
+
+- **verify-pipeline runbook step (Shopify 401, GITHUB_TOKEN):** Credential-gated; documented. When `.\scripts\run-runbook.ps1` or the runbook step in verify-pipeline runs, Shopify returns 401 Unauthorized and GITHUB_TOKEN is not set in this environment. Resolve by configuring `.env.local` and/or GitHub Secrets when available; then re-run.
+- **Integration tests:** Skipped when credentials are missing; documented. `npm run test:integration` skips Shopify/GitHub tests without tokens; by design.
+- **Theme pull / E2E:** Environment/SSL blocker per HANDOFF; no change. Theme pull fails with TLS/SSL errors from this machine/network; E2E and full theme-dev depend on a successful pull or alternate path (e.g. browser-based flow).
+
 ---
 
 ## What exists in the repo
