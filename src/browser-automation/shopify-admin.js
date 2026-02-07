@@ -60,19 +60,26 @@ export async function ensureShopifyLogin(page, storeDomain) {
   const adminUrl = `https://${storeDomain}/admin`;
 
   try {
-    await page.goto(adminUrl, { waitUntil: 'domcontentloaded' });
+    await page.goto(adminUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
-    // Check if already logged in (no login form)
-    const loginForm = await page.locator('form[action*="login"]').count();
-    if (loginForm === 0) {
-      // Already logged in to Shopify admin
+    // Shopify may redirect aodrop.com/admin → admin.shopify.com/store/<id>
+    const currentUrl = page.url();
+    const isAdmin = currentUrl.includes('admin.shopify.com') || currentUrl.includes('/admin');
+    const hasLoginForm = (await page.locator('form[action*="login"]').count()) > 0;
+
+    if (isAdmin && !hasLoginForm) {
       return true;
     }
-
-    // If login form exists, user needs to log in manually
-    // Login required - waiting for manual login
-    await page.waitForURL(adminUrl, { timeout: 120000 }); // Wait up to 2 minutes
-
+    if (hasLoginForm) {
+      // Wait for redirect to admin (any admin URL)
+      await page.waitForFunction(
+        () => {
+          const u = window.location.href;
+          return u.includes('admin.shopify.com') || u.includes('/admin');
+        },
+        { timeout: 120000 }
+      );
+    }
     return true;
   } catch (_error) {
     warn('Failed to access Shopify admin', { storeDomain, error: _error?.message });
@@ -87,12 +94,19 @@ export async function ensureShopifyLogin(page, storeDomain) {
  */
 export async function navigateToAppsDevelopment(page) {
   try {
-    // Navigate to apps page
-    await page.goto('/admin/apps/development', { waitUntil: 'domcontentloaded' });
+    // Shopify Admin (admin.shopify.com) uses /store/<id>/apps/development
+    const currentUrl = page.url();
+    if (currentUrl.includes('admin.shopify.com/store/')) {
+      const url = new URL(currentUrl);
+      const pathMatch = url.pathname.match(/^\/store\/([^/]+)/);
+      const storePath = pathMatch ? pathMatch[0] : '/store';
+      const appsUrl = `${url.origin}${storePath}/apps/development`;
+      await page.goto(appsUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
+    } else {
+      await page.goto('/admin/apps/development', { waitUntil: 'domcontentloaded', timeout: 15000 });
+    }
 
-    // Wait for page to load
-    await page.waitForSelector('h1, [data-testid="apps-page"]', { timeout: 10000 });
-
+    await page.waitForSelector('h1, [data-testid="apps-page"], main, [role="main"]', { timeout: 10000 });
     return true;
   } catch (_error) {
     warn('Failed to navigate to Apps > Development', { error: _error?.message });

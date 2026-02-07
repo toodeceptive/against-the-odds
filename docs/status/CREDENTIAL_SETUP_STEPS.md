@@ -2,18 +2,20 @@
 
 **Goal:** Runbook and verify-pipeline pass (Shopify 401 resolved, optional GITHUB_TOKEN for API checks).
 
+**Fastest path:** Copy the Admin API token (`shpat_...`) from Shopify Admin → Apps → Development → [your app] → API credentials (click **Reveal** if needed), then in repo root run `.\scripts\shopify\browser\save-token-to-env.ps1`. Then run `.\scripts\run-runbook.ps1` and `.\scripts\verify-pipeline.ps1` — both should pass.
+
 ## Shopify Admin API token
 
-1. **Option A – Browser extraction (recommended)**  
-   - Run: `.\scripts\shopify\browser\launch-chrome-for-agent.ps1`  
-   - In the opened Chrome window, **log in to Shopify** (e.g. aodrop.com → Google OAuth).  
-   - When you see Shopify Admin, run: `.\scripts\shopify\browser\get-access-token.ps1`  
+1. **Option A – Browser extraction (recommended)**
+   - Run: `.\scripts\shopify\browser\launch-chrome-for-agent.ps1`
+   - In the opened Chrome window, **log in to Shopify** (e.g. aodrop.com → Google OAuth).
+   - When you see Shopify Admin, run: `.\scripts\shopify\browser\get-access-token.ps1`
    - The script writes `SHOPIFY_ACCESS_TOKEN` to `.env.local`.
 
-2. **Option B – Manual copy**  
-   - In Shopify Admin go to **Apps → Development → [your app] → API credentials**.  
-   - Copy the **Admin API access token** (starts with `shpat_`).  
-   - Run: `.\scripts\shopify\browser\save-token-to-env.ps1` (with token in clipboard)  
+2. **Option B – Manual copy (one step after copy)**
+   - In Shopify Admin go to **Apps → Development → [your app] → API credentials** (or **Reveal** the token if needed).
+   - Copy the **Admin API access token** (starts with `shpat_`).
+   - In repo root run: `.\scripts\shopify\browser\save-token-to-env.ps1` (reads from clipboard).
    - Or: `.\scripts\shopify\browser\save-token-to-env.ps1 -Token 'shpat_...'`
 
 3. Ensure `.env.local` has:
@@ -22,8 +24,8 @@
 
 ## GitHub PAT (optional for runbook)
 
-- Create a token at [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens).  
-- Add to `.env.local`: `GITHUB_TOKEN=ghp_...`  
+- Create a token at [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens).
+- Add to `.env.local`: `GITHUB_TOKEN=ghp_...`
 - Needed for GitHub API checks and CI; not required for local clone/push.
 
 ## Verify
