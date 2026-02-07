@@ -96,9 +96,10 @@
 
 ### Setup (scripts/setup/)
 
-| Script                                                               | Purpose                  | When to run                                      |
-| -------------------------------------------------------------------- | ------------------------ | ------------------------------------------------ |
-| setup-env.ps1 (root), auto-configure-env.ps1, verify-credentials.ps1 | Env and credential setup | First-time setup; verify after credential change |
+| Script                                                               | Purpose                                                                           | When to run                                      |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------ |
+| **full-setup.ps1**                                                   | Full setup orchestrator: .env.local, credentials (client-cred or browser), verify | Single entry point; then run run-runbook.ps1     |
+| setup-env.ps1 (root), auto-configure-env.ps1, verify-credentials.ps1 | Env and credential setup                                                          | First-time setup; verify after credential change |
 
 ### Quality (scripts/quality/)
 

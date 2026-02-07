@@ -25,6 +25,8 @@ These workflows require the following secrets to be configured in GitHub:
 - Runs on: Push to `main`, Pull requests targeting `main`
 - Actions: Lint, format check, unit tests, build, Trivy (security scan), secret-scan, npm audit (continue-on-error), optional coverage, Lighthouse (continue-on-error). Single workflow for all quality gates.
 
+**Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `.\scripts\verify-pipeline.ps1`. CI runs lint, format check, unit tests, Trivy, secret-scan, and npm audit only. Before push, run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if you have no `.env.local`).
+
 ### `codeql.yml` (CodeQL analysis)
 
 - Runs on: Push to `main`, Pull requests targeting `main`, weekly schedule.
@@ -70,6 +72,10 @@ These workflows require the following secrets to be configured in GitHub:
 - **Format check fails**: Run `npm run format` at repo root, then commit and push. CI runs `format:check`, `lint`, `test:unit` on push/PR to main.
 - **Dependabot PR fails**: Major bumps (e.g. eslint 10, @types/node 25) may need config or dependency alignment; update and push to the PR branch or merge main into it and re-run.
 - **CodeQL failing**: The `codeql.yml` workflow runs CodeQL analysis on push/PR to main. The analyze job has `continue-on-error: true` so a CodeQL failure does not block the run. To fix CodeQL itself: ensure JavaScript/TypeScript files are discoverable; see [CodeQL troubleshooting](https://docs.github.com/en/code-security/code-scanning/troubleshooting-code-scanning).
+
+## Branch protection (optional)
+
+- **update-branch-protection-status-checks.js**: Run `node scripts/github/update-branch-protection-status-checks.js` (with GITHUB_TOKEN or .env.local) to set required status checks for `main` to the CI job names: `test`, `secret-scan`, `quality`. These match the jobs in `ci.yml`.
 
 ## To implement (optional)
 

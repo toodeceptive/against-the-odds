@@ -30,13 +30,13 @@ if ([string]::IsNullOrWhiteSpace($Token)) {
     }
 }
 
-# Normalize: trim and extract first shpat_... token (handles clipboard with extra text/newlines)
+# Normalize: trim and extract first shpat_... token (min 32 chars after prefix; matches shopify-admin.js validation)
 $Token = $Token.Trim() -replace "`r`n", " " -replace "`n", " "
-if ($Token -match '(shpat_[a-zA-Z0-9]+)') {
+if ($Token -match '(shpat_[a-zA-Z0-9]{32,})') {
     $Token = $matches[1]
 }
-if ($Token -notmatch '^shpat_[a-zA-Z0-9]+$') {
-    Write-Host "Error: Token should start with shpat_ and contain only letters/numbers. Copy only the token, then run again." -ForegroundColor Red
+if ($Token -notmatch '^shpat_[a-zA-Z0-9]{32,}$') {
+    Write-Host "Error: Token must start with shpat_ and have at least 32 alphanumeric characters after it. Copy the full token, then run again." -ForegroundColor Red
     exit 1
 }
 

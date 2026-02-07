@@ -10,7 +10,7 @@ $env:HTTPS_PROXY = $null
 $env:http_proxy = $null
 $env:https_proxy = $null
 
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 Write-Host "Repository: $repoPath" -ForegroundColor Yellow

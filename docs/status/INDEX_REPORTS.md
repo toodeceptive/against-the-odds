@@ -30,6 +30,7 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **FULL_SCALE_PP_AUDIT_20260207.md**               | Full-scale guru/PP audit (extensions, codebase, repo, E2E, pipeline, security); GitHub vs local; fixes applied  |
 | **AGENT_AUTOMATION_READINESS.md**                 | Checklist so agent can automate without issues; terminal verification, permissions, automations, non-blockers   |
 | **CONVERSATION_AND_COMPLETION_AUDIT_20260207.md** | Audit of conversation and work; goals vs achievement; worktrees; finalizations                                  |
+| **FIX_AND_PERFECT_PLAN_20260207.md**              | Phase 3 audit findings; P0 (hardcoded paths), P1 (runbook), P2 (inventories); Phase 3b fixes applied            |
 
 ---
 

@@ -47,6 +47,7 @@ The user has granted the agent permission to **edit all files (including ignored
 - **Destructive git only with approval**: Force-push or history rewrite only after user approval (already given for this handoff).
 - **Guru-level accuracy**: Use state-of-the-art methods, task management, and precision; may use browser automation or local access when necessary to complete setup.
 - **Fetch project info from repo and Cursor**: It reads from `.cursor/`, `docs/`, `docs/status/`, and the repo—not from "all chat history" (which the new agent cannot see). The prompt summarizes state so the new agent has full context.
+- **Guru/PP execution**: New agents should use [docs/GURU_PP_OPERATOR_GUIDE.md](GURU_PP_OPERATOR_GUIDE.md) and [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md) for execution baseline and daily gates (verify-pipeline, run-runbook).
 - **Files and uploads for store changes**: The user grants the agent permission to read files/paths and use uploads shared in chat when the user is requesting a store change (e.g. "add a product with these images" or providing description/data from their PC). Use them only for the requested change; follow the workflow in docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md (preview → approve → apply → log).
 
 ---

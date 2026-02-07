@@ -4,6 +4,24 @@
 
 ---
 
+## 2026-02-07 — User approval: E2E, PC control, and guru methods for setup
+
+**Summary**: User approved agents to perform all setup tasks using **e2e, PC control, browser automation, screen-reader flows, and other guru-approved methods** as needed and necessary by the guru expert team. Recorded in AGENTS.md so future agents do not require a separate permission prompt when these methods are the right tool for a setup task.
+
+---
+
+## 2026-02-07 — Guru full-system setup and automation plan (Phases 1–4 complete)
+
+**Summary**: Executed Guru full-system setup and automation plan per `.cursor/plans/guru_full-system_setup_and_automation.plan.md`. **Phase 1 (Pipeline):** Workflows README updated (full verify-pipeline local-only; before-push note); OPERATOR_RUNBOOK and WORKFLOW_PIPELINE_VISUAL_GUIDE updated with verify-pipeline before push; branch-protection script documented (test, secret-scan, quality). **Phase 2 (Credentials):** auto-configure-env.ps1 fixed to use repo-root from `$PSScriptRoot`; extended with client-credentials preference for Shopify token, theme ID flow, verify-credentials and run-runbook next steps; full-setup.ps1 added; CREDENTIALS_SETUP.md updated with credential method matrix and future e2e/screen-read/PC-control options. **Phase 3 + 3b (Audit + fix):** FIX_AND_PERFECT_PLAN_20260207.md produced; P0 hardcoded repo paths removed in 28 scripts (portable repo-root resolution); scripts/README and INDEX_REPORTS updated; 74/74 scripts parse. **Phase 4 (Docs):** docs/GURU_PP_OPERATOR_GUIDE.md created (PP baseline, agentic-performance, when to use which skill, daily gates); OPERATOR_RUNBOOK "For AI agents" and Full system setup pointer added; HANDOFF_FOR_NEW_AGENT_202602 and HANDOFF_PROMPT_NEW_AGENT updated to reference guru/PP guide and runbook.
+
+---
+
+## 2026-02-07 — Guru full-system setup and automation plan — Phase 0
+
+**Summary**: Phase 0 (prepare-to-build) executed: PP research and guru-expert audit cycles. **Automated checks**: parse-all-ps1 (73/73 OK), lint (0 errors), test:unit (pass). **Findings for Phase 3**: Multiple scripts use hardcoded `$repoPath = "C:\Users\LegiT\against-the-odds"` (auto-configure-env.ps1, setup-env.ps1, update-dependencies.ps1, run-all.ps1, sync-from-github.ps1, get-theme-id.ps1, check-app-installation.ps1, verify-secrets.ps1, test-push-pull.ps1, optimize-repo.ps1, and others under scripts/); P0 fix in Phase 3b: replace with repo-root resolution from `$PSScriptRoot` (see verify-pipeline.ps1 or utilities.ps1). Build readiness confirmed; Phases 1–4 proceed.
+
+---
+
 ## 2026-02-07 — Agent automation readiness + conversation completion audit
 
 **Summary**: User requested ensure agent can automate without issues; check/fix all terminal problems; full agent functionality and access; audit conversation and work for clarity and completion. **Done**: Terminal verification (format, lint, test:unit, verify-pipeline) — all pass. **Fix**: get-access-token.ps1 corrupted tail removed (73/73 scripts parse). **Docs**: AGENT_AUTOMATION_READINESS.md (no-issues checklist, permissions, automations); CONVERSATION_AND_COMPLETION_AUDIT_20260207.md (goals vs achievement, worktrees, finalizations). INDEX_REPORTS updated. All session goals achieved.

@@ -1,6 +1,6 @@
 # Situation for new agent (2026-02)
 
-**Prompt for new agent:** Use **`docs/status/PLAN_AGENT_ENTRY.md`** and **`prompts/PERFECT_EXECUTION_PROMPT.md`** to start; for full takeover use **`docs/AGENT_PROMPT_DECISION_TREE.md`** and the canonical plan (`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`). To **test and utilize the new Cursor agent system** (rules, skills, /review, /pr, Verifier) with a full system-wide run across code, repo, pipeline, and project, use **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`**.
+**Prompt for new agent:** Use **`docs/status/PLAN_AGENT_ENTRY.md`** and **`prompts/PERFECT_EXECUTION_PROMPT.md`** to start; for full takeover use **`docs/AGENT_PROMPT_DECISION_TREE.md`** and the canonical plan (`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`). **Execution and daily gates:** See [docs/GURU_PP_OPERATOR_GUIDE.md](../GURU_PP_OPERATOR_GUIDE.md) (guru/PP baseline, when to use which skill) and [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md) (daily checks, verify-pipeline, run-runbook). To **test and utilize the new Cursor agent system** (rules, skills, /review, /pr, Verifier) with a full system-wide run across code, repo, pipeline, and project, use **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`**.
 
 The user has given the new agent **full unrestricted approval and dominion over the entire project** to fix everything. This document explains the situation only. No limitations or instructions are imposed.
 

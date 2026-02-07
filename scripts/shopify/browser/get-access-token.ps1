@@ -3,7 +3,7 @@
 
 param(
     [string]$StoreDomain = $env:SHOPIFY_STORE_DOMAIN,
-    [bool]$SaveToEnv = $true
+    [switch]$NoSave  # Omit to save to .env.local; use -NoSave to skip saving
 )
 
 $ErrorActionPreference = "Stop"
@@ -95,7 +95,7 @@ try {
         Write-Host "[OK] Access token extracted: $($token.Substring(0, 20))..." -ForegroundColor Green
         $env:ATO_SHOPIFY_STORE_ID = $null
 
-        if ($SaveToEnv) {
+        if (-not $NoSave) {
             # Update .env.local (SHOPIFY_ACCESS_TOKEN for API scripts; SHOPIFY_CLI_THEME_TOKEN for theme pull/dev)
             if (Test-Path ".env.local") {
                 $envContent = Get-Content ".env.local"
@@ -122,10 +122,10 @@ try {
                 Write-Host "[OK] Saved SHOPIFY_ACCESS_TOKEN and SHOPIFY_CLI_THEME_TOKEN to .env.local" -ForegroundColor Green
             } else {
                 Write-Host "[WARN] .env.local not found. Token not saved." -ForegroundColor Yellow
-                Write-Host "Token obtained but not saved. Run with -SaveToEnv and ensure .env.local exists, or paste the token from Shopify Admin into .env.local." -ForegroundColor Cyan
+                Write-Host "Token obtained but not saved. Ensure .env.local exists and run again without -NoSave, or paste the token from Shopify Admin into .env.local." -ForegroundColor Cyan
             }
         } else {
-            Write-Host "Token obtained (not saved). Run with -SaveToEnv to write to .env.local, or paste from Shopify Admin > Apps > Development > API credentials." -ForegroundColor Cyan
+            Write-Host "Token obtained (not saved). Run without -NoSave to write to .env.local, or paste from Shopify Admin > Apps > Development > API credentials." -ForegroundColor Cyan
         }
     } else {
         Write-Host ""

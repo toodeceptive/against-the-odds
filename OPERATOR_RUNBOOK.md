@@ -2,12 +2,18 @@
 
 **Agent permission:** You have permission to perform all actions in this repo; see [AGENTS.md](AGENTS.md) or `.cursor/rules`. Existing safety rules (preview-before-apply for store changes, no secrets in commits) still apply.
 
+## For AI agents
+
+- **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill).
+- **Daily gates**: Run `npm run quality` and, before push, `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no .env.local). Integration: `.\scripts\run-runbook.ps1` when credentials are set.
+
 **Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (approved; browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
 
 ## Daily Checks
 
 - **One command:** `npm run quality` (format, format:check, lint, test:unit)
 - Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
+- **Before push:** Run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`). See [.github/workflows/README.md](.github/workflows/README.md).
 - **Prettier runs automatically on every commit** (pre-commit hook); see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)
@@ -58,6 +64,7 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 - Store in `.env.local` (never commit)
 - If missing, copy from `.env.example` and fill values
+- **Full system setup**: Run `.\scripts\setup\full-setup.ps1` for a single entry point (ensures .env.local, guides Shopify/GitHub credentials, runs verify-credentials). See [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md) and [docs/BROWSER_CREDENTIAL_FLOW.md](docs/BROWSER_CREDENTIAL_FLOW.md).
 - **replacements.txt** at repo root: regex for git-filter-repo (Shopify secret replacement in history); do not remove if using history sanitization.
 
 ## Troubleshooting

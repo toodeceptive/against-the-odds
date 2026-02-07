@@ -24,6 +24,8 @@ The user grants agents **full permission** to perform all actions in this reposi
 
 Agents may use **Playwright** for scripted E2E and browser automation, and **desktop-automation** (and remote-PC flows) for operations that cannot be performed via GitHub or Shopify API. See `.cursor/context/node-and-automation.md` and [docs/AGENT_SYSTEM.md](docs/AGENT_SYSTEM.md). Use **your browser** (Cursor browser MCP) for interactive credential or one-off UI flows; use Playwright for automated, repeatable E2E runs when appropriate.
 
+**User approval (2026-02-07):** The user has approved agents to perform **all setup tasks** using **e2e, PC control, browser automation, screen-reader flows, and other guru-approved methods** as needed and necessary by the guru expert team. No additional permission prompt is required for these methods when they are the right tool for a setup task.
+
 ## When agents use your browser
 
 With your permission, agents use **your browser** (Cursor browser MCP, your Chrome) when an action is impossible, limited, or unsafe via API—for example:

@@ -207,15 +207,15 @@ export async function navigateToAppApiCredentialsAndReveal(page) {
  * @returns {Promise<string|null>} Access token or null if not found
  */
 export async function extractAccessToken(page) {
-  // Shopify Admin API tokens: shpat_ + alphanumeric (typically 32+ chars; accept 20+ for flexibility)
-  const tokenPattern = /shpat_[a-zA-Z0-9]{20,}/;
+  // Shopify Admin API tokens: shpat_ + alphanumeric (min 32 chars after prefix; reject shorter/truncated)
+  const tokenPattern = /shpat_[a-zA-Z0-9]{32,}/;
   const tryExtractFromCurrentPage = async () => {
     const content = await page.content();
     const m = content.match(tokenPattern);
     if (m) return m[0];
     const visible = await page.evaluate(() => {
       const t = document.body?.innerText || '';
-      const match = t.match(/shpat_[a-zA-Z0-9]{20,}/);
+      const match = t.match(/shpat_[a-zA-Z0-9]{32,}/);
       return match ? match[0] : null;
     });
     return visible;
@@ -256,7 +256,7 @@ export async function extractAccessToken(page) {
     // Method 1b: Visible text (in case token is in shadow DOM or rendered differently)
     const visibleToken = await page.evaluate(() => {
       const bodyText = document.body?.innerText || '';
-      const m = bodyText.match(/shpat_[a-zA-Z0-9]{20,}/);
+      const m = bodyText.match(/shpat_[a-zA-Z0-9]{32,}/);
       return m ? m[0] : null;
     });
     if (visibleToken) return visibleToken;
@@ -270,7 +270,7 @@ export async function extractAccessToken(page) {
         (await inputWithToken.nth(i).getAttribute('value')) ||
         (await inputWithToken.nth(i).getAttribute('data-access-token')) ||
         (await inputWithToken.nth(i).getAttribute('data-token'));
-      if (v && /^shpat_[a-zA-Z0-9]{20,}$/.test(v.trim())) return v.trim();
+      if (v && /^shpat_[a-zA-Z0-9]{32,}$/.test(v.trim())) return v.trim();
     }
 
     // Method 3: Check API credentials section
