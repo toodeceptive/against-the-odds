@@ -40,6 +40,8 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **GURU_EXTENSIONS_CONFIG_AUDIT_20260207.md**                   | Guru extensions & config audit: manual configure/optimize; local, repo, extensions, GitHub; PP + desktop automation      |
 | **CURSOR_UI_OPTIMIZATION_CHECKLIST_20260207.md**               | Cursor Settings UI checklist (Iterate on Lints, Auto-apply, §6); verify-auth/verify-secrets results; PP cycles           |
 | **GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md**             | 100-step multiphase PP cycles: deep research, fixes, optimizations, finalizations; all trees/branches/repos; fix-if-fail |
+| **prompts/MASTER_FULL_SCALE_GURU_PP_PROMPT.md**                | Perfected master approval prompt; full-scale guru PP scope, methods, fix-if-fail, 100-step ref                           |
+| **prompts/NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md**       | Instructions for new agent: create team, execute 100-step PP; paste prompt for new instance                              |
 
 ---
 

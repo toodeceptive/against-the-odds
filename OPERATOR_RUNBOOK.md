@@ -9,6 +9,8 @@
 - **Perfection loop**: To loop until work is fixed, perfected, complete, and optimized (project-wide cleanup/updates/optimizations; fix failed runs; track progression/commit/review/push), use [prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md](prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md) and [.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md](.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md). Run as needed; see [.cursor/plans/README.md](.cursor/plans/README.md) for all three plans.
 - **100-step multiphase PP cycles**: For deep research, fixes, optimizations, auditing, and finalizations across all trees/worktrees/branches/Git/GitHub/repos (fix any failure/error/setup by means necessary): [docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md](docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md).
 
+**Repo root**: Open the **primary** repo (`C:/Users/LegiT/against-the-odds`) as the workspace root so diffs and paths show repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`), not a prefix like `hal/`. If the diff or Source Control shows a path containing `hal` or `hvf`, you are in the wrong workspace—do not commit; close it and open primary first. Hal and hvf are stale workspace names, not in `git worktree list`; see [WORKTREE_INVENTORY.md](docs/status/WORKTREE_INVENTORY.md).
+
 **Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (approved; browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
 
 ## Daily Checks
@@ -70,6 +72,8 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 - **replacements.txt** at repo root: regex for git-filter-repo (Shopify secret replacement in history); do not remove if using history sanitization.
 
 ## Troubleshooting
+
+For **worktree/hal path and commit policy** (do not commit when diff shows hal or hvf; open primary first): [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) — "Cursor: Failed to apply worktree or missing file in worktree path."
 
 ### Git connectivity issues (proxy misconfiguration)
 

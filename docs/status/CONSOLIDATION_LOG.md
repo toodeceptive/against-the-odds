@@ -2,6 +2,32 @@
 
 **Purpose**: Single append-only log with dated entries per track; pointers to detailed reports. Documentation must match actual workflow state.
 
+**Path and commits**: All edits and commits to this file (and the repo) must be made from the **primary** repo path only (`C:/Users/LegiT/against-the-odds`). Git records only repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`); there is no `hal` or `hvf` in any Git path. **Policy**: If your diff or Source Control shows any path containing `hal` or `hvf` (e.g. `c:/Users/LegiT/.cursor/worktrees/against-the-odds/hal/docs/status/CONSOLIDATION_LOG.md`), you are in the wrong workspace and committing from here would violate this policy. Do **not** commit. Close this workspace, open **only** the primary repo as the workspace root, then stage and commit from there so the policy is satisfied. See [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) and [TROUBLESHOOTING.md](../TROUBLESHOOTING.md).
+
+---
+
+## 2026-02-07 — Finalize updates; commit/push after review (user-approved)
+
+**Summary**: User approved fix all problems in terminal and files, finalize all updates, then finish/commit/push after review and finish all unfinished work. **Done**: Quality gates pass (format, format:check, lint, test:unit). No terminal or file errors to fix. Staged all doc and prompt changes; commit and push from primary. No store changes; no deploy-log entry.
+
+---
+
+## 2026-02-07 — Policy: hal path in diff = wrong workspace; do not commit (Bug 1)
+
+**Summary**: Enforced policy so a hal-prefixed path in the diff is treated as a procedural violation: it means the workspace root is hal, so committing from here would violate "primary only." **Fix**: CONSOLIDATION_LOG now states explicitly: if the diff or Source Control shows any path containing `hal` or `hvf`, you are in the wrong workspace and committing would violate the policy; do not commit—close this workspace, open primary only, then commit. OPERATOR_RUNBOOK Repo root bullet updated to match. No code or store changes.
+
+---
+
+## 2026-02-07 — Perfected master prompt and new-agent instructions
+
+**Summary**: Perfected the user approval prompt (typos, structure, clarity) and added handoff for a new agent instance. **Created**: (1) [prompts/MASTER_FULL_SCALE_GURU_PP_PROMPT.md](../../prompts/MASTER_FULL_SCALE_GURU_PP_PROMPT.md) — canonical approval (scope, methods, fix-if-fail rules, 100-step ref, commit policy). (2) [prompts/NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md](../../prompts/NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md) — instructions to run in new instance: open primary, pull, paste prompt to create guru team and execute all 100-step PP cycles. INDEX_REPORTS updated. No store changes.
+
+---
+
+## 2026-02-07 — CONSOLIDATION_LOG path note; remove hal-diff contradiction (Bug 1)
+
+**Summary**: Verified and fixed apparent contradiction: docs state commits from primary only and no hal path in Git, but IDE diff can show `hal/docs/status/CONSOLIDATION_LOG.md`. **Cause**: Same repo file displayed under a workspace root named hal; Git only has `docs/status/CONSOLIDATION_LOG.md`. **Fixes**: (1) CONSOLIDATION_LOG — added **Path and commits** note after Purpose: commits from primary only; Git has no hal path; hal-prefixed paths in IDE are workspace root display; close hal/hvf root and open primary. (2) OPERATOR_RUNBOOK — added **Repo root** bullet: open primary as workspace root so diffs show repo-relative paths; hal/hvf are stale. No code or store changes. See WORKTREE_INVENTORY, TROUBLESHOOTING.
+
 ---
 
 ## 2026-02-07 — 100-step multiphase PP cycles plan; full-scale system verification (user-pre-approved)
