@@ -23,6 +23,6 @@ From Cursor’s terminal (repo root):
 .\scripts\run-runbook.ps1
 ```
 
-This runs the Shopify connection test and GitHub auth check using `.env.local`.
+This runs the Shopify connection test and GitHub auth check using `.env.local`. **Runbook/verify-pipeline** will report **Shopify 401** until `SHOPIFY_ACCESS_TOKEN` (and store domain) are set in `.env.local`. GitHub repo access works without `GITHUB_TOKEN` for clone/push; `GITHUB_TOKEN` is optional locally but needed for GitHub API checks and CI.
 
 See also: `docs/BROWSER_CREDENTIAL_FLOW.md` (permanent one-time setup; agent uses your browser to fetch credentials), `.cursor/rules/env-credentials.mdc` (no commit/log of secrets), `docs/UPDATE_SHOPIFY_FROM_CURSOR.md`, `OPERATOR_RUNBOOK.md`.

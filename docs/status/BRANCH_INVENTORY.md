@@ -2,24 +2,25 @@
 
 **Purpose**: Single source of truth so nothing is overlooked during reorganization.
 
-**Last updated**: 2026-02-07 (worktree cleanup; merged branches guru-finalization-20260206, cursor-agent-setup deleted locally)
+**Last updated**: 2026-02-07 (chore/script-paths-utilities-gitignore added)
 
 ---
 
 ## Branches (local and remote)
 
-| Branch                                  | Location                                                       | Notes                                                                                                                           |
-| --------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| **main**                                | local (current), remote origin                                 | Default branch; workflow triggers are main-only (develop removed).                                                              |
-| **develop**                             | Not present (local or remote)                                  | Main-only; deploy.yml and quality-check.yml deleted (CI consolidated into ci.yml).                                              |
-| **feature/ao-brand-shopify-automation** | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
-| **cursor/main-project-setup-2bd1**      | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
-| **handoff-doc-permissions-20260129**    | local only (+ worktree mhx)                                    | Optional: handoff/permissions work reflected in main (AGENTS.md, handoff docs). Merge or delete when worktree no longer needed. |
-| **cursor-agent-setup**                  | Remote origin only (local deleted 2026-02-07)                  | **Merged to main**; local branch deleted after merge.                                                                           |
-| **shopify-theme**                       | Remote only (created by sync-theme-branch.yml on push to main) | Workflow-created branch for Shopify GitHub App connection                                                                       |
-| **dependabot/npm_and_yarn/…**           | Remote only (transient)                                        | Dependabot PR branches; safe to ignore for inventory; merge/close via PR.                                                       |
-| **guru-finalization-20260206**          | Remote origin only (local deleted 2026-02-07)                  | **Merged to main**; local branch deleted after merge.                                                                           |
-| **mlf-main**                            | local, remote origin                                           | Theme backup branch; **36 commits behind main**. Update with `git merge main` or delete when no longer needed.                  |
+| Branch                                     | Location                                                       | Notes                                                                                                                           |
+| ------------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **main**                                   | local, remote origin                                           | Default branch; workflow triggers are main-only (develop removed).                                                              |
+| **chore/script-paths-utilities-gitignore** | local only                                                     | Script path portability, utilities try/catch, health-report in .gitignore; ready to merge to main.                              |
+| **develop**                                | Not present (local or remote)                                  | Main-only; deploy.yml and quality-check.yml deleted (CI consolidated into ci.yml).                                              |
+| **feature/ao-brand-shopify-automation**    | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
+| **cursor/main-project-setup-2bd1**         | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference. Main is canonical.                                        |
+| **handoff-doc-permissions-20260129**       | local only (+ worktree mhx)                                    | Optional: handoff/permissions work reflected in main (AGENTS.md, handoff docs). Merge or delete when worktree no longer needed. |
+| **cursor-agent-setup**                     | Remote origin only (local deleted 2026-02-07)                  | **Merged to main**; local branch deleted after merge.                                                                           |
+| **shopify-theme**                          | Remote only (created by sync-theme-branch.yml on push to main) | Workflow-created branch for Shopify GitHub App connection                                                                       |
+| **dependabot/npm_and_yarn/…**              | Remote only (transient)                                        | Dependabot PR branches; safe to ignore for inventory; merge/close via PR.                                                       |
+| **guru-finalization-20260206**             | Remote origin only (local deleted 2026-02-07)                  | **Merged to main**; local branch deleted after merge.                                                                           |
+| **mlf-main**                               | local, remote origin                                           | Theme backup branch; **36 commits behind main**. Update with `git merge main` or delete when no longer needed.                  |
 
 **CI**: Workflow `ci.yml` runs on push/PR to **main** only. `format:check`, `lint`, `test:unit` must pass. Dependabot PR branches (e.g. eslint-10, @types/node) may need dependency/version alignment before merge.
 
