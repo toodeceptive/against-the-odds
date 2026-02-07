@@ -10,7 +10,7 @@
 
 ## 1. Conversation and plan history (progressive tracking)
 
-**Current canonical navigation**: For the single Build plan and index, use [.cursor/plans/README.md](.cursor/plans/README.md) and [.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md](.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md). The table below is historical; plan names listed as "consolidated" do not exist as separate files.
+**Current canonical navigation**: For the single Build plan and index, use [.cursor/plans/README.md](../../.cursor/plans/README.md) and [.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md](../../.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md). The table below is historical; plan names listed as "consolidated" do not exist as separate files.
 
 ### 1.1 Plan versions (this conversation and prior)
 
