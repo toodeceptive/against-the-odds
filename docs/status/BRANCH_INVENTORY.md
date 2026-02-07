@@ -40,7 +40,7 @@
 
 ## Remote repository
 
-- **origin**: https://github.com/toodeceptive/against-the-odds.git (fetch and push)
+- **origin**: <https://github.com/toodeceptive/against-the-odds.git> (fetch and push)
 
 ---
 
