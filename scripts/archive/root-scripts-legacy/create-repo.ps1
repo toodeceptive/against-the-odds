@@ -24,7 +24,7 @@ if (-not $Token) {
     Write-Host "5. Click 'Generate token'"
     Write-Host "6. Copy the token and run this script with: .\create-repo.ps1 -Token 'your-token-here'"
     Write-Host ""
-    
+
     $Token = Read-Host "Enter your GitHub Personal Access Token (or press Enter to exit)" -AsSecureString
     if ($Token.Length -eq 0) {
         Write-Host "Exiting. Repository not created."
@@ -36,17 +36,17 @@ if (-not $Token) {
 
 # Prepare the request body
 $body = @{
-    name = $repoName
+    name        = $repoName
     description = "Against The Odds - Private Repository"
-    private = $isPrivate
-    auto_init = $false  # Don't initialize with README since we have local content
+    private     = $isPrivate
+    auto_init   = $false  # Don't initialize with README since we have local content
 } | ConvertTo-Json
 
 # Headers
 $headers = @{
     "Authorization" = "token $Token"
-    "Accept" = "application/vnd.github.v3+json"
-    "User-Agent" = "PowerShell"
+    "Accept"        = "application/vnd.github.v3+json"
+    "User-Agent"    = "PowerShell"
 }
 
 try {
@@ -54,9 +54,9 @@ try {
     Write-Host "Owner: $owner"
     Write-Host "Private: $isPrivate"
     Write-Host ""
-    
+
     $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body -ContentType "application/json"
-    
+
     Write-Host "✅ Repository created successfully!" -ForegroundColor Green
     Write-Host ""
     Write-Host "Repository URL: $($response.html_url)"
@@ -70,17 +70,17 @@ try {
     Write-Host "2. Or if you need to set the remote:"
     Write-Host "   git remote set-url origin $($response.clone_url)"
     Write-Host "   git push -u origin main"
-    
+
     return $response
 } catch {
     Write-Host "❌ Error creating repository:" -ForegroundColor Red
     Write-Host $_.Exception.Message -ForegroundColor Red
-    
+
     if ($_.Exception.Response) {
         $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
         $responseBody = $reader.ReadToEnd()
         Write-Host "Response: $responseBody" -ForegroundColor Red
     }
-    
+
     exit 1
 }

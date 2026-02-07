@@ -128,11 +128,11 @@ Confirm you've read the context files, then execute the tasks in order with guru
 
 ## Quick Reference
 
-| Need                       | Where                                                                                   |
-| -------------------------- | --------------------------------------------------------------------------------------- |
-| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above                       |
-| When to restart            | When this file is saved; push has succeeded                                             |
-| Tree / mode                | Primary repo only, main, Agent mode, "Run everything"                                   |
-| Push unblock + rotate      | CONSOLIDATION_LOG (push resolved via history rewrite)                                   |
-| Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                                                  |
-| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                                      |
+| Need                       | Where                                                             |
+| -------------------------- | ----------------------------------------------------------------- |
+| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above |
+| When to restart            | When this file is saved; push has succeeded                       |
+| Tree / mode                | Primary repo only, main, Agent mode, "Run everything"             |
+| Push unblock + rotate      | CONSOLIDATION_LOG (push resolved via history rewrite)             |
+| Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                            |
+| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                |
