@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-02-06 — Guru finalization: merge to main, branch and inventory
+
+**Summary**: User-approved guru completion. Branch **guru-finalization-20260206** created from qqa worktree (commits: full system test run + Prettier report fix), pushed to origin. **Merged into main** (fast-forward) from primary worktree; **main pushed** to origin. BRANCH_INVENTORY updated: guru-finalization-20260206 (merged), worktree qqa added. All unfinished work from full system test run consolidated to main; lint, format:check, test:unit pass.
+
+**Commits on main**: 6814f19 (chore: Prettier format pass; CONSOLIDATION_LOG and full system test report), 06eaa37 (fix: Prettier trailing spaces in full system test report).
+
+---
+
 ## 2026-02-06 — Full system test and improvement run (execution)
 
 **Summary**: Executed `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md` in order (sections 1–11). **Passed**: Lint, format (after Prettier pass), unit tests, pipeline verify (scripts, workflows, lint, product sync dry-run), files/folders, scripts index, entry points, Cursor agent system (PP, Verifier, /review, /pr), runbook and docs. **Fixed**: Prettier format applied to 271 files. **Deferred**: verify-pipeline runbook step (Shopify 401, GITHUB_TOKEN — credential-gated); integration tests skipped; E2E/theme pull per HANDOFF. Verifier pass: lint, format check, unit tests pass; build not configured.
