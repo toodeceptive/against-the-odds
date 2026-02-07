@@ -2,7 +2,7 @@
 
 **Purpose**: Single source of truth for actual worktrees (from `git worktree list`).
 
-**Last updated**: 2026-02-07 (corrected to match `git worktree list`: all 7 worktrees; stale hal/hvf documented)
+**Last updated**: 2026-02-07 (aligned with `git worktree list`: 8 worktrees including jxj; stale hal/hvf documented)
 
 ---
 
@@ -15,6 +15,7 @@
 | **bjm**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                  | 6e73084 | Worktree; sync ref OPERATOR_RUNBOOK (CONSOLIDATION_LOG) |
 | **cpd**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/cpd` | (detached HEAD)                  | 6e73084 | Worktree                                                |
 | **ghd**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ghd` | (detached HEAD)                  | eabaf83 | Worktree                                                |
+| **jxj**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/jxj` | (detached HEAD)                  | bb147b0 | Worktree (guru PP run 2026-02-07)                       |
 | **igt**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/igt` | (detached HEAD)                  | 6e73084 | Worktree; sync ref OPERATOR_RUNBOOK (CONSOLIDATION_LOG) |
 | **osd**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/osd` | (detached HEAD)                  | 6e73084 | Worktree; sync ref OPERATOR_RUNBOOK (CONSOLIDATION_LOG) |
 
