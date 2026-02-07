@@ -15,6 +15,10 @@ if (Test-Path ".env.local") {
         }
     }
 }
+# Default store for runbook so Shopify step reports token/API state, not "store not set"
+if ([string]::IsNullOrWhiteSpace($env:SHOPIFY_STORE_DOMAIN)) {
+    $env:SHOPIFY_STORE_DOMAIN = "aodrop.com"
+}
 
 Write-Host "=== Runbook: Shopify + GitHub ===" -ForegroundColor Cyan
 & "$repoRoot\scripts\shopify\test-connection.ps1"

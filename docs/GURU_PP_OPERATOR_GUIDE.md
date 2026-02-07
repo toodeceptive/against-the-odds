@@ -59,6 +59,24 @@ For **deep-research backed setups** and **systems-wide improvements**:
 
 ---
 
+## Sample real-world command (full pipeline)
+
+**Command**: From repo root, run:
+
+```powershell
+.\scripts\verify-pipeline.ps1
+```
+
+**What it does**: (1) Parses all 74 PowerShell scripts, (2) Verifies workflow files, (3) Product sync dry-run if Shopify creds in `.env.local`, (4) ESLint, (5) Runbook (Shopify connection + GitHub auth).
+
+**Expected outcomes**:
+- **Without Shopify token**: Steps 1–4 pass; runbook reports `SHOPIFY_ACCESS_TOKEN not set` and GitHub repo access OK → verification finishes with 1 failure (add token to complete).
+- **With credentials**: All steps pass when `SHOPIFY_ACCESS_TOKEN` (and optionally `GITHUB_TOKEN`) are set in `.env.local`.
+
+**Quick quality-only**: `npm run quality` then `.\scripts\verify-pipeline.ps1 -SkipRunbook`.
+
+---
+
 ## References
 
 - **Rules**: [.cursor/rules/pp-basis.mdc](../.cursor/rules/pp-basis.mdc), [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md), [AGENTS.md](../AGENTS.md).

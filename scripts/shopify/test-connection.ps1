@@ -20,6 +20,9 @@ if (Test-Path ".env.local") {
         }
     }
 }
+# Use env after load (param binding runs before .env.local is loaded)
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+if ([string]::IsNullOrWhiteSpace($Token)) { $Token = $env:SHOPIFY_ACCESS_TOKEN }
 
 Write-Host "=== Shopify Connection Test ===" -ForegroundColor Cyan
 Write-Host ""
