@@ -6,12 +6,12 @@
 
 ## Directive parsing (conversation intent)
 
-| Layer | Content |
-| ----- | ------- |
-| **Direct intent** | Loop perfection process until exhausted; fix failed runs/issues; track progression/commit/review/push; run PP on this conversation for alignment/clarity. |
-| **Latent intent** | Single canonical perfection prompt and plan; worktrees and runbook aligned; plans run-as-needed; no broken refs; conversation outcomes explicit. |
-| **Constraints** | Preview-before-apply (store); no secrets in commits; run from repo root; worktree coordination via docs/status and .cursor/plans. |
-| **Success criteria** | All quality/pipeline steps pass or documented; perfection loop and plans executable; conversation state clear and logged. |
+| Layer                | Content                                                                                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Direct intent**    | Loop perfection process until exhausted; fix failed runs/issues; track progression/commit/review/push; run PP on this conversation for alignment/clarity. |
+| **Latent intent**    | Single canonical perfection prompt and plan; worktrees and runbook aligned; plans run-as-needed; no broken refs; conversation outcomes explicit.          |
+| **Constraints**      | Preview-before-apply (store); no secrets in commits; run from repo root; worktree coordination via docs/status and .cursor/plans.                         |
+| **Success criteria** | All quality/pipeline steps pass or documented; perfection loop and plans executable; conversation state clear and logged.                                 |
 
 ---
 
@@ -27,12 +27,12 @@
 
 ## PP audit loop (conversation)
 
-| Check | Result |
-| ----- | ------ |
-| **Aligned?** | Yes. Each change advanced the stated goal (perfection loop, single ref, worktree sync, fix refs, track progression). |
-| **Efficient?** | Yes. Single canonical prompt/plan; one CONSOLIDATION_LOG and plans README; no duplicate trackers. |
-| **Improvable?** | Future agents: use OPERATOR_RUNBOOK "Perfection loop" and MASTER_GURU_E2E prompt/plan; pull main in worktrees to stay in sync. |
-| **Obsolete?** | Worktree-specific perfection prompts (PERFECTED_SYSTEM_PROMPT_20260207, GURU_FULL_SYSTEM_PERFECTION_PROMPT, PERFECT_SYSTEM_E2E_GURU_APPROVAL) superseded by MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md. |
+| Check           | Result                                                                                                                                                                                                   |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Aligned?**    | Yes. Each change advanced the stated goal (perfection loop, single ref, worktree sync, fix refs, track progression).                                                                                     |
+| **Efficient?**  | Yes. Single canonical prompt/plan; one CONSOLIDATION_LOG and plans README; no duplicate trackers.                                                                                                        |
+| **Improvable?** | Future agents: use OPERATOR_RUNBOOK "Perfection loop" and MASTER_GURU_E2E prompt/plan; pull main in worktrees to stay in sync.                                                                           |
+| **Obsolete?**   | Worktree-specific perfection prompts (PERFECTED_SYSTEM_PROMPT_20260207, GURU_FULL_SYSTEM_PERFECTION_PROMPT, PERFECT_SYSTEM_E2E_GURU_APPROVAL) superseded by MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md. |
 
 ---
 

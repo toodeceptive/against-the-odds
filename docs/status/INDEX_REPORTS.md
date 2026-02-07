@@ -33,7 +33,7 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **FIX_AND_PERFECT_PLAN_20260207.md**                           | Phase 3 audit findings; P0 (hardcoded paths), P1 (runbook), P2 (inventories); Phase 3b fixes applied            |
 | **prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md** (root) | Lead-agent perfection prompt; worktree-coordinated; loop until complete; assign new teams if stopped short      |
 | **.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md**       | 7-step execution plan for Master Guru E2E run; status table and completion criteria                             |
-| **PP_CONVERSATION_ALIGNMENT_20260207.md**                     | PP audit on conversation: intent, outcomes, aligned/efficient/improvable/obsolete, assumptions                  |
+| **PP_CONVERSATION_ALIGNMENT_20260207.md**                      | PP audit on conversation: intent, outcomes, aligned/efficient/improvable/obsolete, assumptions                  |
 
 ---
 
