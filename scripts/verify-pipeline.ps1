@@ -36,6 +36,7 @@ if (-not $SkipParse) {
 Write-Host "[2/5] Checking workflow files..." -ForegroundColor Yellow
 $workflows = @(
     ".github/workflows/ci.yml",
+    ".github/workflows/codeql.yml",
     ".github/workflows/shopify-sync.yml",
     ".github/workflows/sync-theme-branch.yml",
     ".github/workflows/sync.yml",

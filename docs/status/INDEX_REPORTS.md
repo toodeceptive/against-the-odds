@@ -61,33 +61,34 @@ See `archive/2026-01-30/ARCHIVE_NOTE.md`.
 
 Use these for current phase, finalization, audits, and handoff. Obsolete/duplicate reports were removed 2026-02-01; see CONSOLIDATION_LOG.
 
-| File                                        | Purpose                                                                                  |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `PHASE_0_FINALIZATION.md`                   | Phase 0 checklist and sign-off ("Phase 0 finalized; proceeding allowed.")                |
-| `BRANCH_INVENTORY.md`                       | Branch and remote inventory                                                              |
-| `WORKTREE_INVENTORY.md`                     | Cursor worktree list (see also `.cursor/worktrees.json`)                                 |
-| `ENVIRONMENTS_AND_SECRETS_INVENTORY.md`     | Local, CI, and remote environment and secrets verification                               |
-| `ROOT_FILES_INVENTORY.md`                   | Root-level file list                                                                     |
-| `PLAN_AGENT_ENTRY.md`                       | Agent entry plan — read first, then execute Phase 0                                      |
-| `CURSOR_GITHUB_AUDIT_20260131.md`           | Cursor + GitHub full audit; plan history                                                 |
-| `PLAN_AUDIT_20260131.md`                    | Plan versions; perfected prompt; execution list                                          |
-| `AGENTIC_SETUP_AUDIT.md`                    | Agentic setup: rules, skills, subagents, worktrees; cross-comparison; gaps; checklist    |
-| `CURSOR_AND_AGENT_OPTIMIZATION.md`          | Full Cursor/agent audit: rules, skills, extensions, personal settings                    |
-| `CURSORIGNORE_TEMPLATE.txt`                 | Copy to repo root as `.cursorignore` for indexing/security                               |
-| `GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md` | Multi-agent guru audit (workflows, prompts, P1/P2)                                       |
-| `deploy-log.md`                             | Deploy and rollback log (append-only)                                                    |
-| `pending-approval.md`                       | Pending Shopify/store changes (preview before apply)                                     |
-| `CODEBASE_AUDIT_20260131.md`                | Codebase audit (src, tests, lint/test, env, portability)                                 |
-| `VERSION_UPDATE_TABLE.md`                   | File \| Last updated \| Summary for key status files                                     |
-| `BRAND_THEME_CUSTOMIZATION_20260201.md`     | AO brand theme spec; use with `src/shopify/themes/ao-brand-customization/`.              |
-| `FINALIZATION_THEME_FLOW_20260201.md`       | Theme flow finalization: merge script, pull-and-preview                                  |
-| `GURU_PRETTIER_AUTOMATION_20260201.md`      | Prettier pre-commit; npm run quality                                                     |
-| `FINALIZATION_COMPLETE_20260201.md`         | Finalizations complete; quality gates passed                                             |
-| `NEXT_BEST_STEPS_20260131.md`               | Prioritized next steps (guru analysis)                                                   |
-| `GURU_EXPERT_ANALYSIS_20260131.md`          | Guru expert analysis (cross-compare)                                                     |
-| `FINALIZATION_AUDIT_20260131.md`            | Finalization audit (unfinished work, broken refs)                                        |
-| `FULL_SYSTEM_TEST_REPORT_20260206.md`       | Full system test run (sections 1–11): passed/failed/deferred, fixes, Verifier pass       |
-| **Canonical plan**                          | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build |
+| File                                              | Purpose                                                                                  |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `PHASE_0_FINALIZATION.md`                         | Phase 0 checklist and sign-off ("Phase 0 finalized; proceeding allowed.")                |
+| `BRANCH_INVENTORY.md`                             | Branch and remote inventory                                                              |
+| `WORKTREE_INVENTORY.md`                           | Cursor worktree list (see also `.cursor/worktrees.json`)                                 |
+| `ENVIRONMENTS_AND_SECRETS_INVENTORY.md`           | Local, CI, and remote environment and secrets verification                               |
+| `ROOT_FILES_INVENTORY.md`                         | Root-level file list                                                                     |
+| `PLAN_AGENT_ENTRY.md`                             | Agent entry plan — read first, then execute Phase 0                                      |
+| `CURSOR_GITHUB_AUDIT_20260131.md`                 | Cursor + GitHub full audit; plan history                                                 |
+| `PLAN_AUDIT_20260131.md`                          | Plan versions; perfected prompt; execution list                                          |
+| `AGENTIC_SETUP_AUDIT.md`                          | Agentic setup: rules, skills, subagents, worktrees; cross-comparison; gaps; checklist    |
+| `CURSOR_AND_AGENT_OPTIMIZATION.md`                | Full Cursor/agent audit: rules, skills, extensions, personal settings                    |
+| `CURSORIGNORE_TEMPLATE.txt`                       | Copy to repo root as `.cursorignore` for indexing/security                               |
+| `GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md`       | Multi-agent guru audit (workflows, prompts, P1/P2)                                       |
+| `deploy-log.md`                                   | Deploy and rollback log (append-only)                                                    |
+| `pending-approval.md`                             | Pending Shopify/store changes (preview before apply)                                     |
+| `CODEBASE_AUDIT_20260131.md`                      | Codebase audit (src, tests, lint/test, env, portability)                                 |
+| `VERSION_UPDATE_TABLE.md`                         | File \| Last updated \| Summary for key status files                                     |
+| `BRAND_THEME_CUSTOMIZATION_20260201.md`           | AO brand theme spec; use with `src/shopify/themes/ao-brand-customization/`.              |
+| `FINALIZATION_THEME_FLOW_20260201.md`             | Theme flow finalization: merge script, pull-and-preview                                  |
+| `GURU_PRETTIER_AUTOMATION_20260201.md`            | Prettier pre-commit; npm run quality                                                     |
+| `FINALIZATION_COMPLETE_20260201.md`               | Finalizations complete; quality gates passed                                             |
+| `NEXT_BEST_STEPS_20260131.md`                     | Prioritized next steps (guru analysis)                                                   |
+| `GURU_EXPERT_ANALYSIS_20260131.md`                | Guru expert analysis (cross-compare)                                                     |
+| `FINALIZATION_AUDIT_20260131.md`                  | Finalization audit (unfinished work, broken refs)                                        |
+| `FULL_SYSTEM_TEST_REPORT_20260206.md`             | Full system test run (sections 1–11): passed/failed/deferred, fixes, Verifier pass       |
+| `FULL_SYSTEM_TEST_REPORT_CUSTOM_GURU_20260207.md` | Custom guru-informed full system test run; verify-pipeline now includes codeql.yml       |
+| **Canonical plan**                                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build |
 
 ---
 
