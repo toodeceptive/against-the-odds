@@ -8,10 +8,10 @@
 
 ## Actual worktrees (from git worktree list)
 
-| Path                                                    | Branch/HEAD                      | Commit  | Purpose                                  |
-| ------------------------------------------------------- | -------------------------------- | ------- | ---------------------------------------- |
-| `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)  | **Primary repo**, main branch            |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user) |
+| Label    | Path                                                    | Branch/HEAD                      | Commit  | Purpose                                  |
+| -------- | ------------------------------------------------------- | -------------------------------- | ------- | ---------------------------------------- |
+| **Primary** | `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)  | Primary repo; main branch; canonical     |
+| **Active**  | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user) |
 
 **Removed (2026-02-07)**: ewa, snq, uub removed via `git worktree remove`. opo, qqa were not in worktree list (already removed or not present). Merged branches guru-finalization-20260206 and cursor-agent-setup deleted locally.
 
