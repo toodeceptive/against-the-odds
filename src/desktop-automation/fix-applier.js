@@ -159,7 +159,7 @@ async function fixAuthentication() {
     const { execSync } = await import('child_process');
     execSync(
       'powershell -ExecutionPolicy Bypass -File scripts/shopify/browser/get-access-token.ps1',
-      { stdio: 'ignore' }
+      { stdio: 'ignore' },
     );
   } catch (err) {
     warn('Could not automatically refresh token', { error: err.message });
@@ -256,7 +256,7 @@ async function verifyFix(originalIssue) {
 
   // Check if original issue is still present
   const issueStillPresent = analysis.issues.some(
-    (i) => i.message === originalIssue.message || i.type === originalIssue.type
+    (i) => i.message === originalIssue.message || i.type === originalIssue.type,
   );
 
   return {

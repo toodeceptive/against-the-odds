@@ -17,9 +17,9 @@
 
 ### Cursor workspace
 
-| File / dir   | Purpose                                                                 |
-| ------------ | ----------------------------------------------------------------------- |
-| `.cursor/`   | Rules, context, plans, tasks, settings, extensions, worktrees          |
+| File / dir      | Purpose                                                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `.cursor/`      | Rules, context, plans, tasks, settings, extensions, worktrees                                                             |
 | `.cursorignore` | Cursor indexing/context exclusions (semantic search, Agent, @ mentions); see docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md |
 
 ### Config and env (templates only at root)

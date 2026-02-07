@@ -28,11 +28,11 @@ Apply this skill when optimizing agent behavior, configuring Cursor, or pursuing
 
 ## 4. Rules vs skills vs subagents
 
-| Use | For |
-|-----|-----|
-| **Rules** (`.cursor/rules/*.mdc`) | Static, always-on or glob-scoped context (commands, style, workflow). Keep focused; reference files, don’t copy. |
+| Use                                      | For                                                                                                                                                |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Rules** (`.cursor/rules/*.mdc`)        | Static, always-on or glob-scoped context (commands, style, workflow). Keep focused; reference files, don’t copy.                                   |
 | **Skills** (`.cursor/skills/*/SKILL.md`) | Dynamic, on-demand capabilities and workflows. Use when task is single-purpose or repeatable; use `disable-model-invocation: true` for slash-only. |
-| **Subagents** (`.cursor/agents/*.md`) | Context isolation, parallel workstreams, or specialized multi-step work. Use for long research, heavy exploration, or independent verification. |
+| **Subagents** (`.cursor/agents/*.md`)    | Context isolation, parallel workstreams, or specialized multi-step work. Use for long research, heavy exploration, or independent verification.    |
 
 Precedence: Local (manual @) → Auto Attached (globs) → Agent Requested → Always.
 

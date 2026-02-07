@@ -69,9 +69,9 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | `PLAN_AGENT_ENTRY.md`                       | Agent entry plan — read first, then execute Phase 0                                      |
 | `CURSOR_GITHUB_AUDIT_20260131.md`           | Cursor + GitHub full audit; plan history                                                 |
 | `PLAN_AUDIT_20260131.md`                    | Plan versions; perfected prompt; execution list                                          |
-| `AGENTIC_SETUP_AUDIT.md`                   | Agentic setup: rules, skills, subagents, worktrees; cross-comparison; gaps; checklist     |
-| `CURSOR_AND_AGENT_OPTIMIZATION.md`        | Full Cursor/agent audit: rules, skills, extensions, personal settings                      |
-| `CURSORIGNORE_TEMPLATE.txt`               | Copy to repo root as `.cursorignore` for indexing/security                                |
+| `AGENTIC_SETUP_AUDIT.md`                    | Agentic setup: rules, skills, subagents, worktrees; cross-comparison; gaps; checklist    |
+| `CURSOR_AND_AGENT_OPTIMIZATION.md`          | Full Cursor/agent audit: rules, skills, extensions, personal settings                    |
+| `CURSORIGNORE_TEMPLATE.txt`                 | Copy to repo root as `.cursorignore` for indexing/security                               |
 | `GURU_MULTI_AGENT_AUDIT_REPORT_20260130.md` | Multi-agent guru audit (workflows, prompts, P1/P2)                                       |
 | `deploy-log.md`                             | Deploy and rollback log (append-only)                                                    |
 | `pending-approval.md`                       | Pending Shopify/store changes (preview before apply)                                     |
@@ -100,7 +100,7 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 
 - **docs/expert-analyses/**: Current Phase 4/5 outputs only — `expert_05_documentation_audit_20260130.md`, `expert_10_dev_experience_audit_20260130.md`. Example outputs of expert prompts.
 - **Legacy expert runs (01–10)**: Moved to `archive/2026-01-30/expert-analyses-legacy/` (root expert-analyses/ removed).
-- **Superseded status files**: ao*guru***20260129, verification**, IMPLEMENTATION*COMPLETE_20260129, proceed*\* moved to `archive/2026-01-30/status-legacy/`.
+- **Superseded status files**: ao\*guru**\*20260129, verification**, IMPLEMENTATION*COMPLETE_20260129, proceed*\* moved to `archive/2026-01-30/status-legacy/`.
 - **Root scripts (legacy)**: create-and-push.ps1, create-repo.ps1, sync-repository.ps1 moved to `scripts/archive/root-scripts-legacy/`.
 - **Plans**: `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — single plan file; open in Cursor and use Build.
 

@@ -51,7 +51,7 @@ function loadToken() {
   const fromGit = tokenFromGitCredential();
   if (fromGit) return fromGit;
   console.error(
-    'No GitHub token found. Set GITHUB_TOKEN, add to .env.local, or ensure Git has credentials for github.com.'
+    'No GitHub token found. Set GITHUB_TOKEN, add to .env.local, or ensure Git has credentials for github.com.',
   );
   process.exit(1);
 }
@@ -72,7 +72,7 @@ async function setStatusCheckContexts(token) {
     const text = await res.text();
     if (res.status === 404) {
       console.error(
-        'Branch protection not found for main. Enable it in GitHub Settings > Branches first.'
+        'Branch protection not found for main. Enable it in GitHub Settings > Branches first.',
       );
     } else {
       console.error(`GitHub API ${res.status}: ${text}`);

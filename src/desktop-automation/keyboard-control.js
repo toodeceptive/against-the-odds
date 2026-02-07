@@ -128,7 +128,7 @@ export async function pressKey(keys, options = {}) {
       const sendKey = keyMap[mainKey.toLowerCase()] || mainKey;
       execSync(
         `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('${modString}${sendKey}')"`,
-        { stdio: 'ignore' }
+        { stdio: 'ignore' },
       );
     } else {
       const keyMap = {
@@ -141,7 +141,7 @@ export async function pressKey(keys, options = {}) {
       const sendKey = keyMap[keys.toLowerCase()] || keys;
       execSync(
         `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('${sendKey}')"`,
-        { stdio: 'ignore' }
+        { stdio: 'ignore' },
       );
     }
   }

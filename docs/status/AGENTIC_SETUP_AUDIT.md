@@ -8,44 +8,44 @@
 
 ## 1. Inventory of artifacts
 
-| Artifact | Path | Type | Scope |
-|----------|------|------|--------|
-| PP baseline | `.cursor/rules/pp-basis.mdc` | Rule | Always |
-| Agent permissions | `.cursor/rules/agent-permissions.mdc` | Rule | Always |
-| Env credentials | `.cursor/rules/env-credentials.mdc` | Rule | Always |
-| Shopify preview | `.cursor/rules/shopify-preview-approval.mdc` | Rule | Always |
-| User browser | `.cursor/rules/use-user-browser.mdc` | Rule | Always |
-| AO Guru | `.cursor/rules/ao-guru.rules.md` | Rule | Agent-decided (no globs) |
-| Prodigy Protocol | `.cursor/skills/prodigy-protocol/SKILL.md` | Skill | Agent-decided |
-| Prodigy Phantasm | `.cursor/skills/prodigy-phantasm/SKILL.md` | Skill | Agent-decided |
-| Universal Godmode | `.cursor/skills/universal-godmode/SKILL.md` | Skill | Agent-decided |
-| Agentic Performance | `.cursor/skills/agentic-performance/SKILL.md` | Skill | Agent-decided |
-| Verifier | `.cursor/agents/verifier.md` | Subagent | Delegated |
-| Worktrees config | `.cursor/worktrees.json` | Config | Worktrees |
-| Cursor settings | `.cursor/settings.json` | Config | IDE + worktree opts |
+| Artifact            | Path                                          | Type     | Scope                    |
+| ------------------- | --------------------------------------------- | -------- | ------------------------ |
+| PP baseline         | `.cursor/rules/pp-basis.mdc`                  | Rule     | Always                   |
+| Agent permissions   | `.cursor/rules/agent-permissions.mdc`         | Rule     | Always                   |
+| Env credentials     | `.cursor/rules/env-credentials.mdc`           | Rule     | Always                   |
+| Shopify preview     | `.cursor/rules/shopify-preview-approval.mdc`  | Rule     | Always                   |
+| User browser        | `.cursor/rules/use-user-browser.mdc`          | Rule     | Always                   |
+| AO Guru             | `.cursor/rules/ao-guru.rules.md`              | Rule     | Agent-decided (no globs) |
+| Prodigy Protocol    | `.cursor/skills/prodigy-protocol/SKILL.md`    | Skill    | Agent-decided            |
+| Prodigy Phantasm    | `.cursor/skills/prodigy-phantasm/SKILL.md`    | Skill    | Agent-decided            |
+| Universal Godmode   | `.cursor/skills/universal-godmode/SKILL.md`   | Skill    | Agent-decided            |
+| Agentic Performance | `.cursor/skills/agentic-performance/SKILL.md` | Skill    | Agent-decided            |
+| Verifier            | `.cursor/agents/verifier.md`                  | Subagent | Delegated                |
+| Worktrees config    | `.cursor/worktrees.json`                      | Config   | Worktrees                |
+| Cursor settings     | `.cursor/settings.json`                       | Config   | IDE + worktree opts      |
 
 ---
 
 ## 2. Cross-comparison matrix (who covers what)
 
-| Concern | pp-basis | prodigy-protocol | prodigy-phantasm | universal-godmode | agentic-performance | ao-guru | Verifier |
-|---------|----------|------------------|------------------|-------------------|----------------------|---------|----------|
-| Purpose-first / no filler | ✅ | ✅ | ✅ (via pp) | ✅ (via pp) | — | — | — |
-| Intent parsing / constraints | ✅ | ✅ | — | ✅ (upgrade inputs) | — | — | — |
-| Task trees / parallelism | ✅ | ✅ | ✅ (threads) | — | ✅ (worktrees, subagents) | — | — |
-| Verification / lint/test | ✅ | ✅ | ✅ | — | ✅ (TDD, hooks) | ✅ (quality gates) | ✅ (runs them) |
-| Failure resilience | ✅ | ✅ | — | — | — | — | — |
-| Continuous audit | ✅ | ✅ | ✅ | — | — | — | — |
-| User style mirroring | ✅ | — | ✅ | ✅ | — | — | — |
-| Plan before code | — | — | — | — | ✅ | — | — |
-| Context discipline | — | — | — | — | ✅ | — | — |
-| Rules vs skills vs subagents | — | — | — | — | ✅ | — | — |
-| Worktrees / Best-of-N | — | — | — | — | ✅ | — | — |
-| Commands / hooks | — | — | — | — | ✅ | — | — |
-| Safety (secrets, approval) | ✅ (refs) | ✅ | — | ✅ | — | ✅ (secrets) | — |
-| Reporting / docs | — | ✅ (learning) | — | — | — | ✅ | ✅ (report) |
+| Concern                      | pp-basis  | prodigy-protocol | prodigy-phantasm | universal-godmode   | agentic-performance       | ao-guru            | Verifier       |
+| ---------------------------- | --------- | ---------------- | ---------------- | ------------------- | ------------------------- | ------------------ | -------------- |
+| Purpose-first / no filler    | ✅        | ✅               | ✅ (via pp)      | ✅ (via pp)         | —                         | —                  | —              |
+| Intent parsing / constraints | ✅        | ✅               | —                | ✅ (upgrade inputs) | —                         | —                  | —              |
+| Task trees / parallelism     | ✅        | ✅               | ✅ (threads)     | —                   | ✅ (worktrees, subagents) | —                  | —              |
+| Verification / lint/test     | ✅        | ✅               | ✅               | —                   | ✅ (TDD, hooks)           | ✅ (quality gates) | ✅ (runs them) |
+| Failure resilience           | ✅        | ✅               | —                | —                   | —                         | —                  | —              |
+| Continuous audit             | ✅        | ✅               | ✅               | —                   | —                         | —                  | —              |
+| User style mirroring         | ✅        | —                | ✅               | ✅                  | —                         | —                  | —              |
+| Plan before code             | —         | —                | —                | —                   | ✅                        | —                  | —              |
+| Context discipline           | —         | —                | —                | —                   | ✅                        | —                  | —              |
+| Rules vs skills vs subagents | —         | —                | —                | —                   | ✅                        | —                  | —              |
+| Worktrees / Best-of-N        | —         | —                | —                | —                   | ✅                        | —                  | —              |
+| Commands / hooks             | —         | —                | —                | —                   | ✅                        | —                  | —              |
+| Safety (secrets, approval)   | ✅ (refs) | ✅               | —                | ✅                  | —                         | ✅ (secrets)       | —              |
+| Reporting / docs             | —         | ✅ (learning)    | —                | —                   | —                         | ✅                 | ✅ (report)    |
 
-**Conclusion**: No harmful duplication. pp-basis is the minimal always-on core; prodigy-* and universal-godmode deepen execution style; agentic-performance is the single place for workflow/tooling (plan, context, worktrees, commands, hooks). ao-guru and Verifier are project-specific (quality gates, verification pass).
+**Conclusion**: No harmful duplication. pp-basis is the minimal always-on core; prodigy-\* and universal-godmode deepen execution style; agentic-performance is the single place for workflow/tooling (plan, context, worktrees, commands, hooks). ao-guru and Verifier are project-specific (quality gates, verification pass).
 
 ---
 
@@ -59,16 +59,16 @@
 
 ## 4. Gap analysis
 
-| Gap | Severity | Recommendation |
-|-----|----------|----------------|
-| No `.cursorignore` | Medium | Add for performance/security; Cursor indexes beyond .gitignore. |
-| No example `.cursor/commands/` | Low | Add at least one (e.g. `/review`) so “commands” in agentic-performance is implementable. |
-| Rule globs/priority | Low | ao-guru could use `globs: ["src/**/*.ts", "**/*.test.*"]` for file-scoped application; optional. |
-| Debug Mode not mentioned | Low | Add to agentic-performance + SOURCES for “tricky bugs” path. |
-| Cloud Agents not mentioned | Low | Add to agentic-performance + SOURCES for async/PR workflow. |
-| @-mentions (@Branch, @Past Chats) | Low | Already in agentic-performance (Past Chats); add @Branch to context discipline. |
-| AGENTS.md vs rules | Info | Document in SOURCES: AGENTS.md = simple root instructions; rules = scoped/always. |
-| hooks.json / long-running loop | Info | Referenced in skill; no repo template—optional add. |
+| Gap                               | Severity | Recommendation                                                                                   |
+| --------------------------------- | -------- | ------------------------------------------------------------------------------------------------ |
+| No `.cursorignore`                | Medium   | Add for performance/security; Cursor indexes beyond .gitignore.                                  |
+| No example `.cursor/commands/`    | Low      | Add at least one (e.g. `/review`) so “commands” in agentic-performance is implementable.         |
+| Rule globs/priority               | Low      | ao-guru could use `globs: ["src/**/*.ts", "**/*.test.*"]` for file-scoped application; optional. |
+| Debug Mode not mentioned          | Low      | Add to agentic-performance + SOURCES for “tricky bugs” path.                                     |
+| Cloud Agents not mentioned        | Low      | Add to agentic-performance + SOURCES for async/PR workflow.                                      |
+| @-mentions (@Branch, @Past Chats) | Low      | Already in agentic-performance (Past Chats); add @Branch to context discipline.                  |
+| AGENTS.md vs rules                | Info     | Document in SOURCES: AGENTS.md = simple root instructions; rules = scoped/always.                |
+| hooks.json / long-running loop    | Info     | Referenced in skill; no repo template—optional add.                                              |
 
 ---
 
@@ -81,7 +81,7 @@
 
 - [x] **agentic-performance**: add .cursorignore, Debug Mode, Cloud Agents, @Branch; SOURCES updated.
 - [x] **Optional**: `.cursor/commands/review/COMMAND.md` for “run linter + tests, summarize issues” (implemented).
-- [x] **Optional**: `globs` on ao-guru for TS/test files (implemented: src/**/*.ts, **/*.test.*, etc.).
+- [x] **Optional**: `globs` on ao-guru for TS/test files (implemented: src/**/\*.ts, **/_.test._, etc.).
 - [ ] **Ongoing**: When adding rules, prefer one concern per rule; reference files; keep &lt;500 lines.
 
 ---

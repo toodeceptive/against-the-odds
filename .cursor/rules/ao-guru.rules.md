@@ -1,7 +1,7 @@
 ---
 name: AO Guru Execution Rules
 description: Consistent agent behavior for audits, fixes, and reporting.
-globs: ["src/**/*.ts", "src/**/*.js", "**/*.test.*", "**/*.spec.*", "tests/**/*"]
+globs: ['src/**/*.ts', 'src/**/*.js', '**/*.test.*', '**/*.spec.*', 'tests/**/*']
 alwaysApply: false
 ---
 
