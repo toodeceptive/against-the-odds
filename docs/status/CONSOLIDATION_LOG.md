@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-06 — CI audit and branch inventory (guru team)
+
+**Summary**: CI audit on primary (main): workflow runs on push/PR to main; format:check, lint, test:unit verified locally. Prettier pass applied to 8 docs (SKILL.md, CHANGELOG, AGENTIC_SETUP_AUDIT, BRANCH_INVENTORY, CONSOLIDATION_LOG, HANDOFF, INDEX_REPORTS, WORKTREE_INVENTORY) so format:check passes. BRANCH_INVENTORY updated: **mlf-main** added (36 behind main — update or delete); CI note added (ci.yml main-only; Dependabot PRs may need version alignment). No workflow code changes; HANDOFF deferrals unchanged.
+
+---
+
 ## 2026-02-06 — Guru finish: HANDOFF deferrals, format, verify-pipeline
 
 **Summary**: User-approved guru completion with explicit deferrals. **HANDOFF** updated with "Deferred (by design)" subsection: verify-pipeline runbook step (Shopify 401, GITHUB_TOKEN) credential-gated; integration tests skipped when credentials missing; theme pull / E2E environment/SSL blocker — no change. Markdownlint fix branch merged to main (97f2d00). Prettier format pass on SKILL.md, AGENTIC_SETUP_AUDIT.md, INDEX_REPORTS.md. **verify-pipeline**: steps 1–4 pass (script parse, workflows, product sync dry-run, lint); step 5 (runbook) fails as expected (credential-gated). Lint, format:check, test:unit pass.

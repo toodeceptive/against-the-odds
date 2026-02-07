@@ -2,7 +2,7 @@
 
 **Purpose**: Single source of truth so nothing is overlooked during reorganization.
 
-**Last updated**: 2026-02-06 (guru finalization merged to main; guru-finalization-20260206 branch merged)
+**Last updated**: 2026-02-06 (guru finalization merged to main; mlf-main + CI note added)
 
 ---
 
@@ -19,6 +19,9 @@
 | **shopify-theme**                       | Remote only (created by sync-theme-branch.yml on push to main) | Workflow-created branch for Shopify GitHub App connection                                                                                               |
 | **dependabot/npm_and_yarn/…**           | Remote only (transient)                                        | Dependabot PR branches; safe to ignore for inventory; merge/close via PR.                                                                               |
 | **guru-finalization-20260206**          | Remote origin (optional local)                                 | Full system test run, Prettier pass, CONSOLIDATION_LOG and report. **Merged to main** (06eaa37). Optional: delete branch after merge.                   |
+| **mlf-main**                            | local, remote origin                                           | Theme backup branch; **36 commits behind main**. Update with `git merge main` or delete when no longer needed.                                          |
+
+**CI**: Workflow `ci.yml` runs on push/PR to **main** only. `format:check`, `lint`, `test:unit` must pass. Dependabot PR branches (e.g. eslint-10, @types/node) may need dependency/version alignment before merge.
 
 **Resolved (Track A)**: develop removed from all workflow triggers. Stale local branches (ao-guru-exec, finalization/consolidate-20260129, wip/finalization-team-20260129) deleted. Main-only strategy documented in CONSOLIDATION_LOG and workflow README. **Branch hygiene (2026-01-31)**: handoff-doc-permissions and cursor/main-project-setup-2bd1 documented as optional; operator may merge useful work to main and delete, or keep as reference (see NEXT_BEST_STEPS_20260131 Tier 2).
 
