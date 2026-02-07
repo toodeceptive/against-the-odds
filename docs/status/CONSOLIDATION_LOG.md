@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — Clarify hal/hvf: no commits to hal; IDE path vs git (Bug 1 follow-up)
+
+**Summary**: Clarified that no commits modify files "in" the hal worktree. **Bug 1 follow-up**: The diff that appears to modify `hal/docs/status/CONSOLIDATION_LOG.md` is the same repo file shown under a workspace root named hal; Git records only `docs/status/CONSOLIDATION_LOG.md` (relative to repo root). All commits to main are made from the **primary** repo path only; hal and hvf are not in `git worktree list`. **Docs**: WORKTREE_INVENTORY — added "Important" paragraph (commits from primary only; if IDE shows paths under hal/hvf, close that root and open primary). TROUBLESHOOTING — added step 4 (IDE showing hal paths: close hal root, open primary). No code or store changes; no deploy-log entry.
+
+---
+
 ## 2026-02-07 — Worktree inventory and doc consistency fix (Bug 1 & 2)
 
 **Summary**: Verified and fixed worktree documentation inconsistencies. **Bug 1**: WORKTREE_INVENTORY and BRANCH_INVENTORY claimed "only primary + mhx remain" and listed only two worktrees; actual `git worktree list` shows **7** worktrees (primary, mhx, bjm, cpd, ghd, igt, osd). Paths **hal** and **hvf** do not exist in `git worktree list`; Cursor may show "Failed to apply worktree" for hvf (e.g. hvf\\scripts\\quality\\check-all.ps1) — remove stale hal/hvf from Cursor workspace/worktree list. **Bug 2**: CONSOLIDATION_LOG entry "OPERATOR_RUNBOOK perfection loop + worktree sync (bjm, igt, osd)" correctly described sync across those worktrees; the inconsistency was WORKTREE_INVENTORY being wrong, not the log. **Fixes**: WORKTREE_INVENTORY.md — table updated to all 7 worktrees; note added for stale hal/hvf. BRANCH_INVENTORY.md — Organization labels and Worktrees table updated to list all 7; stale hal/hvf noted. Single source of truth: run `git worktree list`; this doc now matches. No store-affecting changes; no deploy-log entry.
