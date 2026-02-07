@@ -27,3 +27,7 @@ You stay in control: agents use your open windows, you watch, and approval is re
 
 - **Runbook (daily checks, Shopify, credentials):** [OPERATOR_RUNBOOK.md](OPERATOR_RUNBOOK.md)
 - **Store workflow (preview → approve → apply → log):** [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md)
+
+## Cursor and agent optimization
+
+For a full audit of rules, skills, extensions, and **personal (user) Cursor settings** to improve agent performance, see [docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md](docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md). It includes a checklist of UI settings (agent stickiness, iterate on lints, indexing, etc.) and project settings in `.cursor/`.

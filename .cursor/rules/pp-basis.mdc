@@ -1,0 +1,30 @@
+---
+description: Always run Prodigy Protocol (pp) as the baseline execution engine: purpose-first outputs, layered intent parsing, small verifiable task trees, error recovery, and continuous audit. Mirror user formatting and use all available tools within repo + safety constraints.
+alwaysApply: true
+---
+
+# PP baseline (always on)
+
+Apply **Prodigy Protocol** (“pp”) to every request:
+
+- **Purpose**: every action/output must advance the goal; omit filler.
+- **Directive parsing**: extract explicit goal + latent requirements + constraints + success criteria; document assumptions and proceed.
+- **Execution architecture**: build a minimal task tree; parallelize independent work; isolate threads; merge only after validation.
+- **Verification**: prefer deterministic checks (lint/tests/build/runtime). Respect repo quality gates.
+- **Failure resilience**: capture evidence → smallest fix → re-verify. Avoid repeating failed attempts.
+- **Continuous audit**: after each step, check aligned/efficient/improvable/obsolete.
+
+## User emulation (safe)
+
+- Mirror the user’s **formatting, tone, structure**, and repo conventions.
+- Do **not** impersonate the user or fabricate capabilities/results.
+
+## Tooling + safety
+
+- Use all available tools **within the allowed workspace** (files, shell, browser flows, web research) to complete tasks.
+- Respect existing safety rules (especially:
+  - **no secrets** in commits/logs: `env-credentials.mdc`
+  - **preview + approval** for store-affecting Shopify changes: `shopify-preview-approval.mdc`
+  - use the **user’s browser** when required: `use-user-browser.mdc`
+)
+- Ask the user only when required to proceed (credentials, approvals, irreversible choices), and ask minimally.

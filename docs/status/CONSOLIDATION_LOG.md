@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-02-06 — Cursor agent setup and .cursorignore (branch: cursor-agent-setup)
+
+**Summary**: Full Cursor/agent optimization finalized and committed: PP baseline rule, four skills, Verifier subagent, /review and /pr commands, worktrees env copy, extensions single source, audit docs, and .cursorignore at repo root. Branch `cursor-agent-setup` pushed; merge into `main` from worktree that has main checked out when ready.
+
+**Commits**: (1) chore: add .cursorignore for Cursor indexing and agent context. (2) chore: Cursor agent setup — PP baseline, skills, subagents, commands, worktrees, docs.
+
+**Deliverables**: `.cursorignore` (root); `.cursor/rules/pp-basis.mdc`, `ao-guru.rules.md` (globs); `.cursor/skills/` (prodigy-protocol, prodigy-phantasm, universal-godmode, agentic-performance); `.cursor/agents/verifier.md`; `.cursor/commands/review`, `pr`; `.cursor/worktrees.json` (env copy), `.cursor/settings.json` (extensions via extensions.json only); docs/status/AGENTIC_SETUP_AUDIT.md, CURSOR_AND_AGENT_OPTIMIZATION.md, CURSORIGNORE_TEMPLATE.txt; INDEX_REPORTS, AGENTS.md link.
+
+**References**: docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md, AGENTIC_SETUP_AUDIT.md, .cursor/skills/README.md.
+
+---
+
 ## 2026-01-31 — Phase 0 inventory completed
 
 **Summary**: Branches, worktrees, environments, root files, and handoff chain documented.
@@ -259,7 +271,7 @@
 
 ## 2026-02 — Full system audit: remotes, Cursor, GitHub, pipeline, docs (user-approved)
 
-**Action**: User approved full audit and fix of remotes, repo, terminal, Cursor, GitHub, pipeline, folders, files, worktrees, workflows, agents, .md files, paths. **Git**: origin only (https://github.com/toodeceptive/against-the-odds.git); branches main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129 (local only), shopify-theme (remote only), dependabot/…; 5 worktrees (primary + ewa, mhx, snq, uub). **Cursor**: .cursor/worktrees.json — added inventoryDoc pointer to docs/status/WORKTREE_INVENTORY.md. .cursor/context/github.md — branch strategy main-only; added sync-theme-branch.yml. .cursor/context/shopify.md — theme-pull REST fallback and SHOPIFY_USE_REST_PULL noted. **Docs**: docs/status/INDEX_REPORTS.md — new "Current canonical (2026-02)" section at top (CONSOLIDATION_LOG, BRANCH_INVENTORY, WORKTREE_INVENTORY, GURU_COMPLETION_SUMMARY, SETUP_STATUS, MANUAL_VERIFICATION_CHECKLIST, INDEX_REPORTS, OPERATOR_RUNBOOK, AGENTS.md). No legacy files deleted; consolidation by index and labels only. **Workflows**: Already main-only; sync.yml status updated previously. **Verification**: Pipeline and codebase checks (verify-pipeline, format, lint, test) to run after staging.
+**Action**: User approved full audit and fix of remotes, repo, terminal, Cursor, GitHub, pipeline, folders, files, worktrees, workflows, agents, .md files, paths. **Git**: origin only (<https://github.com/toodeceptive/against-the-odds.git>); branches main, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, handoff-doc-permissions-20260129 (local only), shopify-theme (remote only), dependabot/…; 5 worktrees (primary + ewa, mhx, snq, uub). **Cursor**: .cursor/worktrees.json — added inventoryDoc pointer to docs/status/WORKTREE_INVENTORY.md. .cursor/context/github.md — branch strategy main-only; added sync-theme-branch.yml. .cursor/context/shopify.md — theme-pull REST fallback and SHOPIFY_USE_REST_PULL noted. **Docs**: docs/status/INDEX_REPORTS.md — new "Current canonical (2026-02)" section at top (CONSOLIDATION_LOG, BRANCH_INVENTORY, WORKTREE_INVENTORY, GURU_COMPLETION_SUMMARY, SETUP_STATUS, MANUAL_VERIFICATION_CHECKLIST, INDEX_REPORTS, OPERATOR_RUNBOOK, AGENTS.md). No legacy files deleted; consolidation by index and labels only. **Workflows**: Already main-only; sync.yml status updated previously. **Verification**: Pipeline and codebase checks (verify-pipeline, format, lint, test) to run after staging.
 
 ---
 
