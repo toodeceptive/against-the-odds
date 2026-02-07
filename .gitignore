@@ -12,8 +12,6 @@ build/
 # IDE
 .vscode/
 .idea/
-# Agent rule files (local/IDE only; avoid version control conflicts)
-.cursor/rules/codacy.mdc
 *.swp
 *.swo
 *~
