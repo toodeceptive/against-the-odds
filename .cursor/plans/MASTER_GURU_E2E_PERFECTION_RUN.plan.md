@@ -16,7 +16,7 @@
 | 4   | Run runbook (if credentials set)                      | `.\scripts\run-runbook.ps1`                                                     | Done (cred-gated) |
 | 5   | Verify E2E/Playwright and desktop automation          | `npm run test:e2e` and desktop tests per node-and-automation context            | Done (desktop 13/13; E2E env-dep) |
 | 6   | Update status and consolidation log                   | Append to docs/status/CONSOLIDATION_LOG.md; update WORKTREE_INVENTORY if needed | Done    |
-| 7   | Finalize: commit, push, clear pending-approval if N/A | All changes committed and pushed; deploy-log if store-affecting                 | In progress |
+| 7   | Finalize: commit, push, clear pending-approval if N/A | All changes committed and pushed; deploy-log if store-affecting                 | Done    |
 
 ---
 
