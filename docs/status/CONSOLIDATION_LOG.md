@@ -22,18 +22,6 @@
 
 ---
 
-## 2026-02-06 — Finalization (guru expert team audit; push approved)
-
-**Summary**: In-depth review/audit by guru expert team of entire conversation and all work done. **Approved**: push/pull/commit/update. Current Operating Mode followed (Incremental Fix List only; Phase 0 and Tracks A–G not re-run). Changes pushed to origin/main. No new artifacts.
-
----
-
-## 2026-02-06 — Incremental Fix List (canonical plan)
-
-**Summary**: Executed Incremental Fix List from FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (no new artifacts). **Stale plan refs**: Fixed docs/status/CURSOR_GITHUB_AUDIT_20260131.md — canonical navigation links from `.cursor/plans/` to `../../.cursor/plans/` so they resolve from docs/status/. No other actionable docs had broken plan links (AGENT_WORKFLOW, HANDOFF, IF_HANDOFF, SHOPIFY_CURSOR_USAGE_GUIDE already point to canonical plan). **Lint/script**: Verified ESLint 9 flat config (eslint.config.mjs); package.json lint/lint:fix use `eslint .` (no --ext). Shopify REST API version 2026-01 consistent across scripts. **Inventories**: BRANCH_INVENTORY and WORKTREE_INVENTORY aligned (primary + mhx; ewa, snq, uub removed; no uub to add).
-
----
-
 ## 2026-02-06 — CI audit and branch inventory (guru team)
 
 **Summary**: CI audit on primary (main): workflow runs on push/PR to main; format:check, lint, test:unit verified locally. Prettier pass applied to 8 docs (SKILL.md, CHANGELOG, AGENTIC_SETUP_AUDIT, BRANCH_INVENTORY, CONSOLIDATION_LOG, HANDOFF, INDEX_REPORTS, WORKTREE_INVENTORY) so format:check passes. BRANCH_INVENTORY updated: **mlf-main** added (36 behind main — update or delete); CI note added (ci.yml main-only; Dependabot PRs may need version alignment). No workflow code changes; HANDOFF deferrals unchanged.
@@ -105,6 +93,18 @@
 **Deliverables**: `.cursorignore` (root); `.cursor/rules/pp-basis.mdc`, `ao-guru.rules.md` (globs); `.cursor/skills/` (prodigy-protocol, prodigy-phantasm, universal-godmode, agentic-performance); `.cursor/agents/verifier.md`; `.cursor/commands/review`, `pr`; `.cursor/worktrees.json` (env copy), `.cursor/settings.json` (extensions via extensions.json only); docs/status/AGENTIC_SETUP_AUDIT.md, CURSOR_AND_AGENT_OPTIMIZATION.md, CURSORIGNORE_TEMPLATE.txt; INDEX_REPORTS, AGENTS.md link.
 
 **References**: docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md, AGENTIC_SETUP_AUDIT.md, .cursor/skills/README.md.
+
+---
+
+## 2026-02-06 — Finalization (guru expert team audit; push approved)
+
+**Summary**: In-depth review/audit by guru expert team of entire conversation and all work done. **Approved**: push/pull/commit/update. Current Operating Mode followed (Incremental Fix List only; Phase 0 and Tracks A–G not re-run). Changes pushed to origin/main. No new artifacts.
+
+---
+
+## 2026-02-06 — Incremental Fix List (canonical plan)
+
+**Summary**: Executed Incremental Fix List from FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (no new artifacts). **Stale plan refs**: Fixed docs/status/CURSOR_GITHUB_AUDIT_20260131.md — canonical navigation links from `.cursor/plans/` to `../../.cursor/plans/` so they resolve from docs/status/. No other actionable docs had broken plan links (AGENT_WORKFLOW, HANDOFF, IF_HANDOFF, SHOPIFY_CURSOR_USAGE_GUIDE already point to canonical plan). **Lint/script**: Verified ESLint 9 flat config (eslint.config.mjs); package.json lint/lint:fix use `eslint .` (no --ext). Shopify REST API version 2026-01 consistent across scripts. **Inventories**: BRANCH_INVENTORY and WORKTREE_INVENTORY aligned (primary + mhx; ewa, snq, uub removed; no uub to add).
 
 ---
 
