@@ -26,6 +26,8 @@ Agents may use **Playwright** for scripted E2E and browser automation, and **des
 
 **User approval (2026-02-07):** The user has approved agents to perform **all setup tasks** using **e2e, PC control, browser automation, screen-reader flows, and other guru-approved methods** as needed and necessary by the guru expert team. No additional permission prompt is required for these methods when they are the right tool for a setup task.
 
+**User approval (perfection loop):** The user approves **looping the perfection process** until all work is fixed, perfected, complete, and optimized; **creating new guru expert team analysts/specialists** as needed to carry out new orders; and **controlling the user's PC** to navigate, perfect, optimize, test (processes, e2e, systems, pipeline), and perform/execute setup and optimization tasks **as defined by the lead agent**. Safety rules (preview-before-apply, no secrets in commits) unchanged.
+
 ## When agents use your browser
 
 With your permission, agents use **your browser** (Cursor browser MCP, your Chrome) when an action is impossible, limited, or unsafe via API—for example:

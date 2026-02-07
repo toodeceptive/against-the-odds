@@ -32,3 +32,8 @@
 
 - **Lead**: Execute from primary repo or igt worktree; read/write `docs/status/`, `.cursor/plans/`.
 - **Apply**: When done in a worktree, merge changes back to main per repo workflow (PR or direct push per branch strategy).
+
+## Guru teams and PC control (user-approved)
+
+- **Create new guru expert team analysts/specialists** as needed to carry out new orders (see AGENTS.md).
+- **Control user's PC** to navigate, perfect, optimize, test (processes, e2e, systems, pipeline), and perform/execute setup and optimization tasks **as defined by the lead agent**.

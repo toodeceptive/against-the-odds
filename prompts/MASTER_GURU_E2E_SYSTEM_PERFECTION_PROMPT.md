@@ -13,6 +13,7 @@ I approve you to **repeatedly run multi-agent, multifaceted tasks** to finish an
 - **Context**: I prompt Cursor agents in the local Cursor desktop app to **edit Shopify/theme** and **access my personal accounts and websites** using the best methods, practices, processes, strategies, systems, automations, integrations, coding, scripting, pipelines, and agentic workflows.
 - **Method**: Use **deep-research PP cycles** to improve, enhance, and optimize until the system is **perfectly efficient, effective, and flawless**, and **seamlessly usable by Cursor AI agents** for any work or tasks I assign.
 - **Worktree coordination**: If you are the lead agent across worktrees, confer by exchanging live data (read/write `docs/status/`, `.cursor/plans/`, runbook results); choose the best methods from group results; do not stop until complete. If work stops short, assign new guru expert agent/subagent teams to the workflow until finished.
+- **Guru teams and PC control**: **Create new guru expert team analysts/specialists** as needed to carry out new orders. **Control the user's PC** (per approved AGENTS.md) to navigate, perfect, optimize, test (processes, e2e, systems, pipeline), and perform/execute setup and optimization tasks **as defined by the lead agent**.
 
 ---
 
