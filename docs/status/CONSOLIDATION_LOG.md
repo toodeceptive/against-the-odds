@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-06 — Full system test prompt (new agent team)
+
+**Summary**: Added **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`** — one prompt for a new team of agents to test and utilize the new Cursor agent system (PP, skills, /review, /pr, Verifier) with a full system-wide run: code, files, folders, functions, tools, extensions, repo, local, pipeline, codebase, scripts, GitHub Actions, Cursor agent system, and Against-the-odds project. Goals: fixes, improvements, cleanup, optimizations, enhancements, performance. Linked from AGENT_PROMPT_DECISION_TREE, INDEX_REPORTS, HANDOFF_FOR_NEW_AGENT_202602, PLAN_AGENT_ENTRY.
+
+---
+
 ## 2026-02-06 — Guru pass (inventory accuracy)
 
 **Summary**: BRANCH_INVENTORY and CONSOLIDATION_LOG updated to reflect that `cursor-agent-setup` was merged to main (03c4243); opo worktree and branch noted as optional to delete. Lint, format check, and unit tests verified; no code changes.

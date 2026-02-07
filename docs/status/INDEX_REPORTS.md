@@ -125,3 +125,5 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | Finalization audit (unfinished work, broken refs) | `docs/status/FINALIZATION_AUDIT_20260131.md`            |
 | Codebase audit (Track G)                          | `docs/status/CODEBASE_AUDIT_20260131.md`                |
 | Root files inventory                              | `docs/status/ROOT_FILES_INVENTORY.md`                   |
+| Full system test + improvement (new agent team)   | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`    |
+| Which prompt when (decision tree)                 | `docs/AGENT_PROMPT_DECISION_TREE.md`                    |

@@ -74,7 +74,7 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 
 ## 5. After Phase 0: Which Prompt to Run
 
-Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to choose the right prompt for audits, orchestration, or specialist work (e.g. full audit → MASTER_10_EXPERT_SYSTEM; 10-expert run → MASTER_10_EXPERT_SYSTEM; finalization → head-guru-orchestrator).
+Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to choose the right prompt for audits, orchestration, or specialist work. To **test and utilize the new Cursor agent system** (rules, skills, /review, /pr, Verifier) with a full system-wide run across code, repo, pipeline, and project, use **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`**. For other goals: full audit → MASTER_10_EXPERT_SYSTEM; finalization → head-guru-orchestrator; etc.
 
 ---
 
