@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-02-06 — Cursor agent setup and .cursorignore (branch: cursor-agent-setup)
+
+**Summary**: Full Cursor/agent optimization finalized and committed: PP baseline rule, four skills, Verifier subagent, /review and /pr commands, worktrees env copy, extensions single source, audit docs, and .cursorignore at repo root. Branch `cursor-agent-setup` pushed; merge into `main` from worktree that has main checked out when ready.
+
+**Commits**: (1) chore: add .cursorignore for Cursor indexing and agent context. (2) chore: Cursor agent setup — PP baseline, skills, subagents, commands, worktrees, docs.
+
+**Deliverables**: `.cursorignore` (root); `.cursor/rules/pp-basis.mdc`, `ao-guru.rules.md` (globs); `.cursor/skills/` (prodigy-protocol, prodigy-phantasm, universal-godmode, agentic-performance); `.cursor/agents/verifier.md`; `.cursor/commands/review`, `pr`; `.cursor/worktrees.json` (env copy), `.cursor/settings.json` (extensions via extensions.json only); docs/status/AGENTIC_SETUP_AUDIT.md, CURSOR_AND_AGENT_OPTIMIZATION.md, CURSORIGNORE_TEMPLATE.txt; INDEX_REPORTS, AGENTS.md link.
+
+**References**: docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md, AGENTIC_SETUP_AUDIT.md, .cursor/skills/README.md.
+
+---
+
 ## 2026-01-31 — Phase 0 inventory completed
 
 **Summary**: Branches, worktrees, environments, root files, and handoff chain documented.
