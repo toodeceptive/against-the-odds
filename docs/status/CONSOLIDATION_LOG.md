@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — Plan status and run-as-needed (MASTER_GURU_E2E, guru full-system, FINAL_REPO)
+
+**Summary**: User approved looping until perfection exhausted; fix failed runs/issues; track progression/commit/review/push; run MASTER_GURU_E2E_PERFECTION_RUN.plan.md, guru_full-system_setup_and_automation.plan.md, and FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md as needed. **Plans**: guru_full-system_setup_and_automation.plan.md — all phase todos (phase0–phase4) set to `status: completed` (Phases 0–4 were executed 2026-02-07 per prior CONSOLIDATION_LOG). **.cursor/plans/README.md** — added "Run as needed" section: MASTER_GURU_E2E for perfection loop; guru full-system (Phases 0–4 completed, reference); FINAL_REPO incremental fixes only. **Verification**: npm run quality pass; verify-pipeline 74/74 parse, 6 workflows, lint OK, runbook credential-gated. No failed runs to fix; progression tracked and committed.
+
+---
+
 ## 2026-02-07 — PP perfection loop cycle 3: expanded approval (guru teams, PC control)
 
 **Summary**: User approved continuing the perfection loop with **expanded scope**: create new guru expert team analysts/specialists as needed; control user's PC to navigate, perfect, optimize, test (processes, e2e, systems, pipeline), and perform/execute setup/optimization tasks as defined by the lead agent. **Docs**: AGENTS.md — added "User approval (perfection loop)" paragraph (loop until exhausted, create guru teams, PC control per lead); prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md — added bullet "Guru teams and PC control" (create teams, control PC per lead); .cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md — added "Guru teams and PC control" section. **Verification**: npm run quality pass; verify-pipeline 74/74 parse, 6 workflows, lint OK, runbook credential-gated; desktop-automation tests 13/13 pass. No store changes; no deploy-log entry.

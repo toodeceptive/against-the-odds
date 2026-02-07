@@ -1,8 +1,12 @@
 # Plans index (repo)
 
-This repo intentionally keeps **one canonical plan file**:
+**Canonical plan**: `FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (open in Cursor and use Build). Phase 0 and Tracks A–G are completed; run **incremental fix list** only per plan.
 
-- **Canonical plan**: `FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (open in Cursor and use Build)
+**Run as needed (user-approved)**:
+
+- **Perfection loop / E2E**: `MASTER_GURU_E2E_PERFECTION_RUN.plan.md` — 7-step execution; loop until complete; run with `prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`.
+- **Guru full-system (Phases 0–4 completed)**: `guru_full-system_setup_and_automation.plan.md` — reference for pipeline, credentials, audit, operator guide; re-run specific phases only if scope agreed.
+- **Repo organization**: `FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — incremental fixes only; no re-run of Phase 0 or tracks.
 
 ## Notes on prior plan references
 
