@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — Guru extensions/config audit: manual configure & optimize (user-approved)
+
+**Summary**: User approved manually configuring/optimizing all extensions using guru expert PP cycles and desktop automation; guru team to identify issues locally, in repo, in extensions, on GitHub account/repo; using browser or any approved methods. **Audit**: [GURU_EXTENSIONS_CONFIG_AUDIT_20260207.md](GURU_EXTENSIONS_CONFIG_AUDIT_20260207.md) — team assignment (Extensions, Project settings, VS Code parity, Local verification, Repo, GitHub/remote, Browser/automation). **Findings**: Extensions 18 recommendations; .cursor and .vscode extensions.json match; .cursor/settings.json and .vscode/settings.json aligned (Cursor-only keys in .cursor only). No config changes required; already optimal per CURSOR_AND_AGENT_OPTIMIZATION. **Verification**: npm run quality pass; verify-pipeline -SkipRunbook 74/74 parse, 6 workflows, lint OK; desktop automation 13/13 pass. INDEX_REPORTS updated with GURU_EXTENSIONS_CONFIG_AUDIT_20260207. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-07 — Clarify hal/hvf: no commits to hal; IDE path vs git (Bug 1 follow-up)
 
 **Summary**: Clarified that no commits modify files "in" the hal worktree. **Bug 1 follow-up**: The diff that appears to modify `hal/docs/status/CONSOLIDATION_LOG.md` is the same repo file shown under a workspace root named hal; Git records only `docs/status/CONSOLIDATION_LOG.md` (relative to repo root). All commits to main are made from the **primary** repo path only; hal and hvf are not in `git worktree list`. **Docs**: WORKTREE_INVENTORY — added "Important" paragraph (commits from primary only; if IDE shows paths under hal/hvf, close that root and open primary). TROUBLESHOOTING — added step 4 (IDE showing hal paths: close hal root, open primary). No code or store changes; no deploy-log entry.
