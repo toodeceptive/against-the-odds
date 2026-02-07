@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02-07** — Full no-skip system scan and cleanup: Worktrees ewa, snq, uub removed; merged local branches guru-finalization-20260206 and cursor-agent-setup deleted; BRANCH_INVENTORY and WORKTREE_INVENTORY updated (primary + mhx only); obsolete doc references (CONVERSATION_AUDIT, FULL_SYSTEM_FILE_AUDIT) updated to CONSOLIDATION_LOG/INDEX_REPORTS; HANDOFF and plan updated. Deferrals unchanged.
 - **2026-02-07** — Custom full system test run (guru-informed): Executed FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT per guru expert team review; all 11 dimensions run; verify-pipeline.ps1 now validates codeql.yml (6 workflows). Report: docs/status/FULL_SYSTEM_TEST_REPORT_CUSTOM_GURU_20260207.md.
 - **2026-02-06** — Full system test run: Executed FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT (sections 1–11); Prettier format pass (271 files); CONSOLIDATION_LOG and docs/status/FULL_SYSTEM_TEST_REPORT_20260206.md. Lint, format check, unit tests pass; pipeline verify and Cursor agent system verified; credential-gated items deferred.
 - **2026-02-06** — Full system test prompt: `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md` for new agent team to run system-wide tests (code, repo, pipeline, Cursor system, AO project) and apply fixes/cleanup/optimizations; linked from decision tree, INDEX_REPORTS, HANDOFF, PLAN_AGENT_ENTRY.

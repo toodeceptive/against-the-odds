@@ -215,11 +215,11 @@ flowchart LR
 
 - **Branches**: List local and remote; merge state, default, protected. Document in **docs/status/BRANCH_INVENTORY.md** (or appendix). **Include develop absence and trigger mismatch.**
 - **Worktrees**: Document [.cursor/worktrees.json](.cursor/worktrees.json) and actual worktree list (paths, branch/HEAD, purpose). **Note worktrees.json does not list ewa/mhx/snq.**
-- **Files and folders**: Full inventory of root, scripts, docs, .github, .cursor, config, data, assets, src, tests (use [docs/status/INDEX_REPORTS.md](docs/status/INDEX_REPORTS.md), [docs/status/FULL_SYSTEM_FILE_AUDIT_20260130.md](docs/status/FULL_SYSTEM_FILE_AUDIT_20260130.md)). **Root: explicit list including replacements.txt, each .png; flag .png for Track F.**
+- **Files and folders**: Full inventory of root, scripts, docs, .github, .cursor, config, data, assets, src, tests (use [docs/status/INDEX_REPORTS.md](docs/status/INDEX_REPORTS.md), [docs/status/ROOT_FILES_INVENTORY.md](docs/status/ROOT_FILES_INVENTORY.md), [docs/status/CODEBASE_AUDIT_20260131.md](docs/status/CODEBASE_AUDIT_20260131.md)). **Root: explicit list including replacements.txt, each .png; flag .png for Track F.**
 - **.tmp / temp**: List all .tmp, temp, cache paths and intended cleanup/retention.
 - **node_modules, builds, bins**: Confirm .gitignore; list any bins or symlinks.
 - **Environments and secrets**: List .env.example, .env.shopify.example, .env.local; confirm .env.local gitignored; note GitHub Actions secrets; **no GitHub Environments in use.**
-- **Handoff chain**: Confirm presence of PLAN_HANDOFF_FOR_NEXT_AGENT.md, CONVERSATION_AUDIT.md, IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md; primary path `C:\Users\LegiT\against-the-odds`.
+- **Handoff chain**: Confirm presence of PLAN_HANDOFF_FOR_NEXT_AGENT.md, CONSOLIDATION_LOG.md, IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md; primary path `C:\Users\LegiT\against-the-odds`.
 - **LICENSE**: State "No LICENSE file; package.json UNLICENSED" and add to Track A resolution.
 - **Remote**: Record origin URL and default branch; note "verify repo/org name (toodeceptive/against-the-odds)."
 
@@ -349,7 +349,7 @@ flowchart LR
 - **Log locations**: deploy-log.md, pending-approval.md, CONSOLIDATION_LOG, ARCHIVE_LOG — document retention and naming (append-only; clear pending-approval after apply).
 - **Resolved issues**: In CONSOLIDATION_LOG or short "RESOLVED_ISSUES" section, record resolution of each of the 10 issues (e.g. "develop: removed from triggers; main-only documented").
 - **Master README**: Root README.md — overview, links to OPERATOR_RUNBOOK, docs/README, INDEX_REPORTS, PLAN_AGENT_ENTRY, key scripts, "where to find what."
-- **Handoff chain**: Update [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md), [docs/HANDOFF_PROMPT_NEW_AGENT.md](docs/HANDOFF_PROMPT_NEW_AGENT.md), [docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md](docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md), [docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md](docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md) so next agent sees Phase 0, track deliverables, CONSOLIDATION_LOG location, primary path; CONVERSATION_AUDIT and PLAN_HANDOFF referenced and present.
+- **Handoff chain**: Update [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md), [docs/HANDOFF_PROMPT_NEW_AGENT.md](docs/HANDOFF_PROMPT_NEW_AGENT.md), [docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md](docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md), [docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md](docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md) so next agent sees Phase 0, track deliverables, CONSOLIDATION_LOG location, primary path; CONSOLIDATION_LOG and PLAN_HANDOFF referenced and present.
 
 ---
 
@@ -424,7 +424,7 @@ flowchart LR
 
 ## Common pitfalls and checks
 
-- **Do not** move or delete files still referenced by HANDOFF, PLAN_AGENT_ENTRY, or PLAN_HANDOFF (e.g. system_finalization_report, blocker_resolution_commands, IF_HANDOFF_FILES_MISSING, CONVERSATION_AUDIT). See [docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md](docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md) "Out of scope."
+- **Do not** move or delete files still referenced by HANDOFF, PLAN_AGENT_ENTRY, or PLAN_HANDOFF (e.g. system_finalization_report, blocker_resolution_commands, IF_HANDOFF_FILES_MISSING, CONSOLIDATION_LOG). See [docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md](docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md) "Out of scope."
 - **AGENTS.md vs .cursor/rules**: Verify no conflicting permission or safety wording.
 - **replacements.txt**: Already in OPERATOR_RUNBOOK; plan only verifies and optionally relocates.
 

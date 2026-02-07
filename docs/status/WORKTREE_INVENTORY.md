@@ -1,33 +1,24 @@
 # Worktree Inventory
 
-**Purpose**: Single source of truth for actual worktrees not listed in .cursor/worktrees.json.
+**Purpose**: Single source of truth for actual worktrees (from `git worktree list`).
 
-**Last updated**: 2026-02-06 (added opo, qqa; aligned with BRANCH_INVENTORY)
+**Last updated**: 2026-02-07 (worktree cleanup: ewa, snq, uub removed; opo, qqa no longer worktrees; only primary + mhx remain)
 
 ---
 
 ## Actual worktrees (from git worktree list)
 
-| Path                                                    | Branch/HEAD                      | Commit   | Purpose                                                        |
-| ------------------------------------------------------- | -------------------------------- | -------- | -------------------------------------------------------------- |
-| `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)   | Primary repo, main branch                                      |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ewa` | detached HEAD                    | 505df09  | Cursor navigation worktree (may be temporary)                  |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30  | Active worktree on feature branch (user visible)               |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/snq` | detached HEAD                    | 1c5ed2e  | Cursor navigation worktree (may be temporary)                  |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/uub` | detached HEAD                    | 16a8024  | Cursor navigation worktree (may be temporary)                  |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/opo` | cursor-agent-setup               | (branch) | Cursor agent setup; branch merged to main; repurpose or remove |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/qqa` | detached HEAD                    | 3011143  | Guru finalization / full system test; work merged to main      |
+| Path                                                    | Branch/HEAD                      | Commit  | Purpose                                  |
+| ------------------------------------------------------- | -------------------------------- | ------- | ---------------------------------------- |
+| `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)  | **Primary repo**, main branch            |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user) |
 
-**Note**: worktrees ewa, snq, uub are detached HEAD and may be temporary; mhx is on a live feature branch. Optional cleanup: `git worktree remove <path>` for detached worktrees no longer in use (from main repo).
+**Removed (2026-02-07)**: ewa, snq, uub removed via `git worktree remove`. opo, qqa were not in worktree list (already removed or not present). Merged branches guru-finalization-20260206 and cursor-agent-setup deleted locally.
 
 ---
 
-## Setup instruction
+## Usage
 
-Worktrees are managed by git; no additional action required. If extending worktrees.json, add an entry for each with path and setup command (e.g. ["npm install"]) as in primary worktree.
+All commands run from **repo root**. Do not commit from worktrees without coordinating with main branch.
 
----
-
-## Sign-off
-
-Worktree inventory completed. All actual worktrees are now documented. Nothing is overlooked.
+**Note**: `.cursor/worktrees.json` may not list mhx; this doc is the single source of truth for actual worktrees.

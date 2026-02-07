@@ -1,6 +1,6 @@
 # Codebase Audit — 2026-01-31
 
-**Purpose**: Track G deliverable — code layout, dependencies, lint/test status, strings and env approach, schemas, and recommendations. Builds on [FULL_SYSTEM_FILE_AUDIT_20260130.md](FULL_SYSTEM_FILE_AUDIT_20260130.md).
+**Purpose**: Track G deliverable — code layout, dependencies, lint/test status, strings and env approach, schemas, and recommendations. Builds on codebase layout and INDEX_REPORTS; see CONSOLIDATION_LOG for historical context.
 
 ---
 
