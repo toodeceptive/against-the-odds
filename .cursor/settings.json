@@ -2,7 +2,8 @@
   "files.associations": {
     "*.ps1": "powershell",
     "*.yml": "yaml",
-    "*.yaml": "yaml"
+    "*.yaml": "yaml",
+    "*.liquid": "liquid"
   },
   "files.exclude": {
     "**/.git": true,
@@ -18,10 +19,15 @@
     "**/build": true
   },
   "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.PowerShell",
     "editor.tabSize": 4
@@ -38,9 +44,25 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "editor.tabSize": 2
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[liquid]": {
+    "editor.tabSize": 2
   },
   "powershell.scriptAnalysis.enable": true,
   "powershell.codeFormatting.preset": "OTBS",
@@ -56,8 +78,15 @@
   "git.autofetch": true,
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
   "workbench.editor.enablePreview": false,
   "cursor.worktreeMaxCount": 20,
   "cursor.worktreeCleanupIntervalHours": 6,
-  "git.showCursorWorktrees": true
+  "git.showCursorWorktrees": true,
+  "eslint.useFlatConfig": true,
+  "markdownlint.config": {
+    "default": true,
+    "MD060": false
+  }
 }
