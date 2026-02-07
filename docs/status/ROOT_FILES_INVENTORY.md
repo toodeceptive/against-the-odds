@@ -1,6 +1,6 @@
 # Root Files Inventory
 
-**Purpose**: Explicit list of every root-level file and directory; used by Phase 0 and Track F. **Last updated: 2026-01-31.**
+**Purpose**: Explicit list of every root-level file and directory; used by Phase 0 and Track F. **Last updated: 2026-02 (added .cursorignore).**
 
 ---
 
@@ -17,9 +17,10 @@
 
 ### Cursor workspace
 
-| File / dir | Purpose                                                       |
-| ---------- | ------------------------------------------------------------- |
-| `.cursor/` | Rules, context, plans, tasks, settings, extensions, worktrees |
+| File / dir   | Purpose                                                                 |
+| ------------ | ----------------------------------------------------------------------- |
+| `.cursor/`   | Rules, context, plans, tasks, settings, extensions, worktrees          |
+| `.cursorignore` | Cursor indexing/context exclusions (semantic search, Agent, @ mentions); see docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md |
 
 ### Config and env (templates only at root)
 
