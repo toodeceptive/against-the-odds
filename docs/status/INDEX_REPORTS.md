@@ -69,9 +69,6 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | `ENVIRONMENTS_AND_SECRETS_INVENTORY.md`           | Local, CI, and remote environment and secrets verification                               |
 | `ROOT_FILES_INVENTORY.md`                         | Root-level file list                                                                     |
 | `PLAN_AGENT_ENTRY.md`                             | Agent entry plan — read first, then execute Phase 0                                      |
-| `IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md`   | Read handoff/plan docs from primary when in a worktree                                   |
-| `PLAN_HANDOFF_FOR_NEXT_AGENT.md`                  | Redirect to HANDOFF_FOR_NEW_AGENT_202602, PLAN_AGENT_ENTRY, canonical plan               |
-| `CONVERSATION_AUDIT.md`                           | Redirect to CONSOLIDATION_LOG and EXECUTIVE_DECISION_WORK_PRINCIPLES                     |
 | `CURSOR_GITHUB_AUDIT_20260131.md`                 | Cursor + GitHub full audit; plan history                                                 |
 | `PLAN_AUDIT_20260131.md`                          | Plan versions; perfected prompt; execution list                                          |
 | `AGENTIC_SETUP_AUDIT.md`                          | Agentic setup: rules, skills, subagents, worktrees; cross-comparison; gaps; checklist    |
@@ -91,7 +88,6 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | `FINALIZATION_AUDIT_20260131.md`                  | Finalization audit (unfinished work, broken refs)                                        |
 | `FULL_SYSTEM_TEST_REPORT_20260206.md`             | Full system test run (sections 1–11): passed/failed/deferred, fixes, Verifier pass       |
 | `FULL_SYSTEM_TEST_REPORT_CUSTOM_GURU_20260207.md` | Custom guru-informed full system test run; verify-pipeline now includes codeql.yml       |
-| `FULL_SYSTEM_SCAN_NO_SKIP_20260207.md`            | No-skip scan: missing files created, broken refs fixed, cleanup documented               |
 | **Canonical plan**                                | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build |
 
 ---
