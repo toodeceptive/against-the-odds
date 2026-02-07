@@ -57,16 +57,7 @@
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
   "workbench.editor.enablePreview": false,
-  "extensions.recommendations": [
-    "ms-vscode.PowerShell",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "ms-playwright.playwright",
-    "vitest.explorer",
-    "GitHub.vscode-pull-request-github",
-    "mikestead.dotenv",
-    "DavidAnson.vscode-markdownlint",
-    "redhat.vscode-yaml",
-    "ms-python.python"
-  ]
+  "cursor.worktreeMaxCount": 20,
+  "cursor.worktreeCleanupIntervalHours": 6,
+  "git.showCursorWorktrees": true
 }

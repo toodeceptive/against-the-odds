@@ -1,0 +1,15 @@
+# Copy this file to repo root as .cursorignore
+# Cursor: exclude from semantic search, Agent, and @ mentions
+# https://cursor.com/docs/context/ignore-files
+
+.env
+.env.*
+.env.local
+*.key
+*.pem
+node_modules/
+dist/
+build/
+*.log
+logs/
+.cache/
