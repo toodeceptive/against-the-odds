@@ -113,7 +113,7 @@ After filling `.env.local`:
 
 ## replacements.txt (repo root)
 
-- **Purpose**: Regex for git-filter-repo (Shopify secret replacement when sanitizing history). Do not remove if you use history sanitization; see `docs/status/blocker_resolution_commands_20260129.md` or archive for context.
+- **Purpose**: Regex for git-filter-repo (Shopify secret replacement when sanitizing history). Do not remove if you use history sanitization; see `docs/status/CONSOLIDATION_LOG.md` or archive for context.
 
 ## Shopify app settings (if using embedded app)
 

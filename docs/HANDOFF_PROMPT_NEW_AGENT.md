@@ -112,7 +112,7 @@ Confirm you've read the context files, then execute the tasks in order with guru
 - **Tasks are sequential**: Verify → mark complete → next steps. Push is done.
 - **Security in the prompt**: Explicit "never commit secrets," "only repo scripts," "credentials only from .env.local" keeps behavior safe even with "run everything."
 - **No secrets in the prompt**: The prompt does not contain your tokens or passwords; it points to `.env.local` and docs.
-- **Unblock URL in repo**: The exact GitHub unblock link lives in `docs/status/blocker_resolution_commands_20260129.md`; kept for reference (push was resolved via history rewrite).
+- **Unblock / push**: Push was resolved via history rewrite; see `docs/status/CONSOLIDATION_LOG.md` for context. No separate blocker-resolution file required.
 
 ---
 
@@ -133,6 +133,6 @@ Confirm you've read the context files, then execute the tasks in order with guru
 | Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above                       |
 | When to restart            | When this file is saved; push has succeeded                                             |
 | Tree / mode                | Primary repo only, main, Agent mode, "Run everything"                                   |
-| Push unblock + rotate      | docs/status/blocker_resolution_commands_20260129.md (push resolved via history rewrite) |
+| Push unblock + rotate      | CONSOLIDATION_LOG (push resolved via history rewrite)                                   |
 | Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                                                  |
 | Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                                      |
