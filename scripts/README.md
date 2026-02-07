@@ -137,4 +137,4 @@
 - **sync-theme-branch.yml**: Subtree-split theme to `shopify-theme` branch on push to main when theme files change.
 - **sync.yml**: Repository sync (fetch, main); no develop branch.
 
-_Last updated: 2026-01-31_
+_Last updated: 2026-02-07_

@@ -8,15 +8,15 @@
 
 ## Steps (execute in order; verify each before proceeding)
 
-| #   | Step                                                  | Verification                                                                    | Status  |
-| --- | ----------------------------------------------------- | ------------------------------------------------------------------------------- | ------- |
-| 1   | Perfect and persist the master prompt                 | Prompt saved to `prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`           | Done    |
-| 2   | Run quality gates                                     | `npm run quality` (format, format:check, lint, test:unit)                       | Done    |
-| 3   | Run pipeline verification                             | `.\scripts\verify-pipeline.ps1` (or -SkipRunbook if no .env.local)              | Done (runbook cred-gated) |
-| 4   | Run runbook (if credentials set)                      | `.\scripts\run-runbook.ps1`                                                     | Done (cred-gated) |
+| #   | Step                                                  | Verification                                                                    | Status                            |
+| --- | ----------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------- |
+| 1   | Perfect and persist the master prompt                 | Prompt saved to `prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`           | Done                              |
+| 2   | Run quality gates                                     | `npm run quality` (format, format:check, lint, test:unit)                       | Done                              |
+| 3   | Run pipeline verification                             | `.\scripts\verify-pipeline.ps1` (or -SkipRunbook if no .env.local)              | Done (runbook cred-gated)         |
+| 4   | Run runbook (if credentials set)                      | `.\scripts\run-runbook.ps1`                                                     | Done (cred-gated)                 |
 | 5   | Verify E2E/Playwright and desktop automation          | `npm run test:e2e` and desktop tests per node-and-automation context            | Done (desktop 13/13; E2E env-dep) |
-| 6   | Update status and consolidation log                   | Append to docs/status/CONSOLIDATION_LOG.md; update WORKTREE_INVENTORY if needed | Done    |
-| 7   | Finalize: commit, push, clear pending-approval if N/A | All changes committed and pushed; deploy-log if store-affecting                 | Done    |
+| 6   | Update status and consolidation log                   | Append to docs/status/CONSOLIDATION_LOG.md; update WORKTREE_INVENTORY if needed | Done                              |
+| 7   | Finalize: commit, push, clear pending-approval if N/A | All changes committed and pushed; deploy-log if store-affecting                 | Done                              |
 
 ---
 

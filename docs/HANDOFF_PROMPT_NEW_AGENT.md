@@ -69,8 +69,8 @@ PERMISSIONS (user-approved):
 - Initial setup: Ignore all security measures for initial setup; just prompt the user to continue.
 
 CONTEXT — Read these first (in this order):
-1. docs/status/system_finalization_report_20260129.md — inventory, blockers, what's done
-2. docs/status/blocker_resolution_commands_20260129.md — push unblock URL, rotate steps, exact commands (push already succeeded via history rewrite)
+1. docs/status/CONSOLIDATION_LOG.md — what was done, when; docs/status/INDEX_REPORTS.md — index of status/report files
+2. docs/status/HANDOFF_FOR_NEW_AGENT_202602.md — current repo/branch/worktree state, deferrals
 3. OPERATOR_RUNBOOK.md — daily checks, Shopify, credentials, troubleshooting
 4. docs/CREDENTIALS_SETUP.md — .env.local and where to get Shopify/GitHub values
 5. docs/UPDATE_SHOPIFY_FROM_CURSOR.md — how to update the Shopify store from this Cursor app
@@ -84,12 +84,12 @@ CONTEXT — Read these first (in this order):
 CURRENT STATE:
 - Consolidation is done: all work is on main. Push to GitHub has SUCCEEDED: history was rewritten with git-filter-repo (Shopify secret removed from history); main was force-pushed to origin. Credentials were rotated; .env.local holds the new secret (never commit).
 - **User's browser**: The user has Chrome open with tabs already logged in (e.g. Shopify, GitHub, Cloudflare). When you need to fetch credentials, unblock flows, or complete setup, navigate **this same browser** (the user's open windows)—not a separate session—to finalize end-to-end setup before proceeding.
-- All 55 PowerShell scripts parse; debug sweep runs; lint passes; proof in docs/status/.
+- All 74 PowerShell scripts parse; verify-pipeline and lint pass; proof in docs/status/.
 - .env.local exists in repo root. You may edit .env.local (and any ignored file) to fill in real credentials—e.g. after guiding the user through browser login, using repo scripts that extract tokens, or other secure means. Never commit .env.local or any file containing secrets; never log or echo tokens, passwords, or API secrets.
 
 YOUR TASKS (in order; execute with guru precision and task management):
 1. Verification: Run .\scripts\debug\parse-all-ps1.ps1; run .\scripts\run-everything-debug.ps1 (use -SkipDeps -SkipTests if npm fails); ensure lint passes. Save any new proof log under docs/status/ if needed.
-2. Mark finalization complete (if not already): Ensure docs/status/system_finalization_report_20260129.md status is "Finalization complete" and notes that push succeeded.
+2. Mark finalization complete (if not already): Ensure docs/status/CONSOLIDATION_LOG.md is current and docs/status/PHASE_0_FINALIZATION.md contains "Phase 0 finalized; proceeding allowed" when Phase 0 is done.
 3. Next steps: Using docs/launch/00_launch_checklist.md and NEXT_STEPS.md, complete or advance the immediate next steps: ensure .env.local has real values (edit it or use browser/login flows as needed), run .\scripts\shopify\test-connection.ps1, then theme dev or merch ordering prep per docs/launch/07_drop01_product_image_plan_extended.md and assets/drop01/READY_TO_SEND_CHECKLIST.md. Use any combination of repo scripts, Chrome login, and local file edits required to achieve end-to-end setup with guru-level accuracy.
 
 SECURITY RULES (mandatory):
