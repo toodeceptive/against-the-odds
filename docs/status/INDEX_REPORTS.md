@@ -1,5 +1,7 @@
 # Reports and Status Files — Index
 
+<!-- markdownlint-disable MD060 -->
+
 **Purpose**: Single index of report- and status-style markdown files so agents and humans know what is current vs legacy and where to look.
 
 **Counts (2026-02)**: docs/ **141 files** total; docs/status/ **77 files**; repo total on disk (excl. .git, node_modules) **~476 files**; tracked (excl. coverage, playwright-report, test-results, .vscode) **~431 files**. Full inventory is in .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md.
@@ -84,8 +86,8 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | `NEXT_BEST_STEPS_20260131.md`               | Prioritized next steps (guru analysis)                                                   |
 | `GURU_EXPERT_ANALYSIS_20260131.md`          | Guru expert analysis (cross-compare)                                                     |
 | `FINALIZATION_AUDIT_20260131.md`            | Finalization audit (unfinished work, broken refs)                                        |
-| `FULL_SYSTEM_TEST_REPORT_20260206.md`       | Full system test run (sections 1–11): passed/failed/deferred, fixes, Verifier pass       |
-| **Canonical plan**                          | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build |
+| `FULL_SYSTEM_TEST_REPORT_20260206.md`       | Full system test run (sections 1–11): passed/failed/deferred, fixes, Verifier pass        |
+| **Canonical plan**                          | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build  |
 
 ---
 

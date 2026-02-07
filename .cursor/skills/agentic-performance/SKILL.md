@@ -2,6 +2,7 @@
 name: agentic-performance
 description: Ultimate agentic performance enhancement—plan-first execution, context discipline, rules vs skills vs subagents, worktrees, TDD/verifiable goals, and Cursor best practices. Use when optimizing agent workflows, configuring Cursor, or when the user asks for best-in-class agent performance, worktrees, subagents, or skills.
 ---
+<!-- markdownlint-disable MD060 -->
 
 # Agentic Performance (Ultimate)
 
@@ -28,11 +29,11 @@ Apply this skill when optimizing agent behavior, configuring Cursor, or pursuing
 
 ## 4. Rules vs skills vs subagents
 
-| Use                                      | For                                                                                                                                                |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Rules** (`.cursor/rules/*.mdc`)        | Static, always-on or glob-scoped context (commands, style, workflow). Keep focused; reference files, don’t copy.                                   |
-| **Skills** (`.cursor/skills/*/SKILL.md`) | Dynamic, on-demand capabilities and workflows. Use when task is single-purpose or repeatable; use `disable-model-invocation: true` for slash-only. |
-| **Subagents** (`.cursor/agents/*.md`)    | Context isolation, parallel workstreams, or specialized multi-step work. Use for long research, heavy exploration, or independent verification.    |
+| Use                                       | For                                                                                                                                                 |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Rules** (`.cursor/rules/*.mdc`)         | Static, always-on or glob-scoped context (commands, style, workflow). Keep focused; reference files, don’t copy.                                    |
+| **Skills** (`.cursor/skills/*/SKILL.md`)  | Dynamic, on-demand capabilities and workflows. Use when task is single-purpose or repeatable; use `disable-model-invocation: true` for slash-only.  |
+| **Subagents** (`.cursor/agents/*.md`)     | Context isolation, parallel workstreams, or specialized multi-step work. Use for long research, heavy exploration, or independent verification.       |
 
 Precedence: Local (manual @) → Auto Attached (globs) → Agent Requested → Always.
 
