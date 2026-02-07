@@ -34,7 +34,7 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md** (root) | Lead-agent perfection prompt; worktree-coordinated; loop until complete; assign new teams if stopped short      |
 | **.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md**       | 7-step execution plan for Master Guru E2E run; status table and completion criteria                             |
 | **PP_CONVERSATION_ALIGNMENT_20260207.md**                      | PP audit on conversation: intent, outcomes, aligned/efficient/improvable/obsolete, assumptions                  |
-| **GURU_20_TEAMS_60_SPECIALTIES.md**                            | 20 guru expert teams × 60 specialties; multi-perspective audit checklist for perfection loop                     |
+| **GURU_20_TEAMS_60_SPECIALTIES.md**                            | 20 guru expert teams × 60 specialties; multi-perspective audit checklist for perfection loop                    |
 
 ---
 
