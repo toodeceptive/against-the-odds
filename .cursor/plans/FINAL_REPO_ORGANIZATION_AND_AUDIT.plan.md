@@ -38,6 +38,8 @@ todos:
 isProject: true
 ---
 
+# Final Repository Organization and Audit Plan
+
 ## Current Operating Mode (Read This First)
 
 - **Phase 0 is signed off.** Do **not** re-run Phase 0 or Tracks A–G. Run **incremental fix batches only**: one batch → verify → log.
@@ -110,7 +112,7 @@ Phase 0, Tracks A–G, Synthesis, Addendum, and Guru pass 2 below were executed 
 | data/        | 6       | products, manufacturers, samples (.gitkeep + JSON + README)                                                                                              |
 | docs/        | **141** | Root-level MD, business-plan, decisions, expert-analyses, guides (6), knowledge-base (8), launch (10), security (3), **status (77)**, screenshots/README |
 | docs/status/ | **77**  | All status/report MD + performance-report.json                                                                                                           |
-| prompts/     | 37      | experts 01–10, finalization-_, head-guru, MASTER*10, PERFECT_EXECUTION, ULTIMATE*_, setup/debug/test/optimization, agent-context, agent-capabilities     |
+| prompts/     | 37      | experts 01–10, finalization-_, head-guru, MASTER10, PERFECT_EXECUTION, ULTIMATE_, setup/debug/test/optimization, agent-context, agent-capabilities       |
 | scripts/     | 71      | 70 PS1 + README                                                                                                                                          |
 | src/         | 45      | browser-automation (2), desktop-automation (27 + apps 5), shopify/themes (16)                                                                            |
 | tests/       | 10      | unit, integration, e2e, shopify-admin, desktop-automation                                                                                                |
@@ -164,7 +166,7 @@ These items **must** be addressed during execution; do not skip.
 | U9–U10  | CI verify-pipeline/E2E; architecture one-pager                                         | .github/workflows; docs/                                               | Optional: document or add job; optional one-pager.                                                                                                                                 |
 | U11–U14 | index.html paths; hardcoded paths; pre-commit Windows; performance-report .gitignore   | index.html, scripts, HOOKS.md, .gitignore                              | Fix paths; fix script paths; document HOOKS; add performance-report.json if generated (done where applicable).                                                                     |
 
-**Script path sweep**: 50+ scripts may use hardcoded repo path. Per-script: derive repo from PSScriptRoot (depth: scripts/_.ps1 → "..", scripts/X/_.ps1 → "...", scripts/X/Y/\*.ps1 → "...."); fallback Get-Location. **package.json**: Remove `--ext` from lint/lint:fix (ESLint 9 flat config). **config/shopify/.shopify-cli.yml**: Resolve TODO (application_url). **theme-bootstrap-minimal.ps1**: Implement per plan; document in SETUP_STATUS, TROUBLESHOOTING.
+**Script path sweep**: 50+ scripts may use hardcoded repo path. Per-script: derive repo from PSScriptRoot (depth: scripts/_.ps1 → "..", scripts/X/_.ps1 → "...", scripts/X/Y/.ps1 → "...."); fallback Get-Location. **package.json**: Remove `--ext` from lint/lint:fix (ESLint 9 flat config). **config/shopify/.shopify-cli.yml**: Resolve TODO (application_url). **theme-bootstrap-minimal.ps1**: Implement per plan; document in SETUP_STATUS, TROUBLESHOOTING.
 
 ---
 
@@ -215,11 +217,11 @@ flowchart LR
 
 - **Branches**: List local and remote; merge state, default, protected. Document in **docs/status/BRANCH_INVENTORY.md** (or appendix). **Include develop absence and trigger mismatch.**
 - **Worktrees**: Document [.cursor/worktrees.json](.cursor/worktrees.json) and actual worktree list (paths, branch/HEAD, purpose). **Note worktrees.json does not list ewa/mhx/snq.**
-- **Files and folders**: Full inventory of root, scripts, docs, .github, .cursor, config, data, assets, src, tests (use [docs/status/INDEX_REPORTS.md](docs/status/INDEX_REPORTS.md), [docs/status/FULL_SYSTEM_FILE_AUDIT_20260130.md](docs/status/FULL_SYSTEM_FILE_AUDIT_20260130.md)). **Root: explicit list including replacements.txt, each .png; flag .png for Track F.**
+- **Files and folders**: Full inventory of root, scripts, docs, .github, .cursor, config, data, assets, src, tests (use [docs/status/INDEX_REPORTS.md](docs/status/INDEX_REPORTS.md), [docs/status/ROOT_FILES_INVENTORY.md](docs/status/ROOT_FILES_INVENTORY.md), [docs/status/CODEBASE_AUDIT_20260131.md](docs/status/CODEBASE_AUDIT_20260131.md)). **Root: explicit list including replacements.txt, each .png; flag .png for Track F.**
 - **.tmp / temp**: List all .tmp, temp, cache paths and intended cleanup/retention.
 - **node_modules, builds, bins**: Confirm .gitignore; list any bins or symlinks.
 - **Environments and secrets**: List .env.example, .env.shopify.example, .env.local; confirm .env.local gitignored; note GitHub Actions secrets; **no GitHub Environments in use.**
-- **Handoff chain**: Confirm presence of PLAN_HANDOFF_FOR_NEXT_AGENT.md, CONVERSATION_AUDIT.md, IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md; primary path `C:\Users\LegiT\against-the-odds`.
+- **Handoff chain**: Confirm presence of PLAN_HANDOFF_FOR_NEXT_AGENT.md, CONSOLIDATION_LOG.md, IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md; primary path `C:\Users\LegiT\against-the-odds`.
 - **LICENSE**: State "No LICENSE file; package.json UNLICENSED" and add to Track A resolution.
 - **Remote**: Record origin URL and default branch; note "verify repo/org name (toodeceptive/against-the-odds)."
 
@@ -349,7 +351,7 @@ flowchart LR
 - **Log locations**: deploy-log.md, pending-approval.md, CONSOLIDATION_LOG, ARCHIVE_LOG — document retention and naming (append-only; clear pending-approval after apply).
 - **Resolved issues**: In CONSOLIDATION_LOG or short "RESOLVED_ISSUES" section, record resolution of each of the 10 issues (e.g. "develop: removed from triggers; main-only documented").
 - **Master README**: Root README.md — overview, links to OPERATOR_RUNBOOK, docs/README, INDEX_REPORTS, PLAN_AGENT_ENTRY, key scripts, "where to find what."
-- **Handoff chain**: Update [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md), [docs/HANDOFF_PROMPT_NEW_AGENT.md](docs/HANDOFF_PROMPT_NEW_AGENT.md), [docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md](docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md), [docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md](docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md) so next agent sees Phase 0, track deliverables, CONSOLIDATION_LOG location, primary path; CONVERSATION_AUDIT and PLAN_HANDOFF referenced and present.
+- **Handoff chain**: Update [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md), [docs/HANDOFF_PROMPT_NEW_AGENT.md](docs/HANDOFF_PROMPT_NEW_AGENT.md), [docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md](docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md), [docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md](docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md) so next agent sees Phase 0, track deliverables, CONSOLIDATION_LOG location, primary path; CONSOLIDATION_LOG and PLAN_HANDOFF referenced and present.
 
 ---
 
@@ -424,7 +426,7 @@ flowchart LR
 
 ## Common pitfalls and checks
 
-- **Do not** move or delete files still referenced by HANDOFF, PLAN_AGENT_ENTRY, or PLAN_HANDOFF (e.g. system_finalization_report, blocker_resolution_commands, IF_HANDOFF_FILES_MISSING, CONVERSATION_AUDIT). See [docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md](docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md) "Out of scope."
+- **Do not** move or delete files still referenced by HANDOFF, PLAN_AGENT_ENTRY, or PLAN_HANDOFF (e.g. system_finalization_report, blocker_resolution_commands, IF_HANDOFF_FILES_MISSING, CONSOLIDATION_LOG). See [docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md](docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md) "Out of scope."
 - **AGENTS.md vs .cursor/rules**: Verify no conflicting permission or safety wording.
 - **replacements.txt**: Already in OPERATOR_RUNBOOK; plan only verifies and optionally relocates.
 
