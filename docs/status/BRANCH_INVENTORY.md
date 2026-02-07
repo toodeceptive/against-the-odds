@@ -10,7 +10,7 @@
 
 | Scope           | Label / description                                                                                                                                                                                                                                                                                                      |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Worktrees**   | **Primary**: `C:/Users/LegiT/against-the-odds` (main). **Active**: mhx (handoff-doc-permissions-20260129).                                                                                                                                                                                                               |
+| **Worktrees**   | **Primary**: `C:/Users/LegiT/against-the-odds` (main). **Also**: mhx, bjm, cpd, ghd, igt, osd (see WORKTREE_INVENTORY.md). Stale (remove from Cursor if shown): hal, hvf.                                                                                                                                                |
 | **Pipeline**    | **CI**: ci.yml (main only); **verify**: `.\scripts\verify-pipeline.ps1`; **runbook**: `.\scripts\run-runbook.ps1`. 74 PowerShell scripts, 6 workflows.                                                                                                                                                                   |
 | **Project**     | **Repo**: against-the-odds. **Root**: OPERATOR_RUNBOOK, AGENTS.md, .cursor/plans, docs/status. **Canonical**: main.                                                                                                                                                                                                      |
 | **GitHub repo** | **origin**: https://github.com/toodeceptive/against-the-odds.git (fetch/push). **Default branch**: main.                                                                                                                                                                                                                 |
@@ -45,8 +45,13 @@
 | ------------------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------------------------ |
 | `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)  | **Primary repo** per IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user)                           |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                  | 6e73084 | Worktree                                                           |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/cpd` | (detached HEAD)                  | 6e73084 | Worktree                                                           |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ghd` | (detached HEAD)                  | eabaf83 | Worktree                                                           |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/igt` | (detached HEAD)                  | 6e73084 | Worktree                                                           |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/osd` | (detached HEAD)                  | 6e73084 | Worktree                                                           |
 
-**Removed (2026-02-07)**: ewa, snq, uub removed via `git worktree remove`. opo, qqa no longer worktrees. See WORKTREE_INVENTORY.md for details.
+**Removed (2026-02-07)**: ewa, snq, uub removed via `git worktree remove`. opo, qqa no longer worktrees. **Stale (not in `git worktree list`)**: **hal**, **hvf** — remove from Cursor workspace/worktree list if shown; "Failed to apply worktree" for hvf/hal is due to these paths not existing. See WORKTREE_INVENTORY.md for details.
 
 **Usage**: All commands run from **repo root**; do not commit from worktrees without coordinating with main branch.
 

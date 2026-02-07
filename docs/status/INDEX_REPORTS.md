@@ -35,8 +35,8 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md**       | 7-step execution plan for Master Guru E2E run; status table and completion criteria                                      |
 | **PP_CONVERSATION_ALIGNMENT_20260207.md**                      | PP audit on conversation: intent, outcomes, aligned/efficient/improvable/obsolete, assumptions                           |
 | **GURU_20_TEAMS_60_SPECIALTIES.md**                            | 20 guru expert teams × 60 specialties; multi-perspective audit checklist for perfection loop                             |
-| **GURU_FULL_TEAM_SETUP_VERIFY_ORGANIZE_20260207.md**           | Full-team assignment: setup, verify (incl. desktop automation), clean, organize/label worktrees·pipeline·GitHub·branches   |
-| **GURU_EXPERT_EXECUTION_TASKLIST_20260207.md**                 | Guru expert team step-by-step task list: find/fix all issues, optimize, finalize; commits/pulls/pushes                     |
+| **GURU_FULL_TEAM_SETUP_VERIFY_ORGANIZE_20260207.md**           | Full-team assignment: setup, verify (incl. desktop automation), clean, organize/label worktrees·pipeline·GitHub·branches |
+| **GURU_EXPERT_EXECUTION_TASKLIST_20260207.md**                 | Guru expert team step-by-step task list: find/fix all issues, optimize, finalize; commits/pulls/pushes                   |
 
 ---
 
