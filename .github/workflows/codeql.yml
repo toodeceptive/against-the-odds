@@ -1,12 +1,10 @@
 name: CodeQL
 
+# This workflow is disabled because GitHub's default CodeQL setup is enabled.
+# To use this custom workflow instead, disable default setup in:
+# Settings > Code security > Code scanning > CodeQL analysis > Disable default setup
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '0 23 * * 2'
+  workflow_dispatch: # Manual trigger only
 
 permissions:
   actions: read
