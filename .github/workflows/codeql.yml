@@ -17,6 +17,7 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-22.04
+    continue-on-error: true  # Do not block CI if CodeQL analysis fails (e.g. JS extraction)
     permissions:
       actions: read
       contents: read

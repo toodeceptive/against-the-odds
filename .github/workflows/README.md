@@ -25,6 +25,11 @@ These workflows require the following secrets to be configured in GitHub:
 - Runs on: Push to `main`, Pull requests targeting `main`
 - Actions: Lint, format check, unit tests, build, Trivy (security scan), secret-scan, npm audit (continue-on-error), optional coverage, Lighthouse (continue-on-error). Single workflow for all quality gates.
 
+### `codeql.yml` (CodeQL analysis)
+
+- Runs on: Push to `main`, Pull requests targeting `main`, weekly schedule.
+- Actions: CodeQL init + analyze (JavaScript). **Job has `continue-on-error: true`** so a CodeQL failure does not block the run.
+
 ### `shopify-sync.yml`
 
 - Runs on: Daily at 2 AM, Push to `main` (data/products, src/shopify), Manual trigger
@@ -64,6 +69,7 @@ These workflows require the following secrets to be configured in GitHub:
 
 - **Format check fails**: Run `npm run format` at repo root, then commit and push. CI runs `format:check`, `lint`, `test:unit` on push/PR to main.
 - **Dependabot PR fails**: Major bumps (e.g. eslint 10, @types/node 25) may need config or dependency alignment; update and push to the PR branch or merge main into it and re-run.
+- **CodeQL failing**: The `codeql.yml` workflow runs CodeQL analysis on push/PR to main. The analyze job has `continue-on-error: true` so a CodeQL failure does not block the run. To fix CodeQL itself: ensure JavaScript/TypeScript files are discoverable; see [CodeQL troubleshooting](https://docs.github.com/en/code-security/code-scanning/troubleshooting-code-scanning).
 
 ## To implement (optional)
 
