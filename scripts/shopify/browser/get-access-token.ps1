@@ -32,8 +32,10 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 $scriptPath = Join-Path $env:TEMP ("extract-token-" + [guid]::NewGuid().ToString("N") + ".mjs")
 $extractScript = @"
 import { join } from 'path';
+import { pathToFileURL } from 'url';
 const repoRoot = process.env.ATO_REPO_ROOT || process.cwd();
-const { connectToBrowser, ensureShopifyLogin, extractAccessToken } = await import(join(repoRoot, 'src', 'browser-automation', 'shopify-admin.js'));
+const modulePath = pathToFileURL(join(repoRoot, 'src', 'browser-automation', 'shopify-admin.js')).href;
+const { connectToBrowser, ensureShopifyLogin, extractAccessToken } = await import(modulePath);
 
 (async () => {
   try {

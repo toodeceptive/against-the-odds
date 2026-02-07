@@ -1,0 +1,36 @@
+# Credential setup steps (runbook / verify-pipeline)
+
+**Goal:** Runbook and verify-pipeline pass (Shopify 401 resolved, optional GITHUB_TOKEN for API checks).
+
+## Shopify Admin API token
+
+1. **Option A – Browser extraction (recommended)**  
+   - Run: `.\scripts\shopify\browser\launch-chrome-for-agent.ps1`  
+   - In the opened Chrome window, **log in to Shopify** (e.g. aodrop.com → Google OAuth).  
+   - When you see Shopify Admin, run: `.\scripts\shopify\browser\get-access-token.ps1`  
+   - The script writes `SHOPIFY_ACCESS_TOKEN` to `.env.local`.
+
+2. **Option B – Manual copy**  
+   - In Shopify Admin go to **Apps → Development → [your app] → API credentials**.  
+   - Copy the **Admin API access token** (starts with `shpat_`).  
+   - Run: `.\scripts\shopify\browser\save-token-to-env.ps1` (with token in clipboard)  
+   - Or: `.\scripts\shopify\browser\save-token-to-env.ps1 -Token 'shpat_...'`
+
+3. Ensure `.env.local` has:
+   - `SHOPIFY_STORE_DOMAIN=aodrop.com`
+   - `SHOPIFY_ACCESS_TOKEN=shpat_...`
+
+## GitHub PAT (optional for runbook)
+
+- Create a token at [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens).  
+- Add to `.env.local`: `GITHUB_TOKEN=ghp_...`  
+- Needed for GitHub API checks and CI; not required for local clone/push.
+
+## Verify
+
+```powershell
+.\scripts\run-runbook.ps1
+.\scripts\verify-pipeline.ps1
+```
+
+Both should pass once `SHOPIFY_ACCESS_TOKEN` (and store domain) are set.
