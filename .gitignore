@@ -63,6 +63,7 @@ coverage/
 
 # Generated status reports (optional; commit if desired)
 docs/status/performance-report.json
+docs/status/health-report.json
 
 # Screenshots (keep structure, ignore content)
 docs/screenshots/*.png

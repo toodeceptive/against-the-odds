@@ -1,7 +1,7 @@
 # Run all quality checks (linting, formatting, security)
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 Write-Host "=== Quality Checks ===" -ForegroundColor Cyan
