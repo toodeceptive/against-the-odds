@@ -84,7 +84,7 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | `NEXT_BEST_STEPS_20260131.md`               | Prioritized next steps (guru analysis)                                                   |
 | `GURU_EXPERT_ANALYSIS_20260131.md`          | Guru expert analysis (cross-compare)                                                     |
 | `FINALIZATION_AUDIT_20260131.md`            | Finalization audit (unfinished work, broken refs)                                        |
-| `FULL_SYSTEM_TEST_REPORT_20260206.md`       | Full system test run (sections 1–11): passed/failed/deferred, fixes, Verifier pass        |
+| `FULL_SYSTEM_TEST_REPORT_20260206.md`       | Full system test run (sections 1–11): passed/failed/deferred, fixes, Verifier pass       |
 | **Canonical plan**                          | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` — open in Cursor and use Build |
 
 ---
