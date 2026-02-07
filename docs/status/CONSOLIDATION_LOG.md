@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-02-07 — Assign teams, re-run from step 2 (user-approved)
+
+**Summary**: User approved assigning teams then re-running from step 2. **Assignment**: [GURU_20_TEAMS_60_SPECIALTIES.md](GURU_20_TEAMS_60_SPECIALTIES.md) — added "Assignment (2026-02-07)" table: each of 20 teams assigned primary check (e.g. Team 1 → verify-pipeline, Team 8 → desktop tests, Team 14 → quality). **Re-run**: Step 2 npm run quality pass (Teams 11, 14). Step 3 verify-pipeline.ps1 -SkipRunbook: 74/74 parse, 6 workflows OK (Teams 1, 4, 19). Step 5 desktop-automation 13/13 pass (Team 8). **Findings merged**: None; all team checks pass. CONSOLIDATION_LOG and GURU_20_TEAMS_60_SPECIALTIES (assignment table) updated. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-07 — Plan run with 20-perspective checklist (user-approved)
 
 **Summary**: User approved running the plan as usual and using the checklist in [GURU_20_TEAMS_60_SPECIALTIES.md](GURU_20_TEAMS_60_SPECIALTIES.md) so all 20 perspectives are covered. **Execution**: Steps 2–5 run; each team’s primary check verified. **20-perspective result**: 1 Pipeline & CI — 74/74 parse, 6 workflows OK. 2 Runbook & Ops — skipped (cred-gated). 3 Shopify & theme — OPERATOR_RUNBOOK, theme-dev, deploy-log present. 4 Commerce & products — verify-pipeline step 3 skip when no creds. 5 Cursor & agents — .cursor/rules, .cursor/skills, AGENTS.md present. 6 Plans & orchestration — MASTER_GURU_E2E plan steps 1–7. 7 Browser & E2E — Playwright specs present; E2E env-documented in HANDOFF. 8 Desktop automation — 13/13 pass. 9 Security & secrets — .env.local in .gitignore. 10 Documentation — OPERATOR_RUNBOOK, GURU_PP_OPERATOR_GUIDE current. 11 Testing — quality, integration, desktop paths valid. 12 Developer experience — full-setup.ps1, portable paths. 13 Repo & Git — WORKTREE_INVENTORY, pre-commit. 14 Quality gates — npm run quality pass. 15 Handoff & knowledge — HANDOFF, CONSOLIDATION_LOG, INDEX_REPORTS. 16 Status & tracking — CONSOLIDATION_LOG updated. 17 Integration — run-runbook, test-connection, verify-auth. 18 Resilience — issue-detection timeout, -SkipRunbook. 19 Performance — pipeline and vitest duration OK. 20 Finalization — commit, push, CONSOLIDATION_LOG entry. All 20 perspectives satisfied. No store-affecting changes; no deploy-log entry.

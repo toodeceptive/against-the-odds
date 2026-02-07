@@ -70,4 +70,33 @@ Use this when running the loop “from 20 perspectives.” Each team’s lens ma
 
 ---
 
+## Assignment (2026-02-07 — rerun from step 2)
+
+User approved: assign teams, then re-run from step 2. Lead agent assigns primary check to each team; findings merged; re-run step 2 onward.
+
+| Team                    | Assignment (primary check)                               |
+| ----------------------- | -------------------------------------------------------- |
+| 1 Pipeline & CI         | verify-pipeline.ps1 -SkipRunbook                         |
+| 2 Runbook & Ops         | run-runbook.ps1 (cred-gated; report state)               |
+| 3 Shopify & theme       | OPERATOR_RUNBOOK, theme-dev, deploy-log                  |
+| 4 Commerce & products   | verify-pipeline step 3 (product sync skip when no creds) |
+| 5 Cursor & agents       | .cursor/rules, .cursor/skills, AGENTS.md                 |
+| 6 Plans & orchestration | MASTER_GURU_E2E_PERFECTION_RUN.plan.md steps 1–7         |
+| 7 Browser & E2E         | Playwright/E2E specs; HANDOFF E2E note                   |
+| 8 Desktop automation    | npx vitest run tests/desktop-automation                  |
+| 9 Security & secrets    | .gitignore .env.local; verify-credentials                |
+| 10 Documentation        | OPERATOR_RUNBOOK, GURU_PP_OPERATOR_GUIDE                 |
+| 11 Testing              | npm run quality; test:integration; desktop               |
+| 12 Developer experience | full-setup.ps1; scripts repo-root                        |
+| 13 Repo & Git           | WORKTREE_INVENTORY; pre-commit                           |
+| 14 Quality gates        | npm run quality                                          |
+| 15 Handoff & knowledge  | HANDOFF, CONSOLIDATION_LOG, INDEX_REPORTS                |
+| 16 Status & tracking    | CONSOLIDATION_LOG, deploy-log                            |
+| 17 Integration          | run-runbook, test-connection, verify-auth                |
+| 18 Resilience           | issue-detection timeout; -SkipRunbook                    |
+| 19 Performance          | verify-pipeline; vitest duration                         |
+| 20 Finalization         | Commit, push, CONSOLIDATION_LOG entry                    |
+
+---
+
 _Added 2026-02-07 for “continue the loop from 20 guru expert teams / 60 specialties” execution._
