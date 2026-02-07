@@ -139,6 +139,48 @@
       "problemMatcher": []
     },
     {
+      "label": "Shopify: Setup app access (e2e + runbook)",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/setup-app-access.ps1"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Shopify: Setup app access (launch Chrome first)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/shopify/setup-app-access.ps1",
+        "-LaunchChrome"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Shopify: Optimize brand images",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/optimize-images.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Shopify: Theme update → preview → save",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/shopify/theme-update-preview-save.ps1"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
       "label": "Shopify: Theme Pull",
       "type": "shell",
       "command": "powershell",

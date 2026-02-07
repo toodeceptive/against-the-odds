@@ -59,23 +59,23 @@
 
 Workspace settings live in `.cursor/settings.json` (Cursor) and are mirrored in `.vscode/settings.json` for VS Code and cross-editor compatibility.
 
-| Key                                 | Value                | Purpose                                                           |
-| ----------------------------------- | -------------------- | ----------------------------------------------------------------- |
-| cursor.worktreeMaxCount             | 20                   | Max worktrees per workspace. (Cursor only.)                       |
-| cursor.worktreeCleanupIntervalHours | 6                    | Cleanup old worktrees. (Cursor only.)                              |
-| git.showCursorWorktrees             | true                 | Show worktrees in SCM. (Cursor only.)                              |
-| editor.formatOnSave                 | true                 | Prettier on save.                                                 |
-| editor.formatOnPaste                | true                 | Format pasted code.                                               |
-| editor.codeActionsOnSave            | source.fixAll.eslint | ESLint fix on save.                                               |
-| editor.bracketPairColorization      | true                 | Bracket pair colorization.                                        |
+| Key                                 | Value                | Purpose                                                                  |
+| ----------------------------------- | -------------------- | ------------------------------------------------------------------------ |
+| cursor.worktreeMaxCount             | 20                   | Max worktrees per workspace. (Cursor only.)                              |
+| cursor.worktreeCleanupIntervalHours | 6                    | Cleanup old worktrees. (Cursor only.)                                    |
+| git.showCursorWorktrees             | true                 | Show worktrees in SCM. (Cursor only.)                                    |
+| editor.formatOnSave                 | true                 | Prettier on save.                                                        |
+| editor.formatOnPaste                | true                 | Format pasted code.                                                      |
+| editor.codeActionsOnSave            | source.fixAll.eslint | ESLint fix on save.                                                      |
+| editor.bracketPairColorization      | true                 | Bracket pair colorization.                                               |
 | editor.detectIndentation            | true                 | Respect file indentation; EditorConfig applies when extension installed. |
-| files.autoSave                      | afterDelay           | Reduce risk of losing work.                                       |
-| files.trimTrailingWhitespace        | true                 | Align with .editorconfig.                                         |
-| files.insertFinalNewline           | true                 | Align with .editorconfig.                                          |
-| files.associations                 | *.liquid → liquid    | Shopify theme files.                                              |
-| eslint.useFlatConfig                | true                 | Use ESLint 9 flat config.                                         |
-| markdownlint.config                 | default, MD060 off   | Align with .markdownlint.json.                                    |
-| Extensions                          | —                    | Sourced from .cursor/extensions.json and .vscode/extensions.json.  |
+| files.autoSave                      | afterDelay           | Reduce risk of losing work.                                              |
+| files.trimTrailingWhitespace        | true                 | Align with .editorconfig.                                                |
+| files.insertFinalNewline            | true                 | Align with .editorconfig.                                                |
+| files.associations                  | \*.liquid → liquid   | Shopify theme files.                                                     |
+| eslint.useFlatConfig                | true                 | Use ESLint 9 flat config.                                                |
+| markdownlint.config                 | default, MD060 off   | Align with .markdownlint.json.                                           |
+| Extensions                          | —                    | Sourced from .cursor/extensions.json and .vscode/extensions.json.        |
 
 **Gaps**: None critical. Optional: if Cursor supports more `cursor.*` keys in workspace (e.g. agent iterate on lints), add when documented.
 
@@ -100,10 +100,10 @@ These are set in **Cursor Settings** (UI), not in the repo. Configure for best a
 
 All recommended extensions are **free**, **guru/expert-approved**, and **compatible** with this repo (Node, ESLint, Prettier, Vitest, Playwright, Shopify Liquid, PowerShell, Codacy, Markdown, YAML).
 
-| Source                          | Extensions                                                                                                                                                                                                                                                                 |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **.cursor/extensions.json**     | EditorConfig, PowerShell, Prettier, ESLint, Playwright, Vitest, GitLens, GitHub PR, dotenv, markdownlint, YAML, TypeScript Next, Tailwind, auto-rename-tag, path-intellisense, **Shopify Theme Check**, **Codacy**, Python (18). Copilot/Copilot Chat omitted (paid).       |
-| **.vscode/extensions.json**     | Same list as above for VS Code and Cursor when opening via .vscode.                                                                                                                                                                                                        |
+| Source                      | Extensions                                                                                                                                                                                                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **.cursor/extensions.json** | EditorConfig, PowerShell, Prettier, ESLint, Playwright, Vitest, GitLens, GitHub PR, dotenv, markdownlint, YAML, TypeScript Next, Tailwind, auto-rename-tag, path-intellisense, **Shopify Theme Check**, **Codacy**, Python (18). Copilot/Copilot Chat omitted (paid). |
+| **.vscode/extensions.json** | Same list as above for VS Code and Cursor when opening via .vscode.                                                                                                                                                                                                   |
 
 **Done**: **.cursor/extensions.json** and **.vscode/extensions.json** are the single source for extension recommendations. No paid extensions (e.g. Copilot) in the list; add locally if desired. Cursor and VS Code both read the respective extensions.json.
 

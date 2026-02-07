@@ -3,7 +3,7 @@
 
 param(
     [string]$StoreDomain = $env:SHOPIFY_STORE_DOMAIN,
-    [switch]$SaveToEnv = $true
+    [bool]$SaveToEnv = $true
 )
 
 $ErrorActionPreference = "Stop"
@@ -43,18 +43,18 @@ const { connectToBrowser, ensureShopifyLogin, extractAccessToken } = await impor
     const browser = await connectToBrowser({ useExisting: true, headless: false });
     const context = browser.contexts()[0] || await browser.newContext();
     const page = context.pages()[0] || await context.newPage();
-    
+
     console.log('Navigating to Shopify admin...');
     const loggedIn = await ensureShopifyLogin(page, '$StoreDomain');
-    
+
     if (!loggedIn) {
       console.error('Failed to access Shopify admin');
       process.exit(1);
     }
-    
+
     console.log('Extracting access token...');
     const token = await extractAccessToken(page);
-    
+
     if (token) {
       console.log('SUCCESS:' + token);
       process.exit(0);
@@ -74,12 +74,12 @@ try {
     Write-Host "Running browser automation..." -ForegroundColor Yellow
     Write-Host "Please ensure Chrome is open with Shopify admin logged in." -ForegroundColor Cyan
     Write-Host ""
-    
+
     $env:ATO_REPO_ROOT = $repoPath
     $output = node $scriptPath 2>&1
     $env:ATO_REPO_ROOT = $null
     $token = $null
-    
+
     foreach ($line in $output) {
         if ($line -match 'SUCCESS:(.+)') {
             $token = $matches[1].Trim()
@@ -89,11 +89,12 @@ try {
             Write-Host $line
         }
     }
-    
+
     if ($token) {
         Write-Host ""
         Write-Host "[OK] Access token extracted: $($token.Substring(0, 20))..." -ForegroundColor Green
-        
+        $env:ATO_SHOPIFY_STORE_ID = $null
+
         if ($SaveToEnv) {
             # Update .env.local (SHOPIFY_ACCESS_TOKEN for API scripts; SHOPIFY_CLI_THEME_TOKEN for theme pull/dev)
             if (Test-Path ".env.local") {
@@ -101,7 +102,7 @@ try {
                 $updatedAccess = $false
                 $updatedCli = $false
                 $newContent = @()
-                
+
                 foreach ($line in $envContent) {
                     if ($line -match '^SHOPIFY_ACCESS_TOKEN=(.*)$') {
                         $newContent += "SHOPIFY_ACCESS_TOKEN=$token"
@@ -113,10 +114,10 @@ try {
                         $newContent += $line
                     }
                 }
-                
+
                 if (-not $updatedAccess) { $newContent += "SHOPIFY_ACCESS_TOKEN=$token" }
                 if (-not $updatedCli) { $newContent += "SHOPIFY_CLI_THEME_TOKEN=$token" }
-                
+
                 $newContent | Out-File -FilePath ".env.local" -Encoding UTF8
                 Write-Host "[OK] Saved SHOPIFY_ACCESS_TOKEN and SHOPIFY_CLI_THEME_TOKEN to .env.local" -ForegroundColor Green
             } else {

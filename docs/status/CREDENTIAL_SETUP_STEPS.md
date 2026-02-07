@@ -6,11 +6,13 @@
 
 ## Shopify Admin API token
 
-1. **Option A – Browser extraction (recommended)**
+1. **Option A – Browser extraction (e2e)**
    - Run: `.\scripts\shopify\browser\launch-chrome-for-agent.ps1`
    - In the opened Chrome window, **log in to Shopify** (e.g. aodrop.com → Google OAuth).
-   - When you see Shopify Admin, run: `.\scripts\shopify\browser\get-access-token.ps1`
-   - The script writes `SHOPIFY_ACCESS_TOKEN` to `.env.local`.
+   - Go to **Apps → Development → [your app] → API credentials** and click **Reveal** so the token is visible.
+   - With that tab active, in repo root run: `.\scripts\shopify\browser\get-access-token.ps1`
+   - The script connects to Chrome (CDP), reads the token from the page, and writes `SHOPIFY_ACCESS_TOKEN` to `.env.local`.
+   - If the script does not find the token, use Option B (copy token, then `save-token-to-env.ps1`).
 
 2. **Option B – Manual copy (one step after copy)**
    - In Shopify Admin go to **Apps → Development → [your app] → API credentials** (or **Reveal** the token if needed).
@@ -21,6 +23,7 @@
 3. Ensure `.env.local` has:
    - `SHOPIFY_STORE_DOMAIN=aodrop.com`
    - `SHOPIFY_ACCESS_TOKEN=shpat_...`
+   - (Optional) `SHOPIFY_STORE_ID=nbxwpf-z1` — used by e2e for direct URL to Apps > Development
 
 ## GitHub PAT (optional for runbook)
 

@@ -77,7 +77,7 @@ export async function ensureShopifyLogin(page, storeDomain) {
           const u = window.location.href;
           return u.includes('admin.shopify.com') || u.includes('/admin');
         },
-        { timeout: 120000 }
+        { timeout: 120000 },
       );
     }
     return true;
@@ -88,13 +88,44 @@ export async function ensureShopifyLogin(page, storeDomain) {
 }
 
 /**
- * Navigate to Shopify Apps > Development page
+ * Navigate directly to Shopify Apps > Development using store ID (for automation)
+ * Use when store ID is known (e.g. nbxwpf-z1 from admin URL) to avoid depending on current page
+ * @param {Page} page - Playwright page instance
+ * @param {string} storeId - Store ID from admin URL (e.g. nbxwpf-z1)
+ * @returns {Promise<boolean>} True if navigation successful
+ */
+export async function navigateToAppsDevelopmentByStoreId(page, storeId) {
+  if (!storeId || !/^[a-z0-9_-]+$/i.test(storeId)) return false;
+  try {
+    const appsUrl = `https://admin.shopify.com/store/${storeId}/apps/development`;
+    await page.goto(appsUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    await page.waitForSelector('h1, [data-testid="apps-page"], main, [role="main"]', {
+      timeout: 15000,
+    });
+    return true;
+  } catch (_error) {
+    warn('Failed to navigate to Apps > Development by store ID', {
+      storeId,
+      error: _error?.message,
+    });
+    return false;
+  }
+}
+
+/**
+ * Navigate to Shopify Apps > Development page (uses current URL or store ID from env)
  * @param {Page} page - Playwright page instance
  * @returns {Promise<boolean>} True if navigation successful
  */
 export async function navigateToAppsDevelopment(page) {
   try {
-    // Shopify Admin (admin.shopify.com) uses /store/<id>/apps/development
+    const storeIdFromEnv = typeof process !== 'undefined' && process.env.ATO_SHOPIFY_STORE_ID;
+    if (storeIdFromEnv) {
+      const ok = await navigateToAppsDevelopmentByStoreId(page, storeIdFromEnv);
+      if (ok) return true;
+    }
+
+    // Fallback: derive from current URL
     const currentUrl = page.url();
     if (currentUrl.includes('admin.shopify.com/store/')) {
       const url = new URL(currentUrl);
@@ -106,10 +137,66 @@ export async function navigateToAppsDevelopment(page) {
       await page.goto('/admin/apps/development', { waitUntil: 'domcontentloaded', timeout: 15000 });
     }
 
-    await page.waitForSelector('h1, [data-testid="apps-page"], main, [role="main"]', { timeout: 10000 });
+    await page.waitForSelector('h1, [data-testid="apps-page"], main, [role="main"]', {
+      timeout: 10000,
+    });
     return true;
   } catch (_error) {
     warn('Failed to navigate to Apps > Development', { error: _error?.message });
+    return false;
+  }
+}
+
+/**
+ * Navigate from Apps > Development to the first app's API credentials and reveal token if masked
+ * @param {Page} page - Playwright page instance (should be on apps/development)
+ * @returns {Promise<boolean>} True if we reached a page that may show the token
+ */
+export async function navigateToAppApiCredentialsAndReveal(page) {
+  try {
+    // From apps/development: click first link that goes to an app detail (e.g. /store/.../apps/123), not "Create app"
+    const appLinks = page.locator('a[href*="/apps/"]');
+    const n = await appLinks.count();
+    for (let i = 0; i < Math.min(n, 8); i++) {
+      const href = await appLinks.nth(i).getAttribute('href');
+      const text = await appLinks.nth(i).textContent();
+      // Skip "Create app", "Development", or links that are just /apps/development
+      if (href && !href.endsWith('/development') && !/create|new|development/i.test(text || '')) {
+        await appLinks.nth(i).click();
+        await page.waitForLoadState('domcontentloaded');
+        await page.waitForTimeout(2000);
+        break;
+      }
+    }
+
+    // Click "API credentials" if present (link, tab, or button)
+    const apiCredsLink = page
+      .locator(
+        'a:has-text("API credentials"), [href*="credentials"]:visible, button:has-text("API credentials")',
+      )
+      .first();
+    if ((await apiCredsLink.count()) > 0) {
+      await apiCredsLink.click();
+      await page.waitForLoadState('domcontentloaded');
+      await page.waitForTimeout(1500);
+    }
+
+    // Click every "Reveal" to unmask tokens (Admin API token is often hidden)
+    const revealBtns = page.locator(
+      'button:has-text("Reveal"), [role="button"]:has-text("Reveal"), a:has-text("Reveal")',
+    );
+    const revealCount = await revealBtns.count();
+    for (let r = 0; r < revealCount; r++) {
+      try {
+        await revealBtns.nth(r).click();
+        await page.waitForTimeout(600);
+      } catch {
+        // Ignore if click fails (e.g. already revealed)
+      }
+    }
+
+    return true;
+  } catch (_e) {
     return false;
   }
 }
@@ -120,34 +207,70 @@ export async function navigateToAppsDevelopment(page) {
  * @returns {Promise<string|null>} Access token or null if not found
  */
 export async function extractAccessToken(page) {
+  // Shopify Admin API tokens: shpat_ + alphanumeric (typically 32+ chars; accept 20+ for flexibility)
+  const tokenPattern = /shpat_[a-zA-Z0-9]{20,}/;
+  const tryExtractFromCurrentPage = async () => {
+    const content = await page.content();
+    const m = content.match(tokenPattern);
+    if (m) return m[0];
+    const visible = await page.evaluate(() => {
+      const t = document.body?.innerText || '';
+      const match = t.match(/shpat_[a-zA-Z0-9]{20,}/);
+      return match ? match[0] : null;
+    });
+    return visible;
+  };
+
   try {
+    // If user already navigated to API credentials page, try Reveal + extract first
+    const revealBtn = page.locator('button:has-text("Reveal"), [role="button"]:has-text("Reveal")');
+    if ((await revealBtn.count()) > 0) {
+      for (let r = 0; r < (await revealBtn.count()); r++) {
+        try {
+          await revealBtn.nth(r).click();
+          await page.waitForTimeout(800);
+        } catch {
+          // Ignore if click fails
+        }
+      }
+      const already = await tryExtractFromCurrentPage();
+      if (already) return already;
+    }
+
     const success = await navigateToAppsDevelopment(page);
     if (!success) {
       return null;
     }
 
+    // Navigate into first app's API credentials and click Reveal if present
+    await navigateToAppApiCredentialsAndReveal(page);
+
     // Look for access token in various possible locations
-    // Method 1: Check for token in page content
-    const tokenPattern = /shpat_[a-zA-Z0-9]{32,}/;
+    // Method 1: Full page HTML
     const pageContent = await page.content();
     const tokenMatch = pageContent.match(tokenPattern);
-
     if (tokenMatch) {
       return tokenMatch[0];
     }
 
-    // Method 2: Look for token in data attributes
-    const tokenElement = await page
-      .locator('[data-access-token], [data-token], input[value*="shpat_"]')
-      .first();
-    if ((await tokenElement.count()) > 0) {
-      const token =
-        (await tokenElement.getAttribute('value')) ||
-        (await tokenElement.getAttribute('data-access-token')) ||
-        (await tokenElement.getAttribute('data-token'));
-      if (token && token.startsWith('shpat_')) {
-        return token;
-      }
+    // Method 1b: Visible text (in case token is in shadow DOM or rendered differently)
+    const visibleToken = await page.evaluate(() => {
+      const bodyText = document.body?.innerText || '';
+      const m = bodyText.match(/shpat_[a-zA-Z0-9]{20,}/);
+      return m ? m[0] : null;
+    });
+    if (visibleToken) return visibleToken;
+
+    // Method 2: Look for token in inputs and data attributes (Reveal often populates an input)
+    const inputWithToken = await page.locator(
+      'input[value*="shpat_"], [data-access-token], [data-token]',
+    );
+    for (let i = 0; i < (await inputWithToken.count()); i++) {
+      const v =
+        (await inputWithToken.nth(i).getAttribute('value')) ||
+        (await inputWithToken.nth(i).getAttribute('data-access-token')) ||
+        (await inputWithToken.nth(i).getAttribute('data-token'));
+      if (v && /^shpat_[a-zA-Z0-9]{20,}$/.test(v.trim())) return v.trim();
     }
 
     // Method 3: Check API credentials section
@@ -159,9 +282,9 @@ export async function extractAccessToken(page) {
         return parent?.textContent || '';
       });
 
-      const tokenMatch = nearbyText.match(tokenPattern);
-      if (tokenMatch) {
-        return tokenMatch[0];
+      const m = nearbyText.match(tokenPattern);
+      if (m) {
+        return m[0];
       }
     }
 

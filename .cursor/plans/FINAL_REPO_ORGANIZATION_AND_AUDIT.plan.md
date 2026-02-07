@@ -38,8 +38,6 @@ todos:
 isProject: true
 ---
 
-
-
 # Final Repository Organization and Audit Plan
 
 ## Current Operating Mode (Read This First)
@@ -86,7 +84,6 @@ Phase 0, Tracks A–G, Synthesis, Addendum, and Guru pass 2 below were executed 
 
 ## Plan setup (checklist)
 
-
 | Item            | Status | Notes                                                                                 |
 | --------------- | ------ | ------------------------------------------------------------------------------------- |
 | Frontmatter     | Done   | name, overview, todos (11), isProject                                                 |
@@ -96,7 +93,6 @@ Phase 0, Tracks A–G, Synthesis, Addendum, and Guru pass 2 below were executed 
 | Execution order | Done   | Phase 0 → Tracks A–G → Synthesis → Addendum → Guru pass 2                             |
 | Entry           | Done   | HANDOFF_FOR_NEW_AGENT_202602 + PROMPT_FOR_NEW_AGENT; full dominion → Phase 0 optional |
 
-
 **To run**: Open this file in Cursor and use **Build**, or execute the 11 todos in order.
 
 ---
@@ -104,7 +100,6 @@ Phase 0, Tracks A–G, Synthesis, Addendum, and Guru pass 2 below were executed 
 ## Repository file inventory (guru-corrected)
 
 **Total on disk** (excluding .git and node_modules): **~476 files.** **Tracked** (excluding gitignored generated): **~431 files.**
-
 
 | Area         | Count   | Notes                                                                                                                                                    |
 | ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -117,11 +112,10 @@ Phase 0, Tracks A–G, Synthesis, Addendum, and Guru pass 2 below were executed 
 | data/        | 6       | products, manufacturers, samples (.gitkeep + JSON + README)                                                                                              |
 | docs/        | **141** | Root-level MD, business-plan, decisions, expert-analyses, guides (6), knowledge-base (8), launch (10), security (3), **status (77)**, screenshots/README |
 | docs/status/ | **77**  | All status/report MD + performance-report.json                                                                                                           |
-| prompts/     | 37      | experts 01–10, finalization-*, head-guru, MASTER10, PERFECT_EXECUTION, ULTIMATE*, setup/debug/test/optimization, agent-context, agent-capabilities       |
+| prompts/     | 37      | experts 01–10, finalization-_, head-guru, MASTER10, PERFECT_EXECUTION, ULTIMATE_, setup/debug/test/optimization, agent-context, agent-capabilities       |
 | scripts/     | 71      | 70 PS1 + README                                                                                                                                          |
 | src/         | 45      | browser-automation (2), desktop-automation (27 + apps 5), shopify/themes (16)                                                                            |
 | tests/       | 10      | unit, integration, e2e, shopify-admin, desktop-automation                                                                                                |
-
 
 **Gitignored / generated (not in tracked count):** coverage/ (41), playwright-report/, test-results/, .vscode/ (2 if present); node_modules excluded from tree.
 
@@ -137,7 +131,6 @@ Organize and improve: **branches, workflows, worktrees, agents, consoles, enviro
 
 These items **must** be addressed during execution; do not skip.
 
-
 | #   | Issue                                                                                                                        | Where             | Resolution                                                                                                       |
 | --- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
 | 1   | **develop** branch does not exist but ci.yml, quality-check.yml, deploy.yml reference it                                     | Track A + B       | Create develop and document strategy, or remove develop from all workflow triggers and document main-only        |
@@ -151,13 +144,11 @@ These items **must** be addressed during execution; do not skip.
 | 9   | **Remote URL** (toodeceptive/against-the-odds) — verify intentional                                                          | Phase 0 + Track A | Document in inventory; verify with user if needed                                                                |
 | 10  | **Stale local branches** (ao-guru-exec, finalization/consolidate-20260129, wip/finalization-team-20260129) — merge or delete | Track A           | Include in branch strategy; decide and document                                                                  |
 
-
 **Branch snapshot (audit)**: main (local + origin); develop (absent); ao-guru-exec, cursor/main-project-setup-2bd1, finalization/consolidate-20260129, handoff-doc-permissions-20260129, wip/finalization-team-20260129 (local); shopify-theme (workflow-created by sync-theme-branch.yml). **Worktree snapshot**: Primary `C:\Users\LegiT\against-the-odds` (main); ewa, mhx, snq under `.cursor/worktrees/against-the-odds/` (see IF_HANDOFF primary path).
 
 ---
 
 ## Additional issues (execute with tracks)
-
 
 | ID      | Issue                                                                                  | Where                                                                  | Resolution                                                                                                                                                                         |
 | ------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -175,8 +166,7 @@ These items **must** be addressed during execution; do not skip.
 | U9–U10  | CI verify-pipeline/E2E; architecture one-pager                                         | .github/workflows; docs/                                               | Optional: document or add job; optional one-pager.                                                                                                                                 |
 | U11–U14 | index.html paths; hardcoded paths; pre-commit Windows; performance-report .gitignore   | index.html, scripts, HOOKS.md, .gitignore                              | Fix paths; fix script paths; document HOOKS; add performance-report.json if generated (done where applicable).                                                                     |
 
-
-**Script path sweep**: 50+ scripts may use hardcoded repo path. Per-script: derive repo from PSScriptRoot (depth: scripts/*.ps1 → "..", scripts/X/*.ps1 → "...", scripts/X/Y/.ps1 → "...."); fallback Get-Location. **package.json**: Remove `--ext` from lint/lint:fix (ESLint 9 flat config). **config/shopify/.shopify-cli.yml**: Resolve TODO (application_url). **theme-bootstrap-minimal.ps1**: Implement per plan; document in SETUP_STATUS, TROUBLESHOOTING.
+**Script path sweep**: 50+ scripts may use hardcoded repo path. Per-script: derive repo from PSScriptRoot (depth: scripts/_.ps1 → "..", scripts/X/_.ps1 → "...", scripts/X/Y/.ps1 → "...."); fallback Get-Location. **package.json**: Remove `--ext` from lint/lint:fix (ESLint 9 flat config). **config/shopify/.shopify-cli.yml**: Resolve TODO (application_url). **theme-bootstrap-minimal.ps1**: Implement per plan; document in SETUP_STATUS, TROUBLESHOOTING.
 
 ---
 
@@ -216,8 +206,6 @@ flowchart LR
   T7 --> S1
   S1 --> S2
 ```
-
-
 
 ---
 
@@ -277,7 +265,7 @@ flowchart LR
 
 **Owner**: Expert 5 + head guru ([prompts/expert-05-documentation.md](prompts/expert-05-documentation.md), [prompts/head-guru-orchestrator.md](prompts/head-guru-orchestrator.md)).
 
-- **Prompts**: Index all [prompts/](prompts) (experts 01–10, finalization-*, head-guru, MASTER10_EXPERT_SYSTEM, AO_GURU, PERFECT_EXECUTION, master/ULTIMATE*, setup, testing, debugging, optimization, agent-capabilities, agent-context). Label current vs reference/deprecated; [docs/AGENT_PROMPT_DECISION_TREE.md](docs/AGENT_PROMPT_DECISION_TREE.md) and [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md) point to correct prompts.
+- **Prompts**: Index all [prompts/](prompts) (experts 01–10, finalization-_, head-guru, MASTER10_EXPERT_SYSTEM, AO_GURU, PERFECT_EXECUTION, master/ULTIMATE_, setup, testing, debugging, optimization, agent-capabilities, agent-context). Label current vs reference/deprecated; [docs/AGENT_PROMPT_DECISION_TREE.md](docs/AGENT_PROMPT_DECISION_TREE.md) and [docs/status/PLAN_AGENT_ENTRY.md](docs/status/PLAN_AGENT_ENTRY.md) point to correct prompts.
 - **Cursor rules**: List [.cursor/rules/](.cursor/rules) (agent-permissions.mdc, ao-guru.rules.md, env-credentials.mdc, shopify-preview-approval.mdc, use-user-browser.mdc); verify no conflict with [AGENTS.md](AGENTS.md).
 - **Cursor context and workspace**: .cursor/context (github.md, shopify.md, **node-and-automation.md** — Playwright/desktop for agents), tasks.json, settings.json, extensions.json — keep current and documented.
 - **Plans**: This file is the only plan in .cursor/plans/; no separate index file. Plan execution outputs go to docs/status with date (e.g. CODEBASE_AUDIT_YYYYMMDD.md).
@@ -393,7 +381,6 @@ flowchart LR
 
 ## Key files to create or update
 
-
 | Item                                                                 | Action                                                                                              |
 | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | Phase 0 inventory                                                    | docs/status (branches, worktrees, folders, .tmp/build/bin, env, handoff, root files, LICENSE state) |
@@ -410,7 +397,6 @@ flowchart LR
 | PLAN_AGENT_ENTRY, HANDOFF_PROMPT_NEW_AGENT, PLAN_HANDOFF, IF_HANDOFF | Update with indices and log locations; primary path                                                 |
 | docs/status/HANDOFF_FOR_NEW_AGENT_202602.md, PROMPT_FOR_NEW_AGENT.md | Entry for fix-everything / takeover; keep current                                                   |
 | .cursor/context/node-and-automation.md                               | Playwright and desktop-automation context for agents; keep current                                  |
-
 
 ---
 

@@ -1,5 +1,16 @@
 # Agent instructions
 
+## Guru / PP approved methodology (user-approved)
+
+The user has approved the **guru-expert, deep-research, and Prodigy Protocol (pp) style** as the default approach for this repo. When prompted to improve setups, automations, or systems:
+
+- **Research-first:** Use expert-backed research, best practices, and up-to-date patterns (languages, repos, tooling) before implementing.
+- **Multi-faceted cycles:** Apply pp-style decomposition, verification steps, and recovery where useful (see `.cursor/skills/prodigy-protocol/SKILL.md` and `.cursor/rules/pp-basis.mdc`).
+- **Implement and optimize:** Add or extend scripts, pipeline automations, Cursor tasks, and docs so improvements are **permanent** and wired into the pipeline where needed.
+- **Systems-wide:** Apply the same standard across all aspects—credentials, store operations, theme/product flows, images, E2E, desktop automation, and CI—so the setup stays dependable and ideal.
+
+Deliver trusted, logical, and perfected setups; prefer upgrades, extensions, and automations that integrate into existing runbooks and workflows (e.g. `OPERATOR_RUNBOOK.md`, `docs/AUTOMATION_IMPLEMENTATION_GUIDE.md`, `docs/STORE_OPERATIONS_AUTOMATION.md`).
+
 ## Agent permission
 
 The user grants agents **full permission** to perform all actions in this repository and worktree. The system is fully functional; no operations are inhibited. Agents may run scripts, edit files, commit, push, and execute workflows as needed to complete tasks.

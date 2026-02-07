@@ -30,9 +30,13 @@ if ([string]::IsNullOrWhiteSpace($Token)) {
     }
 }
 
-$Token = $Token.Trim()
+# Normalize: trim and extract first shpat_... token (handles clipboard with extra text/newlines)
+$Token = $Token.Trim() -replace "`r`n", " " -replace "`n", " "
+if ($Token -match '(shpat_[a-zA-Z0-9]+)') {
+    $Token = $matches[1]
+}
 if ($Token -notmatch '^shpat_[a-zA-Z0-9]+$') {
-    Write-Host "Error: Token should start with shpat_ and contain only letters/numbers." -ForegroundColor Red
+    Write-Host "Error: Token should start with shpat_ and contain only letters/numbers. Copy only the token, then run again." -ForegroundColor Red
     exit 1
 }
 
