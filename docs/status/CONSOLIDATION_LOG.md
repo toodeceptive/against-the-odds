@@ -2,7 +2,13 @@
 
 **Purpose**: Single append-only log with dated entries per track; pointers to detailed reports. Documentation must match actual workflow state.
 
-**Path and commits**: All edits and commits to this file (and the repo) must be made from the **primary** repo path only (`C:/Users/LegiT/against-the-odds`). Git records only repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`); there is no `hal` or `hvf` in any Git path. **Policy**: If your diff or Source Control shows any path containing `hal` or `hvf` (e.g. `c:/Users/LegiT/.cursor/worktrees/against-the-odds/hal/docs/status/CONSOLIDATION_LOG.md`), you are in the wrong workspace and committing from here would violate this policy. Do **not** commit. Close this workspace, open **only** the primary repo as the workspace root, then stage and commit from there so the policy is satisfied. See [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) and [TROUBLESHOOTING.md](../TROUBLESHOOTING.md).
+**Path and commits**: All edits and commits to this file (and the repo) must be made from the **primary** repo path only (`C:/Users/LegiT/against-the-odds`). Git records only repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`); there is no worktree name in any Git path. **Policy**: If your diff or Source Control shows any path containing a worktree path (e.g. `hal`, `hvf`, `jxj`, `mhx`, or any path under `.cursor/worktrees/against-the-odds/` such as `.../jxj/docs/status/CONSOLIDATION_LOG.md`), you are in the wrong workspace and committing from here would violate this policy. Do **not** commit. Close this workspace, open **only** the primary repo (`C:/Users/LegiT/against-the-odds`) as the workspace root, then stage and commit from there so the policy is satisfied. See [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) and [TROUBLESHOOTING.md](../TROUBLESHOOTING.md).
+
+---
+
+## 2026-02-07 — Bug 1: Commit-from-worktree policy — extend to jxj and all worktrees
+
+**Summary**: Commits were made from the **jxj** worktree path instead of the primary repo path, violating the documented policy that all commits must be from primary only. **Fix**: CONSOLIDATION_LOG and WORKTREE_INVENTORY policy wording updated to include **all worktree paths** (e.g. `jxj`, `mhx`, `hal`, `hvf`, or any path under `.cursor/worktrees/against-the-odds/`). If the diff or Source Control shows any such path, the workspace is non-primary; do not commit—open primary only, then stage and commit from there. No change to existing commits (Git stores repo-relative paths); procedural fix to prevent recurrence. This commit made from primary.
 
 ---
 
