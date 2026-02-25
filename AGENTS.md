@@ -20,6 +20,17 @@ The user grants agents **full permission** to perform all actions in this reposi
 - **Preview before apply:** Store-affecting changes (theme push, product sync) require preview (e.g. `sync-products.ps1 -DryRun` or theme dev URL), snapshot to `docs/status/pending-approval.md`, and explicit user approval in chat before apply. See `.cursor/rules/shopify-preview-approval.mdc`.
 - **No secrets in commits:** Credentials live only in `.env.local` or GitHub Secrets; never commit or log secrets. See `.cursor/rules/env-credentials.mdc`.
 
+## Structural integrity enforcement contract (CI authoritative)
+
+- **Single enforcement authority:** CI is the only enforcement authority for structural integrity; runtime agents/rules are advisory.
+- **Required gate:** `arch_guard` must exist in `.github/workflows/ci.yml` and be a required status check for `main`.
+- **Signature chain:** `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt` are required. Signature generation is local-only (never generated in CI); CI verifies only.
+- **Schema mutation control:** Schema/data-contract changes must fail CI unless the declared schema version is bumped per `docs/VERSION_POLICY.md`.
+- **Infra authority determinism:** Declare infra authority once in `docs/SSOT_ATO.md`; do not duplicate authority declarations elsewhere.
+- **Ownership enforcement:** `CODEOWNERS` and `docs/OWNERSHIP_REGISTRY.md` are required; ownership violations must fail CI.
+- **No duplicate enforcement logic:** Keep one canonical implementation per control; remove overlapping checks once canonical checks exist.
+- **Binary closure:** Treat the system as open until all controls above are present and enforced by CI.
+
 ## Playwright and desktop automation
 
 Agents may use **Playwright** for scripted E2E and browser automation, and **desktop-automation** (and remote-PC flows) for operations that cannot be performed via GitHub or Shopify API. See `.cursor/context/node-and-automation.md` and [docs/AGENT_SYSTEM.md](docs/AGENT_SYSTEM.md). Use **your browser** (Cursor browser MCP) for interactive credential or one-off UI flows; use Playwright for automated, repeatable E2E runs when appropriate.
