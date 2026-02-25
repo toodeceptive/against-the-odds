@@ -13,6 +13,34 @@ permissions:
   contents: read
 
 jobs:
+  arch_guard:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Structural integrity check
+        run: |
+          set -e
+          echo "Checking required structural artifacts..."
+          [ -f infra/STRUCTURAL_STATE.json ] || { echo "::error::infra/STRUCTURAL_STATE.json missing"; exit 1; }
+          [ -f CODEOWNERS ] || { echo "::error::CODEOWNERS missing"; exit 1; }
+          [ -f docs/OWNERSHIP_REGISTRY.md ] || { echo "::error::docs/OWNERSHIP_REGISTRY.md missing"; exit 1; }
+          [ -f docs/VERSION_POLICY.md ] || { echo "::error::docs/VERSION_POLICY.md missing"; exit 1; }
+          [ -f docs/SSOT_ATO.md ] || { echo "::error::docs/SSOT_ATO.md missing"; exit 1; }
+          [ -f infra/structural.pub ] || { echo "::error::infra/structural.pub missing"; exit 1; }
+
+          SIG="infra/STRUCTURAL_SIGNATURE.txt"
+          [ ! -s "$SIG" ] && [ -s infra/STRUCTURAL_SIGNATURE_NEW.txt ] && cp infra/STRUCTURAL_SIGNATURE_NEW.txt "$SIG"
+          [ -s "$SIG" ] || { echo "::error::infra/STRUCTURAL_SIGNATURE.txt missing or empty (run scripts/infra/sign-structural-state.ps1 or .sh)"; exit 1; }
+
+          ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s "$SIG" < infra/STRUCTURAL_STATE.json || \
+            { echo "::error::Signature verification failed"; exit 1; }
+          echo "Structural integrity OK"
+
   # The test job runs on a matrix of Node.js versions and caches dependencies to speed up
   # subsequent builds. Concurrency ensures that only one CI run per branch executes at a time.
   test:

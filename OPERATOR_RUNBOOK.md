@@ -64,6 +64,10 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 **Desktop automation (optional)**: `robotjs` and `node-window-manager` are optionalDependencies; they may require native build (node-gyp) on install. If `npm install` fails for these, you can skip optional deps or install build tools (e.g. Visual Studio Build Tools on Windows). See `src/desktop-automation/` and `tests/desktop-automation/`.
 
+## Structural integrity (after governance file changes)
+
+After editing AGENTS.md, CODEOWNERS, docs/OWNERSHIP_REGISTRY.md, docs/SSOT_ATO.md, docs/VERSION_POLICY.md, or .github/workflows/ci.yml, run `bash scripts/infra/sign-structural-state.sh` (or `.\scripts\infra\sign-structural-state.ps1` on Windows; use Git Bash or WSL if sign step fails). Commit `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt`. See [infra/README.md](infra/README.md).
+
 ## Credentials
 
 - Store in `.env.local` (never commit)
