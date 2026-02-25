@@ -46,3 +46,28 @@ You stay in control: agents use your open windows, you watch, and approval is re
 ## Cursor and agent optimization
 
 For a full audit of rules, skills, extensions, and **personal (user) Cursor settings** to improve agent performance, see [docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md](docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md). It includes a checklist of UI settings (agent stickiness, iterate on lints, indexing, etc.) and project settings in `.cursor/`.
+
+## Cursor Cloud specific instructions
+
+This is an operational infrastructure repo for the "Against The Odds" Shopify store (aodrop.com). There is no traditional application build/server — `npm run build` and `npm run dev` are no-op echo commands.
+
+### Key commands
+
+| Task              | Command                                                             |
+| ----------------- | ------------------------------------------------------------------- |
+| Install deps      | `npm install`                                                       |
+| Lint              | `npx eslint .`                                                      |
+| Format check      | `npx prettier --check "**/*.{js,ts,jsx,tsx,json,css,md,html}"`      |
+| Unit tests        | `npm run test:unit` (Vitest)                                        |
+| Integration tests | `npm run test:integration` (skipped without Shopify/GitHub creds)   |
+| Full quality gate | `npm run quality` (format + lint + unit tests)                      |
+| Serve static site | `python3 -m http.server 8080` (from repo root; serves `index.html`) |
+| E2E tests         | `npm run test:e2e` (requires `npx playwright install` first)        |
+
+### Caveats
+
+- **No Docker, no database.** All product data lives in `data/products/*.json`; the store is Shopify-hosted.
+- **Integration tests require credentials** (`SHOPIFY_ACCESS_TOKEN`, `GITHUB_TOKEN`, etc. in `.env.local`). Without them, integration tests are auto-skipped — this is expected.
+- **PowerShell scripts** (`.ps1`) are used for Shopify sync, setup, and operational tasks. Install `pwsh` if you need to run them on Linux (`apt-get install -y powershell`), but they are not required for lint/test/build.
+- **Desktop automation** (`src/desktop-automation/`) depends on optional native modules (`robotjs`, `node-window-manager`) that only work on Windows with a display. These fail to install on Linux — this is expected and handled via `optionalDependencies`.
+- **Playwright E2E** uses `python3 -m http.server 8080` as its webServer. Python 3 must be on PATH. Run `npx playwright install` once to fetch browsers before running E2E tests.

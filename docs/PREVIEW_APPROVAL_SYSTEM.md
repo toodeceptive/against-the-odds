@@ -14,6 +14,7 @@ Single reference for the **preview-before-apply** flow so theme and product chan
    ```
 
    Or: `.\scripts\start-theme-preview.ps1` (same effect), or **Tasks → Start theme preview (new window)**.
+
 3. **User** sees:
    - **Cursor**: `pending-approval.md` opens (or refocuses).
    - **Browser**: AO preview opens (static mock immediately; live theme at `http://127.0.0.1:9292` when theme dev server is ready).
@@ -32,11 +33,11 @@ Single reference for the **preview-before-apply** flow so theme and product chan
 
 ## Scripts
 
-| Script | Purpose |
-|--------|---------|
-| **open-preview-popup.ps1** | Opens approval file in Cursor, static mock in browser, starts theme dev, then opens live URL when server responds. |
-| **start-theme-preview.ps1** | Calls `open-preview-popup.ps1` (single entry point for tasks/docs). |
-| **open-pending-approval.ps1** | Opens only `pending-approval.md` in Cursor (no browser). Use when no theme preview is needed. |
+| Script                        | Purpose                                                                                                            |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **open-preview-popup.ps1**    | Opens approval file in Cursor, static mock in browser, starts theme dev, then opens live URL when server responds. |
+| **start-theme-preview.ps1**   | Calls `open-preview-popup.ps1` (single entry point for tasks/docs).                                                |
+| **open-pending-approval.ps1** | Opens only `pending-approval.md` in Cursor (no browser). Use when no theme preview is needed.                      |
 
 ---
 

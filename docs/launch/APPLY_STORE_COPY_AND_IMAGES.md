@@ -9,8 +9,8 @@ Use this checklist to put **all store text and images** live, aligned with your 
 1. Go to **Settings → Store details**.
 2. Set:
    - **Store name:** Against the Odds
-   - **Store description (short):** *Paste "Short description (meta)" from STORE_COPY_AND_CONTENT.md.*
-   - **Store description (long):** *Paste "Long description (About / SEO)" from STORE_COPY_AND_CONTENT.md.*
+   - **Store description (short):** _Paste "Short description (meta)" from STORE_COPY_AND_CONTENT.md._
+   - **Store description (long):** _Paste "Long description (About / SEO)" from STORE_COPY_AND_CONTENT.md._
 
 This drives meta description and any place Shopify uses the store’s “about” blurb.
 
@@ -57,7 +57,7 @@ Use the same visuals you use on your Printify merch so the site and products fee
 
 1. **Online Store → Pages → Add page** (or edit existing “About”).
 2. Title: `About Against the Odds`
-3. Body: *Paste the “About page (full)” body from STORE_COPY_AND_CONTENT.md.*
+3. Body: _Paste the “About page (full)” body from STORE_COPY_AND_CONTENT.md._
 4. Save.
 
 You can also add an **AO About** section on this page and keep the page body in sync with the section body.
@@ -68,7 +68,7 @@ You can also add an **AO About** section on this page and keep the page body in 
 
 - In Theme Editor, open **Theme settings** (or the global SEO block if your theme has one). Set:
   - **Meta title (home):** Against the Odds — Premium Streetwear for People Who Keep Going
-  - **Meta description:** *From “Meta & SEO” in STORE_COPY_AND_CONTENT.md.*
+  - **Meta description:** _From “Meta & SEO” in STORE_COPY_AND_CONTENT.md._
 - If your theme has **OG image**, use your main AO logo or a hero image that matches your designs.
 
 ---
