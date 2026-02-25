@@ -1,4 +1,5 @@
-# Sync products bidirectionally between local data and Shopify
+# Sync products bidirectionally between local data and Shopify.
+# Compatibility wrapper retained for import/export orchestration; canonical import/apply script is scripts/shopify/sync-products.ps1.
 
 param(
     [ValidateSet("import", "export", "both")]

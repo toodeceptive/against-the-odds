@@ -7,6 +7,8 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+# Load shared helpers used by this script (Write-Success / Write-Warning).
+. (Join-Path $PSScriptRoot "..\shared\utilities.ps1")
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 

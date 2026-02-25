@@ -54,9 +54,10 @@
 
 | Script       | Purpose                                                  | When to run                                                                        |
 | ------------ | -------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **sync.ps1** | Bidirectional wrapper; `-Direction import\|export\|both` | Import from store or export to repo; import delegates to shopify/sync-products.ps1 |
+| **shopify/sync-products.ps1** | Canonical repo → Shopify product sync (supports `-DryRun`) | Use for preview/approval/apply flow and CI dry-runs |
+| **sync.ps1** | Compatibility wrapper; `-Direction import\|export\|both` | Use when you need bidirectional import/export behavior |
 | export.ps1   | Export products from store to repo                       | Backup or local data refresh                                                       |
-| import.ps1   | Import (delegates to sync-products)                      | Use sync.ps1 -Direction import or sync-products.ps1                                |
+| import.ps1   | Compatibility alias to `shopify/sync-products.ps1`       | Prefer `shopify/sync-products.ps1` directly for import/apply flows                 |
 
 ### Git (scripts/git/)
 
@@ -113,7 +114,8 @@
 | ----------------------------- | ---------------------------------------------- | ------------------------------------ |
 | **run-runbook.ps1**           | Run OPERATOR_RUNBOOK daily checks              | Daily                                |
 | **open-pending-approval.ps1** | Open docs/status/pending-approval.md in editor | Before/after store-affecting changes |
-| **start-theme-preview.ps1**   | Start theme dev and open preview URL           | Theme preview workflow               |
+| **open-preview-popup.ps1**    | Canonical full preview flow (approval file + browser + theme dev) | Theme preview workflow |
+| **start-theme-preview.ps1**   | Compatibility wrapper to `open-preview-popup.ps1` | Optional alias command               |
 | verify-pipeline.ps1           | Verify Cursor–GitHub–Shopify pipeline          | After workflow or config change      |
 
 ### Archive / Legacy

@@ -11,8 +11,8 @@
 | **Initial setup (Shopify API access)**                | E2E + CDP             | `setup-app-access.ps1`, `get-access-token.ps1`, `launch-chrome-for-agent.ps1`, `save-token-to-env.ps1`                                          | Manual copy token → save-token-to-env; desktop: focus Chrome, type admin URL |
 | **Themes (update, edit files, push)**                 | API + CLI             | `theme-pull.ps1`, `theme-dev.ps1`, `theme-update-store.ps1`, `merge-brand-into-theme.ps1`, `copy-brand-images-to-theme.ps1`, `update-theme.ps1` | E2E: Admin → Online Store → Themes; desktop: navigate theme editor           |
 | **Content (theme copy, pages, homepage)**             | Edit files + push     | Edit files in `src/shopify/themes/aodrop-theme/` (snippets, sections, templates); then `theme-update-store.ps1` or theme dev                    | E2E: Theme editor in Admin; API: Content in theme JSON if applicable         |
-| **Products (titles, descriptions, images)**           | API + data            | `scripts/products/sync.ps1`, `scripts/shopify/sync-products.ps1`; edit `data/products/*.json` then sync                                         | E2E: Admin → Products; API: REST Admin API products                          |
-| **Sizes / variants (options, SKU, price, inventory)** | API + data            | Same as products: `data/products/*.json` has `variants[]` and `options[]`; run `scripts/products/sync.ps1` (import/both) to push                | E2E: Admin → Product → Variants; API: product variants endpoints             |
+| **Products (titles, descriptions, images)**           | API + data            | `scripts/shopify/sync-products.ps1` (canonical); edit `data/products/*.json`, run `-DryRun`, then apply only after approval                      | E2E: Admin → Products; API: REST Admin API products                          |
+| **Sizes / variants (options, SKU, price, inventory)** | API + data            | Same as products: `data/products/*.json` has `variants[]` and `options[]`; run `scripts/shopify/sync-products.ps1` with preview/approval flow   | E2E: Admin → Product → Variants; API: product variants endpoints             |
 | **Posts (blog articles)**                             | API + E2E             | Shopify Admin API `articles` (blog); no script in repo yet — add under `scripts/shopify/` or use E2E to Admin → Online Store → Blog → Post      | E2E: Admin → Content → Blog; desktop: type and submit                        |
 | **Store info (name, domain, contact, policies)**      | API + E2E             | `fetch-store-data.ps1` (backup); `browser/backup-store-settings.ps1`; update via API `shop.json` or Admin Settings                              | E2E: Admin → Settings → General/Domains/etc.; API: GET/PUT shop              |
 | **Printify (connect store, sync products, fulfill)**  | API + manual link     | (Future) Printify API; today: connect in Printify dashboard, then use Shopify product sync                                                      | E2E: open Printify dashboard in Chrome                                       |
@@ -44,11 +44,13 @@
 
 ### Products
 
-- **Data:** `data/products/*.json` (title, body_html, variants, options, images). **Sync:** `.\scripts\products\sync.ps1` with `-Direction import` or `both` (uses `SHOPIFY_ACCESS_TOKEN`).
+- **Data:** `data/products/*.json` (title, body_html, variants, options, images).
+- **Canonical sync path:** `.\scripts\shopify\sync-products.ps1 -DryRun` → write `docs/status/pending-approval.md` → run `.\scripts\open-preview-popup.ps1` → get chat approval → run `.\scripts\shopify\sync-products.ps1`.
+- **Compatibility wrapper:** `.\scripts\products\sync.ps1` remains available for bidirectional import/export orchestration.
 
 ### Sizes / variants
 
-- **Data:** In each product JSON: `variants[]` (title, price, sku, option1, option2) and `options[]` (e.g. Size: Small, Medium, Large). Edit JSON then run `.\scripts\products\sync.ps1` to push.
+- **Data:** In each product JSON: `variants[]` (title, price, sku, option1, option2) and `options[]` (e.g. Size: Small, Medium, Large). Edit JSON and use the same canonical preview/approval sync path above.
 
 ### Posts (blog articles)
 
@@ -68,7 +70,7 @@
 
 ## 3. Printify
 
-- **Current:** No Printify API scripts in repo. Connect store in [Printify](https://printify.com) dashboard (Shopify app or store connection). Product data pushed to Shopify via `scripts/products/sync.ps1` or Admin; Printify syncs from Shopify when configured.
+- **Current:** No Printify API scripts in repo. Connect store in [Printify](https://printify.com) dashboard (Shopify app or store connection). Product data pushed to Shopify via `scripts/shopify/sync-products.ps1` (or Admin); Printify syncs from Shopify when configured.
 - **Future:** Add scripts or workflows for Printify API (product push, order status) if needed; document webhook/order flow. E2E can open Printify dashboard and automate repetitive steps if CDP is available.
 - **Orders:** Shopify orders that use Printify products are fulfilled via Printify; creating orders in Shopify (API or Admin) is the main lever until Printify API is integrated.
 
@@ -85,7 +87,7 @@
 ## 5. Creating orders
 
 - **Via API:** Shopify Admin API `POST /admin/api/2024-01/orders.json` (script not in repo yet; can be added under `scripts/shopify/` or `scripts/orders/`).
-- **Via product sync:** Ensure products exist with `scripts/products/sync.ps1`; create orders in Admin or via future script.
+- **Via product sync:** Ensure products exist with `scripts/shopify/sync-products.ps1` using preview/approval flow; create orders in Admin or via future script.
 - **E2E:** Playwright test or script: go to checkout URL, fill cart, submit (use for testing or one-off flows).
 - **Desktop:** Navigate to Admin → Orders → Create order; use desktop automation to fill form if needed.
 

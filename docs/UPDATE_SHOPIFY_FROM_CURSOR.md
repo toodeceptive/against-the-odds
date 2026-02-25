@@ -69,7 +69,8 @@ If the live store (aodrop.com) doesn’t show your brand changes:
 
 - **Test connection**: `.\scripts\shopify\test-connection.ps1`
 - **Fetch store data** (products, collections, themes): `.\scripts\shopify\fetch-store-data.ps1`
-- **Sync products** (from repo data to store): `.\scripts\shopify\sync-products.ps1`
+- **Sync products** (from repo data to store): `.\scripts\shopify\sync-products.ps1 -DryRun` first, then snapshot to `docs/status/pending-approval.md`, run `.\scripts\open-preview-popup.ps1`, get chat approval, then run `.\scripts\shopify\sync-products.ps1` (no `-DryRun`).
+- **CI behavior:** automated push/schedule paths are preview-only (`-DryRun`); write sync in CI is manual-dispatch with explicit apply input.
 
 Run from repo root; they use `.env.local` for credentials (Admin API token required).
 
@@ -92,13 +93,13 @@ Run from repo root; they use `.env.local` for credentials (Admin API token requi
 
 Use this to confirm the system works end-to-end once you have Shopify CLI access:
 
-1. **Auth + pull theme**  
+1. **Auth + pull theme**
    From repo root: `.\scripts\shopify\theme-auth-then-pull.ps1`
    - Browser opens for login; sign in with the account that has theme access to aodrop.com.
    - After auth, script pulls the live theme into `src/shopify/themes/aodrop-theme`.
    - Success: folder contains `layout/theme.liquid`, `config/`, etc.
 
-2. **Theme dev (live preview)**  
+2. **Theme dev (live preview)**
    From repo root: `.\scripts\shopify\theme-dev.ps1`
    - Preview URL opens in browser.
    - Success: store preview loads; edits in Cursor refresh in browser.
@@ -108,7 +109,7 @@ Use this to confirm the system works end-to-end once you have Shopify CLI access
    - Confirm the theme (or the one deployed from GitHub) shows as expected.
    - If using GitHub deploy: Settings → Apps and sales channels → GitHub — confirm repo and branch.
 
-4. **Optional: apply brand and push via CLI**  
+4. **Optional: apply brand and push via CLI**
    From repo root: `.\scripts\shopify\theme-update-store.ps1`
    - Merges AO brand CSS/snippet, copies brand images, then pushes. Use `-Live` only when you intend to update the live theme.
 

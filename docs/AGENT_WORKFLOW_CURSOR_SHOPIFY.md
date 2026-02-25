@@ -9,9 +9,9 @@ Step-by-step for fulfilling store change requests (products, theme) with preview
 1. **Request**: User asks to add or change a product (e.g. "list this product on my page").
 2. **Create/edit**: Create or update JSON in `data/products/` per [Shopify Product resource](https://shopify.dev/docs/api/admin-rest/latest/resources/product). Use [data/products/example-hoodie.json](data/products/example-hoodie.json) as schema reference (title, body_html, vendor, product_type, tags, status, variants, images, options).
 3. **Preview**: Run `.\scripts\shopify\sync-products.ps1 -DryRun` and capture the output.
-4. **Snapshot**: Write [docs/status/pending-approval.md](status/pending-approval.md) with: Summary (what will change), the dry-run output, and "To approve: reply in Cursor chat with 'approve' or 'yes'." **Then run `.\scripts\open-pending-approval.ps1`** from repo root so the file opens in Cursor automatically for the user. Tell the user: "I've opened the pending changes for you. When ready, say 'approve' in this chat."
+4. **Snapshot**: Write [docs/status/pending-approval.md](status/pending-approval.md) with: Summary (what will change), the dry-run output, and "To approve: reply in Cursor chat with 'approve' or 'yes'." **Then run `.\scripts\open-preview-popup.ps1`** (or `.\scripts\start-theme-preview.ps1`) from repo root so the file opens in Cursor and the preview opens in the browser automatically. Tell the user: "I've opened the pending changes and preview. When ready, say 'approve' in this chat."
 5. **Approval**: Wait for explicit user confirmation in chat (e.g. "approve", "yes", "looks good").
-6. **Apply**: Run `.\scripts\shopify\sync-products.ps1` (no -DryRun); commit and push product JSON to the connected branch (e.g. `main`). If CI is configured, product sync may also run on push.
+6. **Apply**: Run `.\scripts\shopify\sync-products.ps1` (no -DryRun); commit and push product JSON to the connected branch (e.g. `main`). CI push/schedule paths stay preview-only (`-DryRun`); write sync from CI is manual-dispatch only with explicit apply input.
 7. **Log**: Append an entry to [docs/status/deploy-log.md](status/deploy-log.md): timestamp, action "product sync", branch/commit, summary (e.g. "Added product X"), rollback (e.g. "Restore data/products/previous.json and run sync-products.ps1"). Clear [docs/status/pending-approval.md](status/pending-approval.md) (write "No pending changes" placeholder).
 
 ---
@@ -38,7 +38,7 @@ When you ask to add or change a product using **images, files, or descriptions f
 2. **Images**: Agent uploads images to Shopify (e.g. via Admin API / Files) or places them in repo and uses public URLs; then adds image URLs to the product JSON.
 3. **Create/edit** `data/products/*.json` with title, body_html, variants, and image URLs per [Shopify Product resource](https://shopify.dev/docs/api/admin-rest/latest/resources/product).
 4. **Preview**: Run `.\scripts\shopify\sync-products.ps1 -DryRun`; capture output.
-5. **Snapshot** → Write [docs/status/pending-approval.md](status/pending-approval.md), then run `.\scripts\open-pending-approval.ps1` so the file opens automatically → you approve in chat → **Apply** (sync without -DryRun) → **Log** to [docs/status/deploy-log.md](status/deploy-log.md).
+5. **Snapshot** → Write [docs/status/pending-approval.md](status/pending-approval.md), then run `.\scripts\open-preview-popup.ps1` (or `.\scripts\start-theme-preview.ps1`) so the file opens with browser preview → you approve in chat → **Apply** (sync without -DryRun) → **Log** to [docs/status/deploy-log.md](status/deploy-log.md).
 
 ### Browser path (one-off with uploads)
 

@@ -8,9 +8,14 @@
 
 ---
 
-## Current canonical (2026-02)
+## Current reference set (2026-02)
 
 Use these first for pipeline, branches, worktrees, and handoff.
+
+Operational authority is split explicitly to avoid conflicts:
+
+- **Canonical operational docs**: runbooks, active queue/marker/log files, inventories, and policy docs used for current execution.
+- **Historical snapshots**: dated audit/proposal/roster/status files (for example `*_20260131.md`, `*_20260207.md`) are evidence artifacts, not active operational authority.
 
 | File                                                              | Purpose                                                                                                                                                          |
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |

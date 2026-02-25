@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Structural integrity check
         run: |
@@ -40,6 +42,59 @@ jobs:
           ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s "$SIG" < infra/STRUCTURAL_STATE.json || \
             { echo "::error::Signature verification failed"; exit 1; }
           echo "Structural integrity OK"
+
+      - name: Ownership consistency guard
+        run: |
+          set -e
+          echo "Validating ownership registry and CODEOWNERS alignment..."
+          test -f CODEOWNERS || { echo "::error::CODEOWNERS missing"; exit 1; }
+          test -f docs/OWNERSHIP_REGISTRY.md || { echo "::error::docs/OWNERSHIP_REGISTRY.md missing"; exit 1; }
+
+          # Contract-critical ownership scopes must be explicitly represented in CODEOWNERS.
+          for scope in "/.github/" "/docs/" "/scripts/" "/data/" "/src/" "/infra/" "/config/"; do
+            grep -qE "^${scope}[[:space:]]+@toodeceptive$" CODEOWNERS || {
+              echo "::error::CODEOWNERS missing required explicit owner rule for ${scope}"
+              exit 1
+            }
+          done
+          echo "Ownership consistency OK"
+
+      - name: Schema mutation guard
+        run: |
+          set -e
+          echo "Checking schema version policy for product/manufacturer contracts..."
+
+          EVENT="${{ github.event_name }}"
+          if [ "$EVENT" = "pull_request" ]; then
+            RANGE="${{ github.event.pull_request.base.sha }}...${{ github.sha }}"
+          elif [ "$EVENT" = "push" ] && [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            RANGE="${{ github.event.before }}...${{ github.sha }}"
+          else
+            # Fallback for non-push events (e.g. schedule/workflow_dispatch): compare last commit when available.
+            if git rev-parse --verify "${{ github.sha }}^" >/dev/null 2>&1; then
+              RANGE="${{ github.sha }}^...${{ github.sha }}"
+            else
+              RANGE="${{ github.sha }}...${{ github.sha }}"
+            fi
+          fi
+          echo "Using diff range: $RANGE"
+
+          CHANGED_CONTRACT_FILES="$(git diff --name-only "$RANGE" -- 'data/products/*.json' 'data/manufacturers/*.json' || true)"
+          if [ -z "$CHANGED_CONTRACT_FILES" ]; then
+            echo "No product/manufacturer contract files changed."
+            exit 0
+          fi
+
+          echo "Contract files changed:"
+          echo "$CHANGED_CONTRACT_FILES"
+
+          # Policy enforcement: contract file changes must include a schema_version delta.
+          if ! git diff -U0 "$RANGE" -- 'data/products/*.json' 'data/manufacturers/*.json' | grep -Eq '^[+-][[:space:]]*"schema_version"[[:space:]]*:'; then
+            echo "::error::Contract files changed without schema_version bump. See docs/VERSION_POLICY.md."
+            exit 1
+          fi
+
+          echo "Schema mutation guard OK"
 
   # The test job runs on a matrix of Node.js versions and caches dependencies to speed up
   # subsequent builds. Concurrency ensures that only one CI run per branch executes at a time.

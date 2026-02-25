@@ -1,4 +1,5 @@
-# Import products to Shopify from local data files
+# Import products to Shopify from local data files.
+# Compatibility entrypoint retained for older commands; canonical script is scripts/shopify/sync-products.ps1.
 
 param(
     [string]$DataDir = "data\products",

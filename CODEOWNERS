@@ -1,3 +1,10 @@
 # CODEOWNERS — structural integrity contract
 # See docs/OWNERSHIP_REGISTRY.md and AGENTS.md
+/.github/ @toodeceptive
+/docs/ @toodeceptive
+/scripts/ @toodeceptive
+/data/ @toodeceptive
+/src/ @toodeceptive
+/infra/ @toodeceptive
+/config/ @toodeceptive
 * @toodeceptive
