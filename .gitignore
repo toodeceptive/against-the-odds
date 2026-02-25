@@ -79,3 +79,6 @@ shopify-auth.json
 
 # OCR / Tesseract data (local only)
 *.traineddata
+
+# Structural signing key (never commit; script uses ~/.ssh/structural_key)
+infra/.structural_key

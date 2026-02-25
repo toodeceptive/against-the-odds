@@ -8,6 +8,7 @@ All infrastructure is now in place:
 - ✅ Scripts, config, data, workflows, assets, and codebase documented; main-only workflows; root .png moved to assets/brand.
 - ✅ Complete automation scripts; [scripts/README.md](scripts/README.md) for index. Product management, manufacturing, monitoring, GitHub Actions, testing framework.
 
+**Canonical queue**: [docs/status/WORK_QUEUE.md](docs/status/WORK_QUEUE.md) (P0/P1/P2 execution order).
 **Prioritized next steps** (guru expert analysis): [docs/status/NEXT_BEST_STEPS_20260131.md](docs/status/NEXT_BEST_STEPS_20260131.md) — runbook checks, credentials, branch hygiene, launch checklist, optional technical follow-up.
 
 ## 🚀 Immediate Next Steps
@@ -78,6 +79,7 @@ shopify theme dev --store=aodrop.com
 1. Copy `data/products/example-hoodie.json` to a new file
 2. Edit with your product details
 3. Import to Shopify:
+
    ```powershell
    .\scripts\products\sync.ps1 -Direction import
    ```
@@ -194,7 +196,7 @@ If `test-connection.ps1` fails:
 
 If `git push` fails:
 
-1. Check GitHub authentication: `git config --list | grep credential`
+1. Check GitHub authentication: `git config --list | Select-String credential`
 2. Verify remote URL: `git remote -v`
 3. May need to create Personal Access Token in GitHub Settings
 
@@ -224,7 +226,7 @@ Before starting development work:
 - [ ] All scripts executable
 - [ ] Documentation reviewed
 
-## 🎉 You're Ready!
+## 🎉 You're Ready
 
 Everything is set up and ready for development. Start with:
 

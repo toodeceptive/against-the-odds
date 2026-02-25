@@ -23,9 +23,9 @@ These workflows require the following secrets to be configured in GitHub:
 ### `ci.yml` (consolidated gate)
 
 - Runs on: Push to `main`, Pull requests targeting `main`
-- Actions: Lint, format check, unit tests, build, Trivy (security scan), secret-scan, npm audit (continue-on-error), optional coverage, Lighthouse (continue-on-error). Single workflow for all quality gates.
+- Actions: **arch_guard** (structural integrity), lint, format check, unit tests, build, Trivy (security scan), secret-scan, npm audit (continue-on-error), optional coverage, Lighthouse (continue-on-error). Single workflow for all quality gates.
 
-**Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `.\scripts\verify-pipeline.ps1`. CI runs lint, format check, unit tests, Trivy, secret-scan, and npm audit only. Before push, run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if you have no `.env.local`).
+**Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `.\scripts\verify-pipeline.ps1`. CI runs arch_guard, lint, format check, unit tests, Trivy, secret-scan, and npm audit. Before push, run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if you have no `.env.local`).
 
 ### `codeql.yml` (CodeQL analysis)
 
@@ -75,7 +75,7 @@ These workflows require the following secrets to be configured in GitHub:
 
 ## Branch protection (optional)
 
-- **update-branch-protection-status-checks.js**: Run `node scripts/github/update-branch-protection-status-checks.js` (with GITHUB_TOKEN or .env.local) to set required status checks for `main` to the CI job names: `test`, `secret-scan`, `quality`. These match the jobs in `ci.yml`.
+- **update-branch-protection-status-checks.js**: Run `node scripts/github/update-branch-protection-status-checks.js` (with GITHUB_TOKEN or .env.local) to set required status checks for `main` to the CI job names: `test`, `secret-scan`, `quality`, `arch_guard`. These match the jobs in `ci.yml`.
 
 ## To implement (optional)
 
