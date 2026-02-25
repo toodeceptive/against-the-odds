@@ -22,6 +22,7 @@ Single source of truth for active execution. This queue is compression-first and
 ## P2
 
 - [ ] Clean residual stale references in older audit docs only when touched by active work.
+- [ ] If `infra/STRUCTURAL_SIGNATURE_NEW.txt` is empty locally: close Cursor/IDE, then run `git restore infra/STRUCTURAL_SIGNATURE_NEW.txt` to restore from index.
 
 ## Approval Gates (Must Ask First)
 
