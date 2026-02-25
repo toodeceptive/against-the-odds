@@ -5,9 +5,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -27,86 +27,86 @@ jobs:
       security-events: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    # Cache npm dependencies based on the lock file
-    - name: Cache npm
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-${{ matrix.node-version }}-
+      # Cache npm dependencies based on the lock file
+      - name: Cache npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
 
-    # Cache Playwright browsers (if used) to avoid re‑downloading
-    - name: Cache Playwright
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-playwright-
+      # Cache Playwright browsers (if used) to avoid re‑downloading
+      - name: Cache Playwright
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: |
-        if [ -f package.json ]; then
-          npm ci
-        fi
-        
-    - name: Format check
-      run: |
-        if [ -f package.json ] && npm list prettier 2>/dev/null; then
-          npm run format:check || exit 1
-        fi
-        
-    - name: Run linter
-      run: |
-        if [ -f package.json ] && npm list eslint 2>/dev/null; then
-          npm run lint
-        fi
-        
-    - name: Run tests
-      run: |
-        if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
-          npm run test:unit
-        fi
-        
-    - name: Security audit
-      continue-on-error: true
-      run: |
-        if [ -f package.json ]; then
-          npm audit --audit-level=high
-        fi
-        
-    - name: Build verification
-      run: |
-        if [ -f package.json ]; then
-          npm run --if-present build
-        fi
-        
-    - name: Security scan
-      continue-on-error: true
-      uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        severity: 'CRITICAL,HIGH'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-    - name: Upload security results
-      if: always() && hashFiles('trivy-results.sarif') != ''
-      continue-on-error: true
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: 'trivy-results.sarif'
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+          fi
+
+      - name: Format check
+        run: |
+          if [ -f package.json ] && npm list prettier 2>/dev/null; then
+            npm run format:check || exit 1
+          fi
+
+      - name: Run linter
+        run: |
+          if [ -f package.json ] && npm list eslint 2>/dev/null; then
+            npm run lint
+          fi
+
+      - name: Run tests
+        run: |
+          if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
+            npm run test:unit
+          fi
+
+      - name: Security audit
+        continue-on-error: true
+        run: |
+          if [ -f package.json ]; then
+            npm audit --audit-level=high
+          fi
+
+      - name: Build verification
+        run: |
+          if [ -f package.json ]; then
+            npm run --if-present build
+          fi
+
+      - name: Security scan
+        continue-on-error: true
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload security results
+        if: always() && hashFiles('trivy-results.sarif') != ''
+        continue-on-error: true
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
 
   secret-scan:
     runs-on: ubuntu-22.04
@@ -134,16 +134,16 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Lighthouse CI
-      uses: treosh/lighthouse-ci-action@v10
-      continue-on-error: true
-      with:
-        urls: |
-          https://toodeceptive.github.io/against-the-odds/
-        uploadArtifacts: true
-        temporaryPublicStorage: true
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        continue-on-error: true
+        with:
+          urls: |
+            https://toodeceptive.github.io/against-the-odds/
+          uploadArtifacts: true
+          temporaryPublicStorage: true

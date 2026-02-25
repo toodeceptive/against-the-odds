@@ -60,24 +60,24 @@ jobs:
         shell: pwsh
         run: |
           ./scripts/shopify/theme-pull-rest.ps1 -Store $env:SHOPIFY_STORE_DOMAIN -ThemePath "src/shopify/themes/aodrop-theme" -Theme "live"
-          
+
           if (-not (Test-Path "src/shopify/themes/aodrop-theme")) {
             throw "Theme path missing after pull."
           }
-          
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # Publish the pulled theme snapshot to a dedicated branch (force-updated)
           git checkout -B shopify-theme-backup
           git add "src/shopify/themes/aodrop-theme"
-          
+
           $status = git status --porcelain
           if ([string]::IsNullOrWhiteSpace($status)) {
             Write-Host "No changes to commit; backup branch unchanged."
             exit 0
           }
-          
+
           $stamp = (Get-Date).ToString("yyyy-MM-dd")
           git commit -m "chore: backup Shopify theme ($stamp)"
           git push origin shopify-theme-backup --force
