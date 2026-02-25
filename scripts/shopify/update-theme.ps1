@@ -35,6 +35,12 @@ if (Test-Path ".env.local") {
 if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
 if ([string]::IsNullOrWhiteSpace($ThemeId)) { $ThemeId = $env:SHOPIFY_THEME_ID }
 
+# Default to this repo's store so CLI never gets an empty store (".myshopify.com" error)
+if ([string]::IsNullOrWhiteSpace($Store) -or $Store -notmatch '\.') {
+    $Store = "aodrop.com"
+    Write-Host "Using default store: aodrop.com (set SHOPIFY_STORE_DOMAIN in .env.local to override)" -ForegroundColor Gray
+}
+
 Write-Host "=== Shopify Theme Update ===" -ForegroundColor Cyan
 Write-Host ""
 
@@ -50,7 +56,10 @@ if (-not (Test-Path $ThemePath)) {
 $storeForCli = $Store
 if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
     $storeForCli = "aodrop.com.myshopify.com"
+} elseif ($Store -notmatch "\.myshopify\.com$") {
+    $storeForCli = "$Store.myshopify.com"
 }
+Write-Host "Store: $storeForCli" -ForegroundColor Cyan
 
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN
 if ([string]::IsNullOrWhiteSpace($themeToken)) { $themeToken = $env:SHOPIFY_ACCESS_TOKEN }

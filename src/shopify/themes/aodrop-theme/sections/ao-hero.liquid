@@ -1,0 +1,133 @@
+{% comment %}
+  AO Hero — editable headline, subhead, CTA, and brand images.
+  Add to homepage (or any template) via Theme Editor. All text and images customizable.
+{% endcomment %}
+<section class="ao-brand-hero" style="background-color: var(--ao-bg, #0d0d0d); color: var(--ao-text, #f5f0e8); padding: 4rem 1.5rem; text-align: center;">
+  <div class="page-width">
+    {% if section.settings.logo != blank %}
+      <div class="ao-brand-hero__logo" style="margin-bottom: 1.5rem;">
+        <img
+          src="{{ section.settings.logo | image_url: width: 560 }}"
+          alt="{{ section.settings.logo_alt | default: 'Against the Odds' }}"
+          width="280"
+          height="auto"
+          loading="eager"
+        >
+      </div>
+    {% endif %}
+    {% if section.settings.headline != blank %}
+      <h1 class="ao-brand-hero__title" style="font-family: var(--ao-font-display, inherit); font-size: clamp(2rem, 5vw, 3.5rem); text-transform: uppercase; margin-bottom: 0.5rem;">
+        {{ section.settings.headline }}
+      </h1>
+    {% endif %}
+    {% if section.settings.subhead != blank %}
+      <p class="ao-brand-hero__subtitle" style="color: var(--ao-text-muted, #b8b0a0); font-size: 1.125rem; margin-bottom: 1.5rem;">
+        {{ section.settings.subhead }}
+      </p>
+    {% endif %}
+    {% if section.settings.slogan_image != blank %}
+      <div class="ao-brand-hero__slogan" style="margin-bottom: 1rem;">
+        <img
+          src="{{ section.settings.slogan_image | image_url: width: 800 }}"
+          alt="{{ section.settings.slogan_alt | default: "If y'all drop it, we all got it. If y'all rock it, we all profit." }}"
+          width="400"
+          height="auto"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+    {% if section.settings.motto_image != blank %}
+      <div class="ao-brand-hero__motto" style="margin-bottom: 1.5rem;">
+        <img
+          src="{{ section.settings.motto_image | image_url: width: 640 }}"
+          alt="{{ section.settings.motto_alt | default: 'The Odds Were Never Even' }}"
+          width="320"
+          height="auto"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+    {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+      <a href="{{ section.settings.cta_link }}" class="button button--primary" style="margin-top: 1rem;">
+        {{ section.settings.cta_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AO Hero",
+  "tag": "section",
+  "class": "section-ao-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "THE ODDS WERE NEVER EVEN"
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Premium streetwear for people who keep going."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Join the drop list"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Brand images"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (header/hero)"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "Logo alt text",
+      "default": "Against the Odds"
+    },
+    {
+      "type": "image_picker",
+      "id": "slogan_image",
+      "label": "Slogan graphic (If y'all drop it… We all profit)"
+    },
+    {
+      "type": "text",
+      "id": "slogan_alt",
+      "label": "Slogan alt text"
+    },
+    {
+      "type": "image_picker",
+      "id": "motto_image",
+      "label": "Motto graphic (The Odds Were Never Even)"
+    },
+    {
+      "type": "text",
+      "id": "motto_alt",
+      "label": "Motto alt text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AO Hero"
+    }
+  ]
+}
+{% endschema %}

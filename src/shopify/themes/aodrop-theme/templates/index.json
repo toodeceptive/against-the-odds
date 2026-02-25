@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "ao_hero": {
+      "type": "ao-hero",
+      "settings": {
+        "headline": "THE ODDS WERE NEVER EVEN",
+        "subhead": "Premium streetwear for people who keep going.",
+        "cta_label": "Join the drop list",
+        "cta_link": ""
+      },
+      "block_order": []
+    },
+    "ao_footer": {
+      "type": "ao-footer",
+      "settings": {
+        "tagline": "THE ODDS WERE NEVER EVEN · WE ALL PROFIT",
+        "bio": "Premium streetwear for people who keep going.",
+        "copyright": "© 2026 Against the Odds. All rights reserved."
+      },
+      "block_order": []
+    }
+  },
+  "order": ["ao_hero", "ao_footer"]
+}
