@@ -42,7 +42,7 @@
 **Edit in Cursor → push to GitHub → store updates.** Store is connected to this repo via the Shopify GitHub App; pushing to the connected branch (usually `main`) triggers theme deployment. No `shopify theme push` needed for that flow.
 
 - **One-time**: Pull live theme into repo: `.\scripts\shopify\theme-pull.ps1` (then commit and push).
-- **Preview before commit**: Press **Ctrl+Alt+T** (approved shortcut; add keybinding once — see `docs/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks → Run Task → Shopify: Theme Dev (preview before commit)**. The browser opens the preview URL automatically when the server is ready; you can also click the URL in the terminal or paste into **View → Simple Browser**. No commit needed to preview.
+- **Preview before commit**: Run `.\scripts\open-preview-popup.ps1` (or **Tasks → Start theme preview** / `.\scripts\start-theme-preview.ps1`) after writing [docs/status/pending-approval.md](docs/status/pending-approval.md). That opens the approval file in Cursor, the AO preview in the browser (static mock immediately; live theme when dev server is ready), and theme dev in a new window. Set `SHOPIFY_CLI_THEME_TOKEN` in `.env.local` so theme dev starts without login prompt (see [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md)). Optional: **Ctrl+Alt+T** for theme dev only; **Ctrl+Alt+P** to open pending-approval.md.
 - **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, then commit, push to `main`.
 - **Deploy log / rollback**: After each deploy or product sync, append to [docs/status/deploy-log.md](docs/status/deploy-log.md). Rollback: theme → Shopify Admin → theme card → Actions → Reset to last commit; products → revert JSON and re-run sync.
 
