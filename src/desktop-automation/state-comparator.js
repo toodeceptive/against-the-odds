@@ -46,13 +46,13 @@ export function compareStates(state1, state2) {
     },
     issues: {
       newIssues: state2.issues.filter(
-        (issue2) => !state1.issues.some((issue1) => issue1.message === issue2.message)
+        (issue2) => !state1.issues.some((issue1) => issue1.message === issue2.message),
       ),
       resolvedIssues: state1.issues.filter(
-        (issue1) => !state2.issues.some((issue2) => issue2.message === issue1.message)
+        (issue1) => !state2.issues.some((issue2) => issue2.message === issue1.message),
       ),
       persistentIssues: state1.issues.filter((issue1) =>
-        state2.issues.some((issue2) => issue2.message === issue1.message)
+        state2.issues.some((issue2) => issue2.message === issue1.message),
       ),
     },
     summary: {
@@ -175,7 +175,7 @@ export function detectStateChangeIssues(comparison) {
   if (comparison.changes.textChanged) {
     const errorKeywords = ['error', 'failed', 'exception'];
     const hasErrorKeywords = errorKeywords.some((keyword) =>
-      comparison.changes.textDiff.added.some((line) => line.toLowerCase().includes(keyword))
+      comparison.changes.textDiff.added.some((line) => line.toLowerCase().includes(keyword)),
     );
 
     if (hasErrorKeywords) {

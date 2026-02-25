@@ -2,12 +2,22 @@
 
 **Agent permission:** You have permission to perform all actions in this repo; see [AGENTS.md](AGENTS.md) or `.cursor/rules`. Existing safety rules (preview-before-apply for store changes, no secrets in commits) still apply.
 
+## For AI agents
+
+- **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill).
+- **Daily gates**: Run `npm run quality` and, before push, `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no .env.local). Integration: `.\scripts\run-runbook.ps1` when credentials are set.
+- **Perfection loop**: To loop until work is fixed, perfected, complete, and optimized (project-wide cleanup/updates/optimizations; fix failed runs; track progression/commit/review/push), use [prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md](prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md) and [.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md](.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md). Run as needed; see [.cursor/plans/README.md](.cursor/plans/README.md) for all three plans.
+- **100-step multiphase PP cycles**: For deep research, fixes, optimizations, auditing, and finalizations across all trees/worktrees/branches/Git/GitHub/repos (fix any failure/error/setup by means necessary): [docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md](docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md).
+
+**Repo root**: Open the **primary** repo (`C:/Users/LegiT/against-the-odds`) as the workspace root so diffs and paths show repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`), not a prefix like `hal/`. If the diff or Source Control shows a path containing `hal` or `hvf`, you are in the wrong workspace—do not commit; close it and open primary first. Hal and hvf are stale workspace names, not in `git worktree list`; see [WORKTREE_INVENTORY.md](docs/status/WORKTREE_INVENTORY.md).
+
 **Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (approved; browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
 
 ## Daily Checks
 
 - **One command:** `npm run quality` (format, format:check, lint, test:unit)
 - Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
+- **Before push:** Run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`). CI runs **arch_guard**, test, secret-scan, quality; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
 - **Prettier runs automatically on every commit** (pre-commit hook); see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)
@@ -32,7 +42,7 @@
 **Edit in Cursor → push to GitHub → store updates.** Store is connected to this repo via the Shopify GitHub App; pushing to the connected branch (usually `main`) triggers theme deployment. No `shopify theme push` needed for that flow.
 
 - **One-time**: Pull live theme into repo: `.\scripts\shopify\theme-pull.ps1` (then commit and push).
-- **Preview before commit**: Press **Ctrl+Alt+T** (approved shortcut; add keybinding once — see `docs/KEYBINDING_PENDING_APPROVAL.md`) or **Tasks → Run Task → Shopify: Theme Dev (preview before commit)**. The browser opens the preview URL automatically when the server is ready; you can also click the URL in the terminal or paste into **View → Simple Browser**. No commit needed to preview.
+- **Preview before commit**: Run `.\scripts\open-preview-popup.ps1` (or **Tasks → Start theme preview** / `.\scripts\start-theme-preview.ps1`) after writing [docs/status/pending-approval.md](docs/status/pending-approval.md). That opens the approval file in Cursor, the AO preview in the browser (static mock immediately; live theme when dev server is ready), and theme dev in a new window. Set `SHOPIFY_CLI_THEME_TOKEN` in `.env.local` so theme dev starts without login prompt (see [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md)). Optional: **Ctrl+Alt+T** for theme dev only; **Ctrl+Alt+P** to open pending-approval.md.
 - **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, then commit, push to `main`.
 - **Deploy log / rollback**: After each deploy or product sync, append to [docs/status/deploy-log.md](docs/status/deploy-log.md). Rollback: theme → Shopify Admin → theme card → Actions → Reset to last commit; products → revert JSON and re-run sync.
 
@@ -54,13 +64,20 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 **Desktop automation (optional)**: `robotjs` and `node-window-manager` are optionalDependencies; they may require native build (node-gyp) on install. If `npm install` fails for these, you can skip optional deps or install build tools (e.g. Visual Studio Build Tools on Windows). See `src/desktop-automation/` and `tests/desktop-automation/`.
 
+## Structural integrity (after governance file changes)
+
+After editing AGENTS.md, CODEOWNERS, docs/OWNERSHIP_REGISTRY.md, docs/SSOT_ATO.md, docs/VERSION_POLICY.md, or .github/workflows/ci.yml, run `bash scripts/infra/sign-structural-state.sh` (or `.\scripts\infra\sign-structural-state.ps1` on Windows; use Git Bash or WSL if sign step fails). Commit `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt` (or `STRUCTURAL_SIGNATURE_NEW.txt` if the former was locked; arch_guard accepts either). See [infra/README.md](infra/README.md).
+
 ## Credentials
 
 - Store in `.env.local` (never commit)
 - If missing, copy from `.env.example` and fill values
+- **Full system setup**: Run `.\scripts\setup\full-setup.ps1` for a single entry point (ensures .env.local, guides Shopify/GitHub credentials, runs verify-credentials). See [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md) and [docs/BROWSER_CREDENTIAL_FLOW.md](docs/BROWSER_CREDENTIAL_FLOW.md).
 - **replacements.txt** at repo root: regex for git-filter-repo (Shopify secret replacement in history); do not remove if using history sanitization.
 
 ## Troubleshooting
+
+For **worktree/hal path and commit policy** (do not commit when diff shows hal or hvf; open primary first): [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) — "Cursor: Failed to apply worktree or missing file in worktree path."
 
 ### Git connectivity issues (proxy misconfiguration)
 
@@ -106,11 +123,12 @@ After filling `.env.local`:
 
 ## replacements.txt (repo root)
 
-- **Purpose**: Regex for git-filter-repo (Shopify secret replacement when sanitizing history). Do not remove if you use history sanitization; see `docs/status/blocker_resolution_commands_20260129.md` or archive for context.
+- **Purpose**: Regex for git-filter-repo (Shopify secret replacement when sanitizing history). Do not remove if you use history sanitization; see `docs/status/CONSOLIDATION_LOG.md` or archive for context.
 
 ## Shopify app settings (if using embedded app)
 
 - `APP_URL` — your app’s root URL
 - `PREFERENCES_URL` — preferences/settings URL
 - `REDIRECT_URLS` — allowed OAuth redirect URLs (comma-separated in scripts if needed)
-  See `docs/SHOPIFY_SETUP.md` for details.
+
+See `docs/SHOPIFY_SETUP.md` for details.

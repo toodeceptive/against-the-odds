@@ -7,7 +7,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 Write-Host "=== Automated Environment Configuration ===" -ForegroundColor Cyan
@@ -76,18 +76,60 @@ foreach ($key in $knownCredentials.Keys) {
     }
 }
 
-# Missing credentials that need user input
-$missingCredentials = @()
-if ([string]::IsNullOrWhiteSpace($envVars['SHOPIFY_ACCESS_TOKEN']) -or 
-    $envVars['SHOPIFY_ACCESS_TOKEN'] -match 'your_.*_here') {
-    $missingCredentials += "SHOPIFY_ACCESS_TOKEN"
+# --- Shopify access token: prefer client-credentials, else browser flow ---
+$needShopifyToken = [string]::IsNullOrWhiteSpace($envVars['SHOPIFY_ACCESS_TOKEN']) -or $envVars['SHOPIFY_ACCESS_TOKEN'] -match 'your_.*_here'
+$haveApiKeySecret = -not [string]::IsNullOrWhiteSpace($envVars['SHOPIFY_API_KEY']) -and $envVars['SHOPIFY_API_KEY'] -notmatch 'your_.*_here' `
+    -and -not [string]::IsNullOrWhiteSpace($envVars['SHOPIFY_API_SECRET']) -and $envVars['SHOPIFY_API_SECRET'] -notmatch 'your_.*_here'
+
+if ($needShopifyToken -and $haveApiKeySecret) {
+    Write-Host ""
+    Write-Host "SHOPIFY_ACCESS_TOKEN missing but API key/secret present. Obtaining token via client-credentials..." -ForegroundColor Cyan
+    if (Test-Path "scripts\shopify\browser\get-token-client-credentials.ps1") {
+        try {
+            & "scripts\shopify\browser\get-token-client-credentials.ps1"
+            $envContent = Get-Content $envLocalPath
+            $envVars = @{}
+            foreach ($line in $envContent) {
+                if ($line -match '^([A-Z_]+)=(.*)$' -and -not $line.StartsWith('#')) {
+                    $envVars[$matches[1]] = $matches[2].Trim()
+                }
+            }
+            $needShopifyToken = $false
+        } catch {
+            Write-Host "  [WARN] Client-credentials failed: $_" -ForegroundColor Yellow
+        }
+    }
 }
-if ([string]::IsNullOrWhiteSpace($envVars['GITHUB_TOKEN']) -or 
-    $envVars['GITHUB_TOKEN'] -match 'your_.*_here') {
+
+if ($needShopifyToken -and $Interactive) {
+    Write-Host ""
+    Write-Host "SHOPIFY_ACCESS_TOKEN is missing." -ForegroundColor Yellow
+    Write-Host "  1. Run browser flow: open Shopify Admin (log in when asked), then run: .\scripts\shopify\browser\get-access-token.ps1" -ForegroundColor White
+    Write-Host "  2. Or copy token from Admin → Apps → Development → API credentials, then: .\scripts\shopify\browser\save-token-to-env.ps1" -ForegroundColor White
+    Write-Host "  3. Or enter manually below (option 1)." -ForegroundColor White
+}
+
+# --- Theme ID: optional browser extraction ---
+$needThemeId = [string]::IsNullOrWhiteSpace($envVars['SHOPIFY_THEME_ID']) -or $envVars['SHOPIFY_THEME_ID'] -match 'your_.*_here'
+if ($needThemeId -and $Interactive) {
+    Write-Host ""
+    $themeChoice = Read-Host "Get SHOPIFY_THEME_ID via browser now? (y/n; n = add later or use shopify theme list)"
+    if ($themeChoice -eq "y" -and (Test-Path "scripts\shopify\browser\get-theme-id.ps1")) {
+        & "scripts\shopify\browser\get-theme-id.ps1"
+        $envContent = Get-Content $envLocalPath
+        foreach ($line in $envContent) {
+            if ($line -match '^SHOPIFY_THEME_ID=(.*)$') { $envVars['SHOPIFY_THEME_ID'] = $matches[1].Trim(); break }
+        }
+    }
+}
+
+# Missing credentials that need user input (excluding Shopify token if already obtained)
+$missingCredentials = @()
+if ($needShopifyToken) { $missingCredentials += "SHOPIFY_ACCESS_TOKEN" }
+if ([string]::IsNullOrWhiteSpace($envVars['GITHUB_TOKEN']) -or $envVars['GITHUB_TOKEN'] -match 'your_.*_here') {
     $missingCredentials += "GITHUB_TOKEN"
 }
-if ([string]::IsNullOrWhiteSpace($envVars['SHOPIFY_THEME_ID']) -or 
-    $envVars['SHOPIFY_THEME_ID'] -match 'your_.*_here') {
+if ($needThemeId -and ($envVars['SHOPIFY_THEME_ID'] -match 'your_.*_here' -or [string]::IsNullOrWhiteSpace($envVars['SHOPIFY_THEME_ID']))) {
     $missingCredentials += "SHOPIFY_THEME_ID"
 }
 
@@ -103,6 +145,7 @@ if ($missingCredentials.Count -gt 0 -and $Interactive) {
     Write-Host "  1. Enter credentials manually" -ForegroundColor White
     Write-Host "  2. Use browser automation to extract (if Shopify is open)" -ForegroundColor White
     Write-Host "  3. Skip for now (you can add later)" -ForegroundColor White
+    Write-Host "  GitHub token: create at https://github.com/settings/tokens" -ForegroundColor Gray
     Write-Host ""
     
     $choice = Read-Host "Choose option (1/2/3)"
@@ -131,9 +174,10 @@ if ($missingCredentials.Count -gt 0 -and $Interactive) {
     }
 }
 
-# Write updated .env.local
+# Write updated .env.local (re-read file in case sub-scripts updated it)
 Write-Host ""
 Write-Host "Writing .env.local..." -ForegroundColor Yellow
+$envContent = Get-Content $envLocalPath
 $newContent = @()
 foreach ($line in $envContent) {
     if ($line -match '^([A-Z_]+)=(.*)$' -and -not $line.StartsWith('#')) {
@@ -194,6 +238,6 @@ Write-Host ""
 Write-Host "[OK] Environment configuration complete!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Cyan
-Write-Host "1. Review .env.local to ensure all values are correct" -ForegroundColor White
-Write-Host "2. Run verification: .\scripts\setup\verify-credentials.ps1" -ForegroundColor White
-Write-Host "3. Test connections: .\scripts\shopify\test-connection.ps1" -ForegroundColor White
+Write-Host "1. Run verification: .\scripts\setup\verify-credentials.ps1" -ForegroundColor White
+Write-Host "2. Run full checks: .\scripts\run-runbook.ps1" -ForegroundColor White
+Write-Host "3. (Optional) Review .env.local and test: .\scripts\shopify\test-connection.ps1" -ForegroundColor White

@@ -39,7 +39,7 @@ export async function getMousePosition() {
         'powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $pos = [System.Windows.Forms.Cursor]::Position; Write-Output \'X=$($pos.X), Y=$($pos.Y)\'"',
         {
           encoding: 'utf-8',
-        }
+        },
       );
       const match = result.match(/X=(\d+), Y=(\d+)/);
       if (match) {
@@ -91,7 +91,7 @@ export async function moveMouse(x, y, options = {}) {
     try {
       execSync(
         `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x}, ${y})"`,
-        { stdio: 'ignore' }
+        { stdio: 'ignore' },
       );
     } catch (_error) {
       // Silently fail if PowerShell command doesn't work
@@ -233,7 +233,7 @@ export async function dragAndDrop(startX, startY, endX, endY, options = {}) {
     const { execSync } = await import('child_process');
     execSync(
       `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${startX}, ${startY})"`,
-      { stdio: 'ignore' }
+      { stdio: 'ignore' },
     );
   }
 

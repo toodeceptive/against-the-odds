@@ -1,21 +1,23 @@
 {
   "recommendations": [
+    "EditorConfig.EditorConfig",
     "ms-vscode.PowerShell",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "ms-playwright.playwright",
     "vitest.explorer",
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
-    "ms-vscode.vscode-typescript-next",
-    "bradlc.vscode-tailwindcss",
-    "formulahendry.auto-rename-tag",
-    "christian-kohler.path-intellisense",
     "eamodio.gitlens",
     "GitHub.vscode-pull-request-github",
     "mikestead.dotenv",
     "DavidAnson.vscode-markdownlint",
     "redhat.vscode-yaml",
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "shopify.theme-check-vscode",
+    "codacy-app.codacy",
     "ms-python.python"
-  ]
+  ],
+  "unwantedRecommendations": []
 }

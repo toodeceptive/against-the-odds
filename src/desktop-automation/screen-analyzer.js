@@ -183,10 +183,10 @@ export function compareScreenStates(state1, state2) {
     elementsChanged: JSON.stringify(state1.elements) !== JSON.stringify(state2.elements),
     issuesChanged: state1.issues.length !== state2.issues.length,
     newIssues: state2.issues.filter(
-      (issue) => !state1.issues.some((i) => i.message === issue.message)
+      (issue) => !state1.issues.some((i) => i.message === issue.message),
     ),
     resolvedIssues: state1.issues.filter(
-      (issue) => !state2.issues.some((i) => i.message === issue.message)
+      (issue) => !state2.issues.some((i) => i.message === issue.message),
     ),
   };
 

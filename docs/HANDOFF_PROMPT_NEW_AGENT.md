@@ -47,6 +47,7 @@ The user has granted the agent permission to **edit all files (including ignored
 - **Destructive git only with approval**: Force-push or history rewrite only after user approval (already given for this handoff).
 - **Guru-level accuracy**: Use state-of-the-art methods, task management, and precision; may use browser automation or local access when necessary to complete setup.
 - **Fetch project info from repo and Cursor**: It reads from `.cursor/`, `docs/`, `docs/status/`, and the repo—not from "all chat history" (which the new agent cannot see). The prompt summarizes state so the new agent has full context.
+- **Guru/PP execution**: New agents should use [docs/GURU_PP_OPERATOR_GUIDE.md](GURU_PP_OPERATOR_GUIDE.md) and [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md) for execution baseline and daily gates (verify-pipeline, run-runbook).
 - **Files and uploads for store changes**: The user grants the agent permission to read files/paths and use uploads shared in chat when the user is requesting a store change (e.g. "add a product with these images" or providing description/data from their PC). Use them only for the requested change; follow the workflow in docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md (preview → approve → apply → log).
 
 ---
@@ -68,8 +69,8 @@ PERMISSIONS (user-approved):
 - Initial setup: Ignore all security measures for initial setup; just prompt the user to continue.
 
 CONTEXT — Read these first (in this order):
-1. docs/status/system_finalization_report_20260129.md — inventory, blockers, what's done
-2. docs/status/blocker_resolution_commands_20260129.md — push unblock URL, rotate steps, exact commands (push already succeeded via history rewrite)
+1. docs/status/CONSOLIDATION_LOG.md — what was done, when; docs/status/INDEX_REPORTS.md — index of status/report files
+2. docs/status/HANDOFF_FOR_NEW_AGENT_202602.md — current repo/branch/worktree state, deferrals
 3. OPERATOR_RUNBOOK.md — daily checks, Shopify, credentials, troubleshooting
 4. docs/CREDENTIALS_SETUP.md — .env.local and where to get Shopify/GitHub values
 5. docs/UPDATE_SHOPIFY_FROM_CURSOR.md — how to update the Shopify store from this Cursor app
@@ -77,18 +78,18 @@ CONTEXT — Read these first (in this order):
 7. docs/launch/00_launch_checklist.md — launch checklist (next-phase work)
 8. .cursor/context/shopify.md and .cursor/context/github.md — if present, for store/repo context
 
-**Plan-only runs (Security & Platform / next team):** Read docs/status/PLAN_AGENT_ENTRY.md first if present — single entry for plan chats and binding rules. Then read docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md, .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (single plan; open in Cursor and use Build), docs/status/CONVERSATION_AUDIT.md (from this worktree or primary if missing).
+**Plan-only runs (Security & Platform / next team):** Read docs/status/PLAN_AGENT_ENTRY.md first if present — single entry for plan chats and binding rules. Then read docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md, .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md (single plan; open in Cursor and use Build), docs/status/CONSOLIDATION_LOG.md (from this worktree or primary if missing).
 **Cross-worktree:** If you are in a worktree (e.g. uqy, snq, mhx) where those three files are missing, read them from **primary**: C:\Users\LegiT\against-the-odds (main). Fold Expert Team requirements into your plan. See docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md if present.
 
 CURRENT STATE:
 - Consolidation is done: all work is on main. Push to GitHub has SUCCEEDED: history was rewritten with git-filter-repo (Shopify secret removed from history); main was force-pushed to origin. Credentials were rotated; .env.local holds the new secret (never commit).
 - **User's browser**: The user has Chrome open with tabs already logged in (e.g. Shopify, GitHub, Cloudflare). When you need to fetch credentials, unblock flows, or complete setup, navigate **this same browser** (the user's open windows)—not a separate session—to finalize end-to-end setup before proceeding.
-- All 55 PowerShell scripts parse; debug sweep runs; lint passes; proof in docs/status/.
+- All 74 PowerShell scripts parse; verify-pipeline and lint pass; proof in docs/status/.
 - .env.local exists in repo root. You may edit .env.local (and any ignored file) to fill in real credentials—e.g. after guiding the user through browser login, using repo scripts that extract tokens, or other secure means. Never commit .env.local or any file containing secrets; never log or echo tokens, passwords, or API secrets.
 
 YOUR TASKS (in order; execute with guru precision and task management):
 1. Verification: Run .\scripts\debug\parse-all-ps1.ps1; run .\scripts\run-everything-debug.ps1 (use -SkipDeps -SkipTests if npm fails); ensure lint passes. Save any new proof log under docs/status/ if needed.
-2. Mark finalization complete (if not already): Ensure docs/status/system_finalization_report_20260129.md status is "Finalization complete" and notes that push succeeded.
+2. Mark finalization complete (if not already): Ensure docs/status/CONSOLIDATION_LOG.md is current and docs/status/PHASE_0_FINALIZATION.md contains "Phase 0 finalized; proceeding allowed" when Phase 0 is done.
 3. Next steps: Using docs/launch/00_launch_checklist.md and NEXT_STEPS.md, complete or advance the immediate next steps: ensure .env.local has real values (edit it or use browser/login flows as needed), run .\scripts\shopify\test-connection.ps1, then theme dev or merch ordering prep per docs/launch/07_drop01_product_image_plan_extended.md and assets/drop01/READY_TO_SEND_CHECKLIST.md. Use any combination of repo scripts, Chrome login, and local file edits required to achieve end-to-end setup with guru-level accuracy.
 
 SECURITY RULES (mandatory):
@@ -111,7 +112,7 @@ Confirm you've read the context files, then execute the tasks in order with guru
 - **Tasks are sequential**: Verify → mark complete → next steps. Push is done.
 - **Security in the prompt**: Explicit "never commit secrets," "only repo scripts," "credentials only from .env.local" keeps behavior safe even with "run everything."
 - **No secrets in the prompt**: The prompt does not contain your tokens or passwords; it points to `.env.local` and docs.
-- **Unblock URL in repo**: The exact GitHub unblock link lives in `docs/status/blocker_resolution_commands_20260129.md`; kept for reference (push was resolved via history rewrite).
+- **Unblock / push**: Push was resolved via history rewrite; see `docs/status/CONSOLIDATION_LOG.md` for context. No separate blocker-resolution file required.
 
 ---
 
@@ -127,11 +128,11 @@ Confirm you've read the context files, then execute the tasks in order with guru
 
 ## Quick Reference
 
-| Need                       | Where                                                                                   |
-| -------------------------- | --------------------------------------------------------------------------------------- |
-| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above                       |
-| When to restart            | When this file is saved; push has succeeded                                             |
-| Tree / mode                | Primary repo only, main, Agent mode, "Run everything"                                   |
-| Push unblock + rotate      | docs/status/blocker_resolution_commands_20260129.md (push resolved via history rewrite) |
-| Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                                                  |
-| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                                      |
+| Need                       | Where                                                             |
+| -------------------------- | ----------------------------------------------------------------- |
+| Exact prompt for new agent | Copy the block under **Exact Prompt to Give the New Agent** above |
+| When to restart            | When this file is saved; push has succeeded                       |
+| Tree / mode                | Primary repo only, main, Agent mode, "Run everything"             |
+| Push unblock + rotate      | CONSOLIDATION_LOG (push resolved via history rewrite)             |
+| Credentials                | .env.local + docs/CREDENTIALS_SETUP.md                            |
+| Update Shopify from Cursor | docs/UPDATE_SHOPIFY_FROM_CURSOR.md                                |

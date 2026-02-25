@@ -6,7 +6,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 if (-not $Quiet) {
@@ -70,10 +70,10 @@ if ([string]::IsNullOrWhiteSpace($githubToken) -or $githubToken -match 'your_.*_
             "Authorization" = "token $githubToken"
             "Accept" = "application/vnd.github.v3+json"
         }
-        
+
         $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$githubUsername/$githubRepo" `
             -Headers $headers -Method Get -TimeoutSec 10
-        
+
         $results.github.status = "valid"
         $results.github.message = "Connected to repository: $($response.full_name)"
         if (-not $Quiet) {
@@ -100,8 +100,8 @@ $shopifyStore = $envVars['SHOPIFY_STORE_DOMAIN']
 $shopifyToken = $envVars['SHOPIFY_ACCESS_TOKEN']
 $shopifyApiKey = $envVars['SHOPIFY_API_KEY']
 
-if ([string]::IsNullOrWhiteSpace($shopifyStore) -or 
-    [string]::IsNullOrWhiteSpace($shopifyToken) -or 
+if ([string]::IsNullOrWhiteSpace($shopifyStore) -or
+    [string]::IsNullOrWhiteSpace($shopifyToken) -or
     $shopifyToken -match 'your_.*_here') {
     $results.shopify.status = "missing"
     $results.shopify.message = "Shopify credentials not fully configured"
@@ -114,10 +114,10 @@ if ([string]::IsNullOrWhiteSpace($shopifyStore) -or
             "X-Shopify-Access-Token" = $shopifyToken
             "Content-Type" = "application/json"
         }
-        
+
         $response = Invoke-RestMethod -Uri "https://$shopifyStore/admin/api/2026-01/shop.json" `
             -Headers $headers -Method Get -TimeoutSec 10
-        
+
         $results.shopify.status = "valid"
         $results.shopify.message = "Connected to store: $($response.shop.name)"
         if (-not $Quiet) {
@@ -143,11 +143,11 @@ if (-not $Quiet) {
     Write-Host "GitHub: $($results.github.status) - $($results.github.message)" -ForegroundColor $(if ($results.github.status -eq "valid") { "Green" } elseif ($results.github.status -eq "missing") { "Yellow" } else { "Red" })
     Write-Host "Shopify: $($results.shopify.status) - $($results.shopify.message)" -ForegroundColor $(if ($results.shopify.status -eq "valid") { "Green" } elseif ($results.shopify.status -eq "missing") { "Yellow" } else { "Red" })
     Write-Host ""
-    
-    $allValid = ($results.github.status -eq "valid" -or $results.github.status -eq "missing") -and 
+
+    $allValid = ($results.github.status -eq "valid" -or $results.github.status -eq "missing") -and
                 ($results.shopify.status -eq "valid" -or $results.shopify.status -eq "missing") -and
                 $results.environment.status -eq "configured"
-    
+
     if ($allValid) {
         Write-Host "[OK] Credential verification complete!" -ForegroundColor Green
     } else {

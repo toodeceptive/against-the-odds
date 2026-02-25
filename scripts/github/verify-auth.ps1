@@ -7,7 +7,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 Write-Host "=== GitHub Authentication Verification ===" -ForegroundColor Cyan
@@ -47,12 +47,12 @@ if (-not [string]::IsNullOrWhiteSpace($githubToken) -and $githubToken -notmatch 
     try {
         $headers = @{
             "Authorization" = "token $githubToken"
-            "Accept" = "application/vnd.github.v3+json"
+            "Accept"        = "application/vnd.github.v3+json"
         }
-        
+
         $response = Invoke-RestMethod -Uri "https://api.github.com/user" `
             -Headers $headers -Method Get -TimeoutSec 10
-        
+
         Write-Host "  [OK] GitHub API access successful" -ForegroundColor Green
         Write-Host "    Authenticated as: $($response.login)" -ForegroundColor Cyan
         Write-Host "    User ID: $($response.id)" -ForegroundColor Cyan
@@ -85,19 +85,19 @@ if ($TestPush) {
     Write-Host ""
     Write-Host "Testing push capability..." -ForegroundColor Yellow
     Write-Host "  (Creating test commit)" -ForegroundColor Cyan
-    
+
     # Create a test file
     $testFile = ".github-test-$(Get-Date -Format 'yyyyMMddHHmmss')"
     "test" | Out-File -FilePath $testFile
-    
+
     try {
         git add $testFile
         git commit -m "test: GitHub auth verification" --no-verify 2>&1 | Out-Null
-        
+
         $pushResult = git push origin HEAD 2>&1
         if ($LASTEXITCODE -eq 0) {
             Write-Host "  [OK] Push successful" -ForegroundColor Green
-            
+
             # Cleanup
             git reset HEAD~1 --soft 2>&1 | Out-Null
             git restore --staged $testFile 2>&1 | Out-Null
@@ -135,7 +135,7 @@ if ($TestPull) {
 if ($CheckSecrets) {
     Write-Host ""
     Write-Host "Checking GitHub Actions secrets..." -ForegroundColor Yellow
-    
+
     if (Get-Command gh -ErrorAction SilentlyContinue) {
         try {
             $secrets = gh secret list 2>&1

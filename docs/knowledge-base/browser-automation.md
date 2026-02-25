@@ -66,7 +66,7 @@ const result = await retryWithBackoff(
     return await page.click('button');
   },
   3,
-  1000
+  1000,
 );
 ```
 

@@ -80,7 +80,7 @@ export async function extractTableData(page, tableSelector) {
       if (!table) return [];
 
       const headers = Array.from(
-        table.querySelectorAll('thead th, tr:first-child th, tr:first-child td')
+        table.querySelectorAll('thead th, tr:first-child th, tr:first-child td'),
       ).map((th) => th.textContent.trim());
 
       const rows = Array.from(table.querySelectorAll('tbody tr, tr:not(:first-child)'));

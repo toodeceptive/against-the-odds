@@ -2,6 +2,27 @@
 
 ## Common Issues and Solutions
 
+### Cursor: "Failed to apply worktree" or missing file in worktree path (e.g. hvf, hal)
+
+**Symptoms**: Red notification: "Failed to apply worktree to current branch: Unable to read file '…\\hvf\\scripts\\quality\\check-all.ps1'" (or path containing `hal`). Cursor references a worktree that doesn't exist on disk.
+
+**Cause**: Cursor/IDE has a stale worktree or workspace entry (e.g. **hvf**, **hal**). These are not in `git worktree list`; the folder may have been removed or never created.
+
+**Fix**:
+
+1. Run `git worktree list` from the primary repo — only listed paths are valid.
+2. Remove the stale worktree from Cursor: close that folder/workspace, or remove it from **File → Open Recent** / worktree list. If using a multi-root workspace, remove the root that points at `…\\hal` or `…\\hvf`.
+3. Use only worktrees listed in [docs/status/WORKTREE_INVENTORY.md](status/WORKTREE_INVENTORY.md) (primary + mhx, bjm, cpd, ghd, igt, osd). Do not open paths for hal or hvf.
+4. **If the IDE shows diffs or file paths under `hal` (e.g. hal/docs/status/CONSOLIDATION_LOG.md)**: You are in the wrong workspace; committing from here would violate the policy (commits from primary only). Do **not** commit. Close the hal root and open the primary repo (`C:/Users/LegiT/against-the-odds`) as the only workspace root, then stage and commit from there so the policy is satisfied.
+
+### Prettier: "Can only format Markdown files as a whole, not selections"
+
+**Symptoms**: Extension "Prettier - Code formatter" is configured as formatter but reports it can only format Markdown files as a whole, not selections or parts.
+
+**Cause**: Prettier's Markdown formatter does not support format selection (range formatting); it formats the entire file only.
+
+**Workaround**: For Markdown, use **Format Document** (whole file). For selection formatting in other languages (JS/TS/JSON), Prettier supports it; ensure the correct formatter is selected for that language. No repo config change required.
+
 ### Cursor IDE: "Failed to gather Agent Review context" (Error when executing 'git')
 
 **Symptoms**: Red notification in Cursor: "Failed to gather Agent Review context. Caused by: Error when executing 'git':" or `git: 'credential-manager-core' is not a git command`.

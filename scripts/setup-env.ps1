@@ -2,7 +2,7 @@
 # Helps configure environment variables securely
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 Write-Host "=== Environment Setup Script ===" -ForegroundColor Cyan

@@ -1,4 +1,11 @@
 {
-  "setup-worktree": ["npm install"],
+  "setup-worktree": [
+    "npm install",
+    "cp \"$ROOT_WORKTREE_PATH/.env.local\" .env.local 2>/dev/null || true"
+  ],
+  "setup-worktree-windows": [
+    "npm install",
+    "Copy-Item \"$env:ROOT_WORKTREE_PATH\\.env.local\" .env.local -ErrorAction SilentlyContinue"
+  ],
   "inventoryDoc": "docs/status/WORKTREE_INVENTORY.md"
 }

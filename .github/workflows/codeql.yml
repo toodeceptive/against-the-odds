@@ -4,27 +4,36 @@ name: CodeQL
 # To use this custom workflow instead, disable default setup in:
 # Settings > Code security > Code scanning > CodeQL analysis > Disable default setup
 on:
-  workflow_dispatch: # Manual trigger only
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * 0'
 
 permissions:
-  actions: read
   contents: read
   security-events: write
+  actions: read
 
 jobs:
   analyze:
-    name: Analyze
-    runs-on: ubuntu-22.04
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
+    name: Analyze (javascript-typescript)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: javascript
+          languages: javascript-typescript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v3

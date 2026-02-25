@@ -8,14 +8,14 @@ store_domain: aodrop.com
 # Theme configuration
 theme:
   development:
-    theme_id: null  # Will be set after theme creation
+    theme_id: null # Will be set after theme creation
     preview_url: null
 
 # App configuration (if building custom app)
 app:
-  name: "AO"
-  client_id: "your_shopify_api_key_here"  # Shopify App Client ID
-  application_url: "https://example.com"  # TODO: Update with actual app URL
+  name: 'AO'
+  client_id: 'your_shopify_api_key_here' # Shopify App Client ID
+  application_url: 'https://example.com' # TODO: Update with actual app URL
 
 # Development settings
 development:
@@ -25,6 +25,6 @@ development:
 
 # API configuration
 api:
-  version: "2026-01"  # Updated to match Shopify app API version
-  admin_api_version: "2026-01"
-  storefront_api_version: "2026-01"
+  version: '2026-01' # Updated to match Shopify app API version
+  admin_api_version: '2026-01'
+  storefront_api_version: '2026-01'

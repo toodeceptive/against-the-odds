@@ -1,13 +1,12 @@
 # Executive Decision: Work Principles (No Redundancy, Only Progress)
 
-**Authority**: Guru expert executive decision based on repo-recorded history (CONSOLIDATION_LOG, CONVERSATION_AUDIT, HANDOFF, plan/handoff docs). This binds future work so it is **never redundant, pointless, repeated, or non-progressive** — only improve, enhance, fix, update, rework, or reconstruct.
+**Authority**: Guru expert executive decision based on repo-recorded history (CONSOLIDATION_LOG, HANDOFF, plan/handoff docs). This binds future work so it is **never redundant, pointless, repeated, or non-progressive** — only improve, enhance, fix, update, rework, or reconstruct.
 
 ## What “history” means here
 
 We treat “Cursor history” as the repo’s recorded history:
 
 - `docs/status/CONSOLIDATION_LOG.md`
-- `docs/status/CONVERSATION_AUDIT.md`
 - `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`
 - `docs/status/FULL_SYSTEM_AUDIT_20260201.md`
 - `docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md`
@@ -32,7 +31,7 @@ Per `docs/status/CONSOLIDATION_LOG.md`, the following is complete:
 
 ## 2) Binding operating decisions (do not contradict)
 
-From `docs/status/CONVERSATION_AUDIT.md` and handoff docs:
+From handoff docs and CONSOLIDATION_LOG:
 
 - **Shopify ToS-safe**: no unattended headless Shopify Admin automation.
 - **Local-only secrets**: secrets live only in `.env.local` (gitignored).
@@ -43,7 +42,7 @@ From `docs/status/CONVERSATION_AUDIT.md` and handoff docs:
 ## 3) Worktree/workspace rule
 
 - **Primary worktree**: `C:\Users\LegiT\against-the-odds` (main).
-- Additional worktrees may exist under `C:\Users\LegiT\.cursor\worktrees\against-the-odds\*` (ewa/mhx/snq/uub).
+- Additional worktrees may exist under `C:\Users\LegiT\.cursor\worktrees\against-the-odds\*`; see [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) for current list.
 
 **Rule**: When in a worktree, read handoff/plan docs from the **primary worktree** per `docs/status/IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md`. Prefer running fixes from the primary worktree so inventories/logs stay consistent.
 

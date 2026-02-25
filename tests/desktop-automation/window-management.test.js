@@ -15,7 +15,7 @@ describe('Window Management', () => {
         expect(windows[0]).toHaveProperty('title');
       }
     },
-    10000
+    10000,
   );
 
   itIf(isWindows)(
@@ -37,6 +37,6 @@ describe('Window Management', () => {
         expect(window).toBeNull();
       }
     },
-    10000
+    10000,
   );
 });

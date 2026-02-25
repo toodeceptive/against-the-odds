@@ -9,7 +9,7 @@ function Write-ErrorWithContext {
         [Exception]$Exception = $null,
         [string]$ScriptName = $MyInvocation.ScriptName
     )
-    
+
     Write-Host "[FAIL] Error in $ScriptName" -ForegroundColor Red
     Write-Host "  $Message" -ForegroundColor Red
     if ($Exception) {
@@ -32,7 +32,7 @@ function Write-ErrorWithContext {
 
 function Test-Command {
     param([string]$CommandName)
-    
+
     $null = Get-Command $CommandName -ErrorAction SilentlyContinue
     return $?
 }
@@ -46,7 +46,7 @@ function Get-EnvVar {
         [string]$Name,
         [string]$DefaultValue = $null
     )
-    
+
     $value = [System.Environment]::GetEnvironmentVariable($Name, 'Process')
     if ([string]::IsNullOrWhiteSpace($value)) {
         $value = [System.Environment]::GetEnvironmentVariable($Name, 'User')
@@ -60,17 +60,17 @@ function Get-EnvVar {
             }
         }
     }
-    
+
     if ([string]::IsNullOrWhiteSpace($value)) {
         $value = $DefaultValue
     }
-    
+
     return $value
 }
 
 function Set-RepoLocation {
     param([string]$RepoPath = $null)
-    
+
     if ([string]::IsNullOrWhiteSpace($RepoPath)) {
         # Derive repo root from this script's location (scripts/shared -> repo root)
         $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -82,7 +82,7 @@ function Set-RepoLocation {
             $RepoPath = (Get-Location).Path
         }
     }
-    
+
     if (Test-Path $RepoPath) {
         Set-Location $RepoPath
         return $true
@@ -105,28 +105,28 @@ function Invoke-ShopifyAPI {
         [object]$Body = $null,
         [hashtable]$Headers = $null
     )
-    
+
     $baseUrl = "https://$Store/admin/api/2026-01"
     $url = "$baseUrl/$Endpoint"
-    
+
     $requestHeaders = @{
         "X-Shopify-Access-Token" = $Token
-        "Content-Type" = "application/json"
+        "Content-Type"           = "application/json"
     }
-    
+
     if ($Headers) {
         foreach ($key in $Headers.Keys) {
             $requestHeaders[$key] = $Headers[$key]
         }
     }
-    
+
     $params = @{
-        Uri = $url
-        Headers = $requestHeaders
-        Method = $Method
+        Uri        = $url
+        Headers    = $requestHeaders
+        Method     = $Method
         TimeoutSec = 30
     }
-    
+
     if ($Body) {
         if ($Body -is [string]) {
             $params.Body = $Body
@@ -134,7 +134,7 @@ function Invoke-ShopifyAPI {
             $params.Body = $Body | ConvertTo-Json -Depth 10
         }
     }
-    
+
     try {
         return Invoke-RestMethod @params
     } catch {
@@ -150,21 +150,21 @@ function Invoke-GitHubAPI {
         [string]$Method = "Get",
         [object]$Body = $null
     )
-    
+
     $url = "https://api.github.com/$Endpoint"
-    
+
     $headers = @{
         "Authorization" = "token $Token"
-        "Accept" = "application/vnd.github.v3+json"
+        "Accept"        = "application/vnd.github.v3+json"
     }
-    
+
     $params = @{
-        Uri = $url
-        Headers = $headers
-        Method = $Method
+        Uri        = $url
+        Headers    = $headers
+        Method     = $Method
         TimeoutSec = 30
     }
-    
+
     if ($Body) {
         if ($Body -is [string]) {
             $params.Body = $Body
@@ -172,7 +172,7 @@ function Invoke-GitHubAPI {
             $params.Body = $Body | ConvertTo-Json -Depth 10
         }
     }
-    
+
     try {
         return Invoke-RestMethod @params
     } catch {
@@ -191,7 +191,7 @@ function Write-ProgressStep {
         [int]$Total,
         [string]$Message
     )
-    
+
     $percent = [math]::Round(($Step / $Total) * 100)
     Write-Host "[$Step/$Total] $Message" -ForegroundColor Cyan
     Write-Progress -Activity "Processing" -Status $Message -PercentComplete $percent
@@ -223,10 +223,10 @@ function Invoke-WithRetry {
         [int]$DelaySeconds = 2,
         [string]$ErrorMessage = "Operation failed after retries"
     )
-    
+
     $attempt = 0
     $lastError = $null
-    
+
     while ($attempt -lt $MaxRetries) {
         $attempt++
         try {
@@ -240,7 +240,7 @@ function Invoke-WithRetry {
             }
         }
     }
-    
+
     Write-ErrorWithContext -Message $ErrorMessage -Exception $lastError
     throw $lastError
 }
@@ -254,11 +254,11 @@ function Test-ShopifyCredentials {
         [string]$Store,
         [string]$Token
     )
-    
+
     if ([string]::IsNullOrWhiteSpace($Store) -or [string]::IsNullOrWhiteSpace($Token)) {
         return $false
     }
-    
+
     try {
         $result = Invoke-ShopifyAPI -Store $Store -Token $Token -Endpoint "shop.json"
         return $true
@@ -269,11 +269,11 @@ function Test-ShopifyCredentials {
 
 function Test-GitHubCredentials {
     param([string]$Token)
-    
+
     if ([string]::IsNullOrWhiteSpace($Token)) {
         return $false
     }
-    
+
     try {
         $result = Invoke-GitHubAPI -Token $Token -Endpoint "user"
         return $true
@@ -284,19 +284,23 @@ function Test-GitHubCredentials {
 
 #endregion
 
-# Export functions
-Export-ModuleMember -Function @(
-    'Write-ErrorWithContext',
-    'Test-Command',
-    'Get-EnvVar',
-    'Set-RepoLocation',
-    'Invoke-ShopifyAPI',
-    'Invoke-GitHubAPI',
-    'Write-ProgressStep',
-    'Write-Success',
-    'Write-Warning',
-    'Write-Info',
-    'Invoke-WithRetry',
-    'Test-ShopifyCredentials',
-    'Test-GitHubCredentials'
-)
+# Export functions only when loaded as a module (when dot-sourced, skip to avoid error)
+try {
+    Export-ModuleMember -Function @(
+        'Write-ErrorWithContext',
+        'Test-Command',
+        'Get-EnvVar',
+        'Set-RepoLocation',
+        'Invoke-ShopifyAPI',
+        'Invoke-GitHubAPI',
+        'Write-ProgressStep',
+        'Write-Success',
+        'Write-Warning',
+        'Write-Info',
+        'Invoke-WithRetry',
+        'Test-ShopifyCredentials',
+        'Test-GitHubCredentials'
+    )
+} catch {
+    # Dot-sourced: Export-ModuleMember not allowed; functions remain in caller scope
+}

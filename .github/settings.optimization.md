@@ -4,7 +4,7 @@
 
 ### Description
 
-```
+```text
 Official Against The Odds (AO) brand website and Shopify store. Complete development infrastructure with automated workflows, Shopify integration, and comprehensive project management.
 ```
 
@@ -22,7 +22,7 @@ Official Against The Odds (AO) brand website and Shopify store. Complete develop
 
 ### Website
 
-```
+```text
 https://aodrop.com
 ```
 
@@ -41,7 +41,7 @@ https://aodrop.com
 
 2. ✅ Require status checks to pass before merging
    - Require branches to be up to date before merging
-   - Status checks to require: **CI** (workflow name from `.github/workflows/ci.yml`). If you previously required `quality-check` or `deploy`, remove those; only `ci.yml` runs now (consolidated).
+   - Status checks to require: `arch_guard`, `test`, `secret-scan`, `quality` (job names in `.github/workflows/ci.yml`)
 
 3. ✅ Require conversation resolution before merging
 
@@ -50,9 +50,9 @@ https://aodrop.com
 5. ✅ Restrict who can push to matching branches
    - (Optional) Restrict to specific users/teams
 
-### Develop Branch Protection (if using)
+### Develop Branch Protection
 
-Similar rules to main, but allow force pushes for development workflow.
+This repository is main-only. Do not configure a develop branch protection rule.
 
 ## GitHub Actions Settings
 

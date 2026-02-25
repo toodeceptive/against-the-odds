@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02-07** — PP perfection loop cycle 3: Expanded approval in AGENTS.md and Master Guru prompt (create guru expert teams as needed; control PC to navigate/perfect/optimize/test/setup per lead agent); plan updated; quality and desktop tests verified.
+- **2026-02-07** — PP perfection loop (cycle 1): INDEX_REPORTS and HANDOFF/PLAN_AGENT_ENTRY updated with Master Guru E2E prompt and plan; stale refs to missing system_finalization_report_20260129.md and blocker_resolution_commands_20260129.md replaced with CONSOLIDATION_LOG/INDEX_REPORTS/HANDOFF_FOR_NEW_AGENT_202602; create-repo.ps1 (archive) portable path; scripts/README last-updated 2026-02-07; HANDOFF_PROMPT_NEW_AGENT script count 74.
+- **2026-02-07** — Full no-skip system scan and cleanup: Worktrees ewa, snq, uub removed; merged local branches guru-finalization-20260206 and cursor-agent-setup deleted; BRANCH_INVENTORY and WORKTREE_INVENTORY updated (primary + mhx only); obsolete doc references (CONVERSATION_AUDIT, FULL_SYSTEM_FILE_AUDIT) updated to CONSOLIDATION_LOG/INDEX_REPORTS; HANDOFF and plan updated. Deferrals unchanged.
+- **2026-02-07** — Custom full system test run (guru-informed): Executed FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT per guru expert team review; all 11 dimensions run; verify-pipeline.ps1 now validates codeql.yml (6 workflows). Report: docs/status/FULL_SYSTEM_TEST_REPORT_CUSTOM_GURU_20260207.md.
+- **2026-02-06** — Full system test run: Executed FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT (sections 1–11); Prettier format pass (271 files); CONSOLIDATION_LOG and docs/status/FULL_SYSTEM_TEST_REPORT_20260206.md. Lint, format check, unit tests pass; pipeline verify and Cursor agent system verified; credential-gated items deferred.
+- **2026-02-06** — Full system test prompt: `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md` for new agent team to run system-wide tests (code, repo, pipeline, Cursor system, AO project) and apply fixes/cleanup/optimizations; linked from decision tree, INDEX_REPORTS, HANDOFF, PLAN_AGENT_ENTRY.
+- **2026-02-06** — Guru pass: BRANCH_INVENTORY and CONSOLIDATION_LOG updated (cursor-agent-setup merged to main; opo worktree optional delete). Lint, format, unit tests verified.
+- **2026-02-06** — Perfection run: Prettier format pass repo-wide; README "Cursor and agent" section (rules, skills, /review, /pr, AGENTS.md, CURSOR_AND_AGENT_OPTIMIZATION). Lint and unit tests verified; pushed on main.
+- **2026-02-06** — Cursor agent setup (branch `cursor-agent-setup`, merged to main): .cursorignore at repo root; PP baseline rule (pp-basis.mdc); skills (prodigy-protocol, prodigy-phantasm, universal-godmode, agentic-performance); Verifier subagent; /review and /pr commands; worktrees env copy; extensions via extensions.json only; audit docs (AGENTIC_SETUP_AUDIT, CURSOR_AND_AGENT_OPTIMIZATION, CURSORIGNORE_TEMPLATE). CONSOLIDATION_LOG, BRANCH_INVENTORY, ROOT_FILES_INVENTORY updated. Branch merged to main; optional: delete cursor-agent-setup branch and opo worktree when no longer needed.
 - **2026-02** — Guru finalization: Theme brand (ao-brand.css drip/magenta/teal, theme-preview-mock, store-update docs); CI resilience (quality-check: test:unit required, coverage/audit optional; ci: test:unit only, trivy/sarif continue-on-error; shopify-sync: skip when secrets missing; sync-theme-branch: token + continue-on-error). Deploy-log and pipeline verification updated. No store-affecting deploy.
 - **2026-01-31** — Dependabot fix: vitest 1→4, @vitest/coverage-v8 1→4, eslint 8→9; ESLint flat config (eslint.config.mjs), removed .eslintrc.json; npm audit 0 vulnerabilities. Not store-affecting.
 - **2026-01-31** — Workflow visual guide and keybinding finalization: docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md (user-focused pipeline when prompting an agent); Ctrl+Alt+T approved; keybindings added to user Cursor keybindings.json (Ctrl+Alt+P, Ctrl+Alt+T); .cursor/tasks.json theme dev task reveal/focus/showReuseMessage; KEYBINDING_PENDING_APPROVAL and OPERATOR_RUNBOOK updated; README and docs/README links. No store-affecting changes.
@@ -48,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2026-01-28
 
-### Added
+### Added in 1.0.0
 
 - Initial project structure
 - Basic HTML/CSS landing page

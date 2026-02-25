@@ -6,7 +6,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 # Load .env.local into process env when present (same pattern as run-runbook.ps1)
@@ -20,6 +20,9 @@ if (Test-Path ".env.local") {
         }
     }
 }
+# Use env after load (param binding runs before .env.local is loaded)
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+if ([string]::IsNullOrWhiteSpace($Token)) { $Token = $env:SHOPIFY_ACCESS_TOKEN }
 
 Write-Host "=== Shopify Connection Test ===" -ForegroundColor Cyan
 Write-Host ""
@@ -86,7 +89,7 @@ try {
     $themeCount = if ($themes.themes) { $themes.themes.Count } else { 0 }
     Write-Host "  [OK] Themes API accessible" -ForegroundColor Green
     Write-Host "  Themes found: $themeCount" -ForegroundColor Cyan
-    
+
     if ($themes.themes) {
         foreach ($theme in $themes.themes) {
             $role = if ($theme.role -eq "main") { "LIVE" } else { $theme.role.ToUpper() }

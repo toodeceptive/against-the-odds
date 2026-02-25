@@ -11,7 +11,7 @@ Write-Host "=== Against The Odds Repository Setup ===" -ForegroundColor Cyan
 Write-Host ""
 
 # Navigate to repository
-$repoPath = "C:\Users\LegiT\against-the-odds"
+$repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..\..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
 # Check if repository exists on GitHub

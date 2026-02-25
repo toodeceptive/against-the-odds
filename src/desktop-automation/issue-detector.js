@@ -221,7 +221,7 @@ export async function monitorIssues(options = {}) {
 
         // Check for new issues
         const newIssues = issues.filter(
-          (issue) => !lastIssues.some((last) => last.message === issue.message)
+          (issue) => !lastIssues.some((last) => last.message === issue.message),
         );
 
         if (newIssues.length > 0 && onIssue) {

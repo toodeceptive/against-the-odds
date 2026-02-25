@@ -53,7 +53,7 @@ if (-not $SkipChromeLaunch) {
 # Step 2: Extract token from browser and save to .env.local (SHOPIFY_ACCESS_TOKEN + SHOPIFY_CLI_THEME_TOKEN)
 Write-Host ""
 Write-Host "[2/3] Extracting access token from browser (Apps > Development)..." -ForegroundColor Yellow
-& "$PSScriptRoot\browser\get-access-token.ps1" -StoreDomain $adminHost -SaveToEnv
+& "$PSScriptRoot\browser\get-access-token.ps1" -StoreDomain $adminHost
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[FAIL] Could not extract token. Ensure you're logged in to https://$adminHost/admin and have a Development app with API credentials visible." -ForegroundColor Red
     Write-Host "Alternatively: run theme-auth-then-pull.ps1 for device-code login." -ForegroundColor Yellow

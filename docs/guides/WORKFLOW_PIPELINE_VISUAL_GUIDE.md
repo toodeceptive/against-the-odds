@@ -135,6 +135,7 @@ flowchart LR
 | Add one product with images (one-off) | Use your browser (Shopify Admin), fill form, stop before Save                             | Say **approve** in chat, then agent or you clicks Save                                                                                                                                                                                                  |
 | Update docs, scripts, or code         | Edit and commit/push                                                                      | No approval step; agent pushes when done                                                                                                                                                                                                                |
 | Run daily checks or verify setup      | Run lint, format, tests, or `run-runbook.ps1`                                             | No approval step                                                                                                                                                                                                                                        |
+| Verify pipeline before push           | Run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`)                | See [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md) and [.github/workflows/README.md](../../.github/workflows/README.md)                                                                                                                               |
 
 ---
 

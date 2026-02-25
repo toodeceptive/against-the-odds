@@ -34,17 +34,16 @@ if (Test-Path ".env.local") {
     }
 }
 if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+# Default to this repo's store so CLI never gets an empty store
+if ([string]::IsNullOrWhiteSpace($Store) -or $Store -notmatch '\.') {
+    $Store = "aodrop.com"
+    Write-Host "Using default store: aodrop.com (set SHOPIFY_STORE_DOMAIN in .env.local to override)" -ForegroundColor Gray
+}
 
 Write-Host "=== Shopify Theme Dev (preview before commit) ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Ensure theme CLI is available (install globally if missing; we still invoke via npx for consistency)
 . "$PSScriptRoot\Ensure-ShopifyCli.ps1"
-
-if ([string]::IsNullOrWhiteSpace($Store)) {
-    Write-Host "Error: SHOPIFY_STORE_DOMAIN not set (e.g. aodrop.com). Set in .env.local or pass -Store." -ForegroundColor Red
-    exit 1
-}
 
 if (-not (Test-Path $ThemePath)) {
     Write-Host "Theme path not found: $ThemePath" -ForegroundColor Yellow
@@ -65,6 +64,8 @@ if (-not (Test-Path $layoutFile)) {
 $storeForCli = $Store
 if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
     $storeForCli = "aodrop.com.myshopify.com"
+} elseif ($Store -notmatch "\.myshopify\.com$") {
+    $storeForCli = "$Store.myshopify.com"
 }
 
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN

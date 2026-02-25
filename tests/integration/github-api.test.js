@@ -74,7 +74,7 @@ describe('GitHub API Integration', () => {
           Authorization: `token ${githubToken}`,
           Accept: 'application/vnd.github.v3+json',
         },
-      }
+      },
     );
 
     expect(response.ok).toBe(true);

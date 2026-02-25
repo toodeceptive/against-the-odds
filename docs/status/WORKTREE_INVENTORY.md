@@ -1,31 +1,34 @@
 # Worktree Inventory
 
-**Purpose**: Single source of truth for actual worktrees not listed in .cursor/worktrees.json.
+**Purpose**: Single source of truth for actual worktrees (from `git worktree list`).
 
-**Last updated**: 2026-01-31 (executing final plan)
+**Last updated**: 2026-02-25 (aligned with current `git worktree list`; stale hal/hvf still documented)
 
 ---
 
 ## Actual worktrees (from git worktree list)
 
-| Path                                                    | Branch/HEAD                      | Commit  | Purpose                                          |
-| ------------------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------ |
-| `C:/Users/LegiT/against-the-odds`                       | main                             | (HEAD)  | Primary repo, main branch                        |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ewa` | detached HEAD                    | 505df09 | Cursor navigation worktree (may be temporary)    |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user visible) |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/snq` | detached HEAD                    | 1c5ed2e | Cursor navigation worktree (may be temporary)    |
-| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/uub` | detached HEAD                    | 16a8024 | Cursor navigation worktree (may be temporary)    |
+| Label       | Path                                                    | Branch/HEAD                            | Commit  | Purpose                                  |
+| ----------- | ------------------------------------------------------- | -------------------------------------- | ------- | ---------------------------------------- |
+| **Primary** | `C:/Users/LegiT/against-the-odds`                       | cursor/structural-integrity-audit-18a1 | e36a474 | Primary repo checkout in current session |
+| **mhx**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129       | b0a8f30 | Active worktree on feature branch (user) |
+| **bjm**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                        | 6e73084 | Worktree                                 |
+| **bri**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bri` | (detached HEAD)                        | c26bfe3 | Worktree                                 |
+| **cpd**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/cpd` | (detached HEAD)                        | 6e73084 | Worktree                                 |
+| **ghd**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ghd` | (detached HEAD)                        | eabaf83 | Worktree                                 |
+| **igt**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/igt` | (detached HEAD)                        | 6e73084 | Worktree                                 |
+| **ltt**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/ltt` | (detached HEAD)                        | ad98d32 | Worktree                                 |
+| **olu**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/olu` | (detached HEAD)                        | cdcc0ae | Worktree                                 |
+| **osd**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/osd` | (detached HEAD)                        | 6e73084 | Worktree                                 |
 
-**Note**: worktrees ewa, snq, uub are detached HEAD and may be temporary; mhx is on a live feature branch. Optional cleanup: `git worktree remove <path>` for detached worktrees no longer in use (from main repo).
+**Removed (historical)**: ewa, snq, uub were removed via `git worktree remove`; opo and qqa are not in current `git worktree list`. **Not in git worktree list (stale in Cursor/IDE)**: **hal**, **hvf** — if Cursor shows "Failed to apply worktree" or paths under `hal` or `hvf`, remove those workspace entries from Cursor.
+
+**Important**: All commits to main (including CONSOLIDATION_LOG and worktree-doc fixes) must be made from the **primary** repo path only (`C:/Users/LegiT/against-the-odds`). Git stores paths relative to the repo root (e.g. `docs/status/CONSOLIDATION_LOG.md`), not under any worktree subfolder. **Before committing**: If your diff or Source Control shows a path containing any worktree name (e.g. `hal`, `hvf`, `jxj`, `mhx`) or any path under `.cursor/worktrees/against-the-odds/`, you are in the wrong workspace; committing from here would violate the policy. Do **not** commit. Close that root, open **only** the primary repo (`C:/Users/LegiT/against-the-odds`) as the workspace, then stage and commit from there so the policy is satisfied.
 
 ---
 
-## Setup instruction
+## Usage
 
-Worktrees are managed by git; no additional action required. If extending worktrees.json, add an entry for each with path and setup command (e.g. ["npm install"]) as in primary worktree.
+All commands run from **repo root**. Do not commit from worktrees without coordinating with main branch.
 
----
-
-## Sign-off
-
-Worktree inventory completed. All actual worktrees are now documented. Nothing is overlooked.
+**Note**: `.cursor/worktrees.json` may not list mhx; this doc is the single source of truth for actual worktrees.

@@ -119,6 +119,15 @@ against-the-odds/
 - [Quick Start Guide](docs/guides/quick-start.md) — Getting started quickly
 - [Shopify + Cursor guide](docs/guides/SHOPIFY_CURSOR_USAGE_GUIDE.md) — User guide for prompts and preview
 
+## 🤖 Cursor and agent
+
+This repo is set up for Cursor with rules, skills, and commands:
+
+- **Default rule**: [Prodigy Protocol](.cursor/rules/pp-basis.mdc) (PP) runs as the baseline for agent execution.
+- **Skills**: Prodigy Protocol (`pp`), Prodigy Phantasm, Universal Godmode, Agentic Performance — see [.cursor/skills/README.md](.cursor/skills/README.md).
+- **Commands** (type `/` in Agent): **/review** (lint, format, tests; report only) and **/pr** (commit, push, open PR).
+- **More**: [AGENTS.md](AGENTS.md) for agent permissions and [docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md](docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md) for optimization and personal settings.
+
 ## 🔐 Environment Variables
 
 Required environment variables (set in `.env.local`):

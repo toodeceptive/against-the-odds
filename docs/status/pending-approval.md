@@ -4,10 +4,8 @@
 
 ---
 
-## When there are pending changes, the agent will fill in:
+## When there are pending changes
 
-- **Summary:** What will change (e.g. "Add product X", "Theme: update homepage hero").
-- **Preview:** Dry-run output (products) or theme dev URL + diff summary (theme).
-- **To approve:** Reply in Cursor chat with "approve", "yes", or "looks good". The agent will then apply and append to [deploy-log.md](deploy-log.md).
-
-Run **Tasks → Open pending approval** to open this file, or open it from the file tree.
+- **Summary** and **Preview** (dry-run or theme URL) go here.
+- **To approve:** Reply in Cursor chat with "approve", "yes", or "looks good".
+- **Preview popup:** Run `.\scripts\open-preview-popup.ps1` to open this file in Cursor and the preview in your browser.

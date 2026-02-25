@@ -62,7 +62,7 @@ export async function extractText(imageBuffer, options = {}) {
   // Filter by confidence if threshold set
   const words = data.words.filter((word) => word.confidence >= confidenceThreshold);
   const lines = data.lines.filter((line) =>
-    line.words.some((word) => word.confidence >= confidenceThreshold)
+    line.words.some((word) => word.confidence >= confidenceThreshold),
   );
 
   return {

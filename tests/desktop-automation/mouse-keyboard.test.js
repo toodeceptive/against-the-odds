@@ -19,7 +19,7 @@ describe('Mouse and Keyboard Control', () => {
       expect(typeof pos.x).toBe('number');
       expect(typeof pos.y).toBe('number');
     },
-    5000
+    5000,
   );
 
   itIf(isWindows)(
@@ -32,7 +32,7 @@ describe('Mouse and Keyboard Control', () => {
       expect(Math.abs(newPos.x - (startPos.x + 10))).toBeLessThan(15);
       expect(Math.abs(newPos.y - (startPos.y + 10))).toBeLessThan(15);
     },
-    5000
+    5000,
   );
 
   itIf(isWindows)(
@@ -44,7 +44,7 @@ describe('Mouse and Keyboard Control', () => {
       // If no error thrown, click succeeded
       expect(true).toBe(true);
     },
-    5000
+    5000,
   );
 
   itIf(isWindows)(
@@ -55,7 +55,7 @@ describe('Mouse and Keyboard Control', () => {
       await typeText('test', { delay: 0 });
       expect(true).toBe(true);
     },
-    5000
+    5000,
   );
 
   itIf(isWindows)(
@@ -65,6 +65,6 @@ describe('Mouse and Keyboard Control', () => {
       await pressKey('escape');
       expect(true).toBe(true);
     },
-    5000
+    5000,
   );
 });

@@ -1,0 +1,22 @@
+{% comment %}
+  AO Footer brand block — tagline and optional logo. Use in footer section or as a block.
+  Usage: {% render 'ao-footer-brand', tagline: 'THE ODDS WERE NEVER EVEN · WE ALL PROFIT', show_logo: true %}
+  Or use section settings if rendered from a section.
+{% endcomment %}
+<div class="ao-footer-brand" style="text-align: center; padding: 1.5rem 0;">
+  {% if show_logo and logo != blank %}
+    <div class="ao-footer-brand__logo" style="margin-bottom: 1rem;">
+      <img src="{{ logo | image_url: width: 200 }}" alt="Against the Odds" width="120" height="auto" loading="lazy">
+    </div>
+  {% endif %}
+  {% if tagline != blank %}
+    <p class="ao-footer-brand__tagline" style="color: var(--ao-text-muted, #b8b0a0); font-size: 0.875rem; letter-spacing: 0.05em; margin: 0;">
+      {{ tagline }}
+    </p>
+  {% endif %}
+  {% if bio != blank %}
+    <p class="ao-footer-brand__bio" style="color: var(--ao-text-muted, #b8b0a0); font-size: 0.8125rem; margin-top: 0.5rem;">
+      {{ bio }}
+    </p>
+  {% endif %}
+</div>

@@ -33,7 +33,7 @@ export async function executeTask(taskFunction, options = {}) {
     // Execute with timeout
     const taskPromise = taskFunction();
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Task timeout')), timeout)
+      setTimeout(() => reject(new Error('Task timeout')), timeout),
     );
 
     await Promise.race([taskPromise, timeoutPromise]);
