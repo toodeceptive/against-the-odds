@@ -17,6 +17,52 @@ async function getPlaywright() {
   return playwright;
 }
 
+function normalizeStoreHost(storeDomain) {
+  if (!storeDomain || typeof storeDomain !== 'string') return null;
+  const trimmed = storeDomain.trim();
+  if (!trimmed) return null;
+
+  try {
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      return new URL(trimmed).hostname.toLowerCase();
+    }
+    return new URL(`https://${trimmed}`).hostname.toLowerCase();
+  } catch {
+    return null;
+  }
+}
+
+function getTrustedShopifyHosts(storeDomain) {
+  const hosts = new Set(['admin.shopify.com']);
+  const normalizedStoreHost = normalizeStoreHost(storeDomain);
+  if (!normalizedStoreHost) return Array.from(hosts);
+
+  hosts.add(normalizedStoreHost);
+  if (!normalizedStoreHost.endsWith('.myshopify.com')) {
+    hosts.add(`${normalizedStoreHost}.myshopify.com`);
+  }
+
+  return Array.from(hosts);
+}
+
+function isTrustedShopifyAdminUrl(urlValue, trustedHosts) {
+  try {
+    const parsed = new URL(urlValue);
+    if (parsed.protocol !== 'https:') return false;
+
+    const hostname = parsed.hostname.toLowerCase();
+    if (!trustedHosts.includes(hostname)) return false;
+
+    if (hostname === 'admin.shopify.com') {
+      return parsed.pathname.startsWith('/store/');
+    }
+
+    return parsed.pathname === '/admin' || parsed.pathname.startsWith('/admin/');
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Connect to existing Chrome instance or launch new browser
  * @param {Object} options - Connection options
@@ -58,25 +104,40 @@ export async function connectToBrowser(options = {}) {
  */
 export async function ensureShopifyLogin(page, storeDomain) {
   const adminUrl = `https://${storeDomain}/admin`;
+  const trustedHosts = getTrustedShopifyHosts(storeDomain);
 
   try {
     await page.goto(adminUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
     // Shopify may redirect aodrop.com/admin → admin.shopify.com/store/<id>
     const currentUrl = page.url();
-    const isAdmin = currentUrl.includes('admin.shopify.com') || currentUrl.includes('/admin');
+    const isAdmin = isTrustedShopifyAdminUrl(currentUrl, trustedHosts);
     const hasLoginForm = (await page.locator('form[action*="login"]').count()) > 0;
 
     if (isAdmin && !hasLoginForm) {
       return true;
     }
     if (hasLoginForm) {
-      // Wait for redirect to admin (any admin URL)
+      // Wait for redirect to a trusted Shopify admin URL.
       await page.waitForFunction(
-        () => {
-          const u = window.location.href;
-          return u.includes('admin.shopify.com') || u.includes('/admin');
+        (allowedHosts) => {
+          try {
+            const parsed = new URL(window.location.href);
+            if (parsed.protocol !== 'https:') return false;
+
+            const hostname = parsed.hostname.toLowerCase();
+            if (!allowedHosts.includes(hostname)) return false;
+
+            if (hostname === 'admin.shopify.com') {
+              return parsed.pathname.startsWith('/store/');
+            }
+
+            return parsed.pathname === '/admin' || parsed.pathname.startsWith('/admin/');
+          } catch {
+            return false;
+          }
         },
+        trustedHosts,
         { timeout: 120000 },
       );
     }
