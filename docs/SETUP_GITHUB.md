@@ -16,7 +16,7 @@ This guide provides step-by-step instructions for setting up complete GitHub int
 ### Option A: Personal Access Token (Recommended)
 
 1. **Create PAT**:
-   - Go to: https://github.com/settings/tokens
+   - Go to: <https://github.com/settings/tokens>
    - Click "Generate new token (classic)"
    - Name: `Against The Odds - Automated Access`
    - Expiration: 90 days (or custom)
@@ -34,6 +34,7 @@ This guide provides step-by-step instructions for setting up complete GitHub int
    ```
 
 3. **Test Authentication**:
+
    ```powershell
    cd C:\Users\LegiT\against-the-odds
    git push origin main
@@ -45,21 +46,21 @@ See `config/github-auth.md` for SSH key setup instructions.
 
 ## Step 2: Repository Configuration
 
-### Branch Structure
+### Branch Structure (main-only)
 
 ```powershell
-# Create develop branch
-git checkout -b develop
-git push -u origin develop
+# Keep main as the only long-lived branch
+git checkout main
+git pull origin main
 
-# Create feature branch template
+# Create short-lived feature branch from main
 git checkout -b feature/template
 git push -u origin feature/template
 ```
 
 ### Branch Protection Rules (GitHub Web Interface)
 
-1. Go to: https://github.com/toodeceptive/against-the-odds/settings/branches
+1. Go to: <https://github.com/toodeceptive/against-the-odds/settings/branches>
 2. Add rule for `main` branch:
    - ✅ Require pull request reviews before merging
    - ✅ Require status checks to pass before merging
@@ -67,9 +68,7 @@ git push -u origin feature/template
    - ✅ Include administrators
    - ✅ Restrict pushes that create files larger than 100MB
 
-3. Add rule for `develop` branch:
-   - ✅ Require pull request reviews (1 reviewer)
-   - ✅ Require status checks to pass
+3. Do not add a `develop` rule in this repository (main-only strategy).
 
 ### Repository Settings
 
@@ -92,7 +91,7 @@ git push -u origin feature/template
 
 For CI/CD workflows that need authentication:
 
-1. Go to: https://github.com/toodeceptive/against-the-odds/settings/secrets/actions
+1. Go to: <https://github.com/toodeceptive/against-the-odds/settings/secrets/actions>
 2. Add secrets:
    - `GITHUB_TOKEN` - Personal Access Token (if needed for workflows)
    - `SHOPIFY_API_KEY` - Shopify Admin API key
@@ -110,7 +109,7 @@ Issue templates are automatically created in `.github/ISSUE_TEMPLATE/`:
 
 ## Step 5: GitHub Projects Setup
 
-1. Go to: https://github.com/toodeceptive/against-the-odds/projects
+1. Go to: <https://github.com/toodeceptive/against-the-odds/projects>
 2. Create new project: "Against The Odds - Development"
 3. Configure columns:
    - Backlog
@@ -138,7 +137,7 @@ After setting up GitHub Actions workflows:
    ```
 
 2. **Check Actions Tab**:
-   - Go to: https://github.com/toodeceptive/against-the-odds/actions
+   - Go to: <https://github.com/toodeceptive/against-the-odds/actions>
    - Verify workflow runs successfully
 
 3. **Create Test PR**:
