@@ -82,3 +82,6 @@ shopify-auth.json
 
 # Structural signing key (never commit; script uses ~/.ssh/structural_key)
 infra/.structural_key
+
+# Codacy CLI local tool artifacts
+.codacy/

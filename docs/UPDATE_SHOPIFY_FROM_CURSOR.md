@@ -70,7 +70,7 @@ If the live store (aodrop.com) doesn’t show your brand changes:
 - **Test connection**: `.\scripts\shopify\test-connection.ps1`
 - **Fetch store data** (products, collections, themes): `.\scripts\shopify\fetch-store-data.ps1`
 - **Sync products** (from repo data to store): `.\scripts\shopify\sync-products.ps1 -DryRun` first, then snapshot to `docs/status/pending-approval.md`, run `.\scripts\open-preview-popup.ps1`, get chat approval, then run `.\scripts\shopify\sync-products.ps1` (no `-DryRun`).
-- **CI behavior:** automated push/schedule paths are preview-only (`-DryRun`); write sync in CI is manual-dispatch with explicit apply input.
+- **CI behavior:** automated push/schedule paths are preview-only (`-DryRun`), with push scoped to `data/products/**` and `scripts/shopify/sync-products.ps1`; write sync in CI is manual-dispatch with explicit apply input.
 
 Run from repo root; they use `.env.local` for credentials (Admin API token required).
 

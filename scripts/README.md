@@ -52,12 +52,12 @@
 
 ### Products (scripts/products/)
 
-| Script       | Purpose                                                  | When to run                                                                        |
-| ------------ | -------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **shopify/sync-products.ps1** | Canonical repo → Shopify product sync (supports `-DryRun`) | Use for preview/approval/apply flow and CI dry-runs |
-| **sync.ps1** | Compatibility wrapper; `-Direction import\|export\|both` | Use when you need bidirectional import/export behavior |
-| export.ps1   | Export products from store to repo                       | Backup or local data refresh                                                       |
-| import.ps1   | Compatibility alias to `shopify/sync-products.ps1`       | Prefer `shopify/sync-products.ps1` directly for import/apply flows                 |
+| Script                        | Purpose                                                    | When to run                                                        |
+| ----------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------ |
+| **shopify/sync-products.ps1** | Canonical repo → Shopify product sync (supports `-DryRun`) | Use for preview/approval/apply flow and CI dry-runs                |
+| **sync.ps1**                  | Compatibility wrapper; `-Direction import\|export\|both`   | Use when you need bidirectional import/export behavior             |
+| export.ps1                    | Export products from store to repo                         | Backup or local data refresh                                       |
+| import.ps1                    | Compatibility alias to `shopify/sync-products.ps1`         | Prefer `shopify/sync-products.ps1` directly for import/apply flows |
 
 ### Git (scripts/git/)
 
@@ -110,13 +110,13 @@
 
 ### Other (root-level scripts/)
 
-| Script                        | Purpose                                        | When to run                          |
-| ----------------------------- | ---------------------------------------------- | ------------------------------------ |
-| **run-runbook.ps1**           | Run OPERATOR_RUNBOOK daily checks              | Daily                                |
-| **open-pending-approval.ps1** | Open docs/status/pending-approval.md in editor | Before/after store-affecting changes |
-| **open-preview-popup.ps1**    | Canonical full preview flow (approval file + browser + theme dev) | Theme preview workflow |
-| **start-theme-preview.ps1**   | Compatibility wrapper to `open-preview-popup.ps1` | Optional alias command               |
-| verify-pipeline.ps1           | Verify Cursor–GitHub–Shopify pipeline          | After workflow or config change      |
+| Script                        | Purpose                                                           | When to run                          |
+| ----------------------------- | ----------------------------------------------------------------- | ------------------------------------ |
+| **run-runbook.ps1**           | Run OPERATOR_RUNBOOK daily checks                                 | Daily                                |
+| **open-pending-approval.ps1** | Open docs/status/pending-approval.md in editor                    | Before/after store-affecting changes |
+| **open-preview-popup.ps1**    | Canonical full preview flow (approval file + browser + theme dev) | Theme preview workflow               |
+| **start-theme-preview.ps1**   | Compatibility wrapper to `open-preview-popup.ps1`                 | Optional alias command               |
+| verify-pipeline.ps1           | Verify Cursor–GitHub–Shopify pipeline                             | After workflow or config change      |
 
 ### Archive / Legacy
 
@@ -135,8 +135,8 @@
 ## Alignment with CI/CD
 
 - **ci.yml**: Lint, format check, test, build, Trivy, secret-scan, npm audit, optional coverage, Lighthouse (main only; consolidated).
-- **shopify-sync.yml**: Calls product sync (data/products, src/shopify); backup-store job is placeholder.
+- **shopify-sync.yml**: Push trigger is scoped to `data/products/**` and `scripts/shopify/sync-products.ps1`; push/schedule run preview-only (`-DryRun`), and write apply is manual-dispatch only (`apply_changes=true`). backup-store runs on non-push events and snapshots theme to `shopify-theme-backup`.
 - **sync-theme-branch.yml**: Subtree-split theme to `shopify-theme` branch on push to main when theme files change.
 - **sync.yml**: Repository sync (fetch, main); no develop branch.
 
-_Last updated: 2026-02-07_
+_Last updated: 2026-02-25_

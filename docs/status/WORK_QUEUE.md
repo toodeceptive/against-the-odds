@@ -8,6 +8,7 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Add project-scoped `.cursor/mcp.json` with secret-free MCP config (`envmcp` + `.env.local`).
 - [x] Deploy non-overlapping agent roster in `.cursor/agents/` and document it in `docs/AGENT_TEAM.md`.
 - [x] Keep marker current in `docs/status/PP_AUDIT_MARKER.md`.
+- [x] Harden `ci.yml` schema mutation guard for non-push events and full-history diff context.
 
 ## P1
 
@@ -15,6 +16,8 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Align branch protection check names in `.github/settings.optimization.md`.
 - [x] Point onboarding to this queue (`NEXT_STEPS.md`).
 - [x] Refresh worktree/branch inventory drift (`docs/status/WORKTREE_INVENTORY.md`, `docs/status/BRANCH_INVENTORY.md`).
+- [x] Gate `shopify-sync.yml` so CI push/schedule are preview-only and write apply is explicit manual dispatch.
+- [x] Compress Shopify docs/scripts guidance onto canonical sync + preview/approval flow (`docs/UPDATE_SHOPIFY_FROM_CURSOR.md`, `scripts/README.md`).
 
 ## P2
 
