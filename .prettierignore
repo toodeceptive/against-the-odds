@@ -1,2 +1,4 @@
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+# Structural state is script-generated; reformatting invalidates signature
+infra/STRUCTURAL_STATE.json

@@ -17,7 +17,7 @@
 
 - **One command:** `npm run quality` (format, format:check, lint, test:unit)
 - Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
-- **Before push:** Run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`). See [.github/workflows/README.md](.github/workflows/README.md).
+- **Before push:** Run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`). CI runs **arch_guard**, test, secret-scan, quality; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
 - **Prettier runs automatically on every commit** (pre-commit hook); see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)
@@ -66,7 +66,7 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 ## Structural integrity (after governance file changes)
 
-After editing AGENTS.md, CODEOWNERS, docs/OWNERSHIP_REGISTRY.md, docs/SSOT_ATO.md, docs/VERSION_POLICY.md, or .github/workflows/ci.yml, run `bash scripts/infra/sign-structural-state.sh` (or `.\scripts\infra\sign-structural-state.ps1` on Windows; use Git Bash or WSL if sign step fails). Commit `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt`. See [infra/README.md](infra/README.md).
+After editing AGENTS.md, CODEOWNERS, docs/OWNERSHIP_REGISTRY.md, docs/SSOT_ATO.md, docs/VERSION_POLICY.md, or .github/workflows/ci.yml, run `bash scripts/infra/sign-structural-state.sh` (or `.\scripts\infra\sign-structural-state.ps1` on Windows; use Git Bash or WSL if sign step fails). Commit `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt` (or `STRUCTURAL_SIGNATURE_NEW.txt` if the former was locked; arch_guard accepts either). See [infra/README.md](infra/README.md).
 
 ## Credentials
 

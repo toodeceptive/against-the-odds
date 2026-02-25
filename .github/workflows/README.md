@@ -25,7 +25,7 @@ These workflows require the following secrets to be configured in GitHub:
 - Runs on: Push to `main`, Pull requests targeting `main`
 - Actions: **arch_guard** (structural integrity), lint, format check, unit tests, build, Trivy (security scan), secret-scan, npm audit (continue-on-error), optional coverage, Lighthouse (continue-on-error). Single workflow for all quality gates.
 
-**Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `.\scripts\verify-pipeline.ps1`. CI runs lint, format check, unit tests, Trivy, secret-scan, and npm audit only. Before push, run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if you have no `.env.local`).
+**Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `.\scripts\verify-pipeline.ps1`. CI runs arch_guard, lint, format check, unit tests, Trivy, secret-scan, and npm audit. Before push, run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if you have no `.env.local`).
 
 ### `codeql.yml` (CodeQL analysis)
 
