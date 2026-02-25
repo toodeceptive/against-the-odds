@@ -1,0 +1,71 @@
+{% comment %}
+  AO About — brand story block. Editable title and body in Theme Editor.
+{% endcomment %}
+<section class="ao-about section-{{ section.id }}-padding" style="background-color: var(--ao-bg-surface, #1a1a1a); color: var(--ao-text, #f5f0e8); padding: 4rem 1.5rem;">
+  <div class="page-width">
+    {% if section.settings.logo != blank %}
+      <div class="ao-about__logo" style="margin-bottom: 2rem; text-align: center;">
+        <img
+          src="{{ section.settings.logo | image_url: width: 400 }}"
+          alt="Against the Odds"
+          width="200"
+          height="auto"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+    {% if section.settings.title != blank %}
+      <h2 class="ao-about__title" style="font-family: var(--ao-font-display, inherit); font-size: clamp(1.75rem, 4vw, 2.5rem); text-transform: uppercase; margin-bottom: 1.5rem;">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <div class="ao-about__body rte" style="color: var(--ao-text); line-height: 1.7;">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+    {% if section.settings.tagline != blank %}
+      <p class="ao-about__tagline" style="margin-top: 2rem; color: var(--ao-accent-cyan, #00d4ff); font-weight: 700;">
+        {{ section.settings.tagline }}
+      </p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AO About",
+  "tag": "section",
+  "class": "section-ao-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "About Against the Odds"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Against the Odds (AO) is a story-led premium streetwear brand. We're for people who bet on themselves—builders, grinders, and anyone who shows up anyway.</p><p>We don't do generic motivational merch. We do heavyweight hoodies and gear built to last, with designs that actually mean something. Limited drops. No fluff.</p><p><em>The odds were never even. If y'all drop it, we all got it. If y'all rock it, we all profit.</em></p><p>— AO</p>"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline (optional)",
+      "default": "THE ODDS WERE NEVER EVEN · WE ALL PROFIT"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (optional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AO About"
+    }
+  ]
+}
+{% endschema %}

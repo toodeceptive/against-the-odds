@@ -1,0 +1,71 @@
+{% comment %}
+  AO Footer — tagline, optional logo, bio. Add to footer or as a standalone section.
+{% endcomment %}
+<footer class="ao-footer section-{{ section.id }}-padding" style="background-color: var(--ao-bg-elevated, #141414); color: var(--ao-text-muted, #b8b0a0); border-top: 1px solid rgba(255,255,255,0.06); padding: 2rem 1.5rem;">
+  <div class="page-width">
+    {% if section.settings.logo != blank %}
+      <div class="ao-footer__logo" style="margin-bottom: 1rem; text-align: center;">
+        <img
+          src="{{ section.settings.logo | image_url: width: 200 }}"
+          alt="Against the Odds"
+          width="120"
+          height="auto"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+    {% if section.settings.tagline != blank %}
+      <p class="ao-footer__tagline" style="text-align: center; font-size: 0.875rem; letter-spacing: 0.05em; margin: 0;">
+        {{ section.settings.tagline }}
+      </p>
+    {% endif %}
+    {% if section.settings.bio != blank %}
+      <p class="ao-footer__bio" style="text-align: center; font-size: 0.8125rem; margin-top: 0.5rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
+        {{ section.settings.bio }}
+      </p>
+    {% endif %}
+    {% if section.settings.copyright != blank %}
+      <p class="ao-footer__copyright" style="text-align: center; font-size: 0.75rem; margin-top: 1.5rem; opacity: 0.8;">
+        {{ section.settings.copyright }}
+      </p>
+    {% endif %}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "AO Footer",
+  "tag": "section",
+  "class": "section-ao-footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "THE ODDS WERE NEVER EVEN · WE ALL PROFIT"
+    },
+    {
+      "type": "textarea",
+      "id": "bio",
+      "label": "Short bio",
+      "default": "Premium streetwear for people who keep going."
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright line",
+      "default": "© 2026 Against the Odds. All rights reserved."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (optional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AO Footer"
+    }
+  ]
+}
+{% endschema %}
