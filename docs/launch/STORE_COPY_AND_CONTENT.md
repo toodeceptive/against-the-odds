@@ -6,10 +6,10 @@ Single source of truth for all store text and meta. Use in Shopify **Settings �
 
 ## Store identity (Shopify Settings → Store details)
 
-| Field | Copy |
-|-------|------|
-| **Store name** | Against the Odds |
-| **Short description (meta)** | Premium streetwear for people who keep going. Built for the ones who live against the odds. |
+| Field                              | Copy                                                                                                                                                                                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Store name**                     | Against the Odds                                                                                                                                                                                                                            |
+| **Short description (meta)**       | Premium streetwear for people who keep going. Built for the ones who live against the odds.                                                                                                                                                 |
 | **Long description (About / SEO)** | Against the Odds (AO) is a story-led premium streetwear brand for bet-on-yourself customers. We make apparel that signals resilience and ambition—without feeling like generic motivational merch. The odds were never even. We all profit. |
 
 ---
@@ -35,7 +35,7 @@ We started AO because we got tired of merch that talks big and wears thin. Again
 - **Subhead:** Premium streetwear for people who keep going.
 - **CTA:** Join the drop list
 
-*(Pre-launch: keep “Opening soon” + newsletter signup; swap headline to “THE ODDS WERE NEVER EVEN” and subhead to the line above.)*
+_(Pre-launch: keep “Opening soon” + newsletter signup; swap headline to “THE ODDS WERE NEVER EVEN” and subhead to the line above.)_
 
 ### Newsletter / coming soon block
 
@@ -52,7 +52,7 @@ Against the Odds (AO) is a story-led premium streetwear brand. We’re for peopl
 
 We don’t do generic motivational merch. We do heavyweight hoodies and gear built to last, with designs that actually mean something. Limited drops. No fluff.
 
-*The odds were never even. If y’all drop it, we all got it. If y’all rock it, we all profit.*
+_The odds were never even. If y’all drop it, we all got it. If y’all rock it, we all profit._
 
 — AO
 
@@ -74,12 +74,12 @@ We don’t do generic motivational merch. We do heavyweight hoodies and gear bui
 
 ## Meta & SEO
 
-| Use | Copy |
-|-----|------|
-| **Meta title (home)** | Against the Odds — Premium Streetwear for People Who Keep Going |
-| **Meta description** | Premium streetwear built for the ones who live against the odds. Limited drops. Quality-first. Join the drop list. |
-| **OG title** | Against the Odds — Premium Streetwear |
-| **OG description** | The odds were never even. We all profit. Premium essentials for people who keep going. |
+| Use                   | Copy                                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Meta title (home)** | Against the Odds — Premium Streetwear for People Who Keep Going                                                    |
+| **Meta description**  | Premium streetwear built for the ones who live against the odds. Limited drops. Quality-first. Join the drop list. |
+| **OG title**          | Against the Odds — Premium Streetwear                                                                              |
+| **OG description**    | The odds were never even. We all profit. Premium essentials for people who keep going.                             |
 
 ---
 
@@ -103,13 +103,13 @@ We don’t do generic motivational merch. We do heavyweight hoodies and gear bui
 
 Use the assets in `assets/brand/` and `src/shopify/themes/aodrop-theme/assets/` (see [ASSETS_MANIFEST.md](../../src/shopify/themes/ao-brand-customization/ASSETS_MANIFEST.md)):
 
-| Placement | Asset |
-|-----------|--------|
-| Header logo | Against the Odds full logo (blue/pink or blue/yellow) |
-| Hero | Full slogan and/or logo + motto lockup |
-| About section | Logo + motto or full slogan |
-| Footer | We All Profit or motto only |
-| Favicon | AO acronym logo |
+| Placement     | Asset                                                 |
+| ------------- | ----------------------------------------------------- |
+| Header logo   | Against the Odds full logo (blue/pink or blue/yellow) |
+| Hero          | Full slogan and/or logo + motto lockup                |
+| About section | Logo + motto or full slogan                           |
+| Footer        | We All Profit or motto only                           |
+| Favicon       | AO acronym logo                                       |
 
 After your Printify test products arrive, add product photos to the theme and product JSON; keep hero and about imagery aligned with the same graffiti/street-art palette (dark bg, cyan/yellow/pink accents).
 
