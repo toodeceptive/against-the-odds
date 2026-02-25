@@ -10,7 +10,10 @@ For any change that affects the **live Shopify store** (theme push, product sync
 1. **Preview first**: Show the user one of:
    - Product sync: output of `.\scripts\shopify\sync-products.ps1 -DryRun`
    - Theme: `shopify theme dev` preview URL, or a PR diff summary
-2. **Snapshot**: Before asking for approval, write the preview to [docs/status/pending-approval.md](docs/status/pending-approval.md) (summary + dry-run output or theme URL/diff + "To approve: say 'approve' in Cursor chat"). **Then run `.\scripts\open-preview-popup.ps1`** from repo root (or `.\scripts\start-theme-preview.ps1`, which calls it). That opens the approval file in Cursor, opens the AO preview in the browser (static mock immediately; live theme when dev server is ready), and starts theme dev in a new window. Tell the user: "I've opened the pending changes and preview. When ready, say 'approve' in this chat."
+2. **Snapshot**: Before asking for approval, write the preview to [docs/status/pending-approval.md](docs/status/pending-approval.md) (summary + dry-run output or theme URL/diff + "To approve: say 'approve' in Cursor chat"). Then run the appropriate script from repo root:
+   - **Product sync**: `.\scripts\open-pending-approval.ps1` — opens the approval file in Cursor only (dry-run output is in the file; no theme server needed).
+   - **Theme**: `.\scripts\open-preview-popup.ps1` or `.\scripts\start-theme-preview.ps1` — opens the approval file in Cursor, opens AO preview in the browser (static mock immediately; live theme when dev server is ready), and starts theme dev in a new window.
+   Tell the user: "I've opened the pending changes and preview. When ready, say 'approve' in this chat."
 3. **Get explicit approval**: Wait for the user to confirm in chat (e.g. "approve", "yes", "looks good") before apply—unless the user has stated they **pre-approve reviewed finalizations**, in which case treat completion of preview+snapshot (with opportunity to review) as approval. Do not proceed with the following until approved:
    - Running sync without `-DryRun`
    - Pushing to `main` or merging a PR that updates theme/products
