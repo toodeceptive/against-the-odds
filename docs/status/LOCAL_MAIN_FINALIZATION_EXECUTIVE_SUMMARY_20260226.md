@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-The Local Main-Branch Guru Finalization Team executed three passes (V3 full, V4 closure-only, V5 non-redundant closure). The repo remains on `main`. Strict verification was re-run, browser admin checks were re-validated, and blocker handling was tightened with a strict `verify-secrets` script update. Remaining work is credential- and admin-gated and tracked in WORK_QUEUE and LOCAL_MAIN_FINALIZATION_PLAN_20260226.
+The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V6, V7 delta-only). The repo remains on `main`. This cycle added an integration cost/value audit, refreshed strict verification evidence, repaired Codacy local operability, and re-ran blocker closure lanes with deterministic outcomes. Remaining work is external/manual (auth/credentials/signature/policy alignment) and tracked in WORK_QUEUE plus PP_AUDIT_MARKER.
 
 ---
 
@@ -12,7 +12,7 @@ The Local Main-Branch Guru Finalization Team executed three passes (V3 full, V4 
 | ----------------------------------------- | -------- | ---------------------------------------------------- |
 | GitHub CLI not authenticated              | P1       | Open — `gh` installed, login/scope refresh pending   |
 | SHOPIFY_ACCESS_TOKEN missing              | P1       | Open — local operator action                         |
-| Branch protection/rulesets not configured | P2       | Open — GitHub admin action                           |
+| Branch protection required-check alignment | P2       | Open — verify exact required checks vs policy        |
 | Structural signature verify fails         | P2       | Open — local operator; reverted broken local changes |
 | Codacy MCP in cloud                       | P3       | Informational — reset MCP if unavailable             |
 
@@ -24,7 +24,11 @@ The Local Main-Branch Guru Finalization Team executed three passes (V3 full, V4 
 - Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md` — full execution prompt
 - Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V4_CLOSURE_ONLY.md` — delta-only closure prompt
 - Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V5.md` — non-redundant closure + re-execute prompt
+- Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V6_OPTIMAL_INTEGRATIONS.md` — optimized closure + integration policy
+- Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V7_DELTA_ONLY_EXTERNALS.md` — delta-only unresolved blocker rerun
 - Created `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md` — cloud/local blocker pack with owners
+- Created `docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md` — keep/replace/disable matrix with cost/value logic
+- Repaired Codacy local path (`codacy_cli_install`) and re-verified `codacy_cli_analyze` on edited files
 - Updated `scripts/github/verify-secrets.ps1` — strict failure + fallback `gh` path detection
 - Updated CONSOLIDATION_LOG, PP_AUDIT_MARKER, INDEX_REPORTS, AGENT_PROMPT_DECISION_TREE
 - Reverted infra/ to committed state (local structural signature failed verify)
@@ -36,21 +40,21 @@ The Local Main-Branch Guru Finalization Team executed three passes (V3 full, V4 
 | Command                                                     | Result                                     |
 | ----------------------------------------------------------- | ------------------------------------------ |
 | `npm run quality`                                           | PASS                                       |
-| `scripts/verify-pipeline.ps1 -SkipRunbook`                  | PASS                                       |
+| `scripts/verify-pipeline.ps1`                               | FAIL (runbook credential gate)             |
 | `scripts/github/verify-auth.ps1`                            | PASS (repo access OK, 22 branches)         |
-| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | FAIL (gh detected; auth still required)    |
+| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | FAIL (gh installed; unauthenticated)       |
 | `scripts/run-runbook.ps1 -StrictSecrets`                    | FAIL (SHOPIFY_ACCESS_TOKEN not set)        |
-| `ssh-keygen -Y verify` (structural)                         | FAIL (reverted; committed state preserved) |
+| `ssh-keygen -Y verify` (structural)                         | FAIL (`missing header` / invalid payload)  |
 
 ---
 
 ## Remaining Blockers (owner + next action)
 
-1. **GitHub CLI auth** — Local operator: `gh auth login`, then `gh auth refresh -h github.com -s repo,workflow,read:org`, then `verify-secrets.ps1 -FailOnPermissionDenied`
+1. **GitHub CLI auth** — Local operator: `& "C:\Program Files\GitHub CLI\gh.exe" auth login`, then `auth refresh -h github.com -s repo,workflow,read:org`, then `verify-secrets.ps1 -FailOnPermissionDenied`
 2. **Strict runbook** — Local operator: Add `SHOPIFY_ACCESS_TOKEN` to `.env.local`, rerun `scripts/run-runbook.ps1 -StrictSecrets`
-3. **Branch protection** — GitHub admin: Configure per `.github/settings.optimization.md`
-4. **Structural signature** — Local operator: Run `scripts/infra/sign-structural-state.ps1` and commit if needed
-5. **Codacy MCP** — Cursor/Codacy: Reset MCP; verify Copilot MCP settings in GitHub
+3. **Branch protection** — GitHub admin: Confirm required checks match `.github/settings.optimization.md` (`arch_guard`, `test`, `secret-scan`, `quality`)
+4. **Structural signature** — Local operator: Run `scripts/infra/sign-structural-state.ps1`, then rerun `ssh-keygen -Y verify`
+5. **Codacy MCP** — Closed in this pass (CLI reinstalled, analyze path verified)
 
 ---
 

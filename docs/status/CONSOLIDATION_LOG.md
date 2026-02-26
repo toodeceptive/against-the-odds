@@ -6,6 +6,20 @@
 
 ---
 
+## 2026-02-26 — Local main guru finalization V6/V7: integration stack audit, strict rerun, delta-only closure map
+
+**Summary**: Executed a full V6 + V7 non-redundant closure cycle. Added `docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md` with keep/replace/disable decisions (cost/value and functionality based). Added `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V6_OPTIMAL_INTEGRATIONS.md` and `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V7_DELTA_ONLY_EXTERNALS.md`, then executed strict matrix plus delta-only rerun. Repaired Codacy local operability by running `codacy_cli_install` and validating `codacy_cli_analyze` on edited files.
+
+**Execution evidence**: `npm run quality` PASS; `scripts/verify-pipeline.ps1` FAIL only at strict runbook credential gate; `scripts/run-runbook.ps1 -StrictSecrets` FAIL (`SHOPIFY_ACCESS_TOKEN` missing); `scripts/github/verify-auth.ps1` PASS; `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` FAIL (`gh` unauthenticated); `gh auth status` + `gh auth refresh` fail until interactive login; structural verify fails (`Couldn't parse signature: missing header`).
+
+**Browser/admin evidence**: `settings/branches` and `settings/security_analysis` pages re-validated in logged-in browser session; security analysis page still shows multiple "Uh oh" load blocks in code-scanning sections.
+
+**Integration decisions (applied policy)**: Keep core stack active (GitHub MCP, Codacy MCP/CLI, Cursor browser MCP, Cloudflare docs MCP). Keep Cloudflare operational MCP lanes disabled-by-default until needed. Mark BrowserStack/Linear/Notion/Slack as non-essential and disabled-by-default for this repo to avoid paid/unused overhead and auth churn.
+
+**Outcome**: Closure quality improved with deterministic, reproducible blocker classification. Remaining blockers are explicitly external/manual with owners and next actions in `WORK_QUEUE` and `PP_AUDIT_MARKER`. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Local main guru finalization V5: non-redundant prompt, strict rerun, escalation pack
 
 **Summary**: Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V5.md` (non-redundant, role-assigned closure + re-execution) and `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md` (cloud/local escalation owner matrix). Re-ran strict gates and browser admin checks. Hardened `scripts/github/verify-secrets.ps1` to support strict failure semantics and fallback detection of `gh` at `C:\Program Files\GitHub CLI\gh.exe` when PATH is incomplete. Verified parse/lint quality after fix.

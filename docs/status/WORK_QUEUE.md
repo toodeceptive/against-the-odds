@@ -27,10 +27,14 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Harden `scripts/github/verify-secrets.ps1` strict mode and fallback `gh` detection (`C:\Program Files\GitHub CLI\gh.exe`).
 - [x] Run browser-admin checks in GitHub settings (`branches`, `rules`, `security_analysis`) using logged-in session.
 - [x] Resolve stale local lock handles on `infra/STRUCTURAL_*` files and unblock rebase on `main`.
+- [x] Re-run strict verification matrix and capture deterministic blocker evidence.
+- [x] Revalidate Codacy MCP analyze path end-to-end (MCP reachable, CLI install repaired, per-file analyze pass).
+- [x] Publish integration cost/value audit and optimal default stack (`docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md`).
+- [x] Generate and execute recursive prompts (`V6` + `V7` delta-only) for non-redundant closure.
 - [ ] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure.
 - [ ] Align/enforce branch protection or ruleset required checks for `main` per policy docs.
 - [ ] Restore strict runbook credentials in `.env.local` (`SHOPIFY_ACCESS_TOKEN`; optional `GITHUB_TOKEN`) and rerun strict runbook to exit `0`.
-- [x] Validate Codacy MCP analyze path end-to-end for repo-level checks after local install.
+- [ ] Regenerate valid structural signature payload (`infra/STRUCTURAL_SIGNATURE.txt`) and pass `ssh-keygen -Y verify`.
 
 ## Approval Gates (Must Ask First)
 
@@ -48,3 +52,4 @@ Single source of truth for active execution. This queue is compression-first and
 - `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`
 - `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`
 - `OPERATOR_RUNBOOK.md`
+- `docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md`

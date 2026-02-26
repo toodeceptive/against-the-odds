@@ -4,7 +4,7 @@
 
 **Purpose**: Single index of report- and status-style markdown files so agents and humans know what is current vs legacy and where to look.
 
-**Counts (2026-02)**: docs/ **141 files** total; docs/status/ **77 files**; repo total on disk (excl. .git, node_modules) **~476 files**; tracked (excl. coverage, playwright-report, test-results, .vscode) **~431 files**. Full inventory is in .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md.
+**Counts (2026-02)**: docs/ **142 files** total; docs/status/ **78 files**; repo total on disk (excl. .git, node_modules) **~476 files**; tracked (excl. coverage, playwright-report, test-results, .vscode) **~431 files**. Full inventory is in .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md.
 
 ---
 
@@ -52,6 +52,9 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md**              | Local main-branch closure; blocker steps, verification gates, docs truth, git finalize (2026-02-26)                                                              |
 | **prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V4_CLOSURE_ONLY.md** | Delta-only closure pass; execute remaining steps; final output (2026-02-26)                                                                                      |
 | **prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V5.md**              | Non-redundant closure prompt with assigned team roles, strict blockers, and required re-execution pass (2026-02-26)                                              |
+| **prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V6_OPTIMAL_INTEGRATIONS.md** | V6 optimized closure prompt: strict lanes + integration cost/value policy + deterministic delta loop (2026-02-26)                                      |
+| **prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V7_DELTA_ONLY_EXTERNALS.md** | V7 delta-only prompt for unresolved external/manual blockers (2026-02-26)                                                                              |
+| **INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md**                 | Cost/value and functionality audit for MCP/integration stack; keep/replace/disable decisions and safe default tiers (2026-02-26)                              |
 | **LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md**         | Cloud/local escalation pack for auth, credentials, browser admin checks, strict gate evidence, and owner actions (2026-02-26)                                    |
 | **APIS_VS_PC_AUTOMATION_QA_20260207.md**                           | Q&A: when APIs/secrets required vs PC+browser; decision tree; credentials matrix (2026-02-07)                                                                    |
 
