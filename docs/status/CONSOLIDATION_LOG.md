@@ -6,6 +6,14 @@
 
 ---
 
+## 2026-02-26 — Local main guru finalization V4: closure-only prompt, second pass
+
+**Summary**: Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V4_CLOSURE_ONLY.md` (delta-only, closure-focused). Executed V4: quality PASS, verify-pipeline -SkipRunbook PASS. Credential-gated steps (gh auth, strict runbook) remain per WORK_QUEUE. Final output documented in `docs/status/LOCAL_MAIN_FINALIZATION_EXECUTIVE_SUMMARY_20260226.md`.
+
+**Outcome**: V3 + V4 prompts in place; main finalized with commit f99f782; CI green expected. No store-affecting changes.
+
+---
+
 ## 2026-02-26 — Local main guru finalization V3: plan, prompt, verification gates
 
 **Summary**: Updated plan from all chat work; created non-redundant `docs/status/LOCAL_MAIN_FINALIZATION_PLAN_20260226.md` and `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md`. Executed strict verification gates: `npm run quality` PASS, `scripts/verify-pipeline.ps1 -SkipRunbook` PASS, `scripts/github/verify-auth.ps1` PASS (repo access OK, 22 branches). `scripts/github/verify-secrets.ps1` reports gh not installed in current PATH. `scripts/run-runbook.ps1 -StrictSecrets` FAIL (SHOPIFY_ACCESS_TOKEN not set). Structural signature verify FAIL (local signature incorrect; reverted infra/ to committed state). INDEX_REPORTS updated with new plan reference.
