@@ -1,0 +1,5 @@
+root: src/shopify/themes/aodrop-theme
+extends:
+  - theme-check:recommended
+ignore:
+  - 'node_modules/**'
