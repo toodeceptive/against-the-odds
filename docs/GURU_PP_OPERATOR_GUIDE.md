@@ -67,7 +67,7 @@ For **deep-research backed setups** and **systems-wide improvements**:
 .\scripts\verify-pipeline.ps1
 ```
 
-**What it does**: (1) Parses all 74 PowerShell scripts, (2) Verifies workflow files, (3) Product sync dry-run if Shopify creds in `.env.local`, (4) ESLint, (5) Runbook (Shopify connection + GitHub auth).
+**What it does**: (1) Parses all PowerShell scripts, (2) Verifies workflow files, (3) Product sync dry-run if Shopify creds in `.env.local`, (4) ESLint, (5) Runbook (Shopify connection + GitHub auth).
 
 **Expected outcomes**:
 

@@ -12,10 +12,12 @@ $content = Get-Content $envPath
 $apiKey = $null
 $apiSecret = $null
 $storeDomain = "aodrop.com"
+$myshopifyDomain = $null
 foreach ($line in $content) {
     if ($line -match '^SHOPIFY_API_KEY=(.+)$') { $apiKey = $matches[1].Trim() }
     if ($line -match '^SHOPIFY_API_SECRET=(.+)$') { $apiSecret = $matches[1].Trim() }
     if ($line -match '^SHOPIFY_STORE_DOMAIN=(.+)$') { $storeDomain = $matches[1].Trim() }
+    if ($line -match '^SHOPIFY_MYSHOPIFY_DOMAIN=(.+)$') { $myshopifyDomain = $matches[1].Trim() }
 }
 
 if ([string]::IsNullOrWhiteSpace($apiKey) -or $apiKey -match 'your_.*_here') {
@@ -27,13 +29,23 @@ if ([string]::IsNullOrWhiteSpace($apiSecret) -or $apiSecret -match 'your_.*_here
     exit 1
 }
 
-# Use myshopify domain for OAuth; store ID from admin URLs is nbxwpf-z1
-$hostOnly = $storeDomain -replace '^https?://','' -replace '/.*$',''
-if ($hostOnly -eq "aodrop.com") {
-    $uri = "https://nbxwpf-z1.myshopify.com/admin/oauth/access_token"
+# Use the myshopify host for OAuth token exchange.
+$hostOnly = ($storeDomain -replace '^https?://', '' -replace '/.*$', '').ToLowerInvariant()
+$oauthHost = $null
+
+if ($hostOnly -match '\.myshopify\.com$') {
+    $oauthHost = $hostOnly
+} elseif (-not [string]::IsNullOrWhiteSpace($myshopifyDomain)) {
+    $oauthHost = ($myshopifyDomain -replace '^https?://', '' -replace '/.*$', '').ToLowerInvariant()
+} elseif ($hostOnly -eq "aodrop.com") {
+    $oauthHost = "aodrop.com.myshopify.com"
 } else {
-    $uri = "https://$hostOnly/admin/oauth/access_token"
+    Write-Host "Error: Could not determine myshopify domain for OAuth." -ForegroundColor Red
+    Write-Host "Set SHOPIFY_MYSHOPIFY_DOMAIN in .env.local (example: your-store.myshopify.com)." -ForegroundColor Yellow
+    exit 1
 }
+
+$uri = "https://$oauthHost/admin/oauth/access_token"
 
 $body = @{
     grant_type    = "client_credentials"

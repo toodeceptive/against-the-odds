@@ -78,7 +78,7 @@ function Invoke-ShopifyRestMethod {
     $attempt = 0
     while ($true) {
         try {
-            $params = @{ Uri = $Uri; Headers = $Headers; Method = $Method }
+            $params = @{ Uri = $Uri; Headers = $Headers; Method = $Method; TimeoutSec = 60 }
             if ($Body) { $params.Body = $Body }
             return Invoke-RestMethod @params
         } catch {
@@ -97,6 +97,10 @@ function Invoke-ShopifyRestMethod {
                 $retryAfter = [Math]::Max(1, [Math]::Min($retryAfter, 10))
                 Write-Host "  [429] Rate limited; waiting ${retryAfter}s before retry ($attempt/$maxRetries)" -ForegroundColor Yellow
                 Start-Sleep -Seconds $retryAfter
+            } elseif (($statusCode -ge 500 -and $statusCode -lt 600) -or $statusCode -eq 408 -or -not $statusCode) {
+                $backoff = [int][Math]::Min([Math]::Pow(2, $attempt), 10)
+                Write-Host "  [RETRY] Transient API error; waiting ${backoff}s before retry ($attempt/$maxRetries)" -ForegroundColor Yellow
+                Start-Sleep -Seconds $backoff
             } else {
                 throw
             }

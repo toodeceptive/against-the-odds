@@ -92,7 +92,7 @@ try {
 
     if ($token) {
         Write-Host ""
-        Write-Host "[OK] Access token extracted: $($token.Substring(0, 20))..." -ForegroundColor Green
+        Write-Host "[OK] Access token extracted (length: $($token.Length))." -ForegroundColor Green
         $env:ATO_SHOPIFY_STORE_ID = $null
 
         if (-not $NoSave) {

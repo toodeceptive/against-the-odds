@@ -59,6 +59,81 @@ $headers = @{
     "X-Shopify-Access-Token" = $token
     "Content-Type"           = "application/json"
 }
+$requestTimeoutSec = 60
+$maxApiRetries = 3
+
+function Get-RetryDelaySeconds {
+    param(
+        [object]$Exception,
+        [int]$Attempt
+    )
+
+    $statusCode = $null
+    $retryAfter = 0
+    if ($Exception -and $Exception.Response) {
+        if ($Exception.Response.StatusCode) {
+            $statusCode = $Exception.Response.StatusCode.Value__
+        }
+        if ($Exception.Response.Headers -and $Exception.Response.Headers["Retry-After"]) {
+            $retryAfterRaw = $Exception.Response.Headers["Retry-After"] | Select-Object -First 1
+            $parsedRetryAfter = 0.0
+            if ($retryAfterRaw -and [double]::TryParse($retryAfterRaw, [ref]$parsedRetryAfter)) {
+                $retryAfter = [int]$parsedRetryAfter
+            }
+        }
+    }
+
+    if ($retryAfter -gt 0) {
+        return [Math]::Max(1, [Math]::Min($retryAfter, 10))
+    }
+
+    if ($statusCode -eq 429 -or $statusCode -eq 408 -or ($statusCode -ge 500 -and $statusCode -lt 600) -or -not $statusCode) {
+        return [int][Math]::Min([Math]::Pow(2, $Attempt), 10)
+    }
+
+    return 0
+}
+
+function Invoke-ShopifyRestRequest {
+    param(
+        [string]$Uri,
+        [string]$Method = "Get"
+    )
+
+    $attempt = 0
+    while ($true) {
+        try {
+            return Invoke-RestMethod -Uri $Uri -Headers $headers -Method $Method -TimeoutSec $requestTimeoutSec
+        } catch {
+            $attempt++
+            if ($attempt -ge $maxApiRetries) { throw }
+            $caughtException = if ($_.Exception) { $_.Exception } else { $_ }
+            $delay = Get-RetryDelaySeconds -Exception $caughtException -Attempt $attempt
+            if ($delay -le 0) { throw }
+            Write-Host "  [RETRY] REST request failed; waiting ${delay}s before retry ($attempt/$maxApiRetries)" -ForegroundColor Yellow
+            Start-Sleep -Seconds $delay
+        }
+    }
+}
+
+function Invoke-ShopifyWebRequest {
+    param([string]$Uri)
+
+    $attempt = 0
+    while ($true) {
+        try {
+            return Invoke-WebRequest -Uri $Uri -Headers $headers -Method Get -UseBasicParsing -TimeoutSec $requestTimeoutSec
+        } catch {
+            $attempt++
+            if ($attempt -ge $maxApiRetries) { throw }
+            $caughtException = if ($_.Exception) { $_.Exception } else { $_ }
+            $delay = Get-RetryDelaySeconds -Exception $caughtException -Attempt $attempt
+            if ($delay -le 0) { throw }
+            Write-Host "  [RETRY] Web request failed; waiting ${delay}s before retry ($attempt/$maxApiRetries)" -ForegroundColor Yellow
+            Start-Sleep -Seconds $delay
+        }
+    }
+}
 
 Write-Host "=== Shopify Theme Pull (REST API) ===" -ForegroundColor Cyan
 Write-Host "Store: $storeHost -> $ThemePath" -ForegroundColor Gray
@@ -66,10 +141,11 @@ Write-Host ""
 
 # 1) List themes, find main (live)
 try {
-    $themesResp = Invoke-RestMethod -Uri "$baseUrl/themes.json" -Headers $headers -Method Get
+    $themesResp = Invoke-ShopifyRestRequest -Uri "$baseUrl/themes.json" -Method Get
 } catch {
     Write-Host "Error listing themes: $($_.Exception.Message)" -ForegroundColor Red
-    if ($_.Exception.Response.StatusCode -eq 401) {
+    $statusCode = if ($_.Exception -and $_.Exception.Response -and $_.Exception.Response.StatusCode) { $_.Exception.Response.StatusCode.Value__ } else { $null }
+    if ($statusCode -eq 401) {
         Write-Host "Token may be invalid or expired. Re-auth: .\scripts\shopify\theme-auth-then-pull.ps1 or theme-auth-via-browser.ps1" -ForegroundColor Yellow
     }
     exit 1
@@ -88,7 +164,7 @@ Write-Host "Theme ID: $themeId ($($themeObj.name))" -ForegroundColor Gray
 $allKeys = @()
 $uri = "$baseUrl/themes/$themeId/assets.json?limit=250"
 do {
-    $resp = Invoke-WebRequest -Uri $uri -Headers $headers -Method Get -UseBasicParsing
+    $resp = Invoke-ShopifyWebRequest -Uri $uri
     $assetsResp = $resp.Content | ConvertFrom-Json
     foreach ($a in $assetsResp.assets) { $allKeys += $a.key }
     $uri = $null
@@ -107,7 +183,7 @@ $failed = 0
 foreach ($key in $allKeys) {
     $uri = "$baseUrl/themes/$themeId/assets.json?asset[key]=$([uri]::EscapeDataString($key))"
     try {
-        $assetResp = Invoke-RestMethod -Uri $uri -Headers $headers -Method Get
+        $assetResp = Invoke-ShopifyRestRequest -Uri $uri -Method Get
         $asset = $assetResp.asset
         $fullPath = Join-Path $ThemePath $key
         $dir = Split-Path $fullPath -Parent

@@ -18,7 +18,7 @@ Single source of truth for active execution. This queue is compression-first and
 
 ## P2
 
-- [ ] Clean residual stale references in older audit docs only when touched by active work.
+- [x] Clean residual stale references in older audit docs when touched by active work (completed 2026-02-26: stale workflow badge reference and volatile script-count wording updated).
 
 ## Approval Gates (Must Ask First)
 
