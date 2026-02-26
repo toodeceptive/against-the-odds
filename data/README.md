@@ -6,11 +6,12 @@
 
 ## Layout
 
-| Directory               | Purpose                                                                |
-| ----------------------- | ---------------------------------------------------------------------- |
-| **data/products/**      | Product JSON (e.g. example-hoodie.json). Source for repo → store sync. |
-| **data/manufacturers/** | Manufacturer profiles (e.g. example-manufacturer.json).                |
-| **data/samples/**       | Sample tracking data (e.g. .gitkeep; add sample records as needed).    |
+| Directory                   | Purpose                                                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **data/products/**          | Product JSON (e.g. example-hoodie.json). Source for repo → store sync.                                |
+| **data/store-details.json** | Store identity (name, descriptions, slogans). Reference for Shopify Admin and STORE_COPY_AND_CONTENT. |
+| **data/manufacturers/**     | Manufacturer profiles (e.g. example-manufacturer.json).                                               |
+| **data/samples/**           | Sample tracking data (e.g. .gitkeep; add sample records as needed).                                   |
 
 ---
 

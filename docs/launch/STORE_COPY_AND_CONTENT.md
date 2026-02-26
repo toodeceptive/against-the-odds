@@ -117,7 +117,7 @@ After your Printify test products arrive, add product photos to the theme and pr
 
 ## Applying this copy
 
-1. **Store details:** Shopify Admin → Settings → Store details — paste Store name and Short/Long description.
+1. **Store details:** Shopify Admin → Settings → Store details — paste Store name and Short/Long description. Machine-readable source: `data/store-details.json`.
 2. **Theme Editor:** For each section (hero, newsletter, footer), paste the text from the tables above.
 3. **About page:** Create page **About** in Shopify Admin → Online Store → Pages; paste the About page body.
 4. **Theme files:** If your theme uses locale files (e.g. `locales/en.default.schema.json` or section settings), you can reference this doc when editing those files after a theme pull.

@@ -6,6 +6,14 @@
 
 ---
 
+## 2026-02-26 — Store details, theme, design aligned with streetwear branding
+
+**Summary**: Deep-dive research of STORE_COPY_AND_CONTENT, ASSETS_MANIFEST, BRAND_THEME_CUSTOMIZATION, drop01 specs, and business plan. Updated store identity, theme, and design to match motto ("The odds were never even"), slogan ("If y'all drop it, we all got it. If y'all rock it, we all profit."), short ("We all profit."), and streetwear aesthetics. **index.html**: Meta/OG from STORE_COPY; hero motto + subhead; slogan block; footer tagline; fixed broken image path (assets/brand/A_collection...). **styles.css**: Aligned with ao-brand palette (dark #0d0d0d, cyan #00d4ff, yellow accent, Bebas Neue); street-art feel. **data/products/example-hoodie.json**: Rich streetwear body_html with motto, slogan, quality-first copy. **data/store-details.json**: Machine-readable store identity. **docs/data/README**: store-details reference. **STORE_COPY_AND_CONTENT**: data/store-details.json pointer.
+
+**Outcome**: Repo-only changes. Product sync to store requires preview and approval per shopify-preview-approval. No deploy to live store.
+
+---
+
 ## 2026-02-26 — Desktop automation test fix: tesseract package name, stale prompt ref
 
 **Summary**: Fixed `npm run test:desktop` failures. (1) **tesseract package name**: test-system.ps1 checked for `@tesseract.js/tesseract` but package.json has `tesseract.js`; updated dep list to `tesseract.js`. (2) **Stale prompt ref**: test expected `prompts/master-agent-prompt.md` (deleted in 2026-02-01 cleanup); updated to `prompts/head-guru-orchestrator.md` (canonical orchestration prompt). `npm run test:desktop` now passes.
