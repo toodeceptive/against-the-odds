@@ -85,8 +85,8 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | File                                              | Purpose                                                                                  |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `PHASE_0_FINALIZATION.md`                         | Phase 0 checklist and sign-off ("Phase 0 finalized; proceeding allowed.")                |
-| `WORK_QUEUE.md`                                  | Canonical active queue (delta-first, blockers, and closure ownership)                     |
-| `PP_AUDIT_MARKER.md`                             | PP/local-main marker for latest delta run timestamp and baseline                           |
+| `WORK_QUEUE.md`                                   | Canonical active queue (delta-first, blockers, and closure ownership)                    |
+| `PP_AUDIT_MARKER.md`                              | PP/local-main marker for latest delta run timestamp and baseline                         |
 | `BRANCH_INVENTORY.md`                             | Branch and remote inventory                                                              |
 | `WORKTREE_INVENTORY.md`                           | Cursor worktree list (see also `.cursor/worktrees.json`)                                 |
 | `ENVIRONMENTS_AND_SECRETS_INVENTORY.md`           | Local, CI, and remote environment and secrets verification                               |
