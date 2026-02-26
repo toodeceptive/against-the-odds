@@ -57,8 +57,8 @@ The Local Main-Branch Guru Finalization Team executed three passes (V3 full, V4 
 ## Git Finalization
 
 - **Branch**: main
-- **Commits**: f99f782 (V3/V4 baseline) + pending current V5 closure commit
-- **CI**: Expected green (quality, format, lint, test:unit, arch_guard, CodeQL)
+- **Commits**: f99f782, a755477, d08fe2e (V5 closure)
+- **CI**: Green — CI Run 180 success, CodeQL Run 114 success
 
 ---
 

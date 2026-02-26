@@ -12,7 +12,7 @@
 
 **Execution evidence**: `npm run quality` PASS; `scripts/verify-pipeline.ps1` FAIL only at runbook credential gate (`SHOPIFY_ACCESS_TOKEN` missing); `scripts/run-runbook.ps1 -StrictSecrets` FAIL (missing Shopify token); `scripts/github/verify-auth.ps1` PASS; `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` FAIL (gh present, auth pending); structural verify command FAIL (`missing header` in local signature payload).
 
-**Outcome**: Closure quality improved with clearer strict checks and a new V5 execution path. Remaining blockers are narrowed to local auth/credentials and admin policy alignment. No store-affecting changes; no deploy-log entry.
+**Outcome**: Closure quality improved with clearer strict checks and a new V5 execution path. Commit `d08fe2e` pushed to `main`; GitHub Actions shows `CI` Run 180 and `CodeQL` Run 114 completed successfully for this commit. Remaining blockers are narrowed to local auth/credentials and admin policy alignment. No store-affecting changes; no deploy-log entry.
 
 ---
 
