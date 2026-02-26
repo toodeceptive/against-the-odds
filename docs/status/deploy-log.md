@@ -43,4 +43,12 @@ Append-only log for store-affecting changes. Each entry: **Timestamp** (ISO), **
 - **Summary:** Static mock (theme-preview-mock.html) updated to match real Shopify homepage: same hero (THE ODDS WERE NEVER EVEN, subhead, slogan, Join the drop list), same footer (tagline, bio, copyright). Removed large “style mock only” banner; one small “Local preview only” note at bottom. Theme push to Shopify was run but requires one-time login: open the link shown when you run `.\scripts\shopify\update-theme.ps1`, complete auth, then the push will finish. To avoid login next time, set SHOPIFY_CLI_THEME_TOKEN in .env.local (see docs/CREDENTIALS_SETUP.md).
 - **Rollback:** Revert changes to docs/guides/theme-preview-mock.html. Theme: Shopify Admin → theme card → Reset to last commit if needed.
 
+---
+
+## 2026-02-26 — GitHub Actions secrets (shopify-sync enablement)
+
+- **Branch/commit:** `main` @ ea600f3
+- **Summary:** Ran `.\scripts\github\set-secrets-from-env.ps1` (user-approved). Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN in repo Secrets. Enables shopify-sync workflow in CI. SHOPIFY_THEME_ID skipped (not in .env.local).
+- **Rollback:** Remove secrets in GitHub → Settings → Secrets and variables → Actions, or run `gh secret delete SHOPIFY_STORE_DOMAIN SHOPIFY_ACCESS_TOKEN --repo toodeceptive/against-the-odds`. shopify-sync will then skip when secrets are missing.
+
 _(Further entries will appear below as theme deploys and product syncs are applied.)_

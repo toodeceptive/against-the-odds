@@ -96,8 +96,8 @@ if ($ghCommand) {
         } else {
             Write-Host "  [OK] GitHub CLI authenticated" -ForegroundColor Green
 
-            # List secrets
-            $secrets = & $ghCommand secret list 2>&1
+            # List secrets (explicit repo for GH_TOKEN / non-interactive)
+            $secrets = & $ghCommand secret list --repo toodeceptive/against-the-odds 2>&1
             if ($LASTEXITCODE -eq 0) {
                 Write-Host ""
                 Write-Host "Configured secrets:" -ForegroundColor Cyan
