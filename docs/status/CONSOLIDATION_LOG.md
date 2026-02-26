@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-02-26 — Local main finalization closeout: rebase recovery, push, and CI stabilization
+
+**Summary**: Continued the local main closure run after initial blocker capture. Cleared stale file locks on `infra/STRUCTURAL_*` (orphaned `ssh-keygen.exe`/`cmd.exe` handles), completed `main` rebase against `origin/main`, resolved add/add conflicts for `docs/status/WORK_QUEUE.md` and `docs/status/PP_AUDIT_MARKER.md`, and pushed closure commits to `main`. Initial CI run for commit `68baeaf` failed at `Format check`; applied a targeted formatting normalization commit (`aae243a`) and pushed. Latest runs for `aae243a` are green (`CI` success, `CodeQL` success).
+
+**Residual blockers**: strict local credential/admin closure remains incomplete — `gh` not authenticated for secrets visibility checks, `SHOPIFY_ACCESS_TOKEN` missing for strict runbook/verify-pipeline runbook step, and GitHub branch protection/rulesets are still not aligned (no classic branch protection and no rulesets configured).
+
+**Outcome**: Main branch finalized and pushed with green latest CI/CodeQL; unresolved credential/admin tasks remain tracked in `docs/status/WORK_QUEUE.md`. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Local main finalization execution (strict gates + admin audit)
 
 **Summary**: Executed the local main-branch closure run with the required strict command matrix and browser-admin validation. Installed GitHub CLI locally, validated browser access to repo admin settings, and ran strict verification gates. **Observed blockers**: (1) `gh` is installed but not authenticated; `gh auth refresh` cannot run until `gh auth login` completes. (2) `scripts/run-runbook.ps1 -StrictSecrets` and full `scripts/verify-pipeline.ps1` fail due missing local `SHOPIFY_ACCESS_TOKEN`. (3) Structural signature verify fails on local `infra/STRUCTURAL_SIGNATURE.txt` (empty/invalid) and local `main` cannot rebase/pull from `origin/main` because `infra/STRUCTURAL_*` files are locked by another process. (4) GitHub admin audit shows no classic branch protection and no rulesets configured for `main`; Advanced Security page is accessible, but multiple code-scanning UI blocks render "Uh oh" load errors. (5) Codacy MCP server is reachable and Codacy CLI was installed; analyze path works for edited files, but prior wrapper calls failed before install and requires local follow-through.

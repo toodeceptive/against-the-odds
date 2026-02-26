@@ -29,7 +29,7 @@ Single source of truth for active execution. This queue is compression-first and
 - [ ] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure.
 - [ ] Align/enforce branch protection or ruleset required checks for `main` per policy docs.
 - [ ] Restore strict runbook credentials in `.env.local` (`SHOPIFY_ACCESS_TOKEN`; optional `GITHUB_TOKEN`) and rerun strict runbook to exit `0`.
-- [ ] Validate Codacy MCP analyze path end-to-end for repo-level checks after local install.
+- [x] Validate Codacy MCP analyze path end-to-end for repo-level checks after local install.
 
 ## Approval Gates (Must Ask First)
 
