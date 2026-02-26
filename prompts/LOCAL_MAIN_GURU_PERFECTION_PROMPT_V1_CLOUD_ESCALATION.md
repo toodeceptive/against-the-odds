@@ -7,6 +7,7 @@ You are the **Local Main-Branch Guru Orchestrator** for unresolved issues that c
 ## PURPOSE
 
 Run a zero-redundancy, project-wide finalization pass on a **local machine** and **`main` branch** to close blockers that require:
+
 - local account permissions,
 - local browser-bound sessions,
 - local MCP/extension connectivity,
@@ -42,17 +43,17 @@ Close or conclusively classify issues that remain unresolved because of cloud li
 
 ## MANDATORY ZERO-REDUNDANCY LAWS
 
-1) **Delta-first**: no redoing completed work without regression evidence.
-2) Build Done Index from:
+1. **Delta-first**: no redoing completed work without regression evidence.
+2. Build Done Index from:
    - `docs/status/WORK_QUEUE.md`
    - `docs/status/PP_AUDIT_MARKER.md`
    - latest entries in `docs/status/CONSOLIDATION_LOG.md`
    - recent commits/CI runs
-3) Fingerprint each issue: `domain|file|symbol|failure_mode`.
-4) Single owner per issue/workstream.
-5) Smallest safe fix -> targeted recheck -> document.
-6) Max 2 failed attempts per issue, then escalate with hard evidence + fallback.
-7) Every action must move status forward.
+3. Fingerprint each issue: `domain|file|symbol|failure_mode`.
+4. Single owner per issue/workstream.
+5. Smallest safe fix -> targeted recheck -> document.
+6. Max 2 failed attempts per issue, then escalate with hard evidence + fallback.
+7. Every action must move status forward.
 
 ## REQUIRED READ ORDER
 
@@ -87,11 +88,13 @@ Close or conclusively classify issues that remain unresolved because of cloud li
 ## PHASES (LOCAL MAIN-BRANCH RUN)
 
 ### PHASE 0 — BASELINE + DONE INDEX
+
 - Verify branch is `main`; pull latest.
 - Build skip-map from completed cycles.
 - Define exact success criteria for local-only blockers.
 
 ### PHASE 1 — CLOUD-UNRESOLVABLE BLOCKER AUDIT
+
 - Reproduce blockers in local context:
   - `verify-secrets.ps1` with elevated/local auth
   - MCP/Codacy connectivity
@@ -99,6 +102,7 @@ Close or conclusively classify issues that remain unresolved because of cloud li
 - Determine if blocker is now solvable locally.
 
 ### PHASE 2 — REMEDIATION (LOCAL-ONLY ITEMS)
+
 - For each blocker:
   - capture evidence,
   - apply smallest safe local fix,
@@ -106,6 +110,7 @@ Close or conclusively classify issues that remain unresolved because of cloud li
 - Do not re-open already closed cloud fixes unless regression appears.
 
 ### PHASE 3 — PERMISSION + CONNECTOR CLOSURE
+
 - Validate GitHub secrets visibility and required secret presence.
 - Validate MCP/Codacy operational status in local Cursor.
 - Validate Shopify/GitHub integrations through runbook checks.
@@ -113,6 +118,7 @@ Close or conclusively classify issues that remain unresolved because of cloud li
 ### PHASE 4 — VERIFICATION GATES
 
 Run and record:
+
 - `npm run format:check`
 - `npm run lint`
 - `npm run test:unit`
@@ -123,6 +129,7 @@ Run and record:
 - `ssh-keygen -Y verify ...` for structural signature chain
 
 ### PHASE 5 — FINALIZE + DOC TRUTH UPDATE
+
 - Update:
   - `docs/status/WORK_QUEUE.md`
   - `docs/status/PP_AUDIT_MARKER.md`
@@ -132,14 +139,14 @@ Run and record:
 
 ## REQUIRED OUTPUT FORMAT
 
-1) Executive Summary
-2) Findings Register (fingerprint, severity, status)
-3) Local-Only Fixes Applied
-4) Verification Matrix (command/result/evidence)
-5) Remaining External Blockers (owner + exact next action)
-6) Git Finalization (branch/commits/CI)
-7) Rollback Notes
-8) Next Delta Plan
+1. Executive Summary
+2. Findings Register (fingerprint, severity, status)
+3. Local-Only Fixes Applied
+4. Verification Matrix (command/result/evidence)
+5. Remaining External Blockers (owner + exact next action)
+6. Git Finalization (branch/commits/CI)
+7. Rollback Notes
+8. Next Delta Plan
 
 ## SUCCESS CRITERIA
 
