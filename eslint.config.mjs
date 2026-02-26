@@ -43,4 +43,19 @@ export default defineConfig([
       'no-console': 'off',
     },
   },
+  {
+    files: ['src/browser-automation/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        URL: 'readonly',
+        URLSearchParams: 'readonly',
+        fetch: 'readonly',
+        process: 'readonly',
+        document: 'readonly',
+        window: 'readonly',
+      },
+    },
+  },
 ]);
