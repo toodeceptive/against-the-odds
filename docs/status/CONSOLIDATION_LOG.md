@@ -12,7 +12,7 @@
 
 **Execution evidence**: `scripts/run-runbook.ps1 -StrictSecrets` PASS (with .env.local); structural verify PASS; Shopify connection PASS; verify-secrets uses GH_TOKEN fallback when gh not logged in.
 
-**Remaining**: GitHub Actions repo secrets (SHOPIFY_STORE_DOMAIN, SHOPIFY_ACCESS_TOKEN, SHOPIFY_THEME_ID) — add via gh or GitHub UI for CI workflows.
+**Follow-up (2026-02-26)**: Added `scripts/github/set-secrets-from-env.ps1` to push .env.local to repo secrets; made SHOPIFY_THEME_ID optional in verify-secrets per workflows README; documented in OPERATOR_RUNBOOK, CREDENTIAL_SETUP_STEPS, Executive Summary. Remaining: run `set-secrets-from-env.ps1` (requires approval per shopify-preview-approval) to enable shopify-sync in CI.
 
 ---
 

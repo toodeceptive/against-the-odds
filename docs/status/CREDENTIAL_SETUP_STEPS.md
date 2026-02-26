@@ -31,6 +31,15 @@
 - Add to `.env.local`: `GITHUB_TOKEN=ghp_...`
 - Needed for GitHub API checks and CI; not required for local clone/push.
 
+## GitHub Actions secrets (for CI workflows)
+
+After `.env.local` is populated, push values to repo secrets so `shopify-sync` can run in CI:
+
+```powershell
+.\scripts\github\set-secrets-from-env.ps1 -DryRun   # Preview
+.\scripts\github\set-secrets-from-env.ps1           # Apply (requires gh auth)
+```
+
 ## Verify
 
 ```powershell

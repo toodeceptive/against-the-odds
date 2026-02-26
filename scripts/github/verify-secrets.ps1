@@ -10,15 +10,15 @@ Set-Location $repoPath
 Write-Host "=== GitHub Actions Secrets Verification ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Required secrets for workflows
+# Required secrets for workflows (shopify-sync, etc.)
 $requiredSecrets = @(
     "SHOPIFY_STORE_DOMAIN",
-    "SHOPIFY_ACCESS_TOKEN",
-    "SHOPIFY_THEME_ID"
+    "SHOPIFY_ACCESS_TOKEN"
 )
 
-# Optional secrets
+# Optional secrets (theme dev, backups, etc.)
 $optionalSecrets = @(
+    "SHOPIFY_THEME_ID",
     "SHOPIFY_API_KEY",
     "SHOPIFY_API_SECRET",
     "GITHUB_TOKEN",

@@ -31,7 +31,7 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Revalidate Codacy MCP analyze path end-to-end (MCP reachable, CLI install repaired, per-file analyze pass).
 - [x] Publish integration cost/value audit and optimal default stack (`docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md`).
 - [x] Generate and execute recursive prompts (`V6` + `V7` delta-only) for non-redundant closure.
-- [ ] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure.
+- [ ] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure. Mitigated: GH_TOKEN fallback works; run `.\scripts\github\set-secrets-from-env.ps1` to push .env.local to repo Secrets.
 - [x] Align/enforce branch protection or ruleset required checks for `main` per policy docs.
 - [x] Restore strict runbook credentials in `.env.local` (`SHOPIFY_ACCESS_TOKEN`; optional `GITHUB_TOKEN`) and rerun strict runbook to exit `0`.
 - [x] Regenerate valid structural signature payload (`infra/STRUCTURAL_SIGNATURE.txt`) and pass `ssh-keygen -Y verify`.

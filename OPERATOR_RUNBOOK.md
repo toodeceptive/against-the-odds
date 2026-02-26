@@ -73,6 +73,7 @@ After editing AGENTS.md, CODEOWNERS, docs/OWNERSHIP_REGISTRY.md, docs/SSOT_ATO.m
 - Store in `.env.local` (never commit)
 - If missing, copy from `.env.example` and fill values
 - **Full system setup**: Run `.\scripts\setup\full-setup.ps1` for a single entry point (ensures .env.local, guides Shopify/GitHub credentials, runs verify-credentials). See [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md) and [docs/BROWSER_CREDENTIAL_FLOW.md](docs/BROWSER_CREDENTIAL_FLOW.md).
+- **GitHub Actions secrets**: Run `.\scripts\github\set-secrets-from-env.ps1 -DryRun` then `.\scripts\github\set-secrets-from-env.ps1` to push `.env.local` values to repo secrets (enables shopify-sync in CI). Requires `gh auth login` or GH_TOKEN in .env.local.
 - **replacements.txt** at repo root: regex for git-filter-repo (Shopify secret replacement in history); do not remove if using history sanitization.
 
 ## Troubleshooting

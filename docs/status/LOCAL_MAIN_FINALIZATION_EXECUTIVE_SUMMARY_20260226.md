@@ -53,7 +53,7 @@ The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V
 
 ## Remaining Blockers (owner + next action)
 
-1. **GitHub Actions repo secrets** — Add `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_THEME_ID` in Settings > Secrets. Use values from `.env.local` via `gh secret set` or GitHub UI.
+1. **GitHub Actions repo secrets** — Run `.\scripts\github\set-secrets-from-env.ps1 -DryRun` then `.\scripts\github\set-secrets-from-env.ps1` to push `.env.local` values to repo Secrets. Or add manually in Settings > Secrets.
 2. **GitHub CLI persistent auth** (optional) — Run `gh auth login` for persistent `gh secret list` without credential fallback.
 3. **Codacy MCP** — Closed (CLI reinstalled, analyze path verified)
 
@@ -62,8 +62,8 @@ The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V
 ## Git Finalization
 
 - **Branch**: main
-- **Commits**: f99f782, a755477, d08fe2e (V5 closure)
-- **CI**: Green — CI Run 180 success, CodeQL Run 114 success
+- **Commits**: 1844240 (set-secrets-from-env, verify-secrets optional THEME_ID, docs); 11c0d05 (credential closure); 1bf6d86 (format/secret-scan fix)
+- **CI**: Green expected — run `git push` when approved
 
 ---
 
