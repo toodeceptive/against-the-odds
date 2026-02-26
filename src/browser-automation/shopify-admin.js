@@ -228,6 +228,37 @@ export async function navigateToAppsDevelopment(page) {
   }
 }
 
+async function clickFirstAppDetailLink(page) {
+  const appLinks = page.locator('a[href*="/apps/"]');
+  const n = await appLinks.count();
+  for (let i = 0; i < Math.min(n, 8); i++) {
+    const href = await appLinks.nth(i).getAttribute('href');
+    const text = await appLinks.nth(i).textContent();
+    if (href && !href.endsWith('/development') && !/create|new|development/i.test(text || '')) {
+      await appLinks.nth(i).click();
+      await page.waitForLoadState('domcontentloaded');
+      await page.waitForTimeout(2000);
+      return true;
+    }
+  }
+  return false;
+}
+
+async function clickRevealButtons(page) {
+  const revealBtns = page.locator(
+    'button:has-text("Reveal"), [role="button"]:has-text("Reveal"), a:has-text("Reveal")',
+  );
+  const revealCount = await revealBtns.count();
+  for (let r = 0; r < revealCount; r++) {
+    try {
+      await revealBtns.nth(r).click();
+      await page.waitForTimeout(600);
+    } catch {
+      // Ignore if click fails (e.g. already revealed)
+    }
+  }
+}
+
 /**
  * Navigate from Apps > Development to the first app's API credentials and reveal token if masked
  * @param {Page} page - Playwright page instance (should be on apps/development)
@@ -235,22 +266,8 @@ export async function navigateToAppsDevelopment(page) {
  */
 export async function navigateToAppApiCredentialsAndReveal(page) {
   try {
-    // From apps/development: click first link that goes to an app detail (e.g. /store/.../apps/123), not "Create app"
-    const appLinks = page.locator('a[href*="/apps/"]');
-    const n = await appLinks.count();
-    for (let i = 0; i < Math.min(n, 8); i++) {
-      const href = await appLinks.nth(i).getAttribute('href');
-      const text = await appLinks.nth(i).textContent();
-      // Skip "Create app", "Development", or links that are just /apps/development
-      if (href && !href.endsWith('/development') && !/create|new|development/i.test(text || '')) {
-        await appLinks.nth(i).click();
-        await page.waitForLoadState('domcontentloaded');
-        await page.waitForTimeout(2000);
-        break;
-      }
-    }
+    await clickFirstAppDetailLink(page);
 
-    // Click "API credentials" if present (link, tab, or button)
     const apiCredsLink = page
       .locator(
         'a:has-text("API credentials"), [href*="credentials"]:visible, button:has-text("API credentials")',
@@ -262,20 +279,7 @@ export async function navigateToAppApiCredentialsAndReveal(page) {
       await page.waitForTimeout(1500);
     }
 
-    // Click every "Reveal" to unmask tokens (Admin API token is often hidden)
-    const revealBtns = page.locator(
-      'button:has-text("Reveal"), [role="button"]:has-text("Reveal"), a:has-text("Reveal")',
-    );
-    const revealCount = await revealBtns.count();
-    for (let r = 0; r < revealCount; r++) {
-      try {
-        await revealBtns.nth(r).click();
-        await page.waitForTimeout(600);
-      } catch {
-        // Ignore if click fails (e.g. already revealed)
-      }
-    }
-
+    await clickRevealButtons(page);
     return true;
   } catch (_e) {
     return false;
@@ -316,47 +320,51 @@ function buildClientCredentialsEndpoints(storeDomain, storeSlug) {
   return Array.from(endpoints);
 }
 
-async function openDevDashboardSettingsPage(page) {
-  let devPage = page;
-
-  // Shopify Admin "Apps > Development" now links out to Dev Dashboard.
+async function openDevDashboardPopup(page) {
   const devDashboardLink = page
     .locator('a:has-text("Build apps in Dev Dashboard"), a[href*="dev.shopify.com/dashboard"]')
     .first();
-  if ((await devDashboardLink.count()) > 0) {
-    const [popup] = await Promise.all([
-      page.waitForEvent('popup', { timeout: 7000 }).catch(() => null),
-      devDashboardLink.click().catch(() => null),
-    ]);
+  if ((await devDashboardLink.count()) === 0) return page;
 
-    if (popup) {
-      devPage = popup;
-      await devPage.waitForLoadState('domcontentloaded');
-    } else {
-      await page.waitForLoadState('domcontentloaded');
-      devPage = page;
+  const [popup] = await Promise.all([
+    page.waitForEvent('popup', { timeout: 7000 }).catch(() => null),
+    devDashboardLink.click().catch(() => null),
+  ]);
+
+  if (popup) {
+    await popup.waitForLoadState('domcontentloaded');
+    return popup;
+  }
+  await page.waitForLoadState('domcontentloaded');
+  return page;
+}
+
+async function clickFirstAppLinkFromIndex(devPage) {
+  const appLinks = devPage.locator('a[href*="/dashboard/"][href*="/apps/"]');
+  const n = await appLinks.count();
+  for (let i = 0; i < Math.min(n, 15); i++) {
+    const href = await appLinks.nth(i).getAttribute('href');
+    if (href && /\/apps\/\d+/.test(href) && !/\/apps\/?$/.test(href)) {
+      await Promise.all([
+        devPage
+          .waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 15000 })
+          .catch(() => null),
+        appLinks
+          .nth(i)
+          .click()
+          .catch(() => null),
+      ]);
+      return true;
     }
   }
+  return false;
+}
 
-  // If still on app index, open the first real app detail row.
+async function openDevDashboardSettingsPage(page) {
+  const devPage = await openDevDashboardPopup(page);
+
   if (/\/dashboard\/\d+\/apps(?:\?|$)/.test(devPage.url())) {
-    const appLinks = devPage.locator('a[href*="/dashboard/"][href*="/apps/"]');
-    const n = await appLinks.count();
-    for (let i = 0; i < Math.min(n, 15); i++) {
-      const href = await appLinks.nth(i).getAttribute('href');
-      if (href && /\/apps\/\d+/.test(href) && !/\/apps\/?$/.test(href)) {
-        await Promise.all([
-          devPage
-            .waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 15000 })
-            .catch(() => null),
-          appLinks
-            .nth(i)
-            .click()
-            .catch(() => null),
-        ]);
-        break;
-      }
-    }
+    await clickFirstAppLinkFromIndex(devPage);
   }
 
   const currentUrl = devPage.url();
@@ -443,6 +451,23 @@ async function extractClientCredentials(devPage) {
   return creds;
 }
 
+async function tryOAuthEndpoint(endpoint, clientId, clientSecret) {
+  const body = new URLSearchParams({
+    grant_type: 'client_credentials',
+    client_id: clientId,
+    client_secret: clientSecret,
+  });
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body,
+  });
+  if (!res.ok) return null;
+  const payload = await res.json().catch(() => null);
+  const token = payload?.access_token;
+  return typeof token === 'string' && /^shpat_[a-zA-Z0-9]{32,}$/.test(token) ? token : null;
+}
+
 async function requestAccessTokenFromClientCredentials(page, storeDomain) {
   const settingsPage = await openDevDashboardSettingsPage(page);
   if (!settingsPage) return null;
@@ -455,30 +480,50 @@ async function requestAccessTokenFromClientCredentials(page, storeDomain) {
 
   for (const endpoint of endpoints) {
     try {
-      const body = new URLSearchParams({
-        grant_type: 'client_credentials',
-        client_id: creds.clientId,
-        client_secret: creds.clientSecret,
-      });
-
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body,
-      });
-      if (!res.ok) continue;
-
-      const payload = await res.json().catch(() => null);
-      const token = payload?.access_token;
-      if (typeof token === 'string' && /^shpat_[a-zA-Z0-9]{32,}$/.test(token)) {
-        return token;
-      }
+      const token = await tryOAuthEndpoint(endpoint, creds.clientId, creds.clientSecret);
+      if (token) return token;
     } catch {
       // Try next endpoint.
     }
   }
-
   return null;
+}
+
+const TOKEN_PATTERN = /shpat_[a-zA-Z0-9]{32,}/;
+
+async function extractTokenFromPageContent(page) {
+  const content = await page.content();
+  const m = content.match(TOKEN_PATTERN);
+  if (m) return m[0];
+  return page.evaluate(() => {
+    const t = document.body?.innerText || '';
+    const match = t.match(/shpat_[a-zA-Z0-9]{32,}/);
+    return match ? match[0] : null;
+  });
+}
+
+async function extractTokenFromInputs(page) {
+  const inputWithToken = page.locator('input[value*="shpat_"], [data-access-token], [data-token]');
+  const count = await inputWithToken.count();
+  for (let i = 0; i < count; i++) {
+    const v =
+      (await inputWithToken.nth(i).getAttribute('value')) ||
+      (await inputWithToken.nth(i).getAttribute('data-access-token')) ||
+      (await inputWithToken.nth(i).getAttribute('data-token'));
+    if (v && /^shpat_[a-zA-Z0-9]{32,}$/.test(v.trim())) return v.trim();
+  }
+  return null;
+}
+
+async function extractTokenFromApiSection(page) {
+  const apiSection = page.locator('text=/API.*[Cc]redential/i, text=/Access.*[Tt]oken/i');
+  if ((await apiSection.count()) === 0) return null;
+  const nearbyText = await apiSection.first().evaluate((el) => {
+    const parent = el.closest('section, div, form') || el.parentElement;
+    return parent?.textContent || '';
+  });
+  const m = nearbyText.match(TOKEN_PATTERN);
+  return m ? m[0] : null;
 }
 
 /**
@@ -488,25 +533,11 @@ async function requestAccessTokenFromClientCredentials(page, storeDomain) {
  * @returns {Promise<string|null>} Access token or null if not found
  */
 export async function extractAccessToken(page, storeDomain = null) {
-  // Shopify Admin API tokens: shpat_ + alphanumeric (min 32 chars after prefix; reject shorter/truncated)
-  const tokenPattern = /shpat_[a-zA-Z0-9]{32,}/;
-  const tryExtractFromCurrentPage = async () => {
-    const content = await page.content();
-    const m = content.match(tokenPattern);
-    if (m) return m[0];
-    const visible = await page.evaluate(() => {
-      const t = document.body?.innerText || '';
-      const match = t.match(/shpat_[a-zA-Z0-9]{32,}/);
-      return match ? match[0] : null;
-    });
-    return visible;
-  };
-
   try {
-    // If user already navigated to API credentials page, try Reveal + extract first
     const revealBtn = page.locator('button:has-text("Reveal"), [role="button"]:has-text("Reveal")');
     if ((await revealBtn.count()) > 0) {
-      for (let r = 0; r < (await revealBtn.count()); r++) {
+      const n = await revealBtn.count();
+      for (let r = 0; r < n; r++) {
         try {
           await revealBtn.nth(r).click();
           await page.waitForTimeout(800);
@@ -514,74 +545,24 @@ export async function extractAccessToken(page, storeDomain = null) {
           // Ignore if click fails
         }
       }
-      const already = await tryExtractFromCurrentPage();
+      const already = await extractTokenFromPageContent(page);
       if (already) return already;
     }
 
-    const success = await navigateToAppsDevelopment(page);
-    if (!success) {
-      return null;
-    }
-
-    // Navigate into first app's API credentials and click Reveal if present
+    if (!(await navigateToAppsDevelopment(page))) return null;
     await navigateToAppApiCredentialsAndReveal(page);
 
-    // Look for access token in various possible locations
-    // Method 1: Full page HTML
-    const pageContent = await page.content();
-    const tokenMatch = pageContent.match(tokenPattern);
-    if (tokenMatch) {
-      return tokenMatch[0];
-    }
+    const fromContent = await extractTokenFromPageContent(page);
+    if (fromContent) return fromContent;
 
-    // Method 1b: Visible text (in case token is in shadow DOM or rendered differently)
-    const visibleToken = await page.evaluate(() => {
-      const bodyText = document.body?.innerText || '';
-      const m = bodyText.match(/shpat_[a-zA-Z0-9]{32,}/);
-      return m ? m[0] : null;
-    });
-    if (visibleToken) return visibleToken;
+    const fromInputs = await extractTokenFromInputs(page);
+    if (fromInputs) return fromInputs;
 
-    // Method 2: Look for token in inputs and data attributes (Reveal often populates an input)
-    const inputWithToken = await page.locator(
-      'input[value*="shpat_"], [data-access-token], [data-token]',
-    );
-    for (let i = 0; i < (await inputWithToken.count()); i++) {
-      const v =
-        (await inputWithToken.nth(i).getAttribute('value')) ||
-        (await inputWithToken.nth(i).getAttribute('data-access-token')) ||
-        (await inputWithToken.nth(i).getAttribute('data-token'));
-      if (v && /^shpat_[a-zA-Z0-9]{32,}$/.test(v.trim())) return v.trim();
-    }
+    const fromApiSection = await extractTokenFromApiSection(page);
+    if (fromApiSection) return fromApiSection;
 
-    // Method 3: Check API credentials section
-    const apiSection = page.locator('text=/API.*[Cc]redential/i, text=/Access.*[Tt]oken/i');
-    if ((await apiSection.count()) > 0) {
-      // Try to find token in nearby elements
-      const nearbyText = await apiSection.first().evaluate((el) => {
-        const parent = el.closest('section, div, form') || el.parentElement;
-        return parent?.textContent || '';
-      });
-
-      const m = nearbyText.match(tokenPattern);
-      if (m) {
-        return m[0];
-      }
-    }
-
-    // Method 4: Shopify Dev Dashboard client credentials fallback (new UI path)
-    const tokenFromClientCredentials = await requestAccessTokenFromClientCredentials(
-      page,
-      storeDomain,
-    );
-    if (tokenFromClientCredentials) {
-      return tokenFromClientCredentials;
-    }
-
-    // Access token not found on page
-    return null;
+    return await requestAccessTokenFromClientCredentials(page, storeDomain);
   } catch (_error) {
-    // Error extracting access token
     return null;
   }
 }

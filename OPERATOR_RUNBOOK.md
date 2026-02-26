@@ -90,11 +90,13 @@ For **worktree/hal path and commit policy** (do not commit when diff shows hal o
 
 1. Clear git proxy config: `git config --global http.proxy ""` and `git config --global https.proxy ""`
 2. Clear User-level env vars (PowerShell as admin):
+
    ```powershell
    [Environment]::SetEnvironmentVariable('HTTP_PROXY', '', 'User')
    [Environment]::SetEnvironmentVariable('HTTPS_PROXY', '', 'User')
    [Environment]::SetEnvironmentVariable('ALL_PROXY', '', 'User')
    ```
+
 3. Restart terminal/PowerShell session for env vars to take effect.
 4. Verify: `git ls-remote --heads origin` should work.
 
