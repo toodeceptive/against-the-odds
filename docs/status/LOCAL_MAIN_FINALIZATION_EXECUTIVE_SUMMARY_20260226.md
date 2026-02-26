@@ -8,13 +8,13 @@ The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V
 
 ## Findings Register
 
-| Fingerprint                               | Severity | Status                                               |
-| ----------------------------------------- | -------- | ---------------------------------------------------- |
-| GitHub CLI not authenticated              | P1       | Open — `gh` installed, login/scope refresh pending   |
-| SHOPIFY_ACCESS_TOKEN missing              | P1       | Open — local operator action                         |
+| Fingerprint                                | Severity | Status                                               |
+| ------------------------------------------ | -------- | ---------------------------------------------------- |
+| GitHub CLI not authenticated               | P1       | Open — `gh` installed, login/scope refresh pending   |
+| SHOPIFY_ACCESS_TOKEN missing               | P1       | Open — local operator action                         |
 | Branch protection required-check alignment | P2       | Open — verify exact required checks vs policy        |
-| Structural signature verify fails         | P2       | Open — local operator; reverted broken local changes |
-| Codacy MCP in cloud                       | P3       | Informational — reset MCP if unavailable             |
+| Structural signature verify fails          | P2       | Open — local operator; reverted broken local changes |
+| Codacy MCP in cloud                        | P3       | Informational — reset MCP if unavailable             |
 
 ---
 
@@ -37,14 +37,14 @@ The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V
 
 ## Verification Matrix
 
-| Command                                                     | Result                                     |
-| ----------------------------------------------------------- | ------------------------------------------ |
-| `npm run quality`                                           | PASS                                       |
-| `scripts/verify-pipeline.ps1`                               | FAIL (runbook credential gate)             |
-| `scripts/github/verify-auth.ps1`                            | PASS (repo access OK, 22 branches)         |
-| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | FAIL (gh installed; unauthenticated)       |
-| `scripts/run-runbook.ps1 -StrictSecrets`                    | FAIL (SHOPIFY_ACCESS_TOKEN not set)        |
-| `ssh-keygen -Y verify` (structural)                         | FAIL (`missing header` / invalid payload)  |
+| Command                                                     | Result                                    |
+| ----------------------------------------------------------- | ----------------------------------------- |
+| `npm run quality`                                           | PASS                                      |
+| `scripts/verify-pipeline.ps1`                               | FAIL (runbook credential gate)            |
+| `scripts/github/verify-auth.ps1`                            | PASS (repo access OK, 22 branches)        |
+| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | FAIL (gh installed; unauthenticated)      |
+| `scripts/run-runbook.ps1 -StrictSecrets`                    | FAIL (SHOPIFY_ACCESS_TOKEN not set)       |
+| `ssh-keygen -Y verify` (structural)                         | FAIL (`missing header` / invalid payload) |
 
 ---
 

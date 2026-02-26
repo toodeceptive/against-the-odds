@@ -13,18 +13,18 @@ Define the most logical, reliable, and cost-aware integration setup for this rep
 
 ## Current State Matrix
 
-| Integration | Live status | Cost signal | Repo dependency | Decision | Action now |
-| --- | --- | --- | --- | --- | --- |
-| GitHub MCP (`user-github`) | Functional | Included in GitHub account | High | Keep active | Kept |
-| Codacy MCP + CLI (`user-codacy`) | Functional after reinstall | Free plan available | Medium-high | Keep active | Kept and verified |
-| Cursor browser MCP | Functional | Included in Cursor | High | Keep active | Kept |
-| Cloudflare docs MCP | Functional | Free docs access | Medium | Keep active | Kept |
-| Cloudflare bindings/builds/observability MCP | Not authenticated | Paid/plan-dependent operational value | Low-medium (on demand) | Keep disabled by default; enable only for Cloudflare ops tasks | Left disabled |
-| BrowserStack MCP | Unauthorized (`401`) | High cost vs local alternatives | Low | Disable/remove from default stack | Marked obsolete for this repo |
-| Linear MCP | Not authenticated | Per-seat paid beyond free tier | Low | Disable/remove from default stack | Marked obsolete for this repo |
-| Notion MCP | Not authenticated | Per-seat paid beyond free tier | Low | Disable/remove from default stack | Marked obsolete for this repo |
-| Slack MCP | Not authenticated | Per-seat paid beyond free tier | Low | Disable/remove from default stack | Marked obsolete for this repo |
-| Printful lanes (agent roles/scripts) | Available by workflow design | User-approved paid platform | Medium | Keep on-demand | Kept |
+| Integration                                  | Live status                  | Cost signal                           | Repo dependency        | Decision                                                       | Action now                    |
+| -------------------------------------------- | ---------------------------- | ------------------------------------- | ---------------------- | -------------------------------------------------------------- | ----------------------------- |
+| GitHub MCP (`user-github`)                   | Functional                   | Included in GitHub account            | High                   | Keep active                                                    | Kept                          |
+| Codacy MCP + CLI (`user-codacy`)             | Functional after reinstall   | Free plan available                   | Medium-high            | Keep active                                                    | Kept and verified             |
+| Cursor browser MCP                           | Functional                   | Included in Cursor                    | High                   | Keep active                                                    | Kept                          |
+| Cloudflare docs MCP                          | Functional                   | Free docs access                      | Medium                 | Keep active                                                    | Kept                          |
+| Cloudflare bindings/builds/observability MCP | Not authenticated            | Paid/plan-dependent operational value | Low-medium (on demand) | Keep disabled by default; enable only for Cloudflare ops tasks | Left disabled                 |
+| BrowserStack MCP                             | Unauthorized (`401`)         | High cost vs local alternatives       | Low                    | Disable/remove from default stack                              | Marked obsolete for this repo |
+| Linear MCP                                   | Not authenticated            | Per-seat paid beyond free tier        | Low                    | Disable/remove from default stack                              | Marked obsolete for this repo |
+| Notion MCP                                   | Not authenticated            | Per-seat paid beyond free tier        | Low                    | Disable/remove from default stack                              | Marked obsolete for this repo |
+| Slack MCP                                    | Not authenticated            | Per-seat paid beyond free tier        | Low                    | Disable/remove from default stack                              | Marked obsolete for this repo |
+| Printful lanes (agent roles/scripts)         | Available by workflow design | User-approved paid platform           | Medium                 | Keep on-demand                                                 | Kept                          |
 
 ## Recommended Ideal Setup
 
