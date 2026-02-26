@@ -6,6 +6,12 @@
 
 ---
 
+## 2026-02-26 — Delta-first cloud perfection pass (cycle 7): V8 project-wide rerun execution and net-new hardening
+
+**Summary**: Created a new canonical prompt `prompts/CLOUD_GURU_PERFECTION_PROMPT_V8_PROJECT_WIDE_DELTA_MASTER.md` that fuses full project history, done-index seed, unresolved blocker handling, and strict phase-gated verification. Wired V8 into `docs/AGENT_PROMPT_DECISION_TREE.md` and `docs/status/INDEX_REPORTS.md`, then executed the V8 run with parallel non-overlapping audits. **Net-new actionable fixes**: (1) `scripts/github/verify-secrets.ps1` now tracks required-secret failures deterministically and exits non-zero when list succeeds but required secrets are missing, while preserving non-failing behavior for known external 403 permission limits. (2) `.github/workflows/sync-theme-branch.yml` now fails fast on subtree split/push errors (`continue-on-error` removed, `set -euo pipefail` added) so sync drift is visible. (3) `.github/workflows/README.md` updated to document strict failure behavior for theme-branch sync. **Validation**: `npm run format:check`, `npm run lint`, `npm run test:unit`, `pwsh -File scripts/verify-pipeline.ps1`, `pwsh -File scripts/run-runbook.ps1`, and `pwsh -File scripts/github/verify-secrets.ps1` pass in current environment. Remaining external blockers unchanged: GitHub secrets-list 403 requires elevated permissions; Codacy MCP availability remains environment-scoped. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Delta-first cloud perfection pass (cycle 6): structural signature chain recovery (arch_guard risk closure)
 
 **Summary**: Independent verifier surfaced a pre-existing structural-integrity risk: `infra/STRUCTURAL_SIGNATURE.txt` was empty, which could fail CI `arch_guard` validation. Regenerated full signature chain locally via `bash scripts/infra/sign-structural-state.sh`, producing updated `infra/STRUCTURAL_STATE.json`, `infra/STRUCTURAL_SIGNATURE.txt`, `infra/allowed_signers`, and `infra/structural.pub`. Verified signature validity with the same `ssh-keygen -Y verify` semantics used by CI. Re-ran quality/pipeline/runbook gates on the updated branch state; all pass. No store-affecting changes; no deploy-log entry.
