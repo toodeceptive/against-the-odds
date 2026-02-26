@@ -362,12 +362,14 @@ export async function extractAccessToken(page) {
 /**
  * Extract theme ID from Shopify admin
  * @param {Page} page - Playwright page instance
+ * @param {string} storeDomain - Shopify store domain
  * @returns {Promise<string|null>} Theme ID or null if not found
  */
-export async function extractThemeId(page) {
+export async function extractThemeId(page, storeDomain) {
   try {
     // Navigate to themes page
-    await page.goto('/admin/themes', { waitUntil: 'networkidle' });
+    const themesUrl = storeDomain ? `https://${storeDomain}/admin/themes` : '/admin/themes';
+    await page.goto(themesUrl, { waitUntil: 'networkidle' });
 
     // Wait for themes to load
     await page.waitForSelector('[data-theme-id], .theme-card, .theme-item', { timeout: 10000 });
