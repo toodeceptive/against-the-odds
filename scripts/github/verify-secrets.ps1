@@ -35,6 +35,8 @@ foreach ($secret in $optionalSecrets) {
 
 Write-Host ""
 
+$failedChecks = 0
+
 # Check if GitHub CLI is available
 if (Get-Command gh -ErrorAction SilentlyContinue) {
     Write-Host "Checking secrets with GitHub CLI..." -ForegroundColor Yellow
@@ -64,14 +66,20 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
                         Write-Host "  [OK] $secret configured" -ForegroundColor Green
                     } else {
                         Write-Host "  [FAIL] $secret missing" -ForegroundColor Red
+                        $failedChecks++
                     }
                 }
             } else {
                 Write-Host "  [WARN] Could not list secrets: $secrets" -ForegroundColor Yellow
+                $secretsText = ($secrets | Out-String)
+                if ($secretsText -notmatch 'HTTP 403|Resource not accessible by integration') {
+                    $failedChecks++
+                }
             }
         }
     } catch {
         Write-Host "  [FAIL] Error: $_" -ForegroundColor Red
+        $failedChecks++
     }
 } else {
     Write-Host "GitHub CLI (gh) not installed" -ForegroundColor Yellow
@@ -91,3 +99,7 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
 
 Write-Host ""
 Write-Host "For instructions, see: .github/workflows/README.md" -ForegroundColor Cyan
+if ($failedChecks -gt 0) {
+    exit 1
+}
+exit 0

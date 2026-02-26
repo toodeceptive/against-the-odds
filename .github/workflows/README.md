@@ -42,6 +42,7 @@ These workflows require the following secrets to be configured in GitHub:
 
 - Runs on: Push to `main` when `src/shopify/themes/aodrop-theme/**` changes
 - Actions: Subtree-split theme to `shopify-theme` branch and push (for Shopify “Connect from GitHub”)
+- Failure behavior: subtree split/push now fails the job immediately so sync drift is visible and actionable.
 
 ### `sync.yml`
 
