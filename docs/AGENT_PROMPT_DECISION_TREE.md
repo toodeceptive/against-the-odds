@@ -34,8 +34,10 @@
 | **Cloud delta-first perfection rerun** (non-redundant cycle, done-index first, specialist parallel audit, strict verification gates)                              | Cloud Guru Perfection V7 Delta-First          | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V7_DELTA_FIRST.md` — cloud lead orchestrator prompt for iterative, non-overlapping perfection cycles and finalization matrix.                                                                                               |
 | **Cloud project-wide perfection rerun (V8)** (history-aware done-index, whole-project delta audit, blocker-aware closure)                                         | Cloud Guru Perfection V8 Project-Wide Delta   | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V8_PROJECT_WIDE_DELTA_MASTER.md` — comprehensive, non-redundant rerun prompt that fuses full project history, current cycle outputs, and strict verification/finalization criteria.                                         |
 | **Cloud + local escalation fusion rerun (V9)** (project-history + conversation fusion, blocker-aware cloud execution with local-closure handoff)                  | Cloud Guru Perfection V9 Omnifusion Delta     | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V9_OMNIFUSION_DELTA_ESCALATION.md` — canonical rerun prompt for non-redundant cloud execution that auto-bridges to local/main blocker closure artifacts.                                                                    |
+| **Cloud repo-hygiene consolidation rerun (V12)** (cleanup, organize, label, consolidate, safe retirement of superseded artifacts)                                 | Cloud Guru Perfection V12 Repo Hygiene        | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V12_REPO_HYGIENE_CONSOLIDATION.md` — canonical cleanup pass prompt for consolidation, safe obsolete-file retirement, and tracker/routing truth updates.                                                                     |
 | **Cloud final finish rerun (V11)** (deep comprehensive no-redundancy finish loop with strict closure paths and local/browser escalation)                          | Cloud Guru Perfection V11 Final Finish        | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V11_FINAL_FINISH_MASTER.md` — canonical finish prompt that fuses all project history, cycle outputs, blocker closure logic, and strict verification/finalization requirements.                                              |
 | **Local main-branch escalation run** (for cloud-unresolvable blockers, admin-only paths, MCP/local permission closure)                                            | Local Main Guru Escalation                    | `prompts/LOCAL_MAIN_GURU_PERFECTION_PROMPT_V1_CLOUD_ESCALATION.md` — local-only completion prompt for unresolved cloud blockers with strict done-index and verification gates.                                                                                    |
+| **Local main final closeout run (V2)** (strict final closure, cleanup consolidation, verification, and finalization on `main`)                                    | Local Main Guru Finalization V2               | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V2_CLEAN_CONSOLIDATE_CLOSEOUT.md` — local-team copy/paste prompt for strict closure, final verification matrix, and final Git finalization on `main`.                                                                |
 | **Audit and perfection framework** (best ways to audit and perfect entire repo)                                                                                   | Reference doc                                 | `docs/status/AUDIT_AND_PERFECTION_FRAMEWORK.md` — scripts, inventories, expert-driven audit, decision flow, fix types, guru ownership; links to GURU_TEAM_ASSIGNMENTS and canonical plan.                                                                         |
 
 ---
@@ -65,21 +67,23 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 
 ## Quick Reference
 
-| Need                                  | Document                                                                 |
-| ------------------------------------- | ------------------------------------------------------------------------ |
-| Phase 0 and entry                     | `docs/status/PLAN_AGENT_ENTRY.md`                                        |
-| Fix everything / takeover             | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`                            |
-| Full system test + improvement run    | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`                     |
-| Full-system overhaul + unified vision | `prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md`          |
-| Master perfection loop                | `prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`                    |
-| Master full-scale PP approval         | `prompts/MASTER_FULL_SCALE_GURU_PP_PROMPT.md`                            |
-| New-agent full-scale PP handoff       | `prompts/NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md`                   |
-| Cloud delta-first perfection rerun    | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V7_DELTA_FIRST.md`                 |
-| Cloud project-wide perfection rerun   | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V8_PROJECT_WIDE_DELTA_MASTER.md`   |
-| Cloud omnifusion perfection rerun     | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V9_OMNIFUSION_DELTA_ESCALATION.md` |
-| Cloud final finish rerun              | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V11_FINAL_FINISH_MASTER.md`        |
-| Local main-branch escalation run      | `prompts/LOCAL_MAIN_GURU_PERFECTION_PROMPT_V1_CLOUD_ESCALATION.md`       |
-| Phase 0 definition                    | `prompts/PERFECT_EXECUTION_PROMPT.md`                                    |
-| This decision tree                    | `docs/AGENT_PROMPT_DECISION_TREE.md`                                     |
-| Shopify / Cursor workflow             | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`                                  |
-| New-agent handoff                     | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                                       |
+| Need                                   | Document                                                                       |
+| -------------------------------------- | ------------------------------------------------------------------------------ |
+| Phase 0 and entry                      | `docs/status/PLAN_AGENT_ENTRY.md`                                              |
+| Fix everything / takeover              | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`                                  |
+| Full system test + improvement run     | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`                           |
+| Full-system overhaul + unified vision  | `prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md`                |
+| Master perfection loop                 | `prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`                          |
+| Master full-scale PP approval          | `prompts/MASTER_FULL_SCALE_GURU_PP_PROMPT.md`                                  |
+| New-agent full-scale PP handoff        | `prompts/NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md`                         |
+| Cloud delta-first perfection rerun     | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V7_DELTA_FIRST.md`                       |
+| Cloud project-wide perfection rerun    | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V8_PROJECT_WIDE_DELTA_MASTER.md`         |
+| Cloud omnifusion perfection rerun      | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V9_OMNIFUSION_DELTA_ESCALATION.md`       |
+| Cloud repo-hygiene consolidation rerun | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V12_REPO_HYGIENE_CONSOLIDATION.md`       |
+| Cloud final finish rerun               | `prompts/CLOUD_GURU_PERFECTION_PROMPT_V11_FINAL_FINISH_MASTER.md`              |
+| Local main-branch escalation run       | `prompts/LOCAL_MAIN_GURU_PERFECTION_PROMPT_V1_CLOUD_ESCALATION.md`             |
+| Local main final closeout run          | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V2_CLEAN_CONSOLIDATE_CLOSEOUT.md` |
+| Phase 0 definition                     | `prompts/PERFECT_EXECUTION_PROMPT.md`                                          |
+| This decision tree                     | `docs/AGENT_PROMPT_DECISION_TREE.md`                                           |
+| Shopify / Cursor workflow              | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`                                        |
+| New-agent handoff                      | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                                             |
