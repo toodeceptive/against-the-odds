@@ -26,7 +26,7 @@ if ($LASTEXITCODE -eq 0) {
 
 # Test dependencies
 Write-Host "Testing dependencies..." -ForegroundColor Yellow
-$deps = @("screenshot-desktop", "@tesseract.js/tesseract", "sharp", "robotjs", "node-window-manager")
+$deps = @("screenshot-desktop", "tesseract.js", "sharp", "robotjs", "node-window-manager")
 $missing = @()
 foreach ($dep in $deps) {
     npm list $dep --depth=0 2>&1 | Out-Null
@@ -49,7 +49,7 @@ $files = @(
     "src/desktop-automation/keyboard-control.js",
     "src/desktop-automation/window-manager.js",
     "src/desktop-automation/orchestrator.js",
-    "prompts/master-agent-prompt.md"
+    "prompts/head-guru-orchestrator.md"
 )
 $missingFiles = @()
 foreach ($file in $files) {

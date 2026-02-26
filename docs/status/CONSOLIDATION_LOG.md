@@ -6,6 +6,14 @@
 
 ---
 
+## 2026-02-26 — Desktop automation test fix: tesseract package name, stale prompt ref
+
+**Summary**: Fixed `npm run test:desktop` failures. (1) **tesseract package name**: test-system.ps1 checked for `@tesseract.js/tesseract` but package.json has `tesseract.js`; updated dep list to `tesseract.js`. (2) **Stale prompt ref**: test expected `prompts/master-agent-prompt.md` (deleted in 2026-02-01 cleanup); updated to `prompts/head-guru-orchestrator.md` (canonical orchestration prompt). `npm run test:desktop` now passes.
+
+**Outcome**: No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Guru Expert Team and Unfinished Works plan execution
 
 **Summary**: Executed Guru Expert Team and Unfinished Works plan per PROCEED_UNFINISHED_WORKS_GURU_PROMPT flow. **Step 1 (Research)**: Read WORK_QUEUE, PP_AUDIT_MARKER, CONSOLIDATION_LOG; git status (3 modified: guru plan, codacy.mdc, PROCEED prompt; .codacy/ untracked). **Step 2 (Fix)**: `npm run quality` PASS; `scripts/verify-pipeline.ps1 -SkipRunbook` PASS (78 scripts parse, 6 workflows, lint OK). **Step 3 (Codacy)**: Codacy MCP Server not available in session (plugin not in MCP list); per codacy.mdc, suggest reset MCP or check Copilot MCP settings if analysis needed. **Step 4 (Optimize)**: No code complexity fixes; CONSOLIDATION_LOG updated. **Step 5 (Finalize)**: Staging plan/prompt/codacy.mdc changes for commit; push pending user approval per approval gate.
