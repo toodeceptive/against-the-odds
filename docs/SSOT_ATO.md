@@ -12,6 +12,7 @@ Infra authority declaration. Required by structural integrity contract; see [AGE
 | **Workflow / ops**       | [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](AGENT_WORKFLOW_CURSOR_SHOPIFY.md) | Preview → approve → apply.                                                                           |
 | **Runbook**              | [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md)                             | Daily checks, credentials, runbook.                                                                  |
 | **Structural integrity** | CI `arch_guard`                                                           | Single enforcement gate.                                                                             |
+| **Branch strategy**      | main-only                                                                 | No develop branch; feature branches open PRs against main.                                           |
 
 ## Shopify-First
 
