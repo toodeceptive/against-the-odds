@@ -38,7 +38,7 @@ Local closure steps:
 
 1. `gh auth status`
 2. `gh auth login` (scopes: `repo`, `workflow`, admin scopes as needed)
-3. `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1`
+3. `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1 -FailOnPermissionDenied`
 4. If still blocked, verify directly in browser:
    - `https://github.com/toodeceptive/against-the-odds/settings/secrets/actions`
 5. Confirm required secrets exist:
@@ -48,7 +48,7 @@ Local closure steps:
 
 Success signal:
 
-- `verify-secrets.ps1` can list secrets (no 403) and returns exit `0`.
+- `verify-secrets.ps1 -FailOnPermissionDenied` can list secrets (no 403) and returns exit `0`.
 
 ### 2) Codacy MCP unavailable in cloud
 

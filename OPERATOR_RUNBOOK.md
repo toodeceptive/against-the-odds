@@ -26,6 +26,7 @@
 - `.\scripts\shopify\test-connection.ps1`
 - `.\scripts\github\verify-auth.ps1`
 - `.\scripts\github\verify-secrets.ps1`
+- `.\scripts\github\verify-secrets.ps1 -FailOnPermissionDenied` (local/main strict mode: treat GitHub secrets 403 as failure until permissions are fixed)
 - Or run all Shopify + GitHub auth + GitHub secrets checks: `.\scripts\run-runbook.ps1`
 
 ## Health & Quality

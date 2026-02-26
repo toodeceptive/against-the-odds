@@ -51,6 +51,7 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **prompts/LOCAL_MAIN_GURU_PERFECTION_PROMPT_V1_CLOUD_ESCALATION.md**       | Canonical local/main escalation prompt for cloud-unresolvable blockers, admin-only closures, and local MCP/permissions finalization (2026-02-26)                 |
 | **LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md**                 | Local/main branch guru execution pack for cloud-unresolvable blockers: owner actions, validation gates, and closure checklist (2026-02-26)                       |
 | **CLOUD_V9_OMNIFUSION_EXECUTION_20260226.md**                              | Execution artifact for V9 omnifusion rerun: net-new findings register, fixes applied, verification matrix, and external blocker ownership (2026-02-26)           |
+| **CLOUD_V10_SECRETS_STRICT_MODE_EXECUTION_20260226.md**                    | Execution artifact for V10 delta run: strict-mode hardening for GitHub secrets permission closure and updated local/main escalation flow (2026-02-26)            |
 | **APIS_VS_PC_AUTOMATION_QA_20260207.md**                                   | Q&A: when APIs/secrets required vs PC+browser; decision tree; credentials matrix (2026-02-07)                                                                    |
 
 ---

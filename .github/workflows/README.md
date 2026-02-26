@@ -62,6 +62,7 @@ These workflows require the following secrets to be configured in GitHub:
 4. Add each secret listed above
 5. Workflows will automatically use these secrets when triggered
 6. Verify local secret visibility with `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1`
+7. For local/main closure, run strict mode so permission-denied (403) fails fast: `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1 -FailOnPermissionDenied`
 
 ## Notes
 

@@ -1,4 +1,8 @@
 # Verify GitHub Actions secrets configuration
+[CmdletBinding()]
+param(
+    [switch]$FailOnPermissionDenied
+)
 
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
@@ -46,7 +50,7 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
         $authStatus = gh auth status 2>&1
         if ($LASTEXITCODE -ne 0) {
             Write-Host "  [WARN] GitHub CLI not authenticated" -ForegroundColor Yellow
-            Write-Host "    Run: gh auth login" -ForegroundColor Cyan
+            Write-Host "    Run: gh auth login -h github.com -s repo,workflow,read:org" -ForegroundColor Cyan
         } else {
             Write-Host "  [OK] GitHub CLI authenticated" -ForegroundColor Green
             
@@ -72,7 +76,15 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
             } else {
                 Write-Host "  [WARN] Could not list secrets: $secrets" -ForegroundColor Yellow
                 $secretsText = ($secrets | Out-String)
-                if ($secretsText -notmatch 'HTTP 403|Resource not accessible by integration') {
+                if ($secretsText -match 'HTTP 403|Resource not accessible by integration') {
+                    Write-Host "    Current gh token/app cannot list repository secrets." -ForegroundColor Yellow
+                    Write-Host "    Try: gh auth refresh -h github.com -s repo,workflow,read:org" -ForegroundColor Cyan
+                    Write-Host "    Or verify in browser: https://github.com/toodeceptive/against-the-odds/settings/secrets/actions" -ForegroundColor Cyan
+                    if ($FailOnPermissionDenied) {
+                        Write-Host "    Strict mode enabled: permission denial treated as failure." -ForegroundColor Yellow
+                        $failedChecks++
+                    }
+                } else {
                     $failedChecks++
                 }
             }
