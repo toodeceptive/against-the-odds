@@ -6,7 +6,11 @@
 
 ---
 
-## 2026-02-26 — sync-products.ps1: load .env.local for standalone runs
+## 2026-02-26 — Guru expert audit and self-prompt: full system verification
+
+**Summary**: User approved guru expert auditing, review, analysis, and fixes. Created `prompts/GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md` — reusable self-execute prompt (PP phases: audit → fix → verify → document). Executed audit: `npm run quality` PASS; `scripts/verify-pipeline.ps1 -SkipRunbook` PASS (78 scripts parse, 6 workflows OK); ReadLints on .github/workflows and .codacy — no errors. Third-party actions already pinned (Trivy, create-pull-request, Lighthouse full SHAs); .codacy/codacy.yaml Prettier fix and .codacy.yml exclude in place from prior session.
+
+**Outcome**: No code changes required; system verified. New prompt added for future guru audit cycles.
 
 **Summary**: sync-products.ps1 did not load .env.local; it relied on caller (e.g. verify-pipeline) to set SHOPIFY_STORE_DOMAIN/SHOPIFY_ACCESS_TOKEN. Added .env.local loading block (same pattern as test-connection.ps1) so `.\scripts\shopify\sync-products.ps1 -DryRun` works when run directly.
 

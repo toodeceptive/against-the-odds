@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02-26** — Guru expert audit prompt: prompts/GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md (self-execute PP phases); CONSOLIDATION_LOG and INDEX_REPORTS updated.
 - **2026-02-26** — Pin treosh/lighthouse-ci-action to full SHA in ci.yml (Codacy Semgrep).
 - **2026-02-26** — Permanent fix for .codacy/codacy.yaml Prettier failures: include .codacy/ in Prettier scope; add .codacy.yml at repo root to exclude .codacy/ from Codacy Cloud; update lint-staged to \*_/_ glob for subdirs; format codacy.yaml to 2-space indent; document in CODACY_MCP_SETUP.md.
 - **2026-02-26** — CI and maintenance workflow fixes: Trivy action updated to 0.34.1 (full SHA pin); create-pull-request upgraded to v6; maintenance: split npm audit (continue-on-error), Trivy continue-on-error; ci: Trivy pinned to 0.34.1 SHA. Resolves CI failures from invalid action refs.
