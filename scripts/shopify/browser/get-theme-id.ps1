@@ -24,22 +24,28 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 
 # Create extraction script
 $extractScript = @"
-import { chromium } from '@playwright/test';
-import { connectToBrowser, ensureShopifyLogin, extractThemeId } from '../../src/browser-automation/shopify-admin.js';
+import { join } from 'path';
+import { pathToFileURL } from 'url';
+const repoRoot = process.env.ATO_REPO_ROOT || process.cwd();
+const modulePath = pathToFileURL(join(repoRoot, 'src', 'browser-automation', 'shopify-admin.js')).href;
+const { connectToBrowser, ensureShopifyLogin, extractThemeId } = await import(modulePath);
 
 (async () => {
   try {
+    console.log('Connecting to browser...');
     const browser = await connectToBrowser({ useExisting: true, headless: false });
     const context = browser.contexts()[0] || await browser.newContext();
     const page = context.pages()[0] || await context.newPage();
 
+    console.log('Navigating to Shopify admin...');
     const loggedIn = await ensureShopifyLogin(page, '$StoreDomain');
     if (!loggedIn) {
       console.error('Failed to access Shopify admin');
       process.exit(1);
     }
 
-    const themeId = await extractThemeId(page);
+    console.log('Extracting theme ID...');
+    const themeId = await extractThemeId(page, '$StoreDomain');
 
     if (themeId) {
       console.log('SUCCESS:' + themeId);
@@ -55,12 +61,20 @@ import { connectToBrowser, ensureShopifyLogin, extractThemeId } from '../../src/
 })();
 "@
 
-$scriptPath = "scripts\shopify\browser\extract-theme-temp.js"
+$tempDir = if (-not [string]::IsNullOrWhiteSpace($env:TEMP)) {
+    $env:TEMP
+} else {
+    [System.IO.Path]::GetTempPath()
+}
+$scriptPath = Join-Path $tempDir ("extract-theme-" + [guid]::NewGuid().ToString("N") + ".mjs")
 $extractScript | Out-File -FilePath $scriptPath -Encoding UTF8
 
 try {
     Write-Host "Extracting theme ID..." -ForegroundColor Yellow
+    $env:ATO_REPO_ROOT = $repoPath
     $output = node $scriptPath 2>&1
+    $env:ATO_REPO_ROOT = $null
+    $nodeExitCode = $LASTEXITCODE
     $themeId = $null
 
     foreach ($line in $output) {
@@ -94,10 +108,24 @@ try {
             $newContent | Out-File -FilePath ".env.local" -Encoding UTF8
             Write-Host "[OK] Saved to .env.local" -ForegroundColor Green
         }
+        exit 0
     } else {
         Write-Host "[FAIL] Could not extract theme ID" -ForegroundColor Red
+        if ($output) {
+            Write-Host "Details:" -ForegroundColor Yellow
+            foreach ($line in $output) {
+                if (-not [string]::IsNullOrWhiteSpace($line)) {
+                    Write-Host "  $line"
+                }
+            }
+        }
+        if ($nodeExitCode -eq 0) {
+            exit 1
+        }
+        exit $nodeExitCode
     }
 } finally {
+    $env:ATO_REPO_ROOT = $null
     if (Test-Path $scriptPath) {
         Remove-Item $scriptPath -Force
     }

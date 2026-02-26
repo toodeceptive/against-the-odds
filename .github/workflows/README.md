@@ -42,6 +42,7 @@ These workflows require the following secrets to be configured in GitHub:
 
 - Runs on: Push to `main` when `src/shopify/themes/aodrop-theme/**` changes
 - Actions: Subtree-split theme to `shopify-theme` branch and push (for Shopify “Connect from GitHub”)
+- Failure behavior: subtree split/push now fails the job immediately so sync drift is visible and actionable.
 
 ### `sync.yml`
 
@@ -60,12 +61,16 @@ These workflows require the following secrets to be configured in GitHub:
 3. Click **New repository secret**
 4. Add each secret listed above
 5. Workflows will automatically use these secrets when triggered
+6. Verify local secret visibility with `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1`
+7. For local/main closure, run strict mode so permission-denied (403) fails fast: `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1 -FailOnPermissionDenied`
 
 ## Notes
 
 - Secrets are encrypted and only accessible to workflows
 - Never commit secrets to the repository
 - Use `.env.local` for local development (gitignored)
+- `scripts/run-runbook.ps1` now includes `verify-secrets.ps1` so local runbook checks cover auth + secret presence together
+- For strict local/main closure, run `pwsh -NoLogo -NoProfile -File scripts/run-runbook.ps1 -StrictSecrets`
 
 ## CI troubleshooting
 

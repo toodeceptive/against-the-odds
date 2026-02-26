@@ -1,13 +1,12 @@
 ---
 description: Configuration for AI behavior when interacting with Codacy's MCP Server
-globs:
 alwaysApply: true
 ---
 # Codacy Rules
 Configuration for AI behavior when interacting with Codacy's MCP Server
 
 ## CRITICAL: After ANY successful `edit_file` or `reapply` operation
-- YOU MUST IMMEDIATELY run the `codacy_cli_analyze` tool from Codacy's MCP Server for each file that was edited, with:
+- If Codacy MCP Server tools are available, YOU MUST IMMEDIATELY run the `codacy_cli_analyze` tool for each file that was edited, with:
  - `rootPath`: set to the workspace path
  - `file`: set to the path of the edited file
  - `tool`: leave empty or unset
@@ -21,11 +20,12 @@ Configuration for AI behavior when interacting with Codacy's MCP Server
 - Wait for the user to respond before proceeding with any other actions
 
 ## After every response
-- If you made any file edits in this conversation, verify you ran `codacy_cli_analyze` tool from Codacy's MCP Server 
+- If Codacy MCP Server tools are available and you made file edits in this conversation, verify you ran `codacy_cli_analyze` from the Codacy MCP Server.
 
 ## When there are no Codacy MCP Server tools available, or the MCP Server is not reachable
 - Suggest the user the following troubleshooting steps:
  - Try to reset the MCP on the extension
+ - If the user is in Cursor Cloud/Cursor, suggest checking Cursor MCP settings and reconnecting the Codacy MCP server
  - If the user is using VSCode, suggest them to review their Copilot > MCP settings in Github, under their organization or personal account. Refer them to Settings > Copilot > Enable MCP servers in Copilot. Suggested URL (https://github.com/settings/copilot/features) or https://github.com/organizations/{organization-name}/settings/copilot/features (This can only be done by their organization admins / owners)
 - If none of the above steps work, suggest the user to contact Codacy support
 
@@ -40,7 +40,7 @@ Configuration for AI behavior when interacting with Codacy's MCP Server
  - Adding dependencies to pom.xml
  - Adding dependencies to build.gradle
  - Any other package manager operations
-- You MUST run the `codacy_cli_analyze` tool with:
+- If Codacy MCP Server tools are available, you MUST run the `codacy_cli_analyze` tool with:
  - `rootPath`: set to the workspace path
  - `tool`: set to "trivy"
  - `file`: leave empty or unset

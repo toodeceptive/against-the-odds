@@ -69,13 +69,14 @@ if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
 
 $baseUrl = "https://$storeHost/admin/api/$apiVersion"
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+$requestTimeoutSec = 60
 
 Write-Host "Fetching store data..." -ForegroundColor Yellow
 
 # Fetch shop information
 try {
     Write-Host "  Fetching shop information..." -ForegroundColor Cyan
-    $shop = Invoke-RestMethod -Uri "$baseUrl/shop.json" -Headers $headers -Method Get
+    $shop = Invoke-RestMethod -Uri "$baseUrl/shop.json" -Headers $headers -Method Get -TimeoutSec $requestTimeoutSec
     $shop | ConvertTo-Json -Depth 10 | Out-File (Join-Path $OutputDir "shop_$timestamp.json")
     Write-Host "  [OK] Shop data saved" -ForegroundColor Green
 } catch {
@@ -85,7 +86,7 @@ try {
 # Fetch products
 try {
     Write-Host "  Fetching products..." -ForegroundColor Cyan
-    $products = Invoke-RestMethod -Uri "$baseUrl/products.json?limit=250" -Headers $headers -Method Get
+    $products = Invoke-RestMethod -Uri "$baseUrl/products.json?limit=250" -Headers $headers -Method Get -TimeoutSec $requestTimeoutSec
     $products | ConvertTo-Json -Depth 10 | Out-File (Join-Path $OutputDir "products_$timestamp.json")
     Write-Host "  [OK] Fetched $($products.products.Count) product(s)" -ForegroundColor Green
 } catch {
@@ -95,7 +96,7 @@ try {
 # Fetch collections
 try {
     Write-Host "  Fetching collections..." -ForegroundColor Cyan
-    $collections = Invoke-RestMethod -Uri "$baseUrl/collections.json?limit=250" -Headers $headers -Method Get
+    $collections = Invoke-RestMethod -Uri "$baseUrl/collections.json?limit=250" -Headers $headers -Method Get -TimeoutSec $requestTimeoutSec
     $collections | ConvertTo-Json -Depth 10 | Out-File (Join-Path $OutputDir "collections_$timestamp.json")
     Write-Host "  [OK] Fetched $($collections.collections.Count) collection(s)" -ForegroundColor Green
 } catch {
@@ -105,7 +106,7 @@ try {
 # Fetch themes
 try {
     Write-Host "  Fetching themes..." -ForegroundColor Cyan
-    $themes = Invoke-RestMethod -Uri "$baseUrl/themes.json" -Headers $headers -Method Get
+    $themes = Invoke-RestMethod -Uri "$baseUrl/themes.json" -Headers $headers -Method Get -TimeoutSec $requestTimeoutSec
     $themes | ConvertTo-Json -Depth 10 | Out-File (Join-Path $OutputDir "themes_$timestamp.json")
     Write-Host "  [OK] Fetched $($themes.themes.Count) theme(s)" -ForegroundColor Green
 } catch {

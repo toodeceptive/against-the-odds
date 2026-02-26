@@ -191,7 +191,7 @@ foreach ($line in $envContent) {
         $newContent += $line
     }
 }
-$newContent | Out-File -FilePath $envLocalPath -Encoding UTF8 -NoNewline
+$newContent | Out-File -FilePath $envLocalPath -Encoding UTF8
 Write-Host "[OK] Updated .env.local" -ForegroundColor Green
 
 # Optionally store in Windows Credential Manager

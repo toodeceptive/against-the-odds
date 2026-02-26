@@ -1,4 +1,8 @@
 # Verify GitHub Actions secrets configuration
+[CmdletBinding()]
+param(
+    [switch]$FailOnPermissionDenied
+)
 
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
@@ -35,6 +39,8 @@ foreach ($secret in $optionalSecrets) {
 
 Write-Host ""
 
+$failedChecks = 0
+
 # Check if GitHub CLI is available
 if (Get-Command gh -ErrorAction SilentlyContinue) {
     Write-Host "Checking secrets with GitHub CLI..." -ForegroundColor Yellow
@@ -44,7 +50,7 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
         $authStatus = gh auth status 2>&1
         if ($LASTEXITCODE -ne 0) {
             Write-Host "  [WARN] GitHub CLI not authenticated" -ForegroundColor Yellow
-            Write-Host "    Run: gh auth login" -ForegroundColor Cyan
+            Write-Host "    Run: gh auth login -h github.com -s repo,workflow,read:org" -ForegroundColor Cyan
         } else {
             Write-Host "  [OK] GitHub CLI authenticated" -ForegroundColor Green
             
@@ -64,14 +70,28 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
                         Write-Host "  [OK] $secret configured" -ForegroundColor Green
                     } else {
                         Write-Host "  [FAIL] $secret missing" -ForegroundColor Red
+                        $failedChecks++
                     }
                 }
             } else {
                 Write-Host "  [WARN] Could not list secrets: $secrets" -ForegroundColor Yellow
+                $secretsText = ($secrets | Out-String)
+                if ($secretsText -match 'HTTP 403|Resource not accessible by integration') {
+                    Write-Host "    Current gh token/app cannot list repository secrets." -ForegroundColor Yellow
+                    Write-Host "    Try: gh auth refresh -h github.com -s repo,workflow,read:org" -ForegroundColor Cyan
+                    Write-Host "    Or verify in browser: https://github.com/toodeceptive/against-the-odds/settings/secrets/actions" -ForegroundColor Cyan
+                    if ($FailOnPermissionDenied) {
+                        Write-Host "    Strict mode enabled: permission denial treated as failure." -ForegroundColor Yellow
+                        $failedChecks++
+                    }
+                } else {
+                    $failedChecks++
+                }
             }
         }
     } catch {
         Write-Host "  [FAIL] Error: $_" -ForegroundColor Red
+        $failedChecks++
     }
 } else {
     Write-Host "GitHub CLI (gh) not installed" -ForegroundColor Yellow
@@ -91,3 +111,7 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
 
 Write-Host ""
 Write-Host "For instructions, see: .github/workflows/README.md" -ForegroundColor Cyan
+if ($failedChecks -gt 0) {
+    exit 1
+}
+exit 0
