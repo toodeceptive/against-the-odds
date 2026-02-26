@@ -58,7 +58,8 @@ jobs:
   backup-store:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    if: github.event_name != 'push'
+    # Run backups only on non-push events and only when required secrets are set.
+    if: github.event_name != 'push' && secrets.SHOPIFY_STORE_DOMAIN != '' && secrets.SHOPIFY_ACCESS_TOKEN != ''
     permissions:
       contents: write
 

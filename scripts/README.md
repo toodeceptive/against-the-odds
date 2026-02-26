@@ -83,10 +83,10 @@
 
 ### Maintenance (scripts/maintenance/)
 
-| Script                  | Purpose                                | When to run                                   |
-| ----------------------- | -------------------------------------- | --------------------------------------------- |
-| **security-scan.ps1**   | Local secret scan (shpat*, ghp*, etc.) | Before push; CI runs secret-scan in workflows |
-| update-dependencies.ps1 | Dependency update                      | Periodic or per maintenance.yml               |
+| Script                  | Purpose                                           | When to run                                        |
+| ----------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| **security-scan.ps1**   | Local dependency vulnerability scan (`npm audit`) | Before push; pair with CI secret-scan/trivy checks |
+| update-dependencies.ps1 | Dependency update                                 | Periodic or per maintenance.yml                    |
 
 ### Sync (scripts/sync/)
 

@@ -78,14 +78,14 @@ Run from repo root; they use `.env.local` for credentials (Admin API token requi
 
 ## Quick reference (run in Cursor terminal from repo root)
 
-| Goal                                    | Command                                             |
-| --------------------------------------- | --------------------------------------------------- |
-| **Push changes to store (GitHub flow)** | Commit and push to `main` (or connected branch)     |
-| Pull live theme into repo               | `.\scripts\shopify\theme-pull.ps1`                  |
-| Theme dev (live preview)                | `shopify theme dev --store=aodrop.com --theme=live` |
-| Push theme via CLI                      | `.\scripts\shopify\update-theme.ps1`                |
-| Login to Shopify CLI                    | `shopify auth login`                                |
-| Run runbook (Shopify + GitHub)          | `.\scripts\run-runbook.ps1`                         |
+| Goal                                    | Command                                         |
+| --------------------------------------- | ----------------------------------------------- |
+| **Push changes to store (GitHub flow)** | Commit and push to `main` (or connected branch) |
+| Pull live theme into repo               | `.\scripts\shopify\theme-pull.ps1`              |
+| Theme dev (live preview)                | `.\scripts\shopify\theme-dev.ps1`               |
+| Push theme via CLI                      | `.\scripts\shopify\update-theme.ps1`            |
+| Login to Shopify CLI                    | `shopify auth login`                            |
+| Run runbook (Shopify + GitHub)          | `.\scripts\run-runbook.ps1`                     |
 
 ---
 
