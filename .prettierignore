@@ -2,5 +2,4 @@ CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 # Structural state is script-generated; reformatting invalidates signature
 infra/STRUCTURAL_STATE.json
-# Codacy tool config (Codacy CLI manages formatting)
-.codacy/
+# .codacy/ included in Prettier (format/format:check + lint-staged)

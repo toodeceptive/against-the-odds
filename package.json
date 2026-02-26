@@ -61,6 +61,6 @@
     "minimatch": "3.1.5"
   },
   "lint-staged": {
-    "*.{js,mjs,cjs,ts,jsx,tsx,json,css,md,html,yml,yaml}": "prettier --write"
+    "**/*.{js,mjs,cjs,ts,jsx,tsx,json,css,md,html,yml,yaml}": "prettier --write"
   }
 }

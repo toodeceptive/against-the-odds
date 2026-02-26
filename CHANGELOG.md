@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02-26** — Permanent fix for .codacy/codacy.yaml Prettier failures: include .codacy/ in Prettier scope; add .codacy.yml at repo root to exclude .codacy/ from Codacy Cloud; update lint-staged to **/* glob for subdirs; format codacy.yaml to 2-space indent; document in CODACY_MCP_SETUP.md.
 - **2026-02-26** — CI and maintenance workflow fixes: Trivy action updated to 0.34.1 (full SHA pin); create-pull-request upgraded to v6; maintenance: split npm audit (continue-on-error), Trivy continue-on-error; ci: Trivy pinned to 0.34.1 SHA. Resolves CI failures from invalid action refs.
 - **2026-02-07** — PP perfection loop cycle 3: Expanded approval in AGENTS.md and Master Guru prompt (create guru expert teams as needed; control PC to navigate/perfect/optimize/test/setup per lead agent); plan updated; quality and desktop tests verified.
 - **2026-02-07** — PP perfection loop (cycle 1): INDEX_REPORTS and HANDOFF/PLAN_AGENT_ENTRY updated with Master Guru E2E prompt and plan; stale refs to missing system_finalization_report_20260129.md and blocker_resolution_commands_20260129.md replaced with CONSOLIDATION_LOG/INDEX_REPORTS/HANDOFF_FOR_NEW_AGENT_202602; create-repo.ps1 (archive) portable path; scripts/README last-updated 2026-02-07; HANDOFF_PROMPT_NEW_AGENT script count 74.

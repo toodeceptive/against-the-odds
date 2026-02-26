@@ -1,0 +1,6 @@
+---
+# Codacy Cloud config: exclude .codacy/ from style/format tools (e.g. Prettier)
+# to avoid conflicts. .codacy/codacy.yaml is managed by Prettier locally; excluding
+# here prevents Codacy Cloud from flagging it when tool output differs.
+exclude_paths:
+  - '.codacy/**'
