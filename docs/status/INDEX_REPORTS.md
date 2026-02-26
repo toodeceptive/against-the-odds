@@ -18,6 +18,7 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **CONSOLIDATION_LOG.md**                                          | Append-only log of all tracks; single source of what was done and when                                                                                           |
 | **WORK_QUEUE.md**                                                 | Canonical delta-first active queue for local/main closure and blocker ownership                                                                                  |
 | **PP_AUDIT_MARKER.md**                                            | Lightweight delta marker for latest PP/local-main audit timestamp and baseline                                                                                   |
+| **LOCAL_MAIN_FINALIZATION_PLAN_20260226.md**                      | Local main finalization plan; completed work + remaining blockers; verification matrix                                                                           |
 | **BRANCH_INVENTORY.md**                                           | Branch and remote list; main-only strategy                                                                                                                       |
 | **WORKTREE_INVENTORY.md**                                         | Cursor/git worktree paths (see also `.cursor/worktrees.json` → `inventoryDoc`)                                                                                   |
 | **GURU_COMPLETION_SUMMARY.md**                                    | Handoff checklist (theme pull, preview, Admin, optional push)                                                                                                    |
@@ -47,6 +48,7 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **prompts/MASTER_FULL_SCALE_GURU_PP_PROMPT.md**                   | Perfected master approval prompt; full-scale guru PP scope, methods, fix-if-fail, 100-step ref                                                                   |
 | **prompts/NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md**          | Instructions for new agent: create team, execute 100-step PP; paste prompt for new instance                                                                      |
 | **prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md** | Full-system overhaul + unified agent vision; Phase 0 audit; conditional APIs vs PC; 100-step PP; reference master prompt for fix-if-fail and commit (2026-02-07) |
+| **prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md**             | Local main-branch closure; blocker steps, verification gates, docs truth, git finalize (2026-02-26)                                                              |
 | **APIS_VS_PC_AUTOMATION_QA_20260207.md**                          | Q&A: when APIs/secrets required vs PC+browser; decision tree; credentials matrix (2026-02-07)                                                                    |
 
 ---

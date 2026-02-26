@@ -61,6 +61,7 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 | ------------------------------------- | --------------------------------------------------------------- |
 | Phase 0 and entry                     | `docs/status/PLAN_AGENT_ENTRY.md`                               |
 | Fix everything / takeover             | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`                   |
+| Local main finalization (closure)     | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md`             |
 | Full system test + improvement run    | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`            |
 | Full-system overhaul + unified vision | `prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md` |
 | Phase 0 definition                    | `prompts/PERFECT_EXECUTION_PROMPT.md`                           |

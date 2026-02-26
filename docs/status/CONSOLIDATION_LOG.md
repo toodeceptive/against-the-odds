@@ -6,6 +6,14 @@
 
 ---
 
+## 2026-02-26 — Local main guru finalization V3: plan, prompt, verification gates
+
+**Summary**: Updated plan from all chat work; created non-redundant `docs/status/LOCAL_MAIN_FINALIZATION_PLAN_20260226.md` and `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md`. Executed strict verification gates: `npm run quality` PASS, `scripts/verify-pipeline.ps1 -SkipRunbook` PASS, `scripts/github/verify-auth.ps1` PASS (repo access OK, 22 branches). `scripts/github/verify-secrets.ps1` reports gh not installed in current PATH. `scripts/run-runbook.ps1 -StrictSecrets` FAIL (SHOPIFY_ACCESS_TOKEN not set). Structural signature verify FAIL (local signature incorrect; reverted infra/ to committed state). INDEX_REPORTS updated with new plan reference.
+
+**Outcome**: Plan and prompt in place; credential/admin blockers remain per WORK_QUEUE. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Local main finalization closeout: rebase recovery, push, and CI stabilization
 
 **Summary**: Continued the local main closure run after initial blocker capture. Cleared stale file locks on `infra/STRUCTURAL_*` (orphaned `ssh-keygen.exe`/`cmd.exe` handles), completed `main` rebase against `origin/main`, resolved add/add conflicts for `docs/status/WORK_QUEUE.md` and `docs/status/PP_AUDIT_MARKER.md`, and pushed closure commits to `main`. Initial CI run for commit `68baeaf` failed at `Format check`; applied a targeted formatting normalization commit (`aae243a`) and pushed. Latest runs for `aae243a` are green (`CI` success, `CodeQL` success).
