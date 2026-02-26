@@ -143,7 +143,7 @@ foreach ($oauthHost in $candidateHosts) {
             $errorDetail = "$errorDetail | $errorBody"
         }
         if ($statusCode) {
-            $attemptFailures += "[$oauthHost] HTTP $statusCode: $errorDetail"
+            $attemptFailures += "[$oauthHost] HTTP ${statusCode}: $errorDetail"
         } else {
             $attemptFailures += "[$oauthHost] $errorDetail"
         }
