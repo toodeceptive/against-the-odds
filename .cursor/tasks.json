@@ -214,6 +214,62 @@
       "command": "npm",
       "args": ["run", "test:desktop"],
       "problemMatcher": []
+    },
+    {
+      "label": "Playwright: Install Browsers",
+      "type": "shell",
+      "command": "npx",
+      "args": [
+        "playwright",
+        "install"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Vitest: Run with Coverage",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test:coverage"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Vitest: Watch",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run All Tests (unit+integration+e2e)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/test/run-all.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Theme Check (CLI)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/shopify/theme-check.ps1"
+      ],
+      "problemMatcher": []
     }
   ]
 }

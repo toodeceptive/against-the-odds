@@ -1,9 +1,9 @@
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,6 +38,17 @@ export default defineConfig([
   },
   {
     files: ['tests/**/*.js', '**/*.test.js', '**/*.spec.js'],
+
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        test: 'readonly', // Playwright
+      },
+    },
 
     rules: {
       'no-console': 'off',

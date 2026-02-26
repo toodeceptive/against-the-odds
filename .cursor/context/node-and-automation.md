@@ -53,4 +53,10 @@ Uses store ID (e.g. `nbxwpf-z1` for aodrop.com) for direct navigation to Apps > 
 
 ## Cursor tasks
 
-Use Cursor tasks for one-click runs: **Run Shopify E2E Tests**, **Run Desktop Automation Tests**, **Verify Pipeline**, **Shopify: Theme Pull**, **Shopify: Theme Auth Then Pull**, **Finish Setup**, **Run Runbook**.
+Use Cursor tasks for one-click runs: **Run Shopify E2E Tests**, **Run Desktop Automation Tests**, **Verify Pipeline**, **Shopify: Theme Pull**, **Shopify: Theme Auth Then Pull**, **Finish Setup**, **Run Runbook**, **Theme Check (CLI)**, **Playwright: Install Browsers**, **Vitest: Run with Coverage**, **Run All Tests (unit+integration+e2e)**.
+
+---
+
+## Extensions (Testing sidebar)
+
+Playwright and Vitest appear in the Testing sidebar. Use CodeGen for new E2E tests; enable Trace Viewer for debugging. Theme Check: create `.theme-check.yml` for Shopify Liquid extension; run `scripts/shopify/theme-check.ps1` for CLI validation.

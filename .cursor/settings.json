@@ -28,6 +28,29 @@
   "editor.guides.bracketPairs": true,
   "editor.tabSize": 2,
   "editor.detectIndentation": true,
+  "editor.linkedEditing": false,
+  "playwright.reuseBrowser": true,
+  "playwright.showTrace": true,
+  "playwright.pickLocatorCopyToClipboard": true,
+  "playwright.env": {
+    "SHOPIFY_STORE_DOMAIN": "aodrop.com"
+  },
+  "vitest.enable": true,
+  "vitest.commandLine": "npm run test:unit",
+  "vitest.include": "tests/**/*.test.{js,ts}",
+  "vitest.exclude": "tests/e2e/**",
+  "auto-rename-tag.activationOnLanguage": [
+    "html",
+    "liquid",
+    "xml",
+    "javascript",
+    "javascriptreact"
+  ],
+  "themeCheck.checkOnOpen": true,
+  "themeCheck.checkOnChange": true,
+  "themeCheck.checkOnSave": true,
+  "shopifyLiquid.disableWindowsWarning": true,
+  "shopifyLiquid.formatterDevPreview": true,
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.PowerShell",
     "editor.tabSize": 4
@@ -62,7 +85,9 @@
     "editor.tabSize": 2
   },
   "[liquid]": {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "Shopify.theme-check-vscode",
+    "editor.formatOnSave": true
   },
   "powershell.scriptAnalysis.enable": true,
   "powershell.codeFormatting.preset": "OTBS",

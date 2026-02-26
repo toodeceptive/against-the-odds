@@ -19,7 +19,7 @@ Step-by-step for fulfilling store change requests (products, theme) with preview
 ## Theme / page flow
 
 1. **Request**: User asks for theme or page changes (e.g. "update the homepage", "add this section").
-2. **Edit**: Edit files under `src/shopify/themes/aodrop-theme/` (layout, sections, templates, assets, etc.). Ensure structure matches [Shopify theme architecture](https://shopify.dev/docs/storefronts/themes/architecture).
+2. **Edit**: Edit files under `src/shopify/themes/aodrop-theme/` (layout, sections, templates, assets, etc.). Ensure structure matches [Shopify theme architecture](https://shopify.dev/docs/storefronts/themes/architecture). Use Theme Check (Shopify Liquid extension) and `.theme-check.yml` for lint; run `.\scripts\shopify\theme-check.ps1` for CLI validation.
 3. **Preview**: Either (a) run `shopify theme dev --store=aodrop.com --path=src/shopify/themes/aodrop-theme` and get the preview URL, or (b) summarize the diff (e.g. `git diff src/shopify/themes/aodrop-theme`).
 4. **Snapshot**: Write [docs/status/pending-approval.md](status/pending-approval.md) with: Summary (what will change), theme dev URL or diff summary, and "To approve: reply in Cursor chat with 'approve' or 'yes'." **Then run `.\scripts\open-preview-popup.ps1`** (or `.\scripts\start-theme-preview.ps1`) from repo root. That opens the approval file in Cursor, opens the AO preview in the browser (static mock right away; live theme when dev server is ready), and starts theme dev in a new window. Tell the user: "I've opened the pending changes and preview. When ready, say 'approve' in this chat."
 5. **Approval**: Wait for explicit user confirmation in chat (e.g. "approve", "yes", "looks good").

@@ -109,6 +109,29 @@ All recommended extensions are **free**, **guru/expert-approved**, and **compati
 
 ---
 
+## 7a. Extensions in-depth (Playwright, Vitest, Shopify Liquid, Auto Rename Tag)
+
+Per [.cursor/plans/extensions_setup_and_utilization.plan.md](../../.cursor/plans/extensions_setup_and_utilization.plan.md):
+
+- **Playwright**: Use Testing sidebar; gear icon to switch between `playwright.config.js` and `playwright.shopify.config.js`. Enable Show Browser for live debugging; Trace Viewer for flaky tests. CodeGen for new tests.
+- **Vitest**: Run from Testing sidebar; use "Run Tests with Coverage" or `npm run test:coverage`. Watch mode: `npm run test`.
+- **Shopify Liquid**: Requires `.theme-check.yml` at repo root for activation. Liquid formatter: `shopifyLiquid.formatterDevPreview: true`; `[liquid]` defaultFormatter: `Shopify.theme-check-vscode`. Theme Check CLI: `scripts/shopify/theme-check.ps1`.
+- **Auto Rename Tag**: Works with HTML and Liquid. `editor.linkedEditing: false` avoids conflict on HTML files.
+
+---
+
+## 7b. Known issues and inhibiting factors
+
+| Issue | Impact | Mitigation |
+|-------|--------|------------|
+| Codacy ESLint 8 vs repo ESLint 9 | Duplicate or conflicting lint results | Document; verify Codacy flat config support |
+| Shopify Liquid formatter dev preview | May be unstable | Fallback: disable formatOnSave for liquid |
+| Theme Check requires .theme-check.yml | Extension will not activate without it | Create at repo root (done) |
+| Playwright baseURL vs webServer | Tests may hit wrong URL | Verify test intent |
+| run-all.ps1 does not run test:shopify by default | Shopify E2E not in "all" run | Use `-Shopify` flag |
+
+---
+
 ## 8. Worktrees and tasks
 
 - **worktrees.json**: `setup-worktree` / `setup-worktree-windows` run `npm install` and copy `.env.local` from root worktree into the new worktree (when present), so parallel agents have env; `inventoryDoc` → docs/status/WORKTREE_INVENTORY.md. ✅

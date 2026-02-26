@@ -4,6 +4,7 @@ param(
     [switch]$Unit = $false,
     [switch]$Integration = $false,
     [switch]$E2E = $false,
+    [switch]$Shopify = $false,
     [switch]$Coverage = $false
 )
 
@@ -57,6 +58,16 @@ if ($Integration -or (-not $Unit -and -not $E2E)) {
 if ($E2E -or (-not $Unit -and -not $Integration)) {
     Write-Host "Running E2E tests..." -ForegroundColor Yellow
     npm run test:e2e
+    if ($LASTEXITCODE -ne 0) {
+        $allPassed = $false
+    }
+    Write-Host ""
+}
+
+# Run Shopify E2E tests (opt-in via -Shopify)
+if ($Shopify) {
+    Write-Host "Running Shopify E2E tests..." -ForegroundColor Yellow
+    npm run test:shopify
     if ($LASTEXITCODE -ne 0) {
         $allPassed = $false
     }
