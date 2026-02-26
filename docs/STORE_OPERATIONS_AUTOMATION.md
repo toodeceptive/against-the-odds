@@ -2,6 +2,8 @@
 
 **Purpose:** Single map for automating **initial setup**, **future store changes**, **themes**, **content**, **products**, **sizes**, **posts**, **store info**, **Printify**, **image optimization**, and **orders** from the Cursor desktop app using e2e (Playwright), desktop automation (screen/PC control), and scripts. Use for both first-time setup and ongoing operations.
 
+**Env var contracts:** Shopify scripts require `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_ACCESS_TOKEN` in `.env.local` (or GitHub Secrets for CI). See [CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md) and `.env.example`.
+
 ---
 
 ## Automation matrix
@@ -68,7 +70,7 @@
 
 ## 3. Printify
 
-- **Current:** No Printify API scripts in repo. Connect store in [Printify](https://printify.com) dashboard (Shopify app or store connection). Product data pushed to Shopify via `scripts/products/sync.ps1` or Admin; Printify syncs from Shopify when configured.
+- **Current:** No Printify API scripts in repo. **Printify is manual/dashboard until API integration.** Connect store in [Printify](https://printify.com) dashboard (Shopify app or store connection). Product data pushed to Shopify via `scripts/products/sync.ps1` or Admin; Printify syncs from Shopify when configured.
 - **Future:** Add scripts or workflows for Printify API (product push, order status) if needed; document webhook/order flow. E2E can open Printify dashboard and automate repetitive steps if CDP is available.
 - **Orders:** Shopify orders that use Printify products are fulfilled via Printify; creating orders in Shopify (API or Admin) is the main lever until Printify API is integrated.
 

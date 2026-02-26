@@ -20,6 +20,7 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 | [CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md)             | Credentials and .env.local (canonical)                           |
 | [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md)             | Full environment and tooling (see CREDENTIALS_SETUP for secrets) |
 | [BROWSER_CREDENTIAL_FLOW.md](BROWSER_CREDENTIAL_FLOW.md) | Browser-based credential flow                                    |
+| [CODACY_MCP_SETUP.md](CODACY_MCP_SETUP.md)               | Codacy MCP troubleshooting (agents)                              |
 | [guides/quick-start.md](guides/quick-start.md)           | Quick start                                                      |
 
 ## Operations and runbooks
