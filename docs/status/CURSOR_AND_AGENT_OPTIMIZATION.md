@@ -138,6 +138,7 @@ All recommended extensions are **free**, **guru/expert-approved**, and **compati
 
 ## 11. Cross-references
 
+- **Codacy MCP troubleshooting**: [docs/CODACY_MCP_SETUP.md](../CODACY_MCP_SETUP.md)
 - **Agentic setup (rules/skills/subagents)**: [AGENTIC_SETUP_AUDIT.md](AGENTIC_SETUP_AUDIT.md)
 - **Agent workflow (Shopify, preview, runbook)**: [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md), [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md)
 - **Skills index**: [.cursor/skills/README.md](../../.cursor/skills/README.md)
