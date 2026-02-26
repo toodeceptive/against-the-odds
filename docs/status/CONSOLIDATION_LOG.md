@@ -6,6 +6,14 @@
 
 ---
 
+## 2026-02-26 — sync-products.ps1: load .env.local for standalone runs
+
+**Summary**: sync-products.ps1 did not load .env.local; it relied on caller (e.g. verify-pipeline) to set SHOPIFY_STORE_DOMAIN/SHOPIFY_ACCESS_TOKEN. Added .env.local loading block (same pattern as test-connection.ps1) so `.\scripts\shopify\sync-products.ps1 -DryRun` works when run directly.
+
+**Outcome**: No store-affecting changes. Script now self-contained for env resolution.
+
+---
+
 ## 2026-02-26 — Store details, theme, design aligned with streetwear branding
 
 **Summary**: Deep-dive research of STORE_COPY_AND_CONTENT, ASSETS_MANIFEST, BRAND_THEME_CUSTOMIZATION, drop01 specs, and business plan. Updated store identity, theme, and design to match motto ("The odds were never even"), slogan ("If y'all drop it, we all got it. If y'all rock it, we all profit."), short ("We all profit."), and streetwear aesthetics. **index.html**: Meta/OG from STORE_COPY; hero motto + subhead; slogan block; footer tagline; fixed broken image path (assets/brand/A_collection...). **styles.css**: Aligned with ao-brand palette (dark #0d0d0d, cyan #00d4ff, yellow accent, Bebas Neue); street-art feel. **data/products/example-hoodie.json**: Rich streetwear body_html with motto, slogan, quality-first copy. **data/store-details.json**: Machine-readable store identity. **docs/data/README**: store-details reference. **STORE_COPY_AND_CONTENT**: data/store-details.json pointer.

@@ -22,6 +22,19 @@ $repoPath = if ($PSScriptRoot) {
 }
 Set-Location $repoPath
 
+# Load .env.local into process env when present (same pattern as test-connection.ps1)
+if (Test-Path ".env.local") {
+    Get-Content ".env.local" | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith("#") -and $line -match "^([^=]+)=(.*)$") {
+            [Environment]::SetEnvironmentVariable($matches[1].Trim(), $matches[2].Trim(), "Process")
+        }
+    }
+}
+# Re-read from env after load (param binding runs before .env.local is loaded)
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+if ([string]::IsNullOrWhiteSpace($Token)) { $Token = $env:SHOPIFY_ACCESS_TOKEN }
+
 Write-Host "=== Shopify Product Sync ===" -ForegroundColor Cyan
 Write-Host ""
 
