@@ -23,6 +23,7 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Resolve GitHub CodeQL default-vs-advanced conflict (default setup disabled in repo security settings; advanced workflow retained) and upgrade `github/codeql-action` to `@v4` in `.github/workflows/codeql.yml` (completed 2026-02-26).
 - [x] Harden Shopify theme-ID browser extraction reliability (`scripts/shopify/browser/get-theme-id.ps1`, `src/browser-automation/shopify-admin.js`) and add canonical cloud delta-first prompt routing (`prompts/CLOUD_GURU_PERFECTION_PROMPT_V7_DELTA_FIRST.md`, `docs/AGENT_PROMPT_DECISION_TREE.md`) (completed 2026-02-26).
 - [x] Complete Shopify credential recovery and deterministic runbook verification (`scripts/shopify/browser/get-token-client-credentials.ps1`, `scripts/shopify/test-connection.ps1`, `scripts/run-runbook.ps1`; local `.env.local` updated with Shopify API key/secret/token/theme ID) (completed 2026-02-26).
+- [x] Regenerate and validate structural integrity signature chain (`infra/STRUCTURAL_STATE.json`, `infra/STRUCTURAL_SIGNATURE.txt`, `infra/allowed_signers`, `infra/structural.pub`) to clear empty-signature risk before CI `arch_guard` verification (completed 2026-02-26).
 
 ## Approval Gates (Must Ask First)
 

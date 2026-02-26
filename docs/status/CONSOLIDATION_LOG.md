@@ -6,6 +6,12 @@
 
 ---
 
+## 2026-02-26 — Delta-first cloud perfection pass (cycle 6): structural signature chain recovery (arch_guard risk closure)
+
+**Summary**: Independent verifier surfaced a pre-existing structural-integrity risk: `infra/STRUCTURAL_SIGNATURE.txt` was empty, which could fail CI `arch_guard` validation. Regenerated full signature chain locally via `bash scripts/infra/sign-structural-state.sh`, producing updated `infra/STRUCTURAL_STATE.json`, `infra/STRUCTURAL_SIGNATURE.txt`, `infra/allowed_signers`, and `infra/structural.pub`. Verified signature validity with the same `ssh-keygen -Y verify` semantics used by CI. Re-ran quality/pipeline/runbook gates on the updated branch state; all pass. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Delta-first cloud perfection pass (cycle 5): Shopify credential recovery from Dev Dashboard and runbook closure
 
 **Summary**: Restarted from unresolved scope and rebuilt the non-redundant unfinished-task index. **Primary unfinished path closed**: Shopify credentials. Using the logged-in Shopify Dev Dashboard AO app settings, captured client credentials into local `.env.local` (never committed), then hardened `scripts/shopify/browser/get-token-client-credentials.ps1` for deterministic host resolution and PowerShell 7-safe error parsing. During retest, found and fixed two reliability regressions introduced by the hardening patch (PowerShell string interpolation parser edge and reserved `$Host` variable collision). Token exchange succeeded and updated local `SHOPIFY_ACCESS_TOKEN`/`SHOPIFY_CLI_THEME_TOKEN`; OAuth host auto-resolved to `aodrop.myshopify.com`; theme ID persisted as `142763624175`. **Secondary unfinished path closed**: runbook false-failure state. `scripts/shopify/test-connection.ps1` now exits `0` explicitly on success and `scripts/run-runbook.ps1` now normalizes null `$LASTEXITCODE` values to prevent false negatives. **Validation**: `pwsh -File scripts/run-runbook.ps1` passes end-to-end (Shopify APIs + GitHub repo access), `pwsh -File scripts/verify-pipeline.ps1` passes including runbook step, and quality gates (`npm run format:check`, `npm run lint`, `npm run test:unit`) pass. **Remaining external blockers (unchanged)**: GitHub Actions secrets listing still returns HTTP 403 from `scripts/github/verify-secrets.ps1` (requires elevated GitHub token/app permission); Codacy MCP resources remain unavailable in this cloud session (MCP server/config availability issue). No store-affecting changes; no deploy-log entry.
