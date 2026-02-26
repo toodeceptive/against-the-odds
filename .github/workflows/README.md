@@ -61,12 +61,14 @@ These workflows require the following secrets to be configured in GitHub:
 3. Click **New repository secret**
 4. Add each secret listed above
 5. Workflows will automatically use these secrets when triggered
+6. Verify local secret visibility with `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1`
 
 ## Notes
 
 - Secrets are encrypted and only accessible to workflows
 - Never commit secrets to the repository
 - Use `.env.local` for local development (gitignored)
+- `scripts/run-runbook.ps1` now includes `verify-secrets.ps1` so local runbook checks cover auth + secret presence together
 
 ## CI troubleshooting
 

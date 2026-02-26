@@ -27,5 +27,8 @@ if ($null -eq $shopifyExit) { $shopifyExit = 0 }
 & "$repoRoot\scripts\github\verify-auth.ps1"
 $githubExit = $LASTEXITCODE
 if ($null -eq $githubExit) { $githubExit = 0 }
-if ($shopifyExit -ne 0 -or $githubExit -ne 0) { exit 1 }
+& "$repoRoot\scripts\github\verify-secrets.ps1"
+$secretsExit = $LASTEXITCODE
+if ($null -eq $secretsExit) { $secretsExit = 0 }
+if ($shopifyExit -ne 0 -or $githubExit -ne 0 -or $secretsExit -ne 0) { exit 1 }
 exit 0
