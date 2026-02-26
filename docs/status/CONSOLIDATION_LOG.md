@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-02-26 — Credential closure, structural signature, branch protection, git finalize
+
+**Summary**: Closed local credential blocker via `scripts/shopify/browser/save-token-from-file.ps1` (paste file accepts shpat_ token or Client ID+Secret; client-credentials flow obtains access token). Fixed `scripts/github/verify-secrets.ps1` (GH_TOKEN fallback from .env.local/git credential; removed duplicate block). Added `-StrictSecrets` to `scripts/run-runbook.ps1`. Regenerated `infra/STRUCTURAL_*` via WSL bash; `ssh-keygen -Y verify` PASS. Branch protection aligned (test, arch_guard, quality, secret-scan). Fixed ESLint in `shopify-admin.js` (removed no-redeclare global comment).
+
+**Execution evidence**: `scripts/run-runbook.ps1 -StrictSecrets` PASS (with .env.local); structural verify PASS; Shopify connection PASS; verify-secrets uses GH_TOKEN fallback when gh not logged in.
+
+**Remaining**: GitHub Actions repo secrets (SHOPIFY_STORE_DOMAIN, SHOPIFY_ACCESS_TOKEN, SHOPIFY_THEME_ID) — add via gh or GitHub UI for CI workflows.
+
+---
+
 ## 2026-02-26 — Local main guru finalization V6/V7: integration stack audit, strict rerun, delta-only closure map
 
 **Summary**: Executed a full V6 + V7 non-redundant closure cycle. Added `docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md` with keep/replace/disable decisions (cost/value and functionality based). Added `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V6_OPTIMAL_INTEGRATIONS.md` and `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V7_DELTA_ONLY_EXTERNALS.md`, then executed strict matrix plus delta-only rerun. Repaired Codacy local operability by running `codacy_cli_install` and validating `codacy_cli_analyze` on edited files.

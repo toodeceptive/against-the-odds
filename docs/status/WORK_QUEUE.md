@@ -32,9 +32,9 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Publish integration cost/value audit and optimal default stack (`docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md`).
 - [x] Generate and execute recursive prompts (`V6` + `V7` delta-only) for non-redundant closure.
 - [ ] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure.
-- [ ] Align/enforce branch protection or ruleset required checks for `main` per policy docs.
-- [ ] Restore strict runbook credentials in `.env.local` (`SHOPIFY_ACCESS_TOKEN`; optional `GITHUB_TOKEN`) and rerun strict runbook to exit `0`.
-- [ ] Regenerate valid structural signature payload (`infra/STRUCTURAL_SIGNATURE.txt`) and pass `ssh-keygen -Y verify`.
+- [x] Align/enforce branch protection or ruleset required checks for `main` per policy docs.
+- [x] Restore strict runbook credentials in `.env.local` (`SHOPIFY_ACCESS_TOKEN`; optional `GITHUB_TOKEN`) and rerun strict runbook to exit `0`.
+- [x] Regenerate valid structural signature payload (`infra/STRUCTURAL_SIGNATURE.txt`) and pass `ssh-keygen -Y verify`.
 
 ## Approval Gates (Must Ask First)
 

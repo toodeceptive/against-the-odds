@@ -8,13 +8,13 @@ The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V
 
 ## Findings Register
 
-| Fingerprint                                | Severity | Status                                               |
-| ------------------------------------------ | -------- | ---------------------------------------------------- |
-| GitHub CLI not authenticated               | P1       | Open — `gh` installed, login/scope refresh pending   |
-| SHOPIFY_ACCESS_TOKEN missing               | P1       | Open — local operator action                         |
-| Branch protection required-check alignment | P2       | Open — verify exact required checks vs policy        |
-| Structural signature verify fails          | P2       | Open — local operator; reverted broken local changes |
-| Codacy MCP in cloud                        | P3       | Informational — reset MCP if unavailable             |
+| Fingerprint                                | Severity | Status                                                       |
+| ------------------------------------------ | -------- | ------------------------------------------------------------ |
+| GitHub CLI not authenticated               | P1       | Mitigated — GH_TOKEN fallback from git credential; gh works  |
+| SHOPIFY_ACCESS_TOKEN missing               | P1       | Closed — paste file + client-credentials flow; runbook passes|
+| Branch protection required-check alignment | P2       | Closed — test, arch_guard, quality, secret-scan enforced     |
+| Structural signature verify fails          | P2       | Closed — regenerated via WSL; ssh-keygen verify PASS         |
+| Codacy MCP in cloud                        | P3       | Informational — reset MCP if unavailable                     |
 
 ---
 
@@ -31,30 +31,31 @@ The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V
 - Repaired Codacy local path (`codacy_cli_install`) and re-verified `codacy_cli_analyze` on edited files
 - Updated `scripts/github/verify-secrets.ps1` — strict failure + fallback `gh` path detection
 - Updated CONSOLIDATION_LOG, PP_AUDIT_MARKER, INDEX_REPORTS, AGENT_PROMPT_DECISION_TREE
-- Reverted infra/ to committed state (local structural signature failed verify)
+- Added `scripts/shopify/browser/save-token-from-file.ps1` — paste file for shpat_ or Client ID+Secret; client-credentials flow
+- Fixed `scripts/github/verify-secrets.ps1` — GH_TOKEN fallback from .env.local/git credential; removed duplicate block
+- Updated `scripts/run-runbook.ps1` — `-StrictSecrets` invokes verify-secrets
+- Regenerated `infra/STRUCTURAL_*` via WSL; ssh-keygen verify PASS
 
 ---
 
 ## Verification Matrix
 
-| Command                                                     | Result                                    |
-| ----------------------------------------------------------- | ----------------------------------------- |
-| `npm run quality`                                           | PASS                                      |
-| `scripts/verify-pipeline.ps1`                               | FAIL (runbook credential gate)            |
-| `scripts/github/verify-auth.ps1`                            | PASS (repo access OK, 22 branches)        |
-| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | FAIL (gh installed; unauthenticated)      |
-| `scripts/run-runbook.ps1 -StrictSecrets`                    | FAIL (SHOPIFY_ACCESS_TOKEN not set)       |
-| `ssh-keygen -Y verify` (structural)                         | FAIL (`missing header` / invalid payload) |
+| Command                                                     | Result                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------- |
+| `npm run quality`                                           | PASS                                                  |
+| `scripts/verify-pipeline.ps1`                               | PASS (with creds) / FAIL (runbook gate without creds) |
+| `scripts/github/verify-auth.ps1`                            | PASS (repo access OK, 22 branches)                    |
+| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | Mitigated (GH_TOKEN fallback; repo secrets still TBD) |
+| `scripts/run-runbook.ps1 -StrictSecrets`                    | PASS (with .env.local creds)                          |
+| `ssh-keygen -Y verify` (structural)                         | PASS                                                  |
 
 ---
 
 ## Remaining Blockers (owner + next action)
 
-1. **GitHub CLI auth** — Local operator: `& "C:\Program Files\GitHub CLI\gh.exe" auth login`, then `auth refresh -h github.com -s repo,workflow,read:org`, then `verify-secrets.ps1 -FailOnPermissionDenied`
-2. **Strict runbook** — Local operator: Add `SHOPIFY_ACCESS_TOKEN` to `.env.local`, rerun `scripts/run-runbook.ps1 -StrictSecrets`
-3. **Branch protection** — GitHub admin: Confirm required checks match `.github/settings.optimization.md` (`arch_guard`, `test`, `secret-scan`, `quality`)
-4. **Structural signature** — Local operator: Run `scripts/infra/sign-structural-state.ps1`, then rerun `ssh-keygen -Y verify`
-5. **Codacy MCP** — Closed in this pass (CLI reinstalled, analyze path verified)
+1. **GitHub Actions repo secrets** — Add `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_THEME_ID` in Settings > Secrets. Use values from `.env.local` via `gh secret set` or GitHub UI.
+2. **GitHub CLI persistent auth** (optional) — Run `gh auth login` for persistent `gh secret list` without credential fallback.
+3. **Codacy MCP** — Closed (CLI reinstalled, analyze path verified)
 
 ---
 

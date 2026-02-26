@@ -1,6 +1,10 @@
 # Load .env.local and run key runbook checks (Shopify + GitHub verification).
 # Run from repo root: .\scripts\run-runbook.ps1
 
+param(
+    [switch]$StrictSecrets
+)
+
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $repoRoot
@@ -25,5 +29,11 @@ Write-Host "=== Runbook: Shopify + GitHub ===" -ForegroundColor Cyan
 $shopifyExit = $LASTEXITCODE
 & "$repoRoot\scripts\github\verify-auth.ps1"
 $githubExit = $LASTEXITCODE
-if ($shopifyExit -ne 0 -or $githubExit -ne 0) { exit 1 }
+$secretsExit = 0
+if ($StrictSecrets) {
+    Write-Host ""
+    & "$repoRoot\scripts\github\verify-secrets.ps1" -FailOnPermissionDenied
+    $secretsExit = $LASTEXITCODE
+}
+if ($shopifyExit -ne 0 -or $githubExit -ne 0 -or $secretsExit -ne 0) { exit 1 }
 exit 0

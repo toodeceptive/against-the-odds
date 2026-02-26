@@ -77,6 +77,9 @@ cache/
 scripts/**/extract-*-temp.js
 shopify-auth.json
 
+# One-time paste file for token setup (never commit)
+scripts/shopify/.token-paste.txt
+
 # OCR / Tesseract data (local only)
 *.traineddata
 

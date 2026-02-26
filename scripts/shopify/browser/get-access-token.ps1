@@ -53,7 +53,7 @@ const { connectToBrowser, ensureShopifyLogin, extractAccessToken } = await impor
     }
 
     console.log('Extracting access token...');
-    const token = await extractAccessToken(page);
+    const token = await extractAccessToken(page, '$StoreDomain');
 
     if (token) {
       console.log('SUCCESS:' + token);
@@ -92,7 +92,7 @@ try {
 
     if ($token) {
         Write-Host ""
-        Write-Host "[OK] Access token extracted: $($token.Substring(0, 20))..." -ForegroundColor Green
+        Write-Host "[OK] Access token extracted." -ForegroundColor Green
         $env:ATO_SHOPIFY_STORE_ID = $null
 
         if (-not $NoSave) {
@@ -131,11 +131,13 @@ try {
         Write-Host ""
         Write-Host "✗ Could not extract access token automatically" -ForegroundColor Red
         Write-Host "Please extract manually from Shopify Admin > Apps > Development > Your App > API credentials" -ForegroundColor Yellow
+        exit 1
     }
 } catch {
     Write-Host ""
     Write-Host "✗ Error during extraction: $_" -ForegroundColor Red
     Write-Host "Please extract manually from Shopify Admin > Apps > Development" -ForegroundColor Yellow
+    exit 1
 } finally {
     # Cleanup temp script
     if (Test-Path $scriptPath) {

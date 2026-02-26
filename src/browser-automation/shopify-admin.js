@@ -117,31 +117,51 @@ export async function ensureShopifyLogin(page, storeDomain) {
     if (isAdmin && !hasLoginForm) {
       return true;
     }
-    if (hasLoginForm) {
-      // Wait for redirect to a trusted Shopify admin URL.
-      await page.waitForFunction(
-        (allowedHosts) => {
-          try {
-            const parsed = new URL(window.location.href);
-            if (parsed.protocol !== 'https:') return false;
 
-            const hostname = parsed.hostname.toLowerCase();
-            if (!allowedHosts.includes(hostname)) return false;
+    // Attempt one-click social login entries often available on Shopify auth pages.
+    const socialLoginSelectors = [
+      'a:has-text("Continue with Google")',
+      'button:has-text("Continue with Google")',
+      'a:has-text("Continue with Apple")',
+      'button:has-text("Continue with Apple")',
+    ];
 
-            if (hostname === 'admin.shopify.com') {
-              return parsed.pathname.startsWith('/store/');
-            }
-
-            return parsed.pathname === '/admin' || parsed.pathname.startsWith('/admin/');
-          } catch {
-            return false;
-          }
-        },
-        trustedHosts,
-        { timeout: 120000 },
-      );
+    for (const selector of socialLoginSelectors) {
+      const candidate = page.locator(selector).first();
+      if ((await candidate.count()) > 0) {
+        try {
+          await candidate.click();
+          break;
+        } catch {
+          // Try next candidate.
+        }
+      }
     }
-    return true;
+
+    // Wait for redirect to a trusted Shopify admin URL.
+    await page.waitForFunction(
+      (allowedHosts) => {
+        try {
+          const parsed = new URL(window.location.href);
+          if (parsed.protocol !== 'https:') return false;
+
+          const hostname = parsed.hostname.toLowerCase();
+          if (!allowedHosts.includes(hostname)) return false;
+
+          if (hostname === 'admin.shopify.com') {
+            return parsed.pathname.startsWith('/store/');
+          }
+
+          return parsed.pathname === '/admin' || parsed.pathname.startsWith('/admin/');
+        } catch {
+          return false;
+        }
+      },
+      trustedHosts,
+      { timeout: 120000 },
+    );
+
+    return isTrustedShopifyAdminUrl(page.url(), trustedHosts);
   } catch (_error) {
     warn('Failed to access Shopify admin', { storeDomain, error: _error?.message });
     return false;
@@ -262,12 +282,212 @@ export async function navigateToAppApiCredentialsAndReveal(page) {
   }
 }
 
+function getStoreSlugFromAdminUrl(urlValue) {
+  try {
+    const parsed = new URL(urlValue);
+    if (parsed.hostname !== 'admin.shopify.com') return null;
+    const match = parsed.pathname.match(/^\/store\/([^/]+)/);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+function buildClientCredentialsEndpoints(storeDomain, storeSlug) {
+  const endpoints = new Set();
+  const normalizedStoreHost = normalizeStoreHost(storeDomain);
+
+  if (normalizedStoreHost) {
+    endpoints.add(`https://${normalizedStoreHost}/admin/oauth/access_token`);
+    if (!normalizedStoreHost.endsWith('.myshopify.com')) {
+      endpoints.add(`https://${normalizedStoreHost}.myshopify.com/admin/oauth/access_token`);
+    }
+  }
+
+  if (storeSlug && /^[a-z0-9-]+$/i.test(storeSlug)) {
+    endpoints.add(`https://${storeSlug}.myshopify.com/admin/oauth/access_token`);
+  }
+
+  // Known ATO canonical myshopify domain (used elsewhere in repo scripts).
+  if (normalizedStoreHost === 'aodrop.com' || storeSlug === 'aodrop') {
+    endpoints.add('https://nbxwpf-z1.myshopify.com/admin/oauth/access_token');
+  }
+
+  return Array.from(endpoints);
+}
+
+async function openDevDashboardSettingsPage(page) {
+  let devPage = page;
+
+  // Shopify Admin "Apps > Development" now links out to Dev Dashboard.
+  const devDashboardLink = page
+    .locator('a:has-text("Build apps in Dev Dashboard"), a[href*="dev.shopify.com/dashboard"]')
+    .first();
+  if ((await devDashboardLink.count()) > 0) {
+    const [popup] = await Promise.all([
+      page.waitForEvent('popup', { timeout: 7000 }).catch(() => null),
+      devDashboardLink.click().catch(() => null),
+    ]);
+
+    if (popup) {
+      devPage = popup;
+      await devPage.waitForLoadState('domcontentloaded');
+    } else {
+      await page.waitForLoadState('domcontentloaded');
+      devPage = page;
+    }
+  }
+
+  // If still on app index, open the first real app detail row.
+  if (/\/dashboard\/\d+\/apps(?:\?|$)/.test(devPage.url())) {
+    const appLinks = devPage.locator('a[href*="/dashboard/"][href*="/apps/"]');
+    const n = await appLinks.count();
+    for (let i = 0; i < Math.min(n, 15); i++) {
+      const href = await appLinks.nth(i).getAttribute('href');
+      if (href && /\/apps\/\d+/.test(href) && !/\/apps\/?$/.test(href)) {
+        await Promise.all([
+          devPage
+            .waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 15000 })
+            .catch(() => null),
+          appLinks
+            .nth(i)
+            .click()
+            .catch(() => null),
+        ]);
+        break;
+      }
+    }
+  }
+
+  const currentUrl = devPage.url();
+  if (/\/dashboard\/\d+\/apps\/\d+(?:\?|$)/.test(currentUrl)) {
+    await devPage.goto(`${currentUrl.replace(/\/$/, '')}/settings`, {
+      waitUntil: 'domcontentloaded',
+      timeout: 15000,
+    });
+  }
+
+  if (!/\/dashboard\/\d+\/apps\/\d+\/settings/.test(devPage.url())) {
+    return null;
+  }
+
+  await devPage.waitForSelector('h1, input, button', { timeout: 15000 });
+  return devPage;
+}
+
+async function extractClientCredentials(devPage) {
+  const revealButton = devPage
+    .locator(
+      'button:has-text("Reveal client secret"), [role="button"]:has-text("Reveal client secret")',
+    )
+    .first();
+  if ((await revealButton.count()) > 0) {
+    try {
+      await revealButton.click();
+      await devPage.waitForTimeout(500);
+    } catch {
+      // Continue; in some UIs copy button may still work without reveal.
+    }
+  }
+
+  const creds = await devPage.evaluate(() => {
+    const getContextText = (el) => {
+      const labels = el.labels
+        ? Array.from(el.labels)
+            .map((l) => l.textContent || '')
+            .join(' ')
+        : '';
+      const parentText = (el.closest('section, form, div')?.textContent || '').slice(0, 600);
+      return `${labels} ${parentText}`.toLowerCase();
+    };
+
+    const controls = Array.from(document.querySelectorAll('input, textarea'));
+    const values = controls
+      .map((el) => ({
+        value: (el.value || el.getAttribute('value') || '').trim(),
+        context: getContextText(el),
+      }))
+      .filter((entry) => entry.value.length > 0);
+
+    let clientId = null;
+    for (const entry of values) {
+      if (/client\s*id/.test(entry.context) || /^[a-f0-9]{32}$/i.test(entry.value)) {
+        clientId = entry.value;
+        break;
+      }
+    }
+
+    let clientSecret = null;
+    for (const entry of values) {
+      if (entry.value === clientId) continue;
+      if (/client\s*secret|secret/.test(entry.context) && entry.value.length >= 24) {
+        clientSecret = entry.value;
+        break;
+      }
+    }
+
+    if (!clientSecret) {
+      const fallback = values.find(
+        (entry) =>
+          entry.value !== clientId &&
+          /^[A-Za-z0-9_-]{24,}$/.test(entry.value) &&
+          !/^shpat_[A-Za-z0-9]{20,}$/.test(entry.value),
+      );
+      clientSecret = fallback ? fallback.value : null;
+    }
+
+    return { clientId, clientSecret };
+  });
+
+  if (!creds?.clientId || !creds?.clientSecret) return null;
+  return creds;
+}
+
+async function requestAccessTokenFromClientCredentials(page, storeDomain) {
+  const settingsPage = await openDevDashboardSettingsPage(page);
+  if (!settingsPage) return null;
+
+  const creds = await extractClientCredentials(settingsPage);
+  if (!creds) return null;
+
+  const storeSlug = getStoreSlugFromAdminUrl(page.url());
+  const endpoints = buildClientCredentialsEndpoints(storeDomain, storeSlug);
+
+  for (const endpoint of endpoints) {
+    try {
+      const body = new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: creds.clientId,
+        client_secret: creds.clientSecret,
+      });
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      });
+      if (!res.ok) continue;
+
+      const payload = await res.json().catch(() => null);
+      const token = payload?.access_token;
+      if (typeof token === 'string' && /^shpat_[a-zA-Z0-9]{32,}$/.test(token)) {
+        return token;
+      }
+    } catch {
+      // Try next endpoint.
+    }
+  }
+
+  return null;
+}
+
 /**
  * Extract access token from Shopify admin
  * @param {Page} page - Playwright page instance
+ * @param {string} storeDomain - Store domain used for API endpoint fallbacks
  * @returns {Promise<string|null>} Access token or null if not found
  */
-export async function extractAccessToken(page) {
+export async function extractAccessToken(page, storeDomain = null) {
   // Shopify Admin API tokens: shpat_ + alphanumeric (min 32 chars after prefix; reject shorter/truncated)
   const tokenPattern = /shpat_[a-zA-Z0-9]{32,}/;
   const tryExtractFromCurrentPage = async () => {
@@ -347,6 +567,15 @@ export async function extractAccessToken(page) {
       if (m) {
         return m[0];
       }
+    }
+
+    // Method 4: Shopify Dev Dashboard client credentials fallback (new UI path)
+    const tokenFromClientCredentials = await requestAccessTokenFromClientCredentials(
+      page,
+      storeDomain,
+    );
+    if (tokenFromClientCredentials) {
+      return tokenFromClientCredentials;
     }
 
     // Access token not found on page

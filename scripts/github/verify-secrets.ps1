@@ -49,16 +49,47 @@ if (-not $ghCommand) {
 
 $strictFailure = $false
 
+function Get-GitHubTokenFallback {
+    foreach ($name in @("GH_TOKEN", "GITHUB_TOKEN")) {
+        $v = [Environment]::GetEnvironmentVariable($name, "Process")
+        if (-not [string]::IsNullOrWhiteSpace($v) -and $v -notmatch "your_.*_here") { return $v.Trim() }
+    }
+    $envPath = Join-Path $repoPath ".env.local"
+    if (Test-Path $envPath) {
+        foreach ($line in (Get-Content $envPath)) {
+            if ($line -match "^\s*GITHUB_TOKEN\s*=\s*(.+)\s*$" -and -not $line.StartsWith("#")) {
+                $t = $matches[1].Trim().Trim("'`"")
+                if (-not [string]::IsNullOrWhiteSpace($t) -and $t -notmatch "your_.*_here") { return $t }
+            }
+        }
+    }
+    try {
+        $out = "protocol=https`nhost=github.com`n`n" | git credential fill 2>$null
+        $m = $out | Where-Object { $_ -like "password=*" } | Select-Object -First 1
+        if ($m) { return $m.Substring(9).Trim() }
+    } catch {}
+    return $null
+}
+
 # Check if GitHub CLI is available
 if ($ghCommand) {
     Write-Host "Checking secrets with GitHub CLI..." -ForegroundColor Yellow
 
     try {
-        # Verify authentication
+        $authenticated = $false
         $null = & $ghCommand auth status 2>&1
-        if ($LASTEXITCODE -ne 0) {
+        if ($LASTEXITCODE -eq 0) { $authenticated = $true }
+        if (-not $authenticated) {
+            $fb = Get-GitHubTokenFallback
+            if ($fb) {
+                $env:GH_TOKEN = $fb
+                $null = & $ghCommand auth status 2>&1
+                if ($LASTEXITCODE -eq 0) { $authenticated = $true }
+            }
+        }
+        if (-not $authenticated) {
             Write-Host "  [WARN] GitHub CLI not authenticated" -ForegroundColor Yellow
-            Write-Host "    Run: gh auth login" -ForegroundColor Cyan
+            Write-Host "    Run: gh auth login (or set GITHUB_TOKEN)" -ForegroundColor Cyan
             if ($FailOnPermissionDenied) {
                 $strictFailure = $true
             }

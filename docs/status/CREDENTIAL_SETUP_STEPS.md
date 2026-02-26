@@ -2,7 +2,7 @@
 
 **Goal:** Runbook and verify-pipeline pass (Shopify 401 resolved, optional GITHUB_TOKEN for API checks).
 
-**Fastest path:** Copy the Admin API token (`shpat_...`) from Shopify Admin → Apps → Development → [your app] → API credentials (click **Reveal** if needed), then in repo root run `.\scripts\shopify\browser\save-token-to-env.ps1`. Then run `.\scripts\run-runbook.ps1` and `.\scripts\verify-pipeline.ps1` — both should pass.
+**Fastest path (paste file):** Create `scripts/shopify/.token-paste.txt`, paste your token (`shpat_...`) or Client ID (32 hex) + Client secret (long hex) on lines 1–2, then run `.\scripts\shopify\browser\save-token-from-file.ps1`. Or copy token to clipboard and run `.\scripts\shopify\browser\save-token-to-env.ps1`. Then run `.\scripts\run-runbook.ps1` and `.\scripts\verify-pipeline.ps1` — both should pass.
 
 ## Shopify Admin API token
 
