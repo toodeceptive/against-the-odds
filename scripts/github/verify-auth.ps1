@@ -19,7 +19,7 @@ function Protect-SecretsInText {
     # Mask any embedded basic-auth credentials in URLs.
     $masked = $Text -replace '(https?://)([^/\s@]+)@', '$1***@'
     # Mask common GitHub token prefixes if they appear in plaintext.
-    $masked = $masked -replace 'gh[pousr]_[A-Za-z0-9_]{8,}', '***'
+    $masked = $masked -replace '(gh[pousr]_|github_pat_)[A-Za-z0-9_]{8,}', '***'
     return $masked
 }
 
