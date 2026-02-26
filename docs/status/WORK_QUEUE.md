@@ -25,6 +25,7 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Complete Shopify credential recovery and deterministic runbook verification (`scripts/shopify/browser/get-token-client-credentials.ps1`, `scripts/shopify/test-connection.ps1`, `scripts/run-runbook.ps1`; local `.env.local` updated with Shopify API key/secret/token/theme ID) (completed 2026-02-26).
 - [x] Regenerate and validate structural integrity signature chain (`infra/STRUCTURAL_STATE.json`, `infra/STRUCTURAL_SIGNATURE.txt`, `infra/allowed_signers`, `infra/structural.pub`) to clear empty-signature risk before CI `arch_guard` verification (completed 2026-02-26).
 - [x] Add and execute V8 project-wide delta perfection run (`prompts/CLOUD_GURU_PERFECTION_PROMPT_V8_PROJECT_WIDE_DELTA_MASTER.md`) with net-new remediations for secrets verification determinism and theme-branch sync failure visibility (`scripts/github/verify-secrets.ps1`, `.github/workflows/sync-theme-branch.yml`, `.github/workflows/README.md`) (completed 2026-02-26).
+- [x] Add and execute local/main cloud-escalation run assets (`prompts/LOCAL_MAIN_GURU_PERFECTION_PROMPT_V1_CLOUD_ESCALATION.md`, `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md`) for cloud-unresolvable blocker closure by local guru team (completed 2026-02-26).
 
 ## Approval Gates (Must Ask First)
 

@@ -47,7 +47,9 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md**        | Full-system overhaul + unified agent vision; Phase 0 audit; conditional APIs vs PC; 100-step PP; reference master prompt for fix-if-fail and commit (2026-02-07) |
 | **prompts/CLOUD_GURU_PERFECTION_PROMPT_V7_DELTA_FIRST.md**               | Canonical cloud delta-first rerun prompt: done-index first, no-redundancy specialist audits, strict verification/finalization gates (2026-02-26)                 |
 | **prompts/CLOUD_GURU_PERFECTION_PROMPT_V8_PROJECT_WIDE_DELTA_MASTER.md** | Canonical cloud project-wide rerun prompt: full-history done-index seed, blocker-aware delta audit, strict closure and verification matrix (2026-02-26)          |
-| **APIS_VS_PC_AUTOMATION_QA_20260207.md**                                 | Q&A: when APIs/secrets required vs PC+browser; decision tree; credentials matrix (2026-02-07)                                                                    |
+| **prompts/LOCAL_MAIN_GURU_PERFECTION_PROMPT_V1_CLOUD_ESCALATION.md**     | Canonical local/main escalation prompt for cloud-unresolvable blockers, admin-only closures, and local MCP/permissions finalization (2026-02-26)                  |
+| **LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md**                | Local/main branch guru execution pack for cloud-unresolvable blockers: owner actions, validation gates, and closure checklist (2026-02-26)                        |
+| **APIS_VS_PC_AUTOMATION_QA_20260207.md**                                  | Q&A: when APIs/secrets required vs PC+browser; decision tree; credentials matrix (2026-02-07)                                                                    |
 
 ---
 

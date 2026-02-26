@@ -6,6 +6,12 @@
 
 ---
 
+## 2026-02-26 — Delta-first cloud perfection pass (cycle 8): local/main cloud-escalation prompt + execution pack
+
+**Summary**: Added a new canonical local/main-branch prompt for issues that cannot be fully resolved in cloud mode: `prompts/LOCAL_MAIN_GURU_PERFECTION_PROMPT_V1_CLOUD_ESCALATION.md`. Wired prompt routing and indexing updates in `docs/AGENT_PROMPT_DECISION_TREE.md` and `docs/status/INDEX_REPORTS.md`. Executed the prompt logic in this run by performing a fresh blocker-focused audit and producing `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md`, containing exact local owner actions, validation gates, and closure criteria for remaining cloud-unresolvable items (GitHub secrets visibility permissions and Codacy MCP local connectivity). No duplicate remediation of already-closed cycles was performed. Verification gates and pipeline remain passing on current branch state. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Delta-first cloud perfection pass (cycle 7): V8 project-wide rerun execution and net-new hardening
 
 **Summary**: Created a new canonical prompt `prompts/CLOUD_GURU_PERFECTION_PROMPT_V8_PROJECT_WIDE_DELTA_MASTER.md` that fuses full project history, done-index seed, unresolved blocker handling, and strict phase-gated verification. Wired V8 into `docs/AGENT_PROMPT_DECISION_TREE.md` and `docs/status/INDEX_REPORTS.md`, then executed the V8 run with parallel non-overlapping audits. **Net-new actionable fixes**: (1) `scripts/github/verify-secrets.ps1` now tracks required-secret failures deterministically and exits non-zero when list succeeds but required secrets are missing, while preserving non-failing behavior for known external 403 permission limits. (2) `.github/workflows/sync-theme-branch.yml` now fails fast on subtree split/push errors (`continue-on-error` removed, `set -euo pipefail` added) so sync drift is visible. (3) `.github/workflows/README.md` updated to document strict failure behavior for theme-branch sync. **Validation**: `npm run format:check`, `npm run lint`, `npm run test:unit`, `pwsh -File scripts/verify-pipeline.ps1`, `pwsh -File scripts/run-runbook.ps1`, and `pwsh -File scripts/github/verify-secrets.ps1` pass in current environment. Remaining external blockers unchanged: GitHub secrets-list 403 requires elevated permissions; Codacy MCP availability remains environment-scoped. No store-affecting changes; no deploy-log entry.
