@@ -68,13 +68,14 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 | Index of reports                   | `docs/status/INDEX_REPORTS.md`                            |
 | Guru team (roster, assignments)    | `docs/status/GURU_TEAM_ASSIGNMENTS.md`                    |
 | New-agent handoff and prompt       | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                        |
+| Ultimate continuation prompt       | `prompts/ULTIMATE_FOLLOWUP_CONTINUATION_PROMPT.md`        |
 | After Phase 0: which prompt to run | `docs/AGENT_PROMPT_DECISION_TREE.md`                      |
 
 ---
 
 ## 5. After Phase 0: Which Prompt to Run
 
-Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to choose the right prompt for audits, orchestration, or specialist work. To **test and utilize the new Cursor agent system** (rules, skills, /review, /pr, Verifier) with a full system-wide run across code, repo, pipeline, and project, use **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`**. To **loop perfection until complete** (worktree-coordinated lead agent, PP cycles, cleanup/optimization), use **`prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`** and **`.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md`**. For other goals: full audit → MASTER_10_EXPERT_SYSTEM; finalization → head-guru-orchestrator; etc.
+Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to choose the right prompt for audits, orchestration, or specialist work. For **audit + fix-all continuation**, use **`prompts/ULTIMATE_FOLLOWUP_CONTINUATION_PROMPT.md`**. To **test and utilize the new Cursor agent system** (rules, skills, /review, /pr, Verifier) with a full system-wide run across code, repo, pipeline, and project, use **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`**. To **loop perfection until complete** (worktree-coordinated lead agent, PP cycles, cleanup/optimization), use **`prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`** and **`.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md`**. For other goals: full audit → MASTER_10_EXPERT_SYSTEM; finalization → head-guru-orchestrator; etc.
 
 ---
 

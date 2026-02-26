@@ -37,6 +37,7 @@ jobs:
 
           SIG="infra/STRUCTURAL_SIGNATURE.txt"
           [ ! -s "$SIG" ] && [ -s infra/STRUCTURAL_SIGNATURE_NEW.txt ] && cp infra/STRUCTURAL_SIGNATURE_NEW.txt "$SIG"
+          [ ! -s "$SIG" ] && [ -s infra/STRUCTURAL_SIGNATURE_NEW_RESTORED.txt ] && cp infra/STRUCTURAL_SIGNATURE_NEW_RESTORED.txt "$SIG"
           [ -s "$SIG" ] || { echo "::error::infra/STRUCTURAL_SIGNATURE.txt missing or empty (run scripts/infra/sign-structural-state.ps1 or .sh)"; exit 1; }
 
           ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s "$SIG" < infra/STRUCTURAL_STATE.json || \

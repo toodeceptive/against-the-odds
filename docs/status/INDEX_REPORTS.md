@@ -49,6 +49,8 @@ Operational authority is split explicitly to avoid conflicts:
 | **FULL_SYSTEM_DEBUG_OPTIMIZATION_AUDIT_20260207.md**              | Full-system audit; obsolete/out-of-date docs; PC automation vs APIs/secrets; cleanup applied                                                                     |
 | **prompts/MASTER_FULL_SCALE_GURU_PP_PROMPT.md**                   | Perfected master approval prompt; full-scale guru PP scope, methods, fix-if-fail, 100-step ref                                                                   |
 | **prompts/NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md**          | Instructions for new agent: create team, execute 100-step PP; paste prompt for new instance                                                                      |
+| **prompts/ULTIMATE_FOLLOWUP_CONTINUATION_PROMPT.md**              | Canonical audit + fix-all continuation prompt: deep research, guru multi-perspective audit, PP loop, failure resilience, verification, and finalization          |
+| **PROMPT_FOR_NEW_AGENT.md**                                       | Short copy-paste bridge for new sessions; points to ultimate continuation prompt and extended handoff                                                            |
 | **prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md** | Full-system overhaul + unified agent vision; Phase 0 audit; conditional APIs vs PC; 100-step PP; reference master prompt for fix-if-fail and commit (2026-02-07) |
 | **APIS_VS_PC_AUTOMATION_QA_20260207.md**                          | Q&A: when APIs/secrets required vs PC+browser; decision tree; credentials matrix (2026-02-07)                                                                    |
 
