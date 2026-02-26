@@ -111,3 +111,4 @@ if ($failedTests -gt 0) {
     exit 1
 }
 Write-Host '[OK] Connection test complete!' -ForegroundColor Green
+exit 0
