@@ -74,6 +74,7 @@ try {
     $env:ATO_REPO_ROOT = $repoPath
     $output = node $scriptPath 2>&1
     $env:ATO_REPO_ROOT = $null
+    $nodeExitCode = $LASTEXITCODE
     $themeId = $null
 
     foreach ($line in $output) {
@@ -107,10 +108,24 @@ try {
             $newContent | Out-File -FilePath ".env.local" -Encoding UTF8
             Write-Host "[OK] Saved to .env.local" -ForegroundColor Green
         }
+        exit 0
     } else {
         Write-Host "[FAIL] Could not extract theme ID" -ForegroundColor Red
+        if ($output) {
+            Write-Host "Details:" -ForegroundColor Yellow
+            foreach ($line in $output) {
+                if (-not [string]::IsNullOrWhiteSpace($line)) {
+                    Write-Host "  $line"
+                }
+            }
+        }
+        if ($nodeExitCode -eq 0) {
+            exit 1
+        }
+        exit $nodeExitCode
     }
 } finally {
+    $env:ATO_REPO_ROOT = $null
     if (Test-Path $scriptPath) {
         Remove-Item $scriptPath -Force
     }
