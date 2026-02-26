@@ -21,6 +21,7 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Clean residual stale references in older audit docs when touched by active work (completed 2026-02-26: stale workflow badge reference and volatile script-count wording updated).
 - [x] Harden verification reliability and cross-platform parsing (`scripts/debug/parse-all-ps1.ps1`, `scripts/github/verify-auth.ps1`, `scripts/shopify/test-connection.ps1`, `scripts/verify-pipeline.ps1`) (completed 2026-02-26).
 - [x] Resolve GitHub CodeQL default-vs-advanced conflict (default setup disabled in repo security settings; advanced workflow retained) and upgrade `github/codeql-action` to `@v4` in `.github/workflows/codeql.yml` (completed 2026-02-26).
+- [x] Harden Shopify theme-ID browser extraction reliability (`scripts/shopify/browser/get-theme-id.ps1`, `src/browser-automation/shopify-admin.js`) and add canonical cloud delta-first prompt routing (`prompts/CLOUD_GURU_PERFECTION_PROMPT_V7_DELTA_FIRST.md`, `docs/AGENT_PROMPT_DECISION_TREE.md`) (completed 2026-02-26).
 
 ## Approval Gates (Must Ask First)
 
