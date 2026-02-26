@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-02-26 — Local main finalization execution (strict gates + admin audit)
+
+**Summary**: Executed the local main-branch closure run with the required strict command matrix and browser-admin validation. Installed GitHub CLI locally, validated browser access to repo admin settings, and ran strict verification gates. **Observed blockers**: (1) `gh` is installed but not authenticated; `gh auth refresh` cannot run until `gh auth login` completes. (2) `scripts/run-runbook.ps1 -StrictSecrets` and full `scripts/verify-pipeline.ps1` fail due missing local `SHOPIFY_ACCESS_TOKEN`. (3) Structural signature verify fails on local `infra/STRUCTURAL_SIGNATURE.txt` (empty/invalid) and local `main` cannot rebase/pull from `origin/main` because `infra/STRUCTURAL_*` files are locked by another process. (4) GitHub admin audit shows no classic branch protection and no rulesets configured for `main`; Advanced Security page is accessible, but multiple code-scanning UI blocks render "Uh oh" load errors. (5) Codacy MCP server is reachable and Codacy CLI was installed; analyze path works for edited files, but prior wrapper calls failed before install and requires local follow-through.
+
+**Commands executed (evidence)**: `gh auth status`, `gh auth refresh -h github.com -s repo,workflow,read:org`, `npm run quality`, `pwsh -NoLogo -NoProfile -File scripts/verify-pipeline.ps1`, `pwsh -NoLogo -NoProfile -File scripts/run-runbook.ps1 -StrictSecrets`, `pwsh -NoLogo -NoProfile -File scripts/github/verify-auth.ps1`, `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1 -FailOnPermissionDenied`, and `ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s infra/STRUCTURAL_SIGNATURE.txt < infra/STRUCTURAL_STATE.json`.
+
+**Outcome**: Local/admin closure progressed but is not complete; unresolved items are tracked in `docs/status/WORK_QUEUE.md`. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-07 — Bug 1: Commit-from-worktree policy — extend to jxj and all worktrees
 
 **Summary**: Commits were made from the **jxj** worktree path instead of the primary repo path, violating the documented policy that all commits must be from primary only. **Fix**: CONSOLIDATION_LOG and WORKTREE_INVENTORY policy wording updated to include **all worktree paths** (e.g. `jxj`, `mhx`, `hal`, `hvf`, or any path under `.cursor/worktrees/against-the-odds/`). If the diff or Source Control shows any such path, the workspace is non-primary; do not commit—open primary only, then stage and commit from there. No change to existing commits (Git stores repo-relative paths); procedural fix to prevent recurrence. This commit made from primary.

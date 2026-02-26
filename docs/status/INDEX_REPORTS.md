@@ -16,6 +16,8 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **HANDOFF_FOR_NEW_AGENT_202602.md**                               | **Entry point for new agent** — current state, closed branches/workflows, plan and finish remaining work                                                         |
 | **CONSOLIDATION_LOG.md**                                          | Append-only log of all tracks; single source of what was done and when                                                                                           |
+| **WORK_QUEUE.md**                                                 | Canonical delta-first active queue for local/main closure and blocker ownership                                                                                  |
+| **PP_AUDIT_MARKER.md**                                            | Lightweight delta marker for latest PP/local-main audit timestamp and baseline                                                                                   |
 | **BRANCH_INVENTORY.md**                                           | Branch and remote list; main-only strategy                                                                                                                       |
 | **WORKTREE_INVENTORY.md**                                         | Cursor/git worktree paths (see also `.cursor/worktrees.json` → `inventoryDoc`)                                                                                   |
 | **GURU_COMPLETION_SUMMARY.md**                                    | Handoff checklist (theme pull, preview, Admin, optional push)                                                                                                    |
@@ -83,6 +85,8 @@ Use these for current phase, finalization, audits, and handoff. Obsolete/duplica
 | File                                              | Purpose                                                                                  |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `PHASE_0_FINALIZATION.md`                         | Phase 0 checklist and sign-off ("Phase 0 finalized; proceeding allowed.")                |
+| `WORK_QUEUE.md`                                  | Canonical active queue (delta-first, blockers, and closure ownership)                     |
+| `PP_AUDIT_MARKER.md`                             | PP/local-main marker for latest delta run timestamp and baseline                           |
 | `BRANCH_INVENTORY.md`                             | Branch and remote inventory                                                              |
 | `WORKTREE_INVENTORY.md`                           | Cursor worktree list (see also `.cursor/worktrees.json`)                                 |
 | `ENVIRONMENTS_AND_SECRETS_INVENTORY.md`           | Local, CI, and remote environment and secrets verification                               |

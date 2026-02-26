@@ -20,6 +20,17 @@ Single source of truth for active execution. This queue is compression-first and
 
 - [ ] Clean residual stale references in older audit docs only when touched by active work.
 
+## P0 (Local Main Finalization - 2026-02-26 run)
+
+- [x] Confirm repository is operating on `main` and execute full local verification matrix.
+- [x] Install GitHub CLI locally and validate command availability.
+- [x] Run browser-admin checks in GitHub settings (`branches`, `rules`, `security_analysis`) using logged-in session.
+- [x] Resolve stale local lock handles on `infra/STRUCTURAL_*` files and unblock rebase on `main`.
+- [ ] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure.
+- [ ] Align/enforce branch protection or ruleset required checks for `main` per policy docs.
+- [ ] Restore strict runbook credentials in `.env.local` (`SHOPIFY_ACCESS_TOKEN`; optional `GITHUB_TOKEN`) and rerun strict runbook to exit `0`.
+- [ ] Validate Codacy MCP analyze path end-to-end for repo-level checks after local install.
+
 ## Approval Gates (Must Ask First)
 
 - Shopify writes (theme publish/push, product sync apply, Shopify Admin save actions)
@@ -34,4 +45,5 @@ Single source of truth for active execution. This queue is compression-first and
 - `docs/status/CONSOLIDATION_LOG.md`
 - `docs/status/INDEX_REPORTS.md`
 - `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`
+- `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`
 - `OPERATOR_RUNBOOK.md`
