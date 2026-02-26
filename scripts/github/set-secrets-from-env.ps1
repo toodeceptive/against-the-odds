@@ -39,6 +39,12 @@ foreach ($line in (Get-Content $envPath)) {
     }
 }
 
+# Use GH_TOKEN from .env.local when available (gh will use it for auth)
+$tokenFromEnv = $values["GITHUB_TOKEN"]
+if ($tokenFromEnv) {
+    $env:GH_TOKEN = $tokenFromEnv
+}
+
 $gh = Get-Command gh -ErrorAction SilentlyContinue
 if (-not $gh) {
     $ghPath = "C:\Program Files\GitHub CLI\gh.exe"
