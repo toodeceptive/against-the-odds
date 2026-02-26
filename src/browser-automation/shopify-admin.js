@@ -4,6 +4,9 @@
  *
  * Note: Unattended headless automation of Shopify Admin is not recommended per Shopify API terms.
  * Use for manual or user-in-browser flows only (e.g. connect to existing Chrome, user watches).
+ *
+ * @typedef {import('@playwright/test').Browser} Browser
+ * @typedef {import('@playwright/test').Page} Page
  */
 
 import { warn } from '../desktop-automation/logger.js';
@@ -412,7 +415,10 @@ async function extractClientCredentials(devPage) {
     const controls = Array.from(document.querySelectorAll('input, textarea'));
     const values = controls
       .map((el) => ({
-        value: (el.value || el.getAttribute('value') || '').trim(),
+        value: (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement
+          ? el.value
+          : el.getAttribute('value') || ''
+        ).trim(),
         context: getContextText(el),
       }))
       .filter((entry) => entry.value.length > 0);
@@ -529,7 +535,7 @@ async function extractTokenFromApiSection(page) {
 /**
  * Extract access token from Shopify admin
  * @param {Page} page - Playwright page instance
- * @param {string} storeDomain - Store domain used for API endpoint fallbacks
+ * @param {string|null} [storeDomain] - Store domain used for API endpoint fallbacks
  * @returns {Promise<string|null>} Access token or null if not found
  */
 export async function extractAccessToken(page, storeDomain = null) {
@@ -632,7 +638,7 @@ export async function takeScreenshot(page, filename) {
  * Wait for element and extract text
  * @param {Page} page - Playwright page instance
  * @param {string} selector - CSS selector
- * @returns {Promise<string>} Element text content
+ * @returns {Promise<string|null>} Element text content or null
  */
 export async function extractText(page, selector) {
   try {
