@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-The Local Main-Branch Guru Finalization Team executed two passes (V3 full, V4 closure-only). The repo is on `main`, in sync with `origin/main`, with CI expected green. Plan and prompts are committed. Remaining work is credential- and admin-gated and tracked in WORK_QUEUE and LOCAL_MAIN_FINALIZATION_PLAN_20260226.
+The Local Main-Branch Guru Finalization Team executed three passes (V3 full, V4 closure-only, V5 non-redundant closure). The repo remains on `main`. Strict verification was re-run, browser admin checks were re-validated, and blocker handling was tightened with a strict `verify-secrets` script update. Remaining work is credential- and admin-gated and tracked in WORK_QUEUE and LOCAL_MAIN_FINALIZATION_PLAN_20260226.
 
 ---
 
@@ -10,7 +10,7 @@ The Local Main-Branch Guru Finalization Team executed two passes (V3 full, V4 cl
 
 | Fingerprint                               | Severity | Status                                               |
 | ----------------------------------------- | -------- | ---------------------------------------------------- |
-| GitHub CLI not authenticated              | P1       | Open — local operator action                         |
+| GitHub CLI not authenticated              | P1       | Open — `gh` installed, login/scope refresh pending   |
 | SHOPIFY_ACCESS_TOKEN missing              | P1       | Open — local operator action                         |
 | Branch protection/rulesets not configured | P2       | Open — GitHub admin action                           |
 | Structural signature verify fails         | P2       | Open — local operator; reverted broken local changes |
@@ -23,6 +23,9 @@ The Local Main-Branch Guru Finalization Team executed two passes (V3 full, V4 cl
 - Created `docs/status/LOCAL_MAIN_FINALIZATION_PLAN_20260226.md` — completed work + remaining blockers
 - Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md` — full execution prompt
 - Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V4_CLOSURE_ONLY.md` — delta-only closure prompt
+- Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V5.md` — non-redundant closure + re-execute prompt
+- Created `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md` — cloud/local blocker pack with owners
+- Updated `scripts/github/verify-secrets.ps1` — strict failure + fallback `gh` path detection
 - Updated CONSOLIDATION_LOG, PP_AUDIT_MARKER, INDEX_REPORTS, AGENT_PROMPT_DECISION_TREE
 - Reverted infra/ to committed state (local structural signature failed verify)
 
@@ -35,7 +38,7 @@ The Local Main-Branch Guru Finalization Team executed two passes (V3 full, V4 cl
 | `npm run quality`                                           | PASS                                       |
 | `scripts/verify-pipeline.ps1 -SkipRunbook`                  | PASS                                       |
 | `scripts/github/verify-auth.ps1`                            | PASS (repo access OK, 22 branches)         |
-| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | gh not in PATH / not authenticated         |
+| `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` | FAIL (gh detected; auth still required)    |
 | `scripts/run-runbook.ps1 -StrictSecrets`                    | FAIL (SHOPIFY_ACCESS_TOKEN not set)        |
 | `ssh-keygen -Y verify` (structural)                         | FAIL (reverted; committed state preserved) |
 
@@ -54,7 +57,7 @@ The Local Main-Branch Guru Finalization Team executed two passes (V3 full, V4 cl
 ## Git Finalization
 
 - **Branch**: main
-- **Commits**: f99f782 (docs: add local main finalization plan V3 and prompt; update status docs)
+- **Commits**: f99f782 (V3/V4 baseline) + pending current V5 closure commit
 - **CI**: Expected green (quality, format, lint, test:unit, arch_guard, CodeQL)
 
 ---

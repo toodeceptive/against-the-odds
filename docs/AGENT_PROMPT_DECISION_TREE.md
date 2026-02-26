@@ -57,14 +57,15 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 
 ## Quick Reference
 
-| Need                                  | Document                                                        |
-| ------------------------------------- | --------------------------------------------------------------- |
-| Phase 0 and entry                     | `docs/status/PLAN_AGENT_ENTRY.md`                               |
-| Fix everything / takeover             | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`                   |
-| Local main finalization (closure)     | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V3.md`             |
-| Full system test + improvement run    | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`            |
-| Full-system overhaul + unified vision | `prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md` |
-| Phase 0 definition                    | `prompts/PERFECT_EXECUTION_PROMPT.md`                           |
-| This decision tree                    | `docs/AGENT_PROMPT_DECISION_TREE.md`                            |
-| Shopify / Cursor workflow             | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`                         |
-| New-agent handoff                     | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                              |
+| Need                                   | Document                                                             |
+| -------------------------------------- | -------------------------------------------------------------------- |
+| Phase 0 and entry                      | `docs/status/PLAN_AGENT_ENTRY.md`                                    |
+| Fix everything / takeover              | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`                        |
+| Local main finalization (closure)      | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V5.md`                  |
+| Local-main cloud/local escalation pack | `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md` |
+| Full system test + improvement run     | `prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`                 |
+| Full-system overhaul + unified vision  | `prompts/MASTER_FULL_SYSTEM_OVERHAUL_UNIFIED_GURU_PP_PROMPT.md`      |
+| Phase 0 definition                     | `prompts/PERFECT_EXECUTION_PROMPT.md`                                |
+| This decision tree                     | `docs/AGENT_PROMPT_DECISION_TREE.md`                                 |
+| Shopify / Cursor workflow              | `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`                              |
+| New-agent handoff                      | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                                   |

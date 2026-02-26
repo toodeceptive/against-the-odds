@@ -1,4 +1,7 @@
 # Verify GitHub Actions secrets configuration
+param(
+    [switch]$FailOnPermissionDenied
+)
 
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
@@ -35,26 +38,40 @@ foreach ($secret in $optionalSecrets) {
 
 Write-Host ""
 
+# Resolve GitHub CLI command, including default Windows install path.
+$ghCommand = Get-Command gh -ErrorAction SilentlyContinue
+if (-not $ghCommand) {
+    $fallbackGhPath = "C:\Program Files\GitHub CLI\gh.exe"
+    if (Test-Path $fallbackGhPath) {
+        $ghCommand = $fallbackGhPath
+    }
+}
+
+$strictFailure = $false
+
 # Check if GitHub CLI is available
-if (Get-Command gh -ErrorAction SilentlyContinue) {
+if ($ghCommand) {
     Write-Host "Checking secrets with GitHub CLI..." -ForegroundColor Yellow
-    
+
     try {
         # Verify authentication
-        $authStatus = gh auth status 2>&1
+        $null = & $ghCommand auth status 2>&1
         if ($LASTEXITCODE -ne 0) {
             Write-Host "  [WARN] GitHub CLI not authenticated" -ForegroundColor Yellow
             Write-Host "    Run: gh auth login" -ForegroundColor Cyan
+            if ($FailOnPermissionDenied) {
+                $strictFailure = $true
+            }
         } else {
             Write-Host "  [OK] GitHub CLI authenticated" -ForegroundColor Green
-            
+
             # List secrets
-            $secrets = gh secret list 2>&1
+            $secrets = & $ghCommand secret list 2>&1
             if ($LASTEXITCODE -eq 0) {
                 Write-Host ""
                 Write-Host "Configured secrets:" -ForegroundColor Cyan
                 $secrets | ForEach-Object { Write-Host "  $_" -ForegroundColor White }
-                
+
                 # Check for required secrets
                 Write-Host ""
                 Write-Host "Verifying required secrets..." -ForegroundColor Yellow
@@ -64,14 +81,23 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
                         Write-Host "  [OK] $secret configured" -ForegroundColor Green
                     } else {
                         Write-Host "  [FAIL] $secret missing" -ForegroundColor Red
+                        if ($FailOnPermissionDenied) {
+                            $strictFailure = $true
+                        }
                     }
                 }
             } else {
                 Write-Host "  [WARN] Could not list secrets: $secrets" -ForegroundColor Yellow
+                if ($FailOnPermissionDenied) {
+                    $strictFailure = $true
+                }
             }
         }
     } catch {
         Write-Host "  [FAIL] Error: $_" -ForegroundColor Red
+        if ($FailOnPermissionDenied) {
+            $strictFailure = $true
+        }
     }
 } else {
     Write-Host "GitHub CLI (gh) not installed" -ForegroundColor Yellow
@@ -87,7 +113,14 @@ if (Get-Command gh -ErrorAction SilentlyContinue) {
     foreach ($secret in $requiredSecrets) {
         Write-Host "  - $secret" -ForegroundColor White
     }
+    if ($FailOnPermissionDenied) {
+        $strictFailure = $true
+    }
 }
 
 Write-Host ""
 Write-Host "For instructions, see: .github/workflows/README.md" -ForegroundColor Cyan
+
+if ($FailOnPermissionDenied -and $strictFailure) {
+    exit 1
+}

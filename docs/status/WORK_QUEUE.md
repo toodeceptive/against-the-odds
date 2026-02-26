@@ -24,6 +24,7 @@ Single source of truth for active execution. This queue is compression-first and
 
 - [x] Confirm repository is operating on `main` and execute full local verification matrix.
 - [x] Install GitHub CLI locally and validate command availability.
+- [x] Harden `scripts/github/verify-secrets.ps1` strict mode and fallback `gh` detection (`C:\Program Files\GitHub CLI\gh.exe`).
 - [x] Run browser-admin checks in GitHub settings (`branches`, `rules`, `security_analysis`) using logged-in session.
 - [x] Resolve stale local lock handles on `infra/STRUCTURAL_*` files and unblock rebase on `main`.
 - [ ] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure.

@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-02-26 — Local main guru finalization V5: non-redundant prompt, strict rerun, escalation pack
+
+**Summary**: Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V5.md` (non-redundant, role-assigned closure + re-execution) and `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md` (cloud/local escalation owner matrix). Re-ran strict gates and browser admin checks. Hardened `scripts/github/verify-secrets.ps1` to support strict failure semantics and fallback detection of `gh` at `C:\Program Files\GitHub CLI\gh.exe` when PATH is incomplete. Verified parse/lint quality after fix.
+
+**Execution evidence**: `npm run quality` PASS; `scripts/verify-pipeline.ps1` FAIL only at runbook credential gate (`SHOPIFY_ACCESS_TOKEN` missing); `scripts/run-runbook.ps1 -StrictSecrets` FAIL (missing Shopify token); `scripts/github/verify-auth.ps1` PASS; `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied` FAIL (gh present, auth pending); structural verify command FAIL (`missing header` in local signature payload).
+
+**Outcome**: Closure quality improved with clearer strict checks and a new V5 execution path. Remaining blockers are narrowed to local auth/credentials and admin policy alignment. No store-affecting changes; no deploy-log entry.
+
+---
+
 ## 2026-02-26 — Local main guru finalization V4: closure-only prompt, second pass
 
 **Summary**: Created `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V4_CLOSURE_ONLY.md` (delta-only, closure-focused). Executed V4: quality PASS, verify-pipeline -SkipRunbook PASS. Credential-gated steps (gh auth, strict runbook) remain per WORK_QUEUE. Final output documented in `docs/status/LOCAL_MAIN_FINALIZATION_EXECUTIVE_SUMMARY_20260226.md`.

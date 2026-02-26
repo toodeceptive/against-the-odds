@@ -6,17 +6,19 @@
 
 ## Completed (this run)
 
-| Item                     | Evidence                                                       |
-| ------------------------ | -------------------------------------------------------------- |
-| Branch: main only        | `git branch --show-current` → main                             |
-| Rebase onto origin/main  | Conflicts resolved in WORK_QUEUE, PP_AUDIT_MARKER              |
-| Infra file locks cleared | Orphaned ssh-keygen/cmd stopped; rebase unblocked              |
-| CI green                 | Commits aae243a, cae690b — CI #176/#177, CodeQL #110/#111 pass |
-| Format normalization     | Prettier drift fixed (commit aae243a)                          |
-| GitHub CLI installed     | `gh` on PATH                                                   |
-| Browser admin checks     | Branches, rules, security_analysis visited                     |
-| Codacy MCP/CLI           | Installed; codacy_cli_analyze works for edited files           |
-| Docs updated             | WORK_QUEUE, PP_AUDIT_MARKER, CONSOLIDATION_LOG, INDEX_REPORTS  |
+| Item                           | Evidence                                                                                                                  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Branch: main only              | `git branch --show-current` → main                                                                                        |
+| Rebase onto origin/main        | Conflicts resolved in WORK_QUEUE, PP_AUDIT_MARKER                                                                         |
+| Infra file locks cleared       | Orphaned ssh-keygen/cmd stopped; rebase unblocked                                                                         |
+| CI green                       | Commits aae243a, cae690b — CI #176/#177, CodeQL #110/#111 pass                                                            |
+| Format normalization           | Prettier drift fixed (commit aae243a)                                                                                     |
+| GitHub CLI installed           | `gh` installed (`C:\Program Files\GitHub CLI\gh.exe`)                                                                     |
+| Strict secrets script hardened | `scripts/github/verify-secrets.ps1` supports strict fail + fallback `gh` path                                             |
+| Browser admin checks           | Branches, rules, security_analysis visited                                                                                |
+| Codacy MCP/CLI                 | Installed; codacy_cli_analyze works for edited files                                                                      |
+| V5 artifacts created           | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V5.md`, `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md` |
+| Docs updated                   | WORK_QUEUE, PP_AUDIT_MARKER, CONSOLIDATION_LOG, INDEX_REPORTS                                                             |
 
 ---
 
@@ -53,7 +55,8 @@
 4. `docs/status/CONSOLIDATION_LOG.md` (latest-first)
 5. `docs/status/INDEX_REPORTS.md`
 6. `docs/AGENT_PROMPT_DECISION_TREE.md`
-7. `OPERATOR_RUNBOOK.md`
+7. `docs/status/LOCAL_MAIN_CLOUD_ESCALATION_EXECUTION_PACK_20260226.md`
+8. `OPERATOR_RUNBOOK.md`
 
 ---
 
