@@ -16,9 +16,9 @@ function Get-NormalizedHost {
 function Add-HostCandidate {
     param(
         [System.Collections.Generic.List[string]]$List,
-        [string]$Host
+        [string]$HostValue
     )
-    $normalized = Get-NormalizedHost $Host
+    $normalized = Get-NormalizedHost $HostValue
     if ([string]::IsNullOrWhiteSpace($normalized)) { return }
     if ($normalized -notmatch '^[a-z0-9.-]+$') { return }
     if (-not $List.Contains($normalized)) {
