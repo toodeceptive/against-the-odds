@@ -42,7 +42,7 @@ test.describe('Shopify Admin Credential Extraction', () => {
 
     expect(loggedIn).toBe(true);
 
-    const themeId = await extractThemeId(page);
+    const themeId = await extractThemeId(page, storeDomain);
 
     // Theme ID should be numeric if found
     if (themeId) {

@@ -87,7 +87,7 @@ Located in `src/browser-automation/shopify-admin.js`:
 - `connectToBrowser()` - Connect to existing Chrome or launch new
 - `ensureShopifyLogin()` - Ensure logged in to Shopify admin
 - `extractAccessToken()` - Extract access token from admin
-- `extractThemeId()` - Extract theme ID from admin
+- `extractThemeId(storeDomain?)` - Extract theme ID from admin (uses absolute store URL when provided)
 - `takeScreenshot()` - Capture screenshots for documentation
 
 ### Helper Functions
