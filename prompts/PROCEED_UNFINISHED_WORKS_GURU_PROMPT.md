@@ -48,15 +48,15 @@ Proceed with **all unfinished works** after in-depth, comprehensive research, re
 
 ## Key Paths
 
-| Resource           | Path                                               |
-| ------------------ | -------------------------------------------------- |
-| Work queue         | `docs/status/WORK_QUEUE.md`                        |
-| Audit marker       | `docs/status/PP_AUDIT_MARKER.md`                   |
-| Consolidation log  | `docs/status/CONSOLIDATION_LOG.md`                 |
-| Runbook            | `OPERATOR_RUNBOOK.md`                              |
-| Guru operator guide| `docs/GURU_PP_OPERATOR_GUIDE.md`                   |
-| Set repo secrets   | `.\scripts\github\set-secrets-from-env.ps1`        |
-| Verify secrets     | `.\scripts\github\verify-secrets.ps1`              |
+| Resource            | Path                                        |
+| ------------------- | ------------------------------------------- |
+| Work queue          | `docs/status/WORK_QUEUE.md`                 |
+| Audit marker        | `docs/status/PP_AUDIT_MARKER.md`            |
+| Consolidation log   | `docs/status/CONSOLIDATION_LOG.md`          |
+| Runbook             | `OPERATOR_RUNBOOK.md`                       |
+| Guru operator guide | `docs/GURU_PP_OPERATOR_GUIDE.md`            |
+| Set repo secrets    | `.\scripts\github\set-secrets-from-env.ps1` |
+| Verify secrets      | `.\scripts\github\verify-secrets.ps1`       |
 
 ---
 
