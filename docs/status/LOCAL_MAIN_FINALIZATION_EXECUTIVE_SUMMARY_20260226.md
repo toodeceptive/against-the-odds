@@ -62,7 +62,7 @@ The Local Main-Branch Guru Finalization Team executed five passes (V3, V4, V5, V
 ## Git Finalization
 
 - **Branch**: main
-- **Commits**: 1844240 (set-secrets-from-env, verify-secrets optional THEME_ID, docs); 11c0d05 (credential closure); 1bf6d86 (format/secret-scan fix)
+- **Commits**: 9508bb6 and prior (set-secrets-from-env, verify-secrets optional THEME_ID, docs); 11c0d05, 1bf6d86
 - **CI**: Green expected — run `git push` when approved
 
 ---
