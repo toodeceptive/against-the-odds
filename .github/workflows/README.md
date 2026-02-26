@@ -70,6 +70,7 @@ These workflows require the following secrets to be configured in GitHub:
 - Never commit secrets to the repository
 - Use `.env.local` for local development (gitignored)
 - `scripts/run-runbook.ps1` now includes `verify-secrets.ps1` so local runbook checks cover auth + secret presence together
+- For strict local/main closure, run `pwsh -NoLogo -NoProfile -File scripts/run-runbook.ps1 -StrictSecrets`
 
 ## CI troubleshooting
 

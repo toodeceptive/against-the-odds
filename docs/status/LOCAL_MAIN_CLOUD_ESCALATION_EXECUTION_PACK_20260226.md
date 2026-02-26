@@ -97,9 +97,9 @@ Execute and capture evidence:
 - `npm run lint`
 - `npm run test:unit`
 - `pwsh -NoLogo -NoProfile -File scripts/verify-pipeline.ps1`
-- `pwsh -NoLogo -NoProfile -File scripts/run-runbook.ps1`
+- `pwsh -NoLogo -NoProfile -File scripts/run-runbook.ps1 -StrictSecrets`
 - `pwsh -NoLogo -NoProfile -File scripts/github/verify-auth.ps1`
-- `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1`
+- `pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1 -FailOnPermissionDenied`
 - `ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s infra/STRUCTURAL_SIGNATURE.txt < infra/STRUCTURAL_STATE.json`
 
 ## Finalization (Local/Main Team)
