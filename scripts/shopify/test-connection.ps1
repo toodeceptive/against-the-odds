@@ -51,6 +51,7 @@ $requestTimeoutSec = 30
 
 Write-Host "Testing connection to: $Store" -ForegroundColor Yellow
 Write-Host ""
+$failedTests = 0
 
 # Test 1: Get shop information
 Write-Host "Test 1: Fetching shop information..." -ForegroundColor Cyan
@@ -79,6 +80,7 @@ try {
 } catch {
     Write-Host "  [X] Failed to fetch products" -ForegroundColor Red
     Write-Host ('  Error: ' + $_) -ForegroundColor Red
+    $failedTests++
 }
 
 Write-Host ""
@@ -100,7 +102,12 @@ try {
 } catch {
     Write-Host "  [X] Failed to fetch themes" -ForegroundColor Red
     Write-Host ('  Error: ' + $_) -ForegroundColor Red
+    $failedTests++
 }
 
 Write-Host ""
+if ($failedTests -gt 0) {
+    Write-Host "[FAIL] Connection test complete with $failedTests failed test(s)." -ForegroundColor Red
+    exit 1
+}
 Write-Host '[OK] Connection test complete!' -ForegroundColor Green

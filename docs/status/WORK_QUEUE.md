@@ -19,6 +19,7 @@ Single source of truth for active execution. This queue is compression-first and
 ## P2
 
 - [x] Clean residual stale references in older audit docs when touched by active work (completed 2026-02-26: stale workflow badge reference and volatile script-count wording updated).
+- [x] Harden verification reliability and cross-platform parsing (`scripts/debug/parse-all-ps1.ps1`, `scripts/github/verify-auth.ps1`, `scripts/shopify/test-connection.ps1`, `scripts/verify-pipeline.ps1`) (completed 2026-02-26).
 
 ## Approval Gates (Must Ask First)
 

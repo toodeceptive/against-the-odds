@@ -68,8 +68,13 @@ $store = [Environment]::GetEnvironmentVariable("SHOPIFY_STORE_DOMAIN", "Process"
 $token = [Environment]::GetEnvironmentVariable("SHOPIFY_ACCESS_TOKEN", "Process")
 if ($store -and $token) {
     $syncScript = Join-Path $repoPath (Join-Path "scripts" (Join-Path "shopify" "sync-products.ps1"))
-    & $syncScript -DryRun
-    if ($LASTEXITCODE -ne 0) { $failed++ }
+    if (Test-Path $syncScript) {
+        & $syncScript -DryRun
+        if ($LASTEXITCODE -ne 0) { $failed++ }
+    } else {
+        Write-Host "  MISSING scripts/shopify/sync-products.ps1" -ForegroundColor Red
+        $failed++
+    }
 } else {
     Write-Host "  (SHOPIFY_STORE_DOMAIN or SHOPIFY_ACCESS_TOKEN not set, skip dry-run)" -ForegroundColor Gray
 }

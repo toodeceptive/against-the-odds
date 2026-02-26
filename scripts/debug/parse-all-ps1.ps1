@@ -21,8 +21,7 @@ Write-Host "INFO: Parsing all PowerShell scripts in: $RepoPath" -ForegroundColor
 Write-Host ""
 
 $scriptFiles = Get-ChildItem -Path $RepoPath -Filter "*.ps1" -Recurse | Where-Object {
-    $_.FullName -notmatch "\\node_modules\\" -and
-    $_.FullName -notmatch "\\.git\\"
+    $_.FullName -notmatch '[\\/](node_modules|\.git)[\\/]'
 }
 
 $totalScripts = $scriptFiles.Count
@@ -33,12 +32,24 @@ Write-Host "Found $totalScripts PowerShell scripts to validate" -ForegroundColor
 Write-Host ""
 
 foreach ($script in $scriptFiles) {
-    $relativePath = $script.FullName.Replace($RepoPath, "").TrimStart("\")
+    $relativePath = $script.FullName.Replace($RepoPath, "").TrimStart("\", "/")
     Write-Host "Checking: $relativePath" -NoNewline
 
     # Try to parse the script
-    $errors = $null
-    $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content $script.FullName -Raw), [ref]$errors)
+    $errors = @()
+    try {
+        $scriptContent = Get-Content $script.FullName -Raw -ErrorAction Stop
+        $null = [System.Management.Automation.PSParser]::Tokenize($scriptContent, [ref]$errors)
+    } catch {
+        Write-Host " - FAILED" -ForegroundColor Red
+        Write-Host "  ERROR: Could not read file: $($_.Exception.Message)" -ForegroundColor Red
+        $parseErrors += [PSCustomObject]@{
+            File    = $relativePath
+            Line    = 0
+            Message = "Could not read file: $($_.Exception.Message)"
+        }
+        continue
+    }
 
     if ($errors.Count -eq 0) {
         Write-Host " - OK" -ForegroundColor Green

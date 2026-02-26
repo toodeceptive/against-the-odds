@@ -9,6 +9,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
+$failedChecks = 0
 
 function Protect-SecretsInText {
     param([string]$Text)
@@ -71,6 +72,7 @@ if (-not [string]::IsNullOrWhiteSpace($githubToken) -and $githubToken -notmatch 
         Write-Host "    User ID: $($response.id)" -ForegroundColor Cyan
     } catch {
         Write-Host "  [X] GitHub API access failed: $_" -ForegroundColor Red
+        $failedChecks++
     }
 } else {
     Write-Host "  [!] GITHUB_TOKEN not configured" -ForegroundColor Yellow
@@ -88,9 +90,11 @@ try {
     } else {
         Write-Host "  [X] Repository access failed" -ForegroundColor Red
         Write-Host "    Error: $(Protect-SecretsInText -Text ($repoInfo -join [Environment]::NewLine))" -ForegroundColor Red
+        $failedChecks++
     }
 } catch {
     Write-Host "  [X] Repository access test failed: $(Protect-SecretsInText -Text $_)" -ForegroundColor Red
+    $failedChecks++
 }
 
 # Test 3: Push capability (if requested)
@@ -119,12 +123,14 @@ if ($TestPush) {
             Write-Host "  [X] Push failed: $(Protect-SecretsInText -Text ($pushResult -join [Environment]::NewLine))" -ForegroundColor Red
             git reset HEAD~1 --soft 2>&1 | Out-Null
             Remove-Item $testFile -Force
+            $failedChecks++
         }
     } catch {
         Write-Host "  [X] Push test failed: $(Protect-SecretsInText -Text $_)" -ForegroundColor Red
         if (Test-Path $testFile) {
             Remove-Item $testFile -Force
         }
+        $failedChecks++
     }
 }
 
@@ -137,10 +143,12 @@ if ($TestPull) {
         if ($LASTEXITCODE -eq 0) {
             Write-Host "  [OK] Pull successful" -ForegroundColor Green
         } else {
-            Write-Host "  [!] Pull result: $(Protect-SecretsInText -Text ($pullResult -join [Environment]::NewLine))" -ForegroundColor Yellow
+            Write-Host "  [X] Pull failed: $(Protect-SecretsInText -Text ($pullResult -join [Environment]::NewLine))" -ForegroundColor Red
+            $failedChecks++
         }
     } catch {
         Write-Host "  [X] Pull test failed: $(Protect-SecretsInText -Text $_)" -ForegroundColor Red
+        $failedChecks++
     }
 }
 
@@ -175,3 +183,10 @@ Write-Host "Run with -TestPush to test push capability" -ForegroundColor White
 Write-Host "Run with -TestPull to test pull capability" -ForegroundColor White
 Write-Host "Run with -CheckSecrets to check GitHub Actions secrets" -ForegroundColor White
 Write-Host ""
+
+if ($failedChecks -gt 0) {
+    Write-Host "[FAIL] GitHub verification completed with $failedChecks failing check(s)." -ForegroundColor Red
+    exit 1
+}
+Write-Host "[OK] GitHub verification completed successfully." -ForegroundColor Green
+exit 0
