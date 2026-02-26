@@ -29,7 +29,12 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 }
 
 # Create extraction script (temp file outside repo to avoid token exposure in repo path)
-$scriptPath = Join-Path $env:TEMP ("extract-token-" + [guid]::NewGuid().ToString("N") + ".mjs")
+$tempDir = if (-not [string]::IsNullOrWhiteSpace($env:TEMP)) {
+    $env:TEMP
+} else {
+    [System.IO.Path]::GetTempPath()
+}
+$scriptPath = Join-Path $tempDir ("extract-token-" + [guid]::NewGuid().ToString("N") + ".mjs")
 $extractScript = @"
 import { join } from 'path';
 import { pathToFileURL } from 'url';

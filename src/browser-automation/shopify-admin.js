@@ -195,7 +195,9 @@ export async function navigateToAppsDevelopment(page) {
       const appsUrl = `${url.origin}${storePath}/apps/development`;
       await page.goto(appsUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
     } else {
-      await page.goto('/admin/apps/development', { waitUntil: 'domcontentloaded', timeout: 15000 });
+      const url = new URL(currentUrl);
+      const appsUrl = `${url.origin}/admin/apps/development`;
+      await page.goto(appsUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
     }
 
     await page.waitForSelector('h1, [data-testid="apps-page"], main, [role="main"]', {
