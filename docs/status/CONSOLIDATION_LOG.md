@@ -8,7 +8,7 @@
 
 ## 2026-02-26 — Credential closure, structural signature, branch protection, git finalize
 
-**Summary**: Closed local credential blocker via `scripts/shopify/browser/save-token-from-file.ps1` (paste file accepts shpat_ token or Client ID+Secret; client-credentials flow obtains access token). Fixed `scripts/github/verify-secrets.ps1` (GH_TOKEN fallback from .env.local/git credential; removed duplicate block). Added `-StrictSecrets` to `scripts/run-runbook.ps1`. Regenerated `infra/STRUCTURAL_*` via WSL bash; `ssh-keygen -Y verify` PASS. Branch protection aligned (test, arch_guard, quality, secret-scan). Fixed ESLint in `shopify-admin.js` (removed no-redeclare global comment).
+**Summary**: Closed local credential blocker via `scripts/shopify/browser/save-token-from-file.ps1` (paste file accepts shpat* token or Client ID+Secret; client-credentials flow obtains access token). Fixed `scripts/github/verify-secrets.ps1` (GH_TOKEN fallback from .env.local/git credential; removed duplicate block). Added `-StrictSecrets` to `scripts/run-runbook.ps1`. Regenerated `infra/STRUCTURAL*\*`via WSL bash;`ssh-keygen -Y verify`PASS. Branch protection aligned (test, arch_guard, quality, secret-scan). Fixed ESLint in`shopify-admin.js` (removed no-redeclare global comment).
 
 **Execution evidence**: `scripts/run-runbook.ps1 -StrictSecrets` PASS (with .env.local); structural verify PASS; Shopify connection PASS; verify-secrets uses GH_TOKEN fallback when gh not logged in.
 

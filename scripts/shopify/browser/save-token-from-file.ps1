@@ -20,7 +20,7 @@ if (-not (Test-Path $pastePath)) {
 # Paste your Admin API token here (one per line). Line 1 = token, Line 2 = optional theme ID.
 # Or paste Client ID (32 hex) + Client secret (long hex) to obtain token via OAuth.
 # Get from: Shopify Admin > Apps > Development > Your app > API credentials > Reveal
-# Example line 1: shpat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# Example line 1: shpat_<paste your token here>
 # Example line 2: 123456789012
 
 "@
