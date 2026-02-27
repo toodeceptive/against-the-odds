@@ -219,43 +219,28 @@
       "label": "Playwright: Install Browsers",
       "type": "shell",
       "command": "npx",
-      "args": [
-        "playwright",
-        "install"
-      ],
+      "args": ["playwright", "install"],
       "problemMatcher": []
     },
     {
       "label": "Vitest: Run with Coverage",
       "type": "shell",
       "command": "npm",
-      "args": [
-        "run",
-        "test:coverage"
-      ],
+      "args": ["run", "test:coverage"],
       "problemMatcher": []
     },
     {
       "label": "Vitest: Watch",
       "type": "shell",
       "command": "npm",
-      "args": [
-        "run",
-        "test"
-      ],
+      "args": ["run", "test"],
       "problemMatcher": []
     },
     {
       "label": "Run All Tests (unit+integration+e2e)",
       "type": "shell",
       "command": "powershell",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "scripts/test/run-all.ps1"
-      ],
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/test/run-all.ps1"],
       "problemMatcher": []
     },
     {
