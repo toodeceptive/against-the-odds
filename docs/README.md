@@ -40,16 +40,17 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 
 ## Agent and handoff
 
-| Doc                                                                              | Purpose                                                       |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| [../AGENTS.md](../AGENTS.md)                                                     | Agent permission and when agents use your browser (repo root) |
-| [AGENT_PROMPT_DECISION_TREE.md](AGENT_PROMPT_DECISION_TREE.md)                   | Agent prompt decision tree                                    |
-| [AGENT_SYSTEM.md](AGENT_SYSTEM.md)                                               | Agent system and capabilities                                 |
-| [AGENT_PROMPTS.md](AGENT_PROMPTS.md)                                             | Agent prompts index                                           |
-| [HANDOFF_PROMPT_NEW_AGENT.md](HANDOFF_PROMPT_NEW_AGENT.md)                       | Handoff prompt for new agent                                  |
-| [status/HANDOFF_FOR_NEW_AGENT_202602.md](status/HANDOFF_FOR_NEW_AGENT_202602.md) | Situation for new agent (fix everything / takeover)           |
-| [status/PLAN_AGENT_ENTRY.md](status/PLAN_AGENT_ENTRY.md)                         | Agent entry plan                                              |
-| [status/INDEX_REPORTS.md](status/INDEX_REPORTS.md)                               | Index of reports and status files                             |
+| Doc                                                                                                              | Purpose                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [../AGENTS.md](../AGENTS.md)                                                                                     | Agent permission and when agents use your browser (repo root)                                           |
+| [AGENT_PROMPT_DECISION_TREE.md](AGENT_PROMPT_DECISION_TREE.md)                                                   | Agent prompt decision tree                                                                              |
+| [AGENT_SYSTEM.md](AGENT_SYSTEM.md)                                                                               | Agent system and capabilities                                                                           |
+| [AGENT_PROMPTS.md](AGENT_PROMPTS.md)                                                                             | Agent prompts index                                                                                     |
+| [HANDOFF_PROMPT_NEW_AGENT.md](HANDOFF_PROMPT_NEW_AGENT.md)                                                       | Handoff prompt for new agent                                                                            |
+| [status/HANDOFF_FOR_NEW_AGENT_202602.md](status/HANDOFF_FOR_NEW_AGENT_202602.md)                                 | Situation for new agent (fix everything / takeover)                                                     |
+| [status/PLAN_AGENT_ENTRY.md](status/PLAN_AGENT_ENTRY.md)                                                         | Agent entry plan                                                                                        |
+| [status/INDEX_REPORTS.md](status/INDEX_REPORTS.md)                                                               | Index of reports and status files                                                                       |
+| [../.cursor/plans/ao_agent_pp_prompt_conversion.plan.md](../.cursor/plans/ao_agent_pp_prompt_conversion.plan.md) | AO Agent PP Prompt Conversion: -pp / /pp setup; remove OpenClaw from session-start; create AO PP prompt |
 
 ## Subfolders
 
