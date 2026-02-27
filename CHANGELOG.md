@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02-26** — ProdigyClaw/OpenClaw teardown cleanup: Removed scripts/teardown/, global Cursor OpenClaw plans (18 files), teardown-openclaw-complete.ps1, switch-to-against-the-odds.bat; verified no OpenClaw references in repo; docs/status/PRODIGYCLAW_TEARDOWN_COMPLETE.md.
 - **2026-02-26** — Fix Dependabot high vulnerability (GHSA-mw96-cpmx-2vgc): npm audit fix; rollup 4.57.1 → 4.59.0 via vite/vitest transitive chain.
 - **2026-02-26** — Guru expert audit prompt: prompts/GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md (self-execute PP phases); CONSOLIDATION_LOG and INDEX_REPORTS updated.
 - **2026-02-26** — Pin treosh/lighthouse-ci-action to full SHA in ci.yml (Codacy Semgrep).
