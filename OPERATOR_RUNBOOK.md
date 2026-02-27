@@ -4,7 +4,7 @@
 
 ## For AI agents
 
-- **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill).
+- **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill). Run `-pp` or `/pp` to invoke the AO agent in Prodigy Protocol mode; see [prompts/AO_AGENT_PP_PROMPT.md](prompts/AO_AGENT_PP_PROMPT.md).
 - **Daily gates**: Run `npm run quality` and, before push, `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no .env.local). Integration: `.\scripts\run-runbook.ps1` when credentials are set.
 - **Perfection loop**: To loop until work is fixed, perfected, complete, and optimized (project-wide cleanup/updates/optimizations; fix failed runs; track progression/commit/review/push), use [prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md](prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md) and [.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md](.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md). Run as needed; see [.cursor/plans/README.md](.cursor/plans/README.md) for all three plans.
 - **100-step multiphase PP cycles**: For deep research, fixes, optimizations, auditing, and finalizations across all trees/worktrees/branches/Git/GitHub/repos (fix any failure/error/setup by means necessary): [docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md](docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md).

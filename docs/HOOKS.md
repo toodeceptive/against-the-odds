@@ -30,4 +30,10 @@ Repo root is resolved from the script location for worktree portability.
 
 ---
 
-_Last updated: 2026-02-01._
+## Superpowers session-start hook (distinct from pre-commit)
+
+The Cursor **superpowers** plugin has its own `session-start.sh` hook (in the plugin cache under `.cursor/plugins/cache/.../superpowers/.../hooks/`). If the plugin overwrites it after an update, restore from the repo backup: `scripts/cursor/session-start-ao-hook.sh`. See [.cursor/plans/ao_agent_pp_prompt_conversion.plan.md](../.cursor/plans/ao_agent_pp_prompt_conversion.plan.md) for details.
+
+---
+
+_Last updated: 2026-02-27._

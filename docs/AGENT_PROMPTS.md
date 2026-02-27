@@ -8,6 +8,7 @@ This guide explains how to use the agent prompt system for new Cursor instances.
 
 ### Orchestration and entry
 
+- **`prompts/AO_AGENT_PP_PROMPT.md`** — AO agent in Prodigy Protocol mode; invoked via `/pp` or `-pp` in Cursor chat
 - **`prompts/head-guru-orchestrator.md`** — Finalization and reconciliation; multi-agent coordination
 - **`prompts/MASTER_10_EXPERT_SYSTEM.md`** — Sequential 10-expert run (Security → … → DevEx)
 - **`prompts/PERFECT_EXECUTION_PROMPT.md`** — Phase 0 gate; read first before other work

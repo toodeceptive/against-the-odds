@@ -42,7 +42,7 @@
 
 - **Skills**: prodigy-protocol (pp), prodigy-phantasm, universal-godmode, agentic-performance. All reference pp where appropriate; agentic-performance is the single workflow/tooling hub.
 - **Subagents**: Verifier (`.cursor/agents/verifier.md`) for independent lint/test/build pass. Built-in Explore, Bash, Browser used by Cursor when appropriate.
-- **Commands**: `/review` — lint, format, tests, summary; `/pr` — commit, push, open PR (see `.cursor/commands/pr/COMMAND.md`).
+- **Commands**: `/review` — lint, format, tests, summary; `/pr` — commit, push, open PR (see `.cursor/commands/pr/COMMAND.md`); `/pp` — load AO PP prompt and run in Prodigy Protocol mode (see [prompts/AO_AGENT_PP_PROMPT.md](../../prompts/AO_AGENT_PP_PROMPT.md)).
 
 ---
 
@@ -122,13 +122,13 @@ Per [.cursor/plans/extensions_setup_and_utilization.plan.md](../../.cursor/plans
 
 ## 7b. Known issues and inhibiting factors
 
-| Issue | Impact | Mitigation |
-|-------|--------|------------|
-| Codacy ESLint 8 vs repo ESLint 9 | Duplicate or conflicting lint results | Document; verify Codacy flat config support |
-| Shopify Liquid formatter dev preview | May be unstable | Fallback: disable formatOnSave for liquid |
-| Theme Check requires .theme-check.yml | Extension will not activate without it | Create at repo root (done) |
-| Playwright baseURL vs webServer | Tests may hit wrong URL | Verify test intent |
-| run-all.ps1 does not run test:shopify by default | Shopify E2E not in "all" run | Use `-Shopify` flag |
+| Issue                                            | Impact                                 | Mitigation                                  |
+| ------------------------------------------------ | -------------------------------------- | ------------------------------------------- |
+| Codacy ESLint 8 vs repo ESLint 9                 | Duplicate or conflicting lint results  | Document; verify Codacy flat config support |
+| Shopify Liquid formatter dev preview             | May be unstable                        | Fallback: disable formatOnSave for liquid   |
+| Theme Check requires .theme-check.yml            | Extension will not activate without it | Create at repo root (done)                  |
+| Playwright baseURL vs webServer                  | Tests may hit wrong URL                | Verify test intent                          |
+| run-all.ps1 does not run test:shopify by default | Shopify E2E not in "all" run           | Use `-Shopify` flag                         |
 
 ---
 
