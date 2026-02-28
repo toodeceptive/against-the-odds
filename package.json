@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "screenshot-desktop": "^1.15.0",
-    "sharp": "^0.33.0",
+    "sharp": "^0.34.5",
     "tesseract.js": "^5.0.4"
   },
   "optionalDependencies": {
