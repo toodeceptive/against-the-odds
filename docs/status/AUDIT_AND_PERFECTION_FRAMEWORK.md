@@ -55,7 +55,7 @@ The repo has a **canonical plan** ([.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AU
 - **Phase 0 not signed off**: Run inventories and verify-pipeline; complete Phase 0 and sign off in PHASE_0_FINALIZATION.md before tracks.
 - **Full repo perfection**: Execute the canonical plan (Phase 0 → Tracks A–G → Synthesis → Addendum → Guru pass 2) with the guru team per GURU_TEAM_ASSIGNMENTS.
 - **Sequential 10-domain audit**: MASTER_10_EXPERT_SYSTEM.
-- **One component**: ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT on that component.
+- **One component**: [MASTER_10_EXPERT_SYSTEM](../prompts/MASTER_10_EXPERT_SYSTEM.md) or [GURU_EXPERT_AUDIT_AND_FIX_PROMPT](../prompts/GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md).
 - **One domain**: Expert 1–10 as in the decision tree.
 - **Quick check**: verify-pipeline + lint + test; ensure inventories (branch, worktree, root, env) are current.
 

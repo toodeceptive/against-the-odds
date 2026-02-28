@@ -2,8 +2,8 @@
 
 ## System Status: ✅ VERIFIED AND OPERATIONAL
 
-**Date**: January 28, 2026  
-**Verification Type**: Comprehensive System Verification  
+**Date**: January 28, 2026
+**Verification Type**: Comprehensive System Verification
 **Status**: All systems operational
 
 ## Verification Checklist
@@ -183,7 +183,7 @@ The desktop automation system has been:
    ```
 
 3. **Start Using System**
-   - Load `prompts/master-agent-prompt.md` in new Cursor instance
+   - Load `prompts/head-guru-orchestrator.md` in new Cursor instance (master-agent-prompt deprecated)
    - Begin automation tasks
 
 4. **Monitor Performance**

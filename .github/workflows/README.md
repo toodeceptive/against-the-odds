@@ -35,7 +35,7 @@ These workflows require the following secrets to be configured in GitHub:
 ### `shopify-sync.yml`
 
 - Runs on: Daily at 2 AM, Push to `main` (data/products, src/shopify), Manual trigger
-- Actions: Syncs products to Shopify; backup-store job is **placeholder** (implement or remove)
+- Actions: Syncs products to Shopify; backup-store job backs up theme to `shopify-theme-backup` branch (theme pull REST + push)
 - **Resilience**: If `SHOPIFY_STORE_DOMAIN` or `SHOPIFY_ACCESS_TOKEN` are not set, the sync step skips gracefully (exit 0) so the workflow does not fail.
 
 ### `sync-theme-branch.yml`
@@ -77,6 +77,6 @@ These workflows require the following secrets to be configured in GitHub:
 
 - **update-branch-protection-status-checks.js**: Run `node scripts/github/update-branch-protection-status-checks.js` (with GITHUB_TOKEN or .env.local) to set required status checks for `main` to the CI job names: `test`, `secret-scan`, `quality`, `arch_guard`. These match the jobs in `ci.yml`.
 
-## To implement (optional)
+## Implemented
 
-- **shopify-sync.yml backup-store job**: To implement: add a step that runs a script (e.g. product/theme export to a GitHub Actions artifact or a branch). To remove: delete the `backup-store` job from the workflow.
+- **shopify-sync.yml backup-store job**: Implemented. Theme pull via REST; pushes backup to `shopify-theme-backup` branch. See `shopify-sync.yml` backup-store job.

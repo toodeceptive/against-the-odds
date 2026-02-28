@@ -60,7 +60,7 @@ The only valid “fix everything” mode (when Phase 0 is signed off):
 
 ### Incremental fix list (must be concrete, small, outcome-based)
 
-- Fix any **actionable docs** that point to missing plan files (e.g. `full_project_update_perfection_guru.plan.md`) or missing `.cursor/plans/README.md` (if removed).
+- Fix any **actionable docs** that point to missing plan files (e.g. `full_project_update_perfection_guru.plan.md`); point to [.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md](../.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md) and [.cursor/plans/README.md](../.cursor/plans/README.md).
 - Keep a single plan source: `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (+ optional `.cursor/plans/README.md` as an index only).
 - Keep inventories consistent (BRANCH_INVENTORY vs WORKTREE_INVENTORY).
 - Keep scripts/configs aligned (e.g. Shopify Admin API version consistency; ESLint 9 flat config usage).

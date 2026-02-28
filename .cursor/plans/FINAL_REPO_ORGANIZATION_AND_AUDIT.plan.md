@@ -211,7 +211,7 @@ flowchart LR
 
 ## Phase 0: Audit and inventory (Code / auditing gurus)
 
-**Owner**: Code and codebase analysis and auditing team ([prompts/expert-03-code-quality.md](prompts/expert-03-code-quality.md), [prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md](prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md)).
+**Owner**: Code and codebase analysis and auditing team ([prompts/expert-03-code-quality.md](prompts/expert-03-code-quality.md), [prompts/MASTER_10_EXPERT_SYSTEM.md](prompts/MASTER_10_EXPERT_SYSTEM.md)).
 
 **Goal**: Single source of truth for what exists before reorganization. No structural moves yet.
 
@@ -326,7 +326,7 @@ flowchart LR
 
 ## Track G: Code, codebase, language, and full audit (Code / auditing gurus)
 
-**Owner**: Code and codebase analysis and auditing team ([prompts/expert-03-code-quality.md](prompts/expert-03-code-quality.md), [prompts/expert-04-testing-qa.md](prompts/expert-04-testing-qa.md), [prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md](prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md), [prompts/expert-07-integrations-api.md](prompts/expert-07-integrations-api.md)).
+**Owner**: Code and codebase analysis and auditing team ([prompts/expert-03-code-quality.md](prompts/expert-03-code-quality.md), [prompts/expert-04-testing-qa.md](prompts/expert-04-testing-qa.md), [prompts/MASTER_10_EXPERT_SYSTEM.md](prompts/MASTER_10_EXPERT_SYSTEM.md), [prompts/expert-07-integrations-api.md](prompts/expert-07-integrations-api.md)).
 
 - **Codebase layout**: [src/](src) — modules (shopify, browser-automation, desktop-automation); entry points and dependencies; language mix (JS).
 - **Libraries and parsers**: package.json, parsers, bins; document; versions and licenses consistent.

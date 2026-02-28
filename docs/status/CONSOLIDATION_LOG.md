@@ -6,6 +6,70 @@
 
 ---
 
+## 2026-02-27 — /pp user prompt creation + COMMAND wiring
+
+**Summary**: (1) Created perfected /pp user prompt in `prompts/PP_USER_PROMPT.md` (copy-paste, one-liner, invocation guide). (2) Updated `.cursor/commands/pp/COMMAND.md`: when task empty or "run PP", default to full project cycle per PP_EXECUTE_PROJECT_PROMPT. (3) Executed perfected prompt: delta audit—inventories aligned; no new issues. Quality passes.
+
+**Outcome**: /pp prompt perfected and wired. No store changes.
+
+---
+
+## 2026-02-27 — PP_EXECUTE_PROJECT_PROMPT executed (Cycle 7)
+
+**Summary**: Ran PP_EXECUTE_PROJECT_PROMPT. Delta audit: inventories (BRANCH, WORKTREE) aligned with `git branch -a` and `git worktree list` (main, 822b051). No new or missed issues. No non-redundant fixes. Quality passes.
+
+**Outcome**: No changes. Cycle complete per prompt (verify, log, report).
+
+---
+
+## 2026-02-27 — PP_EXECUTE_PROJECT_PROMPT created and executed
+
+**Summary**: (1) Created `prompts/PP_EXECUTE_PROJECT_PROMPT.md` — reusable task for full project PP cycle (delta audit, apply fixes, identify incomplete work, verify, log). (2) Executed it: delta audit found BRANCH_INVENTORY cursor/structural-integrity row still said "Current working branch in primary repo" (primary is on main). Fixed to "Optional branch; primary repo is on main." (3) Added PP_EXECUTE_PROJECT_PROMPT to prompts/README canonical section.
+
+**Outcome**: New prompt perfected and executed. Quality passes. No store changes.
+
+---
+
+## 2026-02-27 — PP full project cycle (repeat, no redundancy)
+
+**Summary**: Delta audit after prior PP run. Only non-redundant fix: WORKTREE_INVENTORY Primary row was stale (cursor/structural-integrity-audit-18a1, e36a474). Updated to main, 822b051 to match `git worktree list`. No other actionable gaps; prior P0/P1/P2 fixes remain in place. Quality gate passes.
+
+**Outcome**: Inventories aligned (BRANCH_INVENTORY + WORKTREE_INVENTORY). No store changes.
+
+---
+
+## 2026-02-27 — PP full project cycle: P0/P1/P2 cleanup
+
+**Summary**: (1) **P0**: Replaced broken links to `prompts/ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT.md` in FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md with `prompts/MASTER_10_EXPERT_SYSTEM.md`. (2) **P1**: Updated .github/workflows/README.md—backup-store job documented as implemented (theme pull + shopify-theme-backup). Refreshed BRANCH_INVENTORY (current checkout main; worktree table). Updated EXECUTIVE_DECISION_WORK_PRINCIPLES fix list with canonical plan pointers. Marked extensions theme-check-yml todo completed (.theme-check.yml exists). (3) **P2**: Updated AUDIT_AND_PERFECTION_FRAMEWORK one-component prompt ref to MASTER_10_EXPERT_SYSTEM / GURU_EXPERT_AUDIT_AND_FIX_PROMPT.
+
+**Outcome**: No store changes. Quality gate passes.
+
+---
+
+## 2026-02-27 — PP audit: session-start disable, OpenClaw cleanup, plan/docs alignment
+
+**Summary**: (1) Replaced superpowers session-start.sh with no-op (empty JSON); no injection. Created `scripts/cursor/session-start-disable.sh`, `scripts/cursor/apply-session-start-hook.ps1` (Mode: disable | ao). (2) Marked ao_agent_pp_prompt_conversion.plan.md complete (all 6 todos); planStatus: complete. (3) Updated 30_guru_pp_passes_cohort_4 Pass 94: "OpenClaw removal" → "Teardown verified" per PRODIGYCLAW_TEARDOWN_COMPLETE. (4) Added prompts/README.md: canonical vs legacy labels. (5) Updated docs/HOOKS.md with disable/ao options and apply script. Full PP audit: no OpenClaw in code/config; CI wired per AGENTS.md; codacy.mdc single file.
+
+**Outcome**: Session-start fully disabled at plugin cache; apply script for future re-enable. No store changes. Added .codacy/codacy.yaml to .prettierignore to fix quality gate.
+
+---
+
+## 2026-02-27 — Codacy PP: all issues fixed, config perfected
+
+**Summary**: Ran PP on all Codacy-related files. (1) Removed BOM from docs/status/performance-report.json (Semgrep detect-invisible-unicode). (2) .codacy.yml: exclude .env.local, token-paste, node_modules; engines.eslint exclude all JS/TS (repo uses ESLint 9 flat config; Codacy ESLint 8 produces false no-undef). (3) .codacy/cli.sh: fixed CRLF→LF for bash. (4) Added npm run codacy:analyze. (5) CODACY_MCP_SETUP: local CLI instructions. (6) codacy.mdc: added codacy:analyze to fallback.
+
+**Outcome**: Codacy CLI runs; exclusions reduce noise; quality gate passes.
+
+---
+
+## 2026-02-27 — Codacy reviews/analysis failures fix (PP)
+
+**Summary**: Codacy MCP not loading in many Cursor sessions; rule treated missing MCP as critical error and blocked agents. Updated [.cursor/rules/codacy.mdc](../.cursor/rules/codacy.mdc): added FALLBACK path—when Codacy MCP unavailable, run `npm run quality` instead; do not block or fail. Fixed globs YAML. Documented GitHub SARIF July 2025 breakage in [CODACY_MCP_SETUP.md](../CODACY_MCP_SETUP.md).
+
+**Outcome**: Agents proceed with quality checks when Codacy MCP unavailable. No store changes.
+
+---
+
 ## 2026-02-27 — AO Agent PP Prompt Conversion (plan execution)
 
 **Summary**: Executed Steps 1–6 per ao_agent_pp_prompt_conversion.plan.md. Removed OpenClaw lines 1–92 from session-start.sh; backed up to scripts/cursor/session-start-ao-hook.sh; created prompts/AO_AGENT_PP_PROMPT.md and .cursor/commands/pp/COMMAND.md; updated CURSOR_AND_AGENT_OPTIMIZATION, OPERATOR_RUNBOOK, HOOKS.

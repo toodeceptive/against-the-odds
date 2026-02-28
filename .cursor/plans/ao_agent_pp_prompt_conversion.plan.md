@@ -6,22 +6,24 @@ lastUpdated: '2026-02-27'
 todos:
   - id: 1
     content: Clean session-start.sh (remove OpenClaw lines 1-92; verify boundary)
-    status: pending
+    status: completed
   - id: 2
     content: Backup cleaned hook to scripts/cursor/session-start-ao-hook.sh
-    status: pending
+    status: completed
   - id: 3
     content: Create prompts/AO_AGENT_PP_PROMPT.md
-    status: pending
+    status: completed
   - id: 4
     content: Create .cursor/commands/pp/COMMAND.md
-    status: pending
+    status: completed
   - id: 5
     content: Update CURSOR_AND_AGENT_OPTIMIZATION and AGENTS/OPERATOR_RUNBOOK
-    status: pending
+    status: completed
   - id: 6
     content: Verify (JSON output, /pp invocation, no OpenClaw)
-    status: pending
+    status: completed
+planStatus: complete
+completedAt: '2026-02-27'
 isProject: false
 ---
 

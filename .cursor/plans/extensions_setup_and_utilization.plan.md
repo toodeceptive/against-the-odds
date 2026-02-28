@@ -10,7 +10,7 @@ todos:
     status: pending
   - id: theme-check-yml
     content: Create .theme-check.yml (required for Shopify Liquid activation)
-    status: pending
+    status: completed
   - id: tasks
     content: Add tasks to .cursor/tasks.json
     status: pending

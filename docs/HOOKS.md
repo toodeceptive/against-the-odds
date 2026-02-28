@@ -32,7 +32,16 @@ Repo root is resolved from the script location for worktree portability.
 
 ## Superpowers session-start hook (distinct from pre-commit)
 
-The Cursor **superpowers** plugin has its own `session-start.sh` hook (in the plugin cache under `.cursor/plugins/cache/.../superpowers/.../hooks/`). If the plugin overwrites it after an update, restore from the repo backup: `scripts/cursor/session-start-ao-hook.sh`. See [.cursor/plans/ao_agent_pp_prompt_conversion.plan.md](../.cursor/plans/ao_agent_pp_prompt_conversion.plan.md) for details.
+The Cursor **superpowers** plugin has its own `session-start.sh` hook (in the plugin cache under `.cursor/plugins/cache/.../superpowers/.../hooks/`).
+
+| Option      | Script                     | Effect                                         |
+| ----------- | -------------------------- | ---------------------------------------------- |
+| **disable** | `session-start-disable.sh` | No-op: empty context, no injection             |
+| **ao**      | `session-start-ao-hook.sh` | AO backup: superpowers using-superpowers skill |
+
+**Apply**: `.\scripts\cursor\apply-session-start-hook.ps1 -Mode disable` (or `-Mode ao`). To fully remove superpowers behavior, uninstall the superpowers plugin in Cursor.
+
+If the plugin overwrites the hook after an update, re-run the apply script.
 
 ---
 

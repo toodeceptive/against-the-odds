@@ -38,13 +38,13 @@ isProject: false
 
 ### Phase S: Schema, interop, and compliance (Passes 91–95)
 
-| #   | Expert                                             | Primary focus                   | Unique improvements                                                                                              |
-| --- | -------------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| 91  | **Schema and Format Validation Expert**            | Plan structure conformity       | Define plan schema (frontmatter, sections); validate against schema; add validation step to verification         |
-| 92  | **MCP and Extensions Interoperability Specialist** | Cursor MCP, extensions          | How plan interacts with MCP servers; superpowers as extension; no MCP conflicts; document extension dependencies |
-| 93  | **Brand and Tone of Voice Aligner**                | AO brand in prompt              | Ensure AO_AGENT_PP_PROMPT matches AO voice; aodrop.com tone; no generic AI phrasing                              |
-| 94  | **Legal and IP Compliance Auditor**                | OpenClaw removal, no IP leakage | Confirm OpenClaw content fully removed; no proprietary/copyright material in plan or prompt; clean handoff       |
-| 95  | **Scenario-Based Execution Path Tester**           | "User X does Y" flows           | Define scenarios: "New user, first -pp"; "Plugin updated, restore needed"; add scenario matrix to plan           |
+| #   | Expert                                             | Primary focus                    | Unique improvements                                                                                                                             |
+| --- | -------------------------------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| 91  | **Schema and Format Validation Expert**            | Plan structure conformity        | Define plan schema (frontmatter, sections); validate against schema; add validation step to verification                                        |
+| 92  | **MCP and Extensions Interoperability Specialist** | Cursor MCP, extensions           | How plan interacts with MCP servers; superpowers as extension; no MCP conflicts; document extension dependencies                                |
+| 93  | **Brand and Tone of Voice Aligner**                | AO brand in prompt               | Ensure AO_AGENT_PP_PROMPT matches AO voice; aodrop.com tone; no generic AI phrasing                                                             |
+| 94  | **Legal and IP Compliance Auditor**                | Teardown verified, no IP leakage | Confirm ProdigyClaw/OpenClaw teardown complete (see PRODIGYCLAW_TEARDOWN_COMPLETE.md); no proprietary material in plan or prompt; clean handoff |
+| 95  | **Scenario-Based Execution Path Tester**           | "User X does Y" flows            | Define scenarios: "New user, first -pp"; "Plugin updated, restore needed"; add scenario matrix to plan                                          |
 
 ### Phase T: Migration and validation (Passes 96–100)
 

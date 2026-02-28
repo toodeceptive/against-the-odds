@@ -1,6 +1,23 @@
 ---
-# Codacy Cloud config: exclude .codacy/ from style/format tools (e.g. Prettier)
-# to avoid conflicts. .codacy/codacy.yaml is managed by Prettier locally; excluding
-# here prevents Codacy Cloud from flagging it when tool output differs.
+# Codacy config: paths excluded from analysis.
+# .codacy/ excluded to avoid Prettier/format conflicts.
+# Credential and secret files excluded (Trivy, Semgrep).
+# ESLint excluded for JS/TS—repo uses eslint.config.mjs (flat) with Node/browser globals; Codacy ESLint 8 uses different defaults.
 exclude_paths:
   - '.codacy/**'
+  - 'node_modules/**'
+  - '.env.local'
+  - '**/.env.local'
+  - '**/.env.*'
+  - 'scripts/shopify/.token-paste.txt'
+
+# Repo uses npm run lint (ESLint 9 flat config) for JS/TS; Codacy ESLint 8 has different globals.
+engines:
+  eslint:
+    exclude_paths:
+      - '**/*.js'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.ts'
+      - '**/*.jsx'
+      - '**/*.tsx'

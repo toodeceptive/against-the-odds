@@ -1,8 +1,10 @@
 # Multi-Agent Synchronized Guru Expert Audit Report
 
-**Date**: 2026-01-30  
-**Scope**: Cursor agent workflows, trees, conversations, GitHub workflows, files, directories, environments, prompts, rules, plans, tasks. Cross-comparative progression tracking and issue/optimization identification.  
+**Date**: 2026-01-30
+**Scope**: Cursor agent workflows, trees, conversations, GitHub workflows, files, directories, environments, prompts, rules, plans, tasks. Cross-comparative progression tracking and issue/optimization identification.
 **Method**: Read `docs/status/PLAN_AGENT_ENTRY.md` and `prompts/PERFECT_EXECUTION_PROMPT.md`; catalog and audit all prompts, GitHub workflows, `.cursor` config, docs vs implementation, redundancies, bugs, optimization opportunities.
+
+**Note (2026-02-27)**: Prompts ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT, AO_GURU_MULTI_SPECIALIST, ULTIMATE_MASTER_AGENT_PROMPT, and master-agent-prompt were removed/consolidated. Use [prompts/MASTER_10_EXPERT_SYSTEM.md](../prompts/MASTER_10_EXPERT_SYSTEM.md), [prompts/head-guru-orchestrator.md](../prompts/head-guru-orchestrator.md), or [prompts/GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md](../prompts/GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md) instead. See [prompts/README.md](../prompts/README.md).
 
 ---
 
