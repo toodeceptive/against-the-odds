@@ -12,7 +12,7 @@
 
 1. Run `git worktree list` from the primary repo — only listed paths are valid.
 2. Remove the stale worktree from Cursor: close that folder/workspace, or remove it from **File → Open Recent** / worktree list. If using a multi-root workspace, remove the root that points at `…\\hal` or `…\\hvf`.
-3. Use only worktrees listed in [docs/status/WORKTREE_INVENTORY.md](status/WORKTREE_INVENTORY.md) (primary + mhx, bjm, cpd, ghd, igt, osd). Do not open paths for hal or hvf.
+3. Use only worktrees listed in [docs/status/WORKTREE_INVENTORY.md](status/WORKTREE_INVENTORY.md). Do not open paths for hal or hvf.
 4. **If the IDE shows diffs or file paths under `hal` (e.g. hal/docs/status/CONSOLIDATION_LOG.md)**: You are in the wrong workspace; committing from here would violate the policy (commits from primary only). Do **not** commit. Close the hal root and open the primary repo (`C:/Users/LegiT/against-the-odds`) as the only workspace root, then stage and commit from there so the policy is satisfied.
 
 ### Prettier: "Can only format Markdown files as a whole, not selections"

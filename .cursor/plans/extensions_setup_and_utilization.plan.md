@@ -7,22 +7,22 @@ todos:
     status: pending
   - id: settings
     content: Update .cursor/settings.json with extension-specific settings
-    status: pending
+    status: completed
   - id: theme-check-yml
     content: Create .theme-check.yml (required for Shopify Liquid activation)
     status: completed
   - id: tasks
     content: Add tasks to .cursor/tasks.json
-    status: pending
+    status: completed
   - id: scripts
     content: Create/extend test-all-extensions.ps1 and theme-check.ps1
-    status: pending
+    status: completed
   - id: verifier
     content: Extend verifier agent with test commands
-    status: pending
+    status: completed
   - id: docs
     content: Update CURSOR_AND_AGENT_OPTIMIZATION and node-and-automation context
-    status: pending
+    status: completed
   - id: verify
     content: Run verification checklist
     status: pending

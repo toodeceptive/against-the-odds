@@ -42,7 +42,7 @@
 
 - **Multiple “master” prompts**: Five files claim orchestration/audit/master role (`head-guru-orchestrator`, `MASTER_10_EXPERT_SYSTEM`, `AO_GURU_MULTI_SPECIALIST_MASTER_AGENT_PROMPT`, `ULTIMATE_MASTER_AGENT_PROMPT`, `ULTIMATE_COMPREHENSIVE_AUDIT_PROMPT`). Risk: agents or users pick different ones and behavior diverges.
 - **Unclear “which prompt when”**: No single decision tree (e.g. “Phase 0 first → then head-guru vs MASTER_10 vs ULTIMATE_AUDIT”). PLAN_AGENT_ENTRY correctly points to Phase 0 only; post–Phase 0 flow is not codified.
-- **Expert 1–10 vs finalization-\***: Both are specialist rosters; finalization-_ is launch/finalization-focused, expert-_ is domain-audit-focused. Overlap in “who does what” for docs, security, releases.
+- **Expert 1–10 vs finalization-\***: Both are specialist rosters; finalization-_is launch/finalization-focused, expert-_ is domain-audit-focused. Overlap in “who does what” for docs, security, releases.
 
 ### 2.3 Recommendations
 
@@ -187,15 +187,15 @@ Relationship: expert-analyses are outputs of past runs; expert prompts are the t
 
 ### P1 (High value)
 
-3. **Consolidate root-level reports**: Move legacy reports to `docs/status/` or `archive/`; add `docs/status/INDEX_REPORTS.md`; keep only README, CHANGELOG, NEXT_STEPS, OPERATOR_RUNBOOK (and similar) at root.
-4. **Deploy and backup-store**: Either implement deploy.yml and shopify-sync backup job or mark as placeholder and link to runbook/launch checklist.
-5. **agent-context.md**: Add `src/shopify/` (and themes/aodrop-theme) to project structure.
+1. **Consolidate root-level reports**: Move legacy reports to `docs/status/` or `archive/`; add `docs/status/INDEX_REPORTS.md`; keep only README, CHANGELOG, NEXT_STEPS, OPERATOR_RUNBOOK (and similar) at root.
+2. **Deploy and backup-store**: Either implement deploy.yml and shopify-sync backup job or mark as placeholder and link to runbook/launch checklist.
+3. **agent-context.md**: Add `src/shopify/` (and themes/aodrop-theme) to project structure.
 
 ### P2 (Nice to have)
 
-6. **sync-products.ps1**: Load `.env.local` when present (same pattern as test-connection.ps1) for local runs.
-7. **Tasks “Open pending approval”**: Document “run from repo root” or use repo-root detection so the path always resolves.
-8. **Script portability**: Audit scripts for hardcoded `C:\Users\LegiT\against-the-odds`; replace with repo-root detection.
+1. **sync-products.ps1**: Load `.env.local` when present (same pattern as test-connection.ps1) for local runs.
+2. **Tasks “Open pending approval”**: Document “run from repo root” or use repo-root detection so the path always resolves.
+3. **Script portability**: Audit scripts for hardcoded `C:\Users\LegiT\against-the-odds`; replace with repo-root detection.
 
 ---
 

@@ -42,7 +42,7 @@
 
 | Path                                                    | Branch/HEAD                      | Commit  | Notes                                                              |
 | ------------------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------------------------ |
-| `C:/Users/LegiT/against-the-odds`                       | main                             | 9d91220 | **Primary repo** per IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md |
+| `C:/Users/LegiT/against-the-odds`                       | main                             | b164c45 | **Primary repo** per IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user)                           |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                  | 6e73084 | Worktree                                                           |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bri` | (detached HEAD)                  | c26bfe3 | Worktree                                                           |
