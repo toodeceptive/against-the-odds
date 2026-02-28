@@ -9,7 +9,7 @@
 ## The prompt (copy this)
 
 ```
-Run PP: parse intent → task tree (2–6 steps) → execute smallest step → validate → audit → report. If no task given: run full project cycle (prompts/PP_EXECUTE_PROJECT_PROMPT.md). If intent unclear: ask once. No redundancy (read CONSOLIDATION_LOG first). No store changes without preview+approval. No secrets in commits.
+Run PP: parse intent → task tree (2–6 steps) → execute smallest step → validate → audit → report. If no task given: run full project cycle (prompts/PP_EXECUTE_PROJECT_PROMPT.md). If "cleanup, finalize, commit": add cleanup .md, delete obsolete, log deletions, audit, fix errors, commit & push. If intent unclear: ask once. No redundancy (read CONSOLIDATION_LOG first). No store changes without preview+approval. No secrets in commits.
 ```
 
 ---
@@ -24,9 +24,16 @@ Run PP: parse intent → task tree (2–6 steps) → execute smallest step → v
 
 ## Invocation guide
 
-| You say                                      | Agent does                                            |
-| -------------------------------------------- | ----------------------------------------------------- |
-| `/pp`                                        | Asks for intent or runs full project cycle per prompt |
-| `/pp [prompt above]`                         | Runs PP with default behavior (full cycle if no task) |
-| `/pp [prompt] fix the broken link in README` | Runs PP on that specific task                         |
-| `/pp execute pp_execute_project_prompt`      | Runs full project PP cycle                            |
+| You say                                      | Agent does                                                                       |
+| -------------------------------------------- | -------------------------------------------------------------------------------- |
+| `/pp`                                        | Asks for intent or runs full project cycle per prompt                            |
+| `/pp [prompt above]`                         | Runs PP with default behavior (full cycle if no task)                            |
+| `/pp [prompt] fix the broken link in README` | Runs PP on that specific task                                                    |
+| `/pp execute pp_execute_project_prompt`      | Runs full project PP cycle                                                       |
+| `/pp cleanup, finalize, commit`              | Full cycle + cleanup .md, delete obsolete, log, audit, fix errors, commit & push |
+
+---
+
+## Extended cycle (cleanup + finalize)
+
+When you add "cleanup, finalize, commit": agent also cleans up .md files, deletes obsolete files/data (logs deletions in CONSOLIDATION_LOG), runs final review and audit, fixes any errors, then commits and pushes.

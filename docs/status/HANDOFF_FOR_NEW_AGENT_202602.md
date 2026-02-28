@@ -11,10 +11,10 @@ The user has given the new agent **full unrestricted approval and dominion over 
 ## Repo and branch state
 
 - **Primary repo:** `C:\Users\LegiT\against-the-odds` on branch **main**.
-- **Last commit on main (at handoff):** Either `f3141ee` ("Finalize and close agent branches/workflows; handoff for new agent") if origin was not updated, or a later commit such as `c720000` ("Canonical Build plan perfected (2026-02-01)") after the previous agent’s local commit. **Pull `origin/main`** to ensure you have the latest.
+- **Last commit on main (at handoff):** Pull `origin/main` to ensure you have the latest (e.g. `3f25a20` or newer).
 - **Other local branches:** `feature/ao-brand-shopify-automation`, `cursor/main-project-setup-2bd1`, `handoff-doc-permissions-20260129` (latter has worktree mhx). **Deleted locally (merged to main):** guru-finalization-20260206, cursor-agent-setup (2026-02-07).
 - **Remote-only branches:** `origin/shopify-theme` (created by sync-theme-branch workflow), `origin/dependabot/npm_and_yarn/...`, `origin/guru-finalization-20260206`, `origin/cursor-agent-setup`.
-- **Worktrees:** See [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) for current list (primary + mhx, bjm, cpd, ghd, igt, osd; jxj when present). ewa, snq, uub removed 2026-02-07; opo, qqa no longer worktrees.
+- **Worktrees:** See [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) for current list.
 
 ---
 

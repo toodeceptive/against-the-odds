@@ -8,8 +8,9 @@ We treat “Cursor history” as the repo’s recorded history:
 
 - `docs/status/CONSOLIDATION_LOG.md`
 - `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`
-- `docs/status/FULL_SYSTEM_AUDIT_20260201.md`
 - `docs/status/PLAN_HANDOFF_FOR_NEXT_AGENT.md`
+
+(Note: FULL_SYSTEM_AUDIT_20260201 was deleted in 2026-02-01 cleanup; CONSOLIDATION_LOG is the history source.)
 
 Cursor chat logs outside the repo are not considered authoritative inputs.
 

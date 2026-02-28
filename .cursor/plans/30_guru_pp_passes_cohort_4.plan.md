@@ -159,7 +159,7 @@ flowchart TD
 
 After all four cohorts complete:
 
-1. **Merge**: Apply findings from 120 passes (Cohorts 1–4) into [ao_agent_pp_prompt_conversion.plan.md](.cursor/plans/ao_agent_pp_prompt_conversion.plan.md).
+1. **Merge**: Apply findings from 120 passes (Cohorts 1–4) into [ao_agent_pp_prompt_conversion.plan.md](ao_agent_pp_prompt_conversion.plan.md).
 2. **Conflict resolution**: Use Pass 69 (Cohort 3) and Pass 86 (Cohort 3) plus Pass 119 (Cohort 4) for change impact.
 3. **Sign-off**: Pass 120 (Final Sign-Off) gates execution.
 4. **Output**: Single master plan V7; archive cohort meta-plans; CHANGELOG and consolidation log.
