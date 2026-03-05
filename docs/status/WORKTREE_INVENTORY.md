@@ -2,7 +2,7 @@
 
 **Purpose**: Single source of truth for actual worktrees (from `git worktree list`).
 
-**Last updated**: 2026-02-27 (aligned with current `git worktree list`; stale hal/hvf still documented)
+**Last updated**: 2026-03-05 (aligned with current `git worktree list`; stale hal/hvf still documented)
 
 ---
 
@@ -10,7 +10,8 @@
 
 | Label       | Path                                                    | Branch/HEAD                      | Commit  | Purpose                                  |
 | ----------- | ------------------------------------------------------- | -------------------------------- | ------- | ---------------------------------------- |
-| **Primary** | `C:/Users/LegiT/against-the-odds`                       | main                             | aa210e4 | Primary repo checkout in current session |
+| **Primary** | `C:/Users/LegiT/against-the-odds`                       | main                             | 90b197b | Primary repo checkout in current session |
+| **hkx**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/hkx` | (detached HEAD)                  | 90b197b | Active Cursor worktree in this run       |
 | **mhx**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user) |
 | **bjm**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                  | 6e73084 | Worktree                                 |
 | **bri**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bri` | (detached HEAD)                  | c26bfe3 | Worktree                                 |

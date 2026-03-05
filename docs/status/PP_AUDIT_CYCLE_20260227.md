@@ -142,4 +142,35 @@
 
 ---
 
-_Last updated: 2026-02-27._
+## Cycle 16: Guru full audit, cleanup, optimization, and closure (2026-03-05)
+
+**Scope**: Executed a full /pp guru cycle for inventory, audit, remediation, follow-up prompt generation, progress-check, and final verification.
+
+**Inventory updates**:
+
+- Branch and worktree inventories re-aligned from stale `aa210e4` to `90b197b`.
+- Active `hkx` worktree added to inventories.
+- Transcript surface verified (18 parent transcripts, 12 subagent transcripts accessible).
+
+**Audit findings and fixes**:
+
+- P0 inventory drift fixed (`BRANCH_INVENTORY.md`, `WORKTREE_INVENTORY.md`).
+- PP marker refreshed to current baseline (`PP_AUDIT_MARKER.md`).
+- New dated artifacts created:
+  - `docs/status/GURU_EXPERT_REVIEW_AUDIT_ANALYSIS_20260305.md`
+  - `prompts/PERFECT_FOLLOWUP_PLAN_PROMPT_20260305.md`
+- Indexes updated (`INDEX_REPORTS.md`, `prompts/README.md`).
+
+**Verification**:
+
+- `npm run quality` ✓
+- `scripts/verify-pipeline.ps1 -SkipRunbook` ✓
+
+**Blockers (documented, non-critical)**:
+
+- Extension verification checklist items remain manual (`verify-install`, `verify` in extensions plan).
+- Credential-gated runbook closure remains deferred by design.
+
+---
+
+_Last updated: 2026-03-05._

@@ -2,20 +2,20 @@
 
 **Purpose**: Single source of truth so nothing is overlooked during reorganization.
 
-**Last updated**: 2026-02-27 (aligned with current `git branch -vv` and `git worktree list`; aa210e4)
+**Last updated**: 2026-03-05 (aligned with current `git branch -vv` and `git worktree list`; 90b197b)
 
 ---
 
 ## Organization labels (worktrees · pipeline · project · GitHub · branches · repos)
 
-| Scope           | Label / description                                                                                                                                                                                                                                                                                                  |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Worktrees**   | **Primary**: `C:/Users/LegiT/against-the-odds` (currently on `main`). **Also**: mhx (handoff-doc-permissions-20260129), bjm, bri, cpd, ghd, igt, ltt, olu, osd (see WORKTREE_INVENTORY.md). Stale (remove from Cursor if shown): hal, hvf.                                                                           |
-| **Pipeline**    | **CI**: ci.yml (main only); **verify**: `.\scripts\verify-pipeline.ps1`; **runbook**: `.\scripts\run-runbook.ps1`. 81 PowerShell scripts, 6 workflows.                                                                                                                                                               |
-| **Project**     | **Repo**: against-the-odds. **Root**: OPERATOR_RUNBOOK, AGENTS.md, .cursor/plans, docs/status. **Canonical**: main.                                                                                                                                                                                                  |
-| **GitHub repo** | **origin**: <https://github.com/toodeceptive/against-the-odds.git> (fetch/push). **Default branch**: main.                                                                                                                                                                                                           |
-| **Branches**    | **main** (default, local+remote). **Current checkout**: `main`. **Optional/local**: chore/script-paths-utilities-gitignore, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, guru-pp-run-20260207, handoff-doc-permissions-20260129, mlf-main. **Remote-only**: shopify-theme and dependabot/\*. |
-| **Repos**       | **Primary repo** = main worktree. **Worktree mhx** = secondary checkout on handoff branch.                                                                                                                                                                                                                           |
+| Scope           | Label / description                                                                                                                                                                                                                                                                                                                                                                                  |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Worktrees**   | **Primary**: `C:/Users/LegiT/against-the-odds` (currently on `main`). **Active detached**: `hkx` (same commit as main). **Also**: mhx (handoff-doc-permissions-20260129), bjm, bri, cpd, ghd, igt, ltt, olu, osd (see WORKTREE_INVENTORY.md). Stale (remove from Cursor if shown): hal, hvf.                                                                                                         |
+| **Pipeline**    | **CI**: ci.yml (main only); **verify**: `.\scripts\verify-pipeline.ps1`; **runbook**: `.\scripts\run-runbook.ps1`. 81 PowerShell scripts, 6 workflows.                                                                                                                                                                                                                                               |
+| **Project**     | **Repo**: against-the-odds. **Root**: OPERATOR_RUNBOOK, AGENTS.md, .cursor/plans, docs/status. **Canonical**: main.                                                                                                                                                                                                                                                                                  |
+| **GitHub repo** | **origin**: <https://github.com/toodeceptive/against-the-odds.git> (fetch/push). **Default branch**: main.                                                                                                                                                                                                                                                                                           |
+| **Branches**    | **main** (default, local+remote). **Current checkout**: detached at `90b197b` in this worktree; primary repo checkout is `main` at same commit. **Optional/local**: chore/script-paths-utilities-gitignore, feature/ao-brand-shopify-automation, cursor/main-project-setup-2bd1, guru-pp-run-20260207, handoff-doc-permissions-20260129, mlf-main. **Remote-only**: shopify-theme and dependabot/\*. |
+| **Repos**       | **Primary repo** = main worktree. **Worktree mhx** = secondary checkout on handoff branch.                                                                                                                                                                                                                                                                                                           |
 
 ---
 
@@ -43,7 +43,8 @@
 
 | Path                                                    | Branch/HEAD                      | Commit  | Notes                                                              |
 | ------------------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------------------------ |
-| `C:/Users/LegiT/against-the-odds`                       | main                             | aa210e4 | **Primary repo** per IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md |
+| `C:/Users/LegiT/against-the-odds`                       | main                             | 90b197b | **Primary repo** per IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md |
+| `C:/Users/LegiT/.cursor/worktrees/against-the-odds/hkx` | (detached HEAD)                  | 90b197b | Active Cursor worktree in current session                          |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user)                           |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                  | 6e73084 | Worktree                                                           |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bri` | (detached HEAD)                  | c26bfe3 | Worktree                                                           |

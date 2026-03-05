@@ -4,11 +4,11 @@
 
 **Purpose**: Single index of report- and status-style markdown files so agents and humans know what is current vs legacy and where to look.
 
-**Counts (2026-02)**: docs/ **142 files** total; docs/status/ **78 files**; repo total on disk (excl. .git, node_modules) **~476 files**; tracked (excl. coverage, playwright-report, test-results, .vscode) **~431 files**. Full inventory is in .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md.
+**Counts (2026-03)**: docs/ **141 files** total; docs/status/ **65 files**; tracked files in repo **508**. Full inventory methodology remains in `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`.
 
 ---
 
-## Current canonical (2026-02)
+## Current canonical (2026-03)
 
 Use these first for pipeline, branches, worktrees, and handoff.
 
@@ -38,9 +38,11 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md** (root)             | Lead-agent perfection prompt; worktree-coordinated; loop until complete; assign new teams if stopped short                                                       |
 | **.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md**                   | 7-step execution plan for Master Guru E2E run; status table and completion criteria                                                                              |
 | **.cursor/plans/ao_agent_pp_prompt_conversion.plan.md**                    | AO Agent PP Prompt Conversion (V11): complete; remove OpenClaw from session-start; create -pp / /pp AO prompt (2026-02-27)                                       |
-| **PP_AUDIT_CYCLE_20260227.md**                                             | PP audit cycles 1–14: session-start disable, full audit, /pp prompt creation, guru expert review, perfect followup (2026-02-27)                                  |
-| **GURU_EXPERT_REVIEW_AUDIT_ANALYSIS_20260227.md**                          | Guru expert review, audit, analysis of all agent work; input for perfect followup plan                                                                           |
-| **prompts/PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**                       | Delta-only followup plan; inventory alignment, fix-handoff-line resolution; invoke via `/pp`                                                                     |
+| **PP_AUDIT_CYCLE_20260227.md**                                             | PP audit cycles 1–16 including 2026-03-05 full guru closure cycle                                                                                                |
+| **GURU_EXPERT_REVIEW_AUDIT_ANALYSIS_20260305.md**                          | Latest guru expert review, audit, analysis with prioritized findings and closure evidence                                                                        |
+| **prompts/PERFECT_FOLLOWUP_PLAN_PROMPT_20260305.md**                       | Latest perfected follow-up execution prompt (delta-first closure flow)                                                                                           |
+| **GURU_EXPERT_REVIEW_AUDIT_ANALYSIS_20260227.md**                          | Prior guru expert review baseline used by later delta cycles                                                                                                     |
+| **prompts/PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**                       | Prior followup prompt baseline; superseded by 2026-03-05 version                                                                                                 |
 | **PP_CONVERSATION_ALIGNMENT_20260207.md**                                  | PP audit on conversation: intent, outcomes, aligned/efficient/improvable/obsolete, assumptions                                                                   |
 | **GURU_20_TEAMS_60_SPECIALTIES.md**                                        | 20 guru expert teams × 60 specialties; multi-perspective audit checklist for perfection loop                                                                     |
 | **GURU_FULL_TEAM_SETUP_VERIFY_ORGANIZE_20260207.md**                       | Full-team assignment: setup, verify (incl. desktop automation), clean, organize/label worktrees·pipeline·GitHub·branches                                         |
