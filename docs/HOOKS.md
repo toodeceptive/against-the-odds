@@ -30,18 +30,17 @@ Repo root is resolved from the script location for worktree portability.
 
 ---
 
-## Superpowers session-start hook (distinct from pre-commit)
+## Superpowers session-start hook (deprecated)
 
-The Cursor **superpowers** plugin has its own `session-start.sh` hook (in the plugin cache under `.cursor/plugins/cache/.../superpowers/.../hooks/`).
+**Status: Deprecated (2026-02-27).** OpenClaw is gone; the session-start hook has been disabled locally. The Cursor **superpowers** plugin's SessionStart hook is disabled (hooks array emptied), and `session-start.sh` has been removed from the plugin cache.
 
-| Option      | Script                     | Effect                                         |
-| ----------- | -------------------------- | ---------------------------------------------- |
-| **disable** | `session-start-disable.sh` | No-op: empty context, no injection             |
-| **ao**      | `session-start-ao-hook.sh` | AO backup: superpowers using-superpowers skill |
+| Legacy script                  | Purpose (archived)                              |
+| ------------------------------ | ----------------------------------------------- |
+| `session-start-disable.sh`     | No-op backup (no longer applied)                |
+| `session-start-ao-hook.sh`     | AO backup (no longer applied)                   |
+| `apply-session-start-hook.ps1` | Would copy a script to plugin; hook is disabled |
 
-**Apply**: `.\scripts\cursor\apply-session-start-hook.ps1 -Mode disable` (or `-Mode ao`). To fully remove superpowers behavior, uninstall the superpowers plugin in Cursor.
-
-If the plugin overwrites the hook after an update, re-run the apply script.
+To fully remove superpowers behavior, uninstall the superpowers plugin in Cursor. If the plugin updates and restores its default hooks, the SessionStart hook may run again; re-disable via `.\scripts\cursor\apply-session-start-hook.ps1 -Mode disable` and clear the hooks array in `hooks/hooks.json` if needed.
 
 ---
 

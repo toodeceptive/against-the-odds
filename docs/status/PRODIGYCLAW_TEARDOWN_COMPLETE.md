@@ -33,6 +33,13 @@ All ProdigyClaw and OpenClaw artifacts have been removed. The against-the-odds r
 - Task Scheduler OpenClaw tasks removed
 - WSL ~/.openclaw removed
 
+### 2026-02-27 — Session-start deprecated
+
+- **Superpowers plugin cache** (`C:\Users\LegiT\.cursor\plugins\cache\cursor-public\superpowers\...\hooks\`):
+  - Deleted `session-start.sh` (was no-op; openclaw gone)
+  - Emptied SessionStart `hooks` array in `hooks.json` (no hook runs)
+- **against-the-odds**: HOOKS.md and apply-session-start-hook.ps1 updated to mark session-start deprecated
+
 ## Manual Steps (user responsibility)
 
 If not yet done:

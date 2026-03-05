@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **2026-02-27** — Session-start deprecated; OpenClaw final cleanup: Deleted session-start.sh from superpowers plugin cache; emptied SessionStart hooks in hooks.json; HOOKS.md and apply-session-start-hook.ps1 marked deprecated; PRODIGYCLAW_TEARDOWN_COMPLETE updated.
 - **2026-02-27** — AO Agent PP Prompt Conversion plan V11: 240 guru expert PP passes (Cohorts 1-8); Environment spec, FAQ, Plan self-test, Requires/Undo per step, Version history, Execution sign-off.
 - **2026-02-26** — ProdigyClaw/OpenClaw teardown cleanup: Removed scripts/teardown/, global Cursor OpenClaw plans (18 files), teardown-openclaw-complete.ps1, switch-to-against-the-odds.bat; verified no OpenClaw references in repo; docs/status/PRODIGYCLAW_TEARDOWN_COMPLETE.md.
 - **2026-02-26** — Fix Dependabot high vulnerability (GHSA-mw96-cpmx-2vgc): npm audit fix; rollup 4.57.1 → 4.59.0 via vite/vitest transitive chain.

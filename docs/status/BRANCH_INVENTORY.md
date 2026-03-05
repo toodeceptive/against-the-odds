@@ -2,7 +2,7 @@
 
 **Purpose**: Single source of truth so nothing is overlooked during reorganization.
 
-**Last updated**: 2026-02-27 (aligned with current `git branch -vv` and `git worktree list`)
+**Last updated**: 2026-02-27 (aligned with current `git branch -vv` and `git worktree list`; aa210e4)
 
 ---
 
@@ -24,6 +24,7 @@
 | Branch                                     | Location                                                       | Notes                                                                   |
 | ------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | **main**                                   | local, remote origin                                           | Default branch; workflow triggers are main-only.                        |
+| **cursor/cloud-ecosystem-perfection-0913** | local, remote origin                                           | Optional branch.                                                        |
 | **cursor/structural-integrity-audit-18a1** | local, remote origin                                           | Optional branch; primary repo is on main.                               |
 | **chore/script-paths-utilities-gitignore** | local only                                                     | Optional local branch.                                                  |
 | **feature/ao-brand-shopify-automation**    | local, remote origin                                           | Optional: merge useful work to main and delete, or keep as reference.   |
@@ -42,7 +43,7 @@
 
 | Path                                                    | Branch/HEAD                      | Commit  | Notes                                                              |
 | ------------------------------------------------------- | -------------------------------- | ------- | ------------------------------------------------------------------ |
-| `C:/Users/LegiT/against-the-odds`                       | main                             | b164c45 | **Primary repo** per IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md |
+| `C:/Users/LegiT/against-the-odds`                       | main                             | aa210e4 | **Primary repo** per IF_HANDOFF_FILES_MISSING_READ_FROM_PRIMARY.md |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user)                           |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                  | 6e73084 | Worktree                                                           |
 | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bri` | (detached HEAD)                  | c26bfe3 | Worktree                                                           |

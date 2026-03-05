@@ -2,8 +2,9 @@
 .SYNOPSIS
   Apply session-start hook to superpowers plugin cache.
 .DESCRIPTION
+  DEPRECATED: OpenClaw is gone; SessionStart hook disabled (2026-02-27).
   Copies the chosen hook script to the superpowers hooks directory.
-  Options: disable (no injection), ao (AO backup with superpowers), or restore from backup.
+  Note: hooks.json was emptied locally; the plugin will not invoke session-start unless restored.
 .PARAMETER Mode
   disable = no-op, empty context
   ao      = AO backup (superpowers using-superpowers skill)
@@ -11,10 +12,11 @@
   .\apply-session-start-hook.ps1 -Mode disable
 #>
 param(
-    [ValidateSet('disable', 'ao')]
-    [string]$Mode = 'disable'
+  [ValidateSet('disable', 'ao')]
+  [string]$Mode = 'disable'
 )
 $ErrorActionPreference = 'Stop'
+Write-Warning "session-start hook is deprecated (OpenClaw removed 2026-02-27). hooks.json was emptied locally."
 $hooksDir = Join-Path $env:USERPROFILE '.cursor\plugins\cache\cursor-public\superpowers'
 if (-not (Test-Path $hooksDir)) {
     Write-Error "Superpowers plugin not found at $hooksDir"
