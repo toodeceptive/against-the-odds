@@ -6,12 +6,12 @@ Single reference for the **preview-before-apply** flow. Product changes and them
 
 ## Product changes
 
-1. **Agent** prepares a dry run (for example `.\scripts\shopify\sync-products.ps1 -DryRun`).
+1. **Agent** prepares a dry run (for example `node scripts/shared/run-powershell.cjs scripts/shopify/sync-products.ps1 -DryRun`).
 2. **Agent** writes [docs/status/pending-approval.md](status/pending-approval.md) with summary, dry-run output, and "To approve: say 'approve' in chat."
 3. **Agent** runs from repo root:
 
-   ```powershell
-   .\scripts\open-pending-approval.ps1
+   ```sh
+   node scripts/shared/run-powershell.cjs scripts/open-pending-approval.ps1
    ```
 
 4. **User** reviews the pending approval file in Cursor and says **"approve"** (or "yes" / "looks good") in chat.
@@ -22,11 +22,11 @@ Single reference for the **preview-before-apply** flow. Product changes and them
 1. **Agent** edits theme files and writes [docs/status/pending-approval.md](status/pending-approval.md) with summary and "To approve: say 'approve' in chat."
 2. **Agent** runs from repo root:
 
-   ```powershell
-   .\scripts\open-preview-popup.ps1
+   ```sh
+   node scripts/shared/run-powershell.cjs scripts/open-preview-popup.ps1
    ```
 
-   Or: `.\scripts\start-theme-preview.ps1` (same effect), or **Tasks → Start theme preview (new window)**.
+   Or: `node scripts/shared/run-powershell.cjs scripts/start-theme-preview.ps1` (same effect), or **Tasks → Start theme preview (new window, desktop helper)**.
 
 3. **User** sees:
    - **Cursor**: `pending-approval.md` opens (or refocuses).
@@ -57,7 +57,7 @@ Single reference for the **preview-before-apply** flow. Product changes and them
 ## Rules (agents)
 
 - **Preview first**: Never push theme or run product sync without preview and user approval. See [.cursor/rules/shopify-preview-approval.mdc](../.cursor/rules/shopify-preview-approval.mdc).
-- **Snapshot**: Always write pending-approval.md before asking for approval. For product changes run **open-pending-approval.ps1**; for theme changes run **open-preview-popup.ps1** or **start-theme-preview.ps1**.
+- **Snapshot**: Always write pending-approval.md before asking for approval. For product changes run **open-pending-approval.ps1**; for theme changes, the cross-platform default is **Open pending approval** + **Shopify: Theme Dev**, while **open-preview-popup.ps1** / **start-theme-preview.ps1** remain desktop helper options.
 - **After apply**: Log to deploy-log.md and clear pending-approval.md.
 
 See [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](AGENT_WORKFLOW_CURSOR_SHOPIFY.md) for full product/theme flows and rollback.

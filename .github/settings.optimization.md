@@ -103,7 +103,6 @@ Add to README.md:
 
 ```markdown
 ![CI](https://github.com/toodeceptive/against-the-odds/workflows/CI/badge.svg)
-![Quality](https://github.com/toodeceptive/against-the-odds/workflows/Quality%20Check/badge.svg)
 ![License](https://img.shields.io/badge/license-UNLICENSED-red)
 ```
 
@@ -111,18 +110,18 @@ Add to README.md:
 
 Use the provided scripts to verify and optimize:
 
-```powershell
+```sh
 # Verify authentication
-.\scripts\github\verify-auth.ps1
+node scripts/shared/run-powershell.cjs scripts/github/verify-auth.ps1
 
 # Test push/pull
-.\scripts\github\test-push-pull.ps1
+node scripts/shared/run-powershell.cjs scripts/github/test-push-pull.ps1
 
 # Verify secrets
-.\scripts\github\verify-secrets.ps1
+node scripts/shared/run-powershell.cjs scripts/github/verify-secrets.ps1
 
 # Get optimization recommendations
-.\scripts\github\optimize-repo.ps1
+node scripts/shared/run-powershell.cjs scripts/github/optimize-repo.ps1
 ```
 
 ## Next Steps

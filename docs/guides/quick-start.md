@@ -6,23 +6,25 @@
 
 - Node.js and npm installed
 - Git configured
-- PowerShell (Windows)
+- PowerShell on Windows, or `pwsh` on Linux/macOS for PowerShell-backed scripts
 - Shopify Partner account (for store development)
+
+For cross-platform script execution, prefer `node scripts/shared/run-powershell.cjs <script.ps1>` when you are not already using an npm or Cursor task wrapper.
 
 ### Initial Setup
 
 1. **Clone the repository** (if not already done):
 
-   ```powershell
+   ```sh
    git clone https://github.com/toodeceptive/against-the-odds.git
    cd against-the-odds
    ```
 
 2. **Set up environment variables**:
 
-   ```powershell
-   # Copy example file
-   Copy-Item .env.example .env.local
+   ```sh
+   # Copy example file (use cp on bash/zsh, Copy-Item on PowerShell)
+   cp .env.example .env.local
 
    # Edit .env.local with your credentials
    # - GitHub token
@@ -37,19 +39,15 @@
 
 4. **Set up Shopify CLI**:
 
-   ```powershell
-   npm install -g @shopify/cli @shopify/theme
-   shopify auth login
+   ```sh
+   npx shopify auth login
    ```
 
 5. **Verify setup**:
 
-   ```powershell
-   # Test GitHub connection
-   git push
-
-   # Test Shopify connection
-   .\scripts\shopify\fetch-store-data.ps1
+   ```sh
+   npm run quality
+   npm run verify:pipeline
    ```
 
 ### Common Tasks

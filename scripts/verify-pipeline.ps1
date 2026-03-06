@@ -98,7 +98,7 @@ if (-not $SkipRunbook) {
     if (-not $RequireRunbook -and -not $token) {
         Write-Host "  (credential-gated: SHOPIFY_ACCESS_TOKEN not set, skip runbook; use -RequireRunbook for strict mode)" -ForegroundColor Gray
     } elseif (Test-Path $runbook) {
-        & $runbook
+        & $runbook -StrictSecrets:$RequireRunbook
         if ($LASTEXITCODE -ne 0) { $failed++ }
     } else {
         Write-Host "  (run-runbook.ps1 not found, skip)" -ForegroundColor Gray

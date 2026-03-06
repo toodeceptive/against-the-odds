@@ -8,11 +8,11 @@ This guide provides comprehensive instructions for setting up your development e
 
 ## Prerequisites
 
-- Windows 10/11
-- PowerShell 5.1 or later
+- Windows, Linux, or macOS
+- PowerShell 7 (`pwsh`) on Linux/macOS, or Windows PowerShell / PowerShell 7 on Windows
 - Node.js 20.x or later
 - Python 3.x (required for Playwright webServer)
-- Shopify CLI (recommended: global install)
+- Shopify CLI (optional globally; repo scripts prefer `npx shopify ...`)
 - Git
 - Chrome browser (for Shopify admin access)
 
@@ -20,9 +20,9 @@ This guide provides comprehensive instructions for setting up your development e
 
 ### Automated Setup (Recommended)
 
-```powershell
+```sh
 # Run automated setup script
-.\scripts\setup\auto-configure-env.ps1
+node scripts/shared/run-powershell.cjs scripts/setup/auto-configure-env.ps1
 ```
 
 This script will:
@@ -37,15 +37,16 @@ This script will:
 
 1. **Copy environment template**:
 
-   ```powershell
-   Copy-Item .env.example .env.local
+   ```sh
+   # Use cp on bash/zsh or Copy-Item on PowerShell
+   cp .env.example .env.local
    ```
 
 2. **Edit `.env.local`** with your credentials (see below)
 
 3. **Verify setup**:
-   ```powershell
-   .\scripts\setup\verify-credentials.ps1
+   ```sh
+   node scripts/shared/run-powershell.cjs scripts/setup/verify-credentials.ps1
    ```
 
 ## Required Credentials
@@ -79,7 +80,7 @@ This script will:
 **SHOPIFY_ACCESS_TOKEN**
 
 - Get from: Shopify Admin > Apps > Development > Custom apps > Your App > API credentials
-- Or use browser automation: `.\scripts\shopify\browser\get-access-token.ps1`
+- Or use browser automation: `node scripts/shared/run-powershell.cjs scripts/shopify/browser/get-access-token.ps1`
 
 **SHOPIFY_STORE_DOMAIN**
 
@@ -88,7 +89,7 @@ This script will:
 **SHOPIFY_THEME_ID**
 
 - Get from: Shopify Admin > Online Store > Themes
-- Or use browser automation: `.\scripts\shopify\browser\get-theme-id.ps1`
+- Or use browser automation: `node scripts/shared/run-powershell.cjs scripts/shopify/browser/get-theme-id.ps1`
 
 ## Credential Retrieval Methods
 
@@ -96,12 +97,12 @@ This script will:
 
 If you have Shopify admin open in Chrome:
 
-```powershell
+```sh
 # Extract access token
-.\scripts\shopify\browser\get-access-token.ps1
+node scripts/shared/run-powershell.cjs scripts/shopify/browser/get-access-token.ps1
 
 # Extract theme ID
-.\scripts\shopify\browser\get-theme-id.ps1
+node scripts/shared/run-powershell.cjs scripts/shopify/browser/get-theme-id.ps1
 ```
 
 ### Method 2: Manual Extraction
@@ -129,15 +130,15 @@ If you have Shopify admin open in Chrome:
 
 After setup, verify all credentials:
 
-```powershell
+```sh
 # Comprehensive verification
-.\scripts\setup\verify-credentials.ps1
+node scripts/shared/run-powershell.cjs scripts/setup/verify-credentials.ps1
 
 # Test Shopify connection
-.\scripts\shopify\test-connection.ps1
+node scripts/shared/run-powershell.cjs scripts/shopify/test-connection.ps1
 
 # Test GitHub connection
-.\scripts\github\verify-auth.ps1
+node scripts/shared/run-powershell.cjs scripts/github/verify-auth.ps1
 ```
 
 ## Secure Storage Options
@@ -200,14 +201,13 @@ After environment setup:
 
 2. **Install Shopify CLI**:
 
-   ```powershell
-   npm install -g @shopify/cli @shopify/theme
-   shopify auth login
+   ```sh
+   npx shopify auth login
    ```
 
 3. **Run health check**:
-   ```powershell
-   .\scripts\health\comprehensive-check.ps1
+   ```sh
+   node scripts/shared/run-powershell.cjs scripts/health/comprehensive-check.ps1
    ```
 
 ## Security Best Practices

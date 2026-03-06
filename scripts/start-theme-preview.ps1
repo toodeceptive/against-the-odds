@@ -1,5 +1,6 @@
 # Start theme preview and open approval file + browser (unified flow).
-# Delegates to open-preview-popup.ps1 so the user gets: pending-approval in Cursor, static AO preview in browser, theme dev in new window, live URL when server is ready.
+# Delegates to open-preview-popup.ps1 so the user gets: pending-approval in Cursor, static AO preview in browser,
+# and theme dev in a new window when the current desktop environment supports it.
 # Run from repo root. For theme changes, agents should run this after writing docs/status/pending-approval.md.
 
 $ErrorActionPreference = "Stop"

@@ -23,7 +23,7 @@ These workflows require the following secrets to be configured in GitHub:
 ### `ci.yml` (consolidated gate)
 
 - Runs on: Push to `main`, Pull requests targeting `main`
-- Actions: **arch_guard** (structural integrity), lint, format check, unit tests, build, Trivy (security scan), secret-scan, npm audit (continue-on-error), optional coverage, Lighthouse (continue-on-error), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all quality gates.
+- Actions: **arch_guard** (structural integrity), test job (format check, lint, unit tests, build, npm audit continue-on-error, Trivy continue-on-error upload), **secret-scan**, **quality** (`npm run quality` as the deterministic required gate, plus Lighthouse as informational `continue-on-error`), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all required native quality gates.
 
 **Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `npm run verify:pipeline`. CI runs arch_guard, lint, format check, unit tests, Trivy, secret-scan, and npm audit. The default local verify auto-skips the runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` when you want the full local integration gate.
 
@@ -74,9 +74,10 @@ These workflows require the following secrets to be configured in GitHub:
 - **CodeQL failing**: The `codeql.yml` workflow runs CodeQL analysis on push/PR to main. The analyze job has `continue-on-error: true` so a CodeQL failure does not block the run. To fix CodeQL itself: ensure JavaScript/TypeScript files are discoverable; see [CodeQL troubleshooting](https://docs.github.com/en/code-security/code-scanning/troubleshooting-code-scanning).
 - **Continuous AI statuses fail on PRs**: This repo treats native CI as authoritative. The `continuous_ai_bridge` job posts success back to the known `Continuous AI: ...` status contexts after `arch_guard`, `test`, `secret-scan`, and `quality` pass, so external paid-app failures do not block merges.
 
-## Branch protection (optional)
+## Branch protection (required on `main`)
 
 - **update-branch-protection-status-checks.js**: Run `node scripts/github/update-branch-protection-status-checks.js` (with GITHUB_TOKEN or .env.local) to set required status checks for `main` to the native CI job names: `test`, `secret-scan`, `quality`, `arch_guard`.
+- **Required checks**: `arch_guard`, `test`, `secret-scan`, and `quality`.
 - **Best practice**: Do not require external Codacy or Continuous AI status contexts in branch protection. Native GitHub Actions checks are the authoritative merge gate in this repo.
 - **If the script returns 403 `Resource not accessible by integration`**: the token lacks repo-admin permission for branch protection updates. In that case, update branch protection manually in GitHub settings or with an admin-scoped token; the `continuous_ai_bridge` job remains the in-repo workaround for failing external `Continuous AI: ...` statuses.
 

@@ -2,22 +2,23 @@
 
 **Purpose**: Index of agent and guru prompts. Use this as the prompt inventory; use `docs/AGENT_PROMPT_DECISION_TREE.md` as the routing authority for "which prompt when."
 
-**Last updated**: 2026-02-27.
+**Last updated**: 2026-03-06.
 
 ---
 
 ## Primary `/pp` and operator entry prompts
 
-| Prompt                                              | Purpose                                                                                        |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **AO_AGENT_PP_PROMPT.md**                           | AO agent in Prodigy Protocol mode. Invoke via `/pp` or `-pp`. Primary PP+AO prompt.            |
-| **PP_USER_PROMPT.md**                               | **Your go-to /pp prompt** — paste with /pp; empty = full project cycle.                        |
-| **PP_EXECUTE_PROJECT_PROMPT.md**                    | Full project PP cycle (delta audit, fixes, verify, log). Use with `/pp`.                       |
-| **PERFECT_DELTA_NATIVE_GURU_PP_PROMPT_20260306.md** | Current best delta-only guru PP prompt for native-CI, workflow, and merge-gate closure.        |
-| **PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**        | Guru expert followup: inventory alignment, fix-handoff-line, OpenClaw cleanup; use with `/pp`. |
-| **MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md**     | Lead-agent perfection prompt; worktree-coordinated; loop until complete.                       |
-| **GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md**             | Self-execute guru audit: audit → fix → verify → document; PP phases.                           |
-| **NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md**    | Instructions for new agent; paste prompt for new instance.                                     |
+| Prompt                                                             | Purpose                                                                                                              |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| **AO_AGENT_PP_PROMPT.md**                                          | AO agent in Prodigy Protocol mode. Invoke via `/pp` or `-pp`. Primary PP+AO prompt.                                  |
+| **PP_USER_PROMPT.md**                                              | **Your go-to /pp prompt** — paste with /pp; empty = full project cycle.                                              |
+| **PP_EXECUTE_PROJECT_PROMPT.md**                                   | Full project PP cycle (delta audit, fixes, verify, log). Use with `/pp`.                                             |
+| **NEW_GURU_EXPERT_TEAM_SYSTEM_OPTIMIZATION_PP_PROMPT_20260306.md** | Current best delta-only guru PP prompt for system optimization, native-CI, workflow truth, and merge-gate closure.   |
+| PERFECT_DELTA_NATIVE_GURU_PP_PROMPT_20260306.md                    | Earlier delta-native guru PP prompt; superseded by the NEW_GURU_EXPERT_TEAM_SYSTEM_OPTIMIZATION prompt when present. |
+| **PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**                       | Guru expert followup: inventory alignment, fix-handoff-line, OpenClaw cleanup; use with `/pp`.                       |
+| **MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md**                    | Lead-agent perfection prompt; worktree-coordinated; loop until complete.                                             |
+| **GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md**                            | Self-execute guru audit: audit → fix → verify → document; PP phases.                                                 |
+| **NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md**                   | Instructions for new agent; paste prompt for new instance.                                                           |
 
 ---
 

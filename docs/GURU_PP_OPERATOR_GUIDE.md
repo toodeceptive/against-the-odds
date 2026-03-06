@@ -72,7 +72,7 @@ For **deep-research backed setups** and **systems-wide improvements**:
 
 - **Daily**: `npm run quality` (format:check, lint, test:unit). See [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md).
 - **Before push**: `npm run verify:pipeline`. The default verify path auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent. Use `npm run verify:pipeline:strict` when you want the full local integration gate. See [.github/workflows/README.md](../.github/workflows/README.md).
-- **Integration (credential-gated)**: `.\scripts\run-runbook.ps1` (Shopify + GitHub checks). Run after credentials are set.
+- **Integration (credential-gated)**: `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1` (Shopify + GitHub checks). Run after credentials are set.
 
 ---
 
@@ -91,7 +91,7 @@ npm run verify:pipeline
 - **Without Shopify token**: Steps 1–4 pass and the runbook step is skipped as credential-gated.
 - **With credentials**: All steps pass when `SHOPIFY_ACCESS_TOKEN` (and optionally `GITHUB_TOKEN`) are set in `.env.local`.
 
-**Strict local closure**: `npm run verify:pipeline:strict` or `.\scripts\run-runbook.ps1` after credentials are configured.
+**Strict local closure**: `npm run verify:pipeline:strict` or `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1` after credentials are configured.
 
 ---
 
@@ -99,4 +99,4 @@ npm run verify:pipeline
 
 - **Rules**: [.cursor/rules/pp-basis.mdc](../.cursor/rules/pp-basis.mdc), [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md), [AGENTS.md](../AGENTS.md).
 - **Credentials**: [docs/CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md), [docs/BROWSER_CREDENTIAL_FLOW.md](BROWSER_CREDENTIAL_FLOW.md).
-- **Full setup**: `.\scripts\setup\full-setup.ps1` (or auto-configure-env.ps1); then run-runbook.ps1.
+- **Full setup**: `node scripts/shared/run-powershell.cjs scripts/setup/full-setup.ps1` (or `scripts/setup/auto-configure-env.ps1` via the same wrapper); then run `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1`.

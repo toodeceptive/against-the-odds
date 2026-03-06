@@ -6,24 +6,20 @@ Official Against The Odds brand website and Shopify store. Complete development 
 
 ## 🚀 Quick Start
 
-```powershell
+```sh
 # Clone the repository
 git clone https://github.com/toodeceptive/against-the-odds.git
 cd against-the-odds
 
-# Set up environment
-Copy-Item .env.example .env.local
-# Edit .env.local with your credentials
+# Create .env.local from the example (use cp on bash/zsh, Copy-Item on PowerShell)
+# Edit .env.local only if you need credential-gated Shopify/GitHub flows
 
 # Install dependencies
 npm install
 
-# Set up Shopify CLI
-npm install -g @shopify/cli @shopify/theme
-shopify auth login
-
-# Verify setup
-.\scripts\shopify\test-connection.ps1
+# Verify the repo-native baseline
+npm run quality
+npm run verify:pipeline
 ```
 
 ## 📋 Project Overview
@@ -62,9 +58,11 @@ against-the-odds/
 
 - Node.js and npm
 - Git
-- PowerShell (Windows)
+- PowerShell on Windows, or `pwsh` on Linux/macOS for PowerShell-backed scripts
 - Python 3.x (for Playwright webServer)
 - Shopify Partner account
+
+For cross-platform script execution, prefer `node scripts/shared/run-powershell.cjs <script.ps1>` (or the npm/task wrapper when available). Raw `.\scripts\...ps1` commands are the Windows/local PowerShell form.
 
 ### Common Tasks
 
@@ -128,21 +126,29 @@ This repo is set up for Cursor with rules, skills, and commands:
 - **Commands** (type `/` in Agent): **/review** (lint, format, tests; report only) and **/pr** (finalize branch for PR/handoff; commit and push only unless a PR step is explicitly requested).
 - **More**: [AGENTS.md](AGENTS.md) for agent permissions and [docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md](docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md) for optimization and personal settings.
 
-## 🔐 Environment Variables
+## 🔐 Credentials and Environment Variables
 
-Required environment variables (set in `.env.local`):
+Set values in `.env.local` only when you need the corresponding credential-gated flow:
 
 ```env
-# GitHub
-GITHUB_TOKEN=your_token_here
+# Repo metadata (useful defaults)
 GITHUB_USERNAME=toodeceptive
 GITHUB_REPO=against-the-odds
 
-# Shopify
+# Optional GitHub API auth (needed for repo-admin or API checks)
+GITHUB_TOKEN=your_token_here
+
+# Shopify Admin API (needed for product sync, strict runbook, and some backups)
+SHOPIFY_STORE_DOMAIN=aodrop.com
+SHOPIFY_ACCESS_TOKEN=your_access_token
+
+# Optional Shopify client-credentials inputs (one way to derive a token)
 SHOPIFY_API_KEY=your_api_key
 SHOPIFY_API_SECRET=your_api_secret
-SHOPIFY_ACCESS_TOKEN=your_access_token
-SHOPIFY_STORE_DOMAIN=aodrop.com
+
+# Optional theme helpers
+SHOPIFY_THEME_ID=your_theme_id
+SHOPIFY_CLI_THEME_TOKEN=your_theme_cli_token
 ```
 
 ## 🧪 Testing
