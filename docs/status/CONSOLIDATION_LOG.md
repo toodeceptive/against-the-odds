@@ -2,7 +2,43 @@
 
 **Purpose**: Single append-only log with dated entries per track; pointers to detailed reports. Documentation must match actual workflow state.
 
-**Path and commits**: All edits and commits to this file (and the repo) must be made from the **primary** repo path only (`C:/Users/LegiT/against-the-odds`). Git records only repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`); there is no worktree name in any Git path. **Policy**: If your diff or Source Control shows any path containing a worktree path (e.g. `hal`, `hvf`, `jxj`, `mhx`, or any path under `.cursor/worktrees/against-the-odds/` such as `.../jxj/docs/status/CONSOLIDATION_LOG.md`), you are in the wrong workspace and committing from here would violate this policy. Do **not** commit. Close this workspace, open **only** the primary repo (`C:/Users/LegiT/against-the-odds`) as the workspace root, then stage and commit from there so the policy is satisfied. See [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) and [TROUBLESHOOTING.md](../TROUBLESHOOTING.md).
+**Path and commits**: Commits to `main` should be made from the **primary** repo path (`C:/Users/LegiT/against-the-odds`). Commits to dedicated worktree feature branches are allowed from the active worktree. Git records only repo-relative paths (for example `docs/status/CONSOLIDATION_LOG.md`); there is no worktree name in any Git path. **Policy**: If Source Control shows stale/non-git worktree paths (for example `hal`, `hvf`, or unknown entries under `.cursor/worktrees/against-the-odds/` not present in `git worktree list`), stop and switch to a valid repo/worktree root before committing. See [WORKTREE_INVENTORY.md](WORKTREE_INVENTORY.md) and [TROUBLESHOOTING.md](../TROUBLESHOOTING.md).
+
+---
+
+## 2026-03-05 — Cycle 15 closure addendum (evidence correction)
+
+**Correction**: Cycle 15 previously ended with "Push to origin/main requires explicit user approval."
+
+**Resolved state**: User approval was received and push to `origin/main` was completed (`aa210e4..33469df`).
+
+**Evidence**: [Fix terminal setup error](9cdab730-d857-40c5-a298-53eaff68733b)
+
+---
+
+## 2026-03-05 — Cycle 17 master workflow consolidation and full /pp closure pass
+
+**Summary**: Executed a second full /pp guru cycle across all conversation results using a custom parallel agent team (inventory lane, md/plan consolidation lane, progression-evidence lane, independent verifier lane, lead orchestrator lane). Re-ran global inventory, deep audit, cleanup/remediation, prompt perfection, execution, and final audit.
+
+**Key fixes**:
+
+- Re-synced inventory drift after branch transition to `pp/guru-closure-20260305` (`c3d28d4`) in `BRANCH_INVENTORY.md` and `WORKTREE_INVENTORY.md`.
+- Updated marker and closure artifacts (`PP_AUDIT_MARKER.md`, `PP_AUDIT_CYCLE_20260227.md`) with current branch/worktree reality.
+- Added master canonical artifacts:
+  - `.cursor/plans/MASTER_ACTIVE_WORKFLOW.plan.md`
+  - `prompts/MASTER_ACTIVE_WORKFLOW_PROMPT.md`
+  - `docs/status/MASTER_AGENT_WORKFLOW_AUDIT_PLAN_20260305.md`
+- Advanced extension lane: installed required extensions (`ms-playwright.playwright`, `vitest.explorer`, `formulahendry.auto-rename-tag`, `shopify.theme-check-vscode`), reran `scripts/test/verify-extensions.ps1`, and marked extension plan verification tasks complete.
+- Consolidation cleanup: deleted superseded `.cursor/plans/30_guru_pp_passes_cohort_4.plan.md`.
+
+**Verification**: Full gates rerun in this cycle (format, lint, unit tests, pipeline verification with `-SkipRunbook`).
+
+**Evidence links**:
+
+- [Perfect prompt no execution](a559c490-dfe9-4992-8188-bdbe4206f7bf)
+- [OpenClaw cleanup regression check](0b2257f8-bd43-4c5e-93cd-effb638569a9)
+- [Guru expert orchestrator run](b981295f-547c-473e-a2c6-6e0fd7c6596f)
+- [Progression evidence audit run](a8767ec2-29e3-4486-8695-697df4ab42cb)
 
 ---
 

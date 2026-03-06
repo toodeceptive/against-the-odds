@@ -1,6 +1,8 @@
 # Plans index (repo)
 
-**Canonical plan**: `FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (open in Cursor and use Build). Phase 0 and Tracks A–G are completed; run **incremental fix list** only per plan.
+**Canonical execution plan**: `MASTER_ACTIVE_WORKFLOW.plan.md` (full guru /pp cycle with inventory → audit → remediation → consolidation → verification → finalize).
+
+**Canonical historical baseline plan**: `FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` (open in Cursor and use Build). Phase 0 and Tracks A–G are completed; run **incremental fix list** only per plan.
 
 **Run as needed (user-approved)**:
 

@@ -11,7 +11,7 @@
 | Label       | Path                                                    | Branch/HEAD                      | Commit  | Purpose                                  |
 | ----------- | ------------------------------------------------------- | -------------------------------- | ------- | ---------------------------------------- |
 | **Primary** | `C:/Users/LegiT/against-the-odds`                       | main                             | 90b197b | Primary repo checkout in current session |
-| **hkx**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/hkx` | (detached HEAD)                  | 90b197b | Active Cursor worktree in this run       |
+| **hkx**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/hkx` | pp/guru-closure-20260305         | c3d28d4 | Active Cursor worktree in this run       |
 | **mhx**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/mhx` | handoff-doc-permissions-20260129 | b0a8f30 | Active worktree on feature branch (user) |
 | **bjm**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bjm` | (detached HEAD)                  | 6e73084 | Worktree                                 |
 | **bri**     | `C:/Users/LegiT/.cursor/worktrees/against-the-odds/bri` | (detached HEAD)                  | c26bfe3 | Worktree                                 |
@@ -24,7 +24,7 @@
 
 **Removed (historical)**: ewa, snq, uub were removed via `git worktree remove`; opo and qqa are not in current `git worktree list`. **Not in git worktree list (stale in Cursor/IDE)**: **hal**, **hvf** — if Cursor shows "Failed to apply worktree" or paths under `hal` or `hvf`, remove those workspace entries from Cursor.
 
-**Important**: All commits to main (including CONSOLIDATION_LOG and worktree-doc fixes) must be made from the **primary** repo path only (`C:/Users/LegiT/against-the-odds`). Git stores paths relative to the repo root (e.g. `docs/status/CONSOLIDATION_LOG.md`), not under any worktree subfolder. **Before committing**: If your diff or Source Control shows a path containing any worktree name (e.g. `hal`, `hvf`, `jxj`, `mhx`) or any path under `.cursor/worktrees/against-the-odds/`, you are in the wrong workspace; committing from here would violate the policy. Do **not** commit. Close that root, open **only** the primary repo (`C:/Users/LegiT/against-the-odds`) as the workspace, then stage and commit from there so the policy is satisfied.
+**Important**: Commits to `main` must be made from the **primary** repo path (`C:/Users/LegiT/against-the-odds`). Commits to dedicated worktree feature branches (for example `pp/guru-closure-20260305` in `hkx`) are allowed from that active worktree. Git stores paths relative to the repo root (for example `docs/status/CONSOLIDATION_LOG.md`), not under worktree subfolders. If Source Control shows paths under stale/non-git worktrees (`hal`, `hvf`, or unknown entries not in `git worktree list`), close that workspace and reopen a valid repo/worktree root before committing.
 
 ---
 

@@ -45,6 +45,7 @@ Execute a delta-only closure pass that resolves high-impact documentation and wo
    - Stage only files changed by this cycle.
    - Commit with a message that reflects audit + remediation + indexing.
    - Push to a remote branch (do not force push; do not push to main without explicit approval).
+   - Update both `docs/status/CONSOLIDATION_LOG.md` and `docs/status/PP_AUDIT_CYCLE_20260227.md` with commit hash, pushed branch, approval state (if applicable), and at least one parent transcript citation.
 
 ---
 

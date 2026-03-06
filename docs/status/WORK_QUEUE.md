@@ -19,7 +19,8 @@ Single source of truth for active execution. This queue is compression-first and
 ## P2
 
 - [ ] Clean residual stale references in older audit docs only when touched by active work.
-- [ ] Complete extension verification lane in `.cursor/plans/extensions_setup_and_utilization.plan.md` (`verify-install`, `verify`) and record evidence.
+- [x] Complete extension verification lane in `.cursor/plans/extensions_setup_and_utilization.plan.md` (`verify-install`, `verify`) and record evidence.
+- [ ] Investigate optional Playwright E2E best-effort failure in `scripts/test/verify-extensions.ps1` (unit and theme-check lanes already pass).
 - [ ] Resolve `config/shopify/.shopify-cli.yml` `application_url` TODO when Shopify CLI app setup is actively required.
 - [ ] Run Codacy MCP per-file analysis when Codacy MCP tools are available in-session; otherwise keep fallback verification evidence.
 

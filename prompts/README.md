@@ -13,8 +13,8 @@
 | **AO_AGENT_PP_PROMPT.md**                        | AO agent in Prodigy Protocol mode. Invoke via `/pp` or `-pp`. Primary PP+AO prompt.            |
 | **PP_USER_PROMPT.md**                            | **Your go-to /pp prompt** — paste with /pp; empty = full project cycle.                        |
 | **PP_EXECUTE_PROJECT_PROMPT.md**                 | Full project PP cycle (delta audit, fixes, verify, log). Use with `/pp`.                       |
+| **MASTER_ACTIVE_WORKFLOW_PROMPT.md**             | Canonical full-cycle prompt for inventory, audit, consolidation, verification, and closure.    |
 | **PERFECT_FOLLOWUP_PLAN_PROMPT_20260305.md**     | Latest guru followup plan: full audit closure, inventory/marker drift fixes, and verification. |
-| **PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**     | Guru expert followup: inventory alignment, fix-handoff-line, OpenClaw cleanup; use with `/pp`. |
 | **MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md**  | Lead-agent perfection prompt; worktree-coordinated; loop until complete.                       |
 | **GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md**          | Self-execute guru audit: audit → fix → verify → document; PP phases.                           |
 | **NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md** | Instructions for new agent; paste prompt for new instance.                                     |
@@ -58,13 +58,14 @@ Use when assigning work to a specific guru/expert domain.
 
 ## Legacy / one-off
 
-| Prompt                                     | Note                     |
-| ------------------------------------------ | ------------------------ |
-| FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md | Full system test run.    |
-| PROCEED_UNFINISHED_WORKS_GURU_PROMPT.md    | Proceed unfinished work. |
-| AGENT_SELF_IMPROVEMENT_EXECUTION_PROMPT.md | Self-improvement.        |
-| PERFECT_EXECUTION_PROMPT.md                | Perfect execution.       |
-| head-guru-orchestrator.md                  | Orchestrator role.       |
+| Prompt                                     | Note                                                   |
+| ------------------------------------------ | ------------------------------------------------------ |
+| FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md | Full system test run.                                  |
+| PROCEED_UNFINISHED_WORKS_GURU_PROMPT.md    | Proceed unfinished work.                               |
+| AGENT_SELF_IMPROVEMENT_EXECUTION_PROMPT.md | Self-improvement.                                      |
+| PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md   | Historical followup baseline (superseded by 20260305). |
+| PERFECT_EXECUTION_PROMPT.md                | Perfect execution.                                     |
+| head-guru-orchestrator.md                  | Orchestrator role.                                     |
 
 ---
 

@@ -4,7 +4,7 @@ overview: Setup, configure, and fully utilize the five recommended extensions (P
 todos:
   - id: verify-install
     content: Verify all extensions installed; add XML Tools if desired
-    status: pending
+    status: completed
   - id: settings
     content: Update .cursor/settings.json with extension-specific settings
     status: completed
@@ -25,7 +25,7 @@ todos:
     status: completed
   - id: verify
     content: Run verification checklist
-    status: pending
+    status: completed
 isProject: false
 ---
 
@@ -51,6 +51,8 @@ The project recommends these extensions in [.cursor/extensions.json](../extensio
 - **XML Tools** (`DotJoshJohnson.xml`) — not recommended; add if XML feeds/sitemaps needed
 
 **Critical**: The Shopify Liquid extension activates on `workspaceContains:**/.theme-check.yml`. Creating `.theme-check.yml` is required for Theme Check diagnostics.
+
+**2026-03-05 verification note**: Required extensions were installed and `scripts/test/verify-extensions.ps1` was rerun. Unit + Theme Check lanes pass; Playwright E2E remains a documented best-effort/environment lane.
 
 ---
 

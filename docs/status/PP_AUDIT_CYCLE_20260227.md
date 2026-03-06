@@ -138,7 +138,11 @@
 
 ## Cycle 15: PP re-run — progress-check, perfect prompt, commit (2026-02-27)
 
-**Scope**: User re-requested full PP cycle. **Progress-check**: Cycle 14 staged state intact; no new drift. **Perfected**: Audit doc (inventories/staged/fix-handoff resolved); followup plan (Step 4: commit then push with approval). **Execute**: Quality ✓; commit a3ee76f. **Pending**: User approval for push to origin/main.
+**Scope**: User re-requested full PP cycle. **Progress-check**: Cycle 14 staged state intact; no new drift. **Perfected**: Audit doc (inventories/staged/fix-handoff resolved); followup plan (Step 4: commit then push with approval). **Execute**: Quality ✓; commit a3ee76f. **Initial status**: pending user approval for push to origin/main.
+
+**Closure update**: User approval was later provided; push to `origin/main` completed (`aa210e4..33469df`).
+
+**Evidence**: [Fix terminal setup error](9cdab730-d857-40c5-a298-53eaff68733b)
 
 ---
 
@@ -170,6 +174,40 @@
 
 - Extension verification checklist items remain manual (`verify-install`, `verify` in extensions plan).
 - Credential-gated runbook closure remains deferred by design.
+
+---
+
+## Cycle 17: Full conversation-scope master consolidation and closure (2026-03-05)
+
+**Scope**: Executed full /pp cycle over all work/results in this conversation. Built custom subagent team and merged outputs into one remediation + consolidation pass.
+
+**Custom team lanes**:
+
+- Inventory drift lane (branches/worktrees/marker)
+- MD/plan consolidation lane
+- Progression-evidence lane
+- Independent verifier lane
+- Lead orchestrator lane
+
+**Actions**:
+
+- Corrected post-branch-switch inventory drift (`BRANCH_INVENTORY.md`, `WORKTREE_INVENTORY.md`, `PP_AUDIT_MARKER.md`).
+- Added cycle-closure evidence correction for Cycle 15 push approval/push completion.
+- Created canonical master artifacts:
+  - `.cursor/plans/MASTER_ACTIVE_WORKFLOW.plan.md`
+  - `prompts/MASTER_ACTIVE_WORKFLOW_PROMPT.md`
+  - `docs/status/MASTER_AGENT_WORKFLOW_AUDIT_PLAN_20260305.md`
+- Updated prompt/report indexes and follow-up prompt closure requirements.
+- Advanced extension verification lane by installing required extensions and rerunning verification script.
+- Deleted safe superseded file: `.cursor/plans/30_guru_pp_passes_cohort_4.plan.md`.
+
+**Verification**: format:check, lint, test:unit, verify-pipeline (`-SkipRunbook`) rerun in-cycle.
+
+**Evidence**:
+
+- [Perfect prompt no execution](a559c490-dfe9-4992-8188-bdbe4206f7bf)
+- [OpenClaw cleanup regression check](0b2257f8-bd43-4c5e-93cd-effb638569a9)
+- [Progression evidence audit run](a8767ec2-29e3-4486-8695-697df4ab42cb)
 
 ---
 

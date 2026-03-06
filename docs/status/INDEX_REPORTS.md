@@ -4,7 +4,7 @@
 
 **Purpose**: Single index of report- and status-style markdown files so agents and humans know what is current vs legacy and where to look.
 
-**Counts (2026-03)**: docs/ **141 files** total; docs/status/ **65 files**; tracked files in repo **508**. Full inventory methodology remains in `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`.
+**Counts (2026-03)**: docs/ **142 files** total; docs/status/ **66 files**; tracked files in repo **512**. Full inventory methodology remains in `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`.
 
 ---
 
@@ -36,7 +36,10 @@ Use these first for pipeline, branches, worktrees, and handoff.
 | **CONVERSATION_AND_COMPLETION_AUDIT_20260207.md**                          | Audit of conversation and work; goals vs achievement; worktrees; finalizations                                                                                   |
 | **FIX_AND_PERFECT_PLAN_20260207.md**                                       | Phase 3 audit findings; P0 (hardcoded paths), P1 (runbook), P2 (inventories); Phase 3b fixes applied                                                             |
 | **prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md** (root)             | Lead-agent perfection prompt; worktree-coordinated; loop until complete; assign new teams if stopped short                                                       |
+| **.cursor/plans/MASTER_ACTIVE_WORKFLOW.plan.md**                           | Canonical active /pp execution plan: inventory, audit, remediation, consolidation, verification, finalize                                                        |
 | **.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md**                   | 7-step execution plan for Master Guru E2E run; status table and completion criteria                                                                              |
+| **docs/status/MASTER_AGENT_WORKFLOW_AUDIT_PLAN_20260305.md**               | Master conversation-scope audit, team lanes, consolidation decisions, and closure plan                                                                           |
+| **prompts/MASTER_ACTIVE_WORKFLOW_PROMPT.md**                               | Canonical master prompt for full guru /pp closure cycles                                                                                                         |
 | **.cursor/plans/ao_agent_pp_prompt_conversion.plan.md**                    | AO Agent PP Prompt Conversion (V11): complete; remove OpenClaw from session-start; create -pp / /pp AO prompt (2026-02-27)                                       |
 | **PP_AUDIT_CYCLE_20260227.md**                                             | PP audit cycles 1–16 including 2026-03-05 full guru closure cycle                                                                                                |
 | **GURU_EXPERT_REVIEW_AUDIT_ANALYSIS_20260305.md**                          | Latest guru expert review, audit, analysis with prioritized findings and closure evidence                                                                        |
