@@ -6,7 +6,7 @@
 
 ## Directive
 
-Proceed with **all unfinished works** after in-depth, comprehensive research, review, analyses, and auditing. I approve **all actions** to proceed progressively: audit, check, run Codacy operations, optimize, perfect, and finalize/commit/push any and all works after thorough review and analysis, in-depth expert guru research, and auditing. I also approve running secrets functions (e.g. `set-secrets-from-env.ps1`) when needed.
+Proceed with **all unfinished works** after in-depth, comprehensive research, review, analyses, and auditing. I approve **all actions** to proceed progressively: audit, check, optimize, perfect, and finalize/commit/push any and all works after thorough review and analysis, in-depth expert guru research, and auditing. I also approve running secrets functions (e.g. `set-secrets-from-env.ps1`) when needed.
 
 ---
 
@@ -15,22 +15,17 @@ Proceed with **all unfinished works** after in-depth, comprehensive research, re
 1. **Research & audit**
    - Read `docs/status/WORK_QUEUE.md`, `docs/status/PP_AUDIT_MARKER.md`, `docs/status/CONSOLIDATION_LOG.md` (latest entries first).
    - Check `git status`, `git log --oneline -5`; identify uncommitted changes and remaining blockers.
-   - Review Problems panel / linter output for all reported issues (ESLint, Codacy Lizard, markdownlint, etc.).
+   - Review Problems panel / linter output for all reported issues (ESLint, Lizard, markdownlint, etc.).
 
 2. **Fix all problems**
    - Resolve every console/linter problem (e.g. MD031 blanks-around-fences, Lizard cyclomatic complexity, NLOC limits).
    - Run `npm run quality`, `.\scripts\verify-pipeline.ps1 -SkipRunbook`, and `.\scripts\run-runbook.ps1 -StrictSecrets` (when creds present).
 
-3. **Codacy operations**
-   - Run `codacy_cli_analyze` on each edited file per `.cursor/rules/codacy.mdc`.
-   - After npm install or dependency changes, run Codacy with tool `trivy`.
-   - Apply fixes for any issues found.
-
-4. **Optimize & perfect**
+3. **Optimize & perfect**
    - Refactor for complexity (extract helpers, reduce cyclomatic complexity below Lizard threshold 8, NLOC below 50 per function where possible).
    - Align docs with actual state; update WORK_QUEUE, PP_AUDIT_MARKER, CONSOLIDATION_LOG as needed.
 
-5. **Finalize**
+4. **Finalize**
    - Commit with clear messages; push to `main` when approved.
    - For store-affecting changes (theme push, product sync, secrets): follow preview-before-apply; write to `docs/status/deploy-log.md` after apply.
 
@@ -64,7 +59,6 @@ Proceed with **all unfinished works** after in-depth, comprehensive research, re
 
 - **Preview before apply** for store-affecting changes; no secrets in commits.
 - **Use user's browser** when credential or admin flows require it.
-- **Codacy**: Run analyze on edited files; run Trivy after dependency changes.
 
 ---
 

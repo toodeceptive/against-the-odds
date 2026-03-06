@@ -1,6 +1,5 @@
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+.tools/
 # Structural state is script-generated; reformatting invalidates signature
 infra/STRUCTURAL_STATE.json
-# .codacy/codacy.yaml: Codacy CLI runtime config; Prettier YAML conflicts with Codacy expected format
-.codacy/codacy.yaml

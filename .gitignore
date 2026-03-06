@@ -72,6 +72,7 @@ docs/screenshots/*.jpg
 # Cache
 cache/
 *.cache
+.tools/
 
 # Browser automation temp files
 scripts/**/extract-*-temp.js

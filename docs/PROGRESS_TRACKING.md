@@ -23,7 +23,7 @@
 
 ### Agent system health
 
-- **MCP availability**: GitHub/Codacy MCP reachable status and drift notes
+- **MCP availability**: GitHub MCP reachable status and drift notes
 - **Command/task parity**: slash commands and Cursor tasks match docs and current workflows
 - **Worktree routing**: live `git worktree list` agrees with documented guidance
 - **Ignore/indexing hygiene**: `.cursorignore` / `.cursorindexingignore` still match desired search scope

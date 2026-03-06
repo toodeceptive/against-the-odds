@@ -99,11 +99,11 @@ These are set in **Cursor Settings** (UI), not in the repo. Configure for best a
 
 ## 7. Extensions alignment
 
-All recommended extensions are **free**, **guru/expert-approved**, and **compatible** with this repo (Node, ESLint, Prettier, Vitest, Playwright, Shopify Liquid, PowerShell, Codacy, Markdown, YAML).
+All recommended extensions are **free**, **guru/expert-approved**, and **compatible** with this repo (Node, ESLint, Prettier, Vitest, Playwright, Shopify Liquid, PowerShell, Markdown, YAML).
 
-| Source                      | Extensions                                                                                                                                                                                                                                                            |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **.cursor/extensions.json** | EditorConfig, PowerShell, Prettier, ESLint, Playwright, Vitest, GitLens, GitHub PR, dotenv, markdownlint, YAML, TypeScript Next, Tailwind, auto-rename-tag, path-intellisense, **Shopify Theme Check**, **Codacy**, Python (18). Copilot/Copilot Chat omitted (paid). |
+| Source                      | Extensions                                                                                                                                                                                                                                                |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **.cursor/extensions.json** | EditorConfig, PowerShell, Prettier, ESLint, Playwright, Vitest, GitLens, GitHub PR, dotenv, markdownlint, YAML, TypeScript Next, Tailwind, auto-rename-tag, path-intellisense, **Shopify Theme Check**, Python (17). Copilot/Copilot Chat omitted (paid). |
 
 **Done**: **.cursor/extensions.json** is the tracked source for extension recommendations in this repo. No paid extensions (e.g. Copilot) are in the list; add them locally if desired.
 
@@ -122,13 +122,12 @@ Per [.cursor/plans/extensions_setup_and_utilization.plan.md](../../.cursor/plans
 
 ## 7b. Known issues and inhibiting factors
 
-| Issue                                            | Impact                                 | Mitigation                                  |
-| ------------------------------------------------ | -------------------------------------- | ------------------------------------------- |
-| Codacy ESLint 8 vs repo ESLint 9                 | Duplicate or conflicting lint results  | Document; verify Codacy flat config support |
-| Shopify Liquid formatter dev preview             | May be unstable                        | Fallback: disable formatOnSave for liquid   |
-| Theme Check requires .theme-check.yml            | Extension will not activate without it | Create at repo root (done)                  |
-| Playwright baseURL vs webServer                  | Tests may hit wrong URL                | Verify test intent                          |
-| run-all.ps1 does not run test:shopify by default | Shopify E2E not in "all" run           | Use `-Shopify` flag                         |
+| Issue                                            | Impact                                 | Mitigation                                |
+| ------------------------------------------------ | -------------------------------------- | ----------------------------------------- |
+| Shopify Liquid formatter dev preview             | May be unstable                        | Fallback: disable formatOnSave for liquid |
+| Theme Check requires .theme-check.yml            | Extension will not activate without it | Create at repo root (done)                |
+| Playwright baseURL vs webServer                  | Tests may hit wrong URL                | Verify test intent                        |
+| run-all.ps1 does not run test:shopify by default | Shopify E2E not in "all" run           | Use `-Shopify` flag                       |
 
 ---
 
@@ -163,7 +162,6 @@ Per [.cursor/plans/extensions_setup_and_utilization.plan.md](../../.cursor/plans
 
 ## 11. Cross-references
 
-- **Codacy MCP troubleshooting**: [docs/CODACY_MCP_SETUP.md](../CODACY_MCP_SETUP.md)
 - **Agentic setup (rules/skills/subagents)**: [AGENTIC_SETUP_AUDIT.md](AGENTIC_SETUP_AUDIT.md)
 - **Agent workflow (Shopify, preview, runbook)**: [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md), [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../AGENT_WORKFLOW_CURSOR_SHOPIFY.md)
 - **Skills index**: [.cursor/skills/README.md](../../.cursor/skills/README.md)

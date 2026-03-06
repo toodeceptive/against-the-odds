@@ -47,6 +47,6 @@
 
 ---
 
-## 5. Codacy MCP
+## 5. MCP variance
 
-If Codacy MCP unavailable: reset MCP in extension; verify Copilot MCP in GitHub settings. Then run analysis on edited files.
+If optional MCP servers are unavailable in a given environment, continue with repo-native verification commands and classify the unavailable MCP lane as environment-specific rather than a hard blocker.

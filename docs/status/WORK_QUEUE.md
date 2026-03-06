@@ -28,7 +28,6 @@ Single source of truth for active execution. This queue is compression-first and
 - [x] Run browser-admin checks in GitHub settings (`branches`, `rules`, `security_analysis`) using logged-in session.
 - [x] Resolve stale local lock handles on `infra/STRUCTURAL_*` files and unblock rebase on `main`.
 - [x] Re-run strict verification matrix and capture deterministic blocker evidence.
-- [x] Revalidate Codacy MCP analyze path end-to-end (MCP reachable, CLI install repaired, per-file analyze pass).
 - [x] Publish integration cost/value audit and optimal default stack (`docs/status/INTEGRATION_STACK_COST_VALUE_AUDIT_20260226.md`).
 - [x] Generate and execute recursive prompts (`V6` + `V7` delta-only) for non-redundant closure.
 - [x] Complete GitHub CLI authentication and scope refresh (`repo`, `workflow`, `read:org`) for strict secrets closure. Closed: set-secrets-from-env.ps1 executed; SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN in repo Secrets.

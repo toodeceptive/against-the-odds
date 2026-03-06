@@ -11,10 +11,6 @@
         "-y",
         "@modelcontextprotocol/server-github"
       ]
-    },
-    "codacy": {
-      "command": "npx",
-      "args": ["-y", "@codacy/codacy-mcp@latest"]
     }
   }
 }

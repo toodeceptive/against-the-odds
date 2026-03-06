@@ -2,3 +2,4 @@ archive/**
 coverage/**
 playwright-report/**
 test-results/**
+.tools/**
