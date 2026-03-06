@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Setup Environment",
+      "label": "Setup Environment (env only)",
       "type": "shell",
       "command": "node",
       "args": ["scripts/shared/run-powershell.cjs", "scripts/setup/auto-configure-env.ps1"],
@@ -27,7 +27,7 @@
       "problemMatcher": []
     },
     {
-      "label": "Run Tests",
+      "label": "Run Unit Tests",
       "type": "shell",
       "command": "npm",
       "args": ["run", "test:unit"],
@@ -69,14 +69,14 @@
       "problemMatcher": []
     },
     {
-      "label": "Preview Product Sync",
+      "label": "Preview Product Sync (Dry Run)",
       "type": "shell",
       "command": "node",
       "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/sync-products.ps1", "-DryRun"],
       "problemMatcher": []
     },
     {
-      "label": "Apply Product Sync",
+      "label": "Apply Product Sync (after approval)",
       "type": "shell",
       "command": "node",
       "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/sync-products.ps1"],
@@ -176,7 +176,7 @@
       "problemMatcher": []
     },
     {
-      "label": "Shopify: Theme update → preview → save",
+      "label": "Shopify: Theme update → preview → optional direct push (legacy)",
       "type": "shell",
       "command": "node",
       "args": [
@@ -245,8 +245,8 @@
     {
       "label": "Run All Tests (unit+integration+e2e)",
       "type": "shell",
-      "command": "node",
-      "args": ["scripts/shared/run-powershell.cjs", "scripts/test/run-all.ps1"],
+      "command": "npm",
+      "args": ["run", "test:all"],
       "problemMatcher": []
     },
     {

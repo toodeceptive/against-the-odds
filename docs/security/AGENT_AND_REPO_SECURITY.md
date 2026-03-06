@@ -23,7 +23,8 @@ Summary for Cursor agents and operators: where secrets live, preview-before-appl
 
 ## Branch protection
 
-- **main** (and optionally `shopify-theme`): Require a pull request before merging; at least one approval (or owner merge). Optional: require status checks (CI, lint).
+- **main** (and optionally `shopify-theme`): Require a pull request before merging; at least one approval (or owner merge). Require native status checks `arch_guard`, `test`, `secret-scan`, and `quality`.
+- **Do not require** retired Codacy checks or external `Continuous AI: ...` statuses in branch protection; the repo uses native GitHub Actions as the authoritative gate.
 - **Document** in repo so agents open PRs for store-affecting changes when that gate is desired.
 
 ---

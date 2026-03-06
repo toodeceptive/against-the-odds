@@ -30,7 +30,7 @@ This repo also includes an always-on rule that runs **PP** as the default execut
 ## Commands (type `/` in Agent)
 
 - **/review**: Lint, format check, tests; summary only (no edits).
-- **/pr**: Commit, push, open PR for current changes (uses `gh pr create` when available).
+- **/pr**: Finalize current branch for PR/handoff; commit and push only unless PR creation is explicitly requested.
 
 ## Subagents
 

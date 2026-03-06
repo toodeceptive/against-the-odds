@@ -29,7 +29,7 @@
 | B    | Run `scripts/github/verify-secrets.ps1 -FailOnPermissionDenied`             | Exit 0, no 403   |
 | C    | Run `scripts/run-runbook.ps1 -StrictSecrets`                                | Exit 0           |
 | D    | Browser: verify branch protection + code scanning at repo settings          | Already verified |
-| E    | Run `npm run quality` and `scripts/verify-pipeline.ps1 -SkipRunbook`        | Both pass        |
+| E    | Run `npm run quality` and `npm run verify:pipeline`                         | Both pass        |
 | F    | Update WORK_QUEUE, PP_AUDIT_MARKER, CONSOLIDATION_LOG                       | Already current  |
 | G    | Commit (logical batches), push main, confirm CI green                       | Done             |
 

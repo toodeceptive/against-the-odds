@@ -42,7 +42,7 @@ Deliver theme updates through preview-first flow, then apply only after explicit
 
 - `./scripts/shopify/theme-dev.ps1` (preview)
 - `npm run quality`
-- `./scripts/verify-pipeline.ps1 -SkipRunbook`
+- `npm run verify:pipeline`
 
 ## Logging
 

@@ -95,7 +95,7 @@ Use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to pick:
 Agents can execute existing PowerShell scripts:
 
 ```javascript
-execSync('powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1');
+execSync('node scripts/shared/run-powershell.cjs scripts/setup/auto-configure-env.ps1');
 ```
 
 ### Use Browser Automation
@@ -112,7 +112,7 @@ const browser = await connectToBrowser();
 Agents can use API scripts:
 
 ```javascript
-execSync('powershell -ExecutionPolicy Bypass -File scripts/shopify/test-connection.ps1');
+execSync('node scripts/shared/run-powershell.cjs scripts/shopify/test-connection.ps1');
 ```
 
 ## Safety Considerations

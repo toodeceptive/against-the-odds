@@ -25,9 +25,9 @@ This runbook assumes you will use the new **Finalization Team** prompts in `prom
   - GitHub auth/secrets verified (as applicable): `scripts/github/*`
 - **Quality gates green**:
   - `npm run quality`
-  - `npm run verify:pipeline` (or `.\scripts\verify-pipeline.ps1`; use `-SkipRunbook` when credentials are intentionally absent)
+  - `npm run verify:pipeline` (default auto-skips the credential-gated runbook step when Shopify credentials are absent)
 - **Credentialed operational check**:
-  - `.\scripts\run-runbook.ps1` after credentials are configured or refreshed
+  - `npm run verify:pipeline:strict` or `.\scripts\run-runbook.ps1` after credentials are configured or refreshed
 - **Extended validation (optional deeper pass)**:
   - `npm run test:all`
   - `scripts/health/comprehensive-check.ps1`

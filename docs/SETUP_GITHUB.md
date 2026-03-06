@@ -64,9 +64,12 @@ git push -u origin feature/template
 2. Add rule for `main` branch:
    - ✅ Require pull request reviews before merging
    - ✅ Require status checks to pass before merging
+   - ✅ Require native status checks: `arch_guard`, `test`, `secret-scan`, `quality`
    - ✅ Require conversation resolution before merging
    - ✅ Include administrators
    - ✅ Restrict pushes that create files larger than 100MB
+
+   Do **not** require retired Codacy checks or external `Continuous AI: ...` statuses; the repo-native GitHub Actions checks are authoritative.
 
 3. Do not add a `develop` rule in this repository (main-only strategy).
 
@@ -142,7 +145,7 @@ After setting up GitHub Actions workflows:
 
 3. **Create Test PR**:
    - Create pull request from `test/ci-workflow` to `main`
-   - Verify status checks appear
+   - Verify status checks appear (`arch_guard`, `test`, `secret-scan`, `quality`)
    - Merge after verification
 
 ## Step 7: Automation Scripts

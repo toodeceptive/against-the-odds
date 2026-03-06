@@ -19,7 +19,7 @@ Proceed with **all unfinished works** after in-depth, comprehensive research, re
 
 2. **Fix all problems**
    - Resolve every console/linter problem (e.g. MD031 blanks-around-fences, Lizard cyclomatic complexity, NLOC limits).
-   - Run `npm run quality`, `.\scripts\verify-pipeline.ps1 -SkipRunbook`, and `.\scripts\run-runbook.ps1 -StrictSecrets` (when creds present).
+   - Run `npm run quality`, `npm run verify:pipeline`, and `.\scripts\run-runbook.ps1 -StrictSecrets` (when creds present).
 
 3. **Optimize & perfect**
    - Refactor for complexity (extract helpers, reduce cyclomatic complexity below Lizard threshold 8, NLOC below 50 per function where possible).

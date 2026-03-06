@@ -69,7 +69,7 @@ pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1 -FailOnPermissio
 ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s infra/STRUCTURAL_SIGNATURE.txt < infra/STRUCTURAL_STATE.json
 ```
 
-Use `-SkipRunbook` for verify-pipeline if `.env.local` lacks Shopify creds. Credential-gated commands may fail; document result.
+Use `npm run verify:pipeline` for the default credential-aware path. Use `npm run verify:pipeline:strict` when local Shopify creds are expected. Credential-gated commands may fail; document result.
 
 ---
 

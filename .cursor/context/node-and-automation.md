@@ -20,7 +20,7 @@ With Chrome launch and login prompt:
 
 Uses store ID (e.g. `nbxwpf-z1` for aodrop.com) for direct navigation to Apps > Development. Full flow and fallbacks: **docs/SHOPIFY_APP_SETUP_AUTOMATION.md**.
 
-**Store operations (ongoing):** Initial setup, store changes, Printify, image optimization, orders — see **docs/STORE_OPERATIONS_AUTOMATION.md**. Entry points: `setup-app-access.ps1`, `products/sync.ps1`, `shopify/optimize-images.ps1`, theme scripts, E2E + desktop fallbacks.
+**Store operations (ongoing):** Initial setup, store changes, Printify, image optimization, orders — see **docs/STORE_OPERATIONS_AUTOMATION.md**. Entry points: `setup-app-access.ps1`, `shopify/sync-products.ps1`, `shopify/optimize-images.ps1`, theme scripts, E2E + desktop fallbacks.
 
 ---
 

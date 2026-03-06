@@ -13,7 +13,7 @@
 ### Phase 1: Audit
 
 - [ ] Run `npm run quality` (format, lint, test:unit)
-- [ ] Run `scripts/verify-pipeline.ps1 -SkipRunbook`
+- [ ] Run `npm run verify:pipeline`
 - [ ] Read workflows: ci.yml, maintenance.yml, codeql.yml, shopify-sync.yml, sync-theme-branch.yml
 - [ ] Read .prettierignore, package.json (scripts, lint-staged)
 - [ ] Check ReadLints on .github/workflows

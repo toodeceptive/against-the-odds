@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-03-07 — Obsolete active-surface cleanup: task labels, legacy wrapper de-emphasis, and command/doc realignment
+
+**Summary**: Ran a delta-only cleanup pass focused on currently active useless or outdated surfaces rather than historical archives. **Fixed**: corrected the broken `/pp` command prompt paths in `.cursor/commands/pp/COMMAND.md`; renamed misleading Cursor tasks in `.cursor/tasks.json` (setup env-only, unit tests, preview/apply product sync, legacy direct theme update helper) and repointed `Run All Tests` to the canonical `npm run test:all` instead of the PowerShell wrapper. **Agent and context cleanup**: removed `scripts/products/sync.ps1` from the primary owned scope in `storeops_productsync`, updated `node-and-automation.md` and `shopify.md` to treat `scripts/shopify/sync-products.ps1` as the primary product-sync path and the `scripts/products/sync.ps1` wrapper as legacy/import-export utility only. **Docs/prompts realigned**: updated current-facing docs/prompts/plans (`README.md`, `FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`, `AGENT_PROMPTS.md`, `FINALIZATION_RUNBOOK.md`, `WORKFLOW_PIPELINE_VISUAL_GUIDE.md`, `AGENT_AND_REPO_SECURITY.md`, `SETUP_GITHUB.md`, `STORE_OPERATIONS_AUTOMATION.md`, `.cursor/skills/README.md`, `MASTER_GURU_E2E_PERFECTION_RUN.plan.md`, `guru_full-system_setup_and_automation.plan.md`, and current PP/finalization prompts) so they no longer teach stale `/pr` semantics, obsolete `-SkipRunbook` verify commands, or legacy product-sync/task names.
+
+**Verification**: `npm run quality` PASS. `npm run verify:pipeline` PASS (credential-aware default path; runbook skipped because `SHOPIFY_ACCESS_TOKEN` is absent).
+
+**Outcome**: Current repo-facing tasks, commands, prompts, agent contexts, and operator docs now point to the active workflow surface instead of obsolete wrappers or superseded task names. Historical logs and archived reports were intentionally left intact as history because they no longer steer active execution.
+
+---
+
 ## 2026-03-06 — Verify-pipeline ergonomics fix: default pass, strict credential gate preserved
 
 **Summary**: Identified the highest-value remaining repo-side friction point after the native CI / Continuous AI merge-gate cleanup: the default `npm run verify:pipeline` path still failed in environments without Shopify credentials, even though the docs treated that credential gate as optional. **Fix**: updated `scripts/verify-pipeline.ps1` so the default run auto-skips only the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent, while adding explicit strict mode via `-RequireRunbook`. Added `npm run verify:pipeline:strict` in `package.json` to preserve the full local integration gate when credentials are expected. Updated the canonical operator docs (`OPERATOR_RUNBOOK.md`, `docs/GURU_PP_OPERATOR_GUIDE.md`, `docs/status/AGENT_AUTOMATION_READINESS.md`, `.github/workflows/README.md`, `scripts/README.md`) and the delta-native PP prompt to reflect the new default-vs-strict behavior.

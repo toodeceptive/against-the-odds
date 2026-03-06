@@ -64,7 +64,7 @@ Execute a **deep-research self-audit** and apply fixes to restore and exceed pri
    - Avoid partial fixes that leave inconsistent state.
 
 3. **Verification loop**
-   - After fixes: `npm run quality` → `verify-pipeline.ps1 -SkipRunbook` → commit only when green.
+   - After fixes: `npm run quality` → `npm run verify:pipeline` → commit only when green.
 
 ## Phase 4: Document & Prevent
 
@@ -88,7 +88,7 @@ Execute a **deep-research self-audit** and apply fixes to restore and exceed pri
 
 - Problems panel: 0 errors.
 - `npm run quality` passes.
-- `verify-pipeline.ps1 -SkipRunbook` passes.
+- `npm run verify:pipeline` passes.
 - All edits committed with clear messages.
 - This prompt and checklists updated for future runs.
 

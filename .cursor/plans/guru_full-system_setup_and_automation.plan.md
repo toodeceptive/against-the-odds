@@ -81,16 +81,16 @@ This plan covers prepare-to-build (Phase 0) and four execution phases. Execution
 1. **CI vs verify-pipeline alignment**
 
 - CI already runs: format check, lint, unit tests, Trivy, secret-scan, npm audit (and optional Lighthouse). verify-pipeline adds: (1) parse-all-ps1, (2) workflow file existence, (3) product sync dry-run (credential-gated), (5) run-runbook (credential-gated).
-- Add an **optional** CI job (e.g. `verify-pipeline`) that runs on Windows runner and executes `scripts/verify-pipeline.ps1 -SkipRunbook` (parse + workflow check only; skip runbook and sync dry-run in CI unless secrets are provided). Or: document in [.github/workflows/README.md](.github/workflows/README.md) that "full verify-pipeline (including runbook) is local-only; CI runs lint/test/security only."
+- Add an **optional** CI job (e.g. `verify-pipeline`) that runs on Windows runner and executes `npm run verify:pipeline` (or strict mode only when secrets are provided). Or: document in [.github/workflows/README.md](.github/workflows/README.md) that "full verify-pipeline (including runbook) is local-only; CI runs lint/test/security only."
 
 2. **Quality gates**
 
-- [package.json](package.json) already has `quality`: `format && format:check && lint && test:unit` (see [OPERATOR_RUNBOOK.md](OPERATOR_RUNBOOK.md)).
-- Add to OPERATOR_RUNBOOK or [docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md](docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md): "Before push: run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no .env.local)."
+- [package.json](package.json) already has `quality`: `format:check && lint && test:unit` (see [OPERATOR_RUNBOOK.md](OPERATOR_RUNBOOK.md)).
+- Add to OPERATOR_RUNBOOK or [docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md](docs/guides/WORKFLOW_PIPELINE_VISUAL_GUIDE.md): "Before push: run `npm run verify:pipeline`; use `npm run verify:pipeline:strict` when local Shopify credentials are expected."
 
 3. **Branch protection and status checks**
 
-- If [scripts/github/update-branch-protection-status-checks.js](scripts/github/update-branch-protection-status-checks.js) is used, ensure it lists actual CI job names (e.g. `test`, `security`).
+- If [scripts/github/update-branch-protection-status-checks.js](scripts/github/update-branch-protection-status-checks.js) is used, ensure it lists the actual native CI job names (`arch_guard`, `test`, `secret-scan`, `quality`).
 
 **Deliverables**: CI job (optional) or clear doc that verify-pipeline is local; OPERATOR_RUNBOOK/visual guide updated; branch-protection script verified or documented.
 

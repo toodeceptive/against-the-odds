@@ -8,28 +8,31 @@
 
 PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they can resolve `pwsh` or `powershell` depending on the environment.
 
-| npm script                       | Invokes                                        | When to use                                                            |
-| -------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------- |
-| `npm run test`                   | vitest                                         | Watch mode for local test iteration                                    |
-| `npm run test:unit`              | vitest run tests/unit                          | Unit tests only                                                        |
-| `npm run test:integration`       | vitest run tests/integration                   | Integration tests only                                                 |
-| `npm run test:e2e`               | playwright test                                | E2E (default config)                                                   |
-| `npm run test:shopify`           | playwright test (shopify config)               | Shopify admin E2E                                                      |
-| `npm run test:coverage`          | vitest run --coverage                          | Coverage report                                                        |
-| `npm run test:all`               | unit + integration + e2e                       | Extended local/CI-style validation                                     |
-| `npm run lint`                   | eslint                                         | Lint JS/TS                                                             |
-| `npm run lint:fix`               | eslint --fix                                   | Auto-fix lint                                                          |
-| `npm run format`                 | prettier --write (js, ts, json, css, md, html) | Format tracked files; **runs automatically on pre-commit**             |
-| `npm run format:check`           | prettier --check                               | CI format check                                                        |
-| `npm run quality`                | format:check + lint + test:unit                | Non-mutating verification gate                                         |
-| `npm run quality:fix`            | format + lint:fix + quality                    | One-command auto-fix then verify                                       |
-| `npm run setup`                  | scripts/setup-env.ps1                          | Initial env setup                                                      |
-| `npm run setup:auto`             | scripts/setup/auto-configure-env.ps1           | Auto-configure env                                                     |
-| `npm run health`                 | scripts/health/comprehensive-check.ps1         | Health check                                                           |
-| `npm run sync`                   | scripts/sync/sync-all.ps1                      | Repo sync (fetch, conflict check)                                      |
-| `npm run test:desktop`           | scripts/desktop-automation/test-system.ps1     | Desktop automation tests                                               |
-| `npm run verify:pipeline`        | scripts/verify-pipeline.ps1                    | Pipeline verification; auto-skips runbook when Shopify token is absent |
-| `npm run verify:pipeline:strict` | scripts/verify-pipeline.ps1 -RequireRunbook    | Full local integration gate when credentials are expected              |
+| npm script                       | Invokes                                        | When to use                                                                     |
+| -------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------- |
+| `npm run test`                   | vitest                                         | Watch mode for local test iteration                                             |
+| `npm run test:unit`              | vitest run tests/unit                          | Unit tests only                                                                 |
+| `npm run test:integration`       | vitest run tests/integration                   | Integration tests only                                                          |
+| `npm run test:e2e`               | playwright test                                | E2E (default config)                                                            |
+| `npm run test:shopify`           | playwright test (shopify config)               | Shopify admin E2E                                                               |
+| `npm run test:coverage`          | vitest run --coverage                          | Coverage report                                                                 |
+| `npm run test:all`               | unit + integration + e2e                       | Extended local/CI-style validation                                              |
+| `npm run lint`                   | eslint                                         | Lint JS/TS                                                                      |
+| `npm run lint:fix`               | eslint --fix                                   | Auto-fix lint                                                                   |
+| `npm run format`                 | prettier --write (js, ts, json, css, md, html) | Format tracked files; **runs automatically on pre-commit**                      |
+| `npm run format:check`           | prettier --check                               | CI format check                                                                 |
+| `npm run quality`                | format:check + lint + test:unit                | Non-mutating verification gate                                                  |
+| `npm run quality:fix`            | format + lint:fix + quality                    | One-command auto-fix then verify                                                |
+| `npm run setup`                  | scripts/setup-env.ps1                          | Basic env bootstrap helper                                                      |
+| `npm run setup:auto`             | scripts/setup/auto-configure-env.ps1           | Auto-configure env helper; prefer `scripts/setup/full-setup.ps1` for full setup |
+| `npm run health`                 | scripts/health/comprehensive-check.ps1         | Health check                                                                    |
+| `npm run sync`                   | scripts/sync/sync-all.ps1                      | Repo sync (fetch, conflict check)                                               |
+| `npm run test:desktop`           | scripts/desktop-automation/test-system.ps1     | Desktop automation tests                                                        |
+| `npm run test:desktop:quick`     | scripts/desktop-automation/test-system.ps1     | Quick desktop automation test pass                                              |
+| `npm run verify:pipeline`        | scripts/verify-pipeline.ps1                    | Pipeline verification; auto-skips runbook when Shopify token is absent          |
+| `npm run verify:pipeline:strict` | scripts/verify-pipeline.ps1 -RequireRunbook    | Full local integration gate when credentials are expected                       |
+| `npm run build`                  | placeholder echo                               | No-op placeholder; repo has no traditional build step                           |
+| `npm run dev`                    | placeholder echo                               | No-op placeholder; repo has no traditional dev server                           |
 
 ---
 
@@ -37,22 +40,22 @@ PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they ca
 
 ### Shopify (scripts/shopify/)
 
-| Script                                           | Purpose                                                                               | When to run                                                                                                                                          |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **sync-products.ps1**                            | Bulk product sync repo → store (Admin API)                                            | Use `-DryRun` first; then apply after approval. Used by CI/shopify-sync workflow.                                                                    |
-| **theme-dev.ps1**                                | Start `shopify theme dev`                                                             | Local theme preview (CLI auto-install, loads .env.local)                                                                                             |
-| **test-connection.ps1**                          | Test Shopify API connectivity                                                         | After credentials change                                                                                                                             |
-| **browser/get-access-token.ps1**                 | Obtain token via user's browser; optional `-SaveToEnv`                                | One-off token setup                                                                                                                                  |
-| **browser/save-token-to-env.ps1**                | Write token to .env.local                                                             | After get-access-token                                                                                                                               |
-| theme-pull.ps1, theme-init.ps1, update-theme.ps1 | Theme operations (REST tried first when token set; CLI fallback)                      | Per [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). Set SHOPIFY_USE_REST_PULL=1 to force REST only.               |
-| **theme-pull-rest.ps1**                          | Pull theme via Shopify REST API (PowerShell/.NET; use when Node CLI fails with SSL)   | Direct alternative to theme-pull.ps1; requires SHOPIFY_ACCESS_TOKEN or SHOPIFY_CLI_THEME_TOKEN.                                                      |
-| **theme-auth-then-pull.ps1**                     | Open Shopify login in browser (store-scoped), then pull theme                         | First-time or "not authorized" — device-code auth + pull.                                                                                            |
-| **theme-auth-via-browser.ps1**                   | Launch Chrome at Admin, extract token, save SHOPIFY_CLI_THEME_TOKEN, then pull        | Fix auth via browser (token-based); use when device-code auth fails.                                                                                 |
-| **finish-setup.ps1**                             | Verify pipeline, theme pull, merge brand (no push), write docs/status/SETUP_STATUS.md | After guru review; automates what can run without interactive auth.                                                                                  |
-| **merge-brand-into-theme.ps1**                   | Copy AO brand assets/snippets and patch layout/theme.liquid                           | After theme-pull; run by theme-pull-and-preview.ps1 or theme-update-store.ps1                                                                        |
-| **copy-brand-images-to-theme.ps1**               | Copy all PNGs from assets/brand into theme assets                                     | Before push; run by theme-update-store.ps1                                                                                                           |
-| **theme-update-store.ps1**                       | Merge brand + copy images + push theme to Shopify                                     | Update store theme with AO brand; run after theme-pull at least once. See [THEME_CUSTOMIZATION_FLOW.md](../docs/guides/THEME_CUSTOMIZATION_FLOW.md). |
-| **theme-pull-and-preview.ps1**                   | Pull → merge brand → theme dev (preview URL)                                          | One-command flow; run theme-pull interactively once first.                                                                                           |
+| Script                                           | Purpose                                                                               | When to run                                                                                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **sync-products.ps1**                            | Bulk product sync repo → store (Admin API)                                            | Use `-DryRun` first; then apply after approval. Used by CI/shopify-sync workflow.                                                             |
+| **theme-dev.ps1**                                | Start `shopify theme dev`                                                             | Local theme preview (CLI auto-install, loads .env.local)                                                                                      |
+| **test-connection.ps1**                          | Test Shopify API connectivity                                                         | After credentials change                                                                                                                      |
+| **browser/get-access-token.ps1**                 | Obtain token via user's browser; optional `-SaveToEnv`                                | One-off token setup                                                                                                                           |
+| **browser/save-token-to-env.ps1**                | Write token to .env.local                                                             | After get-access-token                                                                                                                        |
+| theme-pull.ps1, theme-init.ps1, update-theme.ps1 | Theme operations (REST tried first when token set; CLI fallback)                      | Per [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](../docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). Set SHOPIFY_USE_REST_PULL=1 to force REST only.        |
+| **theme-pull-rest.ps1**                          | Pull theme via Shopify REST API (PowerShell/.NET; use when Node CLI fails with SSL)   | Direct alternative to theme-pull.ps1; requires SHOPIFY_ACCESS_TOKEN or SHOPIFY_CLI_THEME_TOKEN.                                               |
+| **theme-auth-then-pull.ps1**                     | Open Shopify login in browser (store-scoped), then pull theme                         | First-time or "not authorized" — device-code auth + pull.                                                                                     |
+| **theme-auth-via-browser.ps1**                   | Launch Chrome at Admin, extract token, save SHOPIFY_CLI_THEME_TOKEN, then pull        | Fix auth via browser (token-based); use when device-code auth fails.                                                                          |
+| **finish-setup.ps1**                             | Verify pipeline, theme pull, merge brand (no push), write docs/status/SETUP_STATUS.md | After guru review; automates what can run without interactive auth.                                                                           |
+| **merge-brand-into-theme.ps1**                   | Copy AO brand assets/snippets and patch layout/theme.liquid                           | After theme-pull; run by theme-pull-and-preview.ps1 or theme-update-store.ps1                                                                 |
+| **copy-brand-images-to-theme.ps1**               | Copy all PNGs from assets/brand into theme assets                                     | Before push; run by theme-update-store.ps1                                                                                                    |
+| **theme-update-store.ps1**                       | Merge brand + copy images + push theme to Shopify                                     | Direct-apply path. Requires preview + explicit approval first. See [THEME_CUSTOMIZATION_FLOW.md](../docs/guides/THEME_CUSTOMIZATION_FLOW.md). |
+| **theme-pull-and-preview.ps1**                   | Pull → merge brand → theme dev (preview URL)                                          | One-command flow; run theme-pull interactively once first.                                                                                    |
 
 ### Products (scripts/products/)
 
@@ -113,12 +116,13 @@ PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they ca
 
 ### Other (root-level scripts/)
 
-| Script                        | Purpose                                        | When to run                          |
-| ----------------------------- | ---------------------------------------------- | ------------------------------------ |
-| **run-runbook.ps1**           | Run OPERATOR_RUNBOOK daily checks              | Daily                                |
-| **open-pending-approval.ps1** | Open docs/status/pending-approval.md in editor | Before/after store-affecting changes |
-| **start-theme-preview.ps1**   | Start theme dev and open preview URL           | Theme preview workflow               |
-| verify-pipeline.ps1           | Verify Cursor–GitHub–Shopify pipeline          | After workflow or config change      |
+| Script                        | Purpose                                             | When to run                          |
+| ----------------------------- | --------------------------------------------------- | ------------------------------------ |
+| **run-runbook.ps1**           | Run OPERATOR_RUNBOOK daily checks                   | Daily                                |
+| **open-pending-approval.ps1** | Open docs/status/pending-approval.md in editor      | Before/after store-affecting changes |
+| **open-preview-popup.ps1**    | Open approval file plus browser/theme preview       | Theme preview workflow               |
+| **start-theme-preview.ps1**   | Task-facing wrapper around `open-preview-popup.ps1` | Theme preview workflow               |
+| verify-pipeline.ps1           | Verify Cursor–GitHub–Shopify pipeline               | After workflow or config change      |
 
 ### Archive / Legacy
 

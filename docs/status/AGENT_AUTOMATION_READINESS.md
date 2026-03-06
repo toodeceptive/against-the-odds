@@ -24,7 +24,7 @@
 - **AGENTS.md:** Full permission to run scripts, edit files, commit, push; safety rules (preview-before-apply for store, no secrets in commits) apply.
 - **Credentials:** `.env.local` only; agent may read/write for setup; never commit. See `.cursor/rules/env-credentials.mdc`.
 - **Runbook:** `.\scripts\run-runbook.ps1` — daily checks, Shopify/GitHub verification (credential-gated).
-- **Cursor tasks:** All project tasks in `.cursor/tasks.json` (Theme Dev, Theme update→preview→save, Setup app access, Verify Pipeline, Run Runbook, Preview/Apply Product Sync, Quality Gate, Health Check, etc.). Run from repo root.
+- **Cursor tasks:** All project tasks in `.cursor/tasks.json` (Theme Dev, legacy direct theme update helper, Setup app access, Verify Pipeline, Run Runbook, Preview/Apply Product Sync, Quality Gate, Health Check, etc.). Run from repo root.
 
 No additional permissions needed for full Cursor agent functionality; existing setup grants full access within safety rules.
 
@@ -38,7 +38,7 @@ No additional permissions needed for full Cursor agent functionality; existing s
 | Auto-fix quality              | `npm run quality:fix`                             | format + lint:fix + quality                                                                     |
 | Pipeline verify               | `npm run verify:pipeline`                         | Script parse, workflows, product dry-run, lint; auto-skips runbook when Shopify token is absent |
 | Pipeline verify (strict)      | `npm run verify:pipeline:strict`                  | Full local integration gate when Shopify credentials are expected                               |
-| Theme update → preview → save | `.\scripts\shopify\theme-update-preview-save.ps1` | Cursor task: "Shopify: Theme update → preview → save"                                           |
+| Theme update → preview → save | `.\scripts\shopify\theme-update-preview-save.ps1` | Legacy direct-push helper; use preview/approval flow before any direct apply                    |
 | Theme dev                     | `.\scripts\shopify\theme-dev.ps1`                 | Cursor task: "Shopify: Theme Dev (preview before commit)"                                       |
 | App access setup              | `.\scripts\shopify\setup-app-access.ps1`          | E2E + runbook or launch Chrome first                                                            |
 | Image optimize                | `.\scripts\shopify\optimize-images.ps1`           | Web or `-Preset embroidery`                                                                     |

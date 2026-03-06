@@ -25,7 +25,6 @@ Run product sync safely with dry-run previews and explicit approval before apply
 
 - `data/products/`
 - `scripts/shopify/sync-products.ps1`
-- `scripts/products/sync.ps1`
 - `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md` (product sections)
 
 ## Forbidden Actions
