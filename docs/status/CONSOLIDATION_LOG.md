@@ -33,6 +33,12 @@
 
 **Verification**: Full gates rerun in this cycle (format, lint, unit tests, pipeline verification with `-SkipRunbook`).
 
+**Finalize evidence**:
+
+- Commit: `cd2af32` (`chore(pp): execute cycle 17 master workflow closure`)
+- Branch: `pp/guru-closure-20260305`
+- Push target: `origin/pp/guru-closure-20260305`
+
 **Evidence links**:
 
 - [Perfect prompt no execution](a559c490-dfe9-4992-8188-bdbe4206f7bf)

@@ -105,8 +105,13 @@
 
 ---
 
-## Finalization Placeholder (fill during completion)
+## Finalization Evidence
 
-- Commit hash:
-- Pushed branch:
+- Commit hash: `cd2af32`
+- Commit title: `chore(pp): execute cycle 17 master workflow closure`
+- Branch: `pp/guru-closure-20260305`
+- Push target: `origin/pp/guru-closure-20260305`
 - Residual blockers:
+  - Optional Playwright E2E best-effort lane still environment-sensitive in extension verifier script.
+  - `config/shopify/.shopify-cli.yml` `application_url` TODO remains intentionally pending until active Shopify CLI app setup.
+  - Codacy MCP per-file analysis remains pending when Codacy MCP tools are available in-session.
