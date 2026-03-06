@@ -6,20 +6,23 @@
 
 ## npm Scripts (package.json)
 
+PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they can resolve `pwsh` or `powershell` depending on the environment.
+
 | npm script                 | Invokes                                        | When to use                                                |
 | -------------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
-| `npm run test`             | vitest                                         | Unit/integration tests (watch)                             |
+| `npm run test`             | vitest                                         | Watch mode for local test iteration                        |
 | `npm run test:unit`        | vitest run tests/unit                          | Unit tests only                                            |
 | `npm run test:integration` | vitest run tests/integration                   | Integration tests only                                     |
 | `npm run test:e2e`         | playwright test                                | E2E (default config)                                       |
 | `npm run test:shopify`     | playwright test (shopify config)               | Shopify admin E2E                                          |
 | `npm run test:coverage`    | vitest run --coverage                          | Coverage report                                            |
-| `npm run test:all`         | unit + integration                             | Pre-commit / CI                                            |
+| `npm run test:all`         | unit + integration + e2e                       | Extended local/CI-style validation                         |
 | `npm run lint`             | eslint                                         | Lint JS/TS                                                 |
 | `npm run lint:fix`         | eslint --fix                                   | Auto-fix lint                                              |
 | `npm run format`           | prettier --write (js, ts, json, css, md, html) | Format tracked files; **runs automatically on pre-commit** |
 | `npm run format:check`     | prettier --check                               | CI format check                                            |
-| `npm run quality`          | format + format:check + lint + test:unit       | One-command guru review (easy to use)                      |
+| `npm run quality`          | format:check + lint + test:unit                | Non-mutating verification gate                             |
+| `npm run quality:fix`      | format + lint:fix + quality                    | One-command auto-fix then verify                           |
 | `npm run setup`            | scripts/setup-env.ps1                          | Initial env setup                                          |
 | `npm run setup:auto`       | scripts/setup/auto-configure-env.ps1           | Auto-configure env                                         |
 | `npm run health`           | scripts/health/comprehensive-check.ps1         | Health check                                               |
@@ -103,9 +106,9 @@
 
 ### Quality (scripts/quality/)
 
-| Script        | Purpose        | When to run                                             |
-| ------------- | -------------- | ------------------------------------------------------- |
-| check-all.ps1 | Quality checks | Local or CI (ci.yml runs lint, format, coverage, audit) |
+| Script        | Purpose        | When to run                                                                        |
+| ------------- | -------------- | ---------------------------------------------------------------------------------- |
+| check-all.ps1 | Quality checks | Local or CI (ci.yml runs format check, lint, unit tests, audit, Trivy, Lighthouse) |
 
 ### Other (root-level scripts/)
 
@@ -132,8 +135,8 @@
 
 ## Alignment with CI/CD
 
-- **ci.yml**: Lint, format check, test, build, Trivy, secret-scan, npm audit, optional coverage, Lighthouse (main only; consolidated).
-- **shopify-sync.yml**: Calls product sync (data/products, src/shopify); backup-store job is placeholder.
+- **ci.yml**: Lint, format check, unit tests, build, Trivy, secret-scan, npm audit, optional coverage, Lighthouse (main only; consolidated).
+- **shopify-sync.yml**: Calls product sync (data/products, src/shopify); backup-store job is implemented.
 - **sync-theme-branch.yml**: Subtree-split theme to `shopify-theme` branch on push to main when theme files change.
 - **sync.yml**: Repository sync (fetch, main); no develop branch.
 

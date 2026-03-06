@@ -20,7 +20,7 @@ Single source of truth for active execution. This queue is compression-first and
 
 - [ ] Clean residual stale references in older audit docs only when touched by active work.
 
-## P0 (Local Main Finalization - 2026-02-26 run)
+## Historical closure batch (Local Main Finalization - 2026-02-26 run)
 
 - [x] Confirm repository is operating on `main` and execute full local verification matrix.
 - [x] Install GitHub CLI locally and validate command availability.

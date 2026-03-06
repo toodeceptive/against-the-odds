@@ -4,7 +4,7 @@
 
 **Purpose**: Single index of report- and status-style markdown files so agents and humans know what is current vs legacy and where to look.
 
-**Counts (2026-02 snapshot)**: docs/ **142 files** total; docs/status/ **78 files**; repo total on disk (excl. .git, node_modules) **~476 files**; tracked (excl. coverage, playwright-report, test-results, .vscode) **~431 files**. Treat these as historical snapshot counts unless re-measured; the full inventory basis is in `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`.
+**Inventory note**: File counts in older audit docs are historical snapshots and may drift over time. Use this index plus `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` for inventory history, and remeasure live counts when exact numbers matter.
 
 ---
 

@@ -8,18 +8,19 @@
 
 ## 1. Executive summary
 
-| Area                     | Status           | Actions                                                                                           |
-| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------- |
-| Rules                    | ✅ Coherent      | 5 always-on + 1 agent-decided; no conflicts. Optional: add globs to ao-guru.                      |
-| Skills                   | ✅ Complete      | 4 skills (pp, phantasm, godmode, agentic-performance); descriptions and triggers clear.           |
-| Subagents                | ✅ 1 custom      | Verifier; built-in Explore/Bash/Browser used automatically.                                       |
-| Commands                 | ✅ 1 command     | `/review`; add `/pr`, `/fix-issue` when needed.                                                   |
-| Context                  | ✅ Aligned       | github, shopify, node-and-automation match docs and workflows.                                    |
-| AGENTS.md                | ✅ Consistent    | Mirrors safety rules; points to .cursor/rules and docs.                                           |
-| Project settings         | ✅ Good          | Worktree opts set; extensions via extensions.json only.                                           |
-| Extensions               | ✅ Single source | .cursor/extensions.json only (no duplicate in settings.json).                                     |
-| .cursorignore            | 📋 Template      | Copy [CURSORIGNORE_TEMPLATE.txt](CURSORIGNORE_TEMPLATE.txt) to repo root as `.cursorignore` once. |
-| Personal (user) settings | 📋 Checklist     | Set in Cursor Settings UI (§6).                                                                   |
+| Area                     | Status           | Actions                                                                                                      |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------ |
+| Rules                    | ✅ Coherent      | 5 always-on + 1 agent-decided; no conflicts. Optional: add globs to ao-guru.                                 |
+| Skills                   | ✅ Complete      | 4 skills (pp, phantasm, godmode, agentic-performance); descriptions and triggers clear.                      |
+| Subagents                | ✅ 9 custom      | Operational roster + verifier deployed; built-in Explore/Bash/Browser still used automatically.              |
+| Commands                 | ✅ 3 commands    | `/review`, `/pr`, `/pp`; updated to match deterministic, current repo workflows.                             |
+| Context                  | ✅ Aligned       | github, shopify, node-and-automation match docs and workflows.                                               |
+| AGENTS.md                | ✅ Consistent    | Mirrors safety rules; points to .cursor/rules and docs.                                                      |
+| Project settings         | ✅ Good          | Worktree opts set; extensions via `.cursor/extensions.json`; no repo `.vscode/settings.json` mirror shipped. |
+| Extensions               | ✅ Single source | `.cursor/extensions.json` is the repo-tracked recommendation source.                                         |
+| .cursorignore            | ✅ Implemented   | Repo root `.cursorignore` is in place for secrets/build noise.                                               |
+| .cursorindexingignore    | ✅ Implemented   | Added for archive/generated-history indexing reduction.                                                      |
+| Personal (user) settings | 📋 Checklist     | Set in Cursor Settings UI (§6).                                                                              |
 
 ---
 
@@ -41,8 +42,8 @@
 ## 3. Skills, subagents, commands
 
 - **Skills**: prodigy-protocol (pp), prodigy-phantasm, universal-godmode, agentic-performance. All reference pp where appropriate; agentic-performance is the single workflow/tooling hub.
-- **Subagents**: Verifier (`.cursor/agents/verifier.md`) for independent lint/test/build pass. Built-in Explore, Bash, Browser used by Cursor when appropriate.
-- **Commands**: `/review` — lint, format, tests, summary; `/pr` — commit, push, open PR (see `.cursor/commands/pr/COMMAND.md`); `/pp` — load AO PP prompt and run in Prodigy Protocol mode (see [prompts/AO_AGENT_PP_PROMPT.md](../../prompts/AO_AGENT_PP_PROMPT.md)).
+- **Subagents**: Operational roster in `.cursor/agents/` now includes orchestrator_governance, governance_archguard, cursorops_environment, themeops_shopify, storeops_productsync, assetprep_printful, uploadops_printful, cloudflareops_domain, and verifier.
+- **Commands**: `/review` — read-only checks (`format:check`, lint, deterministic tests); `/pr` — finalize branch for PR/handoff (no automatic PR creation); `/pp` — load AO PP prompt and run in Prodigy Protocol mode (see [prompts/AO_AGENT_PP_PROMPT.md](../../prompts/AO_AGENT_PP_PROMPT.md)).
 
 ---
 
@@ -55,9 +56,9 @@
 
 ---
 
-## 5. Project settings (`.cursor/settings.json` and `.vscode/settings.json`)
+## 5. Project settings (`.cursor/settings.json`)
 
-Workspace settings live in `.cursor/settings.json` (Cursor) and are mirrored in `.vscode/settings.json` for VS Code and cross-editor compatibility.
+Workspace settings live in `.cursor/settings.json` (Cursor). This repo does not currently ship a `.vscode/settings.json` mirror, so docs should treat `.cursor/settings.json` as the tracked source.
 
 | Key                                 | Value                | Purpose                                                                  |
 | ----------------------------------- | -------------------- | ------------------------------------------------------------------------ |
@@ -75,7 +76,7 @@ Workspace settings live in `.cursor/settings.json` (Cursor) and are mirrored in 
 | files.associations                  | \*.liquid → liquid   | Shopify theme files.                                                     |
 | eslint.useFlatConfig                | true                 | Use ESLint 9 flat config.                                                |
 | markdownlint.config                 | default, MD060 off   | Align with .markdownlint.json.                                           |
-| Extensions                          | —                    | Sourced from .cursor/extensions.json and .vscode/extensions.json.        |
+| Extensions                          | —                    | Sourced from `.cursor/extensions.json`.                                  |
 
 **Gaps**: None critical. Optional: if Cursor supports more `cursor.*` keys in workspace (e.g. agent iterate on lints), add when documented.
 
@@ -103,9 +104,8 @@ All recommended extensions are **free**, **guru/expert-approved**, and **compati
 | Source                      | Extensions                                                                                                                                                                                                                                                            |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **.cursor/extensions.json** | EditorConfig, PowerShell, Prettier, ESLint, Playwright, Vitest, GitLens, GitHub PR, dotenv, markdownlint, YAML, TypeScript Next, Tailwind, auto-rename-tag, path-intellisense, **Shopify Theme Check**, **Codacy**, Python (18). Copilot/Copilot Chat omitted (paid). |
-| **.vscode/extensions.json** | Same list as above for VS Code and Cursor when opening via .vscode.                                                                                                                                                                                                   |
 
-**Done**: **.cursor/extensions.json** and **.vscode/extensions.json** are the single source for extension recommendations. No paid extensions (e.g. Copilot) in the list; add locally if desired. Cursor and VS Code both read the respective extensions.json.
+**Done**: **.cursor/extensions.json** is the tracked source for extension recommendations in this repo. No paid extensions (e.g. Copilot) are in the list; add them locally if desired.
 
 ---
 
@@ -134,15 +134,16 @@ Per [.cursor/plans/extensions_setup_and_utilization.plan.md](../../.cursor/plans
 
 ## 8. Worktrees and tasks
 
-- **worktrees.json**: `setup-worktree` / `setup-worktree-windows` run `npm install` and copy `.env.local` from root worktree into the new worktree (when present), so parallel agents have env; `inventoryDoc` → docs/status/WORKTREE_INVENTORY.md. ✅
-- **tasks.json**: Setup, credentials, Shopify theme dev/pull, lint, format, tests, runbook, pipeline verify, E2E, desktop automation. ✅ Aligned with context and docs.
+- **worktrees.json**: `setup-worktree` / `setup-worktree-windows` run `npm install` and copy `.env.local` from root worktree into the new worktree (when present), so parallel agents have env; `inventoryDoc` still points to `docs/status/WORKTREE_INVENTORY.md`, but agents should trust live `git worktree list` first because that doc is a documented local snapshot.
+- **tasks.json**: Setup, credentials, Shopify theme dev/pull, quality gate/fix, deterministic tests, preview/apply product sync, runbook, pipeline verify, E2E, desktop automation. PowerShell-backed tasks now route through a cross-platform Node launcher for Linux/cloud parity.
 
 ---
 
-## 9. .cursorignore
+## 9. Ignore files
 
-- **Template**: [docs/status/CURSORIGNORE_TEMPLATE.txt](CURSORIGNORE_TEMPLATE.txt) — copy its contents to repo root as **`.cursorignore`** (one-time). Cursor then excludes those paths from semantic search, Agent, and @ mentions.
-- **Suggested patterns**: `.env*`, `*.key`, `*.pem`, `node_modules/`, `dist/`, `build/`, `*.log`, `logs/`, `.cache/`.
+- **`.cursorignore`**: Implemented at repo root for secrets/build/log noise (`.env*`, keys, node_modules, dist/build, logs, cache).
+- **`.cursorindexingignore`**: Implemented to keep archive/generated history out of indexing while preserving normal file access when explicitly needed.
+- **Template**: [docs/status/CURSORIGNORE_TEMPLATE.txt](CURSORIGNORE_TEMPLATE.txt) remains a reference template if patterns need expansion.
 
 ---
 
@@ -151,11 +152,12 @@ Per [.cursor/plans/extensions_setup_and_utilization.plan.md](../../.cursor/plans
 | #   | Change                                                                                                       | Status                                     |
 | --- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
 | 1   | Unify extensions: use extensions.json as single source; remove extensions.recommendations from settings.json | ✅ Done                                    |
-| 2   | .cursorignore: copy [CURSORIGNORE_TEMPLATE.txt](CURSORIGNORE_TEMPLATE.txt) to repo root as `.cursorignore`   | One-time (user)                            |
+| 2   | `.cursorignore` at repo root for secrets/build noise                                                         | ✅ Done                                    |
 | 3   | Optional: ao-guru globs for `src/**/*.ts`, `**/*.test.*`                                                     | ✅ Done                                    |
-| 4   | Optional: add command `/pr` (see cookbook)                                                                   | ✅ Done (`.cursor/commands/pr/COMMAND.md`) |
+| 4   | Add command `/pr` and align it to branch-finalization workflow                                               | ✅ Done (`.cursor/commands/pr/COMMAND.md`) |
 | 5   | Worktrees: copy `.env.local` into new worktrees so agents have env                                           | ✅ Done (worktrees.json)                   |
 | 6   | Document personal settings checklist (§6)                                                                    | Done (this doc; linked from AGENTS.md)     |
+| 7   | Add `.cursorindexingignore` to reduce archive/generated indexing noise                                       | ✅ Done                                    |
 
 ---
 

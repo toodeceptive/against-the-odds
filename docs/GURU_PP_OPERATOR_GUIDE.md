@@ -41,6 +41,23 @@ Use agentic-performance when optimizing agent workflows, configuring Cursor, or 
 
 ---
 
+## When to use which deployed subagent
+
+| Need                                                                 | Use                                        |
+| -------------------------------------------------------------------- | ------------------------------------------ |
+| Route work, keep lanes non-overlapping, manage delta-first execution | `orchestrator_governance`                  |
+| Structural integrity / governance docs and CI authority              | `governance_archguard`                     |
+| Cursor/MCP/workflow environment optimization                         | `cursorops_environment`                    |
+| Shopify theme preview/apply lane                                     | `themeops_shopify`                         |
+| Shopify product sync preview/apply lane                              | `storeops_productsync`                     |
+| Printful asset prep or upload lanes                                  | `assetprep_printful`, `uploadops_printful` |
+| Cloudflare domain lane                                               | `cloudflareops_domain`                     |
+| Independent verification pass                                        | `verifier`                                 |
+
+See [docs/AGENT_TEAM.md](AGENT_TEAM.md) for ownership boundaries.
+
+---
+
 ## Multi-cycle research approach
 
 For **deep-research backed setups** and **systems-wide improvements**:
@@ -67,7 +84,7 @@ For **deep-research backed setups** and **systems-wide improvements**:
 .\scripts\verify-pipeline.ps1
 ```
 
-**What it does**: (1) Parses all 74 PowerShell scripts, (2) Verifies workflow files, (3) Product sync dry-run if Shopify creds in `.env.local`, (4) ESLint, (5) Runbook (Shopify connection + GitHub auth).
+**What it does**: (1) Parses all tracked PowerShell scripts, (2) Verifies workflow files, (3) Product sync dry-run if Shopify creds in `.env.local`, (4) ESLint, (5) Runbook (Shopify connection + GitHub auth).
 
 **Expected outcomes**:
 

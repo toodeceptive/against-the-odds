@@ -24,6 +24,14 @@ This guide explains how to use the agent prompt system for new Cursor instances.
 
 ## How to Use
 
+### Step 0: Prefer deployed commands and agents first
+
+- Routine PP workflow → `/pp`
+- Read-only repo assessment → `/review`
+- Branch finalization / handoff prep → `/pr`
+- Specialized multi-step lane work → relevant `.cursor/agents/*.md` ownership in `docs/AGENT_TEAM.md`
+- Manual prompt loading → use when the decision tree explicitly routes you there or when a fresh agent needs a prompt file
+
 ### Step 1: Phase 0 first
 
 1. Read `docs/status/PLAN_AGENT_ENTRY.md`
