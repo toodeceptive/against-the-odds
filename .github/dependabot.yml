@@ -9,3 +9,9 @@ updates:
     commit-message:
       prefix: 'chore'
       include: 'scope'
+    groups:
+      eslint-stack:
+        patterns:
+          - 'eslint'
+          - '@eslint/*'
+          - 'globals'

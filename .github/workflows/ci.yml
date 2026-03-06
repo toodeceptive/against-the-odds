@@ -164,14 +164,44 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Start local preview server
+        run: |
+          nohup python3 -m http.server 8080 >/tmp/lighthouse-server.log 2>&1 &
+          echo $! > /tmp/lighthouse-server.pid
+
+      - name: Wait for local preview server
+        run: |
+          python3 - <<'PY'
+          import time
+          import urllib.request
+
+          url = "http://127.0.0.1:8080/"
+          for _ in range(30):
+              try:
+                  with urllib.request.urlopen(url, timeout=2) as response:
+                      if response.status == 200:
+                          raise SystemExit(0)
+              except Exception:
+                  time.sleep(1)
+
+          raise SystemExit("Preview server did not become ready")
+          PY
+
       - name: Lighthouse CI
         uses: treosh/lighthouse-ci-action@03becbfc543944dd6e7534f7ff768abb8a296826
-        continue-on-error: true
         with:
+          configPath: '.lighthouserc.json'
           urls: |
-            https://toodeceptive.github.io/against-the-odds/
+            http://127.0.0.1:8080/
           uploadArtifacts: true
           temporaryPublicStorage: true
+
+      - name: Stop local preview server
+        if: always()
+        run: |
+          if [ -f /tmp/lighthouse-server.pid ]; then
+            kill "$(sed -n '1p' /tmp/lighthouse-server.pid)" || true
+          fi
 
   continuous_ai_bridge:
     if: github.event_name == 'pull_request'

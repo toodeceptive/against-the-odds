@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
 
     steps:
@@ -31,6 +31,17 @@ jobs:
           if [ -f package.json ]; then
             npm update
           fi
+
+      - name: Verify quality gate
+        run: |
+          if [ -f package.json ]; then
+            npm run quality
+          fi
+
+      - name: Verify pipeline
+        shell: pwsh
+        run: |
+          ./scripts/verify-pipeline.ps1 -SkipRunbook
 
       - name: Security audit
         continue-on-error: true

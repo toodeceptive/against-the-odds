@@ -1,17 +1,15 @@
-name: Repository Sync
+name: Repository Status
 
 on:
-  schedule:
-    - cron: '0 */6 * * *' # Every 6 hours
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  sync:
+  status:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
     permissions:
       contents: read
 
@@ -21,20 +19,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git
+      - name: Capture repository status
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-
-      - name: Sync main
-        run: |
-          git fetch origin
-          git checkout main
-          git pull origin main
+          set -euo pipefail
+          git fetch origin main --quiet
 
       - name: Status report
         run: |
-          echo "## Repository Sync Status" >> $GITHUB_STEP_SUMMARY
+          echo "## Repository Status" >> $GITHUB_STEP_SUMMARY
           echo "- Branch strategy: main-only (no develop)" >> $GITHUB_STEP_SUMMARY
-          echo "- Main branch: $(git rev-parse --short HEAD)" >> $GITHUB_STEP_SUMMARY
-          echo "- Last sync: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "- Default branch SHA: $(git rev-parse --short origin/main)" >> $GITHUB_STEP_SUMMARY
+          echo "- Workflow mode: manual-only until an external sync target is defined" >> $GITHUB_STEP_SUMMARY
+          echo "- Captured at: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_STEP_SUMMARY
