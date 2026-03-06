@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-03-06 — Governing prompt rerun: current-state confirmation and final residual doc closure
+
+**Summary**: Re-executed `prompts/NEW_GURU_EXPERT_TEAM_SYSTEM_OPTIMIZATION_PP_PROMPT_20260306.md` exactly as written against the latest live branch/worktree state instead of assuming the prior run still held. **Preflight evidence**: current branch remained `cursor/guru-expert-team-optimization-d325`; the branch PR (`#21`) is already **MERGED** to `main`; latest CI evidence showed branch PR checks green and a newer `main` push run in progress (`CodeQL` on run `22785554928`) after the merge. The only pre-existing unrelated dirty worktree file remained `package-lock.json`. **Delta audit result**: no new repo-side CI, branch-gating, prompt-router, or environment-portability defects were discovered in the active canonical surfaces. One small residual live-doc drift remained in current operational docs: `docs/status/AGENT_AUTOMATION_READINESS.md` and `docs/FINALIZATION_RUNBOOK.md` still referenced the older raw PowerShell/runbook command forms. Those were updated to the current portable wrapper entrypoints (`node scripts/shared/run-powershell.cjs ...`).
+
+**Verification**: `npm run quality` PASS. `npm run verify:pipeline` PASS (88/88 PowerShell scripts parse; workflow presence PASS; lint PASS; product-sync dry-run skipped because `SHOPIFY_ACCESS_TOKEN` is absent; runbook skipped on the default credential-gated path as designed).
+
+**Outcome**: This rerun confirmed the active delta prompt and canonical operational surfaces are now aligned with the live repo behavior. No further actionable repo-side issues were evidenced beyond the small doc residue fixed in this pass.
+
+---
+
 ## 2026-03-06 — Perfected governing prompt + residual router/guide drift closure
 
 **Summary**: Perfected and created the user-requested governing prompt at `prompts/NEW_GURU_EXPERT_TEAM_SYSTEM_OPTIMIZATION_PP_PROMPT_20260306.md`, then executed it against the live branch/worktree state. **Preflight evidence**: branch `cursor/guru-expert-team-optimization-d325`; open PR `#21` (`Guru expert team optimization`); latest branch CI run `22782948277` already green; pre-existing unrelated dirty file remained `package-lock.json`. **Residual actionable issues found and fixed**: (1) prompt inventory/router truth still had one live takeover reference pointing to the older delta prompt — fixed in `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`, `prompts/README.md`, `docs/AGENT_PROMPT_DECISION_TREE.md`, and `OPERATOR_RUNBOOK.md`; (2) current operator/setup guidance still had a small set of older Windows/global-CLI examples — fixed in `docs/GURU_PP_OPERATOR_GUIDE.md`, `.github/settings.optimization.md`, `docs/PREVIEW_APPROVAL_SYSTEM.md`, and `docs/guides/SHOPIFY_CURSOR_USAGE_GUIDE.md` so they now match the active portable task / `node scripts/shared/run-powershell.cjs ...` / `npx shopify ...` flow.

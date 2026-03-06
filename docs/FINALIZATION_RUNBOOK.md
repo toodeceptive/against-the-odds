@@ -27,11 +27,11 @@ This runbook assumes you will use the new **Finalization Team** prompts in `prom
   - `npm run quality`
   - `npm run verify:pipeline` (default auto-skips the credential-gated runbook step when Shopify credentials are absent)
 - **Credentialed operational check**:
-  - `npm run verify:pipeline:strict` or `.\scripts\run-runbook.ps1` after credentials are configured or refreshed
+  - `npm run verify:pipeline:strict` or `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1` after credentials are configured or refreshed
 - **Extended validation (optional deeper pass)**:
   - `npm run test:all`
-  - `scripts/health/comprehensive-check.ps1`
-  - `scripts/quality/check-all.ps1`
+  - `node scripts/shared/run-powershell.cjs scripts/health/comprehensive-check.ps1`
+  - `node scripts/shared/run-powershell.cjs scripts/quality/check-all.ps1`
 
 ### Store ops / security / measurement (required)
 
