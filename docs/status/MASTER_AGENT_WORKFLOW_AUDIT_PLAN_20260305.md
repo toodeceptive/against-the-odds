@@ -107,11 +107,9 @@
 
 ## Finalization Evidence
 
-- Commits:
-  - `cd2af32` - `chore(pp): execute cycle 17 master workflow closure`
-  - `0180167` - `docs(pp): record cycle 17 finalize evidence`
+- Core closure commit: `cd2af32` - `chore(pp): execute cycle 17 master workflow closure`
+- Follow-up docs sync commits: additional `docs(pp)` evidence updates on the same branch
 - Branch: `pp/guru-closure-20260305`
-- Pushed range: `c3d28d4..0180167`
 - Push target: `origin/pp/guru-closure-20260305`
 - Residual blockers:
   - Optional Playwright E2E best-effort lane still environment-sensitive in extension verifier script.
