@@ -16,7 +16,7 @@
 
 **Verification**: `npm run quality` PASS. `npm run verify:pipeline` rerun still ends with the expected credential-gated failure only (`SHOPIFY_ACCESS_TOKEN not set`). All repo-side checks and workflow syntax checks remain green.
 
-**Outcome**: The repo now has a native replacement for the failing external `Continuous AI` PR statuses, and the true merge-blocking source has been identified and isolated from the earlier Codacy retirement work.
+**Outcome**: The repo now has a native replacement for the failing external `Continuous AI` PR statuses, and the true merge-blocking source has been identified and isolated from the earlier Codacy retirement work. After the replacement commit (`ced0481`) ran in CI, PR **#19** returned `mergeStateStatus: CLEAN`; native CI checks passed and all four `Continuous AI: ...` contexts flipped from `FAILURE` to `SUCCESS`.
 
 ---
 
