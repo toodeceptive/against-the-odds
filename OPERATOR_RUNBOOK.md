@@ -5,7 +5,7 @@
 ## For AI agents
 
 - **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill). Run `-pp` or `/pp` to invoke the AO agent in Prodigy Protocol mode; see [prompts/AO_AGENT_PP_PROMPT.md](prompts/AO_AGENT_PP_PROMPT.md).
-- **Daily gates**: Run `npm run quality` and, before push, `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no .env.local). Integration: `.\scripts\run-runbook.ps1` when credentials are set.
+- **Daily gates**: Run `npm run quality` and, before push, `npm run verify:pipeline`. The default pipeline verify now auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` or `.\scripts\run-runbook.ps1` when credentials are set and you want the full integration gate.
 - **Perfection loop**: To loop until work is fixed, perfected, complete, and optimized (project-wide cleanup/updates/optimizations; fix failed runs; track progression/commit/review/push), use [prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md](prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md) and [.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md](.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md). Run as needed; see [.cursor/plans/README.md](.cursor/plans/README.md) for all three plans.
 - **100-step multiphase PP cycles**: For deep research, fixes, optimizations, auditing, and finalizations across all trees/worktrees/branches/Git/GitHub/repos (fix any failure/error/setup by means necessary): [docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md](docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md).
 
@@ -15,9 +15,9 @@
 
 ## Daily Checks
 
-- **One command:** `npm run quality` (format, format:check, lint, test:unit)
+- **One command:** `npm run quality` (format:check, lint, test:unit)
 - Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
-- **Before push:** Run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`). CI runs **arch_guard**, test, secret-scan, quality; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
+- **Before push:** Run `npm run verify:pipeline`. It auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent. Use `npm run verify:pipeline:strict` when you expect Shopify integration checks to pass locally. CI runs **arch_guard**, test, secret-scan, quality; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
 - **Prettier runs automatically on every commit** (pre-commit hook); see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)

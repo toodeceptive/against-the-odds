@@ -26,6 +26,7 @@
     "test:desktop": "node scripts/shared/run-powershell.cjs scripts/desktop-automation/test-system.ps1",
     "test:desktop:quick": "node scripts/shared/run-powershell.cjs scripts/desktop-automation/test-system.ps1 -Quick",
     "verify:pipeline": "node scripts/shared/run-powershell.cjs scripts/verify-pipeline.ps1",
+    "verify:pipeline:strict": "node scripts/shared/run-powershell.cjs scripts/verify-pipeline.ps1 -RequireRunbook",
     "prepare": "husky"
   },
   "keywords": [

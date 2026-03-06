@@ -3,7 +3,8 @@
 
 param(
     [switch]$SkipRunbook = $false,
-    [switch]$SkipParse = $false
+    [switch]$SkipParse = $false,
+    [switch]$RequireRunbook = $false
 )
 
 $ErrorActionPreference = "Stop"
@@ -94,7 +95,9 @@ Write-Host ""
 if (-not $SkipRunbook) {
     Write-Host "[5/5] Runbook (Shopify + GitHub verification)..." -ForegroundColor Yellow
     $runbook = Join-Path $repoPath (Join-Path "scripts" "run-runbook.ps1")
-    if (Test-Path $runbook) {
+    if (-not $RequireRunbook -and -not $token) {
+        Write-Host "  (credential-gated: SHOPIFY_ACCESS_TOKEN not set, skip runbook; use -RequireRunbook for strict mode)" -ForegroundColor Gray
+    } elseif (Test-Path $runbook) {
         & $runbook
         if ($LASTEXITCODE -ne 0) { $failed++ }
     } else {

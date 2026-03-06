@@ -67,6 +67,7 @@ Execution sequence:
 - Run repo-native verification:
   - npm run quality
   - npm run verify:pipeline
+- Use `npm run verify:pipeline:strict` only when Shopify credentials are expected locally and the full runbook gate should be enforced.
 - If verification is blocked by credentials or inaccessible admin permissions, classify the blocker precisely instead of masking it.
 
 6) Documentation and closure
