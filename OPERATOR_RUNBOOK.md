@@ -4,14 +4,14 @@
 
 ## For AI agents
 
-- **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill). Run `-pp` or `/pp` to invoke the AO agent in Prodigy Protocol mode; see [prompts/AO_AGENT_PP_PROMPT.md](prompts/AO_AGENT_PP_PROMPT.md).
-- **Daily gates**: Run `npm run quality` and, before push, `npm run verify:pipeline`. The default pipeline verify now auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` or `.\scripts\run-runbook.ps1` when credentials are set and you want the full integration gate.
+- **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill). Run `-pp` or `/pp` to invoke the AO agent in Prodigy Protocol mode for normal task-scoped work; for repo-wide delta/native-CI closure runs, use [prompts/PERFECT_DELTA_NATIVE_GURU_PP_PROMPT_20260306.md](prompts/PERFECT_DELTA_NATIVE_GURU_PP_PROMPT_20260306.md).
+- **Daily gates**: Run `npm run quality` and, before push, `npm run verify:pipeline`. The default pipeline verify now auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` or `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1` when credentials are set and you want the full integration gate.
 - **Perfection loop**: To loop until work is fixed, perfected, complete, and optimized (project-wide cleanup/updates/optimizations; fix failed runs; track progression/commit/review/push), use [prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md](prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md) and [.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md](.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md). Run as needed; see [.cursor/plans/README.md](.cursor/plans/README.md) for all three plans.
 - **100-step multiphase PP cycles**: For deep research, fixes, optimizations, auditing, and finalizations across all trees/worktrees/branches/Git/GitHub/repos (fix any failure/error/setup by means necessary): [docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md](docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md).
 
 **Repo root**: In the original local Windows environment, open the **primary** repo (`C:/Users/LegiT/against-the-odds`) as the workspace root so diffs and paths show repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`), not a prefix like `hal/`. In cloud or isolated checkouts, use the current repo root and validate it with live `git worktree list` output first. If the diff or Source Control shows a path containing `hal` or `hvf`, you are in the wrong workspace—do not commit; close it and open primary first. Hal and hvf are stale workspace names, not in `git worktree list`; see [WORKTREE_INVENTORY.md](docs/status/WORKTREE_INVENTORY.md).
 
-**Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (approved; browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
+**Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window, desktop helper)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (approved; browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
 
 ## Daily Checks
 
@@ -23,31 +23,31 @@
 ## Integration Checks (credential-gated)
 
 - `npm run test:integration`
-- `.\scripts\shopify\test-connection.ps1`
-- `.\scripts\github\verify-auth.ps1`
-- Or run both Shopify and GitHub checks: `.\scripts\run-runbook.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/shopify/test-connection.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/github/verify-auth.ps1`
+- Or run both Shopify and GitHub checks: `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1`
 
 ## Health & Quality
 
-- `.\scripts\health\comprehensive-check.ps1`
-- `.\scripts\quality\check-all.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/health/comprehensive-check.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/quality/check-all.ps1`
 
 ## Sync & Reporting
 
-- `.\scripts\sync\sync-all.ps1`
-- `.\scripts\reporting\generate-status.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/sync/sync-all.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/reporting/generate-status.ps1`
 
 ## Update Shopify from Cursor (recommended flow)
 
 **Edit in Cursor → push to GitHub → store updates.** Store is connected to this repo via the Shopify GitHub App; pushing to the connected branch (usually `main`) triggers theme deployment. No `shopify theme push` needed for that flow.
 
-- **One-time**: Pull live theme into repo: `.\scripts\shopify\theme-pull.ps1` (then commit and push).
-- **Preview before commit**: Run `.\scripts\open-preview-popup.ps1` (or **Tasks → Start theme preview** / `.\scripts\start-theme-preview.ps1`) after writing [docs/status/pending-approval.md](docs/status/pending-approval.md). That opens the approval file in Cursor, the AO preview in the browser (static mock immediately; live theme when dev server is ready), and theme dev in a new window. Set `SHOPIFY_CLI_THEME_TOKEN` in `.env.local` so theme dev starts without login prompt (see [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md)). Optional: **Ctrl+Alt+T** for theme dev only; **Ctrl+Alt+P** to open pending-approval.md.
+- **One-time**: Pull live theme into repo: `node scripts/shared/run-powershell.cjs scripts/shopify/theme-pull.ps1` (then commit and push).
+- **Preview before commit**: Cross-platform default is **Tasks → Shopify: Theme Dev** after writing [docs/status/pending-approval.md](docs/status/pending-approval.md), plus **Open pending approval** to show the approval file in Cursor. The desktop helper path is `node scripts/shared/run-powershell.cjs scripts/open-preview-popup.ps1` (or `scripts/start-theme-preview.ps1`) when you want the approval file, static preview, and theme-dev helper opened together. Set `SHOPIFY_CLI_THEME_TOKEN` in `.env.local` so theme dev starts without login prompt (see [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md)). Optional: **Ctrl+Alt+T** for theme dev only; **Ctrl+Alt+P** to open pending-approval.md.
 - **Approval gate**: Wait for explicit approval in chat before applying product sync or committing/pushing store-affecting theme changes.
 - **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, get approval when the change is store-affecting, then commit and push to `main`.
 - **Deploy log / rollback**: After each deploy or product sync, append to [docs/status/deploy-log.md](docs/status/deploy-log.md). Rollback: theme → Shopify Admin → theme card → Actions → Reset to last commit; products → revert JSON and re-run sync.
 
-**Agent context**: Store URL `aodrop.com`; theme source `src/shopify/themes/aodrop-theme/`; product data `data/products/*.json`; workflow and product/theme docs: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md). Theme ID in `.env.local` (SHOPIFY_THEME_ID); get via `shopify theme list` or Admin. **Store ops**: Product-with-uploads (JSON path + browser path), theme updates, deploy-log for every change — see [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). **Integrations**: Products via Admin API (`sync-products.ps1`; rate limits ~2 req/s); one-off/settings via user's browser (no headless). See [.cursor/context/shopify.md](.cursor/context/shopify.md).
+**Agent context**: Store URL `aodrop.com`; theme source `src/shopify/themes/aodrop-theme/`; product data `data/products/*.json`; workflow and product/theme docs: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md). Theme ID in `.env.local` (SHOPIFY_THEME_ID); get via `npx shopify theme list` or Admin. **Store ops**: Product-with-uploads (JSON path + browser path), theme updates, deploy-log for every change — see [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). **Integrations**: Products via Admin API (`sync-products.ps1`; rate limits ~2 req/s); one-off/settings via user's browser (no headless). See [.cursor/context/shopify.md](.cursor/context/shopify.md).
 
 See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)** and **[docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md)** for full steps, test connection, and product sync.
 
@@ -55,13 +55,14 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 - **Shopify–GitHub App**: Store is connected to this repo. Theme deploys happen when you push to the connected branch (typically `main`). Configuration: Shopify Admin → Settings → Apps and sales channels → GitHub.
 - **GitHub Actions**: Theme deployment is handled by the Shopify GitHub App; `shopify-sync.yml` is for product sync (Admin API secrets if configured).
-- `shopify auth login` — needed for theme pull and local dev
-- `shopify theme dev --store=aodrop.com --theme=live` — local preview
+- **Task / wrapper first**: use **Shopify: Theme Dev (preview before commit)** or `node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1` for deterministic theme preview.
+- `npx shopify auth login` — manual fallback when you need direct CLI authentication
+- `npx shopify theme dev --store=aodrop.com --theme=live` — manual fallback preview command
 
 ## Dependency Maintenance
 
-- `.\scripts\maintenance\update-dependencies.ps1`
-- `.\scripts\maintenance\security-scan.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/maintenance/update-dependencies.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/maintenance/security-scan.ps1`
 
 **Desktop automation (optional)**: `robotjs` and `node-window-manager` are optionalDependencies; they may require native build (node-gyp) on install. If `npm install` fails for these, you can skip optional deps or install build tools (e.g. Visual Studio Build Tools on Windows). See `src/desktop-automation/` and `tests/desktop-automation/`.
 
@@ -73,8 +74,8 @@ After editing AGENTS.md, CODEOWNERS, docs/OWNERSHIP_REGISTRY.md, docs/SSOT_ATO.m
 
 - Store in `.env.local` (never commit)
 - If missing, copy from `.env.example` and fill values
-- **Full system setup**: Run `.\scripts\setup\full-setup.ps1` for a single entry point (ensures .env.local, guides Shopify/GitHub credentials, runs verify-credentials). See [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md) and [docs/BROWSER_CREDENTIAL_FLOW.md](docs/BROWSER_CREDENTIAL_FLOW.md).
-- **GitHub Actions secrets**: Run `.\scripts\github\set-secrets-from-env.ps1 -DryRun` then `.\scripts\github\set-secrets-from-env.ps1` to push `.env.local` values to repo secrets (enables shopify-sync in CI). Requires `gh auth login` or GH_TOKEN in .env.local.
+- **Full system setup**: Run `node scripts/shared/run-powershell.cjs scripts/setup/full-setup.ps1` for a single entry point (ensures .env.local, guides Shopify/GitHub credentials, runs verify-credentials). See [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md) and [docs/BROWSER_CREDENTIAL_FLOW.md](docs/BROWSER_CREDENTIAL_FLOW.md).
+- **GitHub Actions secrets**: Run `node scripts/shared/run-powershell.cjs scripts/github/set-secrets-from-env.ps1 -DryRun` then `node scripts/shared/run-powershell.cjs scripts/github/set-secrets-from-env.ps1` to push `.env.local` values to repo secrets (enables shopify-sync in CI). Requires `gh auth login` or GH_TOKEN in .env.local.
 - **replacements.txt** at repo root: regex for git-filter-repo (Shopify secret replacement in history); do not remove if using history sanitization.
 
 ## Troubleshooting
@@ -109,15 +110,15 @@ For **worktree/hal path and commit policy** (do not commit when diff shows hal o
 | ---------------------- | --------------------------------------------------------------- |
 | `GITHUB_TOKEN`         | GitHub → Settings → Developer settings → Personal access tokens |
 | `SHOPIFY_ACCESS_TOKEN` | Shopify Admin → Apps → Development → Your app → API credentials |
-| `SHOPIFY_THEME_ID`     | `shopify theme list` or Theme library URL                       |
+| `SHOPIFY_THEME_ID`     | `npx shopify theme list` or Theme library URL                   |
 | `CLOUDFLARE_API_TOKEN` | Cloudflare Dashboard → My Profile → API Tokens                  |
 | `CLOUDFLARE_ZONE_ID`   | Cloudflare → Your domain → Overview (right column)              |
 
 After filling `.env.local`:
 
 - `npm run test:integration`
-- `.\scripts\shopify\test-connection.ps1`
-- `.\scripts\github\verify-auth.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/shopify/test-connection.ps1`
+- `node scripts/shared/run-powershell.cjs scripts/github/verify-auth.ps1`
 - `npm run test:e2e` (optional)
 - `npm run test:coverage` (optional)
 

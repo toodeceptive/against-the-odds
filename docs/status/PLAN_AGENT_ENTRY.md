@@ -10,7 +10,7 @@ You are entering the **Against The Odds (AO)** project. Before doing any other w
 
 1. **Read this file** (`docs/status/PLAN_AGENT_ENTRY.md`).
 2. **Read** `docs/status/EXECUTIVE_DECISION_WORK_PRINCIPLES.md` (binding: no redundant runs; incremental-only execution when Phase 0 is signed off).
-3. **If Phase 0 is already signed off** (see [docs/status/PHASE_0_FINALIZATION.md](PHASE_0_FINALIZATION.md) and [docs/status/CONSOLIDATION_LOG.md](CONSOLIDATION_LOG.md)), skip re-execution and go to [docs/status/NEXT_BEST_STEPS_20260131.md](NEXT_BEST_STEPS_20260131.md) and [docs/AGENT_PROMPT_DECISION_TREE.md](../AGENT_PROMPT_DECISION_TREE.md) for ongoing work.
+3. **If Phase 0 is already signed off** (see [docs/status/PHASE_0_FINALIZATION.md](PHASE_0_FINALIZATION.md) and [docs/status/CONSOLIDATION_LOG.md](CONSOLIDATION_LOG.md)), skip re-execution and go to [docs/status/WORK_QUEUE.md](WORK_QUEUE.md), [docs/status/CONSOLIDATION_LOG.md](CONSOLIDATION_LOG.md), and [docs/AGENT_PROMPT_DECISION_TREE.md](../AGENT_PROMPT_DECISION_TREE.md) for ongoing work. Use [docs/status/NEXT_BEST_STEPS_20260131.md](NEXT_BEST_STEPS_20260131.md) only as historical context.
 4. **Otherwise**, execute the plan described in the next section.
 
 ---
@@ -48,7 +48,7 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 ## 3. Related Context (Optional but Recommended)
 
 - **Agent permission and when agents use your browser**: [AGENTS.md](../../AGENTS.md) (repo root) — full permission; safety rules; when to use Cursor browser MCP.
-- **Handoff for new agent** (context, permissions, exact prompt): [docs/HANDOFF_PROMPT_NEW_AGENT.md](../HANDOFF_PROMPT_NEW_AGENT.md)
+- **Handoff for new agent** (context, permissions, takeover situations): [docs/HANDOFF_PROMPT_NEW_AGENT.md](../HANDOFF_PROMPT_NEW_AGENT.md)
 - **Consolidation log and index** (inventory, what was done): `docs/status/CONSOLIDATION_LOG.md`, `docs/status/INDEX_REPORTS.md`
 - **Operator runbook** (daily checks, Shopify, credentials): [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md)
 - **Consolidation log** (Phase 0 + all tracks, resolved issues): `docs/status/CONSOLIDATION_LOG.md`
@@ -78,4 +78,4 @@ Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** as the 
 
 ---
 
-**Summary**: Read `prompts/PERFECT_EXECUTION_PROMPT.md`, complete Phase 0 if needed, record sign-off in `docs/status/PHASE_0_FINALIZATION.md`, then use `docs/AGENT_PROMPT_DECISION_TREE.md` to pick the next prompt. If sign-off already exists, skip redundant re-execution and continue incrementally.
+**Summary**: Read `prompts/PERFECT_EXECUTION_PROMPT.md`, complete Phase 0 if needed, record sign-off in `docs/status/PHASE_0_FINALIZATION.md`, then use `docs/AGENT_PROMPT_DECISION_TREE.md` to pick the next prompt. If sign-off already exists, skip redundant re-execution and continue incrementally from `WORK_QUEUE.md` + `CONSOLIDATION_LOG.md`.

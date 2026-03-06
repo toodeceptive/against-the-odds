@@ -164,13 +164,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Lighthouse CI
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run repo quality gate
+        run: npm run quality
+
+      - name: Lighthouse CI (informational)
         uses: treosh/lighthouse-ci-action@03becbfc543944dd6e7534f7ff768abb8a296826
         continue-on-error: true
         with:
           urls: |
             https://toodeceptive.github.io/against-the-odds/
-          uploadArtifacts: true
+          uploadArtifacts: false
           temporaryPublicStorage: true
 
   continuous_ai_bridge:

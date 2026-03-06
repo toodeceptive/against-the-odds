@@ -3,12 +3,15 @@
 param(
     [switch]$TestPush = $false,
     [switch]$TestPull = $false,
-    [switch]$CheckSecrets = $false
+    [switch]$CheckSecrets = $false,
+    [switch]$FailOnAuthIssues = $false
 )
 
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
+
+$failures = 0
 
 Write-Host "=== GitHub Authentication Verification ===" -ForegroundColor Cyan
 Write-Host ""
@@ -58,6 +61,7 @@ if (-not [string]::IsNullOrWhiteSpace($githubToken) -and $githubToken -notmatch 
         Write-Host "    User ID: $($response.id)" -ForegroundColor Cyan
     } catch {
         Write-Host "  [X] GitHub API access failed: $_" -ForegroundColor Red
+        $failures++
     }
 } else {
     Write-Host "  [!] GITHUB_TOKEN not configured" -ForegroundColor Yellow
@@ -75,9 +79,11 @@ try {
     } else {
         Write-Host "  [X] Repository access failed" -ForegroundColor Red
         Write-Host "    Error: $repoInfo" -ForegroundColor Red
+        $failures++
     }
 } catch {
     Write-Host "  [X] Repository access test failed: $_" -ForegroundColor Red
+    $failures++
 }
 
 # Test 3: Push capability (if requested)
@@ -104,11 +110,13 @@ if ($TestPush) {
             Remove-Item $testFile -Force
         } else {
             Write-Host "  [X] Push failed: $pushResult" -ForegroundColor Red
+            $failures++
             git reset HEAD~1 --soft 2>&1 | Out-Null
             Remove-Item $testFile -Force
         }
     } catch {
         Write-Host "  [X] Push test failed: $_" -ForegroundColor Red
+        $failures++
         if (Test-Path $testFile) {
             Remove-Item $testFile -Force
         }
@@ -125,9 +133,11 @@ if ($TestPull) {
             Write-Host "  [OK] Pull successful" -ForegroundColor Green
         } else {
             Write-Host "  [!] Pull result: $pullResult" -ForegroundColor Yellow
+            $failures++
         }
     } catch {
         Write-Host "  [X] Pull test failed: $_" -ForegroundColor Red
+        $failures++
     }
 }
 
@@ -162,3 +172,9 @@ Write-Host "Run with -TestPush to test push capability" -ForegroundColor White
 Write-Host "Run with -TestPull to test pull capability" -ForegroundColor White
 Write-Host "Run with -CheckSecrets to check GitHub Actions secrets" -ForegroundColor White
 Write-Host ""
+
+if ($FailOnAuthIssues -and $failures -gt 0) {
+    exit 1
+}
+
+exit 0

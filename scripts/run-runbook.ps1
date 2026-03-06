@@ -27,7 +27,7 @@ if ([string]::IsNullOrWhiteSpace($env:SHOPIFY_STORE_DOMAIN)) {
 Write-Host "=== Runbook: Shopify + GitHub ===" -ForegroundColor Cyan
 & "$repoRoot\scripts\shopify\test-connection.ps1"
 $shopifyExit = $LASTEXITCODE
-& "$repoRoot\scripts\github\verify-auth.ps1"
+& "$repoRoot\scripts\github\verify-auth.ps1" -FailOnAuthIssues
 $githubExit = $LASTEXITCODE
 $secretsExit = 0
 if ($StrictSecrets) {

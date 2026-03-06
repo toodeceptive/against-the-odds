@@ -103,7 +103,6 @@ Add to README.md:
 
 ```markdown
 ![CI](https://github.com/toodeceptive/against-the-odds/workflows/CI/badge.svg)
-![Quality](https://github.com/toodeceptive/against-the-odds/workflows/Quality%20Check/badge.svg)
 ![License](https://img.shields.io/badge/license-UNLICENSED-red)
 ```
 

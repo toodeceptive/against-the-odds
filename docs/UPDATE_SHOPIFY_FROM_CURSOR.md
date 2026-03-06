@@ -16,10 +16,10 @@ If `src/shopify/themes/aodrop-theme` is empty or you haven't pulled your live th
 
 1. **Store:** Create `.env.local` in repo root with `SHOPIFY_STORE_DOMAIN=aodrop.com` (optional but recommended; scripts load it automatically).
 2. **Auth (choose one):**
-   - **Device code:** Run `.\scripts\shopify\theme-auth-then-pull.ps1` (opens browser for login with store scoped to aodrop.com, then pulls). If you get **"not authorized"**: log into **https://aodrop.com/admin** at least once as owner or staff with theme access; or have the owner add you in **Settings → Users and permissions**; then run again.
-   - **Token (browser):** Run `.\scripts\shopify\theme-auth-via-browser.ps1` — launches Chrome at Shopify Admin, you log in, script extracts token (Apps > Development) and saves `SHOPIFY_CLI_THEME_TOKEN` + `SHOPIFY_ACCESS_TOKEN`, then pulls. Use when device-code auth fails or you prefer token-based auth.
+   - **Device code:** Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-auth-then-pull.ps1` (opens browser for login with store scoped to aodrop.com, then pulls). If you get **"not authorized"**: log into **https://aodrop.com/admin** at least once as owner or staff with theme access; or have the owner add you in **Settings → Users and permissions**; then run again.
+   - **Token (browser):** Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-auth-via-browser.ps1` — launches Chrome at Shopify Admin, you log in, script extracts token (Apps > Development) and saves `SHOPIFY_CLI_THEME_TOKEN` + `SHOPIFY_ACCESS_TOKEN`, then pulls. Use when device-code auth fails or you prefer token-based auth.
    - **Token (manual):** Add `SHOPIFY_CLI_THEME_TOKEN` (or `SHOPIFY_ACCESS_TOKEN`) to `.env.local` — theme pull/dev/push use it for non-interactive auth.
-3. **Pull:** Run `.\scripts\shopify\theme-pull.ps1` from repo root (or use theme-auth-then-pull.ps1 for auth + pull in one go). The script **installs Shopify CLI automatically** if missing and reads the store from `.env.local`.
+3. **Pull:** Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-pull.ps1` from repo root (or use theme-auth-then-pull.ps1 for auth + pull in one go). The script **installs Shopify CLI automatically** if missing and reads the store from `.env.local`.
 4. Commit and push so the theme lives on the branch Shopify is watching (usually `main`).
 
 In **Shopify Admin**: Confirm the store is connected to this repo (Settings → Apps and sales channels → GitHub). Set the branch (e.g. `main`) and, if the app asks, the theme directory (e.g. `src/shopify/themes/aodrop-theme` or repo root—depends on how the Shopify GitHub integration is configured).
@@ -35,9 +35,9 @@ In **Shopify Admin**: Confirm the store is connected to this repo (Settings → 
 
 If the live store (aodrop.com) doesn’t show your brand changes:
 
-1. **One-time**: Pull the live theme: run `.\scripts\shopify\theme-auth-then-pull.ps1` (opens browser to log in, then pulls), or `.\scripts\shopify\theme-pull.ps1` — on "not authorized" the script opens login in your browser; sign in, then run theme-pull again.
-2. **Apply and push**: Run `.\scripts\shopify\theme-update-store.ps1` — this merges AO brand CSS/snippet into the theme, copies PNGs from `assets/brand/` into the theme assets, and pushes the theme to Shopify. Use `-Live` only when you intend to update the **live** theme.
-3. **Preview first**: Open `docs/guides/theme-preview-mock.html` in a browser for a static mock, or run `.\scripts\shopify\theme-dev.ps1` for a live preview before pushing. **Theme dev requires a full theme:** if you see "missing layout/theme.liquid" or "127.0.0.1 refused to connect", run `theme-pull.ps1` once so the folder has layout/config; the script uses `npx shopify theme dev` so the correct theme CLI runs.
+1. **One-time**: Pull the live theme: run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-auth-then-pull.ps1` (opens browser to log in, then pulls), or `node scripts/shared/run-powershell.cjs scripts/shopify/theme-pull.ps1` — on "not authorized" the script opens login in your browser; sign in, then run theme-pull again.
+2. **Apply and push**: Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-update-store.ps1` — this merges AO brand CSS/snippet into the theme, copies PNGs from `assets/brand/` into the theme assets, and pushes the theme to Shopify. Use `-Live` only when you intend to update the **live** theme.
+3. **Preview first**: Open `docs/guides/theme-preview-mock.html` in a browser for a static mock, or use **Tasks → Shopify: Theme Dev** / `node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1` for a live preview before pushing. **Theme dev requires a full theme:** if you see "missing layout/theme.liquid" or "127.0.0.1 refused to connect", run `theme-pull.ps1` once so the folder has layout/config; the script uses `npx shopify theme dev` so the correct theme CLI runs.
 
 **Summary**: Edit in Cursor → push to GitHub → store updates. The Admin API token in `.env.local` is **not** required for this flow (only for product sync, backups, or CLI push).
 
@@ -47,9 +47,9 @@ If the live store (aodrop.com) doesn’t show your brand changes:
 
 **When**: You want to push the theme directly from Cursor (e.g. before GitHub is connected, or to a dev theme).
 
-- **Prerequisites**: `.env.local` with `SHOPIFY_STORE_DOMAIN` (optional; scripts load it). Run `shopify auth login` once. Shopify CLI is **installed automatically** by `theme-pull` / `theme-dev` / `update-theme` if missing.
-- **Push theme to store**: `.\scripts\shopify\update-theme.ps1` from repo root
-- **Live preview**: **Tasks → Shopify: Theme Dev** or `.\scripts\shopify\theme-dev.ps1`
+- **Prerequisites**: `.env.local` with `SHOPIFY_STORE_DOMAIN` (optional; scripts load it). Run `npx shopify auth login` once if you are not using a saved token. Shopify CLI is **installed automatically** by `theme-pull` / `theme-dev` / `update-theme` if missing.
+- **Push theme to store**: `node scripts/shared/run-powershell.cjs scripts/shopify/update-theme.ps1` from repo root
+- **Live preview**: **Tasks → Shopify: Theme Dev** or `node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1`
 
 ---
 
@@ -58,7 +58,7 @@ If the live store (aodrop.com) doesn’t show your brand changes:
 **When**: You want to confirm Cursor (and this repo) can talk to Shopify.
 
 1. In Cursor, open Terminal and go to repo root
-2. Load env and run: `.\scripts\run-runbook.ps1` (Shopify + GitHub checks), or only Shopify: `.\scripts\shopify\test-connection.ps1`
+2. Load env and run: `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1` (Shopify + GitHub checks), or only Shopify: `node scripts/shared/run-powershell.cjs scripts/shopify/test-connection.ps1`
 3. Ensure `.env.local` has `SHOPIFY_ACCESS_TOKEN` and `SHOPIFY_STORE_DOMAIN` if you use API-based scripts
 
 ---
@@ -67,9 +67,9 @@ If the live store (aodrop.com) doesn’t show your brand changes:
 
 **When**: You want to sync products or pull store data from Cursor.
 
-- **Test connection**: `.\scripts\shopify\test-connection.ps1`
-- **Fetch store data** (products, collections, themes): `.\scripts\shopify\fetch-store-data.ps1`
-- **Sync products** (from repo data to store): `.\scripts\shopify\sync-products.ps1`
+- **Test connection**: `node scripts/shared/run-powershell.cjs scripts/shopify/test-connection.ps1`
+- **Fetch store data** (products, collections, themes): `node scripts/shared/run-powershell.cjs scripts/shopify/fetch-store-data.ps1`
+- **Sync products** (from repo data to store): `node scripts/shared/run-powershell.cjs scripts/shopify/sync-products.ps1`
 
 Run from repo root; they use `.env.local` for credentials (Admin API token required).
 
@@ -77,14 +77,14 @@ Run from repo root; they use `.env.local` for credentials (Admin API token requi
 
 ## Quick reference (run in Cursor terminal from repo root)
 
-| Goal                                    | Command                                             |
-| --------------------------------------- | --------------------------------------------------- |
-| **Push changes to store (GitHub flow)** | Commit and push to `main` (or connected branch)     |
-| Pull live theme into repo               | `.\scripts\shopify\theme-pull.ps1`                  |
-| Theme dev (live preview)                | `shopify theme dev --store=aodrop.com --theme=live` |
-| Push theme via CLI                      | `.\scripts\shopify\update-theme.ps1`                |
-| Login to Shopify CLI                    | `shopify auth login`                                |
-| Run runbook (Shopify + GitHub)          | `.\scripts\run-runbook.ps1`                         |
+| Goal                                    | Command                                                                                                  |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Push changes to store (GitHub flow)** | Commit and push to `main` (or connected branch)                                                          |
+| Pull live theme into repo               | `node scripts/shared/run-powershell.cjs scripts/shopify/theme-pull.ps1`                                  |
+| Theme dev (live preview)                | **Tasks → Shopify: Theme Dev** or `node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1` |
+| Push theme via CLI                      | `node scripts/shared/run-powershell.cjs scripts/shopify/update-theme.ps1`                                |
+| Login to Shopify CLI                    | `npx shopify auth login`                                                                                 |
+| Run runbook (Shopify + GitHub)          | `node scripts/shared/run-powershell.cjs scripts/run-runbook.ps1`                                         |
 
 ---
 
@@ -93,13 +93,13 @@ Run from repo root; they use `.env.local` for credentials (Admin API token requi
 Use this to confirm the system works end-to-end once you have Shopify CLI access:
 
 1. **Auth + pull theme**  
-   From repo root: `.\scripts\shopify\theme-auth-then-pull.ps1`
+   From repo root: `node scripts/shared/run-powershell.cjs scripts/shopify/theme-auth-then-pull.ps1`
    - Browser opens for login; sign in with the account that has theme access to aodrop.com.
    - After auth, script pulls the live theme into `src/shopify/themes/aodrop-theme`.
    - Success: folder contains `layout/theme.liquid`, `config/`, etc.
 
 2. **Theme dev (live preview)**  
-   From repo root: `.\scripts\shopify\theme-dev.ps1`
+   From repo root: `node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1`
    - Preview URL opens in browser.
    - Success: store preview loads; edits in Cursor refresh in browser.
 
@@ -109,7 +109,7 @@ Use this to confirm the system works end-to-end once you have Shopify CLI access
    - If using GitHub deploy: Settings → Apps and sales channels → GitHub — confirm repo and branch.
 
 4. **Optional: apply brand and push via CLI**  
-   From repo root: `.\scripts\shopify\theme-update-store.ps1`
+   From repo root: `node scripts/shared/run-powershell.cjs scripts/shopify/theme-update-store.ps1`
    - Merges AO brand CSS/snippet, copies brand images, then pushes. Use `-Live` only when you intend to update the live theme.
 
 See also: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](AGENT_WORKFLOW_CURSOR_SHOPIFY.md) (preview/approval flow), `OPERATOR_RUNBOOK.md`, `docs/SHOPIFY_SETUP.md`. Theme-branch sync: pushes to `main` that change `src/shopify/themes/aodrop-theme/` trigger `.github/workflows/sync-theme-branch.yml`, which updates the `shopify-theme` branch for Shopify GitHub App connection.

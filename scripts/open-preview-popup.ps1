@@ -1,6 +1,6 @@
 # Open pending-approval.md and the theme preview in the browser so the user sees both on their desktop.
-# Run from repo root. Starts theme dev in a new window, then opens browser + approval file after a delay.
-# Uses cmd /c start and full paths so the browser actually opens when run from Cursor/IDE terminals.
+# Run from repo root. Starts theme dev in a new window when the platform supports it and
+# otherwise degrades cleanly so non-Windows environments can still open the approval file/preview.
 
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) {
@@ -12,9 +12,17 @@ $repoPath = if ($PSScriptRoot) {
 $pendingFile = Join-Path $repoPath "docs/status/pending-approval.md"
 $themeDevScript = Join-Path $repoPath "scripts/shopify/theme-dev.ps1"
 $previewUrl = "http://127.0.0.1:9292"
+$isWindowsPlatform = $env:OS -eq "Windows_NT"
+$isMacOSPlatform = $false
+if (-not $isWindowsPlatform -and (Get-Command uname -ErrorAction SilentlyContinue)) {
+    $isMacOSPlatform = (uname) -eq "Darwin"
+}
 
-# Find a real browser exe (Chrome, Edge, Firefox) so .html opens in browser, not in VS Code/Cursor
 function Get-BrowserExe {
+    if (-not $isWindowsPlatform) {
+        return $null
+    }
+
     $candidates = @(
         "C:\Program Files\Google\Chrome\Application\chrome.exe",
         "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
@@ -29,7 +37,7 @@ function Get-BrowserExe {
             return $exe
         }
     }
-    # Last resort: registry default for http (might still be IDE in rare cases)
+
     try {
         $progId = (Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice' -ErrorAction SilentlyContinue).ProgId
         if ($progId) {
@@ -38,19 +46,49 @@ function Get-BrowserExe {
             if ($cmd -match '^([^\s"]+)') { $exe = $matches[1]; if (Test-Path -LiteralPath $exe -ErrorAction SilentlyContinue) { return $exe } }
         }
     } catch { }
+
     return $null
 }
 
-# Open a URL or file in a real browser (Chrome/Edge/Firefox), not in VS Code/Cursor
+function Get-PowerShellCommand {
+    foreach ($candidate in @("pwsh", "powershell")) {
+        if (Get-Command $candidate -ErrorAction SilentlyContinue) {
+            return $candidate
+        }
+    }
+
+    return $null
+}
+
+function Open-DefaultTarget {
+    param([string]$Target)
+
+    if ($isWindowsPlatform) {
+        Start-Process $Target
+        return $true
+    }
+
+    $openCommand = if ($isMacOSPlatform) { "open" } else { "xdg-open" }
+    if (Get-Command $openCommand -ErrorAction SilentlyContinue) {
+        & $openCommand $Target | Out-Null
+        return $LASTEXITCODE -eq 0
+    }
+
+    return $false
+}
+
 function Open-InBrowser {
     param([string]$UrlOrPath)
-    $isFile = $UrlOrPath -match '^[A-Za-z]:\\'
+
+    $isUrl = $UrlOrPath -match '^[a-z]+://'
     $target = $UrlOrPath
-    if ($isFile) {
-        $target = (Resolve-Path -LiteralPath $UrlOrPath -ErrorAction SilentlyContinue).Path
-        if (-not $target) { $target = $UrlOrPath }
+    if (-not $isUrl) {
+        $resolved = Resolve-Path -LiteralPath $UrlOrPath -ErrorAction SilentlyContinue
+        if ($resolved) {
+            $target = $resolved.Path
+        }
     }
-    # 1) Use Chrome/Edge/Firefox by path so .html never goes to VS Code
+
     $browserExe = Get-BrowserExe
     if ($browserExe) {
         try {
@@ -58,18 +96,60 @@ function Open-InBrowser {
             return
         } catch { }
     }
-    # 2) For http only: Start-Process with URL
-    if (-not $isFile) {
-        try { Start-Process $target; return } catch { }
-    }
-    # 3) Fallback (may open in VS Code if .html is associated)
+
     try {
-        $quoted = "`"$target`""
-        Start-Process -FilePath "cmd.exe" -ArgumentList "/c", "start", "", $quoted -WorkingDirectory $repoPath
+        if (Open-DefaultTarget $target) {
+            return
+        }
     } catch { }
+
+    if ($isWindowsPlatform) {
+        try {
+            $quoted = "`"$target`""
+            Start-Process -FilePath "cmd.exe" -ArgumentList "/c", "start", "", $quoted -WorkingDirectory $repoPath
+            return
+        } catch { }
+    }
+
+    Write-Host "Could not auto-open $target on this machine. Open it manually if needed." -ForegroundColor Yellow
 }
 
-# 1) Open pending approval in Cursor (or VS Code) so it opens in your editor instead of "Open with" picker
+function Start-ThemeDevWindow {
+    param([string]$ScriptPath)
+
+    $powerShellCommand = Get-PowerShellCommand
+    if (-not $powerShellCommand) {
+        Write-Host "No PowerShell executable found; start theme dev manually." -ForegroundColor Yellow
+        return $false
+    }
+
+    $psArgs = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $ScriptPath)
+
+    if ($isWindowsPlatform) {
+        Start-Process -FilePath $powerShellCommand -ArgumentList $psArgs -WorkingDirectory $repoPath
+        return $true
+    }
+
+    $terminalCandidates = @(
+        @{ Command = "x-terminal-emulator"; Args = @("-e", $powerShellCommand) + $psArgs },
+        @{ Command = "gnome-terminal"; Args = @("--", $powerShellCommand) + $psArgs },
+        @{ Command = "konsole"; Args = @("-e", $powerShellCommand) + $psArgs },
+        @{ Command = "xterm"; Args = @("-e", $powerShellCommand) + $psArgs }
+    )
+
+    foreach ($candidate in $terminalCandidates) {
+        if (Get-Command $candidate.Command -ErrorAction SilentlyContinue) {
+            try {
+                Start-Process -FilePath $candidate.Command -ArgumentList $candidate.Args -WorkingDirectory $repoPath
+                return $true
+            } catch { }
+        }
+    }
+
+    Write-Host "No desktop terminal launcher found. Start 'Shopify: Theme Dev' separately for live preview." -ForegroundColor Yellow
+    return $false
+}
+
 if (Test-Path $pendingFile) {
     if (Get-Command cursor -ErrorAction SilentlyContinue) {
         cursor -r $pendingFile
@@ -85,26 +165,24 @@ if (Test-Path $pendingFile) {
     Write-Host "Pending approval file not found: $pendingFile" -ForegroundColor Yellow
 }
 
-# 2) Open static preview in browser immediately so something always appears
 $mockPath = Join-Path $repoPath "docs/guides/theme-preview-mock.html"
 if (Test-Path $mockPath) {
     Open-InBrowser $mockPath
     Write-Host "Opened AO preview (static mock) in your browser." -ForegroundColor Cyan
 }
 
-# 3) Start theme dev server in a new window
+$themeDevStarted = $false
 if (Test-Path $themeDevScript) {
-    Start-Process powershell -ArgumentList @(
-        "-NoProfile",
-        "-ExecutionPolicy", "Bypass",
-        "-File", $themeDevScript
-    ) -WorkingDirectory $repoPath
-    Write-Host "Theme dev server starting in a new window..." -ForegroundColor Cyan
+    $themeDevStarted = Start-ThemeDevWindow -ScriptPath $themeDevScript
+    if ($themeDevStarted) {
+        Write-Host "Theme dev server starting in a new window..." -ForegroundColor Cyan
+    } else {
+        Write-Host "Theme dev was not auto-started in a separate window on this platform." -ForegroundColor Yellow
+    }
 } else {
     Write-Host "Theme dev script not found: $themeDevScript" -ForegroundColor Red
 }
 
-# 4) Wait for theme dev server to respond, then open live URL if ready
 $maxWaitSeconds = if ($env:PREVIEW_POPUP_MAX_WAIT_SECONDS -match '^\d+$') { [int]$env:PREVIEW_POPUP_MAX_WAIT_SECONDS } else { 90 }
 $intervalSeconds = 2
 $elapsed = 0
@@ -121,13 +199,17 @@ while ($elapsed -lt $maxWaitSeconds) {
     $elapsed += $intervalSeconds
     Write-Host "  ... ${elapsed}s" -ForegroundColor Gray
 }
+
 if ($serverReady) {
     Open-InBrowser $previewUrl
     Write-Host "Browser opened to $previewUrl" -ForegroundColor Green
 } else {
     Write-Host "Theme dev did not respond in time." -ForegroundColor Yellow
-    Write-Host "Check the OTHER PowerShell window that opened: if it says 'log in to Shopify', open the link, complete login, then run this script again for live preview." -ForegroundColor Yellow
-    $mockPath = Join-Path $repoPath "docs/guides/theme-preview-mock.html"
+    if ($themeDevStarted) {
+        Write-Host "Check the other PowerShell or terminal window. If it says 'log in to Shopify', complete login and run this script again for live preview." -ForegroundColor Yellow
+    } else {
+        Write-Host "Run 'Shopify: Theme Dev' manually, then refresh the preview URL once the server is ready." -ForegroundColor Yellow
+    }
     if (Test-Path $mockPath) {
         Open-InBrowser $mockPath
         Write-Host "Opened static preview fallback (AO style mock) in your browser." -ForegroundColor Cyan
