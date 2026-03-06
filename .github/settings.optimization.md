@@ -42,6 +42,7 @@ https://aodrop.com
 2. ✅ Require status checks to pass before merging
    - Require branches to be up to date before merging
    - Status checks to require: `arch_guard`, `test`, `secret-scan`, `quality` (job names in `.github/workflows/ci.yml`)
+   - Do **not** require external Codacy or `Continuous AI: ...` statuses; native GitHub Actions checks are the authoritative gate
 
 3. ✅ Require conversation resolution before merging
 
