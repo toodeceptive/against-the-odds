@@ -1,6 +1,7 @@
 # Agent Team (PP-v6)
 
-This is the canonical roster for specialized non-overlapping agents in this repo.
+This is the deployed non-overlapping `.cursor/agents/` roster for operational lanes in this repo.
+For the larger historical/canonical guru assignment matrix used by the repo-organization plan, see `docs/status/GURU_TEAM_ASSIGNMENTS.md`.
 
 ## Core Routing
 
@@ -36,18 +37,13 @@ This is the canonical roster for specialized non-overlapping agents in this repo
 - Printful uploads/mockups/orders
 - Cloudflare DNS/zone/redirect/workers writes
 - GitHub rulesets/branch protection changes
-- Merge to `main` / direct push to `main`
+- Merge to `main` / direct push to `main` when the change is store-affecting or governance-protected
 
-## Logging Targets
+## Logging
 
-- `docs/status/agent-logs/orchestrator-governance.md`
-- `docs/status/agent-logs/governance-archguard.md`
-- `docs/status/agent-logs/cursorops-environment.md`
-- `docs/status/agent-logs/themeops-shopify.md`
-- `docs/status/agent-logs/storeops-productsync.md`
-- `docs/status/agent-logs/assetprep-printful.md`
-- `docs/status/agent-logs/uploadops-printful.md`
-- `docs/status/agent-logs/cloudflareops-domain.md`
+- Track active execution in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.
+- Create a dedicated per-agent log only if the active run explicitly needs one.
 
 ## Queue Integration
 

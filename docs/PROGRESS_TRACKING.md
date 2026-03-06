@@ -21,6 +21,14 @@
 - **Recent commits / active branch**
 - **Release cadence**: merges into `main`
 
+### Agent system health
+
+- **MCP availability**: GitHub MCP reachable status and drift notes
+- **Command/task parity**: slash commands and Cursor tasks match docs and current workflows
+- **Worktree routing**: live `git worktree list` agrees with documented guidance
+- **Ignore/indexing hygiene**: `.cursorignore` / `.cursorindexingignore` still match desired search scope
+- **Agent roster**: deployed `.cursor/agents/` ownership remains aligned with docs
+
 ### Commerce (Shopify)
 
 - **Theme changes**: theme pull/push frequency
@@ -29,8 +37,10 @@
 
 ## Automated report(s)
 
-- `PROJECT_STATUS.md`: primary dashboard file (regenerated as needed).
-- `docs/status/`: optional date-stamped snapshots.
+- `docs/status/WORK_QUEUE.md`: canonical active execution queue.
+- `docs/status/CONSOLIDATION_LOG.md`: append-only history of what changed and when.
+- `docs/status/`: date-stamped or milestone snapshots when a dedicated report is useful.
+- `PROJECT_STATUS.md`: optional generated dashboard artifact if regenerated; historical copies may live in `archive/`.
 
 Generate with:
 

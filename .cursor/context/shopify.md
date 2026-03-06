@@ -24,7 +24,7 @@
 ## Common Operations
 
 - **Bulk product sync (repo → store):** `scripts/shopify/sync-products.ps1` (use `-DryRun` to preview); used by CI and workflow.
-- **Bidirectional wrapper:** `scripts/products/sync.ps1` (delegates import to sync-products.ps1; use `-Direction import|export|both`).
+- **Legacy bidirectional wrapper:** `scripts/products/sync.ps1` (delegates import to sync-products.ps1; keep only for import/export utility cases, not as the primary approval-gated product sync path).
 - **Theme pull:** `scripts/shopify/theme-pull.ps1` (tries REST first when token set; fallback CLI). If SSL fails: `$env:SHOPIFY_USE_REST_PULL=1` or run `theme-pull-rest.ps1` directly.
 - Theme development: `scripts/shopify/theme-dev.ps1`
 - API testing: `scripts/shopify/test-connection.ps1`

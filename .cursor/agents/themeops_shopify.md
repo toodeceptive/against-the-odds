@@ -42,8 +42,9 @@ Deliver theme updates through preview-first flow, then apply only after explicit
 
 - `./scripts/shopify/theme-dev.ps1` (preview)
 - `npm run quality`
-- `./scripts/verify-pipeline.ps1 -SkipRunbook`
+- `npm run verify:pipeline`
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/themeops-shopify.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

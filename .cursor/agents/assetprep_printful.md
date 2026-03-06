@@ -41,6 +41,7 @@ Prepare source assets into print-ready bundles with deterministic QA checks befo
 - `npm run quality`
 - Scripted image checks where available (`scripts/shopify/optimize-images.ps1`)
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/assetprep-printful.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

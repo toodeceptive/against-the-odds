@@ -13,17 +13,17 @@ Execute a **deep-research self-audit** and apply fixes to restore and exceed pri
 ## Phase 1: Identify & Diagnose
 
 1. **Problem inventory**
-   - List all Problems panel issues (ESLint, Codacy, TypeScript/JSDoc, markdownlint, Lizard).
+   - List all Problems panel issues (ESLint, TypeScript/JSDoc, markdownlint, Lizard).
    - For each: file, line, rule, severity. Group by type (type errors, lint, complexity, style).
 
 2. **Root-cause analysis**
    - **Type/JSDoc**: Missing `@typedef`, wrong return types, undefined globals in evaluate callbacks.
-   - **Lint**: Config mismatch (project vs Codacy), missing globals for mixed Node/browser context.
+   - **Lint**: Config mismatch, missing globals for mixed Node/browser context.
    - **Complexity**: Functions over cyclomatic 8 or NLOC 50; extract helpers.
    - **Style**: MD031, Prettier drift; fix blanks, formatting.
 
 3. **Tool usage audit**
-   - Did the agent use: ReadLints, grep, semantic search, verify-pipeline, Codacy MCP?
+   - Did the agent use: ReadLints, grep, semantic search, verify-pipeline?
    - Were edits verified with `npm run quality` before commit?
    - Were multiple problems batched and fixed in logical groups?
 
@@ -41,9 +41,8 @@ Execute a **deep-research self-audit** and apply fixes to restore and exceed pri
    - Fix return types: `Promise<string|null>` where null is possible.
    - Fix evaluate callbacks: use `instanceof HTMLInputElement` for `el.value` to satisfy TS.
 
-2. **ESLint/Codacy globals**
+2. **ESLint globals**
    - Ensure `eslint.config.mjs` has `src/browser-automation` override with globals (URL, fetch, process, document, window).
-   - If Codacy uses separate config, add globals to `.codacy/tools-configs/eslint.config.mjs` or document as known gap.
 
 3. **Complexity (Lizard)**
    - Extract helpers: `clickFirstAppDetailLink`, `clickRevealButtons`, `openDevDashboardPopup`, `tryOAuthEndpoint`, `extractTokenFrom*`.
@@ -65,12 +64,7 @@ Execute a **deep-research self-audit** and apply fixes to restore and exceed pri
    - Avoid partial fixes that leave inconsistent state.
 
 3. **Verification loop**
-   - After fixes: `npm run quality` → `verify-pipeline.ps1 -SkipRunbook` → commit only when green.
-
-4. **Codacy**
-   - Run `codacy_cli_analyze` on edited files per `.cursor/rules/codacy.mdc`.
-
----
+   - After fixes: `npm run quality` → `npm run verify:pipeline` → commit only when green.
 
 ## Phase 4: Document & Prevent
 
@@ -87,7 +81,6 @@ Execute a **deep-research self-audit** and apply fixes to restore and exceed pri
    - [ ] Fix complexity (extract helpers)
    - [ ] Fix style (MD031, Prettier)
    - [ ] Run quality gate before commit
-   - [ ] Run Codacy on edited files
 
 ---
 
@@ -95,7 +88,7 @@ Execute a **deep-research self-audit** and apply fixes to restore and exceed pri
 
 - Problems panel: 0 errors.
 - `npm run quality` passes.
-- `verify-pipeline.ps1 -SkipRunbook` passes.
+- `npm run verify:pipeline` passes.
 - All edits committed with clear messages.
 - This prompt and checklists updated for future runs.
 

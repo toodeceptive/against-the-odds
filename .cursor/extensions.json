@@ -16,7 +16,6 @@
     "formulahendry.auto-rename-tag",
     "christian-kohler.path-intellisense",
     "shopify.theme-check-vscode",
-    "codacy-app.codacy",
     "ms-python.python"
   ],
   "unwantedRecommendations": []

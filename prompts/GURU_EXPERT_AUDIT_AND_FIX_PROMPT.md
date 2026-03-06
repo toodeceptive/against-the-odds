@@ -4,7 +4,7 @@
 
 ## Directives (Prodigy Protocol)
 
-1. **State intent**: Full system audit (CI, workflows, Codacy, quality gates) → identify issues → fix → verify → document → commit.
+1. **State intent**: Full system audit (CI, workflows, quality gates) → identify issues → fix → verify → document → commit.
 2. **Parse constraints**: No store-affecting changes without preview+approval; no secrets in commits; respect AGENTS.md and .cursor/rules.
 3. **Success criteria**: Quality passes; verify-pipeline passes; no linter errors; all fixes committed and pushed.
 
@@ -13,17 +13,15 @@
 ### Phase 1: Audit
 
 - [ ] Run `npm run quality` (format, lint, test:unit)
-- [ ] Run `scripts/verify-pipeline.ps1 -SkipRunbook`
+- [ ] Run `npm run verify:pipeline`
 - [ ] Read workflows: ci.yml, maintenance.yml, codeql.yml, shopify-sync.yml, sync-theme-branch.yml
-- [ ] Read .codacy.yml, .prettierignore, package.json (scripts, lint-staged)
-- [ ] Check ReadLints on .github/workflows, .codacy
-- [ ] Identify: Codacy Semgrep (action SHA pinning), Prettier drift, ESLint, missing pins, doc gaps
+- [ ] Read .prettierignore, package.json (scripts, lint-staged)
+- [ ] Check ReadLints on .github/workflows
+- [ ] Identify: action SHA pinning, Prettier drift, ESLint, missing pins, doc gaps
 
 ### Phase 2: Fix
 
 - [ ] Pin third-party actions to full 40-char commit SHAs (Trivy, create-pull-request, Lighthouse, etc.)
-- [ ] Fix .codacy/codacy.yaml Prettier if needed (include in format scope, lint-staged)
-- [ ] Add .codacy.yml exclude_paths if Codacy Cloud conflicts
 - [ ] Align workflow resilience (continue-on-error where appropriate)
 - [ ] Update CHANGELOG with fixes
 

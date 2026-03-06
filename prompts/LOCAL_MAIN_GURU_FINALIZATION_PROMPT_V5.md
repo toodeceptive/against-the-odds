@@ -29,7 +29,6 @@ Close all remaining local-only and admin-only work with zero redundancy, then fi
 ## 3) Primary Goals
 
 - Close GitHub secrets visibility blocker with elevated local auth.
-- Restore and validate Codacy MCP availability in local Cursor.
 - Validate admin-only GitHub settings in browser (branch protection + code scanning).
 - Run strict final verification gates.
 - Finalize docs/status truth, commit, push, and verify CI.
@@ -40,7 +39,6 @@ Close all remaining local-only and admin-only work with zero redundancy, then fi
 - **Auth and Secrets Specialist**: `gh` auth, secrets visibility, strict secrets checks.
 - **Verification Specialist**: quality, pipeline, runbook, structural signature commands.
 - **Browser Admin Specialist**: GitHub settings checks in logged-in browser.
-- **Codacy Specialist**: Codacy MCP and CLI availability, per-file analysis after edits.
 - **Documentation Truth Specialist**: `WORK_QUEUE`, `PP_AUDIT_MARKER`, `CONSOLIDATION_LOG`, `INDEX_REPORTS`.
 - **Git Finalization Specialist**: logical commits, push, CI confirmation, rollback notes.
 
@@ -62,18 +60,7 @@ Success signal:
 - strict secrets check exits `0`
 - strict runbook exits `0`
 
-### B. Codacy MCP local restore
-
-- Open local Cursor MCP settings.
-- Verify `codacy` server from `.cursor/mcp.json` is enabled.
-- Reset/reconnect MCP.
-- Validate Codacy MCP tools are discoverable and runnable in chat.
-
-Success signal:
-
-- Codacy tools are available for file analysis runs.
-
-### C. Admin browser checks (GitHub)
+### B. Admin browser checks (GitHub)
 
 Open and verify:
 
@@ -135,4 +122,4 @@ After first V5 run:
 - Remaining blockers (if any) with owner + exact next action
 - Git finalization (branch/commits/CI)
 - Rollback notes
-- Codacy MCP note (cloud/local availability and next action)
+- MCP/environment note (cloud/local availability and next action)

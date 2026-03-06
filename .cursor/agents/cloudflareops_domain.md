@@ -39,6 +39,7 @@ Manage Cloudflare domain operations with strict explicit-approval control for wr
 - Read-before-write snapshot and post-change snapshot comparison
 - `npm run quality` when repo files are edited
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/cloudflareops-domain.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

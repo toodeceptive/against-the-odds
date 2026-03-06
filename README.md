@@ -125,7 +125,7 @@ This repo is set up for Cursor with rules, skills, and commands:
 
 - **Default rule**: [Prodigy Protocol](.cursor/rules/pp-basis.mdc) (PP) runs as the baseline for agent execution.
 - **Skills**: Prodigy Protocol (`pp`), Prodigy Phantasm, Universal Godmode, Agentic Performance — see [.cursor/skills/README.md](.cursor/skills/README.md).
-- **Commands** (type `/` in Agent): **/review** (lint, format, tests; report only) and **/pr** (commit, push, open PR).
+- **Commands** (type `/` in Agent): **/review** (lint, format, tests; report only) and **/pr** (finalize branch for PR/handoff; commit and push only unless a PR step is explicitly requested).
 - **More**: [AGENTS.md](AGENTS.md) for agent permissions and [docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md](docs/status/CURSOR_AND_AGENT_OPTIMIZATION.md) for optimization and personal settings.
 
 ## 🔐 Environment Variables

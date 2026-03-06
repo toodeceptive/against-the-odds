@@ -4,6 +4,8 @@
 
 **Last updated**: 2026-02-27 (aligned with current `git branch -vv` and `git worktree list`; aa210e4)
 
+**Scope note**: This file records the primary local Windows environment snapshot used during the 2026-02 finalization work. Cloud agents and isolated `/workspace` checkouts should trust live `git branch --all` and `git worktree list` first, then use this file as a documented local-state reference.
+
 ---
 
 ## Organization labels (worktrees · pipeline · project · GitHub · branches · repos)

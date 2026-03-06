@@ -1,22 +1,23 @@
 # Prompts — Index
 
-**Purpose**: Index of agent and guru prompts. Use canonical prompts first; legacy/one-off prompts are kept for reference.
+**Purpose**: Index of agent and guru prompts. Use this as the prompt inventory; use `docs/AGENT_PROMPT_DECISION_TREE.md` as the routing authority for "which prompt when."
 
 **Last updated**: 2026-02-27.
 
 ---
 
-## Canonical (use first)
+## Primary `/pp` and operator entry prompts
 
-| Prompt                                           | Purpose                                                                                        |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| **AO_AGENT_PP_PROMPT.md**                        | AO agent in Prodigy Protocol mode. Invoke via `/pp` or `-pp`. Primary PP+AO prompt.            |
-| **PP_USER_PROMPT.md**                            | **Your go-to /pp prompt** — paste with /pp; empty = full project cycle.                        |
-| **PP_EXECUTE_PROJECT_PROMPT.md**                 | Full project PP cycle (delta audit, fixes, verify, log). Use with `/pp`.                       |
-| **PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**     | Guru expert followup: inventory alignment, fix-handoff-line, OpenClaw cleanup; use with `/pp`. |
-| **MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md**  | Lead-agent perfection prompt; worktree-coordinated; loop until complete.                       |
-| **GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md**          | Self-execute guru audit: audit → fix → verify → document; PP phases.                           |
-| **NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md** | Instructions for new agent; paste prompt for new instance.                                     |
+| Prompt                                              | Purpose                                                                                        |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **AO_AGENT_PP_PROMPT.md**                           | AO agent in Prodigy Protocol mode. Invoke via `/pp` or `-pp`. Primary PP+AO prompt.            |
+| **PP_USER_PROMPT.md**                               | **Your go-to /pp prompt** — paste with /pp; empty = full project cycle.                        |
+| **PP_EXECUTE_PROJECT_PROMPT.md**                    | Full project PP cycle (delta audit, fixes, verify, log). Use with `/pp`.                       |
+| **PERFECT_DELTA_NATIVE_GURU_PP_PROMPT_20260306.md** | Current best delta-only guru PP prompt for native-CI, workflow, and merge-gate closure.        |
+| **PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**        | Guru expert followup: inventory alignment, fix-handoff-line, OpenClaw cleanup; use with `/pp`. |
+| **MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md**     | Lead-agent perfection prompt; worktree-coordinated; loop until complete.                       |
+| **GURU_EXPERT_AUDIT_AND_FIX_PROMPT.md**             | Self-execute guru audit: audit → fix → verify → document; PP phases.                           |
+| **NEW_AGENT_FULL_SCALE_GURU_PP_INSTRUCTIONS.md**    | Instructions for new agent; paste prompt for new instance.                                     |
 
 ---
 
@@ -55,15 +56,15 @@ Use when assigning work to a specific guru/expert domain.
 
 ---
 
-## Legacy / one-off
+## Reference / situational prompts
 
-| Prompt                                     | Note                     |
-| ------------------------------------------ | ------------------------ |
-| FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md | Full system test run.    |
-| PROCEED_UNFINISHED_WORKS_GURU_PROMPT.md    | Proceed unfinished work. |
-| AGENT_SELF_IMPROVEMENT_EXECUTION_PROMPT.md | Self-improvement.        |
-| PERFECT_EXECUTION_PROMPT.md                | Perfect execution.       |
-| head-guru-orchestrator.md                  | Orchestrator role.       |
+| Prompt                                     | Note                                                                           |
+| ------------------------------------------ | ------------------------------------------------------------------------------ |
+| FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md | Still routed by the decision tree for full-system test/improvement runs.       |
+| PROCEED_UNFINISHED_WORKS_GURU_PROMPT.md    | Older proceed/unfinished-work flow; keep for reference unless explicitly used. |
+| AGENT_SELF_IMPROVEMENT_EXECUTION_PROMPT.md | Self-improvement reference prompt.                                             |
+| PERFECT_EXECUTION_PROMPT.md                | Phase 0 gate and historical entry authority; not a generic day-to-day router.  |
+| head-guru-orchestrator.md                  | Active orchestration prompt outside the `/pp` entry set.                       |
 
 ---
 

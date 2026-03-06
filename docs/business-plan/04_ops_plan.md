@@ -38,7 +38,7 @@
 - **Manufacturer data**: `data/manufacturers/` (research + decision artifacts).
 - **Sample tracking**: `data/samples/samples.json` managed by `scripts/manufacturing/track-samples.ps1`.
 - **Product definitions**: `data/products/` JSON files.
-- **Shopify sync**: `scripts/products/sync.ps1` (delegates to Shopify sync/export scripts) is the standard mechanism to keep product data aligned.
+- **Shopify sync**: `scripts/shopify/sync-products.ps1` is the standard approval-gated mechanism to keep product data aligned; `scripts/products/sync.ps1` is a legacy bidirectional wrapper for import/export utility cases.
 
 ## Production plan
 
@@ -147,9 +147,9 @@
 
 - **Product setup**:
   - Maintain canonical product JSON in `data/products/`.
-  - Use `scripts/products/sync.ps1 -Direction import` to publish or update products in Shopify when ready.
+  - Use `scripts/shopify/sync-products.ps1 -DryRun` to preview and `scripts/shopify/sync-products.ps1` to publish or update products in Shopify when ready.
 - **Ongoing reconciliation**:
-  - Use `scripts/products/sync.ps1 -Direction export` to pull Shopify state back locally for audits and change tracking.
+  - Use `scripts/products/sync.ps1 -Direction export` only when you need to pull Shopify state back locally for audits and change tracking.
 - **Inventory changes**:
   - Update inventory only after Gate 5 receiving QC passes; keep “in transit / quarantined” stock off-sale to avoid oversells.
 
@@ -205,7 +205,7 @@
 
 - **Wednesday — Catalog & storefront integrity**
   - Run a product data check:
-    - If local is source-of-truth: `scripts/products/sync.ps1 -Direction import -DryRun` (when supported downstream) to preview changes.
+    - If local is source-of-truth: `scripts/shopify/sync-products.ps1 -DryRun` to preview changes.
     - Export current Shopify product state for audit: `scripts/products/sync.ps1 -Direction export`.
   - Validate product pages: pricing, variants, imagery, shipping/returns messaging.
 

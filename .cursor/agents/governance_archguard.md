@@ -44,9 +44,10 @@ Maintain structural governance controls and ensure CI remains the sole enforceme
 ## Verification
 
 - `npm run quality`
-- `./scripts/verify-pipeline.ps1 -SkipRunbook`
+- `npm run verify:pipeline`
 - `ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s infra/STRUCTURAL_SIGNATURE.txt < infra/STRUCTURAL_STATE.json`
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/governance-archguard.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

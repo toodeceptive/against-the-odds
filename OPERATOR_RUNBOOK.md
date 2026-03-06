@@ -5,19 +5,19 @@
 ## For AI agents
 
 - **Execution baseline**: Use [docs/GURU_PP_OPERATOR_GUIDE.md](docs/GURU_PP_OPERATOR_GUIDE.md) for how to execute like the guru team (Prodigy Protocol, agentic-performance, when to use which skill). Run `-pp` or `/pp` to invoke the AO agent in Prodigy Protocol mode; see [prompts/AO_AGENT_PP_PROMPT.md](prompts/AO_AGENT_PP_PROMPT.md).
-- **Daily gates**: Run `npm run quality` and, before push, `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no .env.local). Integration: `.\scripts\run-runbook.ps1` when credentials are set.
+- **Daily gates**: Run `npm run quality` and, before push, `npm run verify:pipeline`. The default pipeline verify now auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` or `.\scripts\run-runbook.ps1` when credentials are set and you want the full integration gate.
 - **Perfection loop**: To loop until work is fixed, perfected, complete, and optimized (project-wide cleanup/updates/optimizations; fix failed runs; track progression/commit/review/push), use [prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md](prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md) and [.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md](.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md). Run as needed; see [.cursor/plans/README.md](.cursor/plans/README.md) for all three plans.
 - **100-step multiphase PP cycles**: For deep research, fixes, optimizations, auditing, and finalizations across all trees/worktrees/branches/Git/GitHub/repos (fix any failure/error/setup by means necessary): [docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md](docs/status/GURU_100_STEP_MULTIPHASE_PP_CYCLES_20260207.md).
 
-**Repo root**: Open the **primary** repo (`C:/Users/LegiT/against-the-odds`) as the workspace root so diffs and paths show repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`), not a prefix like `hal/`. If the diff or Source Control shows a path containing `hal` or `hvf`, you are in the wrong workspace—do not commit; close it and open primary first. Hal and hvf are stale workspace names, not in `git worktree list`; see [WORKTREE_INVENTORY.md](docs/status/WORKTREE_INVENTORY.md).
+**Repo root**: In the original local Windows environment, open the **primary** repo (`C:/Users/LegiT/against-the-odds`) as the workspace root so diffs and paths show repo-relative paths (e.g. `docs/status/CONSOLIDATION_LOG.md`), not a prefix like `hal/`. In cloud or isolated checkouts, use the current repo root and validate it with live `git worktree list` output first. If the diff or Source Control shows a path containing `hal` or `hvf`, you are in the wrong workspace—do not commit; close it and open primary first. Hal and hvf are stale workspace names, not in `git worktree list`; see [WORKTREE_INVENTORY.md](docs/status/WORKTREE_INVENTORY.md).
 
 **Cursor tasks**: Run tasks (e.g. **Open pending approval**, **Shopify: Theme Dev**, **Start theme preview (new window)**) from the **repo root** so paths resolve correctly. **Seamless shortcuts** (add once via Keyboard Shortcuts JSON): **Ctrl+Alt+P** = open pending approval file; **Ctrl+Alt+T** = start theme dev (approved; browser opens preview URL automatically). See `docs/KEYBINDING_PENDING_APPROVAL.md`.
 
 ## Daily Checks
 
-- **One command:** `npm run quality` (format, format:check, lint, test:unit)
+- **One command:** `npm run quality` (format:check, lint, test:unit)
 - Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
-- **Before push:** Run `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`). CI runs **arch_guard**, test, secret-scan, quality; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
+- **Before push:** Run `npm run verify:pipeline`. It auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent. Use `npm run verify:pipeline:strict` when you expect Shopify integration checks to pass locally. CI runs **arch_guard**, test, secret-scan, quality; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
 - **Prettier runs automatically on every commit** (pre-commit hook); see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)
@@ -43,7 +43,8 @@
 
 - **One-time**: Pull live theme into repo: `.\scripts\shopify\theme-pull.ps1` (then commit and push).
 - **Preview before commit**: Run `.\scripts\open-preview-popup.ps1` (or **Tasks → Start theme preview** / `.\scripts\start-theme-preview.ps1`) after writing [docs/status/pending-approval.md](docs/status/pending-approval.md). That opens the approval file in Cursor, the AO preview in the browser (static mock immediately; live theme when dev server is ready), and theme dev in a new window. Set `SHOPIFY_CLI_THEME_TOKEN` in `.env.local` so theme dev starts without login prompt (see [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md)). Optional: **Ctrl+Alt+T** for theme dev only; **Ctrl+Alt+P** to open pending-approval.md.
-- **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, then commit, push to `main`.
+- **Approval gate**: Wait for explicit approval in chat before applying product sync or committing/pushing store-affecting theme changes.
+- **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, get approval when the change is store-affecting, then commit and push to `main`.
 - **Deploy log / rollback**: After each deploy or product sync, append to [docs/status/deploy-log.md](docs/status/deploy-log.md). Rollback: theme → Shopify Admin → theme card → Actions → Reset to last commit; products → revert JSON and re-run sync.
 
 **Agent context**: Store URL `aodrop.com`; theme source `src/shopify/themes/aodrop-theme/`; product data `data/products/*.json`; workflow and product/theme docs: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md). Theme ID in `.env.local` (SHOPIFY_THEME_ID); get via `shopify theme list` or Admin. **Store ops**: Product-with-uploads (JSON path + browser path), theme updates, deploy-log for every change — see [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). **Integrations**: Products via Admin API (`sync-products.ps1`; rate limits ~2 req/s); one-off/settings via user's browser (no headless). See [.cursor/context/shopify.md](.cursor/context/shopify.md).

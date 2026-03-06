@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 /**
- * Set required status checks for main branch to CI-only (test, secret-scan, quality, arch_guard).
+ * Set required status checks for main branch to native CI only (test, secret-scan, quality, arch_guard).
+ * External Codacy or Continuous AI status contexts should not be required.
  * Token: GITHUB_TOKEN or GH_TOKEN env, .env.local, or Git credential for github.com.
  * Usage: node scripts/github/update-branch-protection-status-checks.js
  */

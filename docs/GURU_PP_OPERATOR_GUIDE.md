@@ -41,6 +41,23 @@ Use agentic-performance when optimizing agent workflows, configuring Cursor, or 
 
 ---
 
+## When to use which deployed subagent
+
+| Need                                                                 | Use                                        |
+| -------------------------------------------------------------------- | ------------------------------------------ |
+| Route work, keep lanes non-overlapping, manage delta-first execution | `orchestrator_governance`                  |
+| Structural integrity / governance docs and CI authority              | `governance_archguard`                     |
+| Cursor/MCP/workflow environment optimization                         | `cursorops_environment`                    |
+| Shopify theme preview/apply lane                                     | `themeops_shopify`                         |
+| Shopify product sync preview/apply lane                              | `storeops_productsync`                     |
+| Printful asset prep or upload lanes                                  | `assetprep_printful`, `uploadops_printful` |
+| Cloudflare domain lane                                               | `cloudflareops_domain`                     |
+| Independent verification pass                                        | `verifier`                                 |
+
+See [docs/AGENT_TEAM.md](AGENT_TEAM.md) for ownership boundaries.
+
+---
+
 ## Multi-cycle research approach
 
 For **deep-research backed setups** and **systems-wide improvements**:
@@ -53,8 +70,8 @@ For **deep-research backed setups** and **systems-wide improvements**:
 
 ## Daily gates (what to run when)
 
-- **Daily**: `npm run quality` (format, format:check, lint, test:unit). See [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md).
-- **Before push**: `.\scripts\verify-pipeline.ps1` (or `-SkipRunbook` if no `.env.local`). See [.github/workflows/README.md](../.github/workflows/README.md).
+- **Daily**: `npm run quality` (format:check, lint, test:unit). See [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md).
+- **Before push**: `npm run verify:pipeline`. The default verify path auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent. Use `npm run verify:pipeline:strict` when you want the full local integration gate. See [.github/workflows/README.md](../.github/workflows/README.md).
 - **Integration (credential-gated)**: `.\scripts\run-runbook.ps1` (Shopify + GitHub checks). Run after credentials are set.
 
 ---
@@ -64,17 +81,17 @@ For **deep-research backed setups** and **systems-wide improvements**:
 **Command**: From repo root, run:
 
 ```powershell
-.\scripts\verify-pipeline.ps1
+npm run verify:pipeline
 ```
 
-**What it does**: (1) Parses all 74 PowerShell scripts, (2) Verifies workflow files, (3) Product sync dry-run if Shopify creds in `.env.local`, (4) ESLint, (5) Runbook (Shopify connection + GitHub auth).
+**What it does**: (1) Parses all tracked PowerShell scripts, (2) Verifies workflow files, (3) Product sync dry-run if Shopify creds in `.env.local`, (4) ESLint, (5) Runbook (Shopify connection + GitHub auth).
 
 **Expected outcomes**:
 
-- **Without Shopify token**: Steps 1–4 pass; runbook reports `SHOPIFY_ACCESS_TOKEN not set` and GitHub repo access OK → verification finishes with 1 failure (add token to complete).
+- **Without Shopify token**: Steps 1–4 pass and the runbook step is skipped as credential-gated.
 - **With credentials**: All steps pass when `SHOPIFY_ACCESS_TOKEN` (and optionally `GITHUB_TOKEN`) are set in `.env.local`.
 
-**Quick quality-only**: `npm run quality` then `.\scripts\verify-pipeline.ps1 -SkipRunbook`.
+**Strict local closure**: `npm run verify:pipeline:strict` or `.\scripts\run-runbook.ps1` after credentials are configured.
 
 ---
 

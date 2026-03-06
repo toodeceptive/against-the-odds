@@ -31,7 +31,6 @@ Close all remaining local-only and admin-only blockers with zero redundancy, app
 
 - Lead Orchestrator
 - Auth/Secrets Specialist
-- Codacy/MCP Specialist
 - Browser Admin Specialist
 - Verification Specialist
 - Integration Cost/Value Specialist
@@ -53,21 +52,16 @@ Close all remaining local-only and admin-only blockers with zero redundancy, app
 - `pwsh -NoLogo -NoProfile -File scripts/run-runbook.ps1 -StrictSecrets`
 - If failing due missing Shopify token, classify as external/manual blocker with exact owner and next action.
 
-### C) Codacy MCP local operability
-
-- Validate Codacy MCP tool discovery.
-- Run `codacy_cli_analyze` on edited files after every edit.
-
-### D) GitHub admin checks (browser)
+### C) GitHub admin checks (browser)
 
 - Verify:
   - `https://github.com/toodeceptive/against-the-odds/settings/branches`
   - `https://github.com/toodeceptive/against-the-odds/settings/security_analysis`
 - Compare with `.github/settings.optimization.md`.
 
-### E) Integration cost/value optimization
+### D) Integration cost/value optimization
 
-- Keep: GitHub MCP, Codacy MCP, Cursor browser MCP, Cloudflare docs MCP.
+- Keep: GitHub MCP, Cursor browser MCP, Cloudflare docs MCP.
 - Keep disabled by default: Cloudflare bindings/builds/observability (enable only when needed).
 - Disable by default as obsolete/non-essential for this repo: BrowserStack, Linear, Notion, Slack.
 
@@ -107,4 +101,4 @@ After each pass:
 - Remaining blockers (owner + exact next action)
 - Git finalization (branch/commits/CI)
 - Rollback notes
-- Codacy MCP status note
+- MCP/integration status note

@@ -1,12 +1,25 @@
-# Preview & Approval System (Theme / Store Changes)
+# Preview & Approval System (Theme / Product Changes)
 
-Single reference for the **preview-before-apply** flow so theme and product changes open in Cursor + browser and deploy only after approval.
+Single reference for the **preview-before-apply** flow. Product changes and theme changes use different preview helpers, but both must snapshot to `docs/status/pending-approval.md` and wait for approval before apply.
 
 ---
 
-## One-command flow (theme changes)
+## Product changes
 
-1. **Agent** edits theme (or products) and writes [docs/status/pending-approval.md](status/pending-approval.md) with summary and "To approve: say 'approve' in chat."
+1. **Agent** prepares a dry run (for example `.\scripts\shopify\sync-products.ps1 -DryRun`).
+2. **Agent** writes [docs/status/pending-approval.md](status/pending-approval.md) with summary, dry-run output, and "To approve: say 'approve' in chat."
+3. **Agent** runs from repo root:
+
+   ```powershell
+   .\scripts\open-pending-approval.ps1
+   ```
+
+4. **User** reviews the pending approval file in Cursor and says **"approve"** (or "yes" / "looks good") in chat.
+5. **Agent** applies the product change, appends [docs/status/deploy-log.md](status/deploy-log.md), and clears [docs/status/pending-approval.md](status/pending-approval.md).
+
+## Theme changes
+
+1. **Agent** edits theme files and writes [docs/status/pending-approval.md](status/pending-approval.md) with summary and "To approve: say 'approve' in chat."
 2. **Agent** runs from repo root:
 
    ```powershell
@@ -20,7 +33,7 @@ Single reference for the **preview-before-apply** flow so theme and product chan
    - **Browser**: AO preview opens (static mock immediately; live theme at `http://127.0.0.1:9292` when theme dev server is ready).
    - **New window**: Theme dev server runs (may prompt for Shopify login once if no token).
 4. **User** says **"approve"** (or "yes" / "looks good") in chat.
-5. **Agent** applies: runs `.\scripts\shopify\update-theme.ps1` (or product sync), appends [docs/status/deploy-log.md](status/deploy-log.md), clears [docs/status/pending-approval.md](status/pending-approval.md).
+5. **Agent** applies the theme change, appends [docs/status/deploy-log.md](status/deploy-log.md), and clears [docs/status/pending-approval.md](status/pending-approval.md).
 
 ---
 
@@ -44,7 +57,7 @@ Single reference for the **preview-before-apply** flow so theme and product chan
 ## Rules (agents)
 
 - **Preview first**: Never push theme or run product sync without preview and user approval. See [.cursor/rules/shopify-preview-approval.mdc](../.cursor/rules/shopify-preview-approval.mdc).
-- **Snapshot**: Always write pending-approval.md before asking for approval; then run **open-preview-popup.ps1** so the user sees the preview.
+- **Snapshot**: Always write pending-approval.md before asking for approval. For product changes run **open-pending-approval.ps1**; for theme changes run **open-preview-popup.ps1** or **start-theme-preview.ps1**.
 - **After apply**: Log to deploy-log.md and clear pending-approval.md.
 
 See [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](AGENT_WORKFLOW_CURSOR_SHOPIFY.md) for full product/theme flows and rollback.

@@ -48,9 +48,9 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 ## 3. Related Context (Optional but Recommended)
 
 - **Agent permission and when agents use your browser**: [AGENTS.md](../../AGENTS.md) (repo root) — full permission; safety rules; when to use Cursor browser MCP.
-- **Handoff for new agent** (context, permissions, exact prompt): `docs/HANDOFF_PROMPT_NEW_AGENT.md`
+- **Handoff for new agent** (context, permissions, exact prompt): [docs/HANDOFF_PROMPT_NEW_AGENT.md](../HANDOFF_PROMPT_NEW_AGENT.md)
 - **Consolidation log and index** (inventory, what was done): `docs/status/CONSOLIDATION_LOG.md`, `docs/status/INDEX_REPORTS.md`
-- **Operator runbook** (daily checks, Shopify, credentials): `OPERATOR_RUNBOOK.md`
+- **Operator runbook** (daily checks, Shopify, credentials): [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md)
 - **Consolidation log** (Phase 0 + all tracks, resolved issues): `docs/status/CONSOLIDATION_LOG.md`
 - **Index of reports and status files**: `docs/status/INDEX_REPORTS.md`
 
@@ -58,24 +58,24 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 
 ## 4. Quick Reference
 
-| Need                               | Where                                                     |
-| ---------------------------------- | --------------------------------------------------------- |
-| Agent permission and browser use   | [AGENTS.md](../../AGENTS.md) (repo root)                  |
-| Phase 0 definition and checklist   | `prompts/PERFECT_EXECUTION_PROMPT.md`                     |
-| Phase 0 tracker and sign-off file  | `docs/status/PHASE_0_FINALIZATION.md`                     |
-| Canonical plan (Phase 0 + tracks)  | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` |
-| Consolidation log (all tracks)     | `docs/status/CONSOLIDATION_LOG.md`                        |
-| Index of reports                   | `docs/status/INDEX_REPORTS.md`                            |
-| Guru team (roster, assignments)    | `docs/status/GURU_TEAM_ASSIGNMENTS.md`                    |
-| New-agent handoff and prompt       | `docs/HANDOFF_PROMPT_NEW_AGENT.md`                        |
-| After Phase 0: which prompt to run | `docs/AGENT_PROMPT_DECISION_TREE.md`                      |
+| Need                               | Where                                                              |
+| ---------------------------------- | ------------------------------------------------------------------ |
+| Agent permission and browser use   | [AGENTS.md](../../AGENTS.md) (repo root)                           |
+| Phase 0 definition and checklist   | `prompts/PERFECT_EXECUTION_PROMPT.md`                              |
+| Phase 0 tracker and sign-off file  | `docs/status/PHASE_0_FINALIZATION.md`                              |
+| Canonical plan (Phase 0 + tracks)  | `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`          |
+| Consolidation log (all tracks)     | `docs/status/CONSOLIDATION_LOG.md`                                 |
+| Index of reports                   | `docs/status/INDEX_REPORTS.md`                                     |
+| Guru team (roster, assignments)    | `docs/status/GURU_TEAM_ASSIGNMENTS.md`                             |
+| New-agent handoff and prompt       | [docs/HANDOFF_PROMPT_NEW_AGENT.md](../HANDOFF_PROMPT_NEW_AGENT.md) |
+| After Phase 0: which prompt to run | `docs/AGENT_PROMPT_DECISION_TREE.md`                               |
 
 ---
 
 ## 5. After Phase 0: Which Prompt to Run
 
-Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to choose the right prompt for audits, orchestration, or specialist work. To **test and utilize the new Cursor agent system** (rules, skills, /review, /pr, Verifier) with a full system-wide run across code, repo, pipeline, and project, use **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`**. To **loop perfection until complete** (worktree-coordinated lead agent, PP cycles, cleanup/optimization), use **`prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`** and **`.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md`**. For other goals: full audit → MASTER_10_EXPERT_SYSTEM; finalization → head-guru-orchestrator; etc.
+Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** as the single routing authority for audits, orchestration, and specialist work. Use **`prompts/README.md`** as the prompt inventory only; do not duplicate router logic here.
 
 ---
 
-**Summary**: Read `prompts/PERFECT_EXECUTION_PROMPT.md`, complete Phase 0, record sign-off in `docs/status/PHASE_0_FINALIZATION.md`, then and only then proceed. After that, use `docs/AGENT_PROMPT_DECISION_TREE.md` to pick the next prompt.
+**Summary**: Read `prompts/PERFECT_EXECUTION_PROMPT.md`, complete Phase 0 if needed, record sign-off in `docs/status/PHASE_0_FINALIZATION.md`, then use `docs/AGENT_PROMPT_DECISION_TREE.md` to pick the next prompt. If sign-off already exists, skip redundant re-execution and continue incrementally.

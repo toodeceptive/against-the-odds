@@ -6,12 +6,12 @@
 
 - Read `docs/status/PLAN_AGENT_ENTRY.md` first. If Phase 0 is already signed off (`docs/status/PHASE_0_FINALIZATION.md` contains "Phase 0 finalized; proceeding allowed."), do **not** re-run Phase 0; proceed with this prompt per `docs/status/EXECUTIVE_DECISION_WORK_PRINCIPLES.md` (incremental work only).
 - If Phase 0 is not signed off, complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md` before using this prompt.
-- Primary worktree: `C:\Users\LegiT\against-the-odds` (branch **main**). Pull `origin main` before starting.
+- Primary repo/worktree: use the current repo root and verify it with live `git worktree list` output before starting. If you are in the original local Windows environment, the primary repo is `C:\Users\LegiT\against-the-odds` on branch **main**.
 
 **Cursor system to use**:
 
 - **Default rule**: Prodigy Protocol (PP) runs as baseline (`.cursor/rules/pp-basis.mdc`). Optionally invoke skills: `prodigy-protocol` (alias `pp`), `prodigy-phantasm`, `universal-godmode`, `agentic-performance` (see `.cursor/skills/README.md`).
-- **Commands**: Use **/review** for lint, format check, and tests (report only). Use **/pr** to commit, push, and open a PR when changes are ready.
+- **Commands**: Use **/review** for lint, format check, and tests (report only). Use **/pr** to finalize the branch for PR/handoff (commit and push); create or modify a PR only when explicitly requested.
 - **Verifier subagent**: Delegate to `.cursor/agents/verifier.md` for an independent verification pass (lint, tests, build report) after making changes.
 - **Safety**: Store-affecting changes require preview and user approval; no secrets in commits (see `AGENTS.md`).
 

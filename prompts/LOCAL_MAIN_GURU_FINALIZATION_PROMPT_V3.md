@@ -32,7 +32,6 @@
 ## 3. Primary Goals
 
 - Close GitHub secrets visibility blocker with elevated local auth (when operator completes `gh auth login`).
-- Restore Codacy MCP availability in local Cursor (reset MCP; verify Copilot settings).
 - Validate admin-only GitHub settings in browser (branch protection + code scanning).
 - Run strict final verification gates.
 - Finalize docs/status truth, commit, push, and verify CI.
@@ -50,16 +49,7 @@
 
 **Success**: No 403 from `gh secret list`; strict secrets check exits 0; strict runbook exits 0.
 
-### B. Codacy MCP local restore
-
-- Open local Cursor MCP settings.
-- Verify codacy server from `.cursor/mcp.json` is enabled.
-- Reset/reconnect MCP.
-- Validate Codacy MCP tools are discoverable and runnable.
-
-**Success**: Codacy tools available for file analysis.
-
-### C. Admin browser checks (GitHub)
+### B. Admin browser checks (GitHub)
 
 - Open: `https://github.com/toodeceptive/against-the-odds/settings/branches`
 - Open: `https://github.com/toodeceptive/against-the-odds/settings/security_analysis`
@@ -79,7 +69,7 @@ pwsh -NoLogo -NoProfile -File scripts/github/verify-secrets.ps1 -FailOnPermissio
 ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s infra/STRUCTURAL_SIGNATURE.txt < infra/STRUCTURAL_STATE.json
 ```
 
-Use `-SkipRunbook` for verify-pipeline if `.env.local` lacks Shopify creds. Credential-gated commands may fail; document result.
+Use `npm run verify:pipeline` for the default credential-aware path. Use `npm run verify:pipeline:strict` when local Shopify creds are expected. Credential-gated commands may fail; document result.
 
 ---
 
@@ -115,6 +105,6 @@ After closure, update:
 
 ---
 
-## Codacy MCP Note
+## MCP Note
 
-MCP resources may be unavailable in cloud session. For local closure: reset MCP in the extension; verify Copilot MCP settings in GitHub. Then review, audit, analyze, and utilize results to create another non-redundant prompt and execute again if needed.
+If MCP resources vary by environment, classify the affected lane as environment-specific and continue with repo-native verification commands plus any remaining reachable MCP servers.

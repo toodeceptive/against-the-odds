@@ -2,9 +2,9 @@
 
 ## Overview
 
-This guide explains how to use the agent prompt system for new Cursor instances. Use `docs/AGENT_PROMPT_DECISION_TREE.md` to choose the right prompt for your goal.
+This guide explains how to use the agent prompt system for new Cursor instances. Use `docs/AGENT_PROMPT_DECISION_TREE.md` to choose the right prompt for your goal, and use `prompts/README.md` as the canonical prompt inventory.
 
-## Available Prompts (canonical)
+## Available Prompts (usage guide)
 
 ### Orchestration and entry
 
@@ -24,10 +24,18 @@ This guide explains how to use the agent prompt system for new Cursor instances.
 
 ## How to Use
 
+### Step 0: Prefer deployed commands and agents first
+
+- Routine PP workflow → `/pp`
+- Read-only repo assessment → `/review`
+- Branch finalization / handoff prep → `/pr`
+- Specialized multi-step lane work → relevant `.cursor/agents/*.md` ownership in `docs/AGENT_TEAM.md`
+- Manual prompt loading → use when the decision tree explicitly routes you there or when a fresh agent needs a prompt file
+
 ### Step 1: Phase 0 first
 
 1. Read `docs/status/PLAN_AGENT_ENTRY.md`
-2. Complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md`
+2. If Phase 0 is not already signed off, complete it per `prompts/PERFECT_EXECUTION_PROMPT.md`
 3. Confirm sign-off in `docs/status/PHASE_0_FINALIZATION.md`
 
 ### Step 2: Choose prompt
@@ -87,7 +95,7 @@ Use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to pick:
 Agents can execute existing PowerShell scripts:
 
 ```javascript
-execSync('powershell -ExecutionPolicy Bypass -File scripts/setup/auto-configure-env.ps1');
+execSync('node scripts/shared/run-powershell.cjs scripts/setup/auto-configure-env.ps1');
 ```
 
 ### Use Browser Automation
@@ -104,7 +112,7 @@ const browser = await connectToBrowser();
 Agents can use API scripts:
 
 ```javascript
-execSync('powershell -ExecutionPolicy Bypass -File scripts/shopify/test-connection.ps1');
+execSync('node scripts/shared/run-powershell.cjs scripts/shopify/test-connection.ps1');
 ```
 
 ## Safety Considerations

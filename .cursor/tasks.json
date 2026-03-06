@@ -2,10 +2,10 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Setup Environment",
+      "label": "Setup Environment (env only)",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/setup/auto-configure-env.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/setup/auto-configure-env.ps1"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -15,22 +15,36 @@
     {
       "label": "Verify Credentials",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/setup/verify-credentials.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/setup/verify-credentials.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Test Shopify Connection",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/test-connection.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/test-connection.ps1"],
       "problemMatcher": []
     },
     {
-      "label": "Run Tests",
+      "label": "Run Unit Tests",
       "type": "shell",
       "command": "npm",
-      "args": ["test"],
+      "args": ["run", "test:unit"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Quality Gate",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "quality"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Quality Fix",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "quality:fix"],
       "problemMatcher": []
     },
     {
@@ -55,31 +69,31 @@
       "problemMatcher": []
     },
     {
-      "label": "Sync Products",
+      "label": "Preview Product Sync (Dry Run)",
       "type": "shell",
-      "command": "powershell",
-      "args": [
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "scripts/products/sync.ps1",
-        "-Direction",
-        "both"
-      ],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/sync-products.ps1", "-DryRun"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Apply Product Sync (after approval)",
+      "type": "shell",
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/sync-products.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Health Check",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/health/comprehensive-check.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/health/comprehensive-check.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Shopify: Theme Dev (preview before commit)",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-dev.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/theme-dev.ps1"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -91,8 +105,8 @@
     {
       "label": "Shopify: Theme Dev (Live theme context)",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-dev.ps1", "-Live"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/theme-dev.ps1", "-Live"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -102,8 +116,8 @@
     {
       "label": "Start theme preview (new window)",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/start-theme-preview.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/start-theme-preview.ps1"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -113,12 +127,8 @@
     {
       "label": "Open pending approval",
       "type": "shell",
-      "command": "powershell",
-      "args": [
-        "-NoProfile",
-        "-Command",
-        "$f = (Join-Path (Get-Location) 'docs/status/pending-approval.md'); if (Get-Command cursor -ErrorAction SilentlyContinue) { cursor -r \"$f\" } elseif (Get-Command code -ErrorAction SilentlyContinue) { code -r \"$f\" } else { Invoke-Item \"$f\" }"
-      ],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/open-pending-approval.ps1"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "silent"
@@ -127,33 +137,31 @@
     {
       "label": "Verify Pipeline",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/verify-pipeline.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/verify-pipeline.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Run Runbook",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/run-runbook.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/run-runbook.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Shopify: Setup app access (e2e + runbook)",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/setup-app-access.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/setup-app-access.ps1"],
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "dedicated" }
     },
     {
       "label": "Shopify: Setup app access (launch Chrome first)",
       "type": "shell",
-      "command": "powershell",
+      "command": "node",
       "args": [
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
+        "scripts/shared/run-powershell.cjs",
         "scripts/shopify/setup-app-access.ps1",
         "-LaunchChrome"
       ],
@@ -163,18 +171,16 @@
     {
       "label": "Shopify: Optimize brand images",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/optimize-images.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/optimize-images.ps1"],
       "problemMatcher": []
     },
     {
-      "label": "Shopify: Theme update → preview → save",
+      "label": "Shopify: Theme update → preview → optional direct push (legacy)",
       "type": "shell",
-      "command": "powershell",
+      "command": "node",
       "args": [
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
+        "scripts/shared/run-powershell.cjs",
         "scripts/shopify/theme-update-preview-save.ps1"
       ],
       "problemMatcher": [],
@@ -183,22 +189,22 @@
     {
       "label": "Shopify: Theme Pull",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-pull.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/theme-pull.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Shopify: Theme Auth Then Pull",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/theme-auth-then-pull.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/theme-auth-then-pull.ps1"],
       "problemMatcher": []
     },
     {
       "label": "Finish Setup",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/shopify/finish-setup.ps1"],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/finish-setup.ps1"],
       "problemMatcher": []
     },
     {
@@ -239,21 +245,15 @@
     {
       "label": "Run All Tests (unit+integration+e2e)",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/test/run-all.ps1"],
+      "command": "npm",
+      "args": ["run", "test:all"],
       "problemMatcher": []
     },
     {
       "label": "Theme Check (CLI)",
       "type": "shell",
-      "command": "powershell",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "scripts/shopify/theme-check.ps1"
-      ],
+      "command": "node",
+      "args": ["scripts/shared/run-powershell.cjs", "scripts/shopify/theme-check.ps1"],
       "problemMatcher": []
     }
   ]
