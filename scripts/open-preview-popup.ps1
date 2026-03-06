@@ -12,9 +12,13 @@ $repoPath = if ($PSScriptRoot) {
 $pendingFile = Join-Path $repoPath "docs/status/pending-approval.md"
 $themeDevScript = Join-Path $repoPath "scripts/shopify/theme-dev.ps1"
 $previewUrl = "http://127.0.0.1:9292"
+$shellExe = if (Get-Command pwsh -ErrorAction SilentlyContinue) { "pwsh" } elseif (Get-Command powershell -ErrorAction SilentlyContinue) { "powershell" } else { $null }
 
 # Find a real browser exe (Chrome, Edge, Firefox) so .html opens in browser, not in VS Code/Cursor
 function Get-BrowserExe {
+    if (-not $IsWindows) {
+        return $null
+    }
     $candidates = @(
         "C:\Program Files\Google\Chrome\Application\chrome.exe",
         "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
@@ -62,10 +66,21 @@ function Open-InBrowser {
     if (-not $isFile) {
         try { Start-Process $target; return } catch { }
     }
-    # 3) Fallback (may open in VS Code if .html is associated)
+    # 3) Cross-platform browser opener
+    if ($IsLinux -and (Get-Command xdg-open -ErrorAction SilentlyContinue)) {
+        try { Start-Process "xdg-open" -ArgumentList $target; return } catch { }
+    }
+    if ($IsMacOS -and (Get-Command open -ErrorAction SilentlyContinue)) {
+        try { Start-Process "open" -ArgumentList $target; return } catch { }
+    }
+    # 4) Windows fallback (may open in VS Code if .html is associated)
     try {
         $quoted = "`"$target`""
-        Start-Process -FilePath "cmd.exe" -ArgumentList "/c", "start", "", $quoted -WorkingDirectory $repoPath
+        if ($IsWindows) {
+            Start-Process -FilePath "cmd.exe" -ArgumentList "/c", "start", "", $quoted -WorkingDirectory $repoPath
+        } else {
+            Write-Host "Open this preview manually: $target" -ForegroundColor Yellow
+        }
     } catch { }
 }
 
@@ -94,12 +109,16 @@ if (Test-Path $mockPath) {
 
 # 3) Start theme dev server in a new window
 if (Test-Path $themeDevScript) {
-    Start-Process powershell -ArgumentList @(
-        "-NoProfile",
-        "-ExecutionPolicy", "Bypass",
-        "-File", $themeDevScript
-    ) -WorkingDirectory $repoPath
-    Write-Host "Theme dev server starting in a new window..." -ForegroundColor Cyan
+    if ($shellExe) {
+        Start-Process $shellExe -ArgumentList @(
+            "-NoProfile",
+            "-ExecutionPolicy", "Bypass",
+            "-File", $themeDevScript
+        ) -WorkingDirectory $repoPath
+        Write-Host "Theme dev server starting in a new process..." -ForegroundColor Cyan
+    } else {
+        Write-Host "No PowerShell executable found to launch theme dev automatically." -ForegroundColor Yellow
+    }
 } else {
     Write-Host "Theme dev script not found: $themeDevScript" -ForegroundColor Red
 }

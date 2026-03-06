@@ -6,16 +6,17 @@ This document describes the **automated flow** for pulling the live theme, apply
 
 ## Quick reference (easy to use)
 
-| Goal                                           | Command                                                             |
-| ---------------------------------------------- | ------------------------------------------------------------------- |
-| **Preview look (no Shopify)**                  | Open `docs/guides/theme-preview-mock.html` in your browser          |
-| **Pull theme (once, interactive)**             | `.\scripts\shopify\theme-pull.ps1`                                  |
-| **Merge brand + preview**                      | `.\scripts\shopify\theme-pull-and-preview.ps1 -SkipPull`            |
-| **Update store theme (brand + images + push)** | `.\scripts\shopify\theme-update-store.ps1`                          |
-| **Quality check (format, lint, tests)**        | `npm run quality`                                                   |
-| **Before commit**                              | Pre-commit runs Prettier automatically; optional: `npm run quality` |
+| Goal                                      | Command                                                                    |
+| ----------------------------------------- | -------------------------------------------------------------------------- |
+| **Preview look (no Shopify)**             | Open `docs/guides/theme-preview-mock.html` in your browser                 |
+| **Pull theme (once, interactive)**        | `.\scripts\shopify\theme-pull.ps1`                                         |
+| **Merge brand + preview**                 | `.\scripts\shopify\theme-pull-and-preview.ps1 -SkipPull`                   |
+| **Update store theme (preferred)**        | Preview, approve, then commit/push to `main` so CI updates `shopify-theme` |
+| **Direct-apply helper (legacy/explicit)** | `.\scripts\shopify\theme-update-store.ps1`                                 |
+| **Quality check (format, lint, tests)**   | `npm run quality`                                                          |
+| **Before commit**                         | Pre-commit runs Prettier automatically; optional: `npm run quality`        |
 
-**Store not showing brand?** Run `theme-pull.ps1` once, then `theme-update-store.ps1` to merge brand, copy images from `assets/brand/`, and push to Shopify.
+**Store not showing brand?** First confirm the default flow is working: push approved theme changes to `main` and let CI update `shopify-theme`. Use `theme-update-store.ps1` only as an explicit direct-apply helper after preview + approval.
 
 ---
 
@@ -50,8 +51,8 @@ flowchart LR
 | 2. **Merge brand**   | `.\scripts\shopify\merge-brand-into-theme.ps1`                       | Copies `ao-brand.css` and `ao-hero-brand.liquid` into theme; patches `layout/theme.liquid` (stylesheet + body class) when present.                                             |
 | 3. **Preview**       | `.\scripts\shopify\theme-dev.ps1`                                    | Starts local theme dev server; open the URL (e.g. http://127.0.0.1:9292) to **see the AO brand theme** (dark background, accent colors, logo/slogan when assets are uploaded). |
 | 4. **Before commit** | Pre-commit hook (or `npm run quality`)                               | **Prettier runs automatically** on commit; optional full check: format, format:check, lint, test:unit. See [HOOKS.md](../HOOKS.md).                                            |
-| 5. **Deploy theme**  | `.\scripts\shopify\theme-update-store.ps1`                           | Merges brand CSS/snippet, copies all PNGs from `assets/brand/` into theme assets, then pushes to Shopify. Run after pull at least once.                                        |
-| 6. **Commit repo**   | Commit and push to connected branch                                  | Version control; Shopify deploys from connected branch if configured.                                                                                                          |
+| 5. **Deploy theme**  | Commit and push approved changes to `main`                           | Preferred path: CI updates `shopify-theme`, and Shopify deploys from that connected branch.                                                                                    |
+| 6. **Direct apply**  | `.\scripts\shopify\theme-update-store.ps1`                           | Legacy/explicit direct-apply helper. Requires preview + approval first; use when intentionally bypassing the GitHub branch flow.                                               |
 
 ---
 

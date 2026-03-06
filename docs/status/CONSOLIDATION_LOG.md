@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-03-07 — Store/CI flow correction: separate theme deploys from product sync and align `shopify-theme` model
+
+**Summary**: Ran another delta-only pass on the live store/CI surface. **Workflow fixes**: `.github/workflows/shopify-sync.yml` no longer triggers on `src/shopify/**`, so theme-only pushes do not accidentally run `sync-products.ps1` against the live store. `.github/workflows/sync-theme-branch.yml` no longer hides subtree split/push failures behind `continue-on-error`, so the `shopify-theme` deployment branch cannot silently go stale while the workflow reports success. **Docs/model alignment**: current store/theme docs (`OPERATOR_RUNBOOK.md`, `docs/UPDATE_SHOPIFY_FROM_CURSOR.md`, `docs/STORE_OPERATIONS_AUTOMATION.md`, `docs/guides/THEME_CUSTOMIZATION_FLOW.md`, `docs/AUTOMATION_IMPLEMENTATION_GUIDE.md`) now consistently describe the preferred theme path as: preview → approval → commit/push to `main` → CI updates `shopify-theme` → Shopify deploys from that connected branch. Direct CLI/theme push helpers are kept, but marked as explicit direct-apply alternatives that still require preview + approval. **Preview helper portability**: `scripts/open-preview-popup.ps1` now chooses `pwsh`/`powershell` dynamically and can fall back to `xdg-open` / `open` on non-Windows systems instead of assuming Windows-only browser/process launch behavior.
+
+**Verification**: `npm run quality` PASS. `npm run verify:pipeline` PASS (credential-aware default path; runbook skipped because `SHOPIFY_ACCESS_TOKEN` is absent).
+
+**Outcome**: The active theme deployment model, approval workflow, and branch wiring are now consistent: theme pushes no longer imply unintended product sync, `shopify-theme` sync failures are visible, and the current docs no longer disagree about whether Shopify is connected to `main` or `shopify-theme`.
+
+---
+
 ## 2026-03-07 — Setup and quality surface alignment: `.env.local` SSOT and truthful `check-all`
 
 **Summary**: Ran one more delta-only pass against the current active setup and verification surface. **Setup alignment**: repointed `npm run setup` to `scripts/setup/full-setup.ps1`, simplified `scripts/setup-env.ps1` to bootstrap `.env.local` only, and removed Windows Credential Manager / User-scope secret-storage behavior from `scripts/setup/auto-configure-env.ps1`. **Quality alignment**: simplified `scripts/quality/check-all.ps1` into a truthful wrapper around the canonical `npm run quality`, leaving `npm audit` as informational output rather than a half-blocking pseudo-gate. **Docs/context updated**: current setup and auth guidance (`scripts/README.md`, `.cursor/context/github.md`, `.cursor/context/shopify.md`, `docs/ENVIRONMENT_SETUP.md`, `docs/SETUP_GITHUB.md`, `docs/knowledge-base/shopify-integration.md`, `config/github-auth.md`, `docs/TROUBLESHOOTING.md`, `docs/OPTIMIZATION_GUIDE.md`) now align with the repo rule that local secrets live in `.env.local`.

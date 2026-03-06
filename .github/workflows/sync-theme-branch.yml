@@ -29,7 +29,6 @@ jobs:
           token: ${{ github.token }}
 
       - name: Subtree split and push shopify-theme
-        continue-on-error: true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

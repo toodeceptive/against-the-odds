@@ -39,12 +39,12 @@
 
 ## Update Shopify from Cursor (recommended flow)
 
-**Edit in Cursor → push to GitHub → store updates.** Store is connected to this repo via the Shopify GitHub App; pushing to the connected branch (usually `main`) triggers theme deployment. No `shopify theme push` needed for that flow.
+**Edit in Cursor → push to GitHub → store updates.** Preferred theme flow: commit and push theme changes to `main`; CI updates the connected `shopify-theme` branch; Shopify deploys from that connected branch. No direct `shopify theme push` is needed for that default GitHub flow.
 
 - **One-time**: Pull live theme into repo: `.\scripts\shopify\theme-pull.ps1` (then commit and push).
 - **Preview before commit**: Run `.\scripts\open-preview-popup.ps1` (or **Tasks → Start theme preview** / `.\scripts\start-theme-preview.ps1`) after writing [docs/status/pending-approval.md](docs/status/pending-approval.md). That opens the approval file in Cursor, the AO preview in the browser (static mock immediately; live theme when dev server is ready), and theme dev in a new window. Set `SHOPIFY_CLI_THEME_TOKEN` in `.env.local` so theme dev starts without login prompt (see [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md)). Optional: **Ctrl+Alt+T** for theme dev only; **Ctrl+Alt+P** to open pending-approval.md.
 - **Approval gate**: Wait for explicit approval in chat before applying product sync or committing/pushing store-affecting theme changes.
-- **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, get approval when the change is store-affecting, then commit and push to `main`.
+- **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, get approval when the change is store-affecting, then commit and push to `main` so CI updates the connected `shopify-theme` branch.
 - **Deploy log / rollback**: After each deploy or product sync, append to [docs/status/deploy-log.md](docs/status/deploy-log.md). Rollback: theme → Shopify Admin → theme card → Actions → Reset to last commit; products → revert JSON and re-run sync.
 
 **Agent context**: Store URL `aodrop.com`; theme source `src/shopify/themes/aodrop-theme/`; product data `data/products/*.json`; workflow and product/theme docs: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md). Theme ID in `.env.local` (SHOPIFY_THEME_ID); get via `shopify theme list` or Admin. **Store ops**: Product-with-uploads (JSON path + browser path), theme updates, deploy-log for every change — see [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). **Integrations**: Products via Admin API (`sync-products.ps1`; rate limits ~2 req/s); one-off/settings via user's browser (no headless). See [.cursor/context/shopify.md](.cursor/context/shopify.md).
@@ -53,7 +53,7 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 ## Shopify Theme Development
 
-- **Shopify–GitHub App**: Store is connected to this repo. Theme deploys happen when you push to the connected branch (typically `main`). Configuration: Shopify Admin → Settings → Apps and sales channels → GitHub.
+- **Shopify–GitHub App**: Store is connected to this repo through the `shopify-theme` branch maintained by `sync-theme-branch.yml`. Configuration: Shopify Admin → Settings → Apps and sales channels → GitHub.
 - **GitHub Actions**: Theme deployment is handled by the Shopify GitHub App; `shopify-sync.yml` is for product sync (Admin API secrets if configured).
 - `shopify auth login` — needed for theme pull and local dev
 - `shopify theme dev --store=aodrop.com --theme=live` — local preview

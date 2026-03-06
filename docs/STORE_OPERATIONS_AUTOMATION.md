@@ -8,18 +8,18 @@
 
 ## Automation matrix
 
-| Use case                                              | Primary method        | Scripts / entry points                                                                                                                          | Fallback                                                                     |
-| ----------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| **Initial setup (Shopify API access)**                | E2E + CDP             | `setup-app-access.ps1`, `get-access-token.ps1`, `launch-chrome-for-agent.ps1`, `save-token-to-env.ps1`                                          | Manual copy token → save-token-to-env; desktop: focus Chrome, type admin URL |
-| **Themes (update, edit files, push)**                 | API + CLI             | `theme-pull.ps1`, `theme-dev.ps1`, `theme-update-store.ps1`, `merge-brand-into-theme.ps1`, `copy-brand-images-to-theme.ps1`, `update-theme.ps1` | E2E: Admin → Online Store → Themes; desktop: navigate theme editor           |
-| **Content (theme copy, pages, homepage)**             | Edit files + push     | Edit files in `src/shopify/themes/aodrop-theme/` (snippets, sections, templates); then `theme-update-store.ps1` or theme dev                    | E2E: Theme editor in Admin; API: Content in theme JSON if applicable         |
-| **Products (titles, descriptions, images)**           | API + data            | `scripts/shopify/sync-products.ps1`; edit `data/products/*.json`, preview with `-DryRun`, then apply after approval                             | E2E: Admin → Products; API: REST Admin API products                          |
-| **Sizes / variants (options, SKU, price, inventory)** | API + data            | Same as products: `data/products/*.json` has `variants[]` and `options[]`; preview/apply with `scripts/shopify/sync-products.ps1`               | E2E: Admin → Product → Variants; API: product variants endpoints             |
-| **Posts (blog articles)**                             | API + E2E             | Shopify Admin API `articles` (blog); no script in repo yet — add under `scripts/shopify/` or use E2E to Admin → Online Store → Blog → Post      | E2E: Admin → Content → Blog; desktop: type and submit                        |
-| **Store info (name, domain, contact, policies)**      | API + E2E             | `fetch-store-data.ps1` (backup); `browser/backup-store-settings.ps1`; update via API `shop.json` or Admin Settings                              | E2E: Admin → Settings → General/Domains/etc.; API: GET/PUT shop              |
-| **Printify (connect store, sync products, fulfill)**  | API + manual link     | (Future) Printify API; today: connect in Printify dashboard, then use Shopify product sync                                                      | E2E: open Printify dashboard in Chrome                                       |
-| **Optimizing images**                                 | Script (Node + sharp) | `scripts/shopify/optimize-images.ps1` → `assets/brand` and/or theme assets                                                                      | Run before theme push or product sync                                        |
-| **Creating orders**                                   | API + E2E             | Shopify Admin API orders; product sync for catalog; (Future) order script                                                                       | E2E: checkout flow; desktop: Admin → Orders → Create                         |
+| Use case                                              | Primary method        | Scripts / entry points                                                                                                                                                                        | Fallback                                                                     |
+| ----------------------------------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **Initial setup (Shopify API access)**                | E2E + CDP             | `setup-app-access.ps1`, `get-access-token.ps1`, `launch-chrome-for-agent.ps1`, `save-token-to-env.ps1`                                                                                        | Manual copy token → save-token-to-env; desktop: focus Chrome, type admin URL |
+| **Themes (update, edit files, push)**                 | GitHub flow + CLI     | Default: edit under `src/shopify/themes/aodrop-theme/`, preview, approve, commit to `main`, let CI update `shopify-theme`; direct-apply helpers: `theme-update-store.ps1`, `update-theme.ps1` | E2E: Admin → Online Store → Themes; desktop: navigate theme editor           |
+| **Content (theme copy, pages, homepage)**             | Edit files + push     | Edit files in `src/shopify/themes/aodrop-theme/`; default apply path is commit/push to `main` after preview/approval so CI updates `shopify-theme`                                            | E2E: Theme editor in Admin; API: Content in theme JSON if applicable         |
+| **Products (titles, descriptions, images)**           | API + data            | `scripts/shopify/sync-products.ps1`; edit `data/products/*.json`, preview with `-DryRun`, then apply after approval                                                                           | E2E: Admin → Products; API: REST Admin API products                          |
+| **Sizes / variants (options, SKU, price, inventory)** | API + data            | Same as products: `data/products/*.json` has `variants[]` and `options[]`; preview/apply with `scripts/shopify/sync-products.ps1`                                                             | E2E: Admin → Product → Variants; API: product variants endpoints             |
+| **Posts (blog articles)**                             | API + E2E             | Shopify Admin API `articles` (blog); no script in repo yet — add under `scripts/shopify/` or use E2E to Admin → Online Store → Blog → Post                                                    | E2E: Admin → Content → Blog; desktop: type and submit                        |
+| **Store info (name, domain, contact, policies)**      | API + E2E             | `fetch-store-data.ps1` (backup); `browser/backup-store-settings.ps1`; update via API `shop.json` or Admin Settings                                                                            | E2E: Admin → Settings → General/Domains/etc.; API: GET/PUT shop              |
+| **Printify (connect store, sync products, fulfill)**  | API + manual link     | (Future) Printify API; today: connect in Printify dashboard, then use Shopify product sync                                                                                                    | E2E: open Printify dashboard in Chrome                                       |
+| **Optimizing images**                                 | Script (Node + sharp) | `scripts/shopify/optimize-images.ps1` → `assets/brand` and/or theme assets                                                                                                                    | Run before theme push or product sync                                        |
+| **Creating orders**                                   | API + E2E             | Shopify Admin API orders; product sync for catalog; (Future) order script                                                                                                                     | E2E: checkout flow; desktop: Admin → Orders → Create                         |
 
 ---
 
@@ -36,12 +36,12 @@
 ### Themes
 
 - **Pull from store:** `.\scripts\shopify\theme-pull.ps1` or `theme-auth-then-pull.ps1`. Theme path: `src/shopify/themes/aodrop-theme/`.
-- **Edit locally:** Change Liquid/sections/snippets/templates in that folder; push with `theme-update-store.ps1` or `theme-dev.ps1`.
+- **Edit locally:** Change Liquid/sections/snippets/templates in that folder; preferred apply path is commit/push to `main` after preview/approval so CI updates `shopify-theme`.
 - **Brand into theme:** `.\scripts\shopify\merge-brand-into-theme.ps1`, `.\scripts\shopify\copy-brand-images-to-theme.ps1`.
 
 ### Content (pages, homepage, theme copy)
 
-- **Theme copy:** Edit files in `src/shopify/themes/aodrop-theme/` (sections, templates, snippets); push with `theme-update-store.ps1`.
+- **Theme copy:** Edit files in `src/shopify/themes/aodrop-theme/` (sections, templates, snippets); preferred apply path is commit/push to `main` after preview/approval. Use direct CLI push helpers only when intentionally bypassing the GitHub branch flow.
 - **Pages/blog:** Admin → Content → Pages / Blog, or API (pages, articles). No repo script yet; E2E or add script.
 
 ### Products
