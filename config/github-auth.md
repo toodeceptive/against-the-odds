@@ -24,25 +24,13 @@ This document describes the GitHub authentication setup for the Against The Odds
 
 #### Storing PAT Securely
 
-**Windows Credential Manager (Recommended)**
+**`.env.local` (Recommended)**
 
-```powershell
-# Store PAT in Windows Credential Manager
-cmdkey /generic:git:https://github.com /user:YOUR_GITHUB_USERNAME /pass:YOUR_PAT
+```dotenv
+GITHUB_TOKEN=YOUR_PAT
 ```
 
-**Environment Variable (Alternative)**
-
-```powershell
-# Set in user environment variables (not system-wide)
-[System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'YOUR_PAT', 'User')
-```
-
-**Git Credential Manager (Automatic)**
-
-- First push will prompt for credentials
-- Enter username and PAT (not password)
-- Credentials stored automatically in Windows Credential Manager
+This repo treats `.env.local` as the single local secret source of truth. Do not store GitHub tokens in repo-tracked docs, User-scope environment variables, or alternate local secret stores for normal project operation.
 
 #### Testing Authentication
 
@@ -94,7 +82,7 @@ ssh -T git@github.com
 
 - **Remote URL**: `https://github.com/toodeceptive/against-the-odds.git`
 - **Protocol**: HTTPS (recommended for automated operations)
-- **Credential Helper**: Windows Credential Manager
+- **Credential Helper**: Git over HTTPS with PAT stored in `.env.local`
 - **Status**: ✅ Configured
 
 ## Security Best Practices
@@ -102,7 +90,6 @@ ssh -T git@github.com
 1. **Never commit tokens to repository**
    - Use `.env.local` (gitignored) for local development
    - Use GitHub Secrets for CI/CD workflows
-   - Use Windows Credential Manager for local automation
 
 2. **Rotate tokens regularly**
    - Set expiration dates
@@ -126,9 +113,8 @@ ssh -T git@github.com
 **Solutions**:
 
 1. Verify PAT is valid and not expired
-2. Check credential manager: `cmdkey /list`
-3. Clear cached credentials: `cmdkey /delete:git:https://github.com`
-4. Re-authenticate with new credentials
+2. Check `.env.local` for typos or stale values
+3. Re-authenticate with a new PAT if needed
 
 ### Permission Denied
 

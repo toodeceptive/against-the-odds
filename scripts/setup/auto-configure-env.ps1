@@ -194,37 +194,10 @@ foreach ($line in $envContent) {
 $newContent | Out-File -FilePath $envLocalPath -Encoding UTF8 -NoNewline
 Write-Host "[OK] Updated .env.local" -ForegroundColor Green
 
-# Optionally store in Windows Credential Manager
+# Secrets SSOT: keep credentials in .env.local only
 if ($Interactive) {
     Write-Host ""
-    $response = Read-Host "Store credentials in Windows Credential Manager? (y/n)"
-    if ($response -eq "y") {
-        Write-Host "Storing credentials securely..." -ForegroundColor Yellow
-        
-        # Store GitHub token
-        if ($envVars.ContainsKey('GITHUB_TOKEN') -and 
-            -not [string]::IsNullOrWhiteSpace($envVars['GITHUB_TOKEN']) -and
-            $envVars['GITHUB_TOKEN'] -notmatch 'your_.*_here') {
-            try {
-                cmdkey /generic:git:https://github.com /user:$($knownCredentials.GITHUB_USERNAME) /pass:$($envVars['GITHUB_TOKEN']) 2>&1 | Out-Null
-                Write-Host "  [OK] Stored GitHub credentials" -ForegroundColor Green
-            } catch {
-                Write-Host "  [WARN] Could not store GitHub credentials: $_" -ForegroundColor Yellow
-            }
-        }
-        
-        # Store Shopify credentials
-        if ($envVars.ContainsKey('SHOPIFY_ACCESS_TOKEN') -and 
-            -not [string]::IsNullOrWhiteSpace($envVars['SHOPIFY_ACCESS_TOKEN']) -and
-            $envVars['SHOPIFY_ACCESS_TOKEN'] -notmatch 'your_.*_here') {
-            try {
-                [System.Environment]::SetEnvironmentVariable('SHOPIFY_ACCESS_TOKEN', $envVars['SHOPIFY_ACCESS_TOKEN'], 'User')
-                Write-Host "  [OK] Stored Shopify credentials" -ForegroundColor Green
-            } catch {
-                Write-Host "  [WARN] Could not store Shopify credentials: $_" -ForegroundColor Yellow
-            }
-        }
-    }
+    Write-Host "Credentials are kept in .env.local only. Windows Credential Manager and User-scope environment storage are not used by this repo." -ForegroundColor Cyan
 }
 
 # Validate credentials if not skipped

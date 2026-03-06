@@ -19,7 +19,6 @@
 
 - Environment variables in `.env.local`
 - GitHub Secrets for CI/CD
-- Windows Credential Manager (optional)
 
 ## Common Operations
 

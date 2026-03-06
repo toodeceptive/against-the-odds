@@ -22,7 +22,7 @@ This guide provides comprehensive instructions for setting up your development e
 
 ```powershell
 # Run automated setup script
-.\scripts\setup\auto-configure-env.ps1
+.\scripts\setup\full-setup.ps1
 ```
 
 This script will:
@@ -30,7 +30,7 @@ This script will:
 1. Create `.env.local` from template
 2. Apply known credentials automatically
 3. Guide you through missing credentials
-4. Optionally store credentials in Windows Credential Manager
+4. Keep credentials in `.env.local`
 5. Validate all credentials
 
 ### Manual Setup
@@ -148,17 +148,7 @@ After setup, verify all credentials:
 - Easy to edit and update
 - Local to your machine
 
-### Option 2: Windows Credential Manager
-
-```powershell
-# Store GitHub token
-cmdkey /generic:git:https://github.com /user:toodeceptive /pass:YOUR_TOKEN
-
-# Store in environment variables
-[System.Environment]::SetEnvironmentVariable('SHOPIFY_ACCESS_TOKEN', 'YOUR_TOKEN', 'User')
-```
-
-### Option 3: GitHub Secrets (For CI/CD)
+### Option 2: GitHub Secrets (For CI/CD)
 
 1. Go to: https://github.com/toodeceptive/against-the-odds/settings/secrets/actions
 2. Add each secret:
@@ -216,7 +206,7 @@ After environment setup:
 - ✅ Use different credentials for development and production
 - ✅ Rotate credentials regularly
 - ✅ Use least privilege principle for API tokens
-- ✅ Store secrets securely (Credential Manager or secrets manager)
+- ✅ Store local secrets in `.env.local` and CI secrets in GitHub Actions Secrets
 - ✅ Review access logs regularly
 
 ## References

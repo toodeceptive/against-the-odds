@@ -9,7 +9,7 @@ This guide provides step-by-step instructions for setting up complete GitHub int
 - GitHub account: `toodeceptive`
 - Repository: `against-the-odds`
 - Local repository initialized and synced
-- Git Credential Manager installed (Windows default)
+- Git installed
 
 ## Step 1: Authentication Setup
 
@@ -25,13 +25,7 @@ This guide provides step-by-step instructions for setting up complete GitHub int
 
 2. **Store PAT Securely**:
 
-   ```powershell
-   # Method 1: Windows Credential Manager
-   cmdkey /generic:git:https://github.com /user:toodeceptive /pass:YOUR_PAT
-
-   # Method 2: Environment Variable (User scope)
-   [System.Environment]::SetEnvironmentVariable('GITHUB_TOKEN', 'YOUR_PAT', 'User')
-   ```
+   Put `GITHUB_TOKEN=YOUR_PAT` in `.env.local` (gitignored) per the repo credential policy.
 
 3. **Test Authentication**:
 

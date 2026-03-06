@@ -1,4 +1,4 @@
-# Run all quality checks (linting, formatting, security)
+# Run the canonical quality gate, with optional informational audit output.
 
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
@@ -7,70 +7,31 @@ Set-Location $repoPath
 Write-Host "=== Quality Checks ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Check if Node.js is installed
 if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
     Write-Host "Error: Node.js/npm not found" -ForegroundColor Red
     exit 1
 }
 
-$allPassed = $true
-
-# Lint check
-Write-Host "Running linter..." -ForegroundColor Yellow
-try {
-    npm run lint
-    if ($LASTEXITCODE -ne 0) {
-        $allPassed = $false
-    } else {
-        Write-Host "[OK] Linting passed" -ForegroundColor Green
-    }
-} catch {
-    Write-Host "[WARN] Linting check skipped (no ESLint config)" -ForegroundColor Yellow
+Write-Host "Running canonical quality gate..." -ForegroundColor Yellow
+npm run quality
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[FAIL] Canonical quality gate failed" -ForegroundColor Red
+    exit $LASTEXITCODE
 }
+Write-Host "[OK] Quality gate passed" -ForegroundColor Green
 Write-Host ""
 
-# Format check
-Write-Host "Checking code formatting..." -ForegroundColor Yellow
-try {
-    npm run format:check
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "[WARN] Code formatting issues found" -ForegroundColor Yellow
-        Write-Host "Run 'npm run format' to fix" -ForegroundColor White
-    } else {
-        Write-Host "[OK] Formatting check passed" -ForegroundColor Green
-    }
-} catch {
-    Write-Host "[WARN] Format check skipped (no Prettier config)" -ForegroundColor Yellow
-}
-Write-Host ""
-
-# Security audit
-Write-Host "Running security audit..." -ForegroundColor Yellow
 if (Test-Path "package.json") {
+    Write-Host "Running informational npm audit..." -ForegroundColor Yellow
     npm audit --audit-level=high
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "[WARN] Security vulnerabilities found" -ForegroundColor Yellow
-        Write-Host "Run 'npm audit fix' to attempt automatic fixes" -ForegroundColor White
+        Write-Host "[WARN] npm audit reported vulnerabilities (informational; does not fail check-all.ps1)" -ForegroundColor Yellow
+        Write-Host "Run 'npm audit fix' only after reviewing the impact on lockfile and dependencies." -ForegroundColor White
     } else {
-        Write-Host "[OK] Security audit passed" -ForegroundColor Green
+        Write-Host "[OK] npm audit passed" -ForegroundColor Green
     }
+    Write-Host ""
 }
-Write-Host ""
 
-# Test coverage (if available)
-Write-Host "Checking test coverage..." -ForegroundColor Yellow
-try {
-    npm run test:coverage
-    Write-Host "[OK] Coverage check complete" -ForegroundColor Green
-} catch {
-    Write-Host "[WARN] Coverage check skipped" -ForegroundColor Yellow
-}
-Write-Host ""
-
-if ($allPassed) {
-    Write-Host "[OK] All quality checks passed!" -ForegroundColor Green
-    exit 0
-} else {
-    Write-Host "[FAIL] Some quality checks failed" -ForegroundColor Red
-    exit 1
-}
+Write-Host "[OK] check-all.ps1 complete" -ForegroundColor Green
+exit 0

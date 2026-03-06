@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-03-07 — Setup and quality surface alignment: `.env.local` SSOT and truthful `check-all`
+
+**Summary**: Ran one more delta-only pass against the current active setup and verification surface. **Setup alignment**: repointed `npm run setup` to `scripts/setup/full-setup.ps1`, simplified `scripts/setup-env.ps1` to bootstrap `.env.local` only, and removed Windows Credential Manager / User-scope secret-storage behavior from `scripts/setup/auto-configure-env.ps1`. **Quality alignment**: simplified `scripts/quality/check-all.ps1` into a truthful wrapper around the canonical `npm run quality`, leaving `npm audit` as informational output rather than a half-blocking pseudo-gate. **Docs/context updated**: current setup and auth guidance (`scripts/README.md`, `.cursor/context/github.md`, `.cursor/context/shopify.md`, `docs/ENVIRONMENT_SETUP.md`, `docs/SETUP_GITHUB.md`, `docs/knowledge-base/shopify-integration.md`, `config/github-auth.md`, `docs/TROUBLESHOOTING.md`, `docs/OPTIMIZATION_GUIDE.md`) now align with the repo rule that local secrets live in `.env.local`.
+
+**Verification**: `npm run quality` PASS. `npm run verify:pipeline` PASS (credential-aware default path; runbook skipped because `SHOPIFY_ACCESS_TOKEN` is absent).
+
+**Outcome**: Current setup and verification entry points no longer advertise conflicting secret-storage modes, and `check-all.ps1` now accurately reflects the repo’s real quality gate instead of pretending to be a stricter pass/fail command than it was.
+
+---
+
 ## 2026-03-07 — Obsolete active-surface cleanup: task labels, legacy wrapper de-emphasis, and command/doc realignment
 
 **Summary**: Ran a delta-only cleanup pass focused on currently active useless or outdated surfaces rather than historical archives. **Fixed**: corrected the broken `/pp` command prompt paths in `.cursor/commands/pp/COMMAND.md`; renamed misleading Cursor tasks in `.cursor/tasks.json` (setup env-only, unit tests, preview/apply product sync, legacy direct theme update helper) and repointed `Run All Tests` to the canonical `npm run test:all` instead of the PowerShell wrapper. **Agent and context cleanup**: removed `scripts/products/sync.ps1` from the primary owned scope in `storeops_productsync`, updated `node-and-automation.md` and `shopify.md` to treat `scripts/shopify/sync-products.ps1` as the primary product-sync path and the `scripts/products/sync.ps1` wrapper as legacy/import-export utility only. **Docs/prompts realigned**: updated current-facing docs/prompts/plans (`README.md`, `FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`, `AGENT_PROMPTS.md`, `FINALIZATION_RUNBOOK.md`, `WORKFLOW_PIPELINE_VISUAL_GUIDE.md`, `AGENT_AND_REPO_SECURITY.md`, `SETUP_GITHUB.md`, `STORE_OPERATIONS_AUTOMATION.md`, `.cursor/skills/README.md`, `MASTER_GURU_E2E_PERFECTION_RUN.plan.md`, `guru_full-system_setup_and_automation.plan.md`, and current PP/finalization prompts) so they no longer teach stale `/pr` semantics, obsolete `-SkipRunbook` verify commands, or legacy product-sync/task names.

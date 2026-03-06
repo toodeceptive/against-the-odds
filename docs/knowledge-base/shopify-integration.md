@@ -21,7 +21,7 @@ The Shopify integration uses a multi-layered approach:
 
 - Format: `shpat_` followed by 32+ characters
 - Scope: Defined in app settings
-- Storage: `.env.local` or Windows Credential Manager
+- Storage: `.env.local`
 - Rotation: Recommended every 90 days
 
 ### API Key and Secret
@@ -35,14 +35,14 @@ The Shopify integration uses a multi-layered approach:
 ### Product Management
 
 ```powershell
-# Sync products
-.\scripts\products\sync.ps1 -Direction import
+# Preview product changes
+.\scripts\shopify\sync-products.ps1 -DryRun
 
 # Export products
 .\scripts\products\export.ps1
 
-# Import products
-.\scripts\products\import.ps1
+# Apply approved product changes
+.\scripts\shopify\sync-products.ps1
 ```
 
 ### Theme Development

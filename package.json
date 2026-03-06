@@ -19,7 +19,7 @@
     "quality:fix": "npm run format && npm run lint:fix && npm run quality",
     "build": "echo 'Build process not yet configured'",
     "dev": "echo 'Development server not yet configured'",
-    "setup": "node scripts/shared/run-powershell.cjs scripts/setup-env.ps1",
+    "setup": "node scripts/shared/run-powershell.cjs scripts/setup/full-setup.ps1",
     "setup:auto": "node scripts/shared/run-powershell.cjs scripts/setup/auto-configure-env.ps1",
     "health": "node scripts/shared/run-powershell.cjs scripts/health/comprehensive-check.ps1",
     "sync": "node scripts/shared/run-powershell.cjs scripts/sync/sync-all.ps1",

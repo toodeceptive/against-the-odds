@@ -9,7 +9,7 @@
 ## Authentication
 
 - **Method**: Personal Access Token (PAT)
-- **Storage**: `.env.local` or Windows Credential Manager
+- **Storage**: `.env.local`
 - **Verification**: `scripts/github/verify-auth.ps1`
 
 ## Workflows

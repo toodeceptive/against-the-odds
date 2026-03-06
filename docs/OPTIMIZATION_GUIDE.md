@@ -158,12 +158,8 @@ if (Test-Path $healthCache -NewerThan (Get-Date).AddMinutes(-10)) {
 ### Credential Management
 
 ```powershell
-# Use secure storage
-$token = [System.Environment]::GetEnvironmentVariable('SHOPIFY_ACCESS_TOKEN', 'User')
-
-# Or Windows Credential Manager
-$cred = Get-StoredCredential -Target "shopify-api"
-$token = $cred.GetNetworkCredential().Password
+# Use the repo-local secret source
+$token = (Get-Content .env.local | Where-Object { $_ -match '^SHOPIFY_ACCESS_TOKEN=' }) -replace '^SHOPIFY_ACCESS_TOKEN=', ''
 ```
 
 ### API Key Rotation

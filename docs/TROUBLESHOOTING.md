@@ -72,10 +72,7 @@ On Windows this uses Git Credential Manager (GCM). If you use another helper, se
 1. Verify GitHub token: `.\scripts\github\verify-auth.ps1`
 2. Check token hasn't expired
 3. Regenerate token if needed
-4. Store in Windows Credential Manager:
-   ```powershell
-   cmdkey /generic:git:https://github.com /user:toodeceptive /pass:YOUR_TOKEN
-   ```
+4. Store the refreshed token in `.env.local` as `GITHUB_TOKEN=YOUR_TOKEN`
 
 #### Push/Pull Failures
 
