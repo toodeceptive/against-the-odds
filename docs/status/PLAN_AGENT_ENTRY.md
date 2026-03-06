@@ -74,8 +74,8 @@ The project mandates **Phase 0** (full cleanup and finalization) before any othe
 
 ## 5. After Phase 0: Which Prompt to Run
 
-Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** to choose the right prompt for audits, orchestration, or specialist work. To **test and utilize the new Cursor agent system** (rules, skills, /review, /pr, Verifier) with a full system-wide run across code, repo, pipeline, and project, use **`prompts/FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md`**. To **loop perfection until complete** (worktree-coordinated lead agent, PP cycles, cleanup/optimization), use **`prompts/MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md`** and **`.cursor/plans/MASTER_GURU_E2E_PERFECTION_RUN.plan.md`**. For other goals: full audit → MASTER_10_EXPERT_SYSTEM; finalization → head-guru-orchestrator; etc.
+Once Phase 0 is signed off, use **`docs/AGENT_PROMPT_DECISION_TREE.md`** as the single routing authority for audits, orchestration, and specialist work. Use **`prompts/README.md`** as the prompt inventory only; do not duplicate router logic here.
 
 ---
 
-**Summary**: Read `prompts/PERFECT_EXECUTION_PROMPT.md`, complete Phase 0, record sign-off in `docs/status/PHASE_0_FINALIZATION.md`, then and only then proceed. After that, use `docs/AGENT_PROMPT_DECISION_TREE.md` to pick the next prompt.
+**Summary**: Read `prompts/PERFECT_EXECUTION_PROMPT.md`, complete Phase 0 if needed, record sign-off in `docs/status/PHASE_0_FINALIZATION.md`, then use `docs/AGENT_PROMPT_DECISION_TREE.md` to pick the next prompt. If sign-off already exists, skip redundant re-execution and continue incrementally.

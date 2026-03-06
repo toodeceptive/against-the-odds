@@ -6,7 +6,9 @@
 
 ## Gate: Phase 0 First
 
-- **Before any other work**: Read `docs/status/PLAN_AGENT_ENTRY.md` and complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md`.
+- **Always start with** `docs/status/PLAN_AGENT_ENTRY.md`.
+- **If Phase 0 is not yet signed off**, complete it per `prompts/PERFECT_EXECUTION_PROMPT.md`.
+- **If Phase 0 is already signed off**, do **not** re-run it; follow the incremental-only routing in `docs/status/PLAN_AGENT_ENTRY.md` and `docs/status/EXECUTIVE_DECISION_WORK_PRINCIPLES.md`.
 - **Sign-off required**: `docs/status/PHASE_0_FINALIZATION.md` must contain **Phase 0 finalized; proceeding allowed.**
 
 **Exception — Fix everything / takeover**: If the user has granted **full dominion** to fix the entire project and the system is broken, read **`docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`** first. Then execute the canonical plan (`.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`). All audit content is consolidated in that plan. Phase 0 may be satisfied by existing inventory/sign-off; proceed through tracks and addendum fixes.
@@ -60,6 +62,7 @@ Each step updates docs or config and produces a short deliverable; Head Guru tie
 | Need                                   | Document                                                                 |
 | -------------------------------------- | ------------------------------------------------------------------------ |
 | Phase 0 and entry                      | `docs/status/PLAN_AGENT_ENTRY.md`                                        |
+| Prompt inventory                       | `prompts/README.md`                                                      |
 | Fix everything / takeover              | `docs/status/HANDOFF_FOR_NEW_AGENT_202602.md`                            |
 | Local main finalization (closure)      | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V6_OPTIMAL_INTEGRATIONS.md` |
 | Local main delta-only follow-up        | `prompts/LOCAL_MAIN_GURU_FINALIZATION_PROMPT_V7_DELTA_ONLY_EXTERNALS.md` |

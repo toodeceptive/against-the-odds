@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-03-06 — Delta doc audit/finalization: canonical routing, approval flow, and environment-scope cleanup
+
+**Summary**: Executed a delta-first documentation/agent-OS cleanup pass based on live repo evidence. **Canonical routing**: clarified `prompts/README.md` as prompt inventory (not router), kept `docs/AGENT_PROMPT_DECISION_TREE.md` as routing authority, and simplified `docs/status/PLAN_AGENT_ENTRY.md` to delegate after Phase 0. **Agent roster**: re-scoped `docs/AGENT_TEAM.md` to the deployed `.cursor/agents/` subset, aligned approval wording, and removed dead `docs/status/agent-logs/*` targets from the team doc and operational agent definitions in favor of `WORK_QUEUE.md` + `CONSOLIDATION_LOG.md`. **Plan/archive cleanup**: updated `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md` so it no longer claims to be the only plan file and replaced stale references to the missing `PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md` with current archive/index docs; updated `archive/2026-01-30/ARCHIVE_NOTE.md` and `docs/status/CURSOR_GITHUB_AUDIT_20260131.md` to match. **Workflow clarification**: split product vs theme preview helpers in `docs/PREVIEW_APPROVAL_SYSTEM.md` and `docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md`; aligned `docs/FINALIZATION_RUNBOOK.md` with the actual verification baseline (`npm run quality` → `verify-pipeline` → `run-runbook` when creds exist). **Environment scoping**: added local-snapshot scope notes to branch/worktree inventory docs, clarified the Windows-primary-root note in `OPERATOR_RUNBOOK.md`, updated `docs/README.md`, `docs/AGENT_PROMPTS.md`, `docs/PROGRESS_TRACKING.md`, `docs/status/INDEX_REPORTS.md`, and `docs/status/WORK_QUEUE.md` to reduce stale or over-broad guidance.
+
+**Verification**: `npm run quality` PASS (Prettier write/check, ESLint, Vitest unit tests). `verify-pipeline` SKIPPED in this cloud session because `pwsh` is not installed (`pwsh not available; skipped verify-pipeline`).
+
+**Outcome**: Canonical docs now distinguish inventory vs routing, product vs theme approval helpers, local snapshot vs current cloud environment, and active logs vs nonexistent agent-log files. No store-affecting changes.
+
+---
+
 ## 2026-02-27 — PP re-run: progress-check, perfect prompt, commit (Cycle 15)
 
 **Summary**: User re-requested full PP cycle (guru review → followup plan → perfect → execute). **Progress-check**: Staged state from Cycle 14 unchanged; inventories already aligned; fix-handoff-line already deleted. **Perfected**: GURU_EXPERT_REVIEW (stale → staged, fix-handoff-line → resolved); PERFECT_FOLLOWUP_PLAN (Step 4 clarified: commit then push with approval). **Execute**: Quality ✓; committed all staged changes as a3ee76f. **Outcome**: Commit pushed locally. Push to origin/main requires explicit user approval.

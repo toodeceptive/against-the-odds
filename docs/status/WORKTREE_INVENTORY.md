@@ -4,6 +4,8 @@
 
 **Last updated**: 2026-02-27 (aligned with current `git worktree list`; stale hal/hvf still documented)
 
+**Scope note**: This file records the primary local Windows environment snapshot used during the 2026-02 finalization work. Cloud agents and isolated `/workspace` checkouts should trust live `git worktree list` first, then use this file as a documented local-state reference.
+
 ---
 
 ## Actual worktrees (from git worktree list)

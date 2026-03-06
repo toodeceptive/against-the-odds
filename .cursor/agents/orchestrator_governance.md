@@ -48,6 +48,7 @@ Coordinate specialized agents, keep a single-pass research ledger, and route wor
 - `git worktree list`
 - `npm run quality` (when code/docs touched)
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/orchestrator-governance.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

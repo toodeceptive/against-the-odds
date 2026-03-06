@@ -25,10 +25,12 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 
 ## Operations and runbooks
 
-| Doc                                                | Purpose                                             |
-| -------------------------------------------------- | --------------------------------------------------- |
-| [../OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md)   | Daily checks, Shopify flow, credentials (repo root) |
-| [FINALIZATION_RUNBOOK.md](FINALIZATION_RUNBOOK.md) | Finalization runbook                                |
+| Doc                                                      | Purpose                                             |
+| -------------------------------------------------------- | --------------------------------------------------- |
+| [../OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md)         | Daily checks, Shopify flow, credentials (repo root) |
+| [GURU_PP_OPERATOR_GUIDE.md](GURU_PP_OPERATOR_GUIDE.md)   | PP/operator execution baseline and daily gates      |
+| [PREVIEW_APPROVAL_SYSTEM.md](PREVIEW_APPROVAL_SYSTEM.md) | Quick reference for theme/product approval flows    |
+| [FINALIZATION_RUNBOOK.md](FINALIZATION_RUNBOOK.md)       | Business-plan and launch finalization runbook       |
 
 ## Security and compliance
 
@@ -45,8 +47,10 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 | [../AGENTS.md](../AGENTS.md)                                                                                     | Agent permission and when agents use your browser (repo root)                                           |
 | [AGENT_PROMPT_DECISION_TREE.md](AGENT_PROMPT_DECISION_TREE.md)                                                   | Agent prompt decision tree                                                                              |
 | [AGENT_SYSTEM.md](AGENT_SYSTEM.md)                                                                               | Agent system and capabilities                                                                           |
-| [AGENT_PROMPTS.md](AGENT_PROMPTS.md)                                                                             | Agent prompts index                                                                                     |
-| [HANDOFF_PROMPT_NEW_AGENT.md](HANDOFF_PROMPT_NEW_AGENT.md)                                                       | Handoff prompt for new agent                                                                            |
+| [AGENT_TEAM.md](AGENT_TEAM.md)                                                                                   | Deployed `.cursor/agents` roster and ownership boundaries                                               |
+| [AGENT_PROMPTS.md](AGENT_PROMPTS.md)                                                                             | Supplementary prompt usage guide                                                                        |
+| [../prompts/README.md](../prompts/README.md)                                                                     | Prompt inventory (canonical index)                                                                      |
+| [HANDOFF_PROMPT_NEW_AGENT.md](HANDOFF_PROMPT_NEW_AGENT.md)                                                       | Historical/new-agent handoff prompt template                                                            |
 | [status/HANDOFF_FOR_NEW_AGENT_202602.md](status/HANDOFF_FOR_NEW_AGENT_202602.md)                                 | Situation for new agent (fix everything / takeover)                                                     |
 | [status/PLAN_AGENT_ENTRY.md](status/PLAN_AGENT_ENTRY.md)                                                         | Agent entry plan                                                                                        |
 | [status/INDEX_REPORTS.md](status/INDEX_REPORTS.md)                                                               | Index of reports and status files                                                                       |
@@ -77,3 +81,4 @@ Single entry point for all docs. Each concept has one canonical file; others lin
 | [MANUFACTURING.md](MANUFACTURING.md)             | Manufacturing workflow                   |
 | [MONITORING.md](MONITORING.md)                   | Performance and health monitoring        |
 | [PROJECT_MANAGEMENT.md](PROJECT_MANAGEMENT.md)   | Branching and task workflow              |
+| [PROGRESS_TRACKING.md](PROGRESS_TRACKING.md)     | Progress-tracking conventions            |

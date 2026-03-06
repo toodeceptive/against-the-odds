@@ -2,9 +2,9 @@
 
 ## Overview
 
-This guide explains how to use the agent prompt system for new Cursor instances. Use `docs/AGENT_PROMPT_DECISION_TREE.md` to choose the right prompt for your goal.
+This guide explains how to use the agent prompt system for new Cursor instances. Use `docs/AGENT_PROMPT_DECISION_TREE.md` to choose the right prompt for your goal, and use `prompts/README.md` as the canonical prompt inventory.
 
-## Available Prompts (canonical)
+## Available Prompts (usage guide)
 
 ### Orchestration and entry
 
@@ -27,7 +27,7 @@ This guide explains how to use the agent prompt system for new Cursor instances.
 ### Step 1: Phase 0 first
 
 1. Read `docs/status/PLAN_AGENT_ENTRY.md`
-2. Complete Phase 0 per `prompts/PERFECT_EXECUTION_PROMPT.md`
+2. If Phase 0 is not already signed off, complete it per `prompts/PERFECT_EXECUTION_PROMPT.md`
 3. Confirm sign-off in `docs/status/PHASE_0_FINALIZATION.md`
 
 ### Step 2: Choose prompt

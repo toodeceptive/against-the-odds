@@ -41,6 +41,7 @@ Perform Printful write operations only in approval-gated mode with rollback-read
 - Confirm approval text exists in chat
 - Confirm pending-approval snapshot is present before execution
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/uploadops-printful.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

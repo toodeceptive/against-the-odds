@@ -1,6 +1,6 @@
 # Archive — 2026-01-30
 
-**Purpose**: Legacy report/status markdown files moved from repo root during P1 consolidation; expired/legacy content cleanup (2026-01-30) added expert-analyses-legacy, status-legacy, and root scripts moved to `scripts/archive/root-scripts-legacy/`. See `docs/status/INDEX_REPORTS.md` and `docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md`.
+**Purpose**: Legacy report/status markdown files moved from repo root during P1 consolidation; expired/legacy content cleanup (2026-01-30) added expert-analyses-legacy, status-legacy, and root scripts moved to `scripts/archive/root-scripts-legacy/`. See `docs/status/INDEX_REPORTS.md` and `archive/ARCHIVE_LOG.md`.
 
 **Contents**:
 

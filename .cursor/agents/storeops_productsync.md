@@ -44,6 +44,7 @@ Run product sync safely with dry-run previews and explicit approval before apply
 - `./scripts/shopify/sync-products.ps1 -DryRun`
 - `npm run quality`
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/storeops-productsync.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

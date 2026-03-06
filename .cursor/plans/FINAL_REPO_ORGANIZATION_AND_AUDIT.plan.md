@@ -1,6 +1,6 @@
 ---
 name: Final repo organization and audit
-overview: Single canonical plan to sort, label, organize, clean, and update the entire repository (branches, workflows, worktrees, agents, docs, scripts, configs, assets, code, tooling) with Phase 0 inventory, seven expert tracks, synthesis, and all known gaps and resolutions. This is the only plan file.
+overview: Single canonical repo-organization plan to sort, label, organize, clean, and update the entire repository (branches, workflows, worktrees, agents, docs, scripts, configs, assets, code, tooling) with Phase 0 inventory, seven expert tracks, synthesis, and all known gaps and resolutions. Specialized and historical plan files may also exist in `.cursor/plans/`.
 todos:
   - id: phase0
     content: Phase 0 - Audit and inventory (branches, worktrees, files, env, handoff). Sign-off in docs/status/PHASE_0_FINALIZATION.md
@@ -72,7 +72,7 @@ Only outcome-based, small items:
 
 Default: only update CONSOLIDATION_LOG for tracking. Do not create new trackers or progress docs unless explicitly requested.
 
-**How to build**: Open this file in Cursor and use **Build**. This is the only plan file in `.cursor/plans/`; historical track content is below.
+**How to build**: Open this file in Cursor and use **Build**. This is the canonical repo-organization plan in `.cursor/plans/`; specialized and completed plans may also exist alongside it.
 
 ---
 
@@ -280,7 +280,7 @@ flowchart LR
 
 **Owner**: Expert 5 ([prompts/expert-05-documentation.md](prompts/expert-05-documentation.md)).
 
-- **Archives**: Complete [docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md](docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md). Legacy under [archive/2026-01-30/](archive/2026-01-30/). **archive/ARCHIVE_LOG.md** (parent level) with version/date per batch; keep archive/2026-01-30/ARCHIVE_NOTE.md as needed.
+- **Archives**: Use [docs/status/INDEX_REPORTS.md](docs/status/INDEX_REPORTS.md), [archive/ARCHIVE_LOG.md](archive/ARCHIVE_LOG.md), and [archive/2026-01-30/ARCHIVE_NOTE.md](archive/2026-01-30/ARCHIVE_NOTE.md) to track retained legacy content and archive decisions.
 - **Status and reports**: [docs/status/](docs/status) — [docs/status/INDEX_REPORTS.md](docs/status/INDEX_REPORTS.md) as master index; **version/update table** (File | Last updated | Summary); move superseded to archive and log in ARCHIVE_LOG.
 - **Analyses**: docs/expert-analyses vs archive/2026-01-30/expert-analyses-legacy — single index in INDEX_REPORTS.
 - **Knowledge base**: [docs/knowledge-base/](docs/knowledge-base) — tidy, cross-link, [docs/knowledge-base/README.md](docs/knowledge-base/README.md) as entry.
@@ -426,7 +426,7 @@ flowchart LR
 
 ## Common pitfalls and checks
 
-- **Do not** move or delete files still referenced by HANDOFF, PLAN_AGENT_ENTRY, or PLAN_HANDOFF (e.g. system_finalization_report, blocker_resolution_commands, IF_HANDOFF_FILES_MISSING, CONSOLIDATION_LOG). See [docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md](docs/status/PLAN_EXPIRED_LEGACY_CLEANUP_20260130.md) "Out of scope."
+- **Do not** move or delete files still referenced by HANDOFF, PLAN_AGENT_ENTRY, or PLAN_HANDOFF (e.g. system_finalization_report, blocker_resolution_commands, IF_HANDOFF_FILES_MISSING, CONSOLIDATION_LOG). Cross-check [docs/status/INDEX_REPORTS.md](docs/status/INDEX_REPORTS.md) and [archive/2026-01-30/ARCHIVE_NOTE.md](archive/2026-01-30/ARCHIVE_NOTE.md) before archive cleanup.
 - **AGENTS.md vs .cursor/rules**: Verify no conflicting permission or safety wording.
 - **replacements.txt**: Already in OPERATOR_RUNBOOK; plan only verifies and optionally relocates.
 

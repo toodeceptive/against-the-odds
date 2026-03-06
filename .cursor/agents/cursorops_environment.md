@@ -43,6 +43,7 @@ Optimize Cursor/MCP behavior for throughput and observability without reducing a
 - `cursor --help`
 - `npm run quality`
 
-## Logging Target
+## Logging
 
-- `docs/status/agent-logs/cursorops-environment.md`
+- Record active decisions in `docs/status/WORK_QUEUE.md`.
+- Append completed multi-step work to `docs/status/CONSOLIDATION_LOG.md`.

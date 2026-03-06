@@ -1,12 +1,12 @@
 # Prompts — Index
 
-**Purpose**: Index of agent and guru prompts. Use canonical prompts first; legacy/one-off prompts are kept for reference.
+**Purpose**: Index of agent and guru prompts. Use this as the prompt inventory; use `docs/AGENT_PROMPT_DECISION_TREE.md` as the routing authority for "which prompt when."
 
 **Last updated**: 2026-02-27.
 
 ---
 
-## Canonical (use first)
+## Primary `/pp` and operator entry prompts
 
 | Prompt                                           | Purpose                                                                                        |
 | ------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
@@ -55,15 +55,15 @@ Use when assigning work to a specific guru/expert domain.
 
 ---
 
-## Legacy / one-off
+## Reference / situational prompts
 
-| Prompt                                     | Note                     |
-| ------------------------------------------ | ------------------------ |
-| FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md | Full system test run.    |
-| PROCEED_UNFINISHED_WORKS_GURU_PROMPT.md    | Proceed unfinished work. |
-| AGENT_SELF_IMPROVEMENT_EXECUTION_PROMPT.md | Self-improvement.        |
-| PERFECT_EXECUTION_PROMPT.md                | Perfect execution.       |
-| head-guru-orchestrator.md                  | Orchestrator role.       |
+| Prompt                                     | Note                                                                           |
+| ------------------------------------------ | ------------------------------------------------------------------------------ |
+| FULL_SYSTEM_TEST_AND_IMPROVEMENT_PROMPT.md | Still routed by the decision tree for full-system test/improvement runs.       |
+| PROCEED_UNFINISHED_WORKS_GURU_PROMPT.md    | Older proceed/unfinished-work flow; keep for reference unless explicitly used. |
+| AGENT_SELF_IMPROVEMENT_EXECUTION_PROMPT.md | Self-improvement reference prompt.                                             |
+| PERFECT_EXECUTION_PROMPT.md                | Phase 0 gate and historical entry authority; not a generic day-to-day router.  |
+| head-guru-orchestrator.md                  | Active orchestration prompt outside the `/pp` entry set.                       |
 
 ---
 

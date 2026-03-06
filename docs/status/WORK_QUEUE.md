@@ -42,7 +42,7 @@ Single source of truth for active execution. This queue is compression-first and
 - Printful uploads/mockups/orders
 - Cloudflare DNS/zone/redirect/workers writes
 - GitHub rulesets or branch protection changes
-- Merge to `main` or direct push to `main`
+- Merge to `main` or direct push to `main` when the action is store-affecting, governance-protected, or otherwise covered by an explicit approval gate
 
 ## References
 

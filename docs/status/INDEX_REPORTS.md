@@ -4,11 +4,11 @@
 
 **Purpose**: Single index of report- and status-style markdown files so agents and humans know what is current vs legacy and where to look.
 
-**Counts (2026-02)**: docs/ **142 files** total; docs/status/ **78 files**; repo total on disk (excl. .git, node_modules) **~476 files**; tracked (excl. coverage, playwright-report, test-results, .vscode) **~431 files**. Full inventory is in .cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md.
+**Counts (2026-02 snapshot)**: docs/ **142 files** total; docs/status/ **78 files**; repo total on disk (excl. .git, node_modules) **~476 files**; tracked (excl. coverage, playwright-report, test-results, .vscode) **~431 files**. Treat these as historical snapshot counts unless re-measured; the full inventory basis is in `.cursor/plans/FINAL_REPO_ORGANIZATION_AND_AUDIT.plan.md`.
 
 ---
 
-## Current canonical (2026-02)
+## Current control docs + high-value references (2026-02 snapshot)
 
 Use these first for pipeline, branches, worktrees, and handoff.
 

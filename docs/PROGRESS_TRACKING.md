@@ -29,8 +29,10 @@
 
 ## Automated report(s)
 
-- `PROJECT_STATUS.md`: primary dashboard file (regenerated as needed).
-- `docs/status/`: optional date-stamped snapshots.
+- `docs/status/WORK_QUEUE.md`: canonical active execution queue.
+- `docs/status/CONSOLIDATION_LOG.md`: append-only history of what changed and when.
+- `docs/status/`: date-stamped or milestone snapshots when a dedicated report is useful.
+- `PROJECT_STATUS.md`: optional generated dashboard artifact if regenerated; historical copies may live in `archive/`.
 
 Generate with:
 
