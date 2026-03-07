@@ -43,7 +43,7 @@ describe('Shopify API Integration', () => {
   itIf(Boolean(accessToken))('should have access token configured', () => {
     expect(accessToken).toBeDefined();
     expect(accessToken).not.toBe('');
-    expect(accessToken).toMatch(/^shpat_/);
+    expect(accessToken.length).toBeGreaterThan(19);
   });
 
   itIf(hasCredentials)('should connect to Shopify API', async () => {

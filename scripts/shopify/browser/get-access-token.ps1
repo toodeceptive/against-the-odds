@@ -104,30 +104,26 @@ try {
         $env:ATO_SHOPIFY_STORE_ID = $null
 
         if (-not $NoSave) {
-            # Update .env.local (SHOPIFY_ACCESS_TOKEN for API scripts; SHOPIFY_CLI_THEME_TOKEN for theme pull/dev)
+            # Update .env.local with the Admin API access token for API/REST-based scripts.
             if (Test-Path ".env.local") {
                 $envContent = Get-Content ".env.local"
                 $updatedAccess = $false
-                $updatedCli = $false
                 $newContent = @()
 
                 foreach ($line in $envContent) {
                     if ($line -match '^SHOPIFY_ACCESS_TOKEN=(.*)$') {
                         $newContent += "SHOPIFY_ACCESS_TOKEN=$token"
                         $updatedAccess = $true
-                    } elseif ($line -match '^SHOPIFY_CLI_THEME_TOKEN=(.*)$') {
-                        $newContent += "SHOPIFY_CLI_THEME_TOKEN=$token"
-                        $updatedCli = $true
                     } else {
                         $newContent += $line
                     }
                 }
 
                 if (-not $updatedAccess) { $newContent += "SHOPIFY_ACCESS_TOKEN=$token" }
-                if (-not $updatedCli) { $newContent += "SHOPIFY_CLI_THEME_TOKEN=$token" }
 
                 $newContent | Out-File -FilePath ".env.local" -Encoding UTF8
-                Write-Host "[OK] Saved SHOPIFY_ACCESS_TOKEN and SHOPIFY_CLI_THEME_TOKEN to .env.local" -ForegroundColor Green
+                Write-Host "[OK] Saved SHOPIFY_ACCESS_TOKEN to .env.local" -ForegroundColor Green
+                Write-Host "[INFO] This Admin API token is for API/REST flows only. Use SHOPIFY_CLI_THEME_TOKEN or interactive Shopify CLI login for non-interactive theme dev/push." -ForegroundColor Cyan
             } else {
                 Write-Host "[WARN] .env.local not found. Token not saved." -ForegroundColor Yellow
                 Write-Host "Token obtained but not saved. Ensure .env.local exists and run again without -NoSave, or paste the token from Shopify Admin into .env.local." -ForegroundColor Cyan

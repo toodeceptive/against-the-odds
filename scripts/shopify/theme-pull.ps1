@@ -50,18 +50,18 @@ New-Item -ItemType Directory -Force -Path $ThemePath | Out-Null
 # Use the canonical Shopify admin/CLI host rather than synthesizing one from a custom domain.
 $storeForCli = (Resolve-ShopifyStoreInfo -Store $Store).CliHost
 
-# Theme CLI accepts --password (Admin API or Theme Access token) for non-interactive pull
+# Theme Access token is used for non-interactive Shopify CLI pull.
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN
-if ([string]::IsNullOrWhiteSpace($themeToken)) { $themeToken = $env:SHOPIFY_ACCESS_TOKEN }
+$apiToken = $env:SHOPIFY_ACCESS_TOKEN
 
-# When token is set: try REST first (PowerShell/.NET TLS) to avoid Node SSL handshake failures on Windows.
-if ($themeToken -and ($env:SHOPIFY_USE_REST_PULL -eq "1" -or $env:SHOPIFY_USE_REST_PULL -eq "true")) {
-    Write-Host "Pulling theme '$Theme' from $storeForCli into $ThemePath (REST API, token set)" -ForegroundColor Yellow
+# When an API token is set: try REST first (PowerShell/.NET TLS) to avoid Node SSL handshake failures on Windows.
+if ($apiToken -and ($env:SHOPIFY_USE_REST_PULL -eq "1" -or $env:SHOPIFY_USE_REST_PULL -eq "true")) {
+    Write-Host "Pulling theme '$Theme' from $storeForCli into $ThemePath (REST API, Admin token set)" -ForegroundColor Yellow
     & "$PSScriptRoot\theme-pull-rest.ps1" -Store $Store -ThemePath $ThemePath -Theme $Theme
     exit $LASTEXITCODE
 }
 
-if ($themeToken) {
+if ($apiToken) {
     Write-Host "Pulling theme '$Theme' from $storeForCli into $ThemePath" -ForegroundColor Yellow
     Write-Host "Trying REST API first (avoids Node SSL issues)..." -ForegroundColor Gray
     & "$PSScriptRoot\theme-pull-rest.ps1" -Store $Store -ThemePath $ThemePath -Theme $Theme
@@ -75,7 +75,7 @@ if ($themeToken) {
 Write-Host "Pulling theme '$Theme' from $storeForCli into $ThemePath" -ForegroundColor Yellow
 Write-Host "Using: npx shopify theme pull (theme CLI)" -ForegroundColor Gray
 if ($themeToken) {
-    Write-Host "Using token from SHOPIFY_CLI_THEME_TOKEN / SHOPIFY_ACCESS_TOKEN (non-interactive)." -ForegroundColor Gray
+    Write-Host "Using Theme Access token from SHOPIFY_CLI_THEME_TOKEN (non-interactive)." -ForegroundColor Gray
 } else {
     Write-Host "If you see a verification code: press a key to open the browser, confirm the code, then return here and wait 30-60s." -ForegroundColor Gray
 }

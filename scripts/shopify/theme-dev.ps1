@@ -65,11 +65,14 @@ if (-not (Test-Path $layoutFile)) {
 $storeForCli = (Resolve-ShopifyStoreInfo -Store $Store).CliHost
 
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN
-if ([string]::IsNullOrWhiteSpace($themeToken)) { $themeToken = $env:SHOPIFY_ACCESS_TOKEN }
 
 Write-Host "Starting theme dev server (preview URL will appear below)..." -ForegroundColor Yellow
 Write-Host "Store: $storeForCli  |  Path: $ThemePath" -ForegroundColor Cyan
-if ($themeToken) { Write-Host "Using token (non-interactive)." -ForegroundColor Gray }
+if ($themeToken) {
+    Write-Host "Using Theme Access token (non-interactive)." -ForegroundColor Gray
+} else {
+    Write-Host "No SHOPIFY_CLI_THEME_TOKEN set; Shopify CLI may prompt for interactive login." -ForegroundColor Gray
+}
 Write-Host ""
 Write-Host "Using: npx shopify theme dev (theme CLI). Browser will open when ready (http://127.0.0.1:9292)." -ForegroundColor Gray
 Write-Host ""

@@ -39,7 +39,7 @@ Single reference for the **preview-before-apply** flow. Product changes and them
 
 ## Making it seamless (no login prompt)
 
-- Put **SHOPIFY_CLI_THEME_TOKEN** (or **SHOPIFY_ACCESS_TOKEN**) in `.env.local` so theme dev starts without asking to log in. See [docs/CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md).
+- Put **SHOPIFY_CLI_THEME_TOKEN** in `.env.local` so theme dev starts without asking to log in. `SHOPIFY_ACCESS_TOKEN` is for Admin API / REST flows instead. See [docs/CREDENTIALS_SETUP.md](CREDENTIALS_SETUP.md).
 - Optional: set **PREVIEW_POPUP_MAX_WAIT_SECONDS** (e.g. `45`) to shorten the wait for the live server; default is 90.
 
 ---
