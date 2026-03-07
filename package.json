@@ -31,6 +31,7 @@
     "test:desktop:vitest": "vitest run tests/desktop-automation",
     "verify:pipeline": "node scripts/shared/run-powershell.cjs scripts/verify-pipeline.ps1",
     "verify:pipeline:strict": "node scripts/shared/run-powershell.cjs scripts/verify-pipeline.ps1 -RequireRunbook",
+    "verify:theme-branch": "node scripts/shopify/verify-theme-branch.mjs",
     "prepare": "husky"
   },
   "keywords": [

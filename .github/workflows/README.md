@@ -23,9 +23,9 @@ These workflows require the following secrets to be configured in GitHub:
 ### `ci.yml` (consolidated gate)
 
 - Runs on: Push to `main`, Pull requests targeting `main`
-- Actions: **arch_guard** (signature verification + recomputed structural hash verification + product schema-version enforcement), test job (format check, lint, unit tests, build, npm audit continue-on-error, Trivy continue-on-error upload), **secret-scan**, **e2e_smoke** (`npm run test:e2e:smoke` in Chromium against the checked-out repo), **quality** (`npm run quality` as the deterministic required gate, plus Lighthouse as informational `continue-on-error`), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all required native quality gates.
+- Actions: **arch_guard** (signature verification + recomputed structural hash verification + product schema-version enforcement), test job (format check, lint, unit tests, **theme branch export verification**, build, npm audit continue-on-error, Trivy continue-on-error upload), **secret-scan**, **e2e_smoke** (`npm run test:e2e:smoke` in Chromium against the checked-out repo), **quality** (`npm run quality` as the deterministic required gate, plus Lighthouse as informational `continue-on-error`), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all required native quality gates.
 
-**Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `npm run verify:pipeline`. CI runs `arch_guard`, format/lint/unit checks, `secret-scan`, `e2e_smoke`, `quality`, Trivy, and npm audit. The default local verify auto-skips the runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` when you want the full local integration gate.
+**Full verify-pipeline is local-only**: The full pipeline (including theme branch export verification, product sync dry-run, and optional runbook) is run locally via `npm run verify:pipeline`. CI runs `arch_guard`, format/lint/unit checks, theme branch export verification, `secret-scan`, `e2e_smoke`, `quality`, Trivy, and npm audit. The default local verify auto-skips the runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` when you want the full local integration gate.
 
 ### `codeql.yml` (CodeQL analysis)
 
@@ -42,6 +42,7 @@ These workflows require the following secrets to be configured in GitHub:
 
 - Runs on: Push to `main` when `src/shopify/themes/aodrop-theme/**` changes
 - Actions: Subtree-split theme to `shopify-theme` branch and push (for Shopify “Connect from GitHub”). This branch is the canonical theme deploy target when using the Shopify GitHub App with the repo's nested theme directory.
+- Verification counterpart: `npm run verify:theme-branch` proves the subtree export shape locally and in CI before merge.
 
 ### `sync.yml`
 

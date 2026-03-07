@@ -113,6 +113,12 @@ jobs:
             npm run test:unit
           fi
 
+      - name: Verify theme branch export
+        run: |
+          if [ -f package.json ]; then
+            npm run verify:theme-branch
+          fi
+
       - name: Security audit
         continue-on-error: true
         run: |

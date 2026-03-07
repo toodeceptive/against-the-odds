@@ -19,7 +19,7 @@
 - **Safe default test baseline:** `npm test` (unit + integration; integration auto-skips when credentials are absent)
 - **Extended local validation:** `npm run test:all` (safe baseline + local Playwright smoke against `http://127.0.0.1:8080`)
 - Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
-- **Before push:** Run `npm run verify:pipeline`. It auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent. Use `npm run verify:pipeline:strict` when you expect Shopify integration checks to pass locally. CI runs **arch_guard**, **test**, **secret-scan**, **e2e_smoke**, and **quality**; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
+- **Before push:** Run `npm run verify:pipeline`. It now includes theme branch export verification, auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent, and uses product dry-run when credentials exist. Use `npm run verify:pipeline:strict` when you expect Shopify integration checks to pass locally. CI runs **arch_guard**, **test**, **secret-scan**, **e2e_smoke**, and **quality**; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
 - **Pre-commit hook:** Husky delegates to the canonical repo hook at `config/git-hooks/pre-commit`; see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)
