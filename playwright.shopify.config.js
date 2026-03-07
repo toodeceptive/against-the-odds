@@ -2,7 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Playwright configuration for Shopify Admin browser automation
- * Connects to existing Chrome instance when available
+ * Connects to the user's existing Chrome instance when available.
+ * Standalone browser launch is for explicit local testing only.
  */
 export default defineConfig({
   testDir: './tests/shopify-admin',
@@ -14,8 +15,8 @@ export default defineConfig({
   timeout: 60000, // Longer timeout for admin operations
 
   use: {
-    // Try to connect to existing Chrome instance first
-    // If not available, launch new browser
+    // Canonical path: attach to an existing Chrome instance with remote debugging enabled.
+    // Standalone browser launch is only for explicit local testing.
     baseURL: process.env.SHOPIFY_STORE_URL || 'https://aodrop.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

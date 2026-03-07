@@ -22,10 +22,14 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# Create extraction script
+# Create extraction script (temp file outside repo to avoid brittle relative imports)
+$scriptPath = Join-Path $env:TEMP ("extract-theme-" + [guid]::NewGuid().ToString("N") + ".mjs")
 $extractScript = @"
-import { chromium } from '@playwright/test';
-import { connectToBrowser, ensureShopifyLogin, extractThemeId } from '../../src/browser-automation/shopify-admin.js';
+import { join } from 'path';
+import { pathToFileURL } from 'url';
+const repoRoot = process.env.ATO_REPO_ROOT || process.cwd();
+const modulePath = pathToFileURL(join(repoRoot, 'src', 'browser-automation', 'shopify-admin.js')).href;
+const { connectToBrowser, ensureShopifyLogin, extractThemeId } = await import(modulePath);
 
 (async () => {
   try {
@@ -54,19 +58,22 @@ import { connectToBrowser, ensureShopifyLogin, extractThemeId } from '../../src/
   }
 })();
 "@
-
-$scriptPath = "scripts\shopify\browser\extract-theme-temp.js"
 $extractScript | Out-File -FilePath $scriptPath -Encoding UTF8
 
 try {
     Write-Host "Extracting theme ID..." -ForegroundColor Yellow
+    $env:ATO_REPO_ROOT = $repoPath
     $output = node $scriptPath 2>&1
+    $env:ATO_REPO_ROOT = $null
     $themeId = $null
 
     foreach ($line in $output) {
         if ($line -match 'SUCCESS:(.+)') {
             $themeId = $matches[1].Trim()
             break
+        }
+        if ($line -notmatch '^SUCCESS:') {
+            Write-Host $line
         }
     }
 
@@ -96,6 +103,7 @@ try {
         }
     } else {
         Write-Host "[FAIL] Could not extract theme ID" -ForegroundColor Red
+        exit 1
     }
 } finally {
     if (Test-Path $scriptPath) {

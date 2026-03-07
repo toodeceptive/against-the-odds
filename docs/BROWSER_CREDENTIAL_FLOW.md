@@ -1,6 +1,6 @@
 # Browser-Based Credential Setup (Permanent)
 
-When the agent needs to fetch Shopify (or GitHub/Cloudflare) credentials using **your** browser, this flow is used. The agent uses the Cursor browser extension to control your browser—no separate or headless browser.
+When the agent needs to fetch Shopify (or GitHub/Cloudflare) credentials using **your** browser, this flow is used. The agent uses the Cursor browser extension or Playwright connected to **your existing Chrome**—no separate or headless browser by default.
 
 ## Permanent setup (one-time, secure)
 
@@ -57,6 +57,8 @@ If you prefer the repo's Playwright scripts (e.g. `.\scripts\shopify\browser\get
 3. Log in to Shopify (or the service) in that Chrome window.
 4. Run: `.\scripts\shopify\browser\get-access-token.ps1`
 5. The script connects to your Chrome, navigates to Apps → Development, extracts the token, and saves to `.env.local`.
+
+**Important:** Repo browser helpers now require a real Chrome instance on `localhost:9222` by default. Standalone browser launch is only for explicit local testing and must be opted into intentionally.
 
 ## Security (permanent)
 

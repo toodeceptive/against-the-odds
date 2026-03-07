@@ -27,12 +27,18 @@ async function getPlaywright() {
 }
 
 /**
- * Connect to existing Chrome instance or launch new browser
+ * Connect to the user's existing Chrome instance by default.
+ * Standalone browser launch requires an explicit opt-in.
  * @param {Object} options - Connection options
  * @returns {Promise<Browser>} Playwright browser instance
  */
 export async function connectToBrowser(options = {}) {
-  const { useExisting = true, headless = false, slowMo = 0 } = options;
+  const {
+    useExisting = true,
+    headless = false,
+    slowMo = 0,
+    allowStandalone = process.env.ATO_ALLOW_STANDALONE_BROWSER === '1',
+  } = options;
 
   const pw = await getPlaywright();
   const { chromium } = pw;
@@ -44,8 +50,18 @@ export async function connectToBrowser(options = {}) {
       // Connected to existing Chrome instance
       return browser;
     } catch (_error) {
-      // Could not connect to existing Chrome, launching new instance
+      if (!allowStandalone) {
+        throw new Error(
+          'Could not connect to an existing Chrome instance on localhost:9222. Launch your browser with remote debugging or explicitly opt into standalone browser launch.'
+        );
+      }
     }
+  }
+
+  if (useExisting && !allowStandalone) {
+    throw new Error(
+      'Standalone browser launch is disabled by default. Set useExisting:false or ATO_ALLOW_STANDALONE_BROWSER=1 only for explicit local testing.'
+    );
   }
 
   // Launch new browser instance
