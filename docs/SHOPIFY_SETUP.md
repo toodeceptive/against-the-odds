@@ -13,15 +13,19 @@ This guide provides step-by-step instructions for setting up complete Shopify in
 
 ## Shopify–GitHub App (connected)
 
-Shopify is connected to this repository via the **Shopify GitHub App**. That integration typically:
+Shopify is connected to this repository via the **Shopify GitHub App**. In this repo, the canonical flow is:
 
-- **Theme deploys**: Pushes to the connected branch (e.g. `main`) can trigger theme deployment from Shopify’s side. You may not need GitHub Actions to deploy the theme if the app is handling it.
+- **Theme source**: edit `src/shopify/themes/aodrop-theme` on `main`
+- **Theme deploy branch**: `.github/workflows/sync-theme-branch.yml` subtree-splits that theme into `shopify-theme`
+- **Theme deploys**: Shopify should be connected to the `shopify-theme` branch when using the GitHub App flow.
 - **Repo link**: Configured in Shopify Admin (e.g. Settings → Apps and sales channels → GitHub, or your app’s connection settings).
-- **GitHub Actions**: Workflows that call the Shopify API (e.g. `shopify-sync.yml` for product sync) use **GitHub Actions secrets** (`SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_THEME_ID`). Keep those set in the repo if you use those workflows.
+- **GitHub Actions**: Workflows that call the Shopify API (e.g. `shopify-sync.yml` for product sync) use **GitHub Actions secrets** (`SHOPIFY_ACCESS_TOKEN`, `SHOPIFY_STORE_DOMAIN`). `SHOPIFY_THEME_ID` is optional for local theme helpers.
 
 ## Step 1: Shopify CLI Installation
 
 ### Install Shopify CLI
+
+The repo's theme scripts already bootstrap Shopify CLI for you. Manual global install is optional:
 
 ```powershell
 # Install globally
@@ -66,7 +70,7 @@ shopify auth login
 ### Admin API Access
 
 1. **Via Shopify Admin**:
-   - Go to: https://aodrop.com/admin/settings/apps/development
+   - Open Shopify Admin → Apps → Development
    - Click "Create custom app"
    - Name: "Against The Odds - API Access"
    - Configure Admin API scopes:
@@ -96,7 +100,7 @@ shopify auth login
 ### Storefront API Access
 
 1. **Enable Storefront API**:
-   - Go to: https://aodrop.com/admin/settings/apps/development
+   - Open Shopify Admin → Apps → Development
    - Create custom app for Storefront API
    - Configure scopes:
      - `unauthenticated_read_product_listings`
@@ -107,11 +111,8 @@ shopify auth login
 ## Step 5: Link CLI to Store
 
 ```powershell
-# Navigate to project directory
-cd C:\Users\LegiT\against-the-odds
-
-# Link to store
-shopify theme dev --store=aodrop.com
+# From repo root, prefer the repo wrapper
+node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1
 
 # Or for app development
 shopify app dev
@@ -132,7 +133,7 @@ $headers = @{
     "X-Shopify-Access-Token" = $token
 }
 
-$response = Invoke-RestMethod -Uri "https://$store/admin/api/2026-01/shop.json" -Headers $headers -Method Get
+$response = Invoke-RestMethod -Uri "https://nbxwpf-z1.myshopify.com/admin/api/2026-01/shop.json" -Headers $headers -Method Get
 Write-Host "Store Name: $($response.shop.name)" -ForegroundColor Green
 ```
 
@@ -151,7 +152,7 @@ Run the test:
 New-Item -ItemType Directory -Force -Path "src\shopify\themes\aodrop-theme"
 
 # Pull existing theme (if store has a theme)
-shopify theme pull --store=aodrop.com --theme=live --path=src/shopify/themes/aodrop-theme
+node scripts/shared/run-powershell.cjs scripts/shopify/theme-pull.ps1
 
 # Or create new theme
 shopify theme init --path=src/shopify/themes/aodrop-theme
@@ -161,7 +162,7 @@ shopify theme init --path=src/shopify/themes/aodrop-theme
 
 ```powershell
 # Start local development server
-shopify theme dev --store=aodrop.com --theme=live
+node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1
 
 # This will:
 # - Start local server on http://localhost:9292
@@ -179,7 +180,7 @@ shopify theme dev --store=aodrop.com --theme=live
    - `SHOPIFY_API_SECRET`
    - `SHOPIFY_ACCESS_TOKEN`
    - `SHOPIFY_STORE_DOMAIN` (value: `aodrop.com`)
-   - `SHOPIFY_THEME_ID` (optional, for theme deployment)
+   - `SHOPIFY_THEME_ID` (optional, for local theme targeting)
 
 ## Step 9: Product Management Setup
 
@@ -189,6 +190,7 @@ Products are stored in `data/products/` as JSON files:
 
 ```json
 {
+  "schema_version": 1,
   "title": "AO Hoodie",
   "body_html": "<p>Against The Odds signature hoodie</p>",
   "vendor": "Against The Odds",
@@ -212,8 +214,11 @@ Products are stored in `data/products/` as JSON files:
 ### Sync Products
 
 ```powershell
-# Import products to Shopify
-.\scripts\products\sync.ps1
+# Preview product sync to Shopify
+.\scripts\shopify\sync-products.ps1 -DryRun
+
+# Apply product sync to Shopify
+.\scripts\shopify\sync-products.ps1
 
 # Export products from Shopify
 .\scripts\products\export.ps1

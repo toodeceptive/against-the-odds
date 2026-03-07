@@ -23,7 +23,7 @@ These workflows require the following secrets to be configured in GitHub:
 ### `ci.yml` (consolidated gate)
 
 - Runs on: Push to `main`, Pull requests targeting `main`
-- Actions: **arch_guard** (structural integrity), test job (format check, lint, unit tests, build, npm audit continue-on-error, Trivy continue-on-error upload), **secret-scan**, **quality** (`npm run quality` as the deterministic required gate, plus Lighthouse as informational `continue-on-error`), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all required native quality gates.
+- Actions: **arch_guard** (signature verification + recomputed structural hash verification + product schema-version enforcement), test job (format check, lint, unit tests, build, npm audit continue-on-error, Trivy continue-on-error upload), **secret-scan**, **quality** (`npm run quality` as the deterministic required gate, plus Lighthouse as informational `continue-on-error`), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all required native quality gates.
 
 **Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `npm run verify:pipeline`. CI runs arch_guard, lint, format check, unit tests, Trivy, secret-scan, and npm audit. The default local verify auto-skips the runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` when you want the full local integration gate.
 
@@ -34,14 +34,14 @@ These workflows require the following secrets to be configured in GitHub:
 
 ### `shopify-sync.yml`
 
-- Runs on: Daily at 2 AM, Push to `main` (data/products, src/shopify), Manual trigger
+- Runs on: Daily at 2 AM, Push to `main` (data/products only), Manual trigger
 - Actions: Syncs products to Shopify; backup-store job backs up theme to `shopify-theme-backup` branch (theme pull REST + push)
-- **Resilience**: If `SHOPIFY_STORE_DOMAIN` or `SHOPIFY_ACCESS_TOKEN` are not set, the sync step skips gracefully (exit 0) so the workflow does not fail.
+- **Resilience**: In the `sync-products` job, if `SHOPIFY_STORE_DOMAIN` or `SHOPIFY_ACCESS_TOKEN` are not set, the sync step skips gracefully (exit 0) so the workflow does not fail. The manual/scheduled backup job still expects those secrets to exist.
 
 ### `sync-theme-branch.yml`
 
 - Runs on: Push to `main` when `src/shopify/themes/aodrop-theme/**` changes
-- Actions: Subtree-split theme to `shopify-theme` branch and push (for Shopify “Connect from GitHub”)
+- Actions: Subtree-split theme to `shopify-theme` branch and push (for Shopify “Connect from GitHub”). This branch is the canonical theme deploy target when using the Shopify GitHub App with the repo's nested theme directory.
 
 ### `sync.yml`
 

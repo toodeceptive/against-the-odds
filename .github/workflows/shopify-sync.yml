@@ -1,5 +1,5 @@
 # Shopify Sync: products from data/products/ to store
-# Runs on push to main (product/theme paths), schedule, or manual.
+# Runs on push to main for product-data changes, schedule, or manual.
 # Secrets: SHOPIFY_STORE_DOMAIN, SHOPIFY_ACCESS_TOKEN (Settings > Actions > Secrets).
 # Note: IDE may show "Context access might be invalid" for these secret names—known false positive
 # (GitHub Actions extension doesn't list custom repo secrets). Workflow runs correctly when secrets are set.
@@ -15,7 +15,6 @@ on:
       - main
     paths:
       - 'data/products/**'
-      - 'src/shopify/**'
 
 permissions:
   contents: read

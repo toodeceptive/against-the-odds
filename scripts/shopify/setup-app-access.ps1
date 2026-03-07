@@ -20,8 +20,10 @@ if (-not (Test-Path (Join-Path $repoPath ".git"))) {
     exit 1
 }
 Set-Location $repoPath
+. (Join-Path $repoPath "scripts\shopify\ShopifyStoreHelpers.ps1")
 
 if ([string]::IsNullOrWhiteSpace($StoreDomain)) { $StoreDomain = "aodrop.com" }
+$adminUrl = Get-ShopifyAdminUrl -Store $StoreDomain -Path "/"
 
 $envPath = Join-Path $repoPath ".env.local"
 if (-not (Test-Path $envPath)) {
@@ -42,7 +44,7 @@ Write-Host ""
 # Optional: launch Chrome with remote debugging so automation can connect
 if ($LaunchChrome) {
     Write-Host "Launching Chrome with remote debugging (port 9222)..." -ForegroundColor Yellow
-    & (Join-Path $repoPath "scripts\shopify\browser\launch-chrome-for-agent.ps1") -Url "https://$StoreDomain/admin"
+    & (Join-Path $repoPath "scripts\shopify\browser\launch-chrome-for-agent.ps1") -Url $adminUrl
     Write-Host "Log in to Shopify in the opened window, then go to Apps > Development > [your app] > API credentials and click Reveal." -ForegroundColor Cyan
     Write-Host "Press Enter when ready for token extraction..." -ForegroundColor Cyan
     Read-Host
@@ -50,7 +52,7 @@ if ($LaunchChrome) {
 
 # Extract token (connects to Chrome on port 9222 or launches Chromium)
 $tokenScript = Join-Path $repoPath "scripts\shopify\browser\get-access-token.ps1"
-& $tokenScript -StoreDomain $StoreDomain -SaveToEnv:$true
+& $tokenScript -StoreDomain $StoreDomain
 $tokenOk = $LASTEXITCODE -eq 0
 
 if (-not $tokenOk) {

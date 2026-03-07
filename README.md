@@ -191,10 +191,9 @@ All automation scripts are in the `scripts/` directory:
 
 GitHub Actions workflows automate:
 
-- **CI**: Continuous integration on every push
-- **Deploy**: Automated deployment to production
+- **CI**: Consolidated native checks on push/PR to `main` (`arch_guard`, `test`, `secret-scan`, `quality`)
 - **Sync**: Repository synchronization
-- **Shopify**: Product and theme sync
+- **Shopify**: Product sync + theme branch sync
 - **Quality**: Code quality checks
 - **Maintenance**: Automated maintenance tasks
 

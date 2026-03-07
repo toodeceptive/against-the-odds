@@ -14,23 +14,21 @@ Set-Location $repoRoot
 $infraDir = Join-Path $repoRoot "infra"
 if (-not (Test-Path $infraDir)) { New-Item -ItemType Directory -Path $infraDir -Force | Out-Null }
 
+$structuralFilesPath = Join-Path $infraDir "STRUCTURAL_FILES.json"
+if (-not (Test-Path $structuralFilesPath)) {
+    Write-Host "Missing $structuralFilesPath" -ForegroundColor Red
+    exit 1
+}
+
 # Canonical list of structural files (sorted)
-$structuralFiles = @(
-    "AGENTS.md",
-    "CODEOWNERS",
-    "docs/OWNERSHIP_REGISTRY.md",
-    "docs/SSOT_ATO.md",
-    "docs/VERSION_POLICY.md",
-    ".github/workflows/ci.yml"
-) | Sort-Object
+$structuralFiles = ((Get-Content -Path $structuralFilesPath -Raw -Encoding UTF8 | ConvertFrom-Json).files) | Sort-Object
 
 $files = @{}
 foreach ($rel in $structuralFiles) {
     $path = Join-Path $repoRoot $rel
     if (Test-Path $path) {
-        $content = Get-Content -Path $path -Raw -Encoding UTF8
         $hash = [System.BitConverter]::ToString(
-            [System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes($content))
+            [System.Security.Cryptography.SHA256]::Create().ComputeHash([System.IO.File]::ReadAllBytes($path))
         ) -replace "-", ""
         $files[$rel] = $hash.ToLowerInvariant()
     }

@@ -128,12 +128,13 @@ Then run automation scripts.
 
 ```javascript
 import { connectToBrowser, ensureShopifyLogin } from '../src/browser-automation/shopify-admin.js';
+import { buildShopifyAdminUrl } from '../src/shopify/store-domain.js';
 
 const browser = await connectToBrowser({ useExisting: true });
 const page = await browser.newPage();
 
 await ensureShopifyLogin(page, 'aodrop.com');
-await page.goto('https://aodrop.com/admin/products');
+await page.goto(buildShopifyAdminUrl('aodrop.com', '/products'));
 
 const count = await page.locator('[data-product-count]').textContent();
 console.log(`Products: ${count}`);
@@ -144,9 +145,10 @@ await browser.close();
 ### Example: Navigate and Extract Data
 
 ```javascript
+import { buildShopifyAdminUrl } from '../src/shopify/store-domain.js';
 import { extractTableData } from '../src/browser-automation/helpers.js';
 
-await page.goto('https://aodrop.com/admin/products');
+await page.goto(buildShopifyAdminUrl('aodrop.com', '/products'));
 const products = await extractTableData(page, 'table.products-table');
 console.log(products);
 ```

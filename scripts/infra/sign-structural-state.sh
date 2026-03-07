@@ -8,12 +8,14 @@ cd "$ROOT"
 INFRA="$ROOT/infra"
 mkdir -p "$INFRA"
 
-FILES="AGENTS.md CODEOWNERS docs/OWNERSHIP_REGISTRY.md docs/SSOT_ATO.md docs/VERSION_POLICY.md .github/workflows/ci.yml"
-FILES_SORTED="$(echo $FILES | tr ' ' '\n' | sort)"
+STRUCTURAL_FILES="$INFRA/STRUCTURAL_FILES.json"
+[ -f "$STRUCTURAL_FILES" ] || { echo "Missing $STRUCTURAL_FILES"; exit 1; }
+FILES_SORTED="$(node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync('infra/STRUCTURAL_FILES.json','utf8')); console.log(data.files.sort().join('\n'))")"
 
 # Build files object
 files_json=""
-for f in $FILES_SORTED; do
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
   if [ -f "$ROOT/$f" ]; then
     if command -v sha256sum >/dev/null 2>&1; then
       hash="$(sha256sum < "$ROOT/$f" | cut -d' ' -f1)"
@@ -23,7 +25,9 @@ for f in $FILES_SORTED; do
     [ -n "$files_json" ] && files_json="$files_json,"
     files_json="$files_json\"$f\":\"$hash\""
   fi
-done
+done <<EOF
+$FILES_SORTED
+EOF
 
 timestamp="$(date -Iseconds)"
 state="{\"version\":1,\"timestamp\":\"$timestamp\",\"files\":{$files_json}}"

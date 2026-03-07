@@ -2,18 +2,17 @@
 
 ## Branch model
 
-This repo is intended to use a simple two-branch model with short-lived topic branches:
+This repo now uses a **main-only** branch model with short-lived topic branches:
 
-- **`main`**: production (“what’s live” for the website/repo and the _production_ release artifact). The deploy workflow triggers on pushes to `main`.
-- **`develop`**: staging/integration. The deploy workflow triggers on pushes to `develop` for staging.
-- **Topic branches**: branch from `develop` for work, then merge back via PR.
+- **`main`**: canonical integration branch for code, docs, and workflow changes.
+- **Topic branches**: branch from `main` for work, then merge back via PR.
   - Recommended naming: `feature/<issue>-<short-slug>`, `fix/<issue>-<short-slug>`, `docs/<short-slug>`.
-- **Release PR**: merge `develop` → `main` via PR when you want to ship.
-- **Hotfixes**: if production is broken, branch from `main` (`hotfix/<short-slug>`), merge to `main`, then merge/cherry-pick back to `develop` to keep branches aligned.
+- **Theme deploy branch**: `shopify-theme` is workflow-generated from `main` by `.github/workflows/sync-theme-branch.yml` and is the canonical Shopify GitHub App target when using the nested theme directory.
+- **Hotfixes**: branch from `main` (`hotfix/<short-slug>`) and merge back to `main`.
 
 Operational notes:
 
-- **CI** runs on push/PR to `main` (`.github/workflows/ci.yml`; consolidated lint, format, test, Trivy, secret-scan, npm audit, Lighthouse). This repo uses main-only; no develop branch.
+- **CI** runs on push/PR to `main` (`.github/workflows/ci.yml`; `arch_guard`, `test`, `secret-scan`, `quality`). This repo uses main-only; no develop branch.
 - **Automation vs reality**: Some workflows are intentionally placeholder/scaffold (“Add deployment steps here”). Treat them as guardrails/checklists unless you’ve wired the actual deployment commands.
 
 ## Detached HEAD recovery
@@ -23,7 +22,7 @@ You are currently in a **detached HEAD** state (your `git status` shows `HEAD (n
 ### Why it matters
 
 - Commits you make _can be orphaned_ if you don’t attach them to a branch.
-- CI/PR tooling generally assumes you’re on a named branch (`main`, `develop`, feature branch).
+- CI/PR tooling generally assumes you’re on a named branch (`main` or a feature branch).
 
 ### Safe recovery (recommended)
 
@@ -33,18 +32,16 @@ You are currently in a **detached HEAD** state (your `git status` shows `HEAD (n
 git switch -c wip/recover-detached-head
 ```
 
-2. If you intended to work on `develop` or `main`, switch after capturing:
+2. If you intended to work on `main`, switch after capturing:
 
 ```bash
-git switch develop
-# or
 git switch main
 ```
 
-3. If you need the detached commits on `develop`, merge or cherry-pick them:
+3. If you need the detached commits on `main`, merge or cherry-pick them:
 
 ```bash
-git switch develop
+git switch main
 git merge wip/recover-detached-head
 # or cherry-pick specific commits
 ```
@@ -101,15 +98,15 @@ Several PowerShell scripts set a fixed `$repoPath` (e.g. `C:\Users\LegiT\against
 
 ## Release checklist
 
-Use this checklist for a **production release** (merge `develop` → `main`).
+Use this checklist for a **production release** (merge a PR to `main`, then allow workflow/theme sync to propagate).
 
 ### Pre-flight (before you touch Shopify LIVE)
 
 - [ ] Ensure you’re **on a branch** (not detached HEAD) and your changes are on a PRable branch.
 - [ ] Confirm no secrets are present in the diff (never commit `.env.local`).
 - [ ] Run local gates:
-  - [ ] `npm run lint`
-  - [ ] `npm run test:all` (or at minimum `npm test`)
+  - [ ] `npm run quality`
+  - [ ] `npm run verify:pipeline`
 - [ ] Run health/quality scripts (optional but recommended):
   - [ ] `scripts/health/comprehensive-check.ps1`
   - [ ] `scripts/quality/check-all.ps1`
@@ -119,9 +116,10 @@ Use this checklist for a **production release** (merge `develop` → `main`).
 
 ### Release steps (Git)
 
-- [ ] Open PR: `develop` → `main`
+- [ ] Open PR into `main`
 - [ ] Confirm CI + quality checks are green on the PR.
-- [ ] Merge PR to `main` (this triggers the `Deploy` workflow).
+- [ ] Merge PR to `main`
+- [ ] If the release includes theme changes, confirm `.github/workflows/sync-theme-branch.yml` updates `shopify-theme`.
 
 ### Release steps (Shopify theme)
 

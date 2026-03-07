@@ -23,11 +23,11 @@ Templates live in `.github/ISSUE_TEMPLATE/`:
 
 1. **Create issue** using the right template.
 2. **Label** it with priority/type/area/status.
-3. **Branch** from `develop` for work: `feature/<issue>-short-slug`.
+3. **Branch** from `main` for work: `feature/<issue>-short-slug`.
 4. **Commit** with conventional-ish prefixes (`feat:`, `fix:`, `docs:`, `chore:`).
-5. **Open PR** into `develop`; PR must pass CI and quality checks.
+5. **Open PR** into `main`; PR must pass CI and quality checks.
 6. **Merge**; issue auto-closes when referenced via `Closes #123`.
-7. **Release** to `main` when ready (merge or PR from `develop`).
+7. **Release/store apply** follows the repo's preview/approval workflow rather than a separate `develop` branch.
 
 ## Project board
 

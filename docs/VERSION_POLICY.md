@@ -15,13 +15,13 @@ Schema or data-contract changes **must** bump the declared version. CI fails if 
 ## How to Bump
 
 1. Edit the schema or data contract.
-2. Increment `schema_version` (e.g. `1` → `2`) in the affected file or in `infra/STRUCTURAL_STATE.json` metadata.
+2. Increment `schema_version` (e.g. `1` → `2`) in the affected file and update this document's declared current version when the shared product contract changes.
 3. Run `.\scripts\infra\sign-structural-state.ps1` to regenerate STRUCTURAL_STATE and re-sign.
 4. Commit the changed files plus updated `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt`.
 
 ## Current Schema Version
 
-- **data/products** — `1` (implicit; example-hoodie.json is reference)
+- **data/products** — `1`
 - **data/manufacturers** — `1` (implicit)
 
 When adding `schema_version` to product JSON, use a top-level field:
@@ -33,3 +33,8 @@ When adding `schema_version` to product JSON, use a top-level field:
   ...
 }
 ```
+
+## CI enforcement
+
+- `scripts/infra/verify-product-schema-version.mjs` ensures every tracked `data/products/*.json` file declares `schema_version` and matches the current version above.
+- On PRs/pushes, if a product file's top-level contract changes, CI requires a schema version bump in the file or this document.

@@ -59,7 +59,7 @@ export function resolveShopifyStoreInfo(storeDomain, options = {}) {
     options.myshopifyDomain ?? process.env.SHOPIFY_MYSHOPIFY_DOMAIN
   );
   const explicitStoreSlug = normalizeStoreSlug(
-    options.storeSlug ?? process.env.ATO_SHOPIFY_STORE_ID
+    options.storeSlug ?? process.env.ATO_SHOPIFY_STORE_ID ?? process.env.SHOPIFY_STORE_ID
   );
   const knownStore =
     KNOWN_STORES[storefrontHost] ||
