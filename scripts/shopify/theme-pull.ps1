@@ -9,6 +9,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 $repoPath = if ($PSScriptRoot) {
     $parent = Join-Path $PSScriptRoot ".."
@@ -46,11 +47,8 @@ if ([string]::IsNullOrWhiteSpace($Store)) {
 
 New-Item -ItemType Directory -Force -Path $ThemePath | Out-Null
 
-# Use permanent store domain (myshopify.com) for theme CLI — Shopify often requires it for auth.
-$storeForCli = $Store
-if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
-    $storeForCli = "aodrop.com.myshopify.com"
-}
+# Use the canonical Shopify admin/CLI host rather than synthesizing one from a custom domain.
+$storeForCli = (Resolve-ShopifyStoreInfo -Store $Store).CliHost
 
 # Theme CLI accepts --password (Admin API or Theme Access token) for non-interactive pull
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN

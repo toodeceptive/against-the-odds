@@ -9,6 +9,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
+. (Join-Path $repoPath "scripts\shopify\ShopifyStoreHelpers.ps1")
 
 Write-Host "=== Performance Monitoring ===" -ForegroundColor Cyan
 Write-Host ""
@@ -82,9 +83,10 @@ function Check-ShopifyAPI {
         $headers = @{
             "X-Shopify-Access-Token" = $token
         }
+        $storeInfo = Resolve-ShopifyStoreInfo -Store $store
 
         $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
-        $response = Invoke-RestMethod -Uri "https://$store/admin/api/2026-01/shop.json" `
+        $response = Invoke-RestMethod -Uri "https://$($storeInfo.AdminHost)/admin/api/2026-01/shop.json" `
             -Headers $headers -Method Get -TimeoutSec 10
         $stopwatch.Stop()
 

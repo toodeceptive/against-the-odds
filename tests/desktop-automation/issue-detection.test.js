@@ -6,10 +6,17 @@ import {
 } from '../../src/desktop-automation/issue-detector.js';
 
 describe('Issue Detection', () => {
-  it('should detect issues on screen', async () => {
-    const issues = await detectIssues();
-    expect(Array.isArray(issues)).toBe(true);
-  }, 30000);
+  const isWindows = process.platform === 'win32';
+  const itIf = (condition) => (condition ? it : it.skip);
+
+  itIf(isWindows)(
+    'should detect issues on screen',
+    async () => {
+      const issues = await detectIssues();
+      expect(Array.isArray(issues)).toBe(true);
+    },
+    30000
+  );
 
   it('should classify issues', () => {
     const issue = {
@@ -24,7 +31,7 @@ describe('Issue Detection', () => {
     expect(classified.classification).toHaveProperty('priority');
   });
 
-  it('should monitor issues', async () => {
+  itIf(isWindows)('should monitor issues', async () => {
     const stopMonitoring = await monitorIssues({
       interval: 2000,
       onIssue: () => {},

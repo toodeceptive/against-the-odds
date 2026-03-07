@@ -1,0 +1,11 @@
+{
+  "files": [
+    ".github/workflows/ci.yml",
+    "AGENTS.md",
+    "CODEOWNERS",
+    "docs/OWNERSHIP_REGISTRY.md",
+    "docs/SSOT_ATO.md",
+    "docs/VERSION_POLICY.md",
+    "infra/STRUCTURAL_FILES.json"
+  ]
+}

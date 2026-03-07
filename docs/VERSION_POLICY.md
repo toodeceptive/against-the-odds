@@ -8,28 +8,35 @@ Schema or data-contract changes **must** bump the declared version. CI fails if 
 
 ## Scope
 
-- **data/products/\*.json** — Product schema (Shopify Product resource shape). Declare `schema_version` in each file or in a manifest.
+- **data/products/\*.json** — Product schema (Shopify Product resource shape). Declare `schema_version` in each file.
 - **data/manufacturers/\*.json** — Manufacturer schema.
 - **schemas/** — Any formal JSON schema files (if added).
 
 ## How to Bump
 
 1. Edit the schema or data contract.
-2. Increment `schema_version` (e.g. `1` → `2`) in the affected file or in `infra/STRUCTURAL_STATE.json` metadata.
+2. Increment `schema_version` (e.g. `1` → `2`) in the affected file and update this document's declared current version when the shared product contract changes.
 3. Run `.\scripts\infra\sign-structural-state.ps1` to regenerate STRUCTURAL_STATE and re-sign.
 4. Commit the changed files plus updated `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt`.
 
 ## Current Schema Version
 
-- **data/products** — `1` (implicit; example-hoodie.json is reference)
+- **data/products** — `2`
 - **data/manufacturers** — `1` (implicit)
 
 When adding `schema_version` to product JSON, use a top-level field:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "handle": "example-product-handle",
   "title": "...",
   ...
 }
 ```
+
+## CI enforcement
+
+- `scripts/infra/verify-product-schema-version.mjs` ensures every tracked `data/products/*.json` file declares `schema_version` and matches the current version above.
+- Product files must also declare a slug-safe `handle` (lowercase letters, numbers, hyphens only); product sync uses `handle` as the stable Shopify identity.
+- On PRs/pushes, if a product file's top-level contract changes, CI requires a schema version bump in the file or this document.

@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'https://toodeceptive.github.io/against-the-odds/',
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:8080',
     trace: 'on-first-retry',
   },
   projects: [
@@ -26,8 +26,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'python -m http.server 8080',
-    url: 'http://localhost:8080',
+    command: 'python3 -m http.server 8080',
+    url: 'http://127.0.0.1:8080',
     reuseExistingServer: !process.env.CI,
   },
 });

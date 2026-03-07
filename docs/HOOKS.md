@@ -8,7 +8,8 @@
 
 | Location                        | Purpose                                                             |
 | ------------------------------- | ------------------------------------------------------------------- |
-| **config/git-hooks/pre-commit** | Git hook entry (invoked by Git on `git commit`).                    |
+| **.husky/pre-commit**           | Installed hook entry; delegates to `config/git-hooks/pre-commit`.   |
+| **config/git-hooks/pre-commit** | Canonical repo hook entry (invoked by Husky on `git commit`).       |
 | **scripts/git/pre-commit.ps1**  | PowerShell script that runs the actual checks. Invoked by the hook. |
 
 **Behavior**:
@@ -17,16 +18,17 @@
 2. **Large files** — Blocks commit if any staged file is >100MB.
 3. **Merge conflict markers** — Blocks commit if conflict markers are present.
 4. **Debug statements** — Warns if `console.log`/`debug`/`warn`/`error` found in staged JS/TS.
-5. **Commit message** — Warns if message is very short or doesn’t follow conventional format.
-6. **Linter** — Runs `npm run lint` (warnings only, non-blocking).
+5. **Linter** — Runs `npm run lint` (warnings only, non-blocking).
+
+**Note:** Conventional-commit / commit-message guidance is documented here for contributor expectations, but the current installed hook path does **not** enforce commit messages. Add a dedicated `commit-msg` hook if message validation should become active.
 
 Repo root is resolved from the script location for worktree portability.
 
-**Setup**: Ensure the hook is installed (e.g. copy or link `config/git-hooks/pre-commit` to `.git/hooks/pre-commit` so Git invokes it on commit).
+**Setup**: Run `npm install` to install Husky. The installed Husky hook calls `config/git-hooks/pre-commit`, so the repo keeps one canonical pre-commit behavior.
 
-**Platform**: The pre-commit hook invokes `powershell.exe` and is **Windows-oriented**. On non-Windows (e.g. WSL, CI), use `pwsh` if available or run `scripts/git/pre-commit.ps1` manually; document any CI override in your workflow.
+**Platform**: The canonical hook prefers `pwsh` when available and falls back to `powershell.exe`. If neither exists, the shell wrapper emits a warning and skips the PowerShell hook.
 
-**Manual quality check (no commit)**: Run `npm run quality` to format, check format, lint, and run unit tests in one command.
+**Manual quality check (no commit)**: Run `npm run quality` to check format, lint, and run unit tests in one command.
 
 ---
 

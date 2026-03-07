@@ -1,6 +1,8 @@
 # Shared PowerShell Utilities
 # Common functions for all scripts to reduce duplication
 
+. (Join-Path $PSScriptRoot "..\shopify\ShopifyStoreHelpers.ps1")
+
 #region Error Handling
 
 function Write-ErrorWithContext {
@@ -106,7 +108,8 @@ function Invoke-ShopifyAPI {
         [hashtable]$Headers = $null
     )
 
-    $baseUrl = "https://$Store/admin/api/2026-01"
+    $storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+    $baseUrl = "https://$($storeInfo.AdminHost)/admin/api/2026-01"
     $url = "$baseUrl/$Endpoint"
 
     $requestHeaders = @{

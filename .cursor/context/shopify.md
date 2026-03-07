@@ -4,6 +4,7 @@
 
 - **Store Domain**: aodrop.com
 - **Store URL**: https://aodrop.com
+- **Canonical Admin Host**: nbxwpf-z1.myshopify.com (resolved via shared store-domain helpers)
 - **App Name**: AO
 - **Client ID**: your_shopify_api_key_here (set in .env.local as SHOPIFY_API_KEY)
 - **API Version**: 2026-01
@@ -11,9 +12,9 @@
 
 ## API Endpoints
 
-- **Admin API**: https://aodrop.com/admin/api/2026-01
+- **Admin API**: https://<resolved-admin-host>/admin/api/2026-01
 - **Storefront API**: (if configured)
-- **Theme API**: https://aodrop.com/admin/api/2026-01/themes.json
+- **Theme API**: https://<resolved-admin-host>/admin/api/2026-01/themes.json
 
 ## Credentials Location
 

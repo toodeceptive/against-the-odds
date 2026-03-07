@@ -4,9 +4,9 @@
 
 The project uses GitHub Actions for CI/CD automation:
 
-1. **CI**: Consolidated quality gate (lint, format, test, Trivy, secret-scan, npm audit, Lighthouse) on push/PR to main
+1. **CI**: Consolidated quality gate on push/PR to main (`arch_guard`, `test`, `secret-scan`, `e2e_smoke`, `quality`)
 2. **Sync**: Repository synchronization (main-only)
-3. **Shopify Sync**: Product and theme sync
+3. **Shopify Sync**: Product sync
 4. **Sync theme branch**: Subtree-split theme to shopify-theme branch for Shopify GitHub App
 5. **Maintenance**: Dependency update PRs, weekly Trivy
 
@@ -18,13 +18,16 @@ Runs on: Push to main, Pull requests targeting main
 
 Actions:
 
-- Lint, format check, unit tests, build
-- Trivy security scan, secret-scan, npm audit (continue-on-error where appropriate)
-- Optional coverage, Lighthouse (continue-on-error)
+- `arch_guard`: signature verification + recomputed structural hashes + product schema-version checks
+- test job: format check, lint, unit tests, build
+- `secret-scan`
+- `e2e_smoke`: Chromium-only local Playwright smoke (`npm run test:e2e:smoke`)
+- `quality`: `npm run quality`
+- Trivy, npm audit, Lighthouse remain informational (`continue-on-error`)
 
 ### shopify-sync.yml
 
-Runs on: Daily at 2 AM, Push to main (product/theme changes)
+Runs on: Daily at 2 AM, Push to main (product changes), Manual trigger
 
 Actions:
 
@@ -37,7 +40,7 @@ Required secrets in GitHub Settings > Secrets and variables > Actions:
 
 - `SHOPIFY_STORE_DOMAIN`
 - `SHOPIFY_ACCESS_TOKEN`
-- `SHOPIFY_THEME_ID`
+- `SHOPIFY_THEME_ID` (optional)
 
 ## Workflow Optimization
 

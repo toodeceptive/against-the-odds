@@ -22,11 +22,11 @@ const defaultMaxWidth = isEmbroidery ? 4000 : 2000;
 const defaultQuality = isEmbroidery ? 98 : 85;
 const maxWidth = parseInt(
   args.find((a) => a.startsWith('--max-width='))?.split('=')[1] || String(defaultMaxWidth),
-  10,
+  10
 );
 const quality = parseInt(
   args.find((a) => a.startsWith('--quality='))?.split('=')[1] || String(defaultQuality),
-  10,
+  10
 );
 
 let sharp;

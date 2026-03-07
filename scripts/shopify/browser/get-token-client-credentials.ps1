@@ -4,6 +4,7 @@
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
+. (Join-Path $repoPath "scripts\shopify\ShopifyStoreHelpers.ps1")
 
 $envPath = Join-Path $repoPath ".env.local"
 if (-not (Test-Path $envPath)) { Write-Host "Error: .env.local not found." -ForegroundColor Red; exit 1 }
@@ -27,13 +28,10 @@ if ([string]::IsNullOrWhiteSpace($apiSecret) -or $apiSecret -match 'your_.*_here
     exit 1
 }
 
-# Use myshopify domain for OAuth; store ID from admin URLs is nbxwpf-z1
+# Use the canonical Shopify admin host for OAuth rather than guessing from the storefront domain.
 $hostOnly = $storeDomain -replace '^https?://','' -replace '/.*$',''
-if ($hostOnly -eq "aodrop.com") {
-    $uri = "https://nbxwpf-z1.myshopify.com/admin/oauth/access_token"
-} else {
-    $uri = "https://$hostOnly/admin/oauth/access_token"
-}
+$storeInfo = Resolve-ShopifyStoreInfo -Store $hostOnly
+$uri = "https://$($storeInfo.AdminHost)/admin/oauth/access_token"
 
 $body = @{
     grant_type    = "client_credentials"

@@ -10,6 +10,12 @@
  */
 
 import { warn } from '../desktop-automation/logger.js';
+import {
+  buildClientCredentialsEndpoints as buildTokenEndpoints,
+  buildShopifyAdminUrl,
+  isTrustedShopifyAdminUrl,
+  resolveShopifyStoreInfo,
+} from '../shopify/store-domain.js';
 
 let playwright;
 
@@ -20,59 +26,19 @@ async function getPlaywright() {
   return playwright;
 }
 
-function normalizeStoreHost(storeDomain) {
-  if (!storeDomain || typeof storeDomain !== 'string') return null;
-  const trimmed = storeDomain.trim();
-  if (!trimmed) return null;
-
-  try {
-    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
-      return new URL(trimmed).hostname.toLowerCase();
-    }
-    return new URL(`https://${trimmed}`).hostname.toLowerCase();
-  } catch {
-    return null;
-  }
-}
-
-function getTrustedShopifyHosts(storeDomain) {
-  const hosts = new Set(['admin.shopify.com']);
-  const normalizedStoreHost = normalizeStoreHost(storeDomain);
-  if (!normalizedStoreHost) return Array.from(hosts);
-
-  hosts.add(normalizedStoreHost);
-  if (!normalizedStoreHost.endsWith('.myshopify.com')) {
-    hosts.add(`${normalizedStoreHost}.myshopify.com`);
-  }
-
-  return Array.from(hosts);
-}
-
-function isTrustedShopifyAdminUrl(urlValue, trustedHosts) {
-  try {
-    const parsed = new URL(urlValue);
-    if (parsed.protocol !== 'https:') return false;
-
-    const hostname = parsed.hostname.toLowerCase();
-    if (!trustedHosts.includes(hostname)) return false;
-
-    if (hostname === 'admin.shopify.com') {
-      return parsed.pathname.startsWith('/store/');
-    }
-
-    return parsed.pathname === '/admin' || parsed.pathname.startsWith('/admin/');
-  } catch {
-    return false;
-  }
-}
-
 /**
- * Connect to existing Chrome instance or launch new browser
+ * Connect to the user's existing Chrome instance by default.
+ * Standalone browser launch requires an explicit opt-in.
  * @param {Object} options - Connection options
  * @returns {Promise<Browser>} Playwright browser instance
  */
 export async function connectToBrowser(options = {}) {
-  const { useExisting = true, headless = false, slowMo = 0 } = options;
+  const {
+    useExisting = true,
+    headless = false,
+    slowMo = 0,
+    allowStandalone = process.env.ATO_ALLOW_STANDALONE_BROWSER === '1',
+  } = options;
 
   const pw = await getPlaywright();
   const { chromium } = pw;
@@ -84,8 +50,18 @@ export async function connectToBrowser(options = {}) {
       // Connected to existing Chrome instance
       return browser;
     } catch (_error) {
-      // Could not connect to existing Chrome, launching new instance
+      if (!allowStandalone) {
+        throw new Error(
+          'Could not connect to an existing Chrome instance on localhost:9222. Launch your browser with remote debugging or explicitly opt into standalone browser launch.'
+        );
+      }
     }
+  }
+
+  if (useExisting && !allowStandalone) {
+    throw new Error(
+      'Standalone browser launch is disabled by default. Set useExisting:false or ATO_ALLOW_STANDALONE_BROWSER=1 only for explicit local testing.'
+    );
   }
 
   // Launch new browser instance
@@ -106,15 +82,15 @@ export async function connectToBrowser(options = {}) {
  * @returns {Promise<boolean>} True if successfully logged in
  */
 export async function ensureShopifyLogin(page, storeDomain) {
-  const adminUrl = `https://${storeDomain}/admin`;
-  const trustedHosts = getTrustedShopifyHosts(storeDomain);
+  const adminUrl = buildShopifyAdminUrl(storeDomain, '/');
+  const trustedHosts = resolveShopifyStoreInfo(storeDomain).trustedHosts.join(',');
 
   try {
     await page.goto(adminUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
     // Shopify may redirect aodrop.com/admin → admin.shopify.com/store/<id>
     const currentUrl = page.url();
-    const isAdmin = isTrustedShopifyAdminUrl(currentUrl, trustedHosts);
+    const isAdmin = isTrustedShopifyAdminUrl(currentUrl, storeDomain);
     const hasLoginForm = (await page.locator('form[action*="login"]').count()) > 0;
 
     if (isAdmin && !hasLoginForm) {
@@ -143,16 +119,25 @@ export async function ensureShopifyLogin(page, storeDomain) {
 
     // Wait for redirect to a trusted Shopify admin URL.
     await page.waitForFunction(
-      (allowedHosts) => {
+      (trustedHostList) => {
         try {
           const parsed = new URL(window.location.href);
           if (parsed.protocol !== 'https:') return false;
 
+          const allowedHostnames = new Set(['admin.shopify.com']);
+          if (typeof trustedHostList === 'string' && trustedHostList.trim()) {
+            trustedHostList
+              .split(',')
+              .map((entry) => entry.trim().toLowerCase())
+              .filter(Boolean)
+              .forEach((entry) => allowedHostnames.add(entry));
+          }
+
           const hostname = parsed.hostname.toLowerCase();
-          if (!allowedHosts.includes(hostname)) return false;
+          if (!allowedHostnames.has(hostname)) return false;
 
           if (hostname === 'admin.shopify.com') {
-            return parsed.pathname.startsWith('/store/');
+            return /^\/store\/[^/]+(?:\/|$)/.test(parsed.pathname);
           }
 
           return parsed.pathname === '/admin' || parsed.pathname.startsWith('/admin/');
@@ -161,10 +146,10 @@ export async function ensureShopifyLogin(page, storeDomain) {
         }
       },
       trustedHosts,
-      { timeout: 120000 },
+      { timeout: 120000 }
     );
 
-    return isTrustedShopifyAdminUrl(page.url(), trustedHosts);
+    return isTrustedShopifyAdminUrl(page.url(), storeDomain);
   } catch (_error) {
     warn('Failed to access Shopify admin', { storeDomain, error: _error?.message });
     return false;
@@ -218,7 +203,10 @@ export async function navigateToAppsDevelopment(page) {
       const appsUrl = `${url.origin}${storePath}/apps/development`;
       await page.goto(appsUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
     } else {
-      await page.goto('/admin/apps/development', { waitUntil: 'domcontentloaded', timeout: 15000 });
+      await page.goto(buildShopifyAdminUrl(process.env.SHOPIFY_STORE_DOMAIN, '/apps/development'), {
+        waitUntil: 'domcontentloaded',
+        timeout: 15000,
+      });
     }
 
     await page.waitForSelector('h1, [data-testid="apps-page"], main, [role="main"]', {
@@ -249,7 +237,7 @@ async function clickFirstAppDetailLink(page) {
 
 async function clickRevealButtons(page) {
   const revealBtns = page.locator(
-    'button:has-text("Reveal"), [role="button"]:has-text("Reveal"), a:has-text("Reveal")',
+    'button:has-text("Reveal"), [role="button"]:has-text("Reveal"), a:has-text("Reveal")'
   );
   const revealCount = await revealBtns.count();
   for (let r = 0; r < revealCount; r++) {
@@ -273,7 +261,7 @@ export async function navigateToAppApiCredentialsAndReveal(page) {
 
     const apiCredsLink = page
       .locator(
-        'a:has-text("API credentials"), [href*="credentials"]:visible, button:has-text("API credentials")',
+        'a:has-text("API credentials"), [href*="credentials"]:visible, button:has-text("API credentials")'
       )
       .first();
     if ((await apiCredsLink.count()) > 0) {
@@ -301,26 +289,7 @@ function getStoreSlugFromAdminUrl(urlValue) {
 }
 
 function buildClientCredentialsEndpoints(storeDomain, storeSlug) {
-  const endpoints = new Set();
-  const normalizedStoreHost = normalizeStoreHost(storeDomain);
-
-  if (normalizedStoreHost) {
-    endpoints.add(`https://${normalizedStoreHost}/admin/oauth/access_token`);
-    if (!normalizedStoreHost.endsWith('.myshopify.com')) {
-      endpoints.add(`https://${normalizedStoreHost}.myshopify.com/admin/oauth/access_token`);
-    }
-  }
-
-  if (storeSlug && /^[a-z0-9-]+$/i.test(storeSlug)) {
-    endpoints.add(`https://${storeSlug}.myshopify.com/admin/oauth/access_token`);
-  }
-
-  // Known ATO canonical myshopify domain (used elsewhere in repo scripts).
-  if (normalizedStoreHost === 'aodrop.com' || storeSlug === 'aodrop') {
-    endpoints.add('https://nbxwpf-z1.myshopify.com/admin/oauth/access_token');
-  }
-
-  return Array.from(endpoints);
+  return buildTokenEndpoints(storeDomain, { storeSlug });
 }
 
 async function openDevDashboardPopup(page) {
@@ -389,7 +358,7 @@ async function openDevDashboardSettingsPage(page) {
 async function extractClientCredentials(devPage) {
   const revealButton = devPage
     .locator(
-      'button:has-text("Reveal client secret"), [role="button"]:has-text("Reveal client secret")',
+      'button:has-text("Reveal client secret"), [role="button"]:has-text("Reveal client secret")'
     )
     .first();
   if ((await revealButton.count()) > 0) {
@@ -445,7 +414,7 @@ async function extractClientCredentials(devPage) {
         (entry) =>
           entry.value !== clientId &&
           /^[A-Za-z0-9_-]{24,}$/.test(entry.value) &&
-          !/^shpat_[A-Za-z0-9]{20,}$/.test(entry.value),
+          !/^shpat_[A-Za-z0-9]{20,}$/.test(entry.value)
       );
       clientSecret = fallback ? fallback.value : null;
     }
@@ -581,7 +550,12 @@ export async function extractAccessToken(page, storeDomain = null) {
 export async function extractThemeId(page) {
   try {
     // Navigate to themes page
-    await page.goto('/admin/themes', { waitUntil: 'networkidle' });
+    await page.goto(
+      buildShopifyAdminUrl(process.env.SHOPIFY_STORE_DOMAIN, '/themes', {
+        currentUrl: page.url(),
+      }),
+      { waitUntil: 'networkidle' }
+    );
 
     // Wait for themes to load
     await page.waitForSelector('[data-theme-id], .theme-card, .theme-item', { timeout: 10000 });

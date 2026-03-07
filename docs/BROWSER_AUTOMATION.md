@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide covers browser automation for Shopify admin tasks using Playwright. The automation can connect to your existing Chrome instance (when Shopify is open) or launch a new browser.
+This guide covers browser automation for Shopify admin tasks using Playwright. The canonical path connects to your existing Chrome instance (when Shopify is open); standalone browser launch is for explicit local testing only.
 
 ## Architecture
 
@@ -48,7 +48,7 @@ Browser automation uses `playwright.shopify.config.js` for Shopify-specific sett
 **Requirements**:
 
 - Chrome open with Shopify admin logged in
-- Or script will launch new browser and wait for login
+- Or launch Chrome with remote debugging first; the script connects to that existing browser
 
 **Output**:
 
@@ -76,7 +76,7 @@ Browser automation uses `playwright.shopify.config.js` for Shopify-specific sett
 .\scripts\shopify\browser\verify-store-setup.ps1
 ```
 
-Checks store configuration via browser automation.
+Currently prints a manual verification checklist; it is not yet a full automated verifier.
 
 ## Browser Automation Library
 
@@ -84,7 +84,7 @@ Checks store configuration via browser automation.
 
 Located in `src/browser-automation/shopify-admin.js`:
 
-- `connectToBrowser()` - Connect to existing Chrome or launch new
+- `connectToBrowser()` - Connect to existing Chrome (standalone launch only when explicitly opted into)
 - `ensureShopifyLogin()` - Ensure logged in to Shopify admin
 - `extractAccessToken()` - Extract access token from admin
 - `extractThemeId()` - Extract theme ID from admin
@@ -122,18 +122,21 @@ Launch Chrome with remote debugging:
 
 Then run automation scripts.
 
+**Note:** If Chrome is not available on `localhost:9222`, the canonical helpers now fail with an explicit instruction instead of silently launching a separate browser/profile.
+
 ## Writing Custom Automation
 
 ### Example: Extract Product Count
 
 ```javascript
 import { connectToBrowser, ensureShopifyLogin } from '../src/browser-automation/shopify-admin.js';
+import { buildShopifyAdminUrl } from '../src/shopify/store-domain.js';
 
 const browser = await connectToBrowser({ useExisting: true });
 const page = await browser.newPage();
 
 await ensureShopifyLogin(page, 'aodrop.com');
-await page.goto('https://aodrop.com/admin/products');
+await page.goto(buildShopifyAdminUrl('aodrop.com', '/products'));
 
 const count = await page.locator('[data-product-count]').textContent();
 console.log(`Products: ${count}`);
@@ -144,9 +147,10 @@ await browser.close();
 ### Example: Navigate and Extract Data
 
 ```javascript
+import { buildShopifyAdminUrl } from '../src/shopify/store-domain.js';
 import { extractTableData } from '../src/browser-automation/helpers.js';
 
-await page.goto('https://aodrop.com/admin/products');
+await page.goto(buildShopifyAdminUrl('aodrop.com', '/products'));
 const products = await extractTableData(page, 'table.products-table');
 console.log(products);
 ```
@@ -166,7 +170,7 @@ npx playwright test --config=playwright.shopify.config.js
 ### Test Files
 
 - `tests/shopify-admin/extract-credentials.spec.js` - Credential extraction tests
-- `tests/e2e/shopify-admin.spec.js` - General admin tests
+- `tests/shopify-admin/navigation.spec.js` - General admin navigation tests
 
 ## Best Practices
 
@@ -187,7 +191,7 @@ npx playwright test --config=playwright.shopify.config.js
 
 1. Ensure Chrome is running
 2. Launch Chrome with remote debugging: `chrome.exe --remote-debugging-port=9222`
-3. Use `useExisting: false` to launch new browser
+3. For explicit local testing only, use `useExisting: false` (or `ATO_ALLOW_STANDALONE_BROWSER=1`) to permit standalone browser launch
 
 ### Login Required
 

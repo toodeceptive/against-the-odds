@@ -8,6 +8,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 # Load .env.local into process env when present (same pattern as run-runbook.ps1)
 if (Test-Path ".env.local") {
@@ -46,9 +47,10 @@ $headers = @{
     "Content-Type" = "application/json"
 }
 
-$baseUrl = "https://$Store/admin/api/2026-01"
+$storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+$baseUrl = "https://$($storeInfo.AdminHost)/admin/api/2026-01"
 
-Write-Host "Testing connection to: $Store" -ForegroundColor Yellow
+Write-Host "Testing connection to: $($storeInfo.AdminHost)" -ForegroundColor Yellow
 Write-Host ""
 
 # Test 1: Get shop information

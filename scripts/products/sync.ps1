@@ -19,6 +19,17 @@ $repoPath = if ($PSScriptRoot) {
 }
 Set-Location $repoPath
 
+if (Test-Path ".env.local") {
+    Get-Content ".env.local" | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith("#") -and $line -match "^([^=]+)=(.*)$") {
+            [Environment]::SetEnvironmentVariable($matches[1].Trim(), $matches[2].Trim(), "Process")
+        }
+    }
+}
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+if ([string]::IsNullOrWhiteSpace($Token)) { $Token = $env:SHOPIFY_ACCESS_TOKEN }
+
 Write-Host "=== Product Sync (Bidirectional) ===" -ForegroundColor Cyan
 Write-Host ""
 

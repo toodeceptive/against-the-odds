@@ -86,3 +86,7 @@ scripts/shopify/.token-paste.txt
 
 # Structural signing key (never commit; script uses ~/.ssh/structural_key)
 infra/.structural_key
+
+
+#Ignore cursor AI rules
+.cursor\rules\codacy.mdc

@@ -11,6 +11,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 # Repo root: script is scripts/shopify/sync-products.ps1 -> repo = parent of parent of PSScriptRoot
 $repoPath = if ($PSScriptRoot) {
@@ -38,19 +39,6 @@ if ([string]::IsNullOrWhiteSpace($Token)) { $Token = $env:SHOPIFY_ACCESS_TOKEN }
 Write-Host "=== Shopify Product Sync ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Validate environment — skip sync gracefully in CI when secrets are not set
-if ([string]::IsNullOrWhiteSpace($Store)) {
-    Write-Host "SHOPIFY_STORE_DOMAIN not set; skipping product sync." -ForegroundColor Yellow
-    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Gray
-    exit 0
-}
-
-if ([string]::IsNullOrWhiteSpace($Token)) {
-    Write-Host "SHOPIFY_ACCESS_TOKEN not set; skipping product sync." -ForegroundColor Yellow
-    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Gray
-    exit 0
-}
-
 # Cross-platform products path
 $productsDir = Join-Path (Join-Path $repoPath "data") "products"
 if (-not (Test-Path $productsDir)) {
@@ -71,18 +59,64 @@ if (-not $productFiles -or $productFiles.Count -eq 0) {
 Write-Host "Found $($productFiles.Count) product file(s)" -ForegroundColor Cyan
 Write-Host ""
 
-$storeHost = $Store
-if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
-    $storeHost = "aodrop.com.myshopify.com"
+$isApplyRun = -not $DryRun
+if ($isApplyRun -and [string]::IsNullOrWhiteSpace($Store)) {
+    Write-Host "Error: SHOPIFY_STORE_DOMAIN not set for apply run." -ForegroundColor Red
+    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Yellow
+    exit 1
 }
-$apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
-if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
 
-$headers = @{
-    "X-Shopify-Access-Token" = $Token
-    "Content-Type"           = "application/json"
+if ($isApplyRun -and [string]::IsNullOrWhiteSpace($Token)) {
+    Write-Host "Error: SHOPIFY_ACCESS_TOKEN not set for apply run." -ForegroundColor Red
+    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Yellow
+    exit 1
 }
-$baseUrl = "https://$storeHost/admin/api/$apiVersion"
+
+$baseUrl = $null
+$headers = $null
+if ($isApplyRun) {
+    $storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+    $storeHost = $storeInfo.AdminHost
+    $apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
+    if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
+
+    $headers = @{
+        "X-Shopify-Access-Token" = $Token
+        "Content-Type"           = "application/json"
+    }
+    $baseUrl = "https://$storeHost/admin/api/$apiVersion"
+}
+
+function Test-ProductSchema {
+    param([pscustomobject]$ProductData, [string]$FileName)
+
+    $schemaVersion = 0
+    if ($null -eq $ProductData.schema_version -or -not [long]::TryParse([string]$ProductData.schema_version, [ref]$schemaVersion)) {
+        throw "Product file $FileName must declare a numeric schema_version."
+    }
+
+    $handle = [string]$ProductData.handle
+    if ([string]::IsNullOrWhiteSpace($handle)) {
+        throw "Product file $FileName must declare a non-empty handle."
+    }
+
+    if ($handle -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$') {
+        throw "Product file $FileName has invalid handle '$handle'. Use lowercase letters, numbers, and hyphens only."
+    }
+}
+
+function Get-ShopifyProductPayload {
+    param([pscustomobject]$ProductData)
+
+    $payload = [ordered]@{}
+    foreach ($property in $ProductData.PSObject.Properties) {
+        if ($property.Name -ne "schema_version") {
+            $payload[$property.Name] = $property.Value
+        }
+    }
+
+    return $payload
+}
 
 # Invoke REST with 429 retry (Retry-After or 1s backoff, max 3 retries)
 function Invoke-ShopifyRestMethod {
@@ -117,14 +151,20 @@ function Invoke-ShopifyRestMethod {
     }
 }
 
+$processed = 0
+$failed = 0
 foreach ($file in $productFiles) {
     Write-Host "Processing: $($file.Name)" -ForegroundColor Yellow
 
     try {
         $productData = Get-Content $file.FullName -Raw | ConvertFrom-Json
+        Test-ProductSchema -ProductData $productData -FileName $file.Name
+        $productHandle = ([string]$productData.handle).Trim().ToLowerInvariant()
+        $shopifyProductData = Get-ShopifyProductPayload -ProductData $productData
 
         if ($DryRun) {
-            Write-Host "  [DRY RUN] Would create/update product: $($productData.title)" -ForegroundColor Cyan
+            Write-Host "  [DRY RUN] Would create/update product: $($productData.title) (handle: $productHandle)" -ForegroundColor Cyan
+            $processed++
             continue
         }
 
@@ -132,11 +172,11 @@ foreach ($file in $productFiles) {
         $productId = $null
 
         try {
-            $searchUrl = "$baseUrl/products.json?limit=250"
+            $searchUrl = "$baseUrl/products.json?handle=$([uri]::EscapeDataString($productHandle))&limit=1"
             $allProducts = Invoke-ShopifyRestMethod -Uri $searchUrl -Headers $headers -Method Get
 
             if ($allProducts.products) {
-                $matchingProduct = $allProducts.products | Where-Object { $_.title -eq $productData.title }
+                $matchingProduct = $allProducts.products | Where-Object { $_.handle -eq $productHandle } | Select-Object -First 1
                 if ($matchingProduct) {
                     $productFound = $true
                     $productId = $matchingProduct.id
@@ -147,17 +187,19 @@ foreach ($file in $productFiles) {
         }
 
         if ($productFound -and $productId) {
-            Write-Host "  Updating existing product (ID: $productId)..." -ForegroundColor Yellow
-            $updateBody = @{ product = $productData } | ConvertTo-Json -Depth 10
+            Write-Host "  Updating existing product (ID: $productId, handle: $productHandle)..." -ForegroundColor Yellow
+            $updateBody = @{ product = $shopifyProductData } | ConvertTo-Json -Depth 10
             $response = Invoke-ShopifyRestMethod -Uri "$baseUrl/products/$productId.json" -Headers $headers -Method Put -Body $updateBody
             Write-Host "  [OK] Updated: $($response.product.title)" -ForegroundColor Green
         } else {
-            Write-Host "  Creating new product..." -ForegroundColor Yellow
-            $createBody = @{ product = $productData } | ConvertTo-Json -Depth 10
+            Write-Host "  Creating new product (handle: $productHandle)..." -ForegroundColor Yellow
+            $createBody = @{ product = $shopifyProductData } | ConvertTo-Json -Depth 10
             $response = Invoke-ShopifyRestMethod -Uri "$baseUrl/products.json" -Headers $headers -Method Post -Body $createBody
             Write-Host "  [OK] Created: $($response.product.title) (ID: $($response.product.id))" -ForegroundColor Green
         }
+        $processed++
     } catch {
+        $failed++
         $errorMessage = $_.Exception.Message
         if ($_.ErrorDetails.Message) {
             try {
@@ -174,4 +216,13 @@ foreach ($file in $productFiles) {
 }
 
 Write-Host ""
-Write-Host "[OK] Product sync complete!" -ForegroundColor Green
+if ($failed -gt 0) {
+    Write-Host "[FAIL] Product sync finished with $failed failure(s) and $processed successful item(s)." -ForegroundColor Red
+    exit 1
+}
+
+if ($DryRun) {
+    Write-Host "[OK] Product sync dry run complete! ($processed item(s) validated)" -ForegroundColor Green
+} else {
+    Write-Host "[OK] Product sync complete! ($processed item(s) applied)" -ForegroundColor Green
+}

@@ -16,9 +16,11 @@
 ## Daily Checks
 
 - **One command:** `npm run quality` (format:check, lint, test:unit)
+- **Safe default test baseline:** `npm test` (unit + integration; integration auto-skips when credentials are absent)
+- **Extended local validation:** `npm run test:all` (safe baseline + local Playwright smoke against `http://127.0.0.1:8080`)
 - Or individually: `npm run lint`, `npm run format:check`, `npm run test:unit`
-- **Before push:** Run `npm run verify:pipeline`. It auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent. Use `npm run verify:pipeline:strict` when you expect Shopify integration checks to pass locally. CI runs **arch_guard**, test, secret-scan, quality; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
-- **Prettier runs automatically on every commit** (pre-commit hook); see [docs/HOOKS.md](docs/HOOKS.md).
+- **Before push:** Run `npm run verify:pipeline`. It auto-skips the credential-gated runbook step when `SHOPIFY_ACCESS_TOKEN` is absent. Use `npm run verify:pipeline:strict` when you expect Shopify integration checks to pass locally. CI runs **arch_guard**, **test**, **secret-scan**, **e2e_smoke**, and **quality**; all must pass for merge. See [.github/workflows/README.md](.github/workflows/README.md).
+- **Pre-commit hook:** Husky delegates to the canonical repo hook at `config/git-hooks/pre-commit`; see [docs/HOOKS.md](docs/HOOKS.md).
 
 ## Integration Checks (credential-gated)
 
@@ -39,12 +41,12 @@
 
 ## Update Shopify from Cursor (recommended flow)
 
-**Edit in Cursor → push to GitHub → store updates.** Store is connected to this repo via the Shopify GitHub App; pushing to the connected branch (usually `main`) triggers theme deployment. No `shopify theme push` needed for that flow.
+**Edit in Cursor → push to GitHub → store updates.** Theme work happens on `main`, then `.github/workflows/sync-theme-branch.yml` updates the Shopify-connected `shopify-theme` branch. No `shopify theme push` needed for that GitHub App flow.
 
 - **One-time**: Pull live theme into repo: `node scripts/shared/run-powershell.cjs scripts/shopify/theme-pull.ps1` (then commit and push).
 - **Preview before commit**: Cross-platform default is **Tasks → Shopify: Theme Dev** after writing [docs/status/pending-approval.md](docs/status/pending-approval.md), plus **Open pending approval** to show the approval file in Cursor. The desktop helper path is `node scripts/shared/run-powershell.cjs scripts/open-preview-popup.ps1` (or `scripts/start-theme-preview.ps1`) when you want the approval file, static preview, and theme-dev helper opened together. Set `SHOPIFY_CLI_THEME_TOKEN` in `.env.local` so theme dev starts without login prompt (see [docs/CREDENTIALS_SETUP.md](docs/CREDENTIALS_SETUP.md)). Optional: **Ctrl+Alt+T** for theme dev only; **Ctrl+Alt+P** to open pending-approval.md.
 - **Approval gate**: Wait for explicit approval in chat before applying product sync or committing/pushing store-affecting theme changes.
-- **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, get approval when the change is store-affecting, then commit and push to `main`.
+- **Daily**: Edit theme under `src/shopify/themes/aodrop-theme`, preview as above, get approval when the change is store-affecting, then commit and push to `main`. CI updates `shopify-theme`, and Shopify deploys from that connected branch.
 - **Deploy log / rollback**: After each deploy or product sync, append to [docs/status/deploy-log.md](docs/status/deploy-log.md). Rollback: theme → Shopify Admin → theme card → Actions → Reset to last commit; products → revert JSON and re-run sync.
 
 **Agent context**: Store URL `aodrop.com`; theme source `src/shopify/themes/aodrop-theme/`; product data `data/products/*.json`; workflow and product/theme docs: [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md), [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md). Theme ID in `.env.local` (SHOPIFY_THEME_ID); get via `npx shopify theme list` or Admin. **Store ops**: Product-with-uploads (JSON path + browser path), theme updates, deploy-log for every change — see [docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md](docs/AGENT_WORKFLOW_CURSOR_SHOPIFY.md). **Integrations**: Products via Admin API (`sync-products.ps1`; rate limits ~2 req/s); one-off/settings via user's browser (no headless). See [.cursor/context/shopify.md](.cursor/context/shopify.md).
@@ -53,7 +55,7 @@ See **[docs/UPDATE_SHOPIFY_FROM_CURSOR.md](docs/UPDATE_SHOPIFY_FROM_CURSOR.md)**
 
 ## Shopify Theme Development
 
-- **Shopify–GitHub App**: Store is connected to this repo. Theme deploys happen when you push to the connected branch (typically `main`). Configuration: Shopify Admin → Settings → Apps and sales channels → GitHub.
+- **Shopify–GitHub App**: Store is connected to this repo. Theme deploys happen from the connected `shopify-theme` branch, which CI keeps in sync from `main`. Configuration: Shopify Admin → Settings → Apps and sales channels → GitHub.
 - **GitHub Actions**: Theme deployment is handled by the Shopify GitHub App; `shopify-sync.yml` is for product sync (Admin API secrets if configured).
 - **Task / wrapper first**: use **Shopify: Theme Dev (preview before commit)** or `node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1` for deterministic theme preview.
 - `npx shopify auth login` — manual fallback when you need direct CLI authentication

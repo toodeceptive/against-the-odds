@@ -17,6 +17,7 @@ $repoPath = if ($PSScriptRoot) {
     (Get-Location).Path
 }
 Set-Location $repoPath
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 if (Test-Path ".env.local") {
     Get-Content ".env.local" | ForEach-Object {
@@ -32,15 +33,14 @@ if ([string]::IsNullOrWhiteSpace($Store)) {
     exit 1
 }
 
-$adminHost = $Store
-if ($Store -match "\.myshopify\.com$") { $adminHost = $Store -replace "\.myshopify\.com$", "" }
+$storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+$adminUrl = Get-ShopifyAdminUrl -Store $Store -Path "/"
 
 Write-Host "=== Theme auth via browser (Chrome + token) ===" -ForegroundColor Cyan
 Write-Host ""
 
 # Step 1: Launch Chrome at Shopify Admin (unless user already has Chrome open with Shopify)
 if (-not $SkipChromeLaunch) {
-    $adminUrl = "https://$adminHost/admin"
     Write-Host "[1/3] Launching Chrome at $adminUrl ..." -ForegroundColor Yellow
     & "$PSScriptRoot\browser\launch-chrome-for-agent.ps1" -Url $adminUrl
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -53,9 +53,9 @@ if (-not $SkipChromeLaunch) {
 # Step 2: Extract token from browser and save to .env.local (SHOPIFY_ACCESS_TOKEN + SHOPIFY_CLI_THEME_TOKEN)
 Write-Host ""
 Write-Host "[2/3] Extracting access token from browser (Apps > Development)..." -ForegroundColor Yellow
-& "$PSScriptRoot\browser\get-access-token.ps1" -StoreDomain $adminHost
+& "$PSScriptRoot\browser\get-access-token.ps1" -StoreDomain $Store
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "[FAIL] Could not extract token. Ensure you're logged in to https://$adminHost/admin and have a Development app with API credentials visible." -ForegroundColor Red
+    Write-Host "[FAIL] Could not extract token. Ensure you're logged in to Shopify Admin and have a Development app with API credentials visible." -ForegroundColor Red
     Write-Host "Alternatively: run theme-auth-then-pull.ps1 for device-code login." -ForegroundColor Yellow
     exit 1
 }

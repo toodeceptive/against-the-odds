@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 # Repo root resolved from script location for portability (worktrees/CI)
 $repoPath = if ($PSScriptRoot) {
@@ -59,10 +60,8 @@ $headers = @{
     "Content-Type" = "application/json"
 }
 
-$storeHost = $Store
-if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
-    $storeHost = "aodrop.com.myshopify.com"
-}
+$storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+$storeHost = $storeInfo.AdminHost
 
 $apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
 if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
