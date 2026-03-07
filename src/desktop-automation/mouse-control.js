@@ -39,7 +39,7 @@ export async function getMousePosition() {
         'powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $pos = [System.Windows.Forms.Cursor]::Position; Write-Output \'X=$($pos.X), Y=$($pos.Y)\'"',
         {
           encoding: 'utf-8',
-        },
+        }
       );
       const match = result.match(/X=(\d+), Y=(\d+)/);
       if (match) {
@@ -73,6 +73,10 @@ export async function moveMouse(x, y, options = {}) {
       // Smooth movement
       const current = robot.getMousePos();
       const steps = Math.max(Math.abs(x - current.x), Math.abs(y - current.y));
+      if (steps === 0) {
+        robot.moveMouse(x, y);
+        return;
+      }
       const delay = duration / steps;
 
       for (let i = 0; i <= steps; i++) {
@@ -91,7 +95,7 @@ export async function moveMouse(x, y, options = {}) {
     try {
       execSync(
         `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x}, ${y})"`,
-        { stdio: 'ignore' },
+        { stdio: 'ignore' }
       );
     } catch (_error) {
       // Silently fail if PowerShell command doesn't work
@@ -229,12 +233,47 @@ export async function dragAndDrop(startX, startY, endX, endY, options = {}) {
   if (robot) {
     robot.mouseToggle('down', button);
   } else {
-    // PowerShell fallback - simulate mouse down
+    // PowerShell fallback - perform the full drag gesture with mouse-down/mouse-up events.
     const { execSync } = await import('child_process');
-    execSync(
-      `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${startX}, ${startY})"`,
-      { stdio: 'ignore' },
-    );
+    const { writeFileSync, unlinkSync } = await import('fs');
+    const { tmpdir } = await import('os');
+    const { join } = await import('path');
+    const mouseDownFlag = button === 'right' ? 0x0008 : 0x0002;
+    const mouseUpFlag = button === 'right' ? 0x0010 : 0x0004;
+    const psScriptPath = join(tmpdir(), `mouse-drag-${Date.now()}.ps1`);
+    const psScript = `$code = @'
+using System;
+using System.Runtime.InteropServices;
+public class Mouse {
+  [DllImport("user32.dll")]
+  public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+  [DllImport("user32.dll")]
+  public static extern bool SetCursorPos(int x, int y);
+}
+'@
+Add-Type -TypeDefinition $code
+[Mouse]::SetCursorPos(${startX}, ${startY})
+Start-Sleep -Milliseconds 50
+[Mouse]::mouse_event(${mouseDownFlag}, 0, 0, 0, 0)
+Start-Sleep -Milliseconds ${Math.max(duration, 50)}
+[Mouse]::SetCursorPos(${endX}, ${endY})
+Start-Sleep -Milliseconds 50
+[Mouse]::mouse_event(${mouseUpFlag}, 0, 0, 0, 0)`;
+
+    try {
+      writeFileSync(psScriptPath, psScript, 'utf8');
+      execSync(`powershell -NoProfile -ExecutionPolicy Bypass -File "${psScriptPath}"`, {
+        stdio: 'ignore',
+      });
+    } finally {
+      try {
+        unlinkSync(psScriptPath);
+      } catch {
+        // Ignore cleanup errors
+      }
+    }
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    return;
   }
 
   // Drag to end position

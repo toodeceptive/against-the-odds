@@ -43,7 +43,7 @@
 
 ## 4. Product demo
 
-- **Recommended:** E2E (Playwright): open store URL (e.g. `https://aodrop.com`), navigate to a product page, take a full-page or viewport screenshot. Run as a test or one-off script. Optionally add `tests/e2e/storefront.spec.js` that opens store + product and saves a screenshot to `docs/screenshots/`.
+- **Recommended:** E2E (Playwright): open store URL (e.g. `https://aodrop.com`), navigate to a product page, take a full-page or viewport screenshot. Run as a test or one-off script. The opt-in live-store example lives at `tests/live/storefront.spec.js` and writes screenshots to `test-results/storefront/` by default.
 - **With PC control / live viewing:** Run desktop capture before/after navigating, or record a sequence of screenshots while you click through the storefront. Use when you need “see my desktop” rather than only the browser.
 
 ---
@@ -66,14 +66,14 @@
 
 ## 7. File and script reference
 
-| Item                                                                                  | Purpose                                                                                                                                              |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/desktop-automation/screen-capture.js`                                            | Full screen, region, or window capture; “live viewing” via on-demand or periodic capture.                                                            |
-| `src/desktop-automation/keyboard-control.js`, `mouse-control.js`, `window-manager.js` | PC control: type, click, activate window.                                                                                                            |
-| `scripts/shopify/theme-update-preview-save.ps1`                                       | Theme update (no push) → preview (optional screenshot) → prompt to save (push).                                                                      |
-| `scripts/shopify/optimize-images.ps1`                                                 | Web and embroidery presets; `-Preset embroidery` for high-quality/embroidery-ready.                                                                  |
-| `tests/e2e/storefront.spec.js`                                                        | Product demo E2E: store homepage + optional product page screenshot to `docs/screenshots/`. Run: `npx playwright test tests/e2e/storefront.spec.js`. |
-| `docs/STORE_OPERATIONS_AUTOMATION.md`                                                 | Full map of store operations (themes, content, products, orders, etc.).                                                                              |
+| Item                                                                                  | Purpose                                                                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/desktop-automation/screen-capture.js`                                            | Full screen, region, or window capture; “live viewing” via on-demand or periodic capture.                                             |
+| `src/desktop-automation/keyboard-control.js`, `mouse-control.js`, `window-manager.js` | PC control: type, click, activate window.                                                                                             |
+| `scripts/shopify/theme-update-preview-save.ps1`                                       | Theme update (no push) → preview (optional screenshot) → prompt to save (push).                                                       |
+| `scripts/shopify/optimize-images.ps1`                                                 | Web and embroidery presets; `-Preset embroidery` for high-quality/embroidery-ready.                                                   |
+| `tests/live/storefront.spec.js`                                                       | Product demo E2E: live store homepage + optional product page screenshot to `test-results/storefront/`. Run: `npm run test:e2e:live`. |
+| `docs/STORE_OPERATIONS_AUTOMATION.md`                                                 | Full map of store operations (themes, content, products, orders, etc.).                                                               |
 
 ---
 

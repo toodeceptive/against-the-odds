@@ -11,8 +11,9 @@ This project adheres to a [code of conduct](CODE_OF_CONDUCT.md); by participatin
 1. **Fork the repository** and clone your fork locally.
 2. **Install dependencies** using `npm ci` (or `pnpm install` if you prefer another package manager).
 3. Copy `.env.example` to `.env.local` and configure any required environment variables.
-4. Use `npm run test:all` to run unit, integration and end‑to‑end tests.
-5. Use `npm run quality` to run formatting, linting and unit tests.
+4. Use `npm test` for the safe local baseline (unit + integration; integration skips when credentials are absent).
+5. Use `npm run test:all` for extended local validation (safe baseline + local Playwright smoke).
+6. Use `npm run quality` to run formatting, linting and unit tests.
 
 ## Branching & Commits
 
@@ -30,14 +31,13 @@ This project adheres to a [code of conduct](CODE_OF_CONDUCT.md); by participatin
 
 ## Pre‑Commit Hooks
 
-We recommend using [Husky](https://typicode.github.io/husky/#/) and [lint‑staged](https://github.com/okonet/lint-staged) to run linters and formatters automatically before each commit.  This repository includes an optional setup script:
+This repository installs [Husky](https://typicode.github.io/husky/#/) via `npm install`. The Husky hook delegates to the repo’s canonical entrypoint `config/git-hooks/pre-commit`, which in turn runs `scripts/git/pre-commit.ps1`.
 
 ```sh
-npm install --save-dev husky lint-staged
-npx husky install
+npm install
 ```
 
-Then configure `.husky/pre-commit` to run `npm run quality`.
+On Linux/macOS, the hook uses `pwsh` when available; on Windows it uses `powershell.exe`. See [docs/HOOKS.md](docs/HOOKS.md) for the canonical behavior and fallback guidance.
 
 ## Reporting Issues
 

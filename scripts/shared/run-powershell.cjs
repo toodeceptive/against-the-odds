@@ -19,7 +19,7 @@ for (const command of candidates) {
     {
       stdio: 'inherit',
       windowsHide: true,
-    },
+    }
   );
 
   if (result.error) {

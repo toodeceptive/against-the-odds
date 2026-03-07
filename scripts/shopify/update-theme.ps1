@@ -10,6 +10,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 $repoPath = if ($PSScriptRoot) {
     $parent = Join-Path $PSScriptRoot ".."
@@ -52,13 +53,8 @@ if (-not (Test-Path $ThemePath)) {
     exit 1
 }
 
-# Use permanent store domain (myshopify.com) for theme CLI — matches theme-pull.
-$storeForCli = $Store
-if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
-    $storeForCli = "aodrop.com.myshopify.com"
-} elseif ($Store -notmatch "\.myshopify\.com$") {
-    $storeForCli = "$Store.myshopify.com"
-}
+# Use the canonical Shopify admin/CLI host rather than synthesizing one from a custom domain.
+$storeForCli = (Resolve-ShopifyStoreInfo -Store $Store).CliHost
 Write-Host "Store: $storeForCli" -ForegroundColor Cyan
 
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN

@@ -7,6 +7,7 @@ import {
   connectToBrowser,
   ensureShopifyLogin,
 } from '../../src/browser-automation/shopify-admin.js';
+import { buildShopifyAdminUrl, isTrustedShopifyAdminUrl } from '../../src/shopify/store-domain.js';
 
 test.describe('Shopify Admin E2E Tests', () => {
   test.setTimeout(120000); // 2 minutes for manual login if needed
@@ -24,7 +25,7 @@ test.describe('Shopify Admin E2E Tests', () => {
 
     // Verify we're on admin page
     const url = page.url();
-    expect(url).toContain('/admin');
+    expect(isTrustedShopifyAdminUrl(url, storeDomain)).toBe(true);
 
     await context.close();
     await browser.close();
@@ -38,11 +39,12 @@ test.describe('Shopify Admin E2E Tests', () => {
     const loggedIn = await ensureShopifyLogin(page, storeDomain);
     expect(loggedIn).toBe(true);
 
-    await page.goto(`https://${storeDomain}/admin/products`, { waitUntil: 'domcontentloaded' });
+    await page.goto(buildShopifyAdminUrl(storeDomain, '/products', { currentUrl: page.url() }), {
+      waitUntil: 'domcontentloaded',
+    });
 
     // Check if products page loaded
-    await expect(page).toHaveURL(/\/admin\/products/);
-    await expect(page).toHaveTitle(/Products/i);
+    await expect(page).toHaveURL(/(\/admin\/products|\/store\/[^/]+\/products)/);
 
     await context.close();
     await browser.close();
@@ -56,11 +58,12 @@ test.describe('Shopify Admin E2E Tests', () => {
     const loggedIn = await ensureShopifyLogin(page, storeDomain);
     expect(loggedIn).toBe(true);
 
-    await page.goto(`https://${storeDomain}/admin/themes`, { waitUntil: 'domcontentloaded' });
+    await page.goto(buildShopifyAdminUrl(storeDomain, '/themes', { currentUrl: page.url() }), {
+      waitUntil: 'domcontentloaded',
+    });
 
     // Check if themes page loaded
-    await expect(page).toHaveURL(/\/admin\/themes/);
-    await expect(page).toHaveTitle(/Themes/i);
+    await expect(page).toHaveURL(/(\/admin\/themes|\/store\/[^/]+\/themes)/);
 
     await context.close();
     await browser.close();

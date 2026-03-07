@@ -9,6 +9,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 # Force TLS 1.2+ for Shopify (some Windows/.NET defaults use older TLS)
 try {
@@ -48,10 +49,8 @@ if ([string]::IsNullOrWhiteSpace($Store) -or [string]::IsNullOrWhiteSpace($token
     exit 1
 }
 
-$storeHost = $Store
-if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
-    $storeHost = "aodrop.com.myshopify.com"
-}
+$storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+$storeHost = $storeInfo.AdminHost
 $apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
 if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
 $baseUrl = "https://$storeHost/admin/api/$apiVersion"

@@ -1,8 +1,8 @@
 /**
  * Storefront E2E — product demo and live store verification.
- * Opens the live store (e.g. aodrop.com), optionally navigates to a product, captures screenshot.
- * Run: npx playwright test tests/e2e/storefront.spec.js
- * For product-demo screenshot: set SCREENSHOT_DIR or check docs/screenshots/.
+ * Opens the live store (e.g. aodrop.com), optionally navigates to a product, captures screenshots.
+ * Run: npm run test:e2e:live
+ * For product-demo screenshot: set SCREENSHOT_DIR or use the default test-results/storefront output.
  */
 
 import { test, expect } from '@playwright/test';
@@ -24,7 +24,7 @@ test.describe('Storefront (product demo)', () => {
 
   test('product demo: homepage and optional product page screenshot', async ({ page }) => {
     await page.goto(storeUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
-    const outDir = process.env.SCREENSHOT_DIR || join(process.cwd(), 'docs', 'screenshots');
+    const outDir = process.env.SCREENSHOT_DIR || join(process.cwd(), 'test-results', 'storefront');
     await mkdir(outDir, { recursive: true });
     const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
     await page.screenshot({

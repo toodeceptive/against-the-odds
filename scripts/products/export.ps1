@@ -10,6 +10,18 @@ param(
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
+. (Join-Path $repoPath "scripts\shopify\ShopifyStoreHelpers.ps1")
+
+if (Test-Path ".env.local") {
+    Get-Content ".env.local" | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith("#") -and $line -match "^([^=]+)=(.*)$") {
+            [Environment]::SetEnvironmentVariable($matches[1].Trim(), $matches[2].Trim(), "Process")
+        }
+    }
+}
+if ([string]::IsNullOrWhiteSpace($Store)) { $Store = $env:SHOPIFY_STORE_DOMAIN }
+if ([string]::IsNullOrWhiteSpace($Token)) { $Token = $env:SHOPIFY_ACCESS_TOKEN }
 
 Write-Host "=== Shopify Product Export ===" -ForegroundColor Cyan
 Write-Host ""
@@ -39,7 +51,8 @@ $headers = @{
     "Content-Type" = "application/json"
 }
 
-$baseUrl = "https://$Store/admin/api/2026-01"
+$storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+$baseUrl = "https://$($storeInfo.AdminHost)/admin/api/2026-01"
 $products = @()
 $pageInfo = $null
 $hasNextPage = $true

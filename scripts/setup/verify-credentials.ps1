@@ -8,6 +8,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
+. (Join-Path $repoPath "scripts\shopify\ShopifyStoreHelpers.ps1")
 
 if (-not $Quiet) {
     Write-Host "=== Credential Verification ===" -ForegroundColor Cyan
@@ -114,8 +115,9 @@ if ([string]::IsNullOrWhiteSpace($shopifyStore) -or
             "X-Shopify-Access-Token" = $shopifyToken
             "Content-Type" = "application/json"
         }
+        $shopifyStoreInfo = Resolve-ShopifyStoreInfo -Store $shopifyStore
 
-        $response = Invoke-RestMethod -Uri "https://$shopifyStore/admin/api/2026-01/shop.json" `
+        $response = Invoke-RestMethod -Uri "https://$($shopifyStoreInfo.AdminHost)/admin/api/2026-01/shop.json" `
             -Headers $headers -Method Get -TimeoutSec 10
 
         $results.shopify.status = "valid"

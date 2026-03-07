@@ -10,6 +10,25 @@ $ErrorActionPreference = "Stop"
 $repoPath = if ($PSScriptRoot) { (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path } else { (Get-Location).Path }
 Set-Location $repoPath
 
+function Get-EnvVarsFromFile {
+    param(
+        [string]$Path
+    )
+
+    $parsed = @{}
+    if (-not (Test-Path $Path)) {
+        return $parsed
+    }
+
+    foreach ($line in Get-Content $Path) {
+        if ($line -match '^([A-Z_]+)=(.*)$' -and -not $line.StartsWith('#')) {
+            $parsed[$matches[1]] = $matches[2].Trim()
+        }
+    }
+
+    return $parsed
+}
+
 Write-Host "=== Automated Environment Configuration ===" -ForegroundColor Cyan
 Write-Host ""
 
@@ -35,9 +54,9 @@ if ($envExists) {
             $backupPath = ".env.local.backup.$(Get-Date -Format 'yyyyMMdd_HHmmss')"
             Copy-Item $envLocalPath $backupPath
             Write-Host "[OK] Backed up to $backupPath" -ForegroundColor Green
+            $envExists = $false
         } else {
             Write-Host "Using existing .env.local" -ForegroundColor Cyan
-            $envExists = $false  # Don't overwrite
         }
     }
 }
@@ -55,16 +74,7 @@ if (-not $envExists) {
 
 # Read current .env.local
 $envContent = Get-Content $envLocalPath
-$envVars = @{}
-
-# Parse existing environment variables
-foreach ($line in $envContent) {
-    if ($line -match '^([A-Z_]+)=(.*)$' -and -not $line.StartsWith('#')) {
-        $varName = $matches[1]
-        $varValue = $matches[2].Trim()
-        $envVars[$varName] = $varValue
-    }
-}
+$envVars = Get-EnvVarsFromFile -Path $envLocalPath
 
 # Apply known credentials
 Write-Host ""
@@ -88,12 +98,7 @@ if ($needShopifyToken -and $haveApiKeySecret) {
         try {
             & "scripts\shopify\browser\get-token-client-credentials.ps1"
             $envContent = Get-Content $envLocalPath
-            $envVars = @{}
-            foreach ($line in $envContent) {
-                if ($line -match '^([A-Z_]+)=(.*)$' -and -not $line.StartsWith('#')) {
-                    $envVars[$matches[1]] = $matches[2].Trim()
-                }
-            }
+            $envVars = Get-EnvVarsFromFile -Path $envLocalPath
             $needShopifyToken = $false
         } catch {
             Write-Host "  [WARN] Client-credentials failed: $_" -ForegroundColor Yellow
@@ -164,6 +169,9 @@ if ($missingCredentials.Count -gt 0 -and $Interactive) {
             Write-Host "Attempting browser automation..." -ForegroundColor Yellow
             if (Test-Path "scripts\shopify\browser\get-access-token.ps1") {
                 & "scripts\shopify\browser\get-access-token.ps1"
+                $envContent = Get-Content $envLocalPath
+                $envVars = Get-EnvVarsFromFile -Path $envLocalPath
+                $needShopifyToken = [string]::IsNullOrWhiteSpace($envVars['SHOPIFY_ACCESS_TOKEN']) -or $envVars['SHOPIFY_ACCESS_TOKEN'] -match 'your_.*_here'
             } else {
                 Write-Host "  [WARN] Browser automation script not found. Please enter manually." -ForegroundColor Yellow
             }
@@ -191,7 +199,7 @@ foreach ($line in $envContent) {
         $newContent += $line
     }
 }
-$newContent | Out-File -FilePath $envLocalPath -Encoding UTF8 -NoNewline
+[System.IO.File]::WriteAllLines((Resolve-Path $envLocalPath), $newContent, [System.Text.UTF8Encoding]::new($false))
 Write-Host "[OK] Updated .env.local" -ForegroundColor Green
 
 # Optionally store in Windows Credential Manager

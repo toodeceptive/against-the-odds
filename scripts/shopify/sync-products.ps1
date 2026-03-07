@@ -11,6 +11,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 # Repo root: script is scripts/shopify/sync-products.ps1 -> repo = parent of parent of PSScriptRoot
 $repoPath = if ($PSScriptRoot) {
@@ -71,10 +72,8 @@ if (-not $productFiles -or $productFiles.Count -eq 0) {
 Write-Host "Found $($productFiles.Count) product file(s)" -ForegroundColor Cyan
 Write-Host ""
 
-$storeHost = $Store
-if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
-    $storeHost = "aodrop.com.myshopify.com"
-}
+$storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+$storeHost = $storeInfo.AdminHost
 $apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
 if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
 

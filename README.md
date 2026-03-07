@@ -154,20 +154,26 @@ SHOPIFY_CLI_THEME_TOKEN=your_theme_cli_token
 ## 🧪 Testing
 
 ```powershell
-# Run all tests
+# Run the deterministic local test baseline
 npm test
 
 # Unit tests only
 npm run test:unit
 
-# E2E tests (run `npx playwright install` once if needed)
+# Extended local validation (integration + local E2E smoke)
+npm run test:all
+
+# Local E2E smoke tests (run `npx playwright install` once if needed)
 npm run test:e2e
+
+# Optional live-store smoke tests
+npm run test:e2e:live
 
 # With coverage
 npm run test:coverage
 ```
 
-Desktop automation tests (`tests/desktop-automation/`) run on Windows only and are gated accordingly. Shopify admin E2E tests require `SHOPIFY_STORE_DOMAIN` and Playwright browsers; see `docs/SHOPIFY_SETUP.md`.
+Desktop automation tests (`tests/desktop-automation/`) run on Windows only and are gated accordingly. Shopify admin E2E tests require `SHOPIFY_STORE_DOMAIN` and Playwright browsers; see `docs/SHOPIFY_SETUP.md`. The default Playwright config targets the local repo preview at `http://127.0.0.1:8080`; live storefront checks are opt-in via `npm run test:e2e:live`.
 
 ## 📦 Scripts
 

@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ShopifyStoreHelpers.ps1"
 
 $repoPath = if ($PSScriptRoot) {
     $parent = Join-Path $PSScriptRoot ".."
@@ -34,11 +35,8 @@ if ([string]::IsNullOrWhiteSpace($Store)) {
     exit 1
 }
 
-# Use permanent store domain for CLI (required for auth)
-$storeForCli = $Store
-if ($Store -eq "aodrop.com" -or $Store -match "^aodrop\.com$") {
-    $storeForCli = "aodrop.com.myshopify.com"
-}
+# Use the canonical Shopify admin/CLI host rather than synthesizing one from a custom domain.
+$storeForCli = (Resolve-ShopifyStoreInfo -Store $Store).CliHost
 
 Write-Host "=== Shopify theme: auth then pull ===" -ForegroundColor Cyan
 Write-Host ""

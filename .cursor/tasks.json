@@ -239,7 +239,7 @@
       "label": "Vitest: Watch",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "test"],
+      "args": ["run", "test:watch"],
       "problemMatcher": []
     },
     {
