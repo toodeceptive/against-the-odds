@@ -14,8 +14,9 @@ PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they ca
 | `npm run test:watch`             | vitest                                         | Watch mode for local test iteration                                                |
 | `npm run test:unit`              | vitest run tests/unit                          | Unit tests only                                                                    |
 | `npm run test:integration`       | vitest run tests/integration                   | Integration tests only                                                             |
-| `npm run test:e2e`               | playwright test tests/e2e/example.spec.js      | Local E2E smoke against the repo preview                                           |
-| `npm run test:e2e:live`          | playwright test tests/live/storefront.spec.js  | Optional live-store smoke                                                          |
+| `npm run test:e2e`               | playwright test (playwright.config.js)         | Local E2E suite against the repo preview                                           |
+| `npm run test:e2e:live`          | playwright test (playwright.live.config.js)    | Optional live-store smoke                                                          |
+| `npm run test:e2e:smoke`         | playwright test (Chromium-only local smoke)    | Required native CI smoke check                                                     |
 | `npm run test:shopify`           | playwright test (shopify config)               | Shopify admin E2E                                                                  |
 | `npm run test:coverage`          | vitest run --coverage                          | Coverage report                                                                    |
 | `npm run test:all`               | safe baseline + local e2e                      | Extended local validation                                                          |
@@ -29,7 +30,8 @@ PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they ca
 | `npm run setup:auto`             | scripts/setup/auto-configure-env.ps1           | Auto-configure env helper; prefer `scripts/setup/full-setup.ps1` for full setup    |
 | `npm run health`                 | scripts/health/comprehensive-check.ps1         | Health check                                                                       |
 | `npm run sync`                   | scripts/sync/sync-all.ps1                      | Repo sync (fetch, conflict check)                                                  |
-| `npm run test:desktop`           | scripts/desktop-automation/test-system.ps1     | Desktop automation tests                                                           |
+| `npm run check:desktop:env`      | scripts/desktop-automation/test-system.ps1     | Desktop automation readiness/environment check                                     |
+| `npm run test:desktop`           | check:desktop:env                              | Backward-compatible alias for the desktop readiness check                          |
 | `npm run test:desktop:quick`     | scripts/desktop-automation/test-system.ps1     | Quick desktop automation test pass                                                 |
 | `npm run test:desktop:vitest`    | vitest run tests/desktop-automation            | Direct desktop Vitest suite (Windows/display required)                             |
 | `npm run verify:pipeline`        | scripts/verify-pipeline.ps1                    | Pipeline verification; auto-skips runbook when Shopify token is absent             |
