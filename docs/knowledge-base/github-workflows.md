@@ -4,7 +4,7 @@
 
 The project uses GitHub Actions for CI/CD automation:
 
-1. **CI**: Consolidated quality gate on push/PR to main (`arch_guard`, test job, `secret-scan`, `quality`)
+1. **CI**: Consolidated quality gate on push/PR to main (`arch_guard`, `test`, `secret-scan`, `e2e_smoke`, `quality`)
 2. **Sync**: Repository synchronization (main-only)
 3. **Shopify Sync**: Product sync
 4. **Sync theme branch**: Subtree-split theme to shopify-theme branch for Shopify GitHub App
@@ -21,6 +21,7 @@ Actions:
 - `arch_guard`: signature verification + recomputed structural hashes + product schema-version checks
 - test job: format check, lint, unit tests, build
 - `secret-scan`
+- `e2e_smoke`: Chromium-only local Playwright smoke (`npm run test:e2e:smoke`)
 - `quality`: `npm run quality`
 - Trivy, npm audit, Lighthouse remain informational (`continue-on-error`)
 

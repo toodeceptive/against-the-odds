@@ -12,7 +12,7 @@ This repo now uses a **main-only** branch model with short-lived topic branches:
 
 Operational notes:
 
-- **CI** runs on push/PR to `main` (`.github/workflows/ci.yml`; `arch_guard`, `test`, `secret-scan`, `quality`). This repo uses main-only; no develop branch.
+- **CI** runs on push/PR to `main` (`.github/workflows/ci.yml`; `arch_guard`, `test`, `secret-scan`, `e2e_smoke`, `quality`). This repo uses main-only; no develop branch.
 - **Automation vs reality**: Some workflows are intentionally placeholder/scaffold (“Add deployment steps here”). Treat them as guardrails/checklists unless you’ve wired the actual deployment commands.
 
 ## Detached HEAD recovery

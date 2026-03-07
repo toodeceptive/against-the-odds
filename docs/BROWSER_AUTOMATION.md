@@ -168,7 +168,7 @@ npx playwright test --config=playwright.shopify.config.js
 ### Test Files
 
 - `tests/shopify-admin/extract-credentials.spec.js` - Credential extraction tests
-- `tests/e2e/shopify-admin.spec.js` - General admin tests
+- `tests/shopify-admin/navigation.spec.js` - General admin navigation tests
 
 ## Best Practices
 
