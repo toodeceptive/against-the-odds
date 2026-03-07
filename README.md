@@ -28,15 +28,15 @@ shopify auth login
 .\scripts\shopify\theme-dev.ps1
 ```
 
-5. Update store theme (merge brand + copy images + push):
+5. Deploy through the canonical GitHub-App path:
 
 ```powershell
-.\scripts\shopify\theme-update-store.ps1
+# Commit/push to main; CI updates shopify-theme
 ```
 
-Or push only: `.\scripts\shopify\update-theme.ps1`
+Fallback only: `.\scripts\shopify\theme-update-store.ps1` or `.\scripts\shopify\update-theme.ps1`
 
-**If the store theme hasn’t updated:** Run step 3 (`theme-pull.ps1`) once in an interactive terminal, then run step 5 (`theme-update-store.ps1`) so the live theme gets the AO brand and images.
+**If the store theme hasn’t updated:** First confirm your `main` push triggered `.github/workflows/sync-theme-branch.yml` and updated `shopify-theme`. Use `theme-update-store.ps1` only as a fallback direct CLI push when the GitHub-App path is unavailable.
 
 ## Brand customization (pre-applied)
 
