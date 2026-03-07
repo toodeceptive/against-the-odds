@@ -2,7 +2,7 @@
 
 **Purpose**: Index of agent and guru prompts. Use this as the prompt inventory; use `docs/AGENT_PROMPT_DECISION_TREE.md` as the routing authority for "which prompt when."
 
-**Last updated**: 2026-03-06.
+**Last updated**: 2026-03-07.
 
 ---
 
@@ -14,6 +14,7 @@
 | **PP_USER_PROMPT.md**                                              | **Your go-to /pp prompt** — paste with /pp; empty = full project cycle.                                              |
 | **PP_EXECUTE_PROJECT_PROMPT.md**                                   | Full project PP cycle (delta audit, fixes, verify, log). Use with `/pp`.                                             |
 | **NEW_GURU_EXPERT_TEAM_SYSTEM_OPTIMIZATION_PP_PROMPT_20260306.md** | Current best delta-only guru PP prompt for system optimization, native-CI, workflow truth, and merge-gate closure.   |
+| **ULTIMATE_MULTI_AGENT_CONTINUATION_FINISH_PROMPT_20260307.md**    | Current best continuation / finish-all-work guru PP prompt after the March hardening passes; delta-only and non-redundant. |
 | PERFECT_DELTA_NATIVE_GURU_PP_PROMPT_20260306.md                    | Earlier delta-native guru PP prompt; superseded by the NEW_GURU_EXPERT_TEAM_SYSTEM_OPTIMIZATION prompt when present. |
 | **PERFECT_FOLLOWUP_PLAN_PROMPT_20260227.md**                       | Guru expert followup: inventory alignment, fix-handoff-line, OpenClaw cleanup; use with `/pp`.                       |
 | **MASTER_GURU_E2E_SYSTEM_PERFECTION_PROMPT.md**                    | Lead-agent perfection prompt; worktree-coordinated; loop until complete.                                             |
