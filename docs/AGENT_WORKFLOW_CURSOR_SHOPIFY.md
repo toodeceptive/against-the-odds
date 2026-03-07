@@ -7,7 +7,7 @@ Step-by-step for fulfilling store change requests (products, theme) with preview
 ## Product listing flow
 
 1. **Request**: User asks to add or change a product (e.g. "list this product on my page").
-2. **Create/edit**: Create or update JSON in `data/products/` per [Shopify Product resource](https://shopify.dev/docs/api/admin-rest/latest/resources/product). Use [data/products/example-hoodie.json](data/products/example-hoodie.json) as schema reference (title, body_html, vendor, product_type, tags, status, variants, images, options).
+2. **Create/edit**: Create or update JSON in `data/products/` per [Shopify Product resource](https://shopify.dev/docs/api/admin-rest/latest/resources/product). Use [data/products/example-hoodie.json](data/products/example-hoodie.json) as schema reference (`schema_version`, stable `handle`, title, body_html, vendor, product_type, tags, status, variants, images, options).
 3. **Preview**: Run `node scripts/shared/run-powershell.cjs scripts/shopify/sync-products.ps1 -DryRun` and capture the output.
 4. **Snapshot**: Write [docs/status/pending-approval.md](status/pending-approval.md) with: Summary (what will change), the dry-run output, and "To approve: reply in Cursor chat with 'approve' or 'yes'." **Then run `node scripts/shared/run-powershell.cjs scripts/open-pending-approval.ps1`** from repo root so the file opens in Cursor automatically for the user. Tell the user: "I've opened the pending changes for you. When ready, say 'approve' in this chat."
 5. **Approval**: Wait for explicit user confirmation in chat (e.g. "approve", "yes", "looks good").

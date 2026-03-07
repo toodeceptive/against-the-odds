@@ -83,6 +83,37 @@ $headers = @{
 }
 $baseUrl = "https://$storeHost/admin/api/$apiVersion"
 
+function Test-ProductSchema {
+    param([pscustomobject]$ProductData, [string]$FileName)
+
+    $schemaVersion = 0
+    if ($null -eq $ProductData.schema_version -or -not [long]::TryParse([string]$ProductData.schema_version, [ref]$schemaVersion)) {
+        throw "Product file $FileName must declare a numeric schema_version."
+    }
+
+    $handle = [string]$ProductData.handle
+    if ([string]::IsNullOrWhiteSpace($handle)) {
+        throw "Product file $FileName must declare a non-empty handle."
+    }
+
+    if ($handle -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$') {
+        throw "Product file $FileName has invalid handle '$handle'. Use lowercase letters, numbers, and hyphens only."
+    }
+}
+
+function Get-ShopifyProductPayload {
+    param([pscustomobject]$ProductData)
+
+    $payload = [ordered]@{}
+    foreach ($property in $ProductData.PSObject.Properties) {
+        if ($property.Name -ne "schema_version") {
+            $payload[$property.Name] = $property.Value
+        }
+    }
+
+    return $payload
+}
+
 # Invoke REST with 429 retry (Retry-After or 1s backoff, max 3 retries)
 function Invoke-ShopifyRestMethod {
     param([string]$Uri, [hashtable]$Headers, [string]$Method = "Get", [string]$Body = $null)
@@ -121,9 +152,12 @@ foreach ($file in $productFiles) {
 
     try {
         $productData = Get-Content $file.FullName -Raw | ConvertFrom-Json
+        Test-ProductSchema -ProductData $productData -FileName $file.Name
+        $productHandle = ([string]$productData.handle).Trim().ToLowerInvariant()
+        $shopifyProductData = Get-ShopifyProductPayload -ProductData $productData
 
         if ($DryRun) {
-            Write-Host "  [DRY RUN] Would create/update product: $($productData.title)" -ForegroundColor Cyan
+            Write-Host "  [DRY RUN] Would create/update product: $($productData.title) (handle: $productHandle)" -ForegroundColor Cyan
             continue
         }
 
@@ -131,11 +165,11 @@ foreach ($file in $productFiles) {
         $productId = $null
 
         try {
-            $searchUrl = "$baseUrl/products.json?limit=250"
+            $searchUrl = "$baseUrl/products.json?handle=$([uri]::EscapeDataString($productHandle))&limit=1"
             $allProducts = Invoke-ShopifyRestMethod -Uri $searchUrl -Headers $headers -Method Get
 
             if ($allProducts.products) {
-                $matchingProduct = $allProducts.products | Where-Object { $_.title -eq $productData.title }
+                $matchingProduct = $allProducts.products | Where-Object { $_.handle -eq $productHandle } | Select-Object -First 1
                 if ($matchingProduct) {
                     $productFound = $true
                     $productId = $matchingProduct.id
@@ -146,13 +180,13 @@ foreach ($file in $productFiles) {
         }
 
         if ($productFound -and $productId) {
-            Write-Host "  Updating existing product (ID: $productId)..." -ForegroundColor Yellow
-            $updateBody = @{ product = $productData } | ConvertTo-Json -Depth 10
+            Write-Host "  Updating existing product (ID: $productId, handle: $productHandle)..." -ForegroundColor Yellow
+            $updateBody = @{ product = $shopifyProductData } | ConvertTo-Json -Depth 10
             $response = Invoke-ShopifyRestMethod -Uri "$baseUrl/products/$productId.json" -Headers $headers -Method Put -Body $updateBody
             Write-Host "  [OK] Updated: $($response.product.title)" -ForegroundColor Green
         } else {
-            Write-Host "  Creating new product..." -ForegroundColor Yellow
-            $createBody = @{ product = $productData } | ConvertTo-Json -Depth 10
+            Write-Host "  Creating new product (handle: $productHandle)..." -ForegroundColor Yellow
+            $createBody = @{ product = $shopifyProductData } | ConvertTo-Json -Depth 10
             $response = Invoke-ShopifyRestMethod -Uri "$baseUrl/products.json" -Headers $headers -Method Post -Body $createBody
             Write-Host "  [OK] Created: $($response.product.title) (ID: $($response.product.id))" -ForegroundColor Green
         }

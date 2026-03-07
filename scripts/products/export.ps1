@@ -107,6 +107,8 @@ foreach ($product in $products) {
     
     # Clean product data for export
     $exportData = @{
+        schema_version = 2
+        handle = $product.handle
         title = $product.title
         body_html = $product.body_html
         vendor = $product.vendor

@@ -190,7 +190,8 @@ Products are stored in `data/products/` as JSON files:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "handle": "ao-hoodie",
   "title": "AO Hoodie",
   "body_html": "<p>Against The Odds signature hoodie</p>",
   "vendor": "Against The Odds",

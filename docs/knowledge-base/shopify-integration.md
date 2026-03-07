@@ -35,14 +35,14 @@ The Shopify integration uses a multi-layered approach:
 ### Product Management
 
 ```powershell
-# Sync products
-.\scripts\products\sync.ps1 -Direction import
+# Preview repo -> Shopify product sync
+.\scripts\shopify\sync-products.ps1 -DryRun
+
+# Apply repo -> Shopify product sync
+.\scripts\shopify\sync-products.ps1
 
 # Export products
 .\scripts\products\export.ps1
-
-# Import products
-.\scripts\products\import.ps1
 ```
 
 ### Theme Development

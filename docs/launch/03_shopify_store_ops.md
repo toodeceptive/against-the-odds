@@ -100,12 +100,12 @@ For every sellable SKU/variant:
 
 This repo includes product sync helpers:
 
-- `scripts/shopify/sync-products.ps1` reads `data/products/*.json` and creates/updates products by title.
+- `scripts/shopify/sync-products.ps1` reads `data/products/*.json` and creates/updates products by stable `handle`.
 - Use `-DryRun` first to confirm what will change.
 
 Operational caution:
 
-- Title-based matching can be brittle if titles change. If you plan frequent updates, consider evolving the sync strategy to use a stable identifier (SKU/metafield) and document it here.
+- Keep `handle` stable across edits; titles can change, but product sync now uses `handle` as the canonical Shopify identity.
 
 ## Policies + legal pages
 

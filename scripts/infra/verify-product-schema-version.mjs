@@ -117,6 +117,14 @@ for (const relPath of currentProductFiles) {
   if (typeof product.schema_version !== 'number') {
     fail(`${relPath} is missing a numeric schema_version.`);
   }
+  if (typeof product.handle !== 'string' || !product.handle.trim()) {
+    fail(`${relPath} is missing a non-empty handle.`);
+  }
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(product.handle.trim())) {
+    fail(
+      `${relPath} handle="${product.handle}" is invalid. Use lowercase letters, numbers, and hyphens only.`
+    );
+  }
   if (product.schema_version !== currentVersion) {
     fail(
       `${relPath} schema_version=${product.schema_version} does not match docs/VERSION_POLICY.md current version ${currentVersion}.`

@@ -46,7 +46,7 @@
 
 ### Products
 
-- **Data:** `data/products/*.json` (title, body_html, variants, options, images). **Sync:** `.\scripts\shopify\sync-products.ps1 -DryRun` for preview, then `.\scripts\shopify\sync-products.ps1` after approval.
+- **Data:** `data/products/*.json` (`schema_version`, stable `handle`, title, body_html, variants, options, images). **Sync:** `.\scripts\shopify\sync-products.ps1 -DryRun` for preview, then `.\scripts\shopify\sync-products.ps1` after approval.
 
 ### Sizes / variants
 
