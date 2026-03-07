@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 /**
- * Set required status checks for main branch to native CI only (test, secret-scan, quality, arch_guard).
+ * Set required status checks for main branch to native CI only (test, secret-scan, e2e_smoke, quality, arch_guard).
  * External Codacy or Continuous AI status contexts should not be required.
  * Token: GITHUB_TOKEN or GH_TOKEN env, .env.local, or Git credential for github.com.
  * Usage: node scripts/github/update-branch-protection-status-checks.js
@@ -13,7 +13,7 @@ const { execSync } = require('child_process');
 const OWNER = 'toodeceptive';
 const REPO = 'against-the-odds';
 const BRANCH = 'main';
-const CI_CONTEXTS = ['test', 'secret-scan', 'quality', 'arch_guard'];
+const CI_CONTEXTS = ['arch_guard', 'test', 'secret-scan', 'e2e_smoke', 'quality'];
 
 function tokenFromGitCredential() {
   try {

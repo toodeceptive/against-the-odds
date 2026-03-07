@@ -15,7 +15,7 @@
 ## Workflows
 
 - **Branch strategy**: main-only (no develop branch).
-- CI: `.github/workflows/ci.yml` (push/PR to main; arch_guard + deterministic quality/test gates + security scans)
+- CI: `.github/workflows/ci.yml` (push/PR to main; arch_guard + test + secret-scan + e2e_smoke + quality + informational security scans)
 - Shopify Sync: `.github/workflows/shopify-sync.yml`
 - Sync theme branch: `.github/workflows/sync-theme-branch.yml` (main → shopify-theme)
 - Maintenance: `.github/workflows/maintenance.yml`

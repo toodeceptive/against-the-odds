@@ -64,16 +64,16 @@ This is an operational infrastructure repo for the "Against The Odds" Shopify st
 
 ### Key commands
 
-| Task              | Command                                                             |
-| ----------------- | ------------------------------------------------------------------- |
-| Install deps      | `npm install`                                                       |
-| Lint              | `npx eslint .`                                                      |
-| Format check      | `npx prettier --check "**/*.{js,ts,jsx,tsx,json,css,md,html}"`      |
-| Unit tests        | `npm run test:unit` (Vitest)                                        |
-| Integration tests | `npm run test:integration` (skipped without Shopify/GitHub creds)   |
-| Full quality gate | `npm run quality` (format + lint + unit tests)                      |
-| Serve static site | `python3 -m http.server 8080` (from repo root; serves `index.html`) |
-| E2E tests         | `npm run test:e2e` (requires `npx playwright install` first)        |
+| Task              | Command                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------- |
+| Install deps      | `npm install`                                                                                     |
+| Lint              | `npx eslint .`                                                                                    |
+| Format check      | `npm run format:check`                                                                            |
+| Unit tests        | `npm run test:unit` (Vitest)                                                                      |
+| Integration tests | `npm run test:integration` (skipped without Shopify/GitHub creds)                                 |
+| Full quality gate | `npm run quality` (format + lint + unit tests)                                                    |
+| Serve static site | `python3 -m http.server 8080` (from repo root; serves `index.html`)                               |
+| E2E tests         | `npm run test:e2e` (all local smoke browsers) / `npm run test:e2e:smoke` (Chromium-only CI smoke) |
 
 ### Caveats
 

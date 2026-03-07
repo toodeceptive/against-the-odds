@@ -9,6 +9,7 @@
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "test:e2e": "playwright test tests/e2e/example.spec.js",
+    "test:e2e:smoke": "playwright test tests/e2e/example.spec.js --project=chromium",
     "test:e2e:live": "playwright test tests/live/storefront.spec.js",
     "test:shopify": "playwright test --config=playwright.shopify.config.js",
     "test:coverage": "vitest run --coverage",
