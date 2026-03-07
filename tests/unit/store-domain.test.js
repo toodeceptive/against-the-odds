@@ -31,6 +31,14 @@ describe('Shopify store domain helpers', () => {
     });
   });
 
+  it('falls back to a myshopify-formatted host for unknown storefront domains', () => {
+    expect(resolveShopifyStoreInfo('example.com')).toMatchObject({
+      adminHost: 'example.com.myshopify.com',
+      cliHost: 'example.com.myshopify.com',
+      storeSlug: null,
+    });
+  });
+
   it('builds modern admin.shopify.com routes when a store slug is known', () => {
     expect(buildShopifyAdminUrl('aodrop.com', '/themes')).toBe(
       'https://admin.shopify.com/store/nbxwpf-z1/themes'

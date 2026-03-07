@@ -18,6 +18,19 @@ function Get-NormalizedShopifyStoreHost {
     }
 }
 
+function Get-FallbackMyShopifyHost {
+    param(
+        [Parameter(Mandatory = $true)][string]$StorefrontHost,
+        [string]$StoreSlug
+    )
+
+    if (-not [string]::IsNullOrWhiteSpace($StoreSlug)) {
+        return "$StoreSlug.myshopify.com"
+    }
+
+    return "$StorefrontHost.myshopify.com"
+}
+
 function Resolve-ShopifyStoreInfo {
     param(
         [string]$Store,
@@ -47,6 +60,7 @@ function Resolve-ShopifyStoreInfo {
     }
 
     $explicitMyShopifyDomain = Get-NormalizedShopifyStoreHost -Store $MyShopifyDomain
+    $hasExplicitMyShopifyDomain = -not [string]::IsNullOrWhiteSpace($explicitMyShopifyDomain) -and $explicitMyShopifyDomain -match '\.myshopify\.com$'
     $normalizedStoreSlug = if ([string]::IsNullOrWhiteSpace($StoreSlug)) {
         $null
     } else {
@@ -54,7 +68,7 @@ function Resolve-ShopifyStoreInfo {
     }
 
     $knownStore = $knownStores[$storefrontHost]
-    if (-not $knownStore -and -not [string]::IsNullOrWhiteSpace($explicitMyShopifyDomain)) {
+    if (-not $knownStore -and $hasExplicitMyShopifyDomain) {
         $knownStore = $knownStores[$explicitMyShopifyDomain]
     }
 
@@ -64,9 +78,9 @@ function Resolve-ShopifyStoreInfo {
         if (-not $normalizedStoreSlug) {
             $normalizedStoreSlug = $storefrontHost -replace '\.myshopify\.com$', ''
         }
-    } elseif (-not [string]::IsNullOrWhiteSpace($explicitMyShopifyDomain)) {
+    } elseif ($hasExplicitMyShopifyDomain) {
         $adminHost = $explicitMyShopifyDomain
-        if (-not $normalizedStoreSlug -and $explicitMyShopifyDomain -match '\.myshopify\.com$') {
+        if (-not $normalizedStoreSlug) {
             $normalizedStoreSlug = $explicitMyShopifyDomain -replace '\.myshopify\.com$', ''
         }
     } elseif ($knownStore) {
@@ -74,6 +88,8 @@ function Resolve-ShopifyStoreInfo {
         if (-not $normalizedStoreSlug) {
             $normalizedStoreSlug = $knownStore.StoreSlug
         }
+    } else {
+        $adminHost = Get-FallbackMyShopifyHost -StorefrontHost $storefrontHost -StoreSlug $normalizedStoreSlug
     }
 
     return [PSCustomObject]@{

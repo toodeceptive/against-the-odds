@@ -31,6 +31,13 @@ function deriveStoreSlugFromMyShopifyHost(hostname) {
   return hostname?.endsWith('.myshopify.com') ? hostname.replace(/\.myshopify\.com$/, '') : null;
 }
 
+function buildFallbackMyShopifyHost(storefrontHost, storeSlug) {
+  if (storeSlug) {
+    return `${storeSlug}.myshopify.com`;
+  }
+  return `${storefrontHost}.myshopify.com`;
+}
+
 function normalizeStoreSlug(storeSlug) {
   const trimmed = readEnvValue(storeSlug);
   return trimmed ? trimmed.toLowerCase() : null;
@@ -58,12 +65,13 @@ export function resolveShopifyStoreInfo(storeDomain, options = {}) {
   const explicitMyShopifyDomain = normalizeStoreHost(
     options.myshopifyDomain ?? process.env.SHOPIFY_MYSHOPIFY_DOMAIN
   );
+  const hasExplicitMyShopifyDomain = explicitMyShopifyDomain?.endsWith('.myshopify.com');
   const explicitStoreSlug = normalizeStoreSlug(
     options.storeSlug ?? process.env.ATO_SHOPIFY_STORE_ID
   );
   const knownStore =
     KNOWN_STORES[storefrontHost] ||
-    (explicitMyShopifyDomain ? KNOWN_STORES[explicitMyShopifyDomain] : null);
+    (hasExplicitMyShopifyDomain ? KNOWN_STORES[explicitMyShopifyDomain] : null);
 
   let adminHost = storefrontHost;
   let storeSlug = explicitStoreSlug;
@@ -71,12 +79,14 @@ export function resolveShopifyStoreInfo(storeDomain, options = {}) {
   if (storefrontHost.endsWith('.myshopify.com')) {
     adminHost = storefrontHost;
     storeSlug ||= deriveStoreSlugFromMyShopifyHost(storefrontHost);
-  } else if (explicitMyShopifyDomain) {
+  } else if (hasExplicitMyShopifyDomain) {
     adminHost = explicitMyShopifyDomain;
     storeSlug ||= deriveStoreSlugFromMyShopifyHost(explicitMyShopifyDomain);
   } else if (knownStore?.myshopifyDomain) {
     adminHost = knownStore.myshopifyDomain;
     storeSlug ||= knownStore.storeSlug;
+  } else {
+    adminHost = buildFallbackMyShopifyHost(storefrontHost, storeSlug);
   }
 
   const trustedHosts = Array.from(new Set(['admin.shopify.com', storefrontHost, adminHost]));
