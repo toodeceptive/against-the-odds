@@ -38,6 +38,7 @@ Write-Host "[2/6] Checking workflow files..." -ForegroundColor Yellow
 $workflows = @(
     ".github/workflows/ci.yml",
     ".github/workflows/codeql.yml",
+    ".github/workflows/governance-verify.yml",
     ".github/workflows/shopify-sync.yml",
     ".github/workflows/sync-theme-branch.yml",
     ".github/workflows/sync.yml",
@@ -124,8 +125,22 @@ if (-not $SkipRunbook) {
         } else {
             Write-Host "  E2E smoke OK" -ForegroundColor Green
         }
+
+        $governanceToken = [Environment]::GetEnvironmentVariable("GITHUB_ADMIN_TOKEN", "Process")
+        if ([string]::IsNullOrWhiteSpace($governanceToken)) {
+            Write-Host "  (GITHUB_ADMIN_TOKEN not set, skip governance verification)" -ForegroundColor Gray
+        } else {
+            Write-Host "  Verifying governance settings..." -ForegroundColor Yellow
+            npm run verify:governance 2>&1 | Out-Null
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host "  Governance verification reported issues." -ForegroundColor Red
+                $failed++
+            } else {
+                Write-Host "  Governance settings OK" -ForegroundColor Green
+            }
+        }
     } elseif (-not $RequireRunbook) {
-        Write-Host "  (integration and E2E smoke run in strict mode only; use -RequireRunbook)" -ForegroundColor Gray
+        Write-Host "  (integration, E2E smoke, and governance verification run in strict mode only; use -RequireRunbook)" -ForegroundColor Gray
     }
 
     $runbook = Join-Path $repoPath (Join-Path "scripts" "run-runbook.ps1")

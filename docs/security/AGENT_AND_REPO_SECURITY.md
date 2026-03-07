@@ -8,7 +8,7 @@ Summary for Cursor agents and operators: where secrets live, preview-before-appl
 
 - **Local**: `.env.local` in repo root only. Gitignored; never committed. Agent may read/write for setup only; never commit or log. See [.cursor/rules/env-credentials.mdc](../../.cursor/rules/env-credentials.mdc).
 - **CI**: GitHub Actions **Secrets** (Settings → Secrets and variables → Actions). Use `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_ACCESS_TOKEN` (and optionally `SHOPIFY_THEME_ID`). Pass as **environment variables** in workflows, not on the command line.
-- **Pre-commit / CI**: Optional secret scan (blocklist for `shpat_`, `ghp_`, `shpss_`) to prevent accidental commit. Document in this folder if enabled.
+- **Pre-commit / CI**: Required secret scan looks for Shopify token formats, modern GitHub token formats, generic token/API-key labels, and private key headers across active script/doc/config file types.
 
 ---
 

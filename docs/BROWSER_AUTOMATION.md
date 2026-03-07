@@ -31,7 +31,7 @@ Results Storage / API Integration
 
 2. **Chrome with Remote Debugging** (for connecting to existing instance):
    - Chrome must be launched with: `--remote-debugging-port=9222`
-   - Or use the automation scripts which handle this
+   - Or use `scripts/shopify/browser/launch-chrome-for-agent.ps1` to start a debug-enabled Chrome window
 
 ### Configuration
 
@@ -85,6 +85,7 @@ Currently prints a manual verification checklist; it is not yet a full automated
 Located in `src/browser-automation/shopify-admin.js`:
 
 - `connectToBrowser()` - Connect to existing Chrome (standalone launch only when explicitly opted into)
+- `getConnectedBrowserPage()` - Reuse an attached Shopify Admin tab for the target store when available, or open a new page in the attached context without hijacking an unrelated tab
 - `ensureShopifyLogin()` - Ensure logged in to Shopify admin
 - `extractAccessToken()` - Extract access token from admin
 - `extractThemeId()` - Extract theme ID from admin
@@ -129,11 +130,15 @@ Then run automation scripts.
 ### Example: Extract Product Count
 
 ```javascript
-import { connectToBrowser, ensureShopifyLogin } from '../src/browser-automation/shopify-admin.js';
+import {
+  connectToBrowser,
+  ensureShopifyLogin,
+  getConnectedBrowserPage,
+} from '../src/browser-automation/shopify-admin.js';
 import { buildShopifyAdminUrl } from '../src/shopify/store-domain.js';
 
 const browser = await connectToBrowser({ useExisting: true });
-const page = await browser.newPage();
+const { page, cleanup } = await getConnectedBrowserPage(browser, { storeDomain: 'aodrop.com' });
 
 await ensureShopifyLogin(page, 'aodrop.com');
 await page.goto(buildShopifyAdminUrl('aodrop.com', '/products'));
@@ -141,6 +146,7 @@ await page.goto(buildShopifyAdminUrl('aodrop.com', '/products'));
 const count = await page.locator('[data-product-count]').textContent();
 console.log(`Products: ${count}`);
 
+await cleanup();
 await browser.close();
 ```
 
