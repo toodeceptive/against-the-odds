@@ -110,7 +110,7 @@ jobs:
       - name: Run tests
         run: |
           if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
-            npm run test:unit
+            npm test
           fi
 
       - name: Verify theme branch export

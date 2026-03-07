@@ -1,4 +1,4 @@
-# Verify Cursor-GitHub-Shopify pipeline: scripts parse, workflows present, theme export verifies, optional dry-run and runbook.
+# Verify Cursor-GitHub-Shopify pipeline: scripts parse, workflows present, theme export verifies, and strict mode expands into integration/smoke checks.
 # Run from repo root: .\scripts\verify-pipeline.ps1
 
 param(
@@ -88,12 +88,12 @@ if ($store -and $token) {
 }
 Write-Host ""
 
-# 5. Lint
-Write-Host "[5/6] Lint (ESLint)..." -ForegroundColor Yellow
+# 5. Quality gate
+Write-Host "[5/6] Repo quality gate..." -ForegroundColor Yellow
 if (Test-Path (Join-Path $repoPath "package.json")) {
-    npm run lint 2>&1 | Out-Null
+    npm run quality 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "  Lint reported issues." -ForegroundColor Red
+        Write-Host "  Quality gate reported issues." -ForegroundColor Red
         $failed++
     } else {
         Write-Host "  OK" -ForegroundColor Green
@@ -103,9 +103,31 @@ if (Test-Path (Join-Path $repoPath "package.json")) {
 }
 Write-Host ""
 
-# 6. Runbook (Shopify + GitHub checks)
+# 6. Strict-only integration + runbook checks
 if (-not $SkipRunbook) {
-    Write-Host "[6/6] Runbook (Shopify + GitHub verification)..." -ForegroundColor Yellow
+    Write-Host "[6/6] Strict verification extras..." -ForegroundColor Yellow
+    if ($RequireRunbook -and (Test-Path (Join-Path $repoPath "package.json"))) {
+        Write-Host "  Running integration tests..." -ForegroundColor Yellow
+        npm run test:integration 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "  Integration tests reported issues." -ForegroundColor Red
+            $failed++
+        } else {
+            Write-Host "  Integration tests OK" -ForegroundColor Green
+        }
+
+        Write-Host "  Running local E2E smoke..." -ForegroundColor Yellow
+        npm run test:e2e:smoke 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "  E2E smoke reported issues." -ForegroundColor Red
+            $failed++
+        } else {
+            Write-Host "  E2E smoke OK" -ForegroundColor Green
+        }
+    } elseif (-not $RequireRunbook) {
+        Write-Host "  (integration and E2E smoke run in strict mode only; use -RequireRunbook)" -ForegroundColor Gray
+    }
+
     $runbook = Join-Path $repoPath (Join-Path "scripts" "run-runbook.ps1")
     if (-not $RequireRunbook -and -not $token) {
         Write-Host "  (credential-gated: SHOPIFY_ACCESS_TOKEN not set, skip runbook; use -RequireRunbook for strict mode)" -ForegroundColor Gray
