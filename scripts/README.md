@@ -65,11 +65,11 @@ PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they ca
 
 ### Products (scripts/products/)
 
-| Script       | Purpose                                                  | When to run                                                                        |
-| ------------ | -------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **sync.ps1** | Bidirectional wrapper; `-Direction import\|export\|both` | Import from store or export to repo; import delegates to shopify/sync-products.ps1 |
-| export.ps1   | Export products from store to repo                       | Backup or local data refresh                                                       |
-| import.ps1   | Import (delegates to sync-products)                      | Use sync.ps1 -Direction import or sync-products.ps1                                |
+| Script       | Purpose                                           | When to run                                                                    |
+| ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **sync.ps1** | Legacy wrapper; `-Direction import\|export\|both` | `import` delegates repo → Shopify sync; `export` pulls store data back to repo |
+| export.ps1   | Export products from store to repo                | Backup or local data refresh                                                   |
+| import.ps1   | Import (delegates to sync-products)               | Use sync.ps1 -Direction import or sync-products.ps1                            |
 
 ### Git (scripts/git/)
 

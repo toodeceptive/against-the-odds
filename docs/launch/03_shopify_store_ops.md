@@ -67,7 +67,7 @@ Notes:
 
 - Shopify CLI is the underlying engine (`shopify theme dev/pull/push`); scripts are thin wrappers.
 - `update-theme.ps1` / `theme-update-store.ps1` remain fallback direct-CLI apply paths, not the primary deploy model.
-- Several scripts set a fixed `$repoPath` (example: `C:\Users\LegiT\against-the-odds`). In this Cursor worktree, run from the repo root or use equivalent CLI commands if the path doesn’t match.
+- Active scripts resolve repo root dynamically. Run from the repo root so wrappers and relative paths stay deterministic.
 
 ### Theme guardrails (non-negotiable)
 

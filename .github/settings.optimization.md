@@ -76,10 +76,10 @@ This repository is main-only. Do not configure a develop branch protection rule.
 
 - `SHOPIFY_STORE_DOMAIN` = `aodrop.com`
 - `SHOPIFY_ACCESS_TOKEN` = (Your Shopify Admin API access token)
-- `SHOPIFY_THEME_ID` = (Your Shopify theme ID)
 
 **Optional Secrets**:
 
+- `SHOPIFY_THEME_ID` = (Your Shopify theme ID)
 - `SHOPIFY_API_KEY` = (Your Shopify app client ID)
 - `SHOPIFY_API_SECRET` = (Your Shopify API secret)
 - `GITHUB_TOKEN` = (For enhanced GitHub API access)

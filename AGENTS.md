@@ -22,7 +22,7 @@ The user grants agents **full permission** to perform all actions in this reposi
 
 ## Structural integrity enforcement contract (CI authoritative for repo-contained controls)
 
-- **Single enforcement authority:** CI is the only enforcement authority for repo-contained structural integrity controls; runtime agents/rules are advisory. GitHub-hosted branch protection/ruleset settings are verified separately by governance tooling.
+- **Single enforcement authority:** CI is the only enforcement authority for repo-contained structural integrity controls; runtime agents/rules are advisory. GitHub-hosted branch protection settings are verified separately by governance tooling.
 - **Required gate:** `arch_guard` must exist in `.github/workflows/ci.yml` and be a required status check for `main`.
 - **Signature chain:** `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt` are required. Signature generation is local-only (never generated in CI); CI verifies only.
 - **Schema mutation control:** Schema/data-contract changes in covered data areas must fail CI unless the declared schema version is bumped per `docs/VERSION_POLICY.md`.

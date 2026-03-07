@@ -114,7 +114,7 @@ shopify auth login
 # From repo root, prefer the repo wrapper
 node scripts/shared/run-powershell.cjs scripts/shopify/theme-dev.ps1
 
-# Or for app development
+# Optional/future only: use this if you are explicitly building a custom Shopify app
 shopify app dev
 ```
 

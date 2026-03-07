@@ -101,4 +101,4 @@ No "Go Live" or commit needed to preview—the dev server shows your local chang
 
 **Visual usage guide:** [docs/guides/SHOPIFY_CURSOR_USAGE_GUIDE.md](guides/SHOPIFY_CURSOR_USAGE_GUIDE.md) (diagrams and step-by-step). For a printable/downloadable version: open [docs/guides/SHOPIFY_CURSOR_USAGE_GUIDE.html](guides/SHOPIFY_CURSOR_USAGE_GUIDE.html) in a browser and use **Print → Save as PDF**.
 
-See also: [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](UPDATE_SHOPIFY_FROM_CURSOR.md), [OPERATOR_RUNBOOK.md](../../OPERATOR_RUNBOOK.md).
+See also: [docs/UPDATE_SHOPIFY_FROM_CURSOR.md](UPDATE_SHOPIFY_FROM_CURSOR.md), [OPERATOR_RUNBOOK.md](../OPERATOR_RUNBOOK.md).
