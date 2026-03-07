@@ -58,14 +58,15 @@ The goal is to keep changes safe, reviewable, and reversible.
    - `scripts/shopify/theme-pull.ps1`
 2. **Run a local dev preview** (sync + preview URL):
    - `scripts/shopify/theme-dev.ps1`
-3. **Push to a development theme** for QA:
-   - `scripts/shopify/update-theme.ps1`
-4. **Publish to LIVE only after QA**:
-   - `scripts/shopify/update-theme.ps1 -Live` (requires explicit `yes`)
+3. **Commit and push to `main`** after approval:
+   - CI updates `shopify-theme`
+4. **Let Shopify GitHub App deploy from `shopify-theme`**:
+   - this is the canonical store apply path
 
 Notes:
 
 - Shopify CLI is the underlying engine (`shopify theme dev/pull/push`); scripts are thin wrappers.
+- `update-theme.ps1` / `theme-update-store.ps1` remain fallback direct-CLI apply paths, not the primary deploy model.
 - Several scripts set a fixed `$repoPath` (example: `C:\Users\LegiT\against-the-odds`). In this Cursor worktree, run from the repo root or use equivalent CLI commands if the path doesn’t match.
 
 ### Theme guardrails (non-negotiable)
