@@ -39,19 +39,6 @@ if ([string]::IsNullOrWhiteSpace($Token)) { $Token = $env:SHOPIFY_ACCESS_TOKEN }
 Write-Host "=== Shopify Product Sync ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Validate environment — skip sync gracefully in CI when secrets are not set
-if ([string]::IsNullOrWhiteSpace($Store)) {
-    Write-Host "SHOPIFY_STORE_DOMAIN not set; skipping product sync." -ForegroundColor Yellow
-    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Gray
-    exit 0
-}
-
-if ([string]::IsNullOrWhiteSpace($Token)) {
-    Write-Host "SHOPIFY_ACCESS_TOKEN not set; skipping product sync." -ForegroundColor Yellow
-    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Gray
-    exit 0
-}
-
 # Cross-platform products path
 $productsDir = Join-Path (Join-Path $repoPath "data") "products"
 if (-not (Test-Path $productsDir)) {
@@ -72,16 +59,33 @@ if (-not $productFiles -or $productFiles.Count -eq 0) {
 Write-Host "Found $($productFiles.Count) product file(s)" -ForegroundColor Cyan
 Write-Host ""
 
-$storeInfo = Resolve-ShopifyStoreInfo -Store $Store
-$storeHost = $storeInfo.AdminHost
-$apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
-if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
-
-$headers = @{
-    "X-Shopify-Access-Token" = $Token
-    "Content-Type"           = "application/json"
+$isApplyRun = -not $DryRun
+if ($isApplyRun -and [string]::IsNullOrWhiteSpace($Store)) {
+    Write-Host "Error: SHOPIFY_STORE_DOMAIN not set for apply run." -ForegroundColor Red
+    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Yellow
+    exit 1
 }
-$baseUrl = "https://$storeHost/admin/api/$apiVersion"
+
+if ($isApplyRun -and [string]::IsNullOrWhiteSpace($Token)) {
+    Write-Host "Error: SHOPIFY_ACCESS_TOKEN not set for apply run." -ForegroundColor Red
+    Write-Host "Set it in .env.local or repo Secrets to enable sync." -ForegroundColor Yellow
+    exit 1
+}
+
+$baseUrl = $null
+$headers = $null
+if ($isApplyRun) {
+    $storeInfo = Resolve-ShopifyStoreInfo -Store $Store
+    $storeHost = $storeInfo.AdminHost
+    $apiVersion = $env:SHOPIFY_ADMIN_API_VERSION
+    if ([string]::IsNullOrWhiteSpace($apiVersion)) { $apiVersion = "2026-01" }
+
+    $headers = @{
+        "X-Shopify-Access-Token" = $Token
+        "Content-Type"           = "application/json"
+    }
+    $baseUrl = "https://$storeHost/admin/api/$apiVersion"
+}
 
 function Test-ProductSchema {
     param([pscustomobject]$ProductData, [string]$FileName)
@@ -147,6 +151,8 @@ function Invoke-ShopifyRestMethod {
     }
 }
 
+$processed = 0
+$failed = 0
 foreach ($file in $productFiles) {
     Write-Host "Processing: $($file.Name)" -ForegroundColor Yellow
 
@@ -158,6 +164,7 @@ foreach ($file in $productFiles) {
 
         if ($DryRun) {
             Write-Host "  [DRY RUN] Would create/update product: $($productData.title) (handle: $productHandle)" -ForegroundColor Cyan
+            $processed++
             continue
         }
 
@@ -190,7 +197,9 @@ foreach ($file in $productFiles) {
             $response = Invoke-ShopifyRestMethod -Uri "$baseUrl/products.json" -Headers $headers -Method Post -Body $createBody
             Write-Host "  [OK] Created: $($response.product.title) (ID: $($response.product.id))" -ForegroundColor Green
         }
+        $processed++
     } catch {
+        $failed++
         $errorMessage = $_.Exception.Message
         if ($_.ErrorDetails.Message) {
             try {
@@ -207,4 +216,13 @@ foreach ($file in $productFiles) {
 }
 
 Write-Host ""
-Write-Host "[OK] Product sync complete!" -ForegroundColor Green
+if ($failed -gt 0) {
+    Write-Host "[FAIL] Product sync finished with $failed failure(s) and $processed successful item(s)." -ForegroundColor Red
+    exit 1
+}
+
+if ($DryRun) {
+    Write-Host "[OK] Product sync dry run complete! ($processed item(s) validated)" -ForegroundColor Green
+} else {
+    Write-Host "[OK] Product sync complete! ($processed item(s) applied)" -ForegroundColor Green
+}

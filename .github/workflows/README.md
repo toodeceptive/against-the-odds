@@ -36,7 +36,7 @@ These workflows require the following secrets to be configured in GitHub:
 
 - Runs on: Daily at 2 AM, Push to `main` (data/products only), Manual trigger
 - Actions: Syncs products to Shopify; backup-store job backs up theme to `shopify-theme-backup` branch (theme pull REST + push)
-- **Resilience**: In the `sync-products` job, if `SHOPIFY_STORE_DOMAIN` or `SHOPIFY_ACCESS_TOKEN` are not set, the sync step skips gracefully (exit 0) so the workflow does not fail. The manual/scheduled backup job still expects those secrets to exist.
+- **Resilience**: The product-sync job now fails loudly if required Shopify secrets are missing or if any product apply step fails. Keep `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_ACCESS_TOKEN` configured for scheduled/manual syncs. The backup job still expects those secrets to exist.
 
 ### `sync-theme-branch.yml`
 

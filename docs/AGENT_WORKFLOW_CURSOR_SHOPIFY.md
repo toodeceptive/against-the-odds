@@ -11,7 +11,7 @@ Step-by-step for fulfilling store change requests (products, theme) with preview
 3. **Preview**: Run `node scripts/shared/run-powershell.cjs scripts/shopify/sync-products.ps1 -DryRun` and capture the output.
 4. **Snapshot**: Write [docs/status/pending-approval.md](status/pending-approval.md) with: Summary (what will change), the dry-run output, and "To approve: reply in Cursor chat with 'approve' or 'yes'." **Then run `node scripts/shared/run-powershell.cjs scripts/open-pending-approval.ps1`** from repo root so the file opens in Cursor automatically for the user. Tell the user: "I've opened the pending changes for you. When ready, say 'approve' in this chat."
 5. **Approval**: Wait for explicit user confirmation in chat (e.g. "approve", "yes", "looks good").
-6. **Apply**: Run `node scripts/shared/run-powershell.cjs scripts/shopify/sync-products.ps1` (no `-DryRun`); commit and push product JSON to the connected branch (e.g. `main`). If CI is configured, product sync may also run on push.
+6. **Apply**: Run `node scripts/shared/run-powershell.cjs scripts/shopify/sync-products.ps1` (no `-DryRun`); commit and push product JSON to the connected branch (e.g. `main`). Apply runs now fail if Shopify credentials are missing or if any product fails to sync, so treat any nonzero exit as a blocked deploy.
 7. **Log**: Append an entry to [docs/status/deploy-log.md](status/deploy-log.md): timestamp, action "product sync", branch/commit, summary (e.g. "Added product X"), rollback (e.g. "Restore data/products/previous.json and run sync-products.ps1"). Clear [docs/status/pending-approval.md](status/pending-approval.md) (write "No pending changes" placeholder).
 
 ---
