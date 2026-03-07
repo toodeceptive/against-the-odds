@@ -49,6 +49,12 @@ These workflows require the following secrets to be configured in GitHub:
 - Runs on: Schedule (every 6 h), Manual trigger
 - Actions: Repository sync (fetch, checkout main; no develop branch)
 
+### `governance-verify.yml`
+
+- Runs on: Weekly Monday, Manual trigger
+- Actions: Verifies `main` branch protection settings against repo policy using `scripts/github/verify-governance-settings.js`
+- Requires: `GITHUB_ADMIN_TOKEN` secret (admin-capable token). When the secret is absent, the job is skipped.
+
 ### `maintenance.yml`
 
 - Runs on: Schedule (weekly Sunday), Manual trigger
@@ -78,9 +84,10 @@ These workflows require the following secrets to be configured in GitHub:
 ## Branch protection (required on `main`)
 
 - **update-branch-protection-status-checks.js**: Run `node scripts/github/update-branch-protection-status-checks.js` (with GITHUB_TOKEN or .env.local) to set required status checks for `main` to the native CI job names: `arch_guard`, `test`, `secret-scan`, `e2e_smoke`, `quality`.
+- **verify-governance-settings.js**: Run `node scripts/github/verify-governance-settings.js` (or `npm run verify:governance`) with `GITHUB_ADMIN_TOKEN` to verify PR reviews, code-owner reviews, required checks, conversation resolution, and include-admin settings on `main`.
 - **Required checks**: `arch_guard`, `test`, `secret-scan`, `e2e_smoke`, and `quality`.
-- **Best practice**: Do not require external Codacy or Continuous AI status contexts in branch protection. Native GitHub Actions checks are the authoritative merge gate in this repo.
-- **If the script returns 403 `Resource not accessible by integration`**: the token lacks repo-admin permission for branch protection updates. In that case, update branch protection manually in GitHub settings or with an admin-scoped token; the `continuous_ai_bridge` job remains the in-repo workaround for failing external `Continuous AI: ...` statuses.
+- **Best practice**: Do not require external Codacy or Continuous AI status contexts in branch protection. Native GitHub Actions checks are the authoritative repo merge gate in this repo.
+- **If a governance script returns 403 `Resource not accessible by integration`**: the token lacks repo-admin permission to read or update branch protection. Use an admin-scoped token (`GITHUB_ADMIN_TOKEN`) or verify settings manually in GitHub.
 
 ## Implemented
 

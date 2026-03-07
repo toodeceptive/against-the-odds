@@ -46,10 +46,12 @@ https://aodrop.com
 
 3. ✅ Require conversation resolution before merging
 
-4. ✅ Do not allow bypassing the above settings
+4. ✅ Do not allow bypassing the above settings (verify manually in GitHub settings)
 
 5. ✅ Restrict who can push to matching branches
    - (Optional) Restrict to specific users/teams
+
+**Verification:** Run `npm run verify:governance` with `GITHUB_ADMIN_TOKEN` to verify the programmatically checkable branch-protection settings (required checks, PR reviews, code-owner reviews, conversation resolution, include administrators). Confirm bypass allowances manually in GitHub settings.
 
 ### Develop Branch Protection
 

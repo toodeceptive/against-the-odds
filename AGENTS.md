@@ -20,16 +20,16 @@ The user grants agents **full permission** to perform all actions in this reposi
 - **Preview before apply:** Store-affecting changes (theme push, product sync) require preview (e.g. `sync-products.ps1 -DryRun` or theme dev URL), snapshot to `docs/status/pending-approval.md`, and explicit user approval in chat before apply. See `.cursor/rules/shopify-preview-approval.mdc`.
 - **No secrets in commits:** Credentials live only in `.env.local` or GitHub Secrets; never commit or log secrets. See `.cursor/rules/env-credentials.mdc`.
 
-## Structural integrity enforcement contract (CI authoritative)
+## Structural integrity enforcement contract (CI authoritative for repo-contained controls)
 
-- **Single enforcement authority:** CI is the only enforcement authority for structural integrity; runtime agents/rules are advisory.
+- **Single enforcement authority:** CI is the only enforcement authority for repo-contained structural integrity controls; runtime agents/rules are advisory. GitHub-hosted branch protection/ruleset settings are verified separately by governance tooling.
 - **Required gate:** `arch_guard` must exist in `.github/workflows/ci.yml` and be a required status check for `main`.
 - **Signature chain:** `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt` are required. Signature generation is local-only (never generated in CI); CI verifies only.
 - **Schema mutation control:** Schema/data-contract changes must fail CI unless the declared schema version is bumped per `docs/VERSION_POLICY.md`.
 - **Infra authority determinism:** Declare infra authority once in `docs/SSOT_ATO.md`; do not duplicate authority declarations elsewhere.
-- **Ownership enforcement:** `CODEOWNERS` and `docs/OWNERSHIP_REGISTRY.md` are required; ownership violations must fail CI.
+- **Ownership enforcement:** `CODEOWNERS` and `docs/OWNERSHIP_REGISTRY.md` are required. GitHub branch protection on `main` must require code-owner review; verify it with `npm run verify:governance` (admin token required).
 - **No duplicate enforcement logic:** Keep one canonical implementation per control; remove overlapping checks once canonical checks exist.
-- **Binary closure:** Treat the system as open until all controls above are present and enforced by CI.
+- **Binary closure:** Treat the system as open until all repo-contained CI controls above are present and GitHub governance settings are verified against policy.
 
 ## Playwright and desktop automation
 

@@ -67,11 +67,21 @@ git push -u origin feature/template
    - ✅ Require native status checks: `arch_guard`, `test`, `secret-scan`, `e2e_smoke`, `quality`
    - ✅ Require conversation resolution before merging
    - ✅ Include administrators
-   - ✅ Restrict pushes that create files larger than 100MB
+
+   Additional repo hygiene:
+   - ✅ Prevent commits/pushes of files larger than 100MB via repo policy and local hooks
 
    Do **not** require retired Codacy checks or external `Continuous AI: ...` statuses; the repo-native GitHub Actions checks are authoritative.
 
 3. Do not add a `develop` rule in this repository (main-only strategy).
+
+4. After configuration, verify the settings with:
+
+   ```powershell
+   npm run verify:governance
+   ```
+
+   This requires an admin-capable token in `GITHUB_ADMIN_TOKEN` (preferred) or another admin-scoped GitHub token. The script verifies the branch-protection properties GitHub exposes via API; confirm bypass allowances manually in GitHub settings.
 
 ### Repository Settings
 
@@ -147,6 +157,10 @@ After setting up GitHub Actions workflows:
    - Create pull request from `test/ci-workflow` to `main`
    - Verify status checks appear (`arch_guard`, `test`, `secret-scan`, `e2e_smoke`, `quality`)
    - Merge after verification
+
+4. **Verify governance settings**:
+   - Run `npm run verify:governance`
+   - Confirm the script reports PR reviews, code-owner review, conversation resolution, include-admin, and required checks correctly configured
 
 ## Step 7: Automation Scripts
 

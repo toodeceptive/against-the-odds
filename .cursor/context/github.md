@@ -30,5 +30,6 @@
 ## Common Operations
 
 - Verify auth: `scripts/github/verify-auth.ps1`
+- Verify governance settings: `npm run verify:governance` (requires `GITHUB_ADMIN_TOKEN` or equivalent admin-scoped token)
 - Test push/pull: `scripts/github/test-push-pull.ps1`
 - Verify secrets: `scripts/github/verify-secrets.ps1`
