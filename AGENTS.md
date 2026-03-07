@@ -25,7 +25,7 @@ The user grants agents **full permission** to perform all actions in this reposi
 - **Single enforcement authority:** CI is the only enforcement authority for repo-contained structural integrity controls; runtime agents/rules are advisory. GitHub-hosted branch protection/ruleset settings are verified separately by governance tooling.
 - **Required gate:** `arch_guard` must exist in `.github/workflows/ci.yml` and be a required status check for `main`.
 - **Signature chain:** `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt` are required. Signature generation is local-only (never generated in CI); CI verifies only.
-- **Schema mutation control:** Schema/data-contract changes must fail CI unless the declared schema version is bumped per `docs/VERSION_POLICY.md`.
+- **Schema mutation control:** Schema/data-contract changes in covered data areas must fail CI unless the declared schema version is bumped per `docs/VERSION_POLICY.md`.
 - **Infra authority determinism:** Declare infra authority once in `docs/SSOT_ATO.md`; do not duplicate authority declarations elsewhere.
 - **Ownership enforcement:** `CODEOWNERS` and `docs/OWNERSHIP_REGISTRY.md` are required. GitHub branch protection on `main` must require code-owner review; verify it with `npm run verify:governance` (admin token required).
 - **No duplicate enforcement logic:** Keep one canonical implementation per control; remove overlapping checks once canonical checks exist.

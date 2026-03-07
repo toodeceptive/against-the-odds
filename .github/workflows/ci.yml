@@ -48,7 +48,7 @@ jobs:
           ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s "$SIG" < infra/STRUCTURAL_STATE.json || \
             { echo "::error::Signature verification failed"; exit 1; }
           node scripts/infra/verify-structural-state.mjs
-          node scripts/infra/verify-product-schema-version.mjs
+          node scripts/infra/verify-data-schema-version.mjs
           echo "Structural integrity OK"
 
   # The test job runs on a matrix of Node.js versions and caches dependencies to speed up
