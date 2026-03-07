@@ -23,9 +23,9 @@ These workflows require the following secrets to be configured in GitHub:
 ### `ci.yml` (consolidated gate)
 
 - Runs on: Push to `main`, Pull requests targeting `main`
-- Actions: **arch_guard** (signature verification + recomputed structural hash verification + product schema-version enforcement), test job (format check, lint, unit tests, build, npm audit continue-on-error, Trivy continue-on-error upload), **secret-scan**, **e2e_smoke** (`npm run test:e2e:smoke` in Chromium against the checked-out repo), **quality** (`npm run quality` as the deterministic required gate, plus Lighthouse as informational `continue-on-error`), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all required native quality gates.
+- Actions: **arch_guard** (signature verification + recomputed structural hash verification + data schema-version enforcement), test job (`npm test` safe baseline + **theme branch export verification** + build + informational npm audit/Trivy upload), **secret-scan**, **e2e_smoke** (`npm run test:e2e:smoke` in Chromium against the checked-out repo), **quality** (`npm run quality` as the deterministic required gate, plus Lighthouse as informational `continue-on-error`), and a **continuous_ai_bridge** status-mirroring job for PRs. Single workflow for all required native quality gates.
 
-**Full verify-pipeline is local-only**: The full pipeline (including runbook and product sync dry-run) is run locally via `npm run verify:pipeline`. CI runs `arch_guard`, format/lint/unit checks, `secret-scan`, `e2e_smoke`, `quality`, Trivy, and npm audit. The default local verify auto-skips the runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` when you want the full local integration gate.
+**Full verify-pipeline is local-only**: The full pipeline (including theme branch export verification, repo quality gate, product sync dry-run, and optional runbook) is run locally via `npm run verify:pipeline`. CI runs `arch_guard`, the `npm test` safe baseline, theme branch export verification, `secret-scan`, `e2e_smoke`, `quality`, Trivy, and npm audit. The default local verify auto-skips the runbook step when `SHOPIFY_ACCESS_TOKEN` is absent; use `npm run verify:pipeline:strict` when you want the full local integration gate, including `test:integration` and `test:e2e:smoke`.
 
 ### `codeql.yml` (CodeQL analysis)
 
@@ -42,11 +42,18 @@ These workflows require the following secrets to be configured in GitHub:
 
 - Runs on: Push to `main` when `src/shopify/themes/aodrop-theme/**` changes
 - Actions: Subtree-split theme to `shopify-theme` branch and push (for Shopify “Connect from GitHub”). This branch is the canonical theme deploy target when using the Shopify GitHub App with the repo's nested theme directory.
+- Verification counterpart: `npm run verify:theme-branch` proves the subtree export shape locally and in CI before merge.
 
 ### `sync.yml`
 
 - Runs on: Schedule (every 6 h), Manual trigger
 - Actions: Repository sync (fetch, checkout main; no develop branch)
+
+### `governance-verify.yml`
+
+- Runs on: Weekly Monday, Manual trigger
+- Actions: Verifies `main` branch protection settings against repo policy using `scripts/github/verify-governance-settings.js`
+- Requires: `GITHUB_ADMIN_TOKEN` secret (admin-capable token). When the secret is absent, the job is skipped.
 
 ### `maintenance.yml`
 
@@ -77,9 +84,10 @@ These workflows require the following secrets to be configured in GitHub:
 ## Branch protection (required on `main`)
 
 - **update-branch-protection-status-checks.js**: Run `node scripts/github/update-branch-protection-status-checks.js` (with GITHUB_TOKEN or .env.local) to set required status checks for `main` to the native CI job names: `arch_guard`, `test`, `secret-scan`, `e2e_smoke`, `quality`.
+- **verify-governance-settings.js**: Run `node scripts/github/verify-governance-settings.js` (or `npm run verify:governance`) with `GITHUB_ADMIN_TOKEN` to verify PR reviews, code-owner reviews, required checks, conversation resolution, and include-admin settings on `main`.
 - **Required checks**: `arch_guard`, `test`, `secret-scan`, `e2e_smoke`, and `quality`.
-- **Best practice**: Do not require external Codacy or Continuous AI status contexts in branch protection. Native GitHub Actions checks are the authoritative merge gate in this repo.
-- **If the script returns 403 `Resource not accessible by integration`**: the token lacks repo-admin permission for branch protection updates. In that case, update branch protection manually in GitHub settings or with an admin-scoped token; the `continuous_ai_bridge` job remains the in-repo workaround for failing external `Continuous AI: ...` statuses.
+- **Best practice**: Do not require external Codacy or Continuous AI status contexts in branch protection. Native GitHub Actions checks are the authoritative repo merge gate in this repo.
+- **If a governance script returns 403 `Resource not accessible by integration`**: the token lacks repo-admin permission to read or update branch protection. Use an admin-scoped token (`GITHUB_ADMIN_TOKEN`) or verify settings manually in GitHub.
 
 ## Implemented
 

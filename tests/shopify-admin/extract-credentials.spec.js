@@ -4,6 +4,7 @@ import {
   ensureShopifyLogin,
   extractAccessToken,
   extractThemeId,
+  getConnectedBrowserPage,
 } from '../../src/browser-automation/shopify-admin.js';
 
 test.describe('Shopify Admin Credential Extraction', () => {
@@ -14,45 +15,47 @@ test.describe('Shopify Admin Credential Extraction', () => {
 
   testIf(hasStoreDomain)('should extract access token from admin', async () => {
     const browser = await connectToBrowser({ useExisting: true, headless: false });
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loggedIn = await ensureShopifyLogin(page, storeDomain);
+    const { page, cleanup } = await getConnectedBrowserPage(browser, { storeDomain });
+    try {
+      const loggedIn = await ensureShopifyLogin(page, storeDomain);
 
-    expect(loggedIn).toBe(true);
+      expect(loggedIn).toBe(true);
 
-    const token = await extractAccessToken(page);
+      const token = await extractAccessToken(page, storeDomain);
 
-    // Token should start with shpat_ if found
-    if (token) {
-      expect(token).toMatch(/^shpat_/);
-      console.log('Access token extracted successfully');
-    } else {
-      console.log('Access token not found automatically - may need manual extraction');
+      // Token should start with shpat_ if found
+      if (token) {
+        expect(token).toMatch(/^shpat_/);
+        console.log('Access token extracted successfully');
+      } else {
+        console.log('Access token not found automatically - may need manual extraction');
+      }
+    } finally {
+      await cleanup();
+      await browser.close();
     }
-
-    await context.close();
-    await browser.close();
   });
 
   testIf(hasStoreDomain)('should extract theme ID from admin', async () => {
     const browser = await connectToBrowser({ useExisting: true, headless: false });
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const loggedIn = await ensureShopifyLogin(page, storeDomain);
+    const { page, cleanup } = await getConnectedBrowserPage(browser, { storeDomain });
+    try {
+      const loggedIn = await ensureShopifyLogin(page, storeDomain);
 
-    expect(loggedIn).toBe(true);
+      expect(loggedIn).toBe(true);
 
-    const themeId = await extractThemeId(page);
+      const themeId = await extractThemeId(page);
 
-    // Theme ID should be numeric if found
-    if (themeId) {
-      expect(themeId).toMatch(/^\d+$/);
-      console.log('Theme ID extracted:', themeId);
-    } else {
-      console.log('Theme ID not found automatically - may need manual check');
+      // Theme ID should be numeric if found
+      if (themeId) {
+        expect(themeId).toMatch(/^\d+$/);
+        console.log('Theme ID extracted:', themeId);
+      } else {
+        console.log('Theme ID not found automatically - may need manual check');
+      }
+    } finally {
+      await cleanup();
+      await browser.close();
     }
-
-    await context.close();
-    await browser.close();
   });
 });

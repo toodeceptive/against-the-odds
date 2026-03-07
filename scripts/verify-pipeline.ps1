@@ -1,4 +1,4 @@
-# Verify Cursor-GitHub-Shopify pipeline: scripts parse, workflows present, optional dry-run and runbook.
+# Verify Cursor-GitHub-Shopify pipeline: scripts parse, workflows present, theme export verifies, and strict mode expands into integration/smoke checks.
 # Run from repo root: .\scripts\verify-pipeline.ps1
 
 param(
@@ -22,7 +22,7 @@ Write-Host ""
 
 # 1. Parse PowerShell scripts
 if (-not $SkipParse) {
-    Write-Host "[1/5] Parsing PowerShell scripts..." -ForegroundColor Yellow
+    Write-Host "[1/6] Parsing PowerShell scripts..." -ForegroundColor Yellow
     $parseScript = Join-Path $repoPath (Join-Path "scripts" (Join-Path "debug" "parse-all-ps1.ps1"))
     if (Test-Path $parseScript) {
         & $parseScript
@@ -34,10 +34,11 @@ if (-not $SkipParse) {
 }
 
 # 2. Workflow files exist
-Write-Host "[2/5] Checking workflow files..." -ForegroundColor Yellow
+Write-Host "[2/6] Checking workflow files..." -ForegroundColor Yellow
 $workflows = @(
     ".github/workflows/ci.yml",
     ".github/workflows/codeql.yml",
+    ".github/workflows/governance-verify.yml",
     ".github/workflows/shopify-sync.yml",
     ".github/workflows/sync-theme-branch.yml",
     ".github/workflows/sync.yml",
@@ -54,8 +55,20 @@ foreach ($w in $workflows) {
 }
 Write-Host ""
 
-# 3. Product sync dry-run (if env has Shopify creds)
-Write-Host "[3/5] Product sync dry-run (if .env.local has Shopify creds)..." -ForegroundColor Yellow
+# 3. Theme branch export verification
+Write-Host "[3/6] Verifying theme branch export..." -ForegroundColor Yellow
+if (Test-Path (Join-Path $repoPath "package.json")) {
+    node "scripts/shopify/verify-theme-branch.mjs"
+    if ($LASTEXITCODE -ne 0) {
+        $failed++
+    }
+} else {
+    Write-Host "  (no package.json, skip)" -ForegroundColor Gray
+}
+Write-Host ""
+
+# 4. Product sync dry-run (if env has Shopify creds)
+Write-Host "[4/6] Product sync dry-run (if .env.local has Shopify creds)..." -ForegroundColor Yellow
 $envPath = Join-Path $repoPath ".env.local"
 if (Test-Path $envPath) {
     Get-Content $envPath | ForEach-Object {
@@ -76,12 +89,12 @@ if ($store -and $token) {
 }
 Write-Host ""
 
-# 4. Lint
-Write-Host "[4/5] Lint (ESLint)..." -ForegroundColor Yellow
+# 5. Quality gate
+Write-Host "[5/6] Repo quality gate..." -ForegroundColor Yellow
 if (Test-Path (Join-Path $repoPath "package.json")) {
-    npm run lint 2>&1 | Out-Null
+    npm run quality 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "  Lint reported issues." -ForegroundColor Red
+        Write-Host "  Quality gate reported issues." -ForegroundColor Red
         $failed++
     } else {
         Write-Host "  OK" -ForegroundColor Green
@@ -91,9 +104,45 @@ if (Test-Path (Join-Path $repoPath "package.json")) {
 }
 Write-Host ""
 
-# 5. Runbook (Shopify + GitHub checks)
+# 6. Strict-only integration + runbook checks
 if (-not $SkipRunbook) {
-    Write-Host "[5/5] Runbook (Shopify + GitHub verification)..." -ForegroundColor Yellow
+    Write-Host "[6/6] Strict verification extras..." -ForegroundColor Yellow
+    if ($RequireRunbook -and (Test-Path (Join-Path $repoPath "package.json"))) {
+        Write-Host "  Running integration tests..." -ForegroundColor Yellow
+        npm run test:integration 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "  Integration tests reported issues." -ForegroundColor Red
+            $failed++
+        } else {
+            Write-Host "  Integration tests OK" -ForegroundColor Green
+        }
+
+        Write-Host "  Running local E2E smoke..." -ForegroundColor Yellow
+        npm run test:e2e:smoke 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "  E2E smoke reported issues." -ForegroundColor Red
+            $failed++
+        } else {
+            Write-Host "  E2E smoke OK" -ForegroundColor Green
+        }
+
+        $governanceToken = [Environment]::GetEnvironmentVariable("GITHUB_ADMIN_TOKEN", "Process")
+        if ([string]::IsNullOrWhiteSpace($governanceToken)) {
+            Write-Host "  (GITHUB_ADMIN_TOKEN not set, skip governance verification)" -ForegroundColor Gray
+        } else {
+            Write-Host "  Verifying governance settings..." -ForegroundColor Yellow
+            npm run verify:governance 2>&1 | Out-Null
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host "  Governance verification reported issues." -ForegroundColor Red
+                $failed++
+            } else {
+                Write-Host "  Governance settings OK" -ForegroundColor Green
+            }
+        }
+    } elseif (-not $RequireRunbook) {
+        Write-Host "  (integration, E2E smoke, and governance verification run in strict mode only; use -RequireRunbook)" -ForegroundColor Gray
+    }
+
     $runbook = Join-Path $repoPath (Join-Path "scripts" "run-runbook.ps1")
     if (-not $RequireRunbook -and -not $token) {
         Write-Host "  (credential-gated: SHOPIFY_ACCESS_TOKEN not set, skip runbook; use -RequireRunbook for strict mode)" -ForegroundColor Gray
@@ -104,7 +153,7 @@ if (-not $SkipRunbook) {
         Write-Host "  (run-runbook.ps1 not found, skip)" -ForegroundColor Gray
     }
 } else {
-    Write-Host "[5/5] Runbook skipped (use -SkipRunbook to skip)." -ForegroundColor Gray
+    Write-Host "[6/6] Runbook skipped (use -SkipRunbook to skip)." -ForegroundColor Gray
 }
 
 Write-Host ""

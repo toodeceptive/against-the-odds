@@ -55,6 +55,10 @@ For cross-platform script execution, prefer `node scripts/shared/run-powershell.
 **Sync products to Shopify**:
 
 ```powershell
+.\scripts\shopify\sync-products.ps1 -DryRun
+.\scripts\shopify\sync-products.ps1
+
+# Legacy wrapper: repo -> Shopify import
 .\scripts\products\sync.ps1 -Direction import
 ```
 

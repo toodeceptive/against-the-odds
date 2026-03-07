@@ -15,14 +15,14 @@ Schema or data-contract changes **must** bump the declared version. CI fails if 
 ## How to Bump
 
 1. Edit the schema or data contract.
-2. Increment `schema_version` (e.g. `1` → `2`) in the affected file and update this document's declared current version when the shared product contract changes.
+2. Increment `schema_version` (e.g. `1` → `2`) in the affected file and update this document's declared current version when the shared contract changes for that data area.
 3. Run `.\scripts\infra\sign-structural-state.ps1` to regenerate STRUCTURAL_STATE and re-sign.
 4. Commit the changed files plus updated `infra/STRUCTURAL_STATE.json` and `infra/STRUCTURAL_SIGNATURE.txt`.
 
 ## Current Schema Version
 
 - **data/products** — `2`
-- **data/manufacturers** — `1` (implicit)
+- **data/manufacturers** — `1`
 
 When adding `schema_version` to product JSON, use a top-level field:
 
@@ -37,6 +37,6 @@ When adding `schema_version` to product JSON, use a top-level field:
 
 ## CI enforcement
 
-- `scripts/infra/verify-product-schema-version.mjs` ensures every tracked `data/products/*.json` file declares `schema_version` and matches the current version above.
+- `scripts/infra/verify-data-schema-version.mjs` ensures every tracked `data/products/*.json` and `data/manufacturers/*.json` file declares `schema_version` and matches the current version above.
 - Product files must also declare a slug-safe `handle` (lowercase letters, numbers, hyphens only); product sync uses `handle` as the stable Shopify identity.
-- On PRs/pushes, if a product file's top-level contract changes, CI requires a schema version bump in the file or this document.
+- On PRs/pushes, if a product or manufacturer file's top-level contract changes, CI requires a schema version bump in the file or this document.

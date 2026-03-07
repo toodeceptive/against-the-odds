@@ -48,10 +48,17 @@
       "problemMatcher": []
     },
     {
-      "label": "Run E2E Tests",
+      "label": "Run Local E2E Suite",
       "type": "shell",
       "command": "npm",
       "args": ["run", "test:e2e"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Live Storefront Smoke",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:e2e:live"],
       "problemMatcher": []
     },
     {
@@ -215,10 +222,17 @@
       "problemMatcher": []
     },
     {
-      "label": "Run Desktop Automation Tests",
+      "label": "Run Desktop Automation Readiness Check",
       "type": "shell",
       "command": "npm",
       "args": ["run", "test:desktop"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Desktop Automation Vitest Suite",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:desktop:vitest"],
       "problemMatcher": []
     },
     {

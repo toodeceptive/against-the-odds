@@ -35,14 +35,17 @@ import { join } from 'path';
 import { pathToFileURL } from 'url';
 const repoRoot = process.env.ATO_REPO_ROOT || process.cwd();
 const modulePath = pathToFileURL(join(repoRoot, 'src', 'browser-automation', 'shopify-admin.js')).href;
-const { connectToBrowser, ensureShopifyLogin, extractAccessToken } = await import(modulePath);
+const { connectToBrowser, ensureShopifyLogin, extractAccessToken, getConnectedBrowserPage } = await import(modulePath);
 
 (async () => {
+  let browser = null;
+  let cleanup = async () => {};
   try {
     console.log('Connecting to browser...');
-    const browser = await connectToBrowser({ useExisting: true, headless: false });
-    const context = browser.contexts()[0] || await browser.newContext();
-    const page = context.pages()[0] || await context.newPage();
+    browser = await connectToBrowser({ useExisting: true, headless: false });
+    const connection = await getConnectedBrowserPage(browser, { storeDomain: '$StoreDomain' });
+    const page = connection.page;
+    cleanup = connection.cleanup;
 
     console.log('Navigating to Shopify admin...');
     const loggedIn = await ensureShopifyLogin(page, '$StoreDomain');
@@ -65,6 +68,11 @@ const { connectToBrowser, ensureShopifyLogin, extractAccessToken } = await impor
   } catch (error) {
     console.error('Error:', error.message);
     process.exit(1);
+  } finally {
+    await cleanup().catch(() => {});
+    if (browser) {
+      await browser.close().catch(() => {});
+    }
   }
 })();
 "@

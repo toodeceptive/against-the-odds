@@ -76,6 +76,55 @@ export async function connectToBrowser(options = {}) {
 }
 
 /**
+ * Reuse an existing Shopify Admin page when available so admin flows inherit
+ * the user's real logged-in session. If no admin tab exists, open a new page in
+ * the attached context rather than hijacking an arbitrary open tab.
+ * @param {Browser} browser - Playwright browser instance
+ * @returns {Promise<{context: import('@playwright/test').BrowserContext, page: Page, cleanup: Function}>}
+ */
+export async function getConnectedBrowserPage(browser, options = {}) {
+  const { storeDomain = null } = options;
+  const expectedStoreSlug = resolveShopifyStoreInfo(storeDomain).storeSlug;
+
+  for (const context of browser.contexts()) {
+    for (const page of context.pages()) {
+      if (!storeDomain || !isTrustedShopifyAdminUrl(page.url(), storeDomain)) {
+        continue;
+      }
+
+      const currentStoreSlug = getStoreSlugFromAdminUrl(page.url());
+      if (expectedStoreSlug && currentStoreSlug && currentStoreSlug !== expectedStoreSlug) {
+        continue;
+      }
+
+      return { context, page, cleanup: async () => {} };
+    }
+  }
+
+  const existingContext = browser.contexts()[0];
+  if (existingContext) {
+    const page = await existingContext.newPage();
+    return {
+      context: existingContext,
+      page,
+      cleanup: async () => {
+        await page.close().catch(() => {});
+      },
+    };
+  }
+
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  return {
+    context,
+    page,
+    cleanup: async () => {
+      await context.close().catch(() => {});
+    },
+  };
+}
+
+/**
  * Navigate to Shopify admin and ensure logged in
  * @param {Page} page - Playwright page instance
  * @param {string} storeDomain - Shopify store domain

@@ -91,7 +91,7 @@ Think of “environments” as a combination of:
 
 ### Local scripts and worktrees
 
-Several PowerShell scripts set a fixed `$repoPath` (e.g. `C:\Users\LegiT\against-the-odds`). In a Cursor worktree (like this one), that path may differ. If a script fails due to working directory, either:
+Active scripts resolve repo root dynamically. If a command fails due to working directory, either:
 
 - run the equivalent Shopify CLI commands from the current repo root, or
 - adjust your shell’s working directory manually before running the script.

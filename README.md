@@ -73,8 +73,10 @@ For cross-platform script execution, prefer `node scripts/shared/run-powershell.
 .\scripts\shopify\sync-products.ps1 -DryRun   # preview
 .\scripts\shopify\sync-products.ps1           # apply (after approval)
 
-# Bidirectional: import from store or export to repo
+# Legacy wrapper: repo -> store import path
 .\scripts\products\sync.ps1 -Direction import
+
+# Export products from Shopify -> repo
 .\scripts\products\export.ps1
 ```
 

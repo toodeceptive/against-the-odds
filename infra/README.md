@@ -20,4 +20,4 @@ Required by structural integrity contract. See [AGENTS.md](../AGENTS.md), [docs/
 
 ## Verification (CI)
 
-`arch_guard` runs `ssh-keygen -Y verify`, recomputes hashes for every file in `infra/STRUCTURAL_FILES.json`, and enforces product schema-version rules on every PR/push to main.
+`arch_guard` runs `ssh-keygen -Y verify`, recomputes hashes for every file in `infra/STRUCTURAL_FILES.json`, and enforces data schema-version rules on every PR/push to main.

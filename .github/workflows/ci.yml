@@ -48,7 +48,7 @@ jobs:
           ssh-keygen -Y verify -f infra/allowed_signers -I structural-signing@against-the-odds -n file -s "$SIG" < infra/STRUCTURAL_STATE.json || \
             { echo "::error::Signature verification failed"; exit 1; }
           node scripts/infra/verify-structural-state.mjs
-          node scripts/infra/verify-product-schema-version.mjs
+          node scripts/infra/verify-data-schema-version.mjs
           echo "Structural integrity OK"
 
   # The test job runs on a matrix of Node.js versions and caches dependencies to speed up
@@ -110,7 +110,13 @@ jobs:
       - name: Run tests
         run: |
           if [ -f package.json ] && (npm list vitest 2>/dev/null || npm list jest 2>/dev/null); then
-            npm run test:unit
+            npm test
+          fi
+
+      - name: Verify theme branch export
+        run: |
+          if [ -f package.json ]; then
+            npm run verify:theme-branch
           fi
 
       - name: Security audit
@@ -154,10 +160,10 @@ jobs:
       - name: Check for accidental secrets
         run: |
           set -e
-          for f in $(git ls-files '*.ps1' '*.js' '*.ts' '*.json' '*.yml' '*.yaml' 2>/dev/null); do
+          for f in $(git ls-files '*.ps1' '*.js' '*.ts' '*.mjs' '*.cjs' '*.json' '*.yml' '*.yaml' '*.md' '*.html' 2>/dev/null); do
             [ "$f" = ".env.example" ] && continue
-            # Check for common secret patterns: Shopify (shpat_, shpss_), GitHub tokens (ghp_) and generic api keys
-            if grep -qE '(shpat_|ghp_|shpss_|api_key|token_)[A-Za-z0-9]{20,}' "$f" 2>/dev/null; then
+            # Check for common secret patterns: Shopify tokens, GitHub token formats, generic token labels, and private keys.
+            if grep -qE '(shpat_[A-Za-z0-9]{20,}|shpss_[A-Za-z0-9]{20,}|(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|api[_-]?key[[:space:]"'"'"'=:-]{1,}[A-Za-z0-9._-]{20,}|(SHOPIFY_API_SECRET|client_secret)[[:space:]"'"'"'=:-]{1,}[A-Za-z0-9._-]{20,}|token[_-]?[A-Za-z0-9._-]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----)' "$f" 2>/dev/null; then
               echo "::error file=$f::Possible secret detected. Use .env.local or GitHub Secrets only."
               exit 1
             fi

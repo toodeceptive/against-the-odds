@@ -8,4 +8,4 @@
 
 - **Summary** and **Preview** (dry-run or theme URL) go here.
 - **To approve:** Reply in Cursor chat with "approve", "yes", or "looks good".
-- **Preview popup:** Run `.\scripts\open-preview-popup.ps1` to open this file in Cursor and the preview in your browser.
+- **Preview / review:** Use **Open pending approval** in Cursor, or run `node scripts/shared/run-powershell.cjs scripts/open-pending-approval.ps1`. For theme previews, keep **Shopify: Theme Dev** running; `open-preview-popup.ps1` remains an optional desktop helper.

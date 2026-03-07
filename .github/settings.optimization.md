@@ -46,10 +46,12 @@ https://aodrop.com
 
 3. ✅ Require conversation resolution before merging
 
-4. ✅ Do not allow bypassing the above settings
+4. ✅ Do not allow bypassing the above settings (verify manually in GitHub settings)
 
 5. ✅ Restrict who can push to matching branches
    - (Optional) Restrict to specific users/teams
+
+**Verification:** Run `npm run verify:governance` with `GITHUB_ADMIN_TOKEN` to verify the programmatically checkable branch-protection settings (required checks, PR reviews, code-owner reviews, conversation resolution, include administrators). Confirm bypass allowances manually in GitHub settings.
 
 ### Develop Branch Protection
 
@@ -74,10 +76,10 @@ This repository is main-only. Do not configure a develop branch protection rule.
 
 - `SHOPIFY_STORE_DOMAIN` = `aodrop.com`
 - `SHOPIFY_ACCESS_TOKEN` = (Your Shopify Admin API access token)
-- `SHOPIFY_THEME_ID` = (Your Shopify theme ID)
 
 **Optional Secrets**:
 
+- `SHOPIFY_THEME_ID` = (Your Shopify theme ID)
 - `SHOPIFY_API_KEY` = (Your Shopify app client ID)
 - `SHOPIFY_API_SECRET` = (Your Shopify API secret)
 - `GITHUB_TOKEN` = (For enhanced GitHub API access)

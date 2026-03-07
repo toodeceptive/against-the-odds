@@ -8,34 +8,37 @@
 
 PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they can resolve `pwsh` or `powershell` depending on the environment.
 
-| npm script                       | Invokes                                        | When to use                                                                     |
-| -------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------- |
-| `npm run test`                   | test:unit + test:integration                   | Safe local test baseline                                                        |
-| `npm run test:watch`             | vitest                                         | Watch mode for local test iteration                                             |
-| `npm run test:unit`              | vitest run tests/unit                          | Unit tests only                                                                 |
-| `npm run test:integration`       | vitest run tests/integration                   | Integration tests only                                                          |
-| `npm run test:e2e`               | playwright test tests/e2e/example.spec.js      | Local E2E smoke against the repo preview                                        |
-| `npm run test:e2e:live`          | playwright test tests/live/storefront.spec.js  | Optional live-store smoke                                                       |
-| `npm run test:shopify`           | playwright test (shopify config)               | Shopify admin E2E                                                               |
-| `npm run test:coverage`          | vitest run --coverage                          | Coverage report                                                                 |
-| `npm run test:all`               | safe baseline + local e2e                      | Extended local validation                                                       |
-| `npm run lint`                   | eslint                                         | Lint JS/TS                                                                      |
-| `npm run lint:fix`               | eslint --fix                                   | Auto-fix lint                                                                   |
-| `npm run format`                 | prettier --write (js, ts, json, css, md, html) | Format tracked files; **runs automatically on pre-commit**                      |
-| `npm run format:check`           | prettier --check                               | CI format check                                                                 |
-| `npm run quality`                | format:check + lint + test:unit                | Non-mutating verification gate                                                  |
-| `npm run quality:fix`            | format + lint:fix + quality                    | One-command auto-fix then verify                                                |
-| `npm run setup`                  | scripts/setup-env.ps1                          | Basic env bootstrap helper                                                      |
-| `npm run setup:auto`             | scripts/setup/auto-configure-env.ps1           | Auto-configure env helper; prefer `scripts/setup/full-setup.ps1` for full setup |
-| `npm run health`                 | scripts/health/comprehensive-check.ps1         | Health check                                                                    |
-| `npm run sync`                   | scripts/sync/sync-all.ps1                      | Repo sync (fetch, conflict check)                                               |
-| `npm run test:desktop`           | scripts/desktop-automation/test-system.ps1     | Desktop automation tests                                                        |
-| `npm run test:desktop:quick`     | scripts/desktop-automation/test-system.ps1     | Quick desktop automation test pass                                              |
-| `npm run test:desktop:vitest`    | vitest run tests/desktop-automation            | Direct desktop Vitest suite (Windows/display required)                          |
-| `npm run verify:pipeline`        | scripts/verify-pipeline.ps1                    | Pipeline verification; auto-skips runbook when Shopify token is absent          |
-| `npm run verify:pipeline:strict` | scripts/verify-pipeline.ps1 -RequireRunbook    | Full local integration gate when credentials are expected                       |
-| `npm run build`                  | placeholder echo                               | No-op placeholder; repo has no traditional build step                           |
-| `npm run dev`                    | placeholder echo                               | No-op placeholder; repo has no traditional dev server                           |
+| npm script                       | Invokes                                        | When to use                                                                                                                      |
+| -------------------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run test`                   | test:unit + test:integration                   | Safe local test baseline                                                                                                         |
+| `npm run test:watch`             | vitest                                         | Watch mode for local test iteration                                                                                              |
+| `npm run test:unit`              | vitest run tests/unit                          | Unit tests only                                                                                                                  |
+| `npm run test:integration`       | vitest run tests/integration                   | Integration tests only                                                                                                           |
+| `npm run test:e2e`               | playwright test (playwright.config.js)         | Local E2E suite against the repo preview                                                                                         |
+| `npm run test:e2e:live`          | playwright test (playwright.live.config.js)    | Optional live-store smoke                                                                                                        |
+| `npm run test:e2e:smoke`         | playwright test (Chromium-only local smoke)    | Required native CI smoke check                                                                                                   |
+| `npm run test:shopify`           | playwright test (shopify config)               | Shopify admin E2E                                                                                                                |
+| `npm run test:coverage`          | vitest run --coverage                          | Coverage report                                                                                                                  |
+| `npm run test:all`               | safe baseline + local e2e                      | Extended local validation                                                                                                        |
+| `npm run lint`                   | eslint                                         | Lint JS/TS                                                                                                                       |
+| `npm run lint:fix`               | eslint --fix                                   | Auto-fix lint                                                                                                                    |
+| `npm run format`                 | prettier --write (js, ts, json, css, md, html) | Format tracked files; **runs automatically on pre-commit**                                                                       |
+| `npm run format:check`           | prettier --check                               | CI format check                                                                                                                  |
+| `npm run quality`                | format:check + lint + test:unit                | Non-mutating verification gate                                                                                                   |
+| `npm run quality:fix`            | format + lint:fix + quality                    | One-command auto-fix then verify                                                                                                 |
+| `npm run setup`                  | scripts/setup-env.ps1                          | Basic env bootstrap helper                                                                                                       |
+| `npm run setup:auto`             | scripts/setup/auto-configure-env.ps1           | Auto-configure env helper; prefer `scripts/setup/full-setup.ps1` for full setup                                                  |
+| `npm run health`                 | scripts/health/comprehensive-check.ps1         | Health check                                                                                                                     |
+| `npm run sync`                   | scripts/sync/sync-all.ps1                      | Repo sync (fetch, conflict check)                                                                                                |
+| `npm run check:desktop:env`      | scripts/desktop-automation/test-system.ps1     | Desktop automation readiness/environment check                                                                                   |
+| `npm run test:desktop`           | check:desktop:env                              | Backward-compatible alias for the desktop readiness check                                                                        |
+| `npm run test:desktop:quick`     | scripts/desktop-automation/test-system.ps1     | Quick desktop automation test pass                                                                                               |
+| `npm run test:desktop:vitest`    | vitest run tests/desktop-automation            | Direct desktop Vitest suite (Windows/display required)                                                                           |
+| `npm run verify:pipeline`        | scripts/verify-pipeline.ps1                    | Pipeline verification: parse, workflows, theme export, product dry-run, quality; auto-skips runbook when Shopify token is absent |
+| `npm run verify:pipeline:strict` | scripts/verify-pipeline.ps1 -RequireRunbook    | Full local integration gate: `verify:pipeline` + integration tests + Chromium smoke + runbook when credentials are expected      |
+| `npm run verify:theme-branch`    | scripts/shopify/verify-theme-branch.mjs        | Verifies `src/shopify/themes/aodrop-theme` subtree-exports cleanly to deploy shape                                               |
+| `npm run build`                  | placeholder echo                               | No-op placeholder; repo has no traditional build step                                                                            |
+| `npm run dev`                    | placeholder echo                               | No-op placeholder; repo has no traditional dev server                                                                            |
 
 ---
 
@@ -62,11 +65,11 @@ PowerShell-backed npm scripts use `scripts/shared/run-powershell.cjs` so they ca
 
 ### Products (scripts/products/)
 
-| Script       | Purpose                                                  | When to run                                                                        |
-| ------------ | -------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **sync.ps1** | Bidirectional wrapper; `-Direction import\|export\|both` | Import from store or export to repo; import delegates to shopify/sync-products.ps1 |
-| export.ps1   | Export products from store to repo                       | Backup or local data refresh                                                       |
-| import.ps1   | Import (delegates to sync-products)                      | Use sync.ps1 -Direction import or sync-products.ps1                                |
+| Script       | Purpose                                           | When to run                                                                    |
+| ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **sync.ps1** | Legacy wrapper; `-Direction import\|export\|both` | `import` delegates repo → Shopify sync; `export` pulls store data back to repo |
+| export.ps1   | Export products from store to repo                | Backup or local data refresh                                                   |
+| import.ps1   | Import (delegates to sync-products)               | Use sync.ps1 -Direction import or sync-products.ps1                            |
 
 ### Git (scripts/git/)
 

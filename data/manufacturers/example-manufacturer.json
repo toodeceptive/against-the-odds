@@ -1,4 +1,5 @@
 {
+  "schema_version": 1,
   "name": "Example Manufacturing Co.",
   "contact": {
     "email": "contact@example.com",
