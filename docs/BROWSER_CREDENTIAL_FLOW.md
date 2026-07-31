@@ -34,6 +34,8 @@ If your app is in the **Dev Dashboard** (dev.shopify.com) and you have **Client 
 3. The script gets an access token via the client credentials grant and writes `SHOPIFY_ACCESS_TOKEN` to `.env.local`.
 4. Verify with: `.\scripts\run-runbook.ps1`
 
+Treat this as an Admin API / REST credential path. It does **not** replace `SHOPIFY_CLI_THEME_TOKEN` for non-interactive theme preview/push and may need refresh depending on Shopify token lifetime.
+
 (For custom domains like aodrop.com, the script uses the store’s myshopify domain for the OAuth endpoint.)
 
 ## If the token isn't visible in the browser

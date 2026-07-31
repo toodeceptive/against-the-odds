@@ -17,8 +17,8 @@ If `src/shopify/themes/aodrop-theme` is empty or you haven't pulled your live th
 1. **Store:** Create `.env.local` in repo root with `SHOPIFY_STORE_DOMAIN=aodrop.com` (optional but recommended; scripts load it automatically).
 2. **Auth (choose one):**
    - **Device code:** Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-auth-then-pull.ps1` (opens browser for login, then pulls). If you get **"not authorized"**: log into Shopify Admin at least once as owner or staff with theme access, or have the owner add you in **Settings → Users and permissions**, then run again.
-   - **Token (browser):** Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-auth-via-browser.ps1` — launches Chrome at the resolved Shopify Admin URL, you log in, script extracts token (Apps > Development) and saves `SHOPIFY_CLI_THEME_TOKEN` + `SHOPIFY_ACCESS_TOKEN`, then pulls. Use when device-code auth fails or you prefer token-based auth.
-   - **Token (manual):** Add `SHOPIFY_CLI_THEME_TOKEN` (or `SHOPIFY_ACCESS_TOKEN`) to `.env.local` — theme pull/dev/push use it for non-interactive auth.
+   - **Token (browser):** Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-auth-via-browser.ps1` — launches Chrome at the resolved Shopify Admin URL, you log in, script extracts an Admin API token, saves `SHOPIFY_ACCESS_TOKEN`, and then pulls via REST. Use when device-code auth fails or you prefer token-based auth for theme pull.
+   - **Token (manual):** Add `SHOPIFY_CLI_THEME_TOKEN` to `.env.local` for non-interactive theme dev/push. `SHOPIFY_ACCESS_TOKEN` is for Admin API / REST flows and theme pull REST fallback.
 3. **Pull:** Run `node scripts/shared/run-powershell.cjs scripts/shopify/theme-pull.ps1` from repo root (or use theme-auth-then-pull.ps1 for auth + pull in one go). The script **installs Shopify CLI automatically** if missing and reads the store from `.env.local`.
 4. Commit and push to `main`; CI updates the Shopify-connected `shopify-theme` branch.
 

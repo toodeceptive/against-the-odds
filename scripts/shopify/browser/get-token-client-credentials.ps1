@@ -1,4 +1,4 @@
-# Get Admin API access token via client credentials grant and save to .env.local.
+# Get an Admin API access token via client credentials grant and save to .env.local.
 # Requires SHOPIFY_API_KEY and SHOPIFY_API_SECRET (and optionally SHOPIFY_STORE_DOMAIN) in .env.local.
 
 $ErrorActionPreference = "Stop"
@@ -62,6 +62,7 @@ try {
     $newContent | Out-File -FilePath $envPath -Encoding UTF8
 
     Write-Host "[OK] Access token obtained and saved to .env.local." -ForegroundColor Green
+    Write-Host "[INFO] This token is for Admin API / REST verification flows. It does not replace SHOPIFY_CLI_THEME_TOKEN for non-interactive theme dev/push and may need refresh depending on Shopify token lifetime." -ForegroundColor Cyan
     Write-Host "Verify with: .\scripts\run-runbook.ps1" -ForegroundColor Cyan
 } catch {
     Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red

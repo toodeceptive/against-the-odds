@@ -151,6 +151,33 @@ function Invoke-ShopifyRestMethod {
     }
 }
 
+function Get-ShopifyProductByHandle {
+    param(
+        [string]$BaseUrl,
+        [hashtable]$Headers,
+        [string]$Handle
+    )
+
+    $uri = "$BaseUrl/products.json?limit=250"
+    while ($uri) {
+        $response = Invoke-WebRequest -Uri $uri -Headers $Headers -Method Get -UseBasicParsing
+        $payload = $response.Content | ConvertFrom-Json
+        $match = $payload.products | Where-Object { $_.handle -eq $Handle } | Select-Object -First 1
+        if ($match) {
+            return $match
+        }
+
+        $nextUri = $null
+        $linkHeader = $response.Headers["Link"]
+        if ($linkHeader -match '<([^>]+)>;\s*rel="next"') {
+            $nextUri = $matches[1]
+        }
+        $uri = $nextUri
+    }
+
+    return $null
+}
+
 $processed = 0
 $failed = 0
 foreach ($file in $productFiles) {
@@ -172,15 +199,10 @@ foreach ($file in $productFiles) {
         $productId = $null
 
         try {
-            $searchUrl = "$baseUrl/products.json?handle=$([uri]::EscapeDataString($productHandle))&limit=1"
-            $allProducts = Invoke-ShopifyRestMethod -Uri $searchUrl -Headers $headers -Method Get
-
-            if ($allProducts.products) {
-                $matchingProduct = $allProducts.products | Where-Object { $_.handle -eq $productHandle } | Select-Object -First 1
-                if ($matchingProduct) {
-                    $productFound = $true
-                    $productId = $matchingProduct.id
-                }
+            $matchingProduct = Get-ShopifyProductByHandle -BaseUrl $baseUrl -Headers $headers -Handle $productHandle
+            if ($matchingProduct) {
+                $productFound = $true
+                $productId = $matchingProduct.id
             }
         } catch {
             Write-Host "  [WARN] Could not check for existing products: $_" -ForegroundColor Yellow

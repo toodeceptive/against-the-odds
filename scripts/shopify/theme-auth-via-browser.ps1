@@ -50,7 +50,7 @@ if (-not $SkipChromeLaunch) {
     Write-Host "[1/3] Skipping Chrome launch (use existing Chrome with Shopify Admin open)." -ForegroundColor Gray
 }
 
-# Step 2: Extract token from browser and save to .env.local (SHOPIFY_ACCESS_TOKEN + SHOPIFY_CLI_THEME_TOKEN)
+# Step 2: Extract Admin API token from browser and save to .env.local (SHOPIFY_ACCESS_TOKEN only)
 Write-Host ""
 Write-Host "[2/3] Extracting access token from browser (Apps > Development)..." -ForegroundColor Yellow
 & "$PSScriptRoot\browser\get-access-token.ps1" -StoreDomain $Store
@@ -60,7 +60,7 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-# Reload .env.local so theme-pull sees SHOPIFY_CLI_THEME_TOKEN
+# Reload .env.local so theme-pull sees SHOPIFY_ACCESS_TOKEN for REST fallback
 if (Test-Path ".env.local") {
     Get-Content ".env.local" | ForEach-Object {
         $line = $_.Trim()
@@ -71,12 +71,14 @@ if (Test-Path ".env.local") {
 }
 
 if ($SkipPull) {
-    Write-Host "[OK] Token saved. Run .\scripts\shopify\theme-pull.ps1 when ready." -ForegroundColor Green
+    Write-Host "[OK] Admin API token saved. Run .\scripts\shopify\theme-pull.ps1 when ready." -ForegroundColor Green
+    Write-Host "[INFO] For non-interactive theme dev/push, set SHOPIFY_CLI_THEME_TOKEN separately or use interactive Shopify CLI login." -ForegroundColor Cyan
     exit 0
 }
 
-# Step 3: Pull theme (non-interactive with token)
+# Step 3: Pull theme using REST with the Admin API token
 Write-Host ""
-Write-Host "[3/3] Pulling theme (using token)..." -ForegroundColor Yellow
+Write-Host "[3/3] Pulling theme (using Admin API token via REST)..." -ForegroundColor Yellow
+[Environment]::SetEnvironmentVariable("SHOPIFY_USE_REST_PULL", "1", "Process")
 & "$PSScriptRoot\theme-pull.ps1" -Store $Store
 exit $LASTEXITCODE

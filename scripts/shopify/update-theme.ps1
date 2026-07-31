@@ -58,10 +58,13 @@ $storeForCli = (Resolve-ShopifyStoreInfo -Store $Store).CliHost
 Write-Host "Store: $storeForCli" -ForegroundColor Cyan
 
 $themeToken = $env:SHOPIFY_CLI_THEME_TOKEN
-if ([string]::IsNullOrWhiteSpace($themeToken)) { $themeToken = $env:SHOPIFY_ACCESS_TOKEN }
 
 Write-Host "Deploying theme (npx shopify theme push)..." -ForegroundColor Yellow
-if ($themeToken) { Write-Host "Using token (non-interactive)." -ForegroundColor Gray }
+if ($themeToken) {
+    Write-Host "Using Theme Access token (non-interactive)." -ForegroundColor Gray
+} else {
+    Write-Host "No SHOPIFY_CLI_THEME_TOKEN set; Shopify CLI may prompt for interactive login." -ForegroundColor Gray
+}
 
 # Use npx explicitly so we always use @shopify/cli theme push. Pass --path and path as separate args.
 $pushArgs = @("shopify", "theme", "push", "--store=$storeForCli", "--path", $ThemePath)

@@ -489,7 +489,7 @@ async function tryOAuthEndpoint(endpoint, clientId, clientSecret) {
   if (!res.ok) return null;
   const payload = await res.json().catch(() => null);
   const token = payload?.access_token;
-  return typeof token === 'string' && /^shpat_[a-zA-Z0-9]{32,}$/.test(token) ? token : null;
+  return typeof token === 'string' && token.trim().length >= 20 ? token.trim() : null;
 }
 
 async function requestAccessTokenFromClientCredentials(page, storeDomain) {
